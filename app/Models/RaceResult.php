@@ -6,10 +6,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Support\HasAdvancedFilter;
 
 class RaceResult extends Model
 {
     use HasFactory;
+    use HasAdvancedFilter;
+
+    public const ATTRIBUTES = [
+        'id',
+        'title',
+        'category_id',
+    ];
+
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
+
 
     protected $fillable = [
         'race_id',

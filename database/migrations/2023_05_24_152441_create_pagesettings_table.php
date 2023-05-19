@@ -17,20 +17,19 @@ return new class () extends Migration {
         Schema::create('pagesettings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('header')->nullable();
-            $table->string('footer')->nullable();
-            $table->string('bottomBar')->nullable();
-            $table->string('topHeader')->nullable();
-            $table->string('bottomFooter')->nullable();
+            $table->json('headerSettings')->nullable();
+            $table->json('footerSettings')->nullable();
+            $table->json('themeColor')->nullable();
+            $table->json('menuItems')->nullable();
 
-            $table->boolean('themeColor')->default(false);
             $table->boolean('popularProducts')->default(false);
             $table->boolean('flashDeal')->default(false);
             $table->boolean('bestSellers')->default(false);
             $table->boolean('topBrands')->default(false);
 
             $table->string('status')->default(true);
-            $table->foreignId('featured_banner_id')->nullable()->constrained('featured_banners')->nullOnDelete();
+            $table->string('is_default')->default(false);
+            
             $table->foreignId('page_id')->nullable()->constrained('pages')->nullOnDelete();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
 

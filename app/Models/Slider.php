@@ -28,7 +28,7 @@ class Slider extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'title', 'subtitle', 'details', 'embeded_video', 'photo', 'featured', 'link', 'language_id', 'bg_color', 'status',
+        'title', 'subtitle', 'details', 'embeded_video', 'image', 'featured', 'link', 'language_id', 'bg_color', 'status',
     ];
 
     /**
@@ -41,5 +41,19 @@ class Slider extends Model
     public function scopeActive($query)
     {
         $query->where('status', 1);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('sliders')->withResponsiveomage();
+    }
+  
+    public function registerMediaConversions(): void
+    {
+        $this->addMediaConversion('large')
+            ->width(1000)
+            ->height(400)
+            ->performOnCollections('sliders')
+            ->format('webp');
     }
 }

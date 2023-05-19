@@ -67,12 +67,12 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->roles->pluck('name')->contains(RoleType::ROLE_ADMIN);
+        return $this->roles->pluck('name')->contains(Role::ROLE_ADMIN);
     }
 
     public function isClient()
     {
-        return $this->roles->pluck('name')->contains(RoleType::ROLE_CLIENT);
+        return $this->roles->pluck('name')->contains(Role::ROLE_CLIENT);
     }
 
     public function roles()

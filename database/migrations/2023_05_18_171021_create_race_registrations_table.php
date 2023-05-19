@@ -14,7 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->json('images');
+            $table->json('images')->nullable();
             $table->json('options');
             $table->foreignId('registration_id')->constrained('registrations');
             $table->foreignId('category_id')->constrained('categories');

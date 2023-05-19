@@ -6,6 +6,8 @@ namespace App\Http\Livewire\Front;
 
 use App\Models\FeaturedBanner;
 use App\Models\Race;
+use App\Models\RaceLocation;
+use App\Models\Sponsors;
 use App\Models\Section;
 use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
@@ -18,6 +20,22 @@ class Index extends Component
     public function getRacesProperty(): Collection
     {
         return Race::active()
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+    }
+   
+    public function getRaceLocationsProperty(): Collection
+    {
+        return RaceLocation::active()
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+    }
+    
+    public function getSponsorsProperty(): Collection
+    {
+        return Sponsor::active()
             ->inRandomOrder()
             ->limit(4)
             ->get();

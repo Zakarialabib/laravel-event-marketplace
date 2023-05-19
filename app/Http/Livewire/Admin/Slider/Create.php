@@ -40,7 +40,7 @@ class Create extends Component
         'slider.language_id'   => ['nullable'],
         'slider.bg_color'      => ['nullable'],
         'slider.embeded_video' => ['nullable'],
-        'photo'                => ['required'],
+        'image'                => ['required'],
     ];
 
     public function render(): View|Factory
@@ -69,12 +69,10 @@ class Create extends Component
             if ($this->photo) {
                 $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->photo->extension();
 
-                $img = Image::make($this->photo->getRealPath())->encode('webp', 85);
-
-                $img->stream();
-
-                Storage::disk('local_files')->put('sliders/'.$imageName, $img, 'public');
-
+                $this->slider->addMediaFromDisk($this->photo->getRealPath())
+                ->usingFileName($imageName)
+                ->toMediaCollection('sliders');
+                
                 $this->slider->photo = $imageName;
             }
 

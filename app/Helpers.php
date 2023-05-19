@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Settings;
 use App\Models\Subcategory;
+use App\Models\PageSetting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,6 +28,17 @@ class Helpers
         return Cache::rememberForever('settings', function () {
             return Settings::pluck('value', 'key');
         })->get($key);
+    }
+
+    public static function pageSettings()
+    {
+        $pageSettings = PageSetting::where('is_default', true)->first();
+
+        if (!$pageSettings) {
+            $pageSettings = PageSetting::first();
+        }
+
+        return $pageSettings;
     }
 
     public static function getActiveCategories()
@@ -240,4 +252,6 @@ class Helpers
 
         return $imageName;
     }
+
+    
 }

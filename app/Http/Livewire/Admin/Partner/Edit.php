@@ -10,9 +10,12 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use Spatie\MediaLibraryPro\Http\Livewire\Concerns\WithMedia;
 
 class Edit extends Component
 {
+    use WithMedia;
+    
     public $partner;
 
     public $editModal = false;
@@ -62,45 +65,20 @@ class Edit extends Component
 
         if ($this->image) {
             $imageName = Str::slug($this->partner->name).'-'.Str::random(5).'.'.$this->image->extension();
-            $width = 500;
-            $height = 500;
+          
+            $this->partner->clearMediaCollection('partners');
 
-            $img = Image::make($this->image->getRealPath())->encode('webp', 85);
-
-            if ($img->width() > $width) {
-                $img->resize($width, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            }
-
-            if ($img->height() > $height) {
-                $img->resize(null, $height, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            }
-
-            $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
-
-            $img->stream();
-
-            Storage::disk('local_files')->put('partners/'.$imageName, $img, 'public');
+            $this->image->addFromMediaLibraryRequest($this->image)
+            ->toMediaCollection('partners');
 
             $this->partner->image = $imageName;
-        }
-
-        if ($this->featured_image) {
-            $imageName = Str::slug($this->partner->name).'-'.date('Y-m-d H:i:s').'.'.$this->featured_image->extension();
-            $this->featured_image->storeAs('partners', $imageName);
-            $this->partner->featured_image = $imageName;
         }
 
         $this->partner->save();
 
         $this->alert('success', __('Brand updated successfully.'));
-
-        $this->resetErrorBag();
-
-        $this->resetValidation();
+        
+        $this->emit('refreshIndex');
 
         $this->editModal = false;
     }

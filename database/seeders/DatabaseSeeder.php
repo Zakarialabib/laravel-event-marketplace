@@ -31,6 +31,13 @@ class DatabaseSeeder extends Seeder
             PermissionRoleSeeder::class,
             SuperUserSeeder::class,
             RoleUserSeeder::class,
+            
+            CategorySeeder::class,
+            ProductCategorySeeder::class,
+            RaceLocationSeeder::class,
+            RaceSeeder::class,
+            
+            PageSettingsSeeder::class,
         ]);
     }
 }

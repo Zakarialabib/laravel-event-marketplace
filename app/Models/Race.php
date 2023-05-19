@@ -6,9 +6,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\RaceStatus;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Race extends Model
+class Race extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasFactory;
 
     protected $fillable = [
@@ -26,12 +30,14 @@ class Race extends Model
         'features',
         'options',
         'status',
+        'race_calendar',
     ];
 
     protected $casts = [
         'options'  => 'json',
         'features' => 'json',
-        // 'satuts' => RaceStatus::class,
+        'calendar' => 'json',
+        'satuts' => RaceStatus::class,
     ];
 
     public function location()
@@ -104,5 +110,20 @@ class Race extends Model
     public function setFormattedDateAttribute($value)
     {
         $this->attributes['date'] = \Carbon\Carbon::createFromFormat('Y-m-d', $value);
+    }
+    
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('races')->withResponsiveomage();
+    }
+  
+    public function registerMediaConversions(): void
+    {
+        $this->addMediaConversion('large')
+            ->width(1000)
+            ->height(1000)
+            ->quality(90)
+            ->performOnCollections('races')
+            ->format('webp');
     }
 }

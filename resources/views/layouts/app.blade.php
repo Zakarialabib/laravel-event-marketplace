@@ -58,7 +58,7 @@ lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
     <x-header />
 
-    <x-bottomheader />
+    {{-- <x-bottomheader /> --}}
 
     @yield('content')
 

@@ -6,10 +6,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Support\HasAdvancedFilter;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class RaceLocation extends Model
+class RaceLocation extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasFactory;
+    use HasAdvancedFilter;
+
+    public const ATTRIBUTES = [
+        'id',
+        'name',
+        'category_id',
+        'status',
+    ];
+
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'name',
@@ -17,6 +32,7 @@ class RaceLocation extends Model
         'images',
         'options',
         'category_id',
+        'status',
     ];
 
     // Scope for locations with a specific category
@@ -29,4 +45,19 @@ class RaceLocation extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images');
+    }
+  
+    public function registerMediaConversions(): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(400)
+            ->height(400)
+            ->performOnCollections('images')
+            ->withResponsiveImages()
+            ->format('webp');
+    }
 }
+

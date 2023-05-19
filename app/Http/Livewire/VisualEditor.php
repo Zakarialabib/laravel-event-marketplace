@@ -17,12 +17,12 @@ class VisualEditor extends Component
     public $menuItems = [];
     public $cardContent = [];
     public $listItems = [];
-    public $headerLayout = [];
-    public $footerLayout = [];
+    public $headerSettings = [];
+    public $footerSettings = [];
     public $accordionItems = [];
     public $tabItems = [];
 
-    public $selectedColors = [];
+    public $themeColor = [];
 
     public $title = 'page';
 
@@ -31,7 +31,6 @@ class VisualEditor extends Component
     public $colors;
 
     public $selectedColor;
-    public $themeColors = [];
 
     public $breadcrumbsSettings = [];
     public $pageLoaderSettings = [];
@@ -66,7 +65,7 @@ class VisualEditor extends Component
             'sections' => [],
             'videos'   => [],
         ];
-        $this->headerLayout = [
+        $this->headerSettings = [
             'numberOfColumns' => 1,
             'headerHeight'    => 100,
             'logoUrl'         => null,
@@ -76,14 +75,13 @@ class VisualEditor extends Component
             'searchIcon'      => null,
         ];
 
-        $this->footerLayout = [
+        $this->footerSettings = [
             'numberOfColumns' => 1,
             'headerHeight'    => 100,
             'logoUrl'         => null,
             'logoSize'        => 50,
             'logoPosition'    => 'left',
-            'hasSearchIcon'   => false,
-            'searchIcon'      => null,
+            'hasNewslettersForm'   => false,
         ];
 
         $this-> breadcrumbsSettings = [
@@ -97,15 +95,6 @@ class VisualEditor extends Component
             'customLoader'    => null,
         ];
 
-        // $this->menuItems = [
-        // 'menuName' => '',
-        //     'items' => [
-        //         [
-        //             'label' => '',
-        //             'url' => ''
-        //         ]
-        //     ],
-        // ];
         $this->colors = ['gray', 'red', 'green', 'blue', 'indigo'];
         $this->colorOptions = [100, 200, 300, 400, 500, 600, 700, 800, 900];
         $this->selectedColor = 'gray';
@@ -113,12 +102,12 @@ class VisualEditor extends Component
 
     public function selectedColor($color)
     {
-        $this->selectedColor = $color;
+        $this->themeColor = $color;
     }
 
     public function selectedColors($index, $color)
     {
-        $selectedColors = $this->selectedColors;
+        $selectedColors = $this->themeColor;
 
         // Check if the selected color already exists in the array
         $colorExists = array_filter($selectedColors, function ($value) use ($color) {
@@ -137,7 +126,7 @@ class VisualEditor extends Component
         }
 
         // Update the selectedColors property
-        $this->selectedColors = array_map(function ($index, $value) {
+        $this->themeColor = array_map(function ($index, $value) {
             return [$index => $value];
         }, array_keys($selectedColors), $selectedColors);
     }
@@ -266,7 +255,6 @@ class VisualEditor extends Component
                 $url = $item['url'];
             }
         }
-        dd($this->all());
     }
 
     public function usePredefinedMenu(): void
@@ -285,31 +273,31 @@ class VisualEditor extends Component
     public function saveHeaderSettings()
     {
         $column = [
-            'numberOfColumns' => $this->headerLayout['numberOfColumns'],
-            'headerHeight'    => $this->headerLayout['headerHeight'],
-            'logoUrl'         => $this->headerLayout['logoUrl'],
-            'logoSize'        => $this->headerLayout['logoSize'],
-            'logoPosition'    => $this->headerLayout['logoPosition'],
-            'hasSearchIcon'   => $this->headerLayout['hasSearchIcon'],
-            'searchIcon'      => $this->headerLayout['searchIcon'],
+            'numberOfColumns' => $this->headerSettings['numberOfColumns'],
+            'headerHeight'    => $this->headerSettings['headerHeight'],
+            'logoUrl'         => $this->headerSettings['logoUrl'],
+            'logoSize'        => $this->headerSettings['logoSize'],
+            'logoPosition'    => $this->headerSettings['logoPosition'],
+            'hasSearchIcon'   => $this->headerSettings['hasSearchIcon'],
+            'searchIcon'      => $this->headerSettings['searchIcon'],
         ];
 
         // Save the values to the headerLayout component
-        $this->headerLayout[] = $column;
+        $this->headerSettings[] = $column;
     }
 
     // Footer settings
     public function saveFooterSettings()
     {
         $column = [
-            'numberOfColumns' => $this->footerLayout['numberOfColumns'],
-            'footerHeight'    => $this->footerLayout['footerHeight'],
-            'hasSocialIcons'  => $this->footerLayout['hasSocialIcons'],
-            'socialIcons'     => $this->footerLayout['socialIcons'],
+            'numberOfColumns' => $this->footerSettings['numberOfColumns'],
+            'footerHeight'    => $this->footerSettings['footerHeight'],
+            'hasSocialIcons'  => $this->footerSettings['hasSocialIcons'],
+            'socialIcons'     => $this->footerSettings['socialIcons'],
         ];
 
         // Save the values to the footerLayout component
-        $this->footerLayout[] = $column;
+        $this->footerSettings[] = $column;
     }
 
     public function addCardContent()
@@ -445,7 +433,7 @@ class VisualEditor extends Component
 
     public function removeColor($index)
     {
-        unset($this->selectedColors[$index]);
+        unset($this->themeColor[$index]);
     }
 
     public function createPage()
@@ -476,6 +464,12 @@ class VisualEditor extends Component
         }
 
         File::put(resource_path('views/pages/'.$name.'.blade.php'), $content);
+    }
+
+    public function store()
+    {
+        // PageSettings::find(1);
+        // $this->menuWidget =
     }
 
     public function render(): View

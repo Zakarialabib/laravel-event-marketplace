@@ -6,13 +6,13 @@ namespace App\Http\Livewire\Front;
 
 use App\Helpers;
 use App\Models\Registration;
+use App\Models\Race;
 use App\Enums\OrderType;
 use App\Enums\Status;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use App\Mail\OrderFormMail;
 use Illuminate\Support\Facades\Mail;
 
 class RegistrationForm extends Component
@@ -25,19 +25,34 @@ class RegistrationForm extends Component
 
     public $address;
 
-    public $type;
+    public $registration;
 
-    public $status;
+    protected $rules = [
+        'numberOfParticipants' => 'required|integer',
+        'email' => 'required|email',
+        'firstName' => 'required|string',
+        'lastName' => 'required|string',
+        'gender' => 'required|string',
+        'dateOfBirth' => 'required|date',
+        'phoneNumber' => 'required|string',
+        'country' => 'required|string',
+        'address' => 'required|string',
+        'city' => 'required|string',
+        'zipCode' => 'nullable|string',
+        'emergencyContactName' => 'required|string',
+        'emergencyContactPhoneNumber' => 'required|string',
+        'hasMedicalHistory' => 'boolean',
+        'isTakingMedications' => 'boolean',
+        'hasMedicationAllergies' => 'boolean',
+        'hasSensitivities' => 'boolean',
+    ];
 
-    public $subject;
 
-    public $message;
-
-    public $product;
-
-    public function mount($product)
+    public function mount($race)
     {
-        $this->product = $product;
+        $this->race = $race;
+        $this->registration = new Registration();
+        $this->country = 'Maroc';
     }
 
     public function render(): View|Factory
@@ -45,23 +60,12 @@ class RegistrationForm extends Component
         return view('livewire.front.order-form');
     }
 
-    public function save()
+    public function store()
     {
-        $this->validate([
-            'name'    => 'required',
-            'phone'   => 'required',
-            'address' => 'required',
-        ]);
 
-        $order = Registration::create([
-            'name'    => $this->name,
-            'phone'   => $this->phone,
-            'address' => $this->address,
-            'type'    => OrderType::REGISTRATION,
-            'status'  => STATUS::PENDING,
-            'subject' => __('New request for ').$this->product->name,
-            'message' => $this->name.__(' has sent a request for ').$this->product->name,
-        ]);
+        $this->validate();
+
+        $this->registration-save();
 
         $this->alert('success', __('Your order has been sent successfully!'));
 

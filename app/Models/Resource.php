@@ -6,10 +6,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Support\HasAdvancedFilter;
 
 class Resource extends Model
 {
     use HasFactory;
+    use HasAdvancedFilter;
+
+    public const ATTRIBUTES = [
+        'id',
+        'title',
+        'category_id',
+    ];
+
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'title',

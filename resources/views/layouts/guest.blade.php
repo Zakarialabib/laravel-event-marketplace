@@ -14,7 +14,7 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/' . Helpers::settings('site_favicon')) }}" type="image/x-icon">
 
-    @include('partials.css')
+    @include('partials.front.css')
 
 </head>
 
@@ -32,7 +32,7 @@
     <!-- Footer -->
     <x-copyright />
 
-    @include('partials.js')
+    @include('partials.front.js')
 
 </body>
 

@@ -45,4 +45,17 @@ class Product extends Model
     {
         return $query->where('status');
     }
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('products')->withResponsiveomage();
+    }
+  
+    public function registerMediaConversions(): void
+    {
+        $this->addMediaConversion('large')
+            ->width(1000)
+            ->height(1000)
+            ->performOnCollections('products')
+            ->format('webp');
+    }
 }

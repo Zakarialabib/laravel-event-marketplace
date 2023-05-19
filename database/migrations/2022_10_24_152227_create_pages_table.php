@@ -21,7 +21,7 @@ return new class () extends Migration {
             $table->text('details');
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
             $table->timestamps();
         });

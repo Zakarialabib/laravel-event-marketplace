@@ -10,7 +10,7 @@ return new class () extends Migration {
     /** Run the migrations. */
     public function up(): void
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('medias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('race_id')->constrained('races');
             $table->string('type');
@@ -25,6 +25,6 @@ return new class () extends Migration {
     /** Reverse the migrations. */
     public function down(): void
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('medias');
     }
 };

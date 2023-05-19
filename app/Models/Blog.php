@@ -6,9 +6,12 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Blog extends Model
+class Blog extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasAdvancedFilter;
 
     public const ATTRIBUTES = [
@@ -46,4 +49,18 @@ class Blog extends Model
     {
         return $this->belongsTo(Language::class);
     }
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('blogs')->withResponsiveomage();
+    }
+  
+    public function registerMediaConversions(): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(1000)
+            ->height(1000)
+            ->performOnCollections('blogs')
+            ->format('webp');
+    }
 }
+
