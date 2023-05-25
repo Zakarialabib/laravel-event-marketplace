@@ -14,7 +14,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Index extends Component
 {
@@ -77,15 +76,18 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function selectStore($storeId)
-    {
-        $this->filterStore = $storeId;
-        $this->resetPage(); // Reset pagination to the first page
-    }
-
     public function resetSelected()
     {
         $this->selected = [];
+    }
+
+    public function selectAll()
+    {
+        if (count(array_intersect($this->selected, Race::pluck('id')->toArray())) === count(Race::pluck('id')->toArray())) {
+            $this->selected = [];
+        } else {
+            $this->selected = Race::pluck('id')->toArray();
+        }
     }
 
     public function getVendorsProperty()
@@ -101,7 +103,26 @@ class Index extends Component
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Race())->orderable;
         $this->file = null;
-        $this->selectType = 'category_id';
+    }
+
+   
+
+    public function delete(Race $race)
+    {
+        abort_if(Gate::denies('race_delete'), 403);
+
+        $race->delete();
+
+        $this->alert('success', __('Race deleted successfully.'));
+    }
+
+    public function deleteSelected(): void
+    {
+        abort_if(Gate::denies('race_delete'), 403);
+
+        Race::whereIn('id', $this->selected)->delete();
+
+        $this->resetSelected();
     }
 
     public function render(): View|Factory
@@ -114,24 +135,6 @@ class Index extends Component
 
         $races = $query->paginate($this->perPage);
 
-        return view('livewire.admin.race.index', compact('races'));
-    }
-
-    public function delete(Race $race)
-    {
-        abort_if(Gate::denies('race_delete'), 403);
-
-        $race->delete();
-
-        $this->alert('success', __('Product deleted successfully.'));
-    }
-
-    public function deleteSelected(): void
-    {
-        abort_if(Gate::denies('race_delete'), 403);
-
-        Race::whereIn('id', $this->selected)->delete();
-
-        $this->resetSelected();
+        return view('livewire.admin.race.index', compact('races'))->extends('layouts.dashboard');
     }
 }

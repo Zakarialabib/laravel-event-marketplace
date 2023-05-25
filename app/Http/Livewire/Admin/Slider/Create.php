@@ -9,9 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -70,9 +68,9 @@ class Create extends Component
                 $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->photo->extension();
 
                 $this->slider->addMediaFromDisk($this->photo->getRealPath())
-                ->usingFileName($imageName)
-                ->toMediaCollection('sliders');
-                
+                    ->usingFileName($imageName)
+                    ->toMediaCollection('local_files');
+
                 $this->slider->photo = $imageName;
             }
 

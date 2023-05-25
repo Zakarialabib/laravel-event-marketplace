@@ -211,5 +211,5 @@
                 })
             })
         })
-    </script>
+    </script> 
 @endpush

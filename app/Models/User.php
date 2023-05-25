@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Enums\RoleType;
 use App\Enums\Status;
 use Spatie\Permission\Traits\HasRoles;
 use App\Support\HasAdvancedFilter;
@@ -73,10 +72,5 @@ class User extends Authenticatable
     public function isClient()
     {
         return $this->roles->pluck('name')->contains(Role::ROLE_CLIENT);
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
     }
 }

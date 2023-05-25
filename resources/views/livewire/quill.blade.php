@@ -60,9 +60,11 @@
                 }
             },
         });
+        quill.root.innerHTML = @json($value);
+
         quill.on('text-change', function() {
             let value = document.getElementsByClassName('ql-editor')[0].innerHTML;
-            @this.set('value', value)
+            Livewire.emit('quill_value_updated', value);
         })
     </script>
 @endpush

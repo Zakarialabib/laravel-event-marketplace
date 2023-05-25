@@ -8,9 +8,7 @@ use App\Models\Sponsor;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -65,8 +63,8 @@ class Create extends Component
             $imageName = Str::slug($this->sponsor->name);
 
             $this->sponsor->addMediaFromDisk($image->getRealPath())
-            ->usingFileName($imageName)
-            ->toMediaCollection('sponsors');
+                ->usingFileName($imageName)
+                ->toMediaCollection('local_files');
 
             $this->sponsor->image = $imageName;
         }
@@ -74,10 +72,10 @@ class Create extends Component
         if ($this->image) {
             // with str slug with name date
             $imageName = Str::slug($this->sponsor->name).'.'.$this->image->extension();
-            
+
             $this->sponsor->addMediaFromDisk($this->image->getRealPath())
-            ->usingFileName($imageName)
-            ->toMediaCollection('sponsors');
+                ->usingFileName($imageName)
+                ->toMediaCollection('local_files');
 
             $this->sponsor->image = $imageName;
         }

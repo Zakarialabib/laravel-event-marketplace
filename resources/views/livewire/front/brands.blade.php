@@ -55,7 +55,7 @@
 
                 <div class="w-full sm:w-auto flex justify-center my-2 overflow-x-scroll">
                     <button @click="showSidebar = true" type="button"
-                        class="flex lg:hidden items-center justify-center w-12 h-12 text-gray-600 hover:text-move-600 focus:outline-none">
+                        class="flex lg:hidden items-center justify-center w-12 h-12 text-gray-600 hover:text-redBrick-600 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M4 6h16M4 12h16M4 18h16"></path>
@@ -63,14 +63,14 @@
                     </button>
 
                     <select wire:model="perPage" name="perPage"
-                        class="lg:px-4 md:px-2 py-2 bg-white text-gray-700 rounded border border-gray-100 text-xs focus:shadow-outline-blue focus:border-move-500">
+                        class="lg:px-4 md:px-2 py-2 bg-white text-gray-700 rounded border border-gray-100 text-xs focus:shadow-outline-blue focus:border-redBrick-500">
                         @foreach ($paginationOptions as $value)
                             <option value="{{ $value }}">{{ $value }}</option>
                         @endforeach
                     </select>
 
                     <select
-                        class="lg:px-4 md:px-2 py-2 bg-white text-gray-700 rounded border border-gray-100 text-xs focus:shadow-outline-blue focus:border-move-500"
+                        class="lg:px-4 md:px-2 py-2 bg-white text-gray-700 rounded border border-gray-100 text-xs focus:shadow-outline-blue focus:border-redBrick-500"
                         id="sortBy" wire:model="sorting">
                         <option selected>{{ __('Choose filters') }}</option>
                         @foreach ($sortingOptions as $value => $label)

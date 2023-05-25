@@ -8,7 +8,6 @@ use App\Models\Sponsor;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
 class Edit extends Component
@@ -61,11 +60,10 @@ class Edit extends Component
 
             $this->slider->addMediaFromDisk($this->image->getRealPath())
                 ->usingFileName($imageName)
-                ->toMediaCollection('sponsors');
+                ->toMediaCollection('local_files');
 
             $this->sponsor->image = $imageName;
         }
-
 
         $this->sponsor->save();
 

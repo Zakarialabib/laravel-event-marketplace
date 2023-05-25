@@ -76,12 +76,12 @@ class VisualEditor extends Component
         ];
 
         $this->footerSettings = [
-            'numberOfColumns' => 1,
-            'headerHeight'    => 100,
-            'logoUrl'         => null,
-            'logoSize'        => 50,
-            'logoPosition'    => 'left',
-            'hasNewslettersForm'   => false,
+            'numberOfColumns'    => 1,
+            'headerHeight'       => 100,
+            'logoUrl'            => null,
+            'logoSize'           => 50,
+            'logoPosition'       => 'left',
+            'hasNewslettersForm' => false,
         ];
 
         $this-> breadcrumbsSettings = [

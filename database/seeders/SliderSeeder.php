@@ -16,34 +16,8 @@ class SliderSeeder extends Seeder
      */
     public function run()
     {
-        Slider::insert([
-            [
-                'subtitle' => 'Slider Subtitle',
-                'title'    => 'Slider Title',
-                'details'  => 'Slider Details',
-                'image'    => 'slider.jpg',
-                'bg_color' => 'bg-white',
-                'featured' => 1,
-                'link'     => 'https://www.google.com',
-            ],
-            [
-                'subtitle' => 'Slider Subtitle',
-                'title'    => 'Slider Title',
-                'details'  => 'Slider Details',
-                'image'    => 'slider.jpg',
-                'bg_color' => 'bg-white',
-                'featured' => 0,
-                'link'     => 'https://www.google.com',
-            ],
-            [
-                'subtitle' => 'Slider Subtitle',
-                'title'    => 'Slider Title',
-                'details'  => 'Slider Details',
-                'image'    => 'slider.jpg',
-                'bg_color' => 'bg-white',
-                'featured' => 0,
-                'link'     => 'https://www.google.com',
-            ],
-        ]);
+        Slider::factory()
+            ->count(5)
+            ->create();
     }
 }

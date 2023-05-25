@@ -123,9 +123,7 @@ class Index extends Component
     {
         $query = Product::with(['category' => function ($query) {
             $query->select('id', 'name');
-        }, 'brand' => function ($query) {
-            $query->select('id', 'name');
-        }, 'store',
+        },
         ])->select('products.*')->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
@@ -191,7 +189,7 @@ class Index extends Component
              'meta_description' => $product_details->meta_description,
              'meta_keywords'    => $product_details->meta_keywords,
              'category_id'      => $product_details->category_id,
-             'subcategories'    => $product_details->subcategories,
+            //  'subcategories'    => $product_details->subcategories,
              'image'            => $product_details->image,
              'brand_id'         => $product_details->brand_id,
              'status'           => 0,

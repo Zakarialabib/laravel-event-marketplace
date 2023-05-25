@@ -6,9 +6,14 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Section extends Model
+class Section extends Model implements HasMedia
 {
+    use HasFactory;
+    use InteractsWithMedia;
     use HasAdvancedFilter;
 
     public const HOME_PAGE = 1;
@@ -92,6 +97,21 @@ class Section extends Model
 
     public function language()
     {
-        return $this->belongsTo('App\Models\Language');
+        return $this->belongsTo(Language::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('sliders');
+    }
+
+    public function registerMediaConversions($media = null): void
+    {
+        $this->addMediaConversion('large')
+            ->width(1000)
+            ->height(400)
+            ->performOnCollections('sliders')
+            ->withResponsiveImages()
+            ->format('webp');
     }
 }

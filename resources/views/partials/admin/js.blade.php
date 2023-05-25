@@ -13,7 +13,6 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.36.3/apexcharts.min.js"
      integrity="sha512-sa449wQ9TM6SvZV7TK7Zx/SjVR6bc7lR8tRz1Ar4/R6X2jOLaFln/9C+6Ak2OkAKZ/xBAKJ94dQMeYa0JT1RLg=="
      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
- @include('sweetalert::alert')
 
  <x-livewire-alert::scripts />
 

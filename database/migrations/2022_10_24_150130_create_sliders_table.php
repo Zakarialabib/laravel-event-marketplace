@@ -18,9 +18,11 @@ return new class () extends Migration {
             $table->id();
             $table->string('subtitle')->nullable();
             $table->string('title');
-            $table->string('details')->nullable();
-            $table->string('image');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
             $table->string('bg_color')->nullable();
+            $table->string('text_color')->nullable();
+            $table->string('slider_settings')->nullable();
             $table->boolean('featured')->default(false);
             $table->string('link')->nullable();
             $table->text('embeded_video')->nullable();

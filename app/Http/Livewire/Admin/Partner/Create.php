@@ -8,17 +8,13 @@ use App\Models\Partner;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Spatie\MediaLibraryPro\Http\Livewire\Concerns\WithMedia;
 
 class Create extends Component
 {
-    use WithMedia;
     use LivewireAlert;
     use WithFileUploads;
 
@@ -27,8 +23,6 @@ class Create extends Component
     public $partner;
 
     public $image;
-
-    public $featured_image;
 
     public $image_url = null;
 
@@ -67,9 +61,8 @@ class Create extends Component
             $image = file_get_contents($this->image_url);
 
             $imageName = Str::random(5).'.'.$this->image->extension();
-            
-            $this->partner->addFromMediaLibraryRequest($image)
-            ->toMediaCollection('partners');
+
+            $this->partner->addMedia($image)->toMediaCollection('local_files');
 
             $this->partner->image = $imageName;
         }
@@ -77,17 +70,10 @@ class Create extends Component
         if ($this->image) {
             // with str slug with name date
             $imageName = Str::slug($this->partner->name).'.'.$this->image->extension();
-            
-            $this->partner->addFromMediaLibraryRequest($this->image)
-            ->toMediaCollection('partners');
+
+            $this->partner->addMedia($this->image)->toMediaCollection('local_files');
 
             $this->partner->image = $imageName;
-        }
-
-        if ($this->featured_image) {
-            $imageName = Str::slug($this->partner->name).'-'.date('Y-m-d H:i:s').'.'.$this->featured_image->extension();
-            $this->featured_image->storeAs('partners', $imageName);
-            $this->partner->featured_image = $imageName;
         }
 
         $this->partner->save();

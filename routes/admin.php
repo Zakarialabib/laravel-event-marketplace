@@ -20,6 +20,10 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SmptController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Livewire\Admin\Race\Index as RaceIndex;
+use App\Http\Livewire\Admin\RaceLocation\Index as RaceLocationIndex;
+use App\Http\Livewire\Admin\Category\Index as CategoriesIndex;
+use App\Http\Livewire\Admin\ProductCategory\Index as ProductCategoryIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,16 +37,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:ADMIN', 'firewall.all']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin', 'firewall.all']], function () {
     // change lang
     Route::get('/lang/{lang}', [DashboardController::class, 'changeLanguage'])->name('changelanguage');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/categories', CategoriesIndex::class)->name('categories');
+    Route::get('/product-categories', ProductCategoryIndex::class)->name('product-categories');
+    
     Route::get('/subcategories', [CategoryController::class, 'subcategories'])->name('subcategories');
     Route::get('/brands', [BrandController::class, 'index'])->name('brands');
     Route::get('/products', [ProductController::class, 'index'])->name('products');
+    Route::get('/races', RaceIndex::class)->name('races');
+    Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');
 
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
 

@@ -6,71 +6,115 @@ namespace App\Http\Livewire\Front;
 
 use App\Helpers;
 use App\Models\Registration;
-use App\Models\Race;
-use App\Enums\OrderType;
-use App\Enums\Status;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Auth\Events\Registered;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use App\Mail\RegistrationConfirmation;
+use Illuminate\Support\Facades\Auth;
+use App\Enums\Status;
 
 class RegistrationForm extends Component
 {
     use LivewireAlert;
 
-    public $name;
-
-    public $phone;
-
-    public $address;
+    public $race;
 
     public $registration;
+    
+    public $additionalServices = false;
+
+    public $existingSubmission;
+    public $newsletters = false;
 
     protected $rules = [
-        'numberOfParticipants' => 'required|integer',
-        'email' => 'required|email',
-        'firstName' => 'required|string',
-        'lastName' => 'required|string',
-        'gender' => 'required|string',
-        'dateOfBirth' => 'required|date',
-        'phoneNumber' => 'required|string',
-        'country' => 'required|string',
-        'address' => 'required|string',
-        'city' => 'required|string',
-        'zipCode' => 'nullable|string',
-        'emergencyContactName' => 'required|string',
-        'emergencyContactPhoneNumber' => 'required|string',
-        'hasMedicalHistory' => 'boolean',
-        'isTakingMedications' => 'boolean',
-        'hasMedicationAllergies' => 'boolean',
-        'hasSensitivities' => 'boolean',
+        'race.numberOfParticipants'        => 'required|integer',
+        'race.email'                       => 'required|email',
+        'race.firstName'                   => 'required|string',
+        'race.lastName'                    => 'required|string',
+        'race.gender'                      => 'required|string',
+        'race.dateOfBirth'                 => 'required|date',
+        'race.phoneNumber'                 => 'required|string',
+        'race.country'                     => 'required|string',
+        'race.address'                     => 'required|string',
+        'race.city'                        => 'required|string',
+        'race.zipCode'                     => 'nullable|string',
+        'race.emergencyContactName'        => 'required|string',
+        'race.emergencyContactPhoneNumber' => 'required|string',
+        'race.hasMedicalHistory'           => 'boolean',
+        'race.isTakingMedications'         => 'boolean',
+        'race.hasMedicationAllergies'      => 'boolean',
+        'race.hasSensitivities'            => 'boolean',
     ];
-
 
     public function mount($race)
     {
         $this->race = $race;
         $this->registration = new Registration();
         $this->country = 'Maroc';
+
+        $this->existingSubmission = Registration::where('user_id', Auth::id())
+                                                ->first();
     }
 
     public function render(): View|Factory
     {
-        return view('livewire.front.order-form');
+        return view('livewire.front.registration-form');
     }
 
     public function store()
     {
 
-        $this->validate();
+        if ($this->existingSubmission) {
+            $this->alert('error', __('You already have a submission'));
+            return;
+        }
 
-        $this->registration-save();
+        try {
+            
+            $this->validate();
 
-        $this->alert('success', __('Your order has been sent successfully!'));
+            $this->registration->save();
 
-        // Mail::to(Helpers::settings('company_email_address'))->send(new OrderFormMail($order));
+            $user = User::create([
+                'name'     => $this->registration->first_name.' '.$this->registration->last_name,
+                'email'    => $this->registration->email,
+                'phone'    => $this->registration->phone,
+                'city'     => $this->registration->city,
+                'country'  => $this->registration->country,
+                'status'   => Status::INACTIVE, // Set status to inactive by default
+            ]);
+    
+            $role = Role::create(['name' => 'client']);
+    
+            $user->assignRole($role);
+            
+            // Generate a random password for the user
+            $password = Str::random(10);
+            $user->password = bcrypt($password);
+            $user->save();
 
-        $this->reset();
+            event(new Registered($user));
+    
+            Auth::login($user, true);
+
+            if($this->newsletters){
+                Newsletters::create([
+                    'email' => $this->registration->email,
+                ]);
+            }
+            
+            Mail::to($this->registration->email)->send(new RegistrationConfirmation($user, $password));
+
+            $this->alert('success', __('Your order has been sent successfully!'));
+
+            $this->reset();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }

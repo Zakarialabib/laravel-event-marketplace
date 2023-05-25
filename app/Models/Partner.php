@@ -40,19 +40,19 @@ class Partner extends Model implements HasMedia
         'social_media_urls' => 'json',
         // 'status' => Status::class,
     ];
-    
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('partners')->withResponsiveomage();
+        $this->addMediaCollection('partners');
     }
-  
+
     public function registerMediaConversions(): void
     {
-        $this->addMediaConversion('thumb')
-            ->width(1000)
-            ->height(1000)
+        $this->addMediaConversion('medium')
+            ->width(500)
+            ->height(500)
             ->performOnCollections('partners')
+            ->withResponsiveImages()
             ->format('webp');
     }
 }
-

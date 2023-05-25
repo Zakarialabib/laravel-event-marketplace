@@ -6,9 +6,8 @@ namespace App\Http\Livewire\Admin\Product;
 
 use App\Helpers;
 use App\Models\Brand;
-use App\Models\Category;
+use App\Models\ProductCategory;
 use App\Models\Product;
-use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -57,11 +56,11 @@ class Create extends Component
         'product.meta_description' => ['nullable', 'string', 'max:255'],
         'product.meta_keywords'    => ['nullable', 'string', 'min:1'],
         'product.category_id'      => ['required', 'integer'],
-        'product.subcategories'    => ['required', 'array', 'min:1'],
-        'product.subcategories.*'  => ['integer', 'distinct:strict'],
+        // 'product.subcategories'    => ['required', 'array', 'min:1'],
+        // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
         'options.*.type'           => ['required', 'string', 'in:color,size'],
         'options.*.value'          => ['required_if:options.*.type,color', 'string'],
-        'product.brand_id'         => ['nullable', 'integer'],
+        // 'product.brand_id'         => ['nullable', 'integer'],
         'product.embeded_video'    => ['nullable'],
         'product.condition'        => ['nullable'],
     ];
@@ -76,19 +75,14 @@ class Create extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function updatedProductSubcategories()
-    {
-        $this->product->subcategories()->sync($this->product->subcategories);
-    }
+    // public function updatedProductSubcategories()
+    // {
+    //     $this->product->subcategories()->sync($this->product->subcategories);
+    // }
 
     public function getImagePreviewProperty()
     {
         return $this->product->image;
-    }
-
-    public function getGalleryPreviewProperty()
-    {
-        return $this->product->gallery;
     }
 
     public function render(): View|Factory
@@ -132,8 +126,7 @@ class Create extends Component
             $this->product->gallery = json_encode($gallery);
         }
 
-        $this->product->subcategories = $this->subcategories;
-        $this->product->subcategories = $this->subcategories;
+        // $this->product->subcategories = $this->subcategories;
 
         $this->product->save();
 
@@ -146,16 +139,16 @@ class Create extends Component
 
     public function getCategoriesProperty()
     {
-        return Category::select('name', 'id')->get();
+        return ProductCategory::select('name', 'id')->get();
     }
 
-    public function getBrandsProperty()
-    {
-        return Brand::select('name', 'id')->get();
-    }
+    // public function getBrandsProperty()
+    // {
+    //     return Brand::select('name', 'id')->get();
+    // }
 
-    public function getSubcategoriesProperty()
-    {
-        return Subcategory::select('name', 'id')->get();
-    }
+    // public function getSubcategoriesProperty()
+    // {
+    //     return Subcategory::select('name', 'id')->get();
+    // }
 }

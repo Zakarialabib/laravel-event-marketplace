@@ -1,4 +1,4 @@
-<div x-data="{ isSidebar: false }">
+<div x-data="{ isSidebar: false,  }">
     <div class="relative">
         <nav class="flex bg-gray-50 border-b">
             <div class="px-4 py-5 flex w-full items-center justify-between">
@@ -9,19 +9,24 @@
                         alt="{{ Helpers::settings('site_title') }}" />
                 </a>
 
-                <div class="hidden md:flex justify-center">
-                    <div class="flex items-center justify-center space-x-4">
+                <div class="hidden md:flex justify-center px-4" x-data="{ isMenuOpen : false }">
+                    <div class="flex items-center justify-center uppercase space-x-4 2xl:space-x-6">
                         @foreach (\App\Helpers::getActiveCategories() as $category)
                             <a href="{{ route('front.categories') }}?c={{ $category->id }}"
-                                class="text-md text-center uppercase font-semibold font-heading hover:text-move-400 hover:underline">
+                                class="font-heading font-medium hover:text-redBrick-400 hover:underline">
                                 {{ $category->name }}
                             </a>
                         @endforeach
-                        <button type="button"
-                            class="lg:text-md md:text-sm text-center uppercase font-semibold font-heading hover:text-move-400 hover:underline"
+                        <a href="{{ route('front.catalog')}}"
+                            class="font-heading font-medium uppercase hover:text-redBrick-400 hover:underline">
+                            {{ __('Store') }} 
+                        </a>
+                        {{-- <button type="button"
+                            class="font-heading font-medium uppercase hover:text-redBrick-400 hover:underline"
                             x-on:click="isMenuOpen = !isMenuOpen" @mouseenter="isMenuOpen = true" @click.away="isMenuOpen = false">
-                            {{ __('Races') }} <small class="inline-block align-middle text-gray-100">&#9660;</small>
-                        </button>
+                            {{ __('Store') }} 
+                            <small class="inline-block align-middle text-gray-100">&#9660;</small>
+                        </button> --}}
                     </div>
                     <div x-show="isMenuOpen" x-transition:enter="transition ease-out duration-300 transform origin-top"
                         x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
@@ -34,7 +39,7 @@
                         @click.away="isMenuOpen = false">
                         {{-- @foreach (\App\Helpers::getActiveBrands() as $brand)
                             <a class="" href="{{ route('front.brandPage', $brand->slug) }}">
-                                <p class="mb-3 text-lg font-bold font-heading text-move-900 hover:text-move-600 hover:underline">
+                                <p class="mb-3 text-lg font-bold font-heading text-redBrick-900 hover:text-redBrick-600 hover:underline">
                                     {{ $brand->name }}
                                 </p>
                             </a>
@@ -42,17 +47,17 @@
                     </div>
                 </div>
 
-                <div class="hidden md:flex items-center text-move-800 gap-4">
+                <div class="hidden md:flex items-center text-redBrick-800 gap-4">
                     @if (Auth::check())
                         <x-dropdown align="right" width="56">
                             <x-slot name="trigger">
-                                <div class="flex items-center text-move-800 px-4 cursor-pointer">
+                                <div class="flex items-center text-redBrick-800 px-4 cursor-pointer">
                                     <i class="fa fa-caret-down ml-2"></i> {{ Auth::user()->name }}
                                 </div>
                             </x-slot>
 
                             <x-slot name="content">
-                                @if (Auth::user()->isAdmin())
+                                @if (Auth::user()->hasRole('admin'))
                                     <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                         {{ __('Dashboard') }}
                                     </x-dropdown-link>
@@ -60,7 +65,7 @@
                                     <x-dropdown-link :href="route('admin.settings')">
                                         {{ __('Settings') }}
                                     </x-dropdown-link>
-                                @elseif (Auth::user()->isVendor())
+                                @elseif (Auth::user()->hasRole('vendor'))
                                     <x-dropdown-link href="{{ route('vendor.dashboard') }}">
                                         {{ __('Store') }}
                                     </x-dropdown-link>
@@ -70,7 +75,7 @@
                                     </x-dropdown-link>
                                 @endif
 
-                                <div class="border-t border-move-800"></div>
+                                <div class="border-t border-redBrick-800"></div>
 
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
@@ -86,8 +91,8 @@
                     @else
                         <x-dropdown align="right" width="56">
                             <x-slot name="trigger">
-                                <div class="flex items-center text-move-800 pr-4">
-                                    <svg class="ml-2 text-move-800" width="30" height="30" viewBox="0 0 24 24"
+                                <div class="flex items-center text-redBrick-800 pr-4">
+                                    <svg class="ml-2 text-redBrick-800" width="30" height="30" viewBox="0 0 24 24"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M17 21C17 18.2386 14.7614 16 12 16C9.23858 16 7 18.2386 7 21M17 21H17.8031C18.921 21 19.48 21 19.9074 20.7822C20.2837 20.5905 20.5905 20.2837 20.7822 19.9074C21 19.48 21 18.921 21 17.8031V6.19691C21 5.07899 21 4.5192 20.7822 4.0918C20.5905 3.71547 20.2837 3.40973 19.9074 3.21799C19.4796 3 18.9203 3 17.8002 3H6.2002C5.08009 3 4.51962 3 4.0918 3.21799C3.71547 3.40973 3.40973 3.71547 3.21799 4.0918C3 4.51962 3 5.08009 3 6.2002V17.8002C3 18.9203 3 19.4796 3.21799 19.9074C3.40973 20.2837 3.71547 20.5905 4.0918 20.7822C4.5192 21 5.07899 21 6.19691 21H7M17 21H7M12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10C15 11.6569 13.6569 13 12 13Z"
@@ -151,7 +156,7 @@
                 <div class="border-t border-gray-900 mt-6 py-2"></div>
 
                 <ul class="lg:text-3xl sm:text-xl font-bold font-heading mb-4" x-data="{ isCategory: false }">
-                    <li class="mb-2 hover:underline hover:text-move-500">
+                    <li class="mb-2 hover:underline hover:text-redBrick-500">
                         <button @click="isCategory = !isCategory" type="button">
                             {{ __('Categories') }}
                             <i class="fas fa-angle-down pl-5"></i>
@@ -161,7 +166,7 @@
                         @foreach (\App\Helpers::getActiveCategories() as $category)
                             <li>
                                 <a href="{{ route('front.categories') }}?c={{ $category->id }}"
-                                    class="text-lg text-move-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
+                                    class="text-lg text-redBrick-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
                                     {{ $category->name }}
                                 </a>
                             </li>
@@ -172,7 +177,7 @@
                 <div class="border-t border-gray-900 py-2"></div>
 
                 <ul class="lg:text-3xl sm:text-xl font-bold font-heading mb-4" x-data="{ isBrand: false }">
-                    <li class="mb-2 hover:underline hover:text-move-500">
+                    <li class="mb-2 hover:underline hover:text-redBrick-500">
                         <button @click="isBrand = !isBrand" type="button">
                             {{ __('Partners') }}
                             <i class="fas fa-angle-down pl-5"></i>
@@ -182,7 +187,7 @@
                         {{-- @foreach (\App\Helpers::getActiveBrands() as $brand)
                             <li>
                                 <a href="{{ route('front.brands') }}?c={{ $brand->id }}"
-                                    class="text-lg text-move-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
+                                    class="text-lg text-redBrick-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
                                     {{ $brand->name }}
                                 </a>
                             </li>
@@ -196,30 +201,30 @@
                     @if (Auth::check())
                         <div class="w-full lg:text-3xl sm:text-xl font-bold font-heading">
                             <div class="py-3">
-                                <a href="#" class="hover:text-move-500">
+                                <a href="#" class="hover:text-redBrick-500">
                                     {{ Auth::user()->name }}
                                 </a>
                             </div>
-                            @if (Auth::user()->isAdmin())
+                            @if (Auth::user()->hasRole('admin'))
                                 <div class="py-3">
-                                    <a class="hover:text-move-500" href="{{ route('admin.dashboard') }}">
+                                    <a class="hover:text-redBrick-500" href="{{ route('admin.dashboard') }}">
                                         {{ __('Dashboard') }}
                                     </a>
                                 </div>
                                 <div class="py-3">
-                                    <a class="hover:text-move-500" href="{{ route('admin.settings') }} ">
+                                    <a class="hover:text-redBrick-500" href="{{ route('admin.settings') }} ">
                                         {{ __('Settings') }}
                                     </a>
                                 </div>
-                            @elseif (Auth::user()->isVendor())
+                            @elseif (Auth::user()->hasRole('vendor'))
                                 <div class="py-3">
-                                    <a class="hover:text-move-500" href="{{ route('front.myaccount') }}">
-                                        {{ __('Store') }}
+                                    <a class="hover:text-redBrick-500" href="{{ route('front.myaccount') }}">
+                                        {{ __('Account') }}
                                     </a>
                                 </div>
                             @else
                                 <div class="py-3">
-                                    <a class="hover:text-move-500" href="{{ route('front.myaccount') }}">
+                                    <a class="hover:text-redBrick-500" href="{{ route('front.myaccount') }}">
                                         {{ __('My account') }}
                                     </a>
                                 </div>
@@ -229,11 +234,11 @@
                         <div class="border-t border-gray-900 py-2"></div>
                         <div class="w-full lg:text-3xl sm:text-xl font-bold font-heading">
                             <div class="py-3">
-                                <a class="hover:text-move-500" href="{{ route('login') }}">{{ __('Login') }} </a>
+                                <a class="hover:text-redBrick-500" href="{{ route('login') }}">{{ __('Login') }} </a>
                             </div>
                             {{ __('or') }}
                             <div class="py-3">
-                                <a class="hover:text-move-500" href="{{ route('register') }}">
+                                <a class="hover:text-redBrick-500" href="{{ route('register') }}">
                                     {{ __('Register') }}</a>
                             </div>
                         </div>

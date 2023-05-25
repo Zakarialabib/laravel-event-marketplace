@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,15 +23,15 @@ class AuthRole
         $user = auth()->user();
 
         if ($user) {
-            if ($role === Role::ROLE_ADMIN && $user->isAdmin()) {
-                return $next($request);
-            }
-           
-            if ($role === Role::ROLE_VENDOR && $user->isVendor()) {
+            if ($role === $user->hasRole('admin')) {
                 return $next($request);
             }
 
-            if ($role === Role::ROLE_CLIENT && $user->isClient()) {
+            if ($role === $user->hasRole('vendor')) {
+                return $next($request);
+            }
+
+            if ($role === $user->hasRole('client')) {
                 return $next($request);
             }
         }

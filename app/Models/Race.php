@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Support\HasAdvancedFilter;
 use App\Enums\RaceStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -14,6 +15,19 @@ class Race extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use HasFactory;
+    use HasAdvancedFilter;
+
+    public const ATTRIBUTES = [
+        'id',
+        'name',
+        'status',
+        'date',
+        'race_location_id',
+        'category_id',
+    ];
+
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'name',
@@ -37,7 +51,7 @@ class Race extends Model implements HasMedia
         'options'  => 'json',
         'features' => 'json',
         'calendar' => 'json',
-        'satuts' => RaceStatus::class,
+        'satuts'   => RaceStatus::class,
     ];
 
     public function location()
@@ -65,7 +79,7 @@ class Race extends Model implements HasMedia
         return $this->belongsToMany(Sponsor::class);
     }
 
-    public function media()
+    public function medias()
     {
         return $this->hasMany(Media::class);
     }
@@ -87,17 +101,21 @@ class Race extends Model implements HasMedia
         return number_format($this->price, 2).'DH';
     }
 
-    // Mutator
-    public function setImagesAttribute($value)
-    {
-        // Convert the images to JSON before saving
-        $this->attributes['images'] = json_encode($value);
-    }
-
     // Scope for races happening in the future
     public function scopeUpcoming($query)
     {
         return $query->where('date', '>', now());
+    }
+    
+    public function scopeThisYear($query)
+    {
+        return $query->whereYear('date', date('Y'));
+    }
+    
+    public function scopeThisMonth($query)
+    {
+        return $query->whereYear('date', date('Y'))
+                     ->whereMonth('date', date('m'));
     }
 
     // Accessor for formatted race date
@@ -111,19 +129,20 @@ class Race extends Model implements HasMedia
     {
         $this->attributes['date'] = \Carbon\Carbon::createFromFormat('Y-m-d', $value);
     }
-    
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('races')->withResponsiveomage();
+        $this->addMediaCollection('local_files');
     }
-  
-    public function registerMediaConversions(): void
+
+    public function registerMediaConversions($media = null): void
     {
         $this->addMediaConversion('large')
             ->width(1000)
             ->height(1000)
             ->quality(90)
-            ->performOnCollections('races')
+            ->performOnCollections('local_files')
+            // ->withResponsiveImages()
             ->format('webp');
     }
 }

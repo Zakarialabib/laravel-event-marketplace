@@ -13,6 +13,7 @@ return new class () extends Migration {
         Schema::create('races', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->date('date');
             $table->string('description')->nullable();
             $table->foreignId('race_location_id')->constrained('race_locations');
@@ -20,7 +21,7 @@ return new class () extends Migration {
             $table->integer('number_of_days')->nullable();
             $table->integer('number_of_racers');
             $table->decimal('price', 8, 2);
-            $table->json('images')->nullable();
+            $table->string('images')->nullable();
             $table->json('social_media')->nullable();
             $table->json('sponsors')->nullable();
             $table->json('course')->nullable();

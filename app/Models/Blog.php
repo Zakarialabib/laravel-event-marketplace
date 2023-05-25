@@ -49,18 +49,18 @@ class Blog extends Model implements HasMedia
     {
         return $this->belongsTo(Language::class);
     }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('blogs')->withResponsiveomage();
+        $this->addMediaCollection('blogs');
     }
-  
-    public function registerMediaConversions(): void
+
+    public function registerMediaConversions($media = null): void
     {
-        $this->addMediaConversion('thumb')
-            ->width(1000)
-            ->height(1000)
+        $this->addMediaConversion('large')
+            ->width(800)
+            ->height(800)
             ->performOnCollections('blogs')
             ->format('webp');
     }
 }
-

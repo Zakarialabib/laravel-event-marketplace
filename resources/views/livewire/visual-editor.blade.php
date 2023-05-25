@@ -59,6 +59,12 @@
                                 max="100"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
+                        <div>
+                            <label for="bg-color" class="block font-medium mb-2">Header background color:</label>
+                            <input type="color" id="bg-color" wire:model.lazy="headerLayout.bg-color" min="10"
+                                max="100"
+                                class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
                         
                     </div>
                     <div class="my-4">

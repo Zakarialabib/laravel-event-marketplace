@@ -9,8 +9,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use App\Models\Slider;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\Language;
@@ -69,11 +67,11 @@ class Edit extends Component
         if ($this->photo) {
             $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->photo->extension();
 
-            $this->slider->clearMediaCollection('sliders');
-            
+            $this->slider->clearMediaCollection('media');
+
             $this->slider->addMediaFromDisk($this->photo->getRealPath())
                 ->usingFileName($imageName)
-                ->toMediaCollection('sliders');
+                ->toMediaCollection('local_files');
 
             $this->slider->photo = $imageName;
         }

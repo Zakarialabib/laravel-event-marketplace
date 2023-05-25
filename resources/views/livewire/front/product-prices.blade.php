@@ -16,12 +16,12 @@
                             <div class="flex items-center px-4 py-3 border-b border-gray-200"
                                 wire:loading.class.delay="opacity-50" wire:key="row-{{ $store->id }}">
                                 <div class="flex-grow">
-                                    <h4 class="text-md font-bold text-move-400">{{ $store->name }}</h4>
+                                    <h4 class="text-md font-bold text-redBrick-400">{{ $store->name }}</h4>
                                     {{-- <p class="text-sm text-gray-500">{{ $store->location }}</p> --}}
                                 </div>
                                 <div class="flex-none">
                                     <a href=""
-                                        class="px-4 py-2 bg-move-600 hover:bg-move-700 text-white rounded-lg inline-flex items-center">
+                                        class="px-4 py-2 bg-redBrick-600 hover:bg-redBrick-700 text-white rounded-lg inline-flex items-center">
                                         <span>{{ __('Buy Now') }}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
                                             fill="currentColor">
@@ -42,7 +42,7 @@
                             </div>
                         @empty
                             <div
-                                class="flex-none px-4 py-2 text-center text-white hover:text-move-700 items-center">
+                                class="flex-none px-4 py-2 text-center text-white hover:text-redBrick-700 items-center">
                                 <span>{{ __('Nothing found') }}</span>
                             </div>
                         @endforelse

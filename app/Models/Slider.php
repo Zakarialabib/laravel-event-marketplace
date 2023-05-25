@@ -6,9 +6,14 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Slider extends Model
+class Slider extends Model implements HasMedia
 {
+    use HasFactory;
+    use InteractsWithMedia;
     use HasAdvancedFilter;
 
     public const StatusInactive = 0;
@@ -28,7 +33,9 @@ class Slider extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'title', 'subtitle', 'details', 'embeded_video', 'image', 'featured', 'link', 'language_id', 'bg_color', 'status',
+        'title', 'subtitle', 'description', 'embeded_video', 'image',
+        'text_color', 'slider_settings',
+        'featured', 'link', 'language_id', 'bg_color', 'status',
     ];
 
     /**
@@ -45,15 +52,16 @@ class Slider extends Model
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('sliders')->withResponsiveomage();
+        $this->addMediaCollection('sliders');
     }
-  
-    public function registerMediaConversions(): void
+
+    public function registerMediaConversions($media = null): void
     {
         $this->addMediaConversion('large')
             ->width(1000)
             ->height(400)
             ->performOnCollections('sliders')
+            ->withResponsiveImages()
             ->format('webp');
     }
 }

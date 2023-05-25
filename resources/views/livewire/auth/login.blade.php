@@ -1,8 +1,5 @@
 <div>
-    <h1 class="text-3xl md:text-xl font-bold text-center mb-4">
-        {{ __('Login to your account') }}
-    </h1>
-
+    
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <!-- Validation Errors -->

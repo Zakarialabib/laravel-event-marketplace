@@ -29,21 +29,17 @@ class Login extends Component
     {
         $this->validate();
 
-        if ( ! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
-            $this->addError('email', __('These credentials do not match our records'));
-
-            return;
-        } else {
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
             $user = User::where(['email' => $this->email])->first();
 
             auth()->login($user, $this->remember_me);
 
             switch (true) {
-                case $user->hasRole('admin'):
+                case Auth::user()->hasRole('admin'):
                     $homePage = RouteServiceProvider::ADMIN_HOME;
 
                     break;
-                case $user->hasRole('vendor'):
+                case Auth::user()->hasRole('vendor'):
                     $homePage = RouteServiceProvider::VENDOR_HOME;
 
                     break;
@@ -54,6 +50,8 @@ class Login extends Component
             }
 
             return redirect()->intended($homePage);
+        } else {
+            $this->addError('email', __('These credentials do not match our records'));
         }
     }
 

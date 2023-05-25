@@ -6,10 +6,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Support\HasAdvancedFilter;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasFactory;
+    use HasAdvancedFilter;
+
+    public const ATTRIBUTES = [
+        'id',
+        'name',
+        'status',
+    ];
+
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'name',
@@ -45,17 +59,19 @@ class Product extends Model
     {
         return $query->where('status');
     }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('products')->withResponsiveomage();
+        $this->addMediaCollection('products');
     }
-  
-    public function registerMediaConversions(): void
+
+    public function registerMediaConversions($media = null): void
     {
         $this->addMediaConversion('large')
             ->width(1000)
             ->height(1000)
             ->performOnCollections('products')
+            ->withResponsiveImages()
             ->format('webp');
     }
 }

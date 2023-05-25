@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Helpers
 {
@@ -34,7 +36,7 @@ class Helpers
     {
         $pageSettings = PageSetting::where('is_default', true)->first();
 
-        if (!$pageSettings) {
+        if ( ! $pageSettings) {
             $pageSettings = PageSetting::first();
         }
 
@@ -253,5 +255,10 @@ class Helpers
         return $imageName;
     }
 
-    
+    public static function addMediaFromUrlToCollection(HasMedia $model, string $url, string $collectionName): Media
+    {
+        $media = $model->addMediaFromUrl($url)->toMediaCollection($collectionName);
+
+        return $media;
+    }
 }

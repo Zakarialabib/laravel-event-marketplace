@@ -1,15 +1,15 @@
 <nav aria-label="secondary" x-data="{ open: false }"
-    class="sticky top-0 z-10 flex items-center justify-between px-4 py-4 transition-transform duration-500 bg-gray-100"
+    class="sticky top-0 z-10 flex items-center justify-between px-4 py-4 transition-transform duration-500 shadow"
     :class="{
         '-translate-y-full': scrollingDown,
         'translate-y-0': scrollingUp,
     }">
 
     <div class="flex items-center gap-3">
-        <x-button type="button" iconOnly secondary srText="Open main menu" @click="isSidebarOpen = !isSidebarOpen">
-            <x-icons.menu x-show="!isSidebarOpen" aria-hidden="true" class="w-5 h-5" />
-            <x-icons.x x-show="isSidebarOpen" aria-hidden="true" class="w-5 h-5" />
-        </x-button>
+        <button type="button" iconOnly class="text-black" srText="Open main menu" @click="isSidebarOpen = !isSidebarOpen">
+            <x-icons.menu x-show="!isSidebarOpen" aria-hidden="true" class="w-7 h-7" />
+            <x-icons.x x-show="isSidebarOpen" aria-hidden="true" class="w-7 h-7" />
+        </button>
     </div>
 
     <div class="flex items-center gap-3">
@@ -25,7 +25,7 @@
             <x-dropdown align="right" width="60">
                 <x-slot name="trigger">
                     <x-button type="button" primary>
-                        {{ Auth::user()->name }}
+                        {{ Auth::user()->first_name }} 
                     </x-button>
                 </x-slot>
 

@@ -13,11 +13,11 @@ return new class () extends Migration {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('images');
-            $table->text('description');
-            $table->string('website_url');
-            $table->string('logo_image_url');
-            $table->string('social_media_url');
+            $table->string('images')->nullable();
+            $table->text('description')->nullable();
+            $table->string('website_url')->nullable();
+            $table->string('logo_image_url')->nullable();
+            $table->string('social_media_url')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

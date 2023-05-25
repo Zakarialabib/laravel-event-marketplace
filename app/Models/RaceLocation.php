@@ -35,29 +35,34 @@ class RaceLocation extends Model implements HasMedia
         'status',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     // Scope for locations with a specific category
     public function scopeByCategory($query, $categoryId)
     {
         return $query->where('category_id', $categoryId);
     }
 
-    public function category()
+    public function scopeActive($query)
     {
-        return $this->belongsTo(Category::class);
+        return $query->where('status', true);
     }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('images');
+        $this->addMediaCollection('race_locations');
     }
-  
-    public function registerMediaConversions(): void
+
+    public function registerMediaConversions($media = null): void
     {
-        $this->addMediaConversion('thumb')
-            ->width(400)
-            ->height(400)
-            ->performOnCollections('images')
+        $this->addMediaConversion('large')
+            ->width(1000)
+            ->height(1000)
+            ->performOnCollections('race_locations')
             ->withResponsiveImages()
             ->format('webp');
     }
 }
-

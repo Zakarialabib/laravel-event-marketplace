@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Front;
 
 use App\Http\Livewire\WithSorting;
-use App\Models\Brand;
-use App\Models\Category;
+use App\Models\ProductCategory;
 use App\Models\Product;
-use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -23,65 +21,36 @@ class Catalog extends Component
 
     public $paginationOptions = [25, 50, 100];
 
-    public ?int $maxPrice;
-    public ?int $minPrice;
-    public ?int $category_id;
+    public $category_id;
 
-    public $subcategory_id;
-
-    public ?int $brand_id;
-    public ?string $sorting;
+    public $sorting;
 
     public $sortingOptions;
 
     public $selectedFilters = [];
 
     protected $queryString = [
-        'category_id'    => ['except' => '', 'as' => 'c'],
-        'subcategory_id' => ['except' => '', 'as' => 's'],
-        'brand_id'       => ['except' => '', 'as' => 'b'],
-        'sorting'        => ['except' => '', 'as' => 'f'],
-        'maxPrice'       => ['except' => '', 'as' => 'max'],
-        'minPrice'       => ['except' => '', 'as' => 'min'],
+        // 'category_id' => ['except' => '', 'as' => 'c'],
+        // 'sorting'     => ['except' => '', 'as' => 'f'],
     ];
 
-    public function filterProducts($type, $value)
+    public function filterType($type, $value)
     {
-        switch($type) {
+        switch ($type) {
             case 'category':
                 $this->category_id = $value;
-
-                break;
-            case 'subcategory':
-                $this->subcategory_id = $value;
-
-                break;
-            case 'brand':
-                $this->brand_id = $value;
 
                 break;
         }
         $this->resetPage();
     }
 
+
     public function clearFilter($filter)
     {
-        switch($filter) {
-            case 'category':
-                $this->category_id = null;
-                unset($this->selectedFilters['category']);
-
-                break;
-            case 'subcategory':
-                $this->subcategory_id = null;
-                unset($this->selectedFilters['subcategory']);
-
-                break;
-            case 'brand':
-                $this->brand_id = null;
-                unset($this->selectedFilters['brand']);
-
-                break;
+        if ($filter) {
+            $this->category_id = null;
+            unset($this->selectedFilters['category']);
         }
         $this->resetPage();
     }
@@ -106,20 +75,8 @@ class Catalog extends Component
     public function render(): View|Factory
     {
         $query = Product::active()
-            ->when($this->minPrice, function ($query) {
-                return $query->where('price', '>=', $this->minPrice);
-            })
-            ->when($this->maxPrice, function ($query) {
-                return $query->where('price', '<=', $this->maxPrice);
-            })
             ->when($this->category_id, function ($query) {
-                return $query->where('category_id', $this->category_id);
-            })
-            ->when($this->subcategory_id, function ($query) {
-                return $query->whereIn('subcategories', $this->subcategory_id);
-            })
-            ->when($this->brand_id, function ($query) {
-                return $query->where('brand_id', $this->brand_id);
+                return $query->where('category_id', '>=', $this->category_id);
             });
 
         if ($this->sorting === 'name') {
@@ -143,16 +100,6 @@ class Catalog extends Component
 
     public function getCategoriesProperty()
     {
-        return Category::active()->with('subcategories')->get();
-    }
-
-    public function getSubcategoriesProperty()
-    {
-        return Subcategory::active()->get();
-    }
-
-    public function getBrandsProperty()
-    {
-        return Brand::select('id', 'name')->active()->get();
+        return ProductCategory::active()->get();
     }
 }

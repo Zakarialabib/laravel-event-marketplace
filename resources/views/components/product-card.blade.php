@@ -37,13 +37,13 @@
             </div>
 
             <a href="{{ route('front.product', $product->slug) }}">
-                <h4 class="block text-center mb-2 lg:text-md md:text-sm font-bold font-heading hover:text-move-600"
+                <h4 class="block text-center mb-2 lg:text-md md:text-sm font-bold font-heading hover:text-redBrick-600"
                     itemprop="name">
                     {{ Str::limit($product->name, 40) }}</h4>
             </a>
 
             <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p class="text-center text-move-400 hover:text-move-800 font-bold text-md mt-2"><span
+                <p class="text-center text-redBrick-400 hover:text-redBrick-800 font-bold text-md mt-2"><span
                         itemprop="price">{{ $product->price }}</span>DH
 
                     @if ($product->old_price && $product->discount != 0)
@@ -58,7 +58,7 @@
             </div>
 
             <div class="flex justify-center">
-                <a class="my-2 block bg-move-500 hover:bg-move-800 text-center text-white font-bold text-xs py-2 px-4 rounded-md uppercase cursor-pointer tracking-wider hover:shadow-lg transition ease-in duration-300"
+                <a class="my-2 block bg-redBrick-500 hover:bg-redBrick-800 text-center text-white font-bold text-xs py-2 px-4 rounded-md uppercase cursor-pointer tracking-wider hover:shadow-lg transition ease-in duration-300"
                 {{-- href="{{ route('redirect', $product->url) }}" --}}
                  wire:loading.attr="disabled">
                     {{ __('Boutique') }}

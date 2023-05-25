@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Front;
 
 use App\Http\Livewire\WithSorting;
+use App\Models\RaceLocation;
 use App\Models\Category;
-use App\Models\Product;
-use App\Models\Subcategory;
-use App\Models\Brand;
+use App\Models\Race;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -28,67 +27,65 @@ class Categories extends Component
     public array $paginationOptions;
 
     public $category_id;
-
-    public $subcategory_id;
-
-    public $brand_id;
+    
+    public $raceLocation_id;
 
     public $sorting;
+    
+    public $status = true;
 
     public $sortingOptions;
 
     public $selectedFilters = [];
 
     protected $queryString = [
-        'category_id'    => ['except' => '', 'as' => 'c'],
-        'subcategory_id' => ['except' => '', 'as' => 's'],
-        'sorting'        => ['except' => '', 'as' => 'f'],
+        'category_id' => ['except' => '', 'as' => 'c'],
+        'sorting'     => ['except' => '', 'as' => 'f'],
     ];
+
+    public function getCategoriesProperty()
+    {
+        return Category::active()->get();
+    }
+   
+    public function getRaceLocationsProperty()
+    {
+        return RaceLocation::active()->get();
+    }
 
     public function updatingPerPage()
     {
         $this->resetPage();
     }
 
-    public function filterProducts($type, $value)
+    public function filterType($type, $value)
     {
         switch ($type) {
             case 'category':
                 $this->category_id = $value;
 
                 break;
-            case 'subcategory':
-                $this->subcategory_id = [$value];
-
-                break;
-            case 'brand':
-                $this->brand_id = $value;
+            case 'location':
+                $this->raceLocation_id = [$value];
 
                 break;
         }
         $this->resetPage();
     }
 
+
     public function clearFilter($filter)
     {
-        switch ($filter) {
-            case 'category':
-                $this->category_id = null;
-                unset($this->selectedFilters['category']);
-
-                break;
-            case 'subcategory':
-                $this->subcategory_id = null;
-                unset($this->selectedFilters['subcategory']);
-
-                break;
-            case 'brand':
-                $this->brand_id = null;
-                unset($this->selectedFilters['brand']);
-
-                break;
+        if ($filter) {
+            $this->category_id = null;
+            unset($this->selectedFilters['category']);
         }
         $this->resetPage();
+    }
+
+    public function loadMore()
+    {
+        $this->perPage += 25;
     }
 
     public function mount()
@@ -102,60 +99,39 @@ class Categories extends Component
             'price-desc' => __('Price, high to low'),
             'date-asc'   => __('Date, new to old'),
             'date-desc'  => __('Date, old to new'),
+            'ThisYear'  => __('This year'),
+            'ThisMonth'  => __('This month'),
         ];
-    }
-
-    public function getCategoriesProperty()
-    {
-        return Category::active()->get();
-    }
-
-    public function getSubcategoriesProperty()
-    {
-        return Subcategory::active()->get();
-    }
-
-    public function getBrandsProperty()
-    {
-        return Brand::active()->get();
-    }
-
-    public function loadMore()
-    {
-        $this->perPage += 25;
     }
 
     public function render(): View|Factory
     {
-        $query = Product::active()
-            ->when($this->category_id, function ($query) {
-                return $query->where('category_id', $this->category_id);
+        $query = Race::where('category_id', $this->category_id)
+            ->when($this->raceLocation_id, function ($query) {
+                return $query->where('race_location_id', $this->raceLocation_id);
             })
-            ->when($this->subcategory_id, function ($query) {
-                return $query->whereIn('subcategories', $this->subcategory_id);
-            })
-            ->when($this->brand_id, function ($query) {
-                return $query->where('brand_id', $this->brand_id);
-            });
+            ->where('status', $this->status);
 
         if ($this->sorting === 'name') {
-            $query->orderBy('name', 'asc');
+            $races = $query->orderBy('name', 'asc')->paginate($this->perPage);
         } elseif ($this->sorting === 'name-desc') {
-            $query->orderBy('name', 'desc');
+            $races = $query->orderBy('name', 'desc')->paginate($this->perPage);
         } elseif ($this->sorting === 'price') {
-            $query->orderBy('price', 'asc');
+            $races = $query->orderBy('price', 'asc')->paginate($this->perPage);
         } elseif ($this->sorting === 'price-desc') {
-            $query->orderBy('price', 'desc');
+            $races = $query->orderBy('price', 'desc')->paginate($this->perPage);
         } elseif ($this->sorting === 'date') {
-            $query->orderBy('created_at', 'asc');
+            $races = $query->orderBy('created_at', 'asc')->paginate($this->perPage);
         } elseif ($this->sorting === 'date-desc') {
-            $query->orderBy('created_at', 'desc');
+            $races = $query->orderBy('created_at', 'desc')->paginate($this->perPage);
+        } elseif ($this->sorting === 'ThisYear') {
+            $races = $query->ThisYear()->paginate($this->perPage);
+        } elseif ($this->sorting === 'ThisMonth') {
+            $races = $query->ThisMonth()->paginate($this->perPage);
         }
 
-        $products = $query->paginate($this->perPage);
-
-        return view('livewire.front.categories', [
-            'products' => $products,
-        ]);
+        $races = $query->paginate($this->perPage);
+        
+        return view('livewire.front.categories', compact('races'));
     }
 }

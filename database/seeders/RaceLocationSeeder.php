@@ -16,17 +16,8 @@ class RaceLocationSeeder extends Seeder
      */
     public function run()
     {
-        RaceLocation::insert([
-            [
-                'id'         => 1,
-                'name'        => 'Dar bouaza',
-                'description'        => 'description',
-                'slug'        => 'dar-bouazza',
-                'type'        => '',
-                'images'        => '',
-                'status'        => true,
-            ],
-           
-        ]);
+        RaceLocation::factory()
+            ->count(3)
+            ->create();
     }
 }

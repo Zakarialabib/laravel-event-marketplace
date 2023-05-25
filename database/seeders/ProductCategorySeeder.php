@@ -18,43 +18,37 @@ class ProductCategorySeeder extends Seeder
     {
         ProductCategory::insert([
             [
-                'id'         => 1,
+                'id'          => 1,
                 'name'        => 'Textile',
-                'images'        => '',
                 'description' => 'textile',
-                'slug'         => 'textile',
-                'type'      => 'product' ,
-                'status'        => true,
+                'slug'        => 'textile',
+                'type'        => 'product',
+                'status'      => true,
             ],
             [
-                'id'         => 2,
-                'name'        => 'Textile',
-                'images'        => '',
-                'description' => 'textile',
-                'slug'         => 'textile',
-                'type'      => 'product' ,
-                'status'        => true,
+                'id'          => 2,
+                'name'        => 'Eyewar',
+                'description' => 'Eyewar',
+                'slug'        => 'Eyewar',
+                'type'        => 'product',
+                'status'      => true,
             ],
             [
-                'id'         => 3,
+                'id'          => 3,
                 'name'        => 'Accessories',
-                'images'        => '',
                 'description' => 'accessories',
-                'slug'         => 'accessories',
-                'type'      => 'product' ,
-                'status'        => true,
+                'slug'        => 'accessories',
+                'type'        => 'product',
+                'status'      => true,
             ],
             [
-                'id'         => 4,
+                'id'          => 4,
                 'name'        => 'Nutririon',
-                'images'        => '',
                 'description' => 'nutririon',
-                'slug'         => 'nutririon',
-                'type'      => 'product' ,
-                'status'        => true,
+                'slug'        => 'nutririon',
+                'type'        => 'product',
+                'status'      => true,
             ],
         ]);
     }
 }
-
-

@@ -34,18 +34,24 @@ class Sponsor extends Model implements HasMedia
         'social_media_url',
         'status',
     ];
-    
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('sponsors')->withResponsiveomage();
+        $this->addMediaCollection('sponsors');
     }
-  
-    public function registerMediaConversions(): void
+
+    public function registerMediaConversions($media = null): void
     {
-        $this->addMediaConversion('thumb')
-            ->width(400)
-            ->height(400)
+        $this->addMediaConversion('medium')
+            ->width(500)
+            ->height(500)
             ->performOnCollections('sponsors')
+            ->withResponsiveImages()
             ->format('webp');
     }
 }

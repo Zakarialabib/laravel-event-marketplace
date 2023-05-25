@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->text('description');
             $table->string('website_url');
             $table->string('logo_image_url');
-            $table->json('images')->nullable();
+            $table->string('images')->nullable();
             $table->json('social_media_urls');
             $table->boolean('status')->default(true);
             $table->timestamps();

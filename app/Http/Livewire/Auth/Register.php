@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
-use App\Models\Store;
 use Spatie\Permission\Models\Role;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -23,12 +22,6 @@ class Register extends Component
     public $phone;
     public $city; // Set the default city to 'Casablanca'
     public $country; // Set
-    public $isStoreOwner = false; // Add a new property to indicate whether the user is a store owner
-
-    // Properties for store owners only
-    public $storeName;
-    public $storeUrl;
-    public $storePhone;
 
     public function mount()
     {
@@ -55,41 +48,20 @@ class Register extends Component
             'status'   => Status::INACTIVE, // Set status to inactive by default
         ]);
 
-        // Set the user's role based on the 'isStoreOwner' property
-        $roleName = $this->isStoreOwner ? 'VENDOR' : 'CLIENT';
-
-        $role = Role::where('name', $roleName)->first();
+        $role = Role::create(['name' => 'client']);
 
         $user->assignRole($role);
-
-        if ($this->isStoreOwner) {
-            $store = new Store([
-                'name'   => $this->storeName,
-                'url'    => $this->storeUrl,
-                'phone'  => $this->storePhone,
-                'status' => Status::INACTIVE, // Set status to inactive by default
-            ]);
-
-            $user->store()->save($store);
-
-            $subscription = Subscription::find(1); // trial
-
-            $user->subscriptions()->attach($subscription, [
-                'starts_at' => now(),
-                'ends_at'   => now()->addDays(14), // Set trial end date
-            ]);
-        }
 
         event(new Registered($user));
 
         Auth::login($user, true);
 
         switch (true) {
-            case $user->hasRole('ADMIN'):
+            case $user->hasRole('admin'):
                 $homePage = RouteServiceProvider::ADMIN_HOME;
 
                 break;
-            case $user->hasRole('VENDOR'):
+            case $user->hasRole('vendor'):
                 $homePage = RouteServiceProvider::VENDOR_HOME;
 
                 break;

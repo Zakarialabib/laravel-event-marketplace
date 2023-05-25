@@ -26,18 +26,23 @@ class DatabaseSeeder extends Seeder
             // FeaturedBannerSeeder::class,
             BlogSeeder::class,
             SliderSeeder::class,
-            RolesSeeder::class,
+            PermissionsDemoSeeder::class,
+
+            // RolesSeeder::class,
             PermissionsSeeder::class,
-            PermissionRoleSeeder::class,
-            SuperUserSeeder::class,
-            RoleUserSeeder::class,
-            
+            // PermissionRoleSeeder::class,
+            // SuperUserSeeder::class,
+            // RoleUserSeeder::class,
+
+            SponsorSeeder::class,
             CategorySeeder::class,
             ProductCategorySeeder::class,
             RaceLocationSeeder::class,
             RaceSeeder::class,
-            
-            PageSettingsSeeder::class,
+
+            // PageSettingsSeeder::class,
         ]);
+
+        \App\Models\Race::factory(10)->create();
     }
 }

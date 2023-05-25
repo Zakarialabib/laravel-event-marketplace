@@ -130,7 +130,7 @@
                                 </div>
                                 <div>
                                     @if ($product->status == 1)
-                                        <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-move-400 hover:bg-move-200 transition cursor-pointer"
+                                        <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-redBrick-400 hover:bg-redBrick-200 transition cursor-pointer"
                                             href="{{ route('redirect', $product->url) }}">
                                             {{ __('Boutique') }}
                                         </a>
@@ -184,28 +184,28 @@
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             <button @click="activeTab = 'description'"
-                                :class="activeTab === 'description' ? 'text-move-400' : ''">
+                                :class="activeTab === 'description' ? 'text-redBrick-400' : ''">
                                 {{ __('Description') }}
                             </button>
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             <button @click="activeTab = 'reviews'"
-                                :class="activeTab === 'reviews' ? 'text-move-400' : ''">
+                                :class="activeTab === 'reviews' ? 'text-redBrick-400' : ''">
                                 {{ __('Reviews') }}
                             </button>
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             <button @click="activeTab = 'shipping'"
-                                :class="activeTab === 'shipping' ? 'text-move-400' : ''">
+                                :class="activeTab === 'shipping' ? 'text-redBrick-400' : ''">
                                 {{ __('Shipping & Returns') }}
                             </button>
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             <button @click="activeTab = 'brands'"
-                                :class="activeTab === 'brands' ? 'text-move-400' : ''">
+                                :class="activeTab === 'brands' ? 'text-redBrick-400' : ''">
                                 {{ __('Product Brand') }}
                             </button>
                         </div>

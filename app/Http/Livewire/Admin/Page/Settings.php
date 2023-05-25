@@ -96,13 +96,13 @@ class Settings extends Component
              ],
          ];
      }
- 
+
      public function removeMenu($index)
      {
          unset($this->menuItems[$index]);
          $this->menuItems = array_values($this->menuItems);
      }
- 
+
      public function addMenuItem($index)
      {
          $this->menuItems[$index]['items'][] = [
@@ -110,25 +110,25 @@ class Settings extends Component
              'url'   => '',
          ];
      }
- 
+
      public function removeMenuItem($menuIndex, $itemIndex)
      {
          unset($this->menuItems[$menuIndex]['items'][$itemIndex]);
          $this->menuItems[$menuIndex]['items'] = array_values($this->menuItems[$menuIndex]['items']);
      }
- 
+
      public function saveMenuItems()
      {
          foreach ($this->menuItems as $index => $menu) {
              $menuName = $menu['menuName'];
- 
+
              foreach ($menu['items'] as $item) {
                  $label = $item['label'];
                  $url = $item['url'];
              }
          }
      }
- 
+
      public function usePredefinedMenu(): void
      {
          $this->menuItems[] = [
@@ -140,7 +140,7 @@ class Settings extends Component
              ],
          ];
      }
- 
+
      // Header settings
      public function saveHeaderSettings()
      {
@@ -153,11 +153,11 @@ class Settings extends Component
              'hasSearchIcon'   => $this->headerSettings['hasSearchIcon'],
              'searchIcon'      => $this->headerSettings['searchIcon'],
          ];
- 
+
          // Save the values to the headerLayout component
          $this->headerSettings[] = $column;
      }
- 
+
      // Footer settings
      public function saveFooterSettings()
      {
@@ -167,11 +167,10 @@ class Settings extends Component
              'hasSocialIcons'  => $this->footerSettings['hasSocialIcons'],
              'socialIcons'     => $this->footerSettings['socialIcons'],
          ];
- 
+
          // Save the values to the footerLayout component
          $this->footerSettings[] = $column;
      }
-
 
     public function updatePageSettings($id)
     {
@@ -198,7 +197,7 @@ class Settings extends Component
     }
 
     public function mount()
-    { 
+    {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
         $this->perPage = 25;

@@ -8,14 +8,13 @@ use App\Models\Brand;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
-use Spatie\MediaLibraryPro\Http\Livewire\Concerns\WithMedia;
+use Livewire\WithFileUploads;
 
 class Edit extends Component
 {
-    use WithMedia;
-    
+    use WithFileUploads;
+
     public $partner;
 
     public $editModal = false;
@@ -65,11 +64,10 @@ class Edit extends Component
 
         if ($this->image) {
             $imageName = Str::slug($this->partner->name).'-'.Str::random(5).'.'.$this->image->extension();
-          
+
             $this->partner->clearMediaCollection('partners');
 
-            $this->image->addFromMediaLibraryRequest($this->image)
-            ->toMediaCollection('partners');
+            $this->partner->addMedia($this->image)->toMediaCollection('local_files');
 
             $this->partner->image = $imageName;
         }
@@ -77,7 +75,7 @@ class Edit extends Component
         $this->partner->save();
 
         $this->alert('success', __('Brand updated successfully.'));
-        
+
         $this->emit('refreshIndex');
 
         $this->editModal = false;

@@ -22,7 +22,6 @@ class RaceResult extends Model
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
 
-
     protected $fillable = [
         'race_id',
         'winner_id',

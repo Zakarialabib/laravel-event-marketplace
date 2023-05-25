@@ -18,7 +18,7 @@ class UserObserver
             'reason' => auth()->user(),
         ];
 
-        $admins = User::isAdmin();
+        $admins = User::hasRole('admin');
 
         Notification::send($admins, new DataChangeNotification($payload));
     }

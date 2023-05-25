@@ -29,7 +29,7 @@ return new class () extends Migration {
 
             $table->string('status')->default(true);
             $table->string('is_default')->default(false);
-            
+
             $table->foreignId('page_id')->nullable()->constrained('pages')->nullOnDelete();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
 

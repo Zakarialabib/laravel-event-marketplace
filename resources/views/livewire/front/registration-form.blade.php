@@ -7,84 +7,71 @@
         </div>
         <div class="flex flex-wrap items-center">
             <div class="w-full md:w-1/2 pr-2">
-                <label class="font-bold font-heading text-gray-600" for="">{{ __('FullName') }}</label>
-                <input wire:model="name"
-                    class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
-                    type="text">
-                @error('name')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="w-full md:w-1/2 pr-2">
-                <label for="number_of_participants">Nombre de participants (si relais)</label>
-                <input type="number" id="number_of_participants" wire:model="numberOfParticipants">
+                <label class="font-bold font-heading text-gray-600" for="number_of_participants">Nombre de participants (si relais)</label>
+                <x-input type="number" id="number_of_participants" wire:model.defer="race.numberOfParticipants" />
                 @error('numberOfParticipants')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Email') }}</label>
-                <x-input wire:model="email" required type="email" />
+                <x-input wire:model.defer="race.email" required type="email" />
                 @error('email')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Lirst name') }}</label>
-                <x-input wire:model.defer="firstName" required type="text" />
+                <x-input wire:model.defer="race.firstName" required type="text" />
                 @error('firstName')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Last name') }}</label>
-                <input wire:model.defer="lastName" required
-                    class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
-                    type="text">
+                <x-input wire:model.defer="race.lastName" required type="text" />
                 @error('lastName')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Phone') }}</label>
-                <x-input wire:model.defer="phone" required type="number" />
+                <x-input wire:model.defer="race.phone" required type="number" />
                 @error('phone')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Country') }}</label>
-                <x-input wire:model.defer="country" type="text" required />
+                <x-input wire:model.defer="race.country" type="text" required />
                 @error('country')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('City') }}</label>
-                <x-input wire:model.defer="city" required type="text">
-                @error('city')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+                <x-input wire:model.defer="race.city" required type="text" />
+                    @error('city')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Zip Code') }}</label>
-                <x-input wire:model.defer="zipCode" type="text" />
+                <x-input wire:model.defer="race.zipCode" type="text" />
                 @error('zipCode')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('date Of Birth') }}</label>
-                <input wire:model.defer="dateOfBirth"
-                    class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
-                    type="date">
+                <x-input wire:model.defer="race.dateOfBirth" type="date" />
                 @error('dateOfBirth')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Gender') }}</label>
-                <select wire:model.defer="gender"
+                <select wire:model.defer="race.gender"
                     class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
                     <option value="Men">Men</option>
                     <option value="Women">Women</option>
@@ -96,9 +83,7 @@
 
             <div class="w-full">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Address') }}</label>
-                <input wire:model.defer="address"
-                    class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
-                    type="text">
+                <x-input wire:model.defer="race.address" type="text" />
                 @error('address')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -107,57 +92,58 @@
             <div class="w-full md:w-1/2 pr-2">
                 <label for=""
                     class="font-bold font-heading text-gray-600">{{ __('Emergency Contact Name') }}</label>
-                <input wire:model.defer="emergencyContactName" type="text"
-                    class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md" />
-                    @error('address')
+                <x-input wire:model.defer="race.emergencyContactName" type="text" />
+                @error('address')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label for=""
                     class="font-bold font-heading text-gray-600">{{ __('Emergency Contact Phone Number') }}</label>
-                <input wire:model.defer="emergencyContactPhoneNumber" type="number"
-                    class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md" />
-                    @error('emergencyContactPhoneNumber')
+                <x-input wire:model.defer="race.emergencyContactPhoneNumber" type="number"  />
+                @error('emergencyContactPhoneNumber')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="flex flex-wrap gap-2">
+            <div class="w-full flex flex-wrap py-4 justify-center gap-4">
                 <div class="">
                     <label for=""
                         class="font-bold font-heading text-gray-600">{{ __('has Medical History') }}</label>
-                    <input wire:model.defer="hasMedicalHistory" type="checkbox"
-                        class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md" />
+                    <input wire:model.defer="race.hasMedicalHistory" type="checkbox" />
                 </div>
                 <div class="">
                     <label for=""
                         class="font-bold font-heading text-gray-600">{{ __('is Taking Medications') }}</label>
-                    <input wire:model.defer="isTakingMedications" type="checkbox"
-                        class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md" />
+                    <input wire:model.defer="race.isTakingMedications" type="checkbox" />
                 </div>
                 <div class="">
                     <label for=""
                         class="font-bold font-heading text-gray-600">{{ __('has Medication Allergies') }}</label>
-                    <input wire:model.defer="hasMedicationAllergies" type="checkbox"
-                        class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md" />
+                    <input wire:model.defer="race.hasMedicationAllergies" type="checkbox" />
                 </div>
                 <div class="">
                     <label for=""
-                        class="font-bold font-heading text-gray-600">{{ __('has cSensitivities') }}</label>
-                    <input wire:model.defer="hasSensitivities" type="checkbox"
-                        class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md" />
+                        class="font-bold font-heading text-gray-600">{{ __('has Sensitivities') }}</label>
+                    <input wire:model.defer="race.hasSensitivities" type="checkbox" />
                 </div>
             </div>
             <!-- Additional services section -->
-            <div>
+            @if($additionalServices)
+            <div class="w-full">
                 <h3>Additional services</h3>
                 <!-- Display and handle additional services selection -->
                 <!-- Each additional service should have its name, description, price, and photo fields -->
             </div>
+            @endif
 
             <div class="w-full flex py-2 justify-center">
-                <button wire:click="save" wire:loading.attr="disabled"
-                    class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-move-400 hover:bg-move-200 transition cursor-pointer">
+                <h5>We will send details about your registration your email with account access</h5>
+                <label for=""
+                        class="font-bold font-heading text-gray-600">{{ __('Register into promotional email') }}</label>
+                    <input wire:model.defer="newsletters" type="checkbox" />
+
+                <button type="submit" wire:loading.attr="disabled"
+                    class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-redBrick-600 hover:bg-redBrick-200 transition cursor-pointer">
                     {{ __('Registration') }}
                 </button>
             </div>
