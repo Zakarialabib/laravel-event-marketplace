@@ -178,8 +178,10 @@
                         <div
                             class="flex flex-wrap items-center bg-gray-50 pt-5 pb-15 rounded-lg w-full px-4 md:-mx-4 shadow-2xl bg-white shadow-2xl">
                             <div class="w-full lg:w-1/3 h-full mb-6 flex justify-center">
+                                <a href="{{ route('front.raceDetails', $race->slug) }}">
                                 <img class="object-cover object-center w-full rounded-xl h-72 lg:h-96"
                                     src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}">
+                                </a>
                                 <a href="{{ route('front.raceDetails', $race->slug) }}"
                                     class="cursor-pointer absolute bottom-0 inline-flex items-center md:text-lg bg-redBrick-600 py-6 px-8 front-bold rounded-full text-white hover:bg-redBrick-800 hover:text-redBrick-200 focus:bg-redBrick-800 font-semibold">
                                     <span class="mr-3">{{ __('Check race') }}</span>
@@ -198,7 +200,7 @@
                                     {{ $race->date }}
                                 </p>
                                 <a class="inline-block mb-4 text-2xl font-medium leading-6 text-gray-800 hover:text-gray-900 font-bold hover:underline"
-                                    href="">{{ $race->name }}</a>
+                                    href="{{ route('front.raceDetails', $race->slug) }}">{{ $race->name }}</a>
                                 <div class="mb-4">
                                     <span class="text-sm md:text-base font-medium text-gray-500">Race Location:</span>
                                     <span class="text-base md:text-lg">{{ $race?->location->name }}</span>

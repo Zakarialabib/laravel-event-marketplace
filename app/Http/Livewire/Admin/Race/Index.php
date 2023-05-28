@@ -33,8 +33,6 @@ class Index extends Component
 
     public int $perPage;
 
-    public $refreshIndex;
-
     public array $orderable;
 
     public $selectAll;

@@ -24,7 +24,7 @@ class Create extends Component
 
     public $slider;
 
-    public $photo;
+    public $image;
 
     public $listeners = [
         'createSlider',
@@ -33,7 +33,7 @@ class Create extends Component
     public array $rules = [
         'slider.title'         => ['required', 'string', 'max:255'],
         'slider.subtitle'      => ['nullable', 'string'],
-        'slider.details'       => ['nullable', 'string'],
+        'slider.description'       => ['nullable'],
         'slider.link'          => ['nullable', 'string'],
         'slider.language_id'   => ['nullable'],
         'slider.bg_color'      => ['nullable'],
@@ -64,14 +64,14 @@ class Create extends Component
         try {
             $this->validate();
 
-            if ($this->photo) {
-                $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->photo->extension();
+            if ($this->image) {
+                $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->image->extension();
 
-                $this->slider->addMediaFromDisk($this->photo->getRealPath())
+                $this->slider->addMediaFromDisk($this->image->getRealPath())
                     ->usingFileName($imageName)
                     ->toMediaCollection('local_files');
 
-                $this->slider->photo = $imageName;
+                $this->slider->image = $imageName;
             }
 
             $this->slider->save();

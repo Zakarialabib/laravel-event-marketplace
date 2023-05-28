@@ -48,11 +48,11 @@
                         <input type="checkbox" value="{{ $slider->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        @if ($slider->photo)
-                            <img src="{{ asset('images/sliders/' . $slider->photo) }}" alt="{{ $slider->title }}"
-                                class="w-10 h-10 rounded-full">
-                        @else
-                            {{ __('No image') }}
+                        @if ($slider->hasMedia('local_files'))
+                        <img src="{{ $slider->getFirstMediaUrl('local_files') }}" alt="{{ $slider->name }}"
+                            class="w-10 h-10 rounded-full object-cover">
+                            @else
+                            <p>No slider image available.</p>
                         @endif
                     </x-table.td>
                     <x-table.td>

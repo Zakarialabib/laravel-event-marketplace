@@ -1,8 +1,7 @@
 @props(['socialMedia'])
 <div>
-    <span class="text-sm md:text-base font-medium text-gray-500">Social Media:</span>
     @foreach (json_decode($socialMedia) as $index => $socialMedia)
-        <a class="inline-flex items-center text-base md:text-lg text-green-500 hover:text-green-600 font-semibold"
+        <a class="inline-flex items-center text-base md:text-lg text-rendBrick-500 hover:text-rendBrick-600 font-semibold"
             href="{{ $socialMedia->value }}">
             @if ($socialMedia->name === 'Facebook')
                 <i class="fab fa-facebook-square mr-3"></i>

@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             SponsorSeeder::class,
             CategorySeeder::class,
             ProductCategorySeeder::class,
+            ProductSeeder::class,
             RaceLocationSeeder::class,
             RaceSeeder::class,
 

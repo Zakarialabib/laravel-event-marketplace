@@ -28,23 +28,24 @@ class Edit extends Component
 
     public $slider;
 
-    public $photo;
+    public $image;
 
     public $description;
 
     protected $rules = [
         'slider.title'         => ['required', 'string', 'max:255'],
         'slider.subtitle'      => ['nullable', 'string', 'max:255'],
-        'slider.details'       => ['nullable'],
+        'slider.description'       => ['nullable'],
         'slider.link'          => ['nullable', 'string'],
         'slider.language_id'   => ['nullable', 'integer'],
         'slider.bg_color'      => ['nullable', 'string'],
         'slider.embeded_video' => ['nullable'],
+        'image' => ['nullable'],
     ];
 
     public function quill_value_updated($value)
     {
-        $this->slider->details = $value;
+        $this->slider->description = $value;
     }
 
     public function editModal(Slider $slider)
@@ -55,7 +56,9 @@ class Edit extends Component
 
         $this->slider = $slider;
 
-        $this->description = $slider->details;
+        $this->description = $this->slider->description;
+
+        $this->image = $this->slider->getMedia('local_files');
 
         $this->editModal = true;
     }
@@ -64,21 +67,22 @@ class Edit extends Component
     {
         $this->validate();
 
-        if ($this->photo) {
-            $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->photo->extension();
+        if ($this->image) {
+            $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->image->extension();
 
-            $this->slider->clearMediaCollection('media');
+            $this->slider->clearMediaCollection('local_files');
 
-            $this->slider->addMediaFromDisk($this->photo->getRealPath())
-                ->usingFileName($imageName)
+            $this->slider->addMedia($this->image->getRealPath())
                 ->toMediaCollection('local_files');
 
-            $this->slider->photo = $imageName;
+            $this->slider->image = $imageName;
         }
 
         $this->slider->save();
 
         $this->alert('success', __('Slider updated successfully.'));
+        
+        $this->emit('refreshIndex');
 
         $this->editModal = false;
     }

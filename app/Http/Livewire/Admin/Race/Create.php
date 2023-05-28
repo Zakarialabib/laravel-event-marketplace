@@ -74,10 +74,10 @@ class Create extends Component
         'features.*.name'  => ['nullable', 'string'],
         'features.*.value' => ['nullable', 'string'],
 
-        'calendar.*.date'       => ['nullable', 'string'],
-        'calendar.*.start_time' => ['nullable', 'string'],
-        'calendar.*.end_time'   => ['nullable', 'string'],
-        'calendar.*.activity'   => ['nullable', 'string'],
+        'calendar.*.date' => ['nullable'],
+        'calendar.*.events.*.start_time' => ['nullable'],
+        'calendar.*.events.*.end_time' => ['nullable'],
+        'calendar.*.events.*.activity' => ['nullable', 'string'],
 
         'options.*.type'  => ['nullable', 'string'],
         'options.*.value' => ['nullable', 'string'],
@@ -129,7 +129,7 @@ class Create extends Component
 
         // $this->race->features[] = $this->features;
 
-        // $this->race->calendar[] = $this->calendar;
+        $this->race->calendar[] = $this->calendar;
 
         $this->race->save();
 
@@ -138,6 +138,40 @@ class Create extends Component
         $this->emit('refreshIndex');
 
         $this->createModal = false;
+    }
+
+    public function addRaceDate()
+    {
+        $this->calendar[] = [
+            'date' => '',
+            'events' => [
+                [
+                    'start_time' => '',
+                    'end_time' => '',
+                    'activity' => '',
+                ],
+            ],
+        ];
+    }
+
+    public function removeRaceDate($date)
+    {
+        unset($this->calendar[$date]);
+    }
+
+    public function removeRaceEvent($date, $eventIndex)
+    {
+        unset($this->calendar[$date]['events'][$eventIndex]);
+        $this->calendar[$date]['events'] = array_values($this->calendar[$date]['events']);
+    }
+
+    public function addRaceEvent($date)
+    {
+        $this->calendar[$date]['events'][] = [
+            'start_time' => '',
+            'end_time' => '',
+            'activity' => '',
+        ];
     }
 
     public function addOption()

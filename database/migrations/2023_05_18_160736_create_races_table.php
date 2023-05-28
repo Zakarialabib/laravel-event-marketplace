@@ -21,6 +21,7 @@ return new class () extends Migration {
             $table->integer('number_of_days')->nullable();
             $table->integer('number_of_racers');
             $table->decimal('price', 8, 2);
+            $table->decimal('discount_price', 8, 2)->nullable();
             $table->string('images')->nullable();
             $table->json('social_media')->nullable();
             $table->json('sponsors')->nullable();
@@ -28,6 +29,8 @@ return new class () extends Migration {
             $table->json('features')->nullable();
             $table->json('options')->nullable();
             $table->json('calendar')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->string('meta_description')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

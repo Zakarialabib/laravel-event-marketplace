@@ -28,12 +28,6 @@
                     </div>
 
 
-                    <div class="w-full px-4 my-2">
-                        <x-label for="gallery" :value="__('Gallery')" />
-                        <x-media-upload title="{{ __('Gallery') }}" name="gallery" wire:model="gallery"
-                            :preview="$this->gallerypreview" :file="$gallery" multiple types="PNG / JPEG / WEBP"
-                            fileTypes="image/*" />
-                    </div>
                     <div class="w-full px-4">
                         <x-button primary type="button" wire:click="saveImage" wire:loading.attr="disabled">
                             {{ __('Save') }}

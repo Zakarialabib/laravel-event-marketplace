@@ -1,11 +1,11 @@
 <div>
     <div class="pb-24 pt-10 px-10" x-data="{ showRegistrationForm: false }">
         <div class="flex justify-center items-center h-full">
-            <img class="object-cover object-center w-full h-full rounded-xl md:h-36 lg:h-full lg:object-top"
+            <img class="object-cover object-center w-full h-full rounded-md md:h-36 lg:h-full lg:object-top"
                 src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}">
         </div>
 
-        <h3 class="xl:text-5xl md:text-2xl sm:text-lg uppercase py-6 text-center font-bold mb-2 py-10">
+        <h3 class="bg-redBrick-500 text-white xl:text-6xl lg:text-5xl md:text-2xl sm:text-lg uppercase py-6 text-center font-bold mb-2 py-10">
             {{ $race->name }} - {{ $race->category->name }}
         </h3>
 
@@ -82,6 +82,44 @@
                         <span class="text-sm md:text-base font-medium text-gray-500">{{ __('Price') }}:</span>
                         <span class="text-base md:text-lg">{{ $race->price }} DH</span>
                     </div>
+
+                    <hr>
+                    @if ($race->calendar)
+                        <div class="mt-6 w-full px-4">
+                            <p class="w-full text-center mb-6 text-2xl font-medium text-gray-500">{{ __('Calendar') }}:
+                            </p>
+                            <table class="w-full border-collapse text-center border">
+                                <thead>
+                                    <tr class="bg-red-500 text-white">
+                                        <th class="text-left py-2 px-3">{{ __('Date') }}</th>
+                                        <th class="w-1/4 py-2 px-3">{{ __('Start Time') }}</th>
+                                        <th class="w-1/4 py-2 px-3">{{ __('End Time') }}</th>
+                                        <th class="w-1/2 py-2 px-3">{{ __('Activity') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($race->calendar as $data)
+                                        <tr class="border-b bg-gray-100">
+                                            <td class="text-left py-2 px-3 font-bold">{{ $data['date'] }}</td>
+                                            <td class="py-2 px-3"></td>
+                                            <td class="py-2 px-3"></td>
+                                            <td class="py-2 px-3"></td>
+                                        </tr>
+                                        @foreach ($data['events'] as $event)
+                                            <tr class="border-b">
+                                                <td class="py-2 px-3"></td>
+                                                <td class="py-2 px-3">{{ $event['start_time'] }}</td>
+                                                <td class="py-2 px-3">{{ $event['end_time'] }}</td>
+                                                <td class="py-2 px-3">{{ $event['activity'] }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <p class="block text-base md:text-lg text-gray-400">{{ __('No calendar available') }}.</p>
+                    @endif
 
                     @if ($race->sponsors)
                         <div class="mt-6 w-full px-4 flex flex-wrap justify-center space-x-2 mb-4 ">

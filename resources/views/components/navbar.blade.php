@@ -14,6 +14,9 @@
 
     <div class="flex items-center gap-3">
         <div class="md:flex hidden flex-wrap items-center">
+            <a target="__blank" href="{{ route('front.index')}}" class="text-gray-800 mr-4" >
+                <i class="fa fa-eye w-6 h-6"></i>
+            </a>
             <x-button type="button" secondary id="fullScreen">
                 <i class="fa fa-expand w-4 h-4"></i>
             </x-button>

@@ -2,20 +2,24 @@
     <div class="relative mx-auto mb-5">
         <div class="w-full mx-auto bg-gray-900">
             @foreach ($this->sliders as $slider)
-                <div class="flex flex-wrap -mx-4 py-20 px-4"
-                    style="background-image: url({{ $slider->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
-                    <div class="w-full px-10 lg:mb-5 sm:mb-2">
-                        <div class="lg:py-5 py-10 text-white px-2">
-                            <h5 class="xl:text-2xl md:text-xl sm:text-md font-bold mb-2 cursor-pointer">
-                                {{ $slider->subtitle }}
-                            </h5>
-                            <h2
-                                class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
-                                {{ $slider->title }}
-                            </h2>
-                            <p class="py-10 xl:text-lg sm:text-sm">
-                                {{-- <livewire:front.search-box /> --}}
-                            </p>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-black opacity-75" style="background-color:{{ $slider->bg_color }}">
+                    </div>
+                    <div class="flex flex-wrap -mx-4 py-20 px-4"
+                        style="background-image: url({{ $slider->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
+                        <div class="w-full px-10 lg:mb-5 sm:mb-2 z-50">
+                            <div class="lg:py-5 py-10 text-white px-2">
+                                <h5 class="xl:text-2xl md:text-xl sm:text-md font-bold mb-2">
+                                    {{ $slider->subtitle }}
+                                </h5>
+                                <h2
+                                    class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
+                                    {{ $slider->title }}
+                                </h2>
+                                <p class="text-md font-medium my-4">
+                                    {{ $slider->description }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -23,7 +27,7 @@
         </div>
         <div class="pb-24 pt-10 px-10 bg-redBrick-600">
             <h3
-                class="xl:text-5xl md:text-2xl sm:text-lg text-white hover:text-black uppercase py-6 text-center font-bold mb-2 cursor-pointer py-10">
+                class="xl:text-5xl md:text-2xl sm:text-lg text-white hover:text-redBrick-500 uppercase py-6 text-center font-bold mb-2 cursor-pointer py-10">
                 {{ __('Upcoming Races') }}
             </h3>
             <div class="mb-10 space-y-10">
@@ -31,8 +35,10 @@
                     <div
                         class="flex flex-wrap items-center bg-gray-50 pt-5 pb-15 rounded-lg w-full px-4 md:-mx-4 shadow-2xl transition duration-300 ease-in-out delay-200 transform bg-white shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
                         <div class="w-full lg:w-1/3 h-full mb-6 flex justify-center">
-                            <img class="object-cover object-center w-full rounded-xl h-72 lg:h-96"
-                                src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}">
+                            <a href="{{ route('front.raceDetails', $race->slug) }}">
+                                <img class="object-cover object-center w-full rounded-xl h-72 lg:h-96"
+                                    src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}">
+                            </a>
                             <a href="{{ route('front.raceDetails', $race->slug) }}"
                                 class="cursor-pointer absolute bottom-5 inline-flex items-center md:text-lg bg-redBrick-600 py-6 px-8 front-bold rounded-full text-white hover:bg-redBrick-800 hover:text-redBrick-200 focus:bg-redBrick-800 font-semibold">
                                 <span class="mr-3">{{ __('Check race') }}</span>
@@ -50,7 +56,7 @@
                                 {{ $race->date }}
                             </p>
                             <a class="inline-block mb-4 text-2xl font-medium leading-6 text-gray-800 hover:text-gray-900 font-bold hover:underline"
-                                href="">{{ $race->name }}</a>
+                                href="{{ route('front.raceDetails', $race->slug) }}">{{ $race->name }}</a>
                             <div class="mb-4">
                                 <span class="text-sm md:text-base font-medium text-gray-500">Race Location:</span>
                                 <span class="text-base md:text-lg">{{ $race?->location->name }}</span>
@@ -133,6 +139,37 @@
                 @endforeach
             </div>
         </div>
+
+        @livewire('front.resources')
+
+        @if (count($this->featuredProducts) > 0)
+            <div class="bg-gray-100 py-10">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-8 hover:bg-text-700">
+                        <a href="https://www.example-store.com" target="_blank" rel="noopener">
+                            {{ __('Visit Store') }}
+                        </a>
+                    </h2>
+
+                    <p class="text-center text-gray-700 mb-6">Gear up for success! Visit our online store to explore a
+                        wide
+                        range of high-quality products designed for endurance athletes.</p>
+
+                    <hr>
+                    <!-- Optional: Featured Products Section -->
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-semibold mb-4">{{ __('Featured Products') }}</h3>
+
+                        <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+                            @foreach ($this->featuredProducts as $product)
+                                <x-product-card :product="$product" />
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="px-5 py-12 lg:px-16 bg-gray-50">
             <h5 class="xl:text-3xl md:text-xl sm:text-lg uppercase pb-4 text-center font-bold mb-2 cursor-pointer">
                 {{ __('Sponsors') }}
@@ -144,7 +181,7 @@
                             <img class="mx-auto w-56 h-auto my-4 rounded-xl filter grayscale transition duration-300 hover:grayscale-0"
                                 src="{{ $sponsor->getFirstMediaUrl('local_files') }}" alt="{{ $sponsor->name }}">
                             <p
-                                class="text-center text-sm px-4 mb-4 absolute bottom-0 left-0 w-full text-white text-opacity-0 group-hover:text-opacity-100 transition-opacity duration-300">
+                                class="text-center text-sm px-4 mb-4 absolute bottom-0 left-0 w-full text-white text-opacity-0 group-hover:text-opacity-100 transition-opacity duration-300 cursor-pointer">
                                 {{ $sponsor->name }}
                             </p>
                         </div>

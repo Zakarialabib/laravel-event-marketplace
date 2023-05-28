@@ -4,16 +4,16 @@
     <div itemprop="sku" content="{{ $product->code }}"></div>
     <div itemprop="description" content="{{ $product->description }}"></div>
 
-    <div class="mb-5 bg-white rounded-lg shadow-2xl sm:w-full">
+    <div class="mb-5 bg-white rounded-xl shadow-2xl sm:w-full">
         <div class="relative text-left">
-            <a href="{{ route('front.product', $product->slug) }}" class="flex justify-center" itemprop="url">
-                <img class="lg:h-[250px] md:h-[150px] object-fill py-2"
-                    src="{{ asset('images/products/' . $product->image) }}" onerror="this.onerror=null; this.remove();"
+            <a href="{{ route('front.product', $product->slug) }}" class="flex justify-center mb-4" itemprop="url">
+                <img class="lg:h-[250px] md:h-[150px] object-fill"
+                    src="{{ $product->getFirstMediaUrl('local_files') }}" onerror="this.onerror=null; this.remove();"
                     alt="{{ $product->name }}" loading="lazy" />
-                <meta itemprop="image" content="{{ asset('images/products/' . $product->image) }}" />
+                <meta itemprop="image" content="{{ $product->getFirstMediaUrl('local_files') }}" />
             </a>
 
-            @if ($product->old_price && $product->discount != 0)
+            @if ($product->discount_price && $product->discount != 0)
                 <div class="absolute top-0 right-0 mb-3 p-2 bg-red-500 rounded-bl-lg">
                     <span class="text-white font-bold text-sm">
                         - {{ $product->discount }}%
@@ -46,8 +46,8 @@
                 <p class="text-center text-redBrick-400 hover:text-redBrick-800 font-bold text-md mt-2"><span
                         itemprop="price">{{ $product->price }}</span>DH
 
-                    @if ($product->old_price && $product->discount != 0)
-                        <del class="ml-4 text-black">{{ $product->old_price }} DH </del>
+                    @if ($product->discount_price && $product->discount != 0)
+                        <del class="ml-4 text-black">{{ $product->discount_price }} DH </del>
                     @endif
                 </p>
 
@@ -58,11 +58,7 @@
             </div>
 
             <div class="flex justify-center">
-                <a class="my-2 block bg-redBrick-500 hover:bg-redBrick-800 text-center text-white font-bold text-xs py-2 px-4 rounded-md uppercase cursor-pointer tracking-wider hover:shadow-lg transition ease-in duration-300"
-                {{-- href="{{ route('redirect', $product->url) }}" --}}
-                 wire:loading.attr="disabled">
-                    {{ __('Boutique') }}
-                </a>
+                <livewire:front.add-to-cart :product="$product" :key="$product->id" />
             </div>
         </div>
     </div>

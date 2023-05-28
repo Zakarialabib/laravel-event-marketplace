@@ -34,9 +34,9 @@
                         <x-input-error :messages="$errors->get('slider.subtitle')" for="slider.subtitle" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
-                        <x-label for="details" :value="__('Details')" />
-                        <x-input.textarea wire:model.lazy="slider.details" id="details" />
-                        <x-input-error :messages="$errors->get('details')" for="details" class="mt-2" />
+                        <x-label for="description" :value="__('Description')" />
+                        <x-input.textarea wire:model.lazy="slider.description" id="description" />
+                        <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="bg_color" :value="__('Background Color')" />
@@ -60,8 +60,8 @@
 
                     <div class="w-full py-2 px-3">
                         <x-label for="image" :value="__('Image')" />
-                        <x-media-upload title="{{ __('Image') }}" name="photo" wire:model="photo"
-                            :file="$photo" {{-- :preview="$this->photopreview" --}} single types="PNG / JPEG / WEBP"
+                        <x-media-upload title="{{ __('Image') }}" name="" wire:model="image"
+                            :file="$image" {{-- :preview="$this->preview" --}} single types="PNG / JPEG / WEBP"
                             fileTypes="image/*" />
                     </div>
 

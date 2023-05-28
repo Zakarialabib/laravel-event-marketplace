@@ -72,10 +72,10 @@ class Edit extends Component
         'features.*.name'  => ['nullable', 'string'],
         'features.*.value' => ['nullable', 'string'],
 
-        'calendar.*.date'       => ['nullable', 'string'],
-        'calendar.*.start_time' => ['nullable', 'string'],
-        'calendar.*.end_time'   => ['nullable', 'string'],
-        'calendar.*.activity'   => ['nullable', 'string'],
+        'calendar.*.date' => ['nullable'],
+        'calendar.*.events.*.start_time' => ['nullable'],
+        'calendar.*.events.*.end_time' => ['nullable'],
+        'calendar.*.events.*.activity' => ['nullable', 'string'],
 
         'options.*.type'  => ['nullable', 'string'],
         'options.*.value' => ['nullable', 'string'],
@@ -106,6 +106,41 @@ class Edit extends Component
         $this->options = array_values($this->options);
     }
 
+    public function addRaceDate()
+    {
+        $this->calendar[] = [
+            'date' => '',
+            'events' => [
+                [
+                    'start_time' => '',
+                    'end_time' => '',
+                    'activity' => '',
+                ],
+            ],
+        ];
+    }
+
+    public function removeRaceDate($date)
+    {
+        unset($this->calendar[$date]);
+    }
+
+    public function removeRaceEvent($date, $eventIndex)
+    {
+        unset($this->calendar[$date]['events'][$eventIndex]);
+        $this->calendar[$date]['events'] = array_values($this->calendar[$date]['events']);
+    }
+
+    public function addRaceEvent($date)
+    {
+        $this->calendar[$date]['events'][] = [
+            'start_time' => '',
+            'end_time' => '',
+            'activity' => '',
+        ];
+    }
+
+
     public function editModal($id)
     {
         $this->resetErrorBag();
@@ -118,7 +153,9 @@ class Edit extends Component
 
         $this->options = $this->race->options ?? [];
         
-        $this->images = $this->race->getMedia('media');
+        $this->calendar = $this->race->calendar ?? [];
+        // dd($this->calendar);
+        $this->images = $this->race->getMedia('local_files');
 
         $this->editModal = true;
     }
@@ -127,7 +164,6 @@ class Edit extends Component
     {
         $this->validate();
 
-        dd($this->all());
         if ($this->images) {
             foreach($this->images as $image) {
                 $this->race->addMedia($image)->toMediaCollection('local_files');
@@ -145,7 +181,7 @@ class Edit extends Component
 
         // $this->race->features[] = $this->features;
 
-        // $this->race->calendar[] = $this->calendar;
+        $this->race->calendar = $this->calendar;
 
         $this->race->save();
 

@@ -24,7 +24,7 @@ class Index extends Component
 
     public $slider;
 
-    public $photo;
+    public $image;
 
     public $listeners = [
         'refreshIndex' => '$refresh',
@@ -111,7 +111,7 @@ class Index extends Component
 
     // public function getPhotoPreviewProperty()
     // {
-    //     return $this->slider->photo;
+    //     return $this->slider->image;
     // }
 
     public function setFeatured($id)

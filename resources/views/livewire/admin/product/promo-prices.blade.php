@@ -11,8 +11,8 @@
                         <input type="number" wire:model="percentage" id="percentage">
                     </div>
                     <div>
-                        <label for="copy_price_to_old_price">{{ __('Copy price to old price') }}</label>
-                        <input type="checkbox" wire:model="copyPriceToOldPrice" id="copy_price_to_old_price">
+                        <label for="copy_price_to_discount_price">{{ __('Copy price to old price') }}</label>
+                        <input type="checkbox" wire:model="copyPriceToOldPrice" id="copy_price_to_discount_price">
                     </div>
                     <button type="submit">{{ __('Update') }}</button>
                 </div>

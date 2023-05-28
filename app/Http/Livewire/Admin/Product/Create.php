@@ -48,13 +48,11 @@ class Create extends Component
 
     protected $rules = [
         'product.name'             => ['required', 'string', 'max:255'],
-        'product.url'              => ['required', 'string', 'max:255'],
         'product.price'            => ['required', 'numeric', 'max:2147483647'],
-        'product.old_price'        => ['required', 'numeric', 'max:2147483647'],
+        'product.discount_price'        => ['required', 'numeric', 'max:2147483647'],
         'description'              => ['nullable'],
         'product.meta_title'       => ['nullable', 'string', 'max:255'],
         'product.meta_description' => ['nullable', 'string', 'max:255'],
-        'product.meta_keywords'    => ['nullable', 'string', 'min:1'],
         'product.category_id'      => ['required', 'integer'],
         // 'product.subcategories'    => ['required', 'array', 'min:1'],
         // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
@@ -62,7 +60,6 @@ class Create extends Component
         'options.*.value'          => ['required_if:options.*.type,color', 'string'],
         // 'product.brand_id'         => ['nullable', 'integer'],
         'product.embeded_video'    => ['nullable'],
-        'product.condition'        => ['nullable'],
     ];
 
     public function quill_value_updated($value)

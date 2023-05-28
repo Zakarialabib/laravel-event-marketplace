@@ -40,7 +40,7 @@ class SponsorFactory extends Factory
     {
         return $this->afterCreating(function (Sponsor $sponsor) {
             $sponsor->addMediaFromUrl($this->faker->imageUrl())
-                ->toMediaCollection('sponsors');
+                ->toMediaCollection('local_files');
         });
     }
 }

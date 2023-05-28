@@ -1,6 +1,6 @@
 @section('title', __('Dashboard'))
 <x-dashboard-layout>
-    @livewire('media-library')
+    
     <div>
         <div class="bg-white">
             <div class="md:inline-flex float-right pt-2 pb-5 sm:flex sm:flex-wrap">
@@ -203,16 +203,8 @@
             </div>
         </div>
 
-        <div class="flex flex-row">
-
-            <div class="md:w-full">
-                {{-- <x-card>
-                    <h5 class="font-bold py-2 text-xl">{{ __('Total Sales in Last 30 Days') }}</h5>
-                    <div class="card-body">
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </x-card> --}}
-            </div>
+        <div class="my-4 mx-4 bg-gray-100 shadow-md">
+            @livewire('calendar')
         </div>
 
     </div>

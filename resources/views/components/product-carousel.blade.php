@@ -9,21 +9,10 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide">
-                <img src="{{ asset('images/products/' . $product->image) }}" 
+                <img src="{{ $product->getFirstMediaUrl('local_files') }}" 
                 alt="{{ $product->name }}"  loading="lazy"
                 class="w-full h-full object-cover">
             </div>
-
-            @if ($gallery)
-                @foreach ($gallery as $item)
-                    <div class="swiper-slide">
-                        <img src="{{ asset('images/products/' . $item) }}" 
-                            class="w-full h-full object-cover"
-                            alt="{{ $product->name }}" 
-                            loading="lazy">
-                    </div>
-                @endforeach
-            @endif
 
             @if($product->embeded_video)
             <div class="swiper-slide">

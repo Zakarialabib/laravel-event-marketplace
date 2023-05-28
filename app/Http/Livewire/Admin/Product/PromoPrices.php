@@ -35,7 +35,7 @@ class PromoPrices extends Component
 
         foreach ($products as $product) {
             if ($this->copyPriceToOldPrice) {
-                $product->old_price = $product->price;
+                $product->discount_price = $product->price;
             } else {
                 $product->price = $product->price * (1 + $this->percentage / 100);
             }

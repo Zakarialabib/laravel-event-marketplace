@@ -7,7 +7,7 @@
     <meta property="og:image:secure_url" content="{{ asset('images/products/' . $product->image) }}">
     <meta property="og:image:width" content="1000">
     <meta property="og:image:height" content="1000">
-    <meta property="product:brand" content="{{ $product->brand?->name }}">
+    {{-- <meta property="product:brand" content="{{ $product->brand?->name }}"> --}}
     <meta property="product:availability" content="in stock">
     <meta property="product:condition" content="new">
     <meta property="product:price:amount" content="{{ $product->price }}">
@@ -32,44 +32,17 @@
                             <div class="mb-5 pb-5 border-b">
                                 <span class="text-gray-500">
                                     {{ $product->category?->name }} / 
-                                    @isset($product->brand)
+                                    {{-- @isset($product->brand)
                                         <a href="{{ route('front.brandPage', $product->brand?->slug) }}">{{ $product->brand?->name }}</a>
                                     @endisset
                                     <div itemprop="brand" itemtype="https://schema.org/Brand" itemscope>
                                         <meta itemprop="brand" content="{{ $product->brand?->name }}" />
-                                    </div>
+                                    </div> --}}
                                 </span>
                                 <h2 class="mt-2 mb-6 max-w-xl lg:text-5xl sm:text-xl font-bold font-heading">
                                     {{ $product->name }}
                                 </h2>
 
-                                <div class="flex items-center">
-                                    <div class="flex items-center" itemprop="aggregateRating"
-                                        itemtype="https://schema.org/AggregateRating" itemscope>
-                                        <meta itemprop="reviewCount" content="{{ $product->reviews->count() }}">
-                                        @for ($i = 0; $i < 5; $i++)
-                                            @if ($i < $product->reviews->avg('rating'))
-                                                <meta itemprop="ratingValue"
-                                                    content="{{ $product->reviews->avg('rating') }}">
-                                                <svg class="w-4 h-4 text-orange-500 fill-current"
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M12 17.27l-5.18 2.73 1-5.81-4.24-3.63 5.88-.49L12 6.11l2.45 5.51 5.88.49-4.24 3.63 1 5.81z" />
-                                                </svg>
-                                            @else
-                                                <svg class="w-4 h-4 text-orange-500 fill-current"
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M12 17.27l-5.18 2.73 1-5.81-4.24-3.63 5.88-.49L12 6.11l2.45 5.51 5.88.49-4.24 3.63 1 5.81z" />
-                                                </svg>
-                                            @endif
-                                        @endfor
-
-                                        <span
-                                            class="ml-2 text-sm text-gray-500 font-body">{{ $product->reviews->count() }}
-                                            {{ __('Reviews') }}</span>
-                                    </div>
-                                </div>
                             </div>
                             <div itemprop="offers" itemtype="https://schema.org/AggregateOffer" itemscope>
                                 <p class="inline-block mb-4 text-2xl font-bold font-heading">
@@ -130,9 +103,9 @@
                                 </div>
                                 <div>
                                     @if ($product->status == 1)
-                                        <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-redBrick-400 hover:bg-redBrick-200 transition cursor-pointer"
-                                            href="{{ route('redirect', $product->url) }}">
-                                            {{ __('Boutique') }}
+                                    <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-redBrick-400 hover:bg-redBrick-200 transition cursor-pointer"
+                                            wire:click="AddToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">
+                                            {{ __('Add to cart') }}
                                         </a>
                                     @else
                                         <div class="text-sm font-bold">
@@ -190,13 +163,6 @@
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
-                            <button @click="activeTab = 'reviews'"
-                                :class="activeTab === 'reviews' ? 'text-redBrick-400' : ''">
-                                {{ __('Reviews') }}
-                            </button>
-                        </div>
-                        <div
-                            class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             <button @click="activeTab = 'shipping'"
                                 :class="activeTab === 'shipping' ? 'text-redBrick-400' : ''">
                                 {{ __('Shipping & Returns') }}
@@ -204,10 +170,10 @@
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
-                            <button @click="activeTab = 'brands'"
+                            {{-- <button @click="activeTab = 'brands'"
                                 :class="activeTab === 'brands' ? 'text-redBrick-400' : ''">
                                 {{ __('Product Brand') }}
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     <div x-show="activeTab === 'description'" class="px-5 mb-10">
@@ -217,54 +183,6 @@
                             </p>
                         </div>
                     </div>
-                    <div x-show="activeTab === 'reviews'" class="px-5 mb-10">
-                        <div role="reviews" aria-labelledby="tab-1" id="tab-panel-1" tabindex="0">
-                            {{-- show review or  make review --}}
-                            @if (auth()->check())
-                                @if ($product->reviews->where('user_id', auth()->user()->id)->count() > 0)
-                                    <div class="mb-8">
-                                        <h4 class="mb-4 text-2xl font-bold font-heading text-orange-500">
-                                            {{ __('Your Review') }}</h4>
-                                        <div class="flex items-center">
-                                            <input type="hidden" name="rating" id="rating" value="0">
-                                            <input type="hidden" name="product_id" id="product_id"
-                                                value="{{ $product->id }}">
-                                            <input type="hidden" name="user_id" id="user_id"
-                                                value="{{ auth()->user()->id }}">
-                                            <input type="hidden" name="review_id" id="review_id"
-                                                value="{{ $product->reviews->where('user_id', auth()->user()->id)->first()->id }}">
-                                            <textarea name="review" id="review" cols="30" rows="10"
-                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-orange-500">{{ $product->reviews->where('user_id', auth()->user()->id)->first()->review }}</textarea>
-                                        </div>
-                                        <div class="flex items-center my-4">
-                                            <button
-                                                class="px-8 py-2 text-white bg-orange-500 rounded-lg focus:outline-none">{{ __('Send Review') }}</button>
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="mb-8">
-                                        <h4 class="mb-4 text-2xl font-bold font-heading text-orange-500">
-                                            {{ __('Make Review') }}</h4>
-                                        <div class="flex items-center">
-                                            <input type="hidden" name="rating" id="rating" value="0">
-                                            <input type="hidden" name="product_id" id="product_id"
-                                                value="{{ $product->id }}">
-                                            <input type="hidden" name="user_id" id="user_id"
-                                                value="{{ auth()->user()->id }}">
-                                            <textarea name="review" id="review" cols="30" rows="10"
-                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-orange-500"></textarea>
-                                        </div>
-                                        <div class="flex items-center my-4">
-                                            <button
-                                                class="px-8 py-2 text-white bg-orange-500 rounded-lg focus:outline-none">
-                                                {{ __('Send Review') }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endif
-                        </div>
-                    </div>
                     <div x-show="activeTab === 'shipping'" class="px-5 mb-10">
                         <div role="shipping" aria-labelledby="tab-2" id="tab-panel-2" tabindex="0">
                             <p class="mb-8 max-w-2xl text-gray-500 font-body">
@@ -272,13 +190,13 @@
                             </p>
                         </div>
                     </div>
-                    <div x-show="activeTab === 'brands'" class="px-5 mb-10">
+                    {{-- <div x-show="activeTab === 'brands'" class="px-5 mb-10">
                         <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 -mx-2 px-2">
                             @foreach ($brand_products as $product)
                                 <x-product-card :product="$product" />
                             @endforeach
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             

@@ -41,7 +41,7 @@ class SliderFactory extends Factory
     {
         return $this->afterCreating(function (Slider $slider) {
             $slider->addMediaFromUrl($this->faker->imageUrl())
-                ->toMediaCollection('sliders');
+                ->toMediaCollection('local_files');
         });
     }
 }

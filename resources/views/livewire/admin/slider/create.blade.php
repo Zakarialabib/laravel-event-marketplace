@@ -36,9 +36,9 @@
                         <x-input-error :messages="$errors->get('slider.subtitle')" for="slider.subtitle" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
-                        <x-label for="details" :value="__('Details')" />
-                        <x-input.textarea wire:model.lazy="slider.details" id="details" />
-                        <x-input-error :messages="$errors->get('slider.details')" for="slider.details" class="mt-2" />
+                        <x-label for="description" :value="__('Description')" />
+                        <x-input.textarea wire:model.lazy="slider.description" id="description" />
+                        <x-input-error :messages="$errors->get('slider.description')" for="slider.description" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="bg_color" :value="__('Background Color')" />
@@ -62,9 +62,9 @@
                     </div>
 
                     <div class="w-full py-2 px-3">
-                        <x-label for="photo" :value="__('Image')" />
-                        <x-fileupload wire:model="photo" :file="$photo" accept="image/jpg,image/jpeg,image/png" />
-                        <x-input-error :messages="$errors->get('photo')" for="photo" class="mt-2" />
+                        <x-label for="" :value="__('Image')" />
+                        <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
+                        <x-input-error :messages="$errors->get('')" for="" class="mt-2" />
                     </div>
                     <div class="w-full px-3">
                         <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">

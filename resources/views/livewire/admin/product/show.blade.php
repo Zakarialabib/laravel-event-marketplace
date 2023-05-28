@@ -53,7 +53,7 @@
                                     {{ __('Old Price') }}
                                 </x-table.th>
                                 <x-table.td>
-                                    {{ $product?->old_price }}
+                                    {{ $product?->discount_price }}
                                 </x-table.td>
                             </x-table.tr>
                             <x-table.tr>

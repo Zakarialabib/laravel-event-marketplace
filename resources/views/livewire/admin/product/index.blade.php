@@ -37,14 +37,6 @@
             class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
             placeholder="{{ __('Search') }}" />
         </div>
-        <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
-            <select wire:model="filterStore" wire:change="selectStore($event.target.value)">
-                <option value="">All Stores</option>
-                @foreach ($this->vendors as $vendor)
-                    {{ $vendor->name }}
-                @endforeach
-            </select>            
-        </div>
     </div>
 
     <x-table>
@@ -78,10 +70,12 @@
                         <input type="checkbox" value="{{ $product->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        <a href="{{ route('redirect', $product->url) }}">
-                        <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ $product->name }}"
+                        @if ($product->hasMedia('local_files'))
+                        <img src="{{ $product->getFirstMediaUrl('local_files') }}" alt="{{ $product->name }}"
                             class="w-10 h-10 rounded-full object-cover">
-                        </a>
+                            @else
+                            <p>No product image available.</p>
+                        @endif
                     </x-table.td>
                     <x-table.td>
                         <button type="button" wire:click="$emit('showModal',{{ $product->id }})">
@@ -99,8 +93,8 @@
 
                     <x-table.td>
                         {{ $product->price }}DH
-                        @if ($product->old_price)
-                            // {{ $product->old_price }}DH
+                        @if ($product->discount_price)
+                            // {{ $product->discount_price }}DH
                         @endif
                     </x-table.td>
                     <x-table.td>

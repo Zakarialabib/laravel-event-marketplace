@@ -209,10 +209,10 @@ class Index extends Component
 
          foreach ($products as $product) {
              if ($this->copyPriceToOldPrice) {
-                 $product->old_price = $product->price;
+                 $product->discount_price = $product->price;
              } elseif ($this->copyOldPriceToPrice) {
-                 $product->price = $product->old_price;
-                 $product->old_price = null;
+                 $product->price = $product->discount_price;
+                 $product->discount_price = null;
              } elseif ($this->percentageMethod === '+') {
                  $product->price = round(floatval($product->price) * (1 + $this->percentage / 100));
              } else {

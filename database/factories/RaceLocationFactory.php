@@ -29,7 +29,7 @@ class RaceLocationFactory extends Factory
     {
         return $this->afterCreating(function (RaceLocation $raceLocation) {
             $raceLocation->addMediaFromUrl($this->faker->imageUrl())
-                ->toMediaCollection('race_locations');
+                ->toMediaCollection('local_files');
         });
     }
 }

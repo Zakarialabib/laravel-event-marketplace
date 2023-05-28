@@ -28,7 +28,8 @@ class RaceSeeder extends Seeder
                 'category_id'      => 1,
                 'number_of_days'   => 3,
                 'number_of_racers' => 100,
-                'price'            => 400,
+                'price'            => 1000,
+                'discount_price'            => 800,
                 'social_media'     => json_encode([
                     ['name' => 'Facebook', 'value' => 'https://www.facebook.com/triathlondarabouazza'],
                     ['name' => 'Instagram', 'value' => 'https://www.instagram.com/triathlondarabouazza'],
@@ -53,42 +54,51 @@ class RaceSeeder extends Seeder
                 ]),
                 'options'  => null,
                 'calendar' => json_encode([
-                    '14/07' => [
-                        [
-                            'start_time' => '18h00',
-                            'end_time'   => '20h00',
-                            'activity'   => 'Pasta Party',
+                    [
+                        'date' => '14/07',
+                        'events' => [
+                            [
+                                'start_time' => '18h00',
+                                'end_time' => '20h00',
+                                'activity' => 'Pasta Party',
+                            ],
                         ],
                     ],
-                    '15/07' => [
-                        [
-                            'start_time' => '07h00',
-                            'end_time'   => '09h00',
-                            'activity'   => 'Accueil des participants',
-                        ],
-                        [
-                            'start_time' => '09h00',
-                            'end_time'   => '16h00',
-                            'activity'   => 'Épreuves',
-                        ],
-                        [
-                            'start_time' => '16h00',
-                            'activity'   => 'Fin des épreuves',
-                        ],
-                    ],
-                    '16/07' => [
-                        [
-                            'start_time' => '10h00',
-                            'end_time'   => '11h00',
-                            'activity'   => 'Remise des prix',
-                        ],
-                        [
-                            'start_time' => '11h00',
-                            'end_time'   => '12h00',
-                            'activity'   => 'Clôture',
+                    [
+                        'date' => '15/07',
+                        'events' => [
+                            [
+                                'start_time' => '07h00',
+                                'end_time' => '09h00',
+                                'activity' => 'Accueil des participants',
+                            ],
+                            [
+                                'start_time' => '09h00',
+                                'end_time' => '16h00',
+                                'activity' => 'Épreuves',
+                            ],
+                            [
+                                'start_time' => '16h00',
+                                'activity' => 'Fin des épreuves',
+                            ],
                         ],
                     ],
-                ], ),
+                    [
+                        'date' => '16/07',
+                        'events' => [
+                            [
+                                'start_time' => '10h00',
+                                'end_time' => '11h00',
+                                'activity' => 'Remise des prix',
+                            ],
+                            [
+                                'start_time' => '11h00',
+                                'end_time' => '12h00',
+                                'activity' => 'Clôture',
+                            ],
+                        ],
+                    ],    
+                ],),
                 'status' => true,
             ],
         ]);

@@ -21,13 +21,11 @@ class Registration extends Model
         'additional_services',
     ];
 
-    // Define the relationship with the Participant model
     public function participant()
     {
         return $this->belongsTo(Participant::class);
     }
 
-    // Define the relationship with the Race model
     public function race()
     {
         return $this->belongsTo(Race::class);

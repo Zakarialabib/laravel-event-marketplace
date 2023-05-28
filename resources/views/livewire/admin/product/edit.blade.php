@@ -23,10 +23,10 @@
                             <x-input-error :messages="$errors->get('product.slug')" for="product.slug" class="mt-2" />
                         </div>
                         <div class="sm:w-full lg:w-1/2 px-3 ">
-                            <x-label for="url" :value="__('Product url')"  />
-                            <x-input id="url" class="block mt-1 w-full" type="text" name="url"
-                                wire:model="product.url" required />
-                            <x-input-error :messages="$errors->get('product.url')" for="product.url" class="mt-2" />
+                            <x-label for="slug" :value="__('Product slug')"  />
+                            <x-input id="slug" class="block mt-1 w-full" type="text" name="slug"
+                                wire:model="product.slug" required />
+                            <x-input-error :messages="$errors->get('product.slug')" for="product.slug" class="mt-2" />
                         </div>
                     </div>
 
@@ -68,10 +68,10 @@
                         </div>
 
                         <div class="sm:w-full lg:w-1/2 px-3 ">
-                            <x-label for="old_price" :value="__('Old Price')" />
-                            <x-input id="old_price" class="block mt-1 w-full" type="number" name="old_price"
-                                wire:model="product.old_price" />
-                            <x-input-error :messages="$errors->get('product.old_price')" for="product.old_price" class="mt-2" />
+                            <x-label for="discount_price" :value="__('Old Price')" />
+                            <x-input id="discount_price" class="block mt-1 w-full" type="number" name="discount_price"
+                                wire:model="product.discount_price" />
+                            <x-input-error :messages="$errors->get('product.discount_price')" for="product.discount_price" class="mt-2" />
 
                         </div>
 
@@ -89,13 +89,6 @@
                             </select>
                         </div> --}}
 
-                        <div class="sm:w-full lg:w-1/2 px-3 ">
-                            <x-label for="video" :value="__('Condition')" />
-                            <x-input id="condition" class="block mt-1 w-full" type="text" name="condition"
-                                wire:model="product.condition" />
-                            <x-input-error :messages="$errors->get('product.condition')" for="product.condition" class="mt-2" />
-                        </div>
-
                         <div class="w-full mb-4 px-3">
                             <x-label for="description" :value="__('Description')" />
                             <livewire:quill :value="$description" />
@@ -108,13 +101,6 @@
                                 fileTypes="image/*" />
                         </div>
 
-
-                        <div class="w-full px-3 my-2">
-                            <x-label for="gallery" :value="__('Gallery')" />
-                            <x-media-upload title="{{ __('Gallery') }}" name="gallery" wire:model="gallery"
-                                :preview="$this->gallerypreview" :file="$gallery" multiple types="PNG / JPEG / WEBP"
-                                fileTypes="image/*" />
-                        </div>
                     </div>
 
                     <x-accordion title="{{ 'More Details' }}">
@@ -172,12 +158,6 @@
 
                             </div>
 
-                            <div class="w-1/2 sm:w-full px-2">
-                                <x-label for="meta_keywords" :value="__('Meta Keywords')" />
-                                <x-input id="meta_keywords" class="block mt-1 w-full" type="text"
-                                    name="meta_keywords" wire:model="product.meta_keywords" />
-                                <x-input-error :messages="$errors->get('product.meta_keywords')" for="product.meta_keywords" class="mt-2" />
-                            </div>
                             <div class="w-full px-2 mt-4">
                                 <x-label for="video" :value="__('Embeded Video')" />
                                 <x-input id="embeded_video" class="block mt-1 w-full" type="text"

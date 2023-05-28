@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Front;
 
 use App\Models\FeaturedBanner;
+use App\Models\Product;
 use App\Models\Race;
 use App\Models\RaceLocation;
 use App\Models\Sponsor;
@@ -44,6 +45,15 @@ class Index extends Component
     public function getPartnersProperty(): Collection
     {
         return Partner::select('name', 'id')->get();
+    }
+    
+    public function getFeaturedProductsProperty(): Collection
+    {
+        return Product::active()
+            // ->where('featured', true)
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
     }
 
     public function getSlidersProperty(): Collection

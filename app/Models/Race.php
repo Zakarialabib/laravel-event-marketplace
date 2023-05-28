@@ -44,7 +44,7 @@ class Race extends Model implements HasMedia
         'features',
         'options',
         'status',
-        'race_calendar',
+        'calendar',
     ];
 
     protected $casts = [
@@ -94,14 +94,11 @@ class Race extends Model implements HasMedia
         return $query->where('status', true);
     }
 
-    // Custom Attribute
     public function getFullPriceAttribute()
     {
-        // Perform any calculations or formatting here
         return number_format($this->price, 2).'DH';
     }
 
-    // Scope for races happening in the future
     public function scopeUpcoming($query)
     {
         return $query->where('date', '>', now());
@@ -118,13 +115,11 @@ class Race extends Model implements HasMedia
                      ->whereMonth('date', date('m'));
     }
 
-    // Accessor for formatted race date
     public function getFormattedDateAttribute()
     {
         return $this->date->format('Y-m-d');
     }
 
-    // Mutator for race date
     public function setFormattedDateAttribute($value)
     {
         $this->attributes['date'] = \Carbon\Carbon::createFromFormat('Y-m-d', $value);

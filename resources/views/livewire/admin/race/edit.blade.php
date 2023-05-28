@@ -24,8 +24,8 @@
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="number_of_racers" :value="__('Number of racers')" required />
-                            <x-input id="number_of_racers" class="block mt-1 w-full" type="number" name="number_of_racers"
-                                wire:model.lazy="race.number_of_racers" required />
+                            <x-input id="number_of_racers" class="block mt-1 w-full" type="number"
+                                name="number_of_racers" wire:model.lazy="race.number_of_racers" required />
                             <x-input-error :messages="$errors->get('number_of_racers')" for="number_of_racers" class="mt-2" />
                         </div>
                     </div>
@@ -74,7 +74,7 @@
 
                         </div>
 
-                        
+
                         <div class="w-full px-3 mb-6 lg:mb-0">
                             <x-label for="description" :value="__('Description')" />
                             {{-- <livewire:quill wire:model="description" /> --}}
@@ -85,8 +85,8 @@
 
                         <div class="w-full px-4 my-2">
                             <x-label for="images" :value="__('Race Image')" />
-                            <x-media-upload title="{{ __('Race Image') }}" name="images" wire:model="images" :file="$images"
-                            multiple types="PNG / JPEG / WEBP" fileTypes="image/*" />
+                            <x-media-upload title="{{ __('Race Image') }}" name="images" wire:model="images"
+                                :file="$images" multiple types="PNG / JPEG / WEBP" fileTypes="image/*" />
                         </div>
 
                     </div>
@@ -101,18 +101,62 @@
                                 <livewire:admin.race.features />
                             </div>
                             <div class="w-full px-2">
-                                <livewire:admin.race.calendar />
-                            </div>
-                            <div class="w-full px-2">
                                 <livewire:admin.race.sponsors />
                             </div>
                             <div class="w-full px-2">
                                 <livewire:admin.race.courses />
                             </div> --}}
                             <div class="w-full px-2">
+                                @foreach ($calendar as $index => $day)
+                                    <div>
+                                        <div class="flex flex-wrap space-x-2 py-4 justify-center">
+                                            <input type="text" wire:model.lazy="calendar.{{ $index }}.date"
+                                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+                                                placeholder="Date (dd/mm)">
+                                            <x-button type="button" danger
+                                                wire:click="removeRaceDate('{{ $index }}')">
+                                                <i class="fa fa-trash"></i>
+                                            </x-button>
+                                        </div>
+                                        <div clas="w-full text-center space-x-2">
+                                            @foreach ($day['events'] as $eventIndex => $event)
+                                            {{-- @dd(request()->all()) --}}
+                                                <input type="text"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.start_time"
+                                                    placeholder="Start Time">
+                                                <input type="text"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.end_time"
+                                                    placeholder="End Time">
+                                                <input type="text"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.activity"
+                                                    placeholder="Activity">
+                                                <x-button type="button" danger
+                                                    wire:click="removeRaceEvent('{{ $index }}', {{ $eventIndex }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </x-button>
+                                            @endforeach
+                                        </div>
+                                        <div class="flex justify-center py-4">
+                                        <x-button secondary type="button" class="text-center"
+                                            wire:click="addRaceEvent('{{ $index }}')"> Add Date +</x-button>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <div class="flex justify-center mb-4">
+                                    <button
+                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                        wire:click="addRaceDate">Add Race Date</button>
+                                </div>
+                            </div>
+
+                            <div class="w-full px-2">
                                 <livewire:admin.race.options />
                             </div>
-                            
+
                             {{-- <div class="lg:w-1/3 sm:w-1/2 px-2">
                                 <x-label for="meta_title" :value="__('Meta Title')" />
                                 <x-input id="meta_title" class="block mt-1 w-full" type="number" name="meta_title"
@@ -144,7 +188,7 @@
 
 
 @push('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#description'))
@@ -160,6 +204,5 @@
             .catch(error => {
                 console.error(error);
             });
-
     </script>
 @endpush

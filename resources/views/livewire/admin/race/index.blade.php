@@ -118,9 +118,9 @@
                             </x-table.td>
                             <x-table.td>
                                 @if ($race->hasMedia('local_files'))
-                                <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
-                                    class="w-10 h-10 rounded-full object-cover">
-                                    @else
+                                    <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
+                                        class="w-10 h-10 rounded-full object-cover">
+                                @else
                                     <p>No race image available.</p>
                                 @endif
                             </x-table.td>
@@ -136,7 +136,7 @@
                                 </a>
                                 <br>
                                 <small>
-                                    {{ $race->category->name }} - {{ $race->location->name }} 
+                                    {{ $race->category->name }} - {{ $race->location->name }}
                                 </small>
                             </x-table.td>
 

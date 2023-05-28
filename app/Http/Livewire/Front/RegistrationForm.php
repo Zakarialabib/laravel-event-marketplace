@@ -57,7 +57,7 @@ class RegistrationForm extends Component
         $this->registration = new Registration();
         $this->country = 'Maroc';
 
-        $this->existingSubmission = Registration::where('user_id', Auth::id())
+        $this->existingSubmission = Registration::where('participant_id', Auth::id())
                                                 ->first();
     }
 

@@ -41,6 +41,8 @@ class RaceFactory extends Factory
             'options'          => null,
             'calendar'         => null,
             'status'           => true,
+            'meta_title'       => null,
+            'meta_description' => null,
         ];
     }
 
@@ -48,7 +50,7 @@ class RaceFactory extends Factory
     {
         return $this->afterCreating(function (Race $race) {
             $race->addMediaFromUrl($this->faker->imageUrl())
-                ->toMediaCollection('races');
+                ->toMediaCollection('local_files');
         });
     }
 }
