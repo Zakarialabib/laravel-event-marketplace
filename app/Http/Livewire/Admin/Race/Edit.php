@@ -59,8 +59,8 @@ class Edit extends Component
         // 'race.meta_title'       => ['nullable', 'string', 'max:255'],
         // 'race.meta_description' => ['nullable', 'string', 'max:255'],
 
-        'social_media.*.name'  => ['nullable', 'string'],
-        'social_media.*.value' => ['nullable', 'string'],
+        'social_media.*.name'  => ['nullable'],
+        'social_media.*.value' => ['nullable'],
 
         'sponsors.*.name'  => ['nullable', 'string'],
         'sponsors.*.image' => ['nullable', 'string'],
@@ -69,8 +69,8 @@ class Edit extends Component
         'courses.*.name'    => ['nullable', 'string'],
         'courses.*.content' => ['nullable', 'string'],
 
-        'features.*.name'  => ['nullable', 'string'],
-        'features.*.value' => ['nullable', 'string'],
+        'features' => ['nullable', 'array'],
+        'features.*' => ['nullable', 'string'],
 
         'calendar.*.date' => ['nullable'],
         'calendar.*.events.*.start_time' => ['nullable'],
@@ -92,6 +92,18 @@ class Edit extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function addFeature()
+    {
+        $this->features[] = '';
+    }
+    
+    public function removeFeature($index)
+    {
+        unset($this->features[$index]);
+        $this->features = array_values($this->features);
+    }
+
+
     public function addOption()
     {
         $this->options[] = [
@@ -105,6 +117,50 @@ class Edit extends Component
         unset($this->options[$index]);
         $this->options = array_values($this->options);
     }
+
+    public function addSponsor()
+    {
+        $this->sponsors[] = [
+            'name'  => '',
+            'image' => '',
+            'link'  => '',
+        ];
+    }
+
+    public function removeSponsor($index)
+    {
+        unset($this->sponsors[$index]);
+        $this->sponsors = array_values($this->sponsors);
+    }
+
+    public function addSocialMedia()
+    {
+        $this->social_media[] = [
+            'name'  => '',
+            'value' => '',
+        ];
+    }
+
+    public function removeSocialMedia($index)
+    {
+        unset($this->social_media[$index]);
+        $this->social_media = array_values($this->social_media);
+    }
+
+    public function addCourse()
+    {
+        $this->courses[] = [
+            'name'    => '',
+            'content' => '',
+        ];
+    }
+
+    public function removeCourse($index)
+    {
+        unset($this->courses[$index]);
+        $this->courses = array_values($this->courses);
+    }
+
 
     public function addRaceDate()
     {
@@ -154,6 +210,9 @@ class Edit extends Component
         $this->options = $this->race->options ?? [];
         
         $this->calendar = $this->race->calendar ?? [];
+        $this->social_media = $this->race->social_media ?? [];
+        $this->features = $this->race->features ?? [];
+        $this->courses = $this->race->courses ?? [];
         // dd($this->calendar);
         $this->images = $this->race->getMedia('local_files');
 
@@ -169,17 +228,16 @@ class Edit extends Component
                 $this->race->addMedia($image)->toMediaCollection('local_files');
             }
         }
-        
-        
-        // $this->race->options[] = $this->options;
 
-        // $this->race->social_media[] = $this->social_media;
+        $this->race->options = $this->options;
 
-        // $this->race->sponsors[] = $this->sponsors;
+        $this->race->social_media = $this->social_media;
 
-        // $this->race->courses[] = $this->courses;
+        $this->race->sponsors = $this->sponsors;
 
-        // $this->race->features[] = $this->features;
+        $this->race->courses = $this->courses;
+
+        $this->race->features = $this->features;
 
         $this->race->calendar = $this->calendar;
 

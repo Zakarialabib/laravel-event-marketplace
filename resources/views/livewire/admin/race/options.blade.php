@@ -5,15 +5,8 @@
                 <select wire:model.lazy="options.{{ $index }}.type"
                     class="block w-full bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                     <option value="">{{ __('Choose an option') }}</option>
-                    <option value="color" {{ $option['type'] == 'color' ? 'selected' : '' }}>
-                        {{ __('Color') }}
-                    </option>
                 </select>
-                @if ($option['type'] === 'color')
-                    <input type="color" wire:model.lazy="options.{{ $index }}.value">
-                @else
-                    <input type="text" wire:model.lazy="options.{{ $index }}.value">
-                @endif
+                <input type="text" wire:model.lazy="options.{{ $index }}.value">
                 <x-button danger type="button" wire:click="removeOption({{ $index }})">{{ __('Remove') }}
                 </x-button>
             </div>

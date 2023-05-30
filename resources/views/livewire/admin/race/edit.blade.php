@@ -94,18 +94,82 @@
                     <x-accordion title="{{ __('More Details') }}">
                         <div class="flex flex-wrap px-4 mb-3">
 
-                            {{-- <div class="w-full px-2">
-                                <livewire:admin.race.social-medias />
+                            <div class="w-full px-2">
+                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                    {{-- @dd($social_media) --}}
+                                    @foreach (json_decode($social_media) as $index => $media)
+                                        <div class="flex flex-row w-full items-center space-x-4">
+                                            <input type="text"
+                                                wire:model.lazy="social_media.{{ $index }}.name">
+                                            <input type="text"
+                                                wire:model.lazy="social_media.{{ $index }}.value">
+                                            <x-button danger type="button"
+                                                wire:click="removeSocialMedia({{ $index }})">
+                                                <i class="fa fa-trash"></i>
+                                            </x-button>
+                                        </div>
+                                    @endforeach
+                                    <x-button primary type="button" wire:click="addSocialMedia">
+                                        {{ __('Add Social Media') }}</x-button>
+                                </div>
                             </div>
                             <div class="w-full px-2">
-                                <livewire:admin.race.features />
+                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                    @foreach ($courses as $index => $course)
+                                        <div class="flex flex-row w-full items-center space-x-4">
+                                            <input type="text" wire:model.lazy="courses.{{ $index }}.name"
+                                                placeholder="Course Name"
+                                                class="block w-full bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                            <textarea wire:model.lazy="courses.{{ $index }}.content" placeholder="Course Content"
+                                                class="block w-full bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"></textarea>
+                                            <x-button danger type="button"
+                                                wire:click="removeCourse({{ $index }})">{{ __('Remove') }}
+                                            </x-button>
+                                        </div>
+                                    @endforeach
+                                    <x-button primary type="button" wire:click="addCourse">{{ __('Add Course') }}
+                                    </x-button>
+                                </div>
                             </div>
                             <div class="w-full px-2">
-                                <livewire:admin.race.sponsors />
+                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                    @foreach ($sponsors as $index => $sponsor)
+                                        <div class="flex flex-row w-full items-center space-x-4">
+                                            <input type="text" wire:model.lazy="sponsors.{{ $index }}.name"
+                                                placeholder="Sponsor Name"
+                                                class="block w-full bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                            <input type="text"
+                                                wire:model.lazy="sponsors.{{ $index }}.image"
+                                                placeholder="Sponsor Image"
+                                                class="block w-full bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                            <input type="text" wire:model.lazy="sponsors.{{ $index }}.link"
+                                                placeholder="Sponsor Link"
+                                                class="block w-full bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                            <x-button danger type="button"
+                                                wire:click="removeSponsor({{ $index }})">{{ __('Remove') }}
+                                            </x-button>
+                                        </div>
+                                    @endforeach
+                                    <x-button primary type="button" wire:click="addSponsor">{{ __('Add Sponsor') }}
+                                    </x-button>
+                                </div>
                             </div>
+
                             <div class="w-full px-2">
-                                <livewire:admin.race.courses />
-                            </div> --}}
+                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                    @foreach ($features as $index => $feature)
+                                        <div class="flex flex-row w-full items-center space-x-4">
+                                            <input type="text" wire:model.lazy="features.{{ $index }}">
+                                            <x-button danger type="button"
+                                                wire:click="removeFeature({{ $index }})">
+                                                <i class="fa fa-trash"></i>
+                                            </x-button>
+                                        </div>
+                                    @endforeach
+                                    <x-button primary type="button" wire:click="addFeature">{{ __('Add Feature') }}
+                                    </x-button>
+                                </div>
+                            </div>
                             <div class="w-full px-2">
                                 @foreach ($calendar as $index => $day)
                                     <div>
@@ -120,7 +184,7 @@
                                         </div>
                                         <div clas="w-full text-center space-x-2">
                                             @foreach ($day['events'] as $eventIndex => $event)
-                                            {{-- @dd(request()->all()) --}}
+                                                {{-- @dd(request()->all()) --}}
                                                 <input type="text"
                                                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                                                     wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.start_time"
@@ -140,8 +204,9 @@
                                             @endforeach
                                         </div>
                                         <div class="flex justify-center py-4">
-                                        <x-button secondary type="button" class="text-center"
-                                            wire:click="addRaceEvent('{{ $index }}')"> Add Date +</x-button>
+                                            <x-button secondary type="button" class="text-center"
+                                                wire:click="addRaceEvent('{{ $index }}')"> Add Date +
+                                            </x-button>
                                         </div>
                                     </div>
                                 @endforeach

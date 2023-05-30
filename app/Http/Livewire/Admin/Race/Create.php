@@ -118,16 +118,16 @@ class Create extends Component
 
             $this->race->images = $imageName;
         }
-
-        // $this->race->options[] = $this->options;
-
+        
         // $this->race->social_media[] = $this->social_media;
-
+        
         // $this->race->sponsors[] = $this->sponsors;
-
+        
         // $this->race->courses[] = $this->courses;
-
+        
         // $this->race->features[] = $this->features;
+        
+        $this->race->options[] = $this->options;
 
         $this->race->calendar[] = $this->calendar;
 
