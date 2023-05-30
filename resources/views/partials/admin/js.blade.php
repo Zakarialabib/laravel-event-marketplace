@@ -14,6 +14,8 @@
      integrity="sha512-sa449wQ9TM6SvZV7TK7Zx/SjVR6bc7lR8tRz1Ar4/R6X2jOLaFln/9C+6Ak2OkAKZ/xBAKJ94dQMeYa0JT1RLg=="
      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
- <x-livewire-alert::scripts />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<x-livewire-alert::scripts />
 
  @stack('scripts')

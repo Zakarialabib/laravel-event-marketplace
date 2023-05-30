@@ -77,10 +77,8 @@
 
                         <div class="w-full px-3 mb-6 lg:mb-0">
                             <x-label for="description" :value="__('Description')" />
-                            {{-- <livewire:quill wire:model="description" /> --}}
-                            <div wire:ignore>
-                                <textarea id="description" wire:model.lazy="description"></textarea>
-                            </div>
+                            {{-- @dd($description) --}}
+                            <x-input.quill id="description" wire:model.defer="description" :value="$description"  />   
                         </div>
 
                         <div class="w-full px-4 my-2">
@@ -94,14 +92,14 @@
                     <x-accordion title="{{ __('More Details') }}">
                         <div class="flex flex-wrap px-4 mb-3">
 
+                            @if($social_media)
                             <div class="w-full px-2">
                                 <div class="space-y-4 flex flex-col items-center justify-center my-4">
-                                    {{-- @dd($social_media) --}}
                                     @foreach (json_decode($social_media) as $index => $media)
                                         <div class="flex flex-row w-full items-center space-x-4">
-                                            <input type="text"
+                                            <input type="text" placeholder="Social Media Name" name="social_media_name"
                                                 wire:model.lazy="social_media.{{ $index }}.name">
-                                            <input type="text"
+                                            <input type="text" placeholder="Social Media Link" name="social_media_link"
                                                 wire:model.lazy="social_media.{{ $index }}.value">
                                             <x-button danger type="button"
                                                 wire:click="removeSocialMedia({{ $index }})">
@@ -113,6 +111,7 @@
                                         {{ __('Add Social Media') }}</x-button>
                                 </div>
                             </div>
+                            @endif
                             <div class="w-full px-2">
                                 <div class="space-y-4 flex flex-col items-center justify-center my-4">
                                     @foreach ($courses as $index => $course)
@@ -166,7 +165,8 @@
                                             </x-button>
                                         </div>
                                     @endforeach
-                                    <x-button primary type="button" wire:click="addFeature">{{ __('Add Feature') }}
+                                    <x-button primary type="button" wire:click="addFeature">
+                                        {{ __('Add Feature') }}
                                     </x-button>
                                 </div>
                             </div>
@@ -184,7 +184,6 @@
                                         </div>
                                         <div clas="w-full text-center space-x-2">
                                             @foreach ($day['events'] as $eventIndex => $event)
-                                                {{-- @dd(request()->all()) --}}
                                                 <input type="text"
                                                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                                                     wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.start_time"

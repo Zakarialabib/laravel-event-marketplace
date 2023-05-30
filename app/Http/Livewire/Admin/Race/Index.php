@@ -29,17 +29,11 @@ class Index extends Component
         'delete', 'exportAll',
     ];
 
-    public $selectType;
-
     public int $perPage;
 
     public array $orderable;
 
     public $selectAll;
-
-    public $file;
-
-    public float $price;
 
     public string $search = '';
 
@@ -88,11 +82,6 @@ class Index extends Component
         }
     }
 
-    public function getVendorsProperty()
-    {
-        return User::select('name', 'id')->get();
-    }
-
     public function mount()
     {
         $this->sortBy = 'id';
@@ -100,7 +89,6 @@ class Index extends Component
         $this->perPage = 25;
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Race())->orderable;
-        $this->file = null;
     }
 
    

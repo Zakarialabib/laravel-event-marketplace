@@ -62,23 +62,22 @@ class Edit extends Component
         'social_media.*.name'  => ['nullable'],
         'social_media.*.value' => ['nullable'],
 
-        'sponsors.*.name'  => ['nullable', 'string'],
-        'sponsors.*.image' => ['nullable', 'string'],
-        'sponsors.*.link'  => ['nullable', 'string'],
+        'sponsors.*.name'  => ['nullable'],
+        'sponsors.*.image' => ['nullable'],
+        'sponsors.*.link'  => ['nullable'],
 
-        'courses.*.name'    => ['nullable', 'string'],
-        'courses.*.content' => ['nullable', 'string'],
+        'courses.*.name'    => ['nullable'],
+        'courses.*.content' => ['nullable'],
 
-        'features' => ['nullable', 'array'],
-        'features.*' => ['nullable', 'string'],
+        'features.*' => ['nullable'],
 
         'calendar.*.date' => ['nullable'],
         'calendar.*.events.*.start_time' => ['nullable'],
         'calendar.*.events.*.end_time' => ['nullable'],
-        'calendar.*.events.*.activity' => ['nullable', 'string'],
+        'calendar.*.events.*.activity' => ['nullable'],
 
-        'options.*.type'  => ['nullable', 'string'],
-        'options.*.value' => ['nullable', 'string'],
+        'options.*.type'  => ['nullable'],
+        'options.*.value' => ['nullable'],
 
     ];
 
@@ -223,7 +222,7 @@ class Edit extends Component
     {
         $this->validate();
 
-        if ($this->images) {
+        if (empty($this->images)) {
             foreach($this->images as $image) {
                 $this->race->addMedia($image)->toMediaCollection('local_files');
             }
@@ -235,7 +234,7 @@ class Edit extends Component
 
         $this->race->sponsors = $this->sponsors;
 
-        $this->race->courses = $this->courses;
+        $this->race->course = $this->courses;
 
         $this->race->features = $this->features;
 

@@ -14,6 +14,10 @@ import Sortable from 'sortablejs';
 
 window.Sortable = Sortable;
 
+import 'quill/dist/quill.snow.css';
+import Quill from "quill";
+window.Quill = Quill;
+
 Alpine.plugin(focus);
 Alpine.plugin(intersect);
 

@@ -1,23 +1,45 @@
-<!-- resources/views/components/quill.blade.php -->
-<div class="rounded-md shadow-sm" wire:ignore>
-    <div x-data x-ref="quillEditor" x-init="quill = new Quill($refs.quillEditor, { theme: 'snow' });
-    quill.on('text-change', function() {
-        $dispatch('input', quill.root.innerHTML);
-    });"
-        class="prose max-w-full form-textarea block transition duration-150 ease-in-out sm:text-sm sm:leading-5"></div>
+@props(['value' => ''])
+
+<div
+    wire:ignore
+    x-data="{ content: @entangle($attributes->wire('model')).defer }"
+    x-on:text-change.debounce.2000ms="content = $event.detail.content"
+    x-init="initQuill($refs.editor, $dispatch)"
+    class="mt-1"
+>
+    <div wire:ignore>
+        <div x-ref="editor">{!! $value !!}</div>
+    </div>
 </div>
 
+<script>
+    function initQuill(ref, dispatch) {
+        const quill = new Quill(ref, {
+                theme: 'snow',
+                modules: {
+                    toolbar: {
+                        container: [
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ 'header': 1 }, { 'header': 2 }],
+                            ['link', 'blockquote', 'code-block', 'image', 'video'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            [{ 'direction': 'rtl' }],
 
-<!-- add the script to the Blade layout file -->
-@once
-    @push('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css"
-            integrity="sha512-/FHUK/LsH78K9XTqsR9hbzr21J8B8RwHR/r8Jv9fzry6NVAOVIGFKQCNINsbhK7a1xubVu2r5QZcz2T9cKpubw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @endpush
-    @push('scripts')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"
-            integrity="sha512-P2W2rr8ikUPfa31PLBo5bcBQrsa+TNj8jiKadtaIrHQGMo6hQM6RdPjQYxlNguwHz8AwSQ28VkBK6kHBLgd/8g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    @endpush
-@endonce
+                            [{ 'size': ['small', false, 'large', 'huge'] }],
+                            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                            [{ 'color': [] }, { 'background': [] }],
+                            [{ 'font': [] }],
+                            [{ 'align': [] }],
+                            ['clean']
+                        ]
+                    }
+                }, 
+                bounds: ref,
+                placeholder: '{{ $placeholder ?? 'Write something great!' }}'
+            });
+            quill.on('text-change', function () {
+                dispatch('text-change', { content: quill.root.innerHTML })
+            });
+        }
+</script>
