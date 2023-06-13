@@ -42,6 +42,7 @@ class Edit extends Component
 
     public $listeners = [
         'optionUpdated' => 'updatedOptions',
+        'imagesUpdated' => 'onImagesUpdated',
         'editModal',
         Quill::EVENT_VALUE_UPDATED,
     ];
@@ -64,6 +65,11 @@ class Edit extends Component
         // 'product.brand_id'         => ['nullable', 'integer'],
         'product.embeded_video'    => ['nullable'],
     ];
+    
+    public function onImagesUpdated($image): void
+    {
+        $this->images = $image;
+    }
 
     public function quill_value_updated($value)
     {

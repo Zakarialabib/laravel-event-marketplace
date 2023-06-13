@@ -13,10 +13,8 @@ import intersect from "@alpinejs/intersect";
 import Sortable from 'sortablejs';
 
 window.Sortable = Sortable;
-
-import 'quill/dist/quill.snow.css';
-import Quill from "quill";
-window.Quill = Quill;
+import 'trix/dist/trix.css';
+import 'trix';
 
 Alpine.plugin(focus);
 Alpine.plugin(intersect);
@@ -104,6 +102,13 @@ Alpine.data("mainState", () => {
         },
         scrollingDown: false,
         scrollingUp: false,
+        initializeTrix() {
+            const element = document.getElementById('editor');
+            element.addEventListener('trix-change', () => {
+                // Trigger Livewire update
+                Livewire.emit('editorContentUpdated', element.value);
+            });
+        },
     };
 });
 

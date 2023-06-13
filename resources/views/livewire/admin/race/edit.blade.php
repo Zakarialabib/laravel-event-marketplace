@@ -76,41 +76,48 @@
 
 
                         <div class="w-full px-3 mb-6 lg:mb-0">
-                            <x-label for="description" :value="__('Description')" />
-                            {{-- @dd($description) --}}
-                            <x-input.quill id="description" wire:model.defer="description" :value="$description"  />   
+                             <x-label for="description" :value="__('Description')" />
+                            {{-- @livewire('quill', ['value' => $description])  --}}
+                            @livewire('trix', ['value' => $description]) 
+                            {{-- <x-input.trix label="descripton" name="description"
+                                wire:model="description" value="{{$description}}" placeholder="Write something..." />
+                            ///////
+                                <x-input.quillEditor label="descripton" name="description" endpoint="/uploads"
+                                wire:model="description" value="{{$description}}" placeholder="Write something..." /> --}}
+
+                            {{ $description }}
                         </div>
 
                         <div class="w-full px-4 my-2">
-                            <x-label for="images" :value="__('Race Image')" />
-                            <x-media-upload title="{{ __('Race Image') }}" name="images" wire:model="images"
-                                :file="$images" multiple types="PNG / JPEG / WEBP" fileTypes="image/*" />
+                            <x-label for="images" :value="__('Images')" />
+                            @livewire('multiple-uploads')
                         </div>
-
                     </div>
 
                     <x-accordion title="{{ __('More Details') }}">
                         <div class="flex flex-wrap px-4 mb-3">
 
-                            @if($social_media)
-                            <div class="w-full px-2">
-                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
-                                    @foreach (json_decode($social_media) as $index => $media)
-                                        <div class="flex flex-row w-full items-center space-x-4">
-                                            <input type="text" placeholder="Social Media Name" name="social_media_name"
-                                                wire:model.lazy="social_media.{{ $index }}.name">
-                                            <input type="text" placeholder="Social Media Link" name="social_media_link"
-                                                wire:model.lazy="social_media.{{ $index }}.value">
-                                            <x-button danger type="button"
-                                                wire:click="removeSocialMedia({{ $index }})">
-                                                <i class="fa fa-trash"></i>
-                                            </x-button>
-                                        </div>
-                                    @endforeach
-                                    <x-button primary type="button" wire:click="addSocialMedia">
-                                        {{ __('Add Social Media') }}</x-button>
+                            @if ($social_media)
+                                <div class="w-full px-2">
+                                    <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                        @foreach (json_decode($social_media) as $index => $media)
+                                            <div class="flex flex-row w-full items-center space-x-4">
+                                                <input type="text" placeholder="Social Media Name"
+                                                    name="social_media_name"
+                                                    wire:model.lazy="social_media.{{ $index }}.name">
+                                                <input type="text" placeholder="Social Media Link"
+                                                    name="social_media_link"
+                                                    wire:model.lazy="social_media.{{ $index }}.value">
+                                                <x-button danger type="button"
+                                                    wire:click="removeSocialMedia({{ $index }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </x-button>
+                                            </div>
+                                        @endforeach
+                                        <x-button primary type="button" wire:click="addSocialMedia">
+                                            {{ __('Add Social Media') }}</x-button>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
                             <div class="w-full px-2">
                                 <div class="space-y-4 flex flex-col items-center justify-center my-4">
@@ -247,26 +254,19 @@
         </x-slot>
     </x-modal>
     <!-- End Create Modal -->
+
+    @push('scripts')
+        <script>
+            // document.addEventListener('livewire:load', function() {
+            //     Livewire.on('updatedDescription', content => {
+            //         document.getElementById('editor').value = content;
+            //     });
+            // });
+            // const trixEditor = document.querySelector('trix-editor');
+            // trixEditor.addEventListener('trix-blur', function() {
+            //     const value = trixEditor.getAttribute('value');
+            //     @this.set('description', value);
+            // });
+        </script>
+    @endpush
 </div>
-
-
-
-@push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#description'))
-            .then(editor => {
-                editor.model.document.on('change:data', () => {
-                    @this.set('description', editor.getData());
-                })
-
-                Livewire.on('reinit', () => {
-                    editor.setData('', '')
-                })
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-@endpush

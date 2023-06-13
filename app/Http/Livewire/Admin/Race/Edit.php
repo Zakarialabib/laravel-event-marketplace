@@ -20,14 +20,16 @@ class Edit extends Component
 
     public $listeners = [
         'editModal',
-        'trumbowygEditorUpdated' => 'updateDescription',
+        'updatedDescription',
+        'imagesUpdated' => 'onImagesUpdated',
+        'mediaDeleted',
     ];
 
     public $editModal = false;
 
     public $race;
 
-    public $images;
+    public $images = [];
 
     public $options = [];
 
@@ -41,7 +43,7 @@ class Edit extends Component
 
     public $calendar = [];
 
-    public $description = null;
+    public $description ;    
 
     public array $listsForFields = [];
 
@@ -54,8 +56,9 @@ class Edit extends Component
         'race.category_id'      => ['required', 'integer'],
         'race.number_of_days'   => ['required', 'numeric', 'max:2147483647'],
         'race.number_of_racers' => ['required', 'numeric', 'max:2147483647'],
-        'description'           => ['nullable'],
+        // 'description'           => ['nullable'],
         'images'    => [ 'nullable'],
+
         // 'race.meta_title'       => ['nullable', 'string', 'max:255'],
         // 'race.meta_description' => ['nullable', 'string', 'max:255'],
 
@@ -81,9 +84,14 @@ class Edit extends Component
 
     ];
 
-    public function updateDescription($value)
+    public function updatedDescription($value)
     {
         $this->description = $value;
+    }
+
+    public function onImagesUpdated($images): void
+    {
+        $this->images = $images;
     }
 
     public function updated($propertyName)
@@ -195,6 +203,11 @@ class Edit extends Component
         ];
     }
 
+    public function mediaDeleted(): void
+    {
+        $this->images = $this->product->getMedia('local_files');
+    }
+
 
     public function editModal($id)
     {
@@ -205,14 +218,14 @@ class Edit extends Component
         $this->race = Race::findOrFail($id);
 
         $this->description = $this->race->description;
-
+        // dd($this->all());
         $this->options = $this->race->options ?? [];
         
         $this->calendar = $this->race->calendar ?? [];
         $this->social_media = $this->race->social_media ?? [];
         $this->features = $this->race->features ?? [];
         $this->courses = $this->race->courses ?? [];
-        // dd($this->calendar);
+
         $this->images = $this->race->getMedia('local_files');
 
         $this->editModal = true;

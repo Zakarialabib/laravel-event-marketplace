@@ -1,70 +1,214 @@
 <div>
-    <!-- Create the editor container -->
+    <div class="w-full pl-px pr-px bg-transparent z-20 absolute left-0 right-0" style="top: 38px;">
+        <div id="quillProgressBar" class="bg-green-600 text-xs leading-none h-1" style="width: 0%"></div>
+    </div>
+
     <div id="{{ $quillId }}" wire:ignore></div>
-</div>
 
-@pushOnce('styles')
-<!-- Include stylesheet -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-@endPushOnce
-
-@pushOnce('scripts')
-    <!-- Include the Quill library -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-@endPushOnce
-
-@push('scripts')
-     <!-- Initialize Quill editor -->
-     <script>
-        var quill = new Quill('#{{ $quillId }}', {
-            theme: 'snow',
-            modules: {
-                toolbar: {
-                    container: [
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{
-                            'header': 1
-                        }, {
-                            'header': 2
-                        }],
-                        ['link', 'blockquote', 'code-block', 'image', 'video'],
-                        [{
-                            'list': 'ordered'
-                        }, {
-                            'list': 'bullet'
-                        }],
-                        [{
-                            'direction': 'rtl'
-                        }],
-
-                        [{
-                            'size': ['small', false, 'large', 'huge']
-                        }],
-                        [{
-                            'header': [1, 2, 3, 4, 5, 6, false]
-                        }],
-
-                        [{
-                            'color': []
-                        }, {
-                            'background': []
-                        }],
-                        [{
-                            'font': []
-                        }],
-                        [{
-                            'align': []
-                        }],
-                        ['clean']
-                    ]
+    @once
+        @push('styles')
+            <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+            <style>
+                /* Toolbar Styles */
+                .ql-editor-haserror .ql-toolbar.ql-snow+.ql-container.ql-snow {
+                    border: 1px solid #f56565;
+                    border-radius: 0.5rem;
                 }
-            },
-        });
-        quill.root.innerHTML = @json($value);
 
-        quill.on('text-change', function() {
-            let value = document.getElementsByClassName('ql-editor')[0].innerHTML;
-            Livewire.emit('quill_value_updated', value);
-        })
+                .ql-toolbar.ql-snow+.ql-container.ql-snow {
+                    border: 1px solid #e2e8f0;
+                    border-radius: 0.5rem;
+                }
+
+                .ql-toolbar.ql-snow {
+                    font-family: inherit;
+                    border-top-left-radius: 0.5rem;
+                    border-top-right-radius: 0.5rem;
+                    background-color: #fff;
+                    border: 0.5px solid #e2e8f0;
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                    margin-left: 1px;
+                    margin-right: 1px;
+                }
+
+                .ql-container {
+                    color: #2d3748;
+                    font-family: inherit;
+                    font-size: inherit;
+                }
+
+                .ql-container.ql-snow {
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+                    border-color: #e2e8f0;
+                    margin-top: -44px;
+                }
+
+                .ql-editor {
+                    overflow-y: visible;
+                    padding-top: 64px;
+                }
+
+                .ql-scrolling-container {
+                    height: 100%;
+                    min-height: 100%;
+                    overflow-y: auto;
+                }
+
+                .ql-editor.ql-blank::before {
+                    color: #a0aec0;
+                    font-style: normal;
+                }
+
+                .ql-editor:focus {
+                    border-radius: 0.5rem;
+                    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+                }
+
+                .ql-editor h1,
+                .ql-editor h2,
+                .ql-editor h3 {
+                    font-size: 1.75rem !important;
+                    font-weight: 700;
+                    color: #2d3748;
+                    border-bottom: 0;
+                    margin-bottom: 0.75em;
+                    line-height: 1.2;
+                }
+
+                .ql-editor p,
+                .ql-editor ul,
+                .ql-editor ol,
+                .ql-snow .ql-editor pre {
+                    margin-bottom: 1em;
+                }
+
+                .ql-editor strong {
+                    font-weight: 700;
+                }
+
+                .ql-editor ol,
+                .ql-editor ul {
+                    padding-left: 0;
+                }
+
+                .ql-editor li {
+                    margin-bottom: 0.25em;
+                }
+
+                .ql-editor a {
+                    color: #4299e1;
+                }
+
+                .ql-editor blockquote {
+                    position: relative;
+                    display: block;
+                    margin-top: 1.875em !important;
+                    margin-bottom: 1.875em !important;
+                    font-size: 1.875rem;
+                    line-height: 1.2;
+                    border-left: 3px solid #cbd5e0;
+                    font-weight: 600;
+                    color: #4a5568;
+                    font-style: normal;
+                    letter-spacing: -0.05em;
+                }
+
+                .ql-snow .ql-editor pre {
+                    display: block;
+                    border-radius: 0.5rem;
+                    padding: 1rem;
+                    font-size: 1rem;
+                }
+
+                .ql-snow .ql-editor img {
+                    border-radius: 0.5rem;
+                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+                }
+
+                .ql-editor iframe {
+                    width: 100%;
+                    max-width: 100%;
+                    height: 400px;
+                }
+            </style>
+        @endpush
+
+        @push('scripts')
+            <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script>
+            <script src="https://unpkg.com/quill-paste-smart@latest/dist/quill-paste-smart.js" defer></script>
+        @endpush
+    @endonce
+
+    @push('scripts')
+    <!-- Initialize Quill editor -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var quill = new Quill('#{{ $quillId }}', {
+                theme: 'snow',
+                scrollingContainer: '.ql-scrolling-container',
+                modules: {
+                    toolbar: {
+                        container: [
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{
+                                'header': 1
+                            }, {
+                                'header': 2
+                            }],
+                            ['link', 'blockquote', 'code-block', 'image', 'video'],
+                            [{
+                                'list': 'ordered'
+                            }, {
+                                'list': 'bullet'
+                            }],
+                            [{
+                                'direction': 'rtl'
+                            }],
+
+                            [{
+                                'size': ['small', false, 'large', 'huge']
+                            }],
+                            [{
+                                'header': [1, 2, 3, 4, 5, 6, false]
+                            }],
+
+                            [{
+                                'color': []
+                            }, {
+                                'background': []
+                            }],
+                            [{
+                                'font': []
+                            }],
+                            [{
+                                'align': []
+                            }],
+                            ['clean']
+                        ]
+                    }
+                },
+                placeholder: 'Write something great!',
+            });
+            quill.root.innerHTML = @json($value);
+
+            quill.on('text-change', function() {
+                let value = document.getElementsByClassName('ql-editor')[0].innerHTML;
+                Livewire.emit('quill_value_updated', value);
+            });
+            quill.clipboard.addMatcher(Node.ELEMENT_NODE, function(node, delta) {
+                var plaintext = node.innerText.replace(/\s+/g, ' ').trim();
+                var Delta = Quill.import('delta');
+                return new Delta().insert(plaintext);
+            });
+            quill.getModule('toolbar').addHandler('image', () => {
+                selectLocalImage(quill);
+            });
+        });
     </script>
 @endpush
+
+
+</div>

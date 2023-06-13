@@ -10,6 +10,8 @@
     integrity="sha512-tJYqW5NWrT0JEkWYxrI4IK2jvT7PAiOwElIGTjALSyr8ZrilUQf+gjw2z6woWGSZqeXASyBXUr+WbtqiQgxUYg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+{{-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> --}}
+
 @stack('styles')
 
 <style>

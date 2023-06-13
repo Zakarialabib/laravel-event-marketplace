@@ -127,9 +127,9 @@ class Create extends Component
         
         // $this->race->features[] = $this->features;
         
-        $this->race->options[] = $this->options;
+        $this->race->options = $this->options;
 
-        $this->race->calendar[] = $this->calendar;
+        $this->race->calendar = $this->calendar;
 
         $this->race->save();
 

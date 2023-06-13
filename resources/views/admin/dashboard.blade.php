@@ -1,6 +1,8 @@
 @section('title', __('Dashboard'))
 <x-dashboard-layout>
-    
+ 
+    @livewire('media-library')
+
     <div>
         <div class="bg-white">
             <div class="md:inline-flex float-right pt-2 pb-5 sm:flex sm:flex-wrap">

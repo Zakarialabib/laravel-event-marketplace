@@ -19,10 +19,10 @@ class Quill extends Component
         $this->quillId = 'quill-' . uniqid();
     }
 
-    // public function updatedValue($value)
-    // {
-    //     $this->emit(self::EVENT_VALUE_UPDATED, $this->value);
-    // }
+    public function updatedValue($value)
+    {
+        $this->emit(self::EVENT_VALUE_UPDATED, $value);
+    }
 
     public function render()
     {

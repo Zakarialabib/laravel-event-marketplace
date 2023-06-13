@@ -78,7 +78,11 @@
                         <div class="w-full px-3 mb-6 lg:mb-0">
                             <x-label for="description" :value="__('Description')" />
                             {{-- <livewire:quill :value="$description" /> --}}
-                            <x-input.quill id="description" wire:model.defer="description"  />   
+                            {{-- <x-input.quill id="description" wire:model.defer="description"  />    --}}
+                            <div wire:ignore>
+                                <input id="editor" type="hidden" wire:model="description">
+                                <trix-editor input="editor"></trix-editor>
+                            </div>
                         </div>
 
                         <div class="w-full px-4 my-2">

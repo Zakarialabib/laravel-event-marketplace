@@ -79,6 +79,7 @@ class RaceSeeder extends Seeder
                             ],
                             [
                                 'start_time' => '16h00',
+                                'end_time' => '16h00',
                                 'activity' => 'Fin des épreuves',
                             ],
                         ],

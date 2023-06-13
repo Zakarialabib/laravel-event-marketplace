@@ -2,9 +2,6 @@
     <div class="container mx-auto">
         <div class="mb-5">
             {{-- <label for="datepicker" class="font-bold mb-1 text-gray-700 block">Select Date</label> --}}
-            <label for="datepicker" class="label">
-                <span class="label-text">Tarikh Mula</span>
-            </label>
 
             <div class="relative">
                 <input type="hidden" name="date" x-ref="date" :value="datepickerValue" />

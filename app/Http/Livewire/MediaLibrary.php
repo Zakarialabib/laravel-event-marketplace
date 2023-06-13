@@ -9,83 +9,87 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class MediaLibrary extends Component
 {
     public $model;
-    public $category;
+    public $models;
     public $mediaItems;
+    public $cropData = [
+        'x' => 0,
+        'y' => 0,
+        'width' => 0,
+        'height' => 0,
+    ];
 
-    public function mount($model = null)
+    public function cropImage()
     {
-        $this->model = $model; // race parametre for example --> App\Models\Race
-        $this->category = null;
-        $this->refreshMediaItems();
-    }
+        // Access crop data
+        $x = $this->cropData['x'];
+        $y = $this->cropData['y'];
+        $width = $this->cropData['width'];
+        $height = $this->cropData['height'];
 
-    public function render()
-    {
-        $mediaItems = $this->model
-            ? $this->model->getMedia('local_files')
-            : collect();
-    
-        return view('livewire.media-library', [
-            'models' => $this->getModels(),
-            'categories' => $this->getCategories(),
-            'mediaItems' => $mediaItems,
-        ]);
-    }    
+        // Perform cropping operations based on the crop data
 
-    protected function refreshMediaItems()
-    {
-        
-        $this->mediaItems = Media::where('model_type', $this->model)
-            ->where('collection_name', 'local_files')
-            ->when($this->category, function ($query, $category) {
-                return $query->where('custom_properties->category', $category);
-            })
-            ->get();
-    }
+        // Example: Save the cropped image
+        $image = Image::make($this->selectedImage);
+        $image->crop($width, $height, $x, $y);
+        $image->save('path/to/save/cropped-image.jpg');
 
-    // public function updatedModel($model)
-    // {
-    //     $this->model = $model;
-    //     $this->category = null;
-    //     $this->refreshMediaItems();
-    // }
-
-    // public function updatedCategory($category)
-    // {
-    //     $this->category = $category;
-    //     $this->refreshMediaItems();
-    // }
-
-    protected function getModels()
-    {
-        // Add your desired models to the array
-        return [
-            'App\Models\Race' => 'Race',
-            'App\Models\RaceLocation' => 'RaceLocation',
-            'App\Models\Category' => 'Category',
-            // Add more models as needed
+        // Clear crop data
+        $this->cropData = [
+            'x' => 0,
+            'y' => 0,
+            'width' => 0,
+            'height' => 0,
         ];
     }
 
-    protected function getCategories()
+    public function mount($model = null)
     {
-
-        if ($this->model === 'App\Models\Race') {
-            return [
-                'category1' => 'Category 1',
-                'category2' => 'Category 2',
-            ];
-        } elseif ($this->model === 'App\Models\User') {
-            return [
-                'category3' => 'Category 3',
-                'category4' => 'Category 4',
-            ];
-        }
-
-        // Return default categories or an empty array if no categories are available
-        return [];
+        $this->model = $model ?? 'Race';
+        $this->models = $this->getModels();
+        $this->refreshMediaItems();
+    }
+    
+    public function render()
+    {
+        return view('livewire.media-library');
     }
 
+    public function updatedModel($model)
+    {
+        $this->model = $model;
+        $this->refreshMediaItems();
+    }
+
+    protected function refreshMediaItems()
+    {
+        switch ($this->model) {
+            case 'Race':
+                $this->mediaItems =  Media::where('model_type', 'App\Models\Race')
+                ->where('collection_name', 'local_files')
+                ->get();
+                break;
+            case 'Race Location':
+                $this->mediaItems =  Media::where('model_type', 'App\Models\RaceLocation')
+                ->where('collection_name', 'local_files')
+                ->get();
+                break;
+            // Add more cases for other models as needed
+            default:
+                $this->mediaItems = collect();
+                break;
+        }
+
+       
+    }
+
+    protected function getModels()
+    {
+        return [
+            'App\Models\Race' => 'Race',
+            'App\Models\RaceLocation' => 'Race Location',
+            // Add more models as needed
+        ];
+    }
 
     public function deleteMedia($mediaId)
     {

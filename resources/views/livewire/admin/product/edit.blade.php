@@ -95,10 +95,8 @@
                         </div>
 
                         <div class="w-full px-3 my-2">
-                            <x-label for="image" :value="__('Product Image')" />
-                            <x-media-upload title="{{ __('Product Image') }}" name="image" wire:model="image"
-                                :file="$image" :preview="$this->imagepreview" single types="PNG / JPEG / WEBP"
-                                fileTypes="image/*" />
+                            <x-label for="image" :value="__('Images')" />
+                            @livewire('multiple-uploads')
                         </div>
 
                     </div>
