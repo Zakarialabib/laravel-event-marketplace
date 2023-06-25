@@ -6,7 +6,7 @@ namespace App\Http\Livewire\Admin\Language;
 
 use Livewire\Component;
 use App\Models\Language;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Index extends Component
@@ -23,12 +23,12 @@ class Index extends Component
 
     public function mount()
     {
-        $this->languages = Language::all()->toArray();
+        $this->languages = Language::query()->get();
     }
 
     public function render()
     {
-        return view('livewire.admin.language.index');
+        return view('livewire.admin.language.index')->extends('layouts.dashboard');
     }
 
     public function onSetDefault($id)

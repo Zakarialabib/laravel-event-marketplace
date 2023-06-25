@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Http\Livewire\Quill;
 
 class Edit extends Component
 {
@@ -19,13 +18,9 @@ class Edit extends Component
     use WithFileUploads;
 
     public $listeners = [
-        'editModal',
-        'updatedDescription',
         'imagesUpdated' => 'onImagesUpdated',
         'mediaDeleted',
     ];
-
-    public $editModal = false;
 
     public $race;
 
@@ -43,7 +38,7 @@ class Edit extends Component
 
     public $calendar = [];
 
-    public $description ;    
+    public $description;    
 
     public array $listsForFields = [];
 
@@ -56,8 +51,8 @@ class Edit extends Component
         'race.category_id'      => ['required', 'integer'],
         'race.number_of_days'   => ['required', 'numeric', 'max:2147483647'],
         'race.number_of_racers' => ['required', 'numeric', 'max:2147483647'],
-        // 'description'           => ['nullable'],
-        'images'    => [ 'nullable'],
+        'description'           => ['nullable'],
+        // 'images'    => [ 'nullable'],
 
         // 'race.meta_title'       => ['nullable', 'string', 'max:255'],
         // 'race.meta_description' => ['nullable', 'string', 'max:255'],
@@ -94,10 +89,6 @@ class Edit extends Component
         $this->images = $images;
     }
 
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
 
     public function addFeature()
     {
@@ -209,26 +200,26 @@ class Edit extends Component
     }
 
 
-    public function editModal($id)
+    public function mount($name)
     {
         $this->resetErrorBag();
 
         $this->resetValidation();
 
-        $this->race = Race::findOrFail($id);
+        $this->race = Race::whereName($name)->firstOrFail();
 
         $this->description = $this->race->description;
-        // dd($this->all());
+        
         $this->options = $this->race->options ?? [];
         
         $this->calendar = $this->race->calendar ?? [];
         $this->social_media = $this->race->social_media ?? [];
         $this->features = $this->race->features ?? [];
         $this->courses = $this->race->courses ?? [];
+        $this->sponsors = $this->race->sponsors ?? [];
 
         $this->images = $this->race->getMedia('local_files');
 
-        $this->editModal = true;
     }
 
     public function update()
@@ -241,10 +232,12 @@ class Edit extends Component
             }
         }
 
+        $this->race->description = $this->description;
+
         $this->race->options = $this->options;
 
         $this->race->social_media = $this->social_media;
-
+        
         $this->race->sponsors = $this->sponsors;
 
         $this->race->course = $this->courses;
@@ -255,11 +248,10 @@ class Edit extends Component
 
         $this->race->save();
 
-        $this->alert('success', 'Race updated successfully');
+        $this->alert('success', __('Race updated successfully'));
 
-        $this->emit('refreshIndex');
+        return redirect()->route('admin.races');
 
-        $this->editModal = false;
     }
 
     public function getCategoriesProperty()
@@ -274,6 +266,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.race.edit');
+        return view('livewire.admin.race.edit')->extends('layouts.dashboard');
     }
 }

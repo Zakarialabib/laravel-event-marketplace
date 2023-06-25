@@ -12,6 +12,7 @@ return new class () extends Migration {
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->foreignId('participant_id')->constrained('participants');
             $table->foreignId('race_id')->constrained('races');
             $table->timestamp('registration_date')->nullable();

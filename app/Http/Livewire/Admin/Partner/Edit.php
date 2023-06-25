@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire\Admin\Partners;
+namespace App\Http\Livewire\Admin\Partner;
 
-use App\Models\Brand;
+use App\Models\Partner;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -51,7 +51,7 @@ class Edit extends Component
 
         $this->resetValidation();
 
-        $this->partner = Brand::findOrfail($partner);
+        $this->partner = Partner::findOrfail($partner);
 
         $this->editModal = true;
     }
@@ -74,7 +74,7 @@ class Edit extends Component
 
         $this->partner->save();
 
-        $this->alert('success', __('Brand updated successfully.'));
+        $this->alert('success', __('Partner updated successfully.'));
 
         $this->emit('refreshIndex');
 
@@ -83,6 +83,6 @@ class Edit extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.partners.edit');
+        return view('livewire.admin.partner.edit');
     }
 }

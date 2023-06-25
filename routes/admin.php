@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedBannerController;
-use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductController;
@@ -20,10 +19,16 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SmptController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Livewire\Admin\Language\Index as LanguageIndex;
+use App\Http\Livewire\Admin\Language\EditTranslation;
 use App\Http\Livewire\Admin\Race\Index as RaceIndex;
+use App\Http\Livewire\Admin\Race\Edit as RaceUpdate;
 use App\Http\Livewire\Admin\RaceLocation\Index as RaceLocationIndex;
 use App\Http\Livewire\Admin\Category\Index as CategoriesIndex;
 use App\Http\Livewire\Admin\ProductCategory\Index as ProductCategoryIndex;
+use App\Http\Livewire\Admin\Email\Index as EmailIndex;
+use App\Http\Livewire\Admin\Menu\Index as MenuIndex;
+use App\Http\Livewire\Admin\Backup\Index as BackupIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +55,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/brands', [BrandController::class, 'index'])->name('brands');
     Route::get('/products', [ProductController::class, 'index'])->name('products');
     Route::get('/races', RaceIndex::class)->name('races');
+    Route::get('/race/{name}', RaceUpdate::class)->name('race.update');
     Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');
 
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
@@ -81,9 +87,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
 
     Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
     Route::get('/smpt', [SmptController::class, 'index'])->name('smpt');
-    Route::get('/language', [LanguageController::class, 'index'])->name('language');
-    Route::get('/translation/{code}', [LanguageController::class, 'translation'])->name('translation');
+    Route::get('/language', LanguageIndex::class)->name('language');
+    Route::get('/backup', BackupIndex::class)->name('setting.backup');
+    Route::get('/translation/{code}', EditTranslation::class)->name('translation');
     Route::get('/roles', [RolesController::class, 'index'])->name('roles');
     Route::get('/permissions', [UsersController::class, 'permissions'])->name('permissions');
     Route::get('/currencies', [SettingController::class, 'currencies'])->name('currencies');
+    Route::get('/email-template', EmailIndex::class)->name('email-templates.index');
+    Route::get('/menu-settings', MenuIndex::class)->name('menu-settings.index');
 });

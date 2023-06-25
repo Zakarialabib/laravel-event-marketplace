@@ -24,8 +24,8 @@
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="number_of_racers" :value="__('Number of racers')" required />
-                            <x-input id="number_of_racers" class="block mt-1 w-full" type="number" name="number_of_racers"
-                                wire:model="race.number_of_racers" required />
+                            <x-input id="number_of_racers" class="block mt-1 w-full" type="number"
+                                name="number_of_racers" wire:model="race.number_of_racers" required />
                             <x-input-error :messages="$errors->get('number_of_racers')" for="number_of_racers" class="mt-2" />
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                             <select
                                 class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                                 id="category_id" name="category_id" wire:model="race.category_id">
-                                <option value="" >{{ __('Select Category') }}</option>
+                                <option value="">{{ __('Select Category') }}</option>
                                 @foreach ($this->categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
@@ -74,15 +74,11 @@
 
                         </div>
 
-                        
+
                         <div class="w-full px-3 mb-6 lg:mb-0">
                             <x-label for="description" :value="__('Description')" />
-                            {{-- <livewire:quill :value="$description" /> --}}
-                            {{-- <x-input.quill id="description" wire:model.defer="description"  />    --}}
-                            <div wire:ignore>
-                                <input id="editor" type="hidden" wire:model="description">
-                                <trix-editor input="editor"></trix-editor>
-                            </div>
+                            <x-trix name="raceDescription" wire:model.lazy="description" 
+                            class="mt-1" />
                         </div>
 
                         <div class="w-full px-4 my-2">
@@ -114,7 +110,7 @@
                             <div class="w-full px-2">
                                 <livewire:admin.race.options />
                             </div>
-                            
+
                             {{-- <div class="lg:w-1/3 sm:w-1/2 px-2">
                                 <x-label for="meta_title" :value="__('Meta Title')" />
                                 <x-input id="meta_title" class="block mt-1 w-full" type="number" name="meta_title"

@@ -12,6 +12,7 @@ return new class () extends Migration {
     {
         Schema::create('race_registrations', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->string('name');
             $table->text('description');
             $table->string('images')->nullable();

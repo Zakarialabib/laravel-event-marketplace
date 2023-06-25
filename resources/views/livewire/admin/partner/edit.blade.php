@@ -1,7 +1,7 @@
 <div>
     <x-modal wire:model="editModal">
         <x-slot name="title">
-            {{ __('Edit Brand') }}
+            {{ __('Edit Parnter') }}
         </x-slot>
 
         <x-slot name="content">
@@ -13,21 +13,21 @@
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="name" :value="__('Name')" />
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                            wire:model.lazy="brand.name" />
-                        <x-input-error :messages="$errors->get('brand.name')" for="brand.name" class="mt-2" />
+                            wire:model.lazy="partner.name" />
+                        <x-input-error :messages="$errors->get('partner.name')" for="partner.name" class="mt-2" />
                     </div>
 
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="slug" :value="__('Slug')" />
                         <x-input id="slug" class="block mt-1 w-full" type="text" name="slug"
-                            wire:model.lazy="brand.slug" />
-                        <x-input-error :messages="$errors->get('brand.slug')" for="brand.slug" class="mt-2" />
+                            wire:model.lazy="partner.slug" />
+                        <x-input-error :messages="$errors->get('partner.slug')" for="partner.slug" class="mt-2" />
                     </div>
 
                     <div class="w-full px-3">
                         <x-label for="description" :value="__('Description')" />
-                        <x-input.textarea wire:model.lazy="brand.description" id="description" />
-                        <x-input-error :messages="$errors->get('brand.description')" for="brand.description" class="mt-2" />
+                        <x-input.textarea wire:model.lazy="partner.description" id="description" />
+                        <x-input-error :messages="$errors->get('partner.description')" for="partner.description" class="mt-2" />
                     </div>
 
                     <div class="w-full py-2 px-3">

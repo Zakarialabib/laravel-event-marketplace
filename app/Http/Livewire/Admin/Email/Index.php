@@ -18,15 +18,19 @@ class Index extends Component
 
     public int $perPage;
 
+    public $email;
+
     public array $orderable;
 
     public string $search = '';
 
     public array $selected = [];
 
+    protected $listeners = [
+        'refreshIndex' => '$refresh'
+    ];
+    
     public array $paginationOptions;
-
-    public array $listsForFields = [];
 
     protected $queryString = [
         'search' => [
@@ -79,7 +83,7 @@ class Index extends Component
 
         $emails = $query->paginate($this->perPage);
 
-        return view('livewire.admin.email.index', compact('emails'));
+        return view('livewire.admin.email.index', compact('emails'))->extends('layouts.dashboard');
     }
 
      // Blog Category  Delete

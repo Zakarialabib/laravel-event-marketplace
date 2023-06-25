@@ -91,7 +91,7 @@
 
                         <div class="w-full mb-4 px-3">
                             <x-label for="description" :value="__('Description')" />
-                            <livewire:quill :value="$description" />
+                            <x-trix name="description" wire:model.lazy="description" class="mt-1" />
                         </div>
 
                         <div class="w-full px-3 my-2">

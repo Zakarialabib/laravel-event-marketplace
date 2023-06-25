@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire\Admin\Partners;
+namespace App\Http\Livewire\Admin\Partner;
 
 use App\Models\Partner;
 use Illuminate\Contracts\View\Factory;
@@ -18,7 +18,7 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $createPartner;
+    public $createModal;
 
     public $partner;
 
@@ -26,7 +26,7 @@ class Create extends Component
 
     public $image_url = null;
 
-    public $listeners = ['createPartner'];
+    public $listeners = ['createModal'];
 
     protected $rules = [
         'partner.name'        => ['required', 'string', 'max:255'],
@@ -37,10 +37,10 @@ class Create extends Component
     {
         abort_if(Gate::denies('partner_create'), 403);
 
-        return view('livewire.admin.partners.create');
+        return view('livewire.admin.partner.create');
     }
 
-    public function createPartner()
+    public function createModal()
     {
         $this->resetErrorBag();
 
@@ -48,7 +48,7 @@ class Create extends Component
 
         $this->partner = new Partner();
 
-        $this->createPartner = true;
+        $this->createModal = true;
     }
 
     public function create()
@@ -82,6 +82,6 @@ class Create extends Component
 
         $this->emit('refreshIndex');
 
-        $this->createPartner = false;
+        $this->createModal = false;
     }
 }

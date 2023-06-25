@@ -13,8 +13,4 @@ class LanguageController extends Controller
         return view('admin.language.index');
     }
 
-    public function translation($language)
-    {
-        return view('admin.language.translation', compact('language'));
-    }
 }

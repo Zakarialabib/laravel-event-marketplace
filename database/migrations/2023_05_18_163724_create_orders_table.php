@@ -12,6 +12,7 @@ return new class () extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->decimal('amount', 10, 2);
             $table->string('payment_method', 50);
             $table->string('payment_status', 50);

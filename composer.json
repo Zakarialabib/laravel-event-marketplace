@@ -10,6 +10,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
         "jantinnerezo/livewire-alert": "^2.2",
+        "kkomelin/laravel-translatable-string-exporter": "^1.21",
         "laravel/framework": "^10.10",
         "laravel/pint": "^1.10",
         "laravel/sanctum": "^3.2",

@@ -31,6 +31,7 @@ class Race extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'description',
         'date',
         'race_location_id',
         'category_id',
@@ -50,7 +51,10 @@ class Race extends Model implements HasMedia
     protected $casts = [
         'options'  => 'json',
         'features' => 'json',
+        'social_media' => 'json',
+        'sponsors' => 'json',
         'calendar' => 'json',
+        'course' => 'json',
         'satuts'   => RaceStatus::class,
     ];
 

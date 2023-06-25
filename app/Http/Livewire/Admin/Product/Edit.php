@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Http\Livewire\Quill;
 
 class Edit extends Component
 {
@@ -27,6 +26,8 @@ class Edit extends Component
     public $editModal = false;
 
     public $image;
+    
+    public $images;
 
     public $category_id;
 
@@ -44,7 +45,6 @@ class Edit extends Component
         'optionUpdated' => 'updatedOptions',
         'imagesUpdated' => 'onImagesUpdated',
         'editModal',
-        Quill::EVENT_VALUE_UPDATED,
     ];
 
     protected $rules = [
@@ -71,9 +71,9 @@ class Edit extends Component
         $this->images = $image;
     }
 
-    public function quill_value_updated($value)
+    public function updatedDescription($value)
     {
-        $this->product->description = $value;
+        $this->description = $value;
     }
 
     public function getImagePreviewProperty()
@@ -90,7 +90,7 @@ class Edit extends Component
 
     public function getBrandsProperty()
     {
-        return Brand::select('name', 'id')->get();
+        // return Brand::select('name', 'id')->get();
     }
 
     // public function getSubcategoriesProperty()
@@ -157,6 +157,7 @@ class Edit extends Component
             $this->product->gallery = json_encode($gallery);
         }
 
+        $this->product->description = $this->description;
         $this->product->options = $this->options;
 
         $this->product->save();

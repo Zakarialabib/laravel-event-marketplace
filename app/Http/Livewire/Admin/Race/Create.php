@@ -22,7 +22,6 @@ class Create extends Component
 
     public $listeners = [
         'createModal',
-        Quill::EVENT_VALUE_UPDATED,
     ];
 
     public $createModal = false;
@@ -43,7 +42,7 @@ class Create extends Component
 
     public $calendar = [];
 
-    public $description = null;
+    public $description;
 
     public array $listsForFields = [];
 
@@ -84,7 +83,7 @@ class Create extends Component
 
     ];
 
-    public function quill_value_updated($value)
+    public function updatedDescription($value)
     {
         $this->description = $value;
     }

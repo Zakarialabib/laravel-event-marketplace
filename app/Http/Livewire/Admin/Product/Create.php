@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Http\Livewire\Quill;
 
 class Create extends Component
 {
@@ -23,7 +22,6 @@ class Create extends Component
 
     public $listeners = [
         'createProduct',
-        Quill::EVENT_VALUE_UPDATED,
     ];
 
     public $createProduct = false;
@@ -62,7 +60,7 @@ class Create extends Component
         'product.embeded_video'    => ['nullable'],
     ];
 
-    public function quill_value_updated($value)
+    public function updatedDescription($value)
     {
         $this->description = $value;
     }
@@ -124,6 +122,7 @@ class Create extends Component
         }
 
         // $this->product->subcategories = $this->subcategories;
+        $this->product->description = $this->description;
 
         $this->product->save();
 

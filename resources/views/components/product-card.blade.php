@@ -37,7 +37,7 @@
             </div>
 
             <a href="{{ route('front.product', $product->slug) }}">
-                <h4 class="block text-center mb-2 lg:text-md md:text-sm font-bold font-heading hover:text-redBrick-600"
+                <h4 class="block text-center mb-2 lg:text-md md:text-sm font-bold font-heading text-redBrick-600 hover:text-redBrick-800"
                     itemprop="name">
                     {{ Str::limit($product->name, 40) }}</h4>
             </a>

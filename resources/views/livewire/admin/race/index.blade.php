@@ -110,12 +110,14 @@
                 @forelse($races as $race)
                     <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $race->id }}">
                         <x-table.td>
-                            <input type="checkbox" value="{{ $race->id }}" wire:model="selected">
+                            <input type="checkbox" wire:model="selected" 
+                                id="selected{{ $race->id }}"
+                                wire:loading.attr="disabled">
                         </x-table.td>
                         <x-table.td>
                             @if ($race->hasMedia('local_files'))
                                 <button type="button" wire:click="$emit('imageModal', {{ $race->id }})"
-                                    wire:key="image-{{ $race->id }}">
+                                    wire:loading.attr="disabled">
                                     <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
                                         class="w-10 h-10 rounded-full object-cover">
                                 </button>
@@ -128,7 +130,7 @@
                         </x-table.td>
                         <x-table.td>
                             <button type="button" wire:click="$emit('showModal',{{ $race->id }})"
-                                wire:key="button-{{ $race->id }}">
+                                wire:loading.attr="disabled">
                                 {{ Str::limit($race->name, 55) }}
                             </button>
                             <a class="ml-2 text-blue-500" href="" target="_blank">
@@ -173,7 +175,7 @@
                                         <i class="fas fa-eye"></i>
                                         {{ __('View') }}
                                     </x-dropdown-link>
-                                    <x-dropdown-link wire:click="$emit('editModal', {{ $race->id }})"
+                                    <x-dropdown-link href="{{ route('admin.race.update', $race->name) }}"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-edit"></i>
                                         {{ __('Edit') }}
@@ -197,19 +199,13 @@
             </x-table.tbody>
         </x-table>
 
-        <p class="card-body">
-        <div class="pt-3">
+        <p class="card-body pt-3">
             {{ $races->links() }}
-        </div>
         </p>
 
         <!-- Show Modal -->
         @livewire('admin.race.show', ['race' => $race])
         <!-- End Show Modal -->
-
-        <!-- Edit Modal -->
-        @livewire('admin.race.edit', ['race' => $race])
-        <!-- End Edit Modal -->
 
         <!-- Image Modal -->
         @livewire('admin.race.image', ['race' => $race])
@@ -217,27 +213,26 @@
 
         @livewire('admin.race.create')
     </x-card>
-</div>
 
-
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:load', function() {
-            window.livewire.on('deleteModal', raceId => {
-                Swal.fire({
-                    title: __("Are you sure?"),
-                    text: __("You won't be able to revert this!"),
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: __("Yes, delete it!")
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.livewire.emit('delete', raceId)
-                    }
+    @push('scripts')
+        <script>
+            document.addEventListener('livewire:load', function() {
+                window.livewire.on('deleteModal', raceId => {
+                    Swal.fire({
+                        title: __("Are you sure?"),
+                        text: __("You won't be able to revert this!"),
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: __("Yes, delete it!")
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.livewire.emit('delete', raceId)
+                        }
+                    })
                 })
             })
-        })
-    </script>
-@endpush
+        </script>
+    @endpush
+</div>

@@ -51,6 +51,6 @@ Route::group(['middleware' => 'firewall.all'], function () {
     Route::post('/uploads', [UploadController::class, 'upload'])->name('upload');
 });
 
-Route::fallback(function (Request $request) {
-    return app()->make(ErrorController::class)->notFound($request);
-});
+// Route::fallback(function (Request $request) {
+//     return app()->make(ErrorController::class)->notFound($request);
+// });

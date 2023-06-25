@@ -1,6 +1,6 @@
 <div x-data="{ isSidebar: false,  }">
     <div class="relative">
-        <nav class="flex bg-gray-50 border-b">
+        <nav class="flex bg-gray-50 border-b drop-shadow-md">
             <div class="px-4 py-5 flex w-full items-center justify-between">
                 <a class="pl-4 lg:text-3xl sm:text-xl font-bold font-heading text-white"
                     href="{{ route('front.index') }}">

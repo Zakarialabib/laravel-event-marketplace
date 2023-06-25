@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire\Admin\Partners;
+namespace App\Http\Livewire\Admin\Partner;
 
 use App\Http\Livewire\WithSorting;
-use App\Imports\PartnersImport;
-use App\Models\Brand;
+use App\Models\Partner;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -100,14 +99,14 @@ class Index extends Component
         $this->sortDirection = 'desc';
         $this->perPage = 100;
         $this->paginationOptions = [25, 50, 100];
-        $this->orderable = (new Brand())->orderable;
+        $this->orderable = (new Partner())->orderable;
     }
 
     public function render(): View|Factory
     {
         abort_if(Gate::denies('partner_access'), 403);
 
-        $query = Brand::advancedFilter([
+        $query = Partner::advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
@@ -115,10 +114,10 @@ class Index extends Component
 
         $partners = $query->paginate($this->perPage);
 
-        return view('livewire.admin.partners.index', compact('partners'));
+        return view('livewire.admin.partner.index', compact('partners'));
     }
 
-    public function showModal(Brand $partner)
+    public function showModal(Partner $partner)
     {
         abort_if(Gate::denies('partner_show'), 403);
 
@@ -147,7 +146,7 @@ class Index extends Component
     {
         abort_if(Gate::denies('partner_delete'), 403);
 
-        Brand::whereIn('id', $this->selected)->delete();
+        Partner::whereIn('id', $this->selected)->delete();
 
         $this->resetSelected();
     }
@@ -156,9 +155,9 @@ class Index extends Component
     {
         abort_if(Gate::denies('partner_delete'), 403);
 
-        Brand::findOrFail($this->partner)->delete();
+        Partner::findOrFail($this->partner)->delete();
 
-        $this->alert('success', __('Brand deleted successfully.'));
+        $this->alert('success', __('Partner deleted successfully.'));
     }
 
     public function importModal()
@@ -168,16 +167,5 @@ class Index extends Component
         $this->importModal = true;
     }
 
-    public function import()
-    {
-        // abort_if(Gate::denies('partner_create'), 403);
-
-        $this->validate([
-            'file' => 'required|mimes:xlsx',
-        ]);
-
-        Excel::import(new PartnersImport(), $this->file);
-
-        $this->alert('success', __('Brand imported successfully.'));
-    }
+   
 }
