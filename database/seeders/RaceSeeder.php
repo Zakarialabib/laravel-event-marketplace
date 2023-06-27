@@ -39,9 +39,9 @@ class RaceSeeder extends Seeder
                     ['name' => 'XYZ Corporation', 'image' => 'https://example.com/images/xyz.png', 'link' => 'https://www.xyz.com'],
                 ]),
                 'course' => json_encode([
-                    'swim' => ['content' => 'Swim course details'],
-                    'bike' => ['content' => 'Bike course details'],
-                    'run'  => ['content' => 'Run course details'],
+                    ['name' => 'swim' ,'content' => 'Swim course details'],
+                    ['name' => 'bike' , 'content' => 'Bike course details'],
+                    ['name' => 'run' ,'content' => 'Run course details'],
                 ]),
                 'features' => json_encode([
                     'Tshirt',

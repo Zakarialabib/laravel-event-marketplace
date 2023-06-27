@@ -55,8 +55,7 @@
                         <span class="text-base md:text-lg capitalize">{{ $race->price }} DH</span>
                     </p>
                     @if ($race->course)
-                        <p class="flex items-center">
-                        <ul>
+                        <ul class="flex items-center">
                             @foreach ($race->course as $key => $course)
                                 <li class="text-base inline-flex gap-2 md:text-lg">
                                     <span
@@ -66,7 +65,6 @@
                                 </li>
                             @endforeach
                         </ul>
-                        </p>
                     @else
                         <p class="block text-base md:text-lg capitalize text-gray-400">No course details available.
                         </p>
