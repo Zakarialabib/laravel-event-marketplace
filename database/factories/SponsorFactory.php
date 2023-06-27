@@ -39,7 +39,7 @@ class SponsorFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Sponsor $sponsor) {
-            $sponsor->addMediaFromUrl($this->faker->imageUrl())
+            $sponsor->addMediaFromUrl($this->getImageUrl(500, 500))
                 ->toMediaCollection('local_files');
         });
     }

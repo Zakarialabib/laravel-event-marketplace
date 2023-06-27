@@ -28,7 +28,7 @@ class RaceLocationFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (RaceLocation $raceLocation) {
-            $raceLocation->addMediaFromUrl($this->faker->imageUrl())
+            $raceLocation->addMediaFromUrl($this->getImageUrl(1000, 1000))
                 ->toMediaCollection('local_files');
         });
     }

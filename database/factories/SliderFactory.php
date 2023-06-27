@@ -40,7 +40,7 @@ class SliderFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Slider $slider) {
-            $slider->addMediaFromUrl($this->faker->imageUrl())
+            $slider->addMediaFromUrl($this->getImageUrl(1200, 400))
                 ->toMediaCollection('local_files');
         });
     }

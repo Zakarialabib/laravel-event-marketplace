@@ -38,7 +38,7 @@ class ProductFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Product $product) {
-            $product->addMediaFromUrl($this->faker->imageUrl())
+            $product->addMediaFromUrl($this->getImageUrl(1000, 1000))
                 ->toMediaCollection('local_files');
         });
     }

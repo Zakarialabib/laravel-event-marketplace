@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,14 @@ class AppServiceProvider extends ServiceProvider
         }
 
         View::share('languages', $this->getLanguages());
+        
+        Factory::macro('getImageUrl', function (int $width, int $height): string {
+            return sprintf(
+                'https://picsum.photos/%d/%d',
+                $width,
+                $height
+            );
+        });
 
         Settings::observe(SettingsObserver::class);
 

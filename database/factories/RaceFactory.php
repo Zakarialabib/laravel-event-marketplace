@@ -49,7 +49,7 @@ class RaceFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Race $race) {
-            $race->addMediaFromUrl($this->faker->imageUrl())
+            $race->addMediaFromUrl($this->getImageUrl(1200, 400))
                 ->toMediaCollection('local_files');
         });
     }
