@@ -21,10 +21,10 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name'             => $this->faker->word,
-            'description'      => $this->faker->sentence,
-            'price'            => 1000,
-            'discount_price'   => 800,
+            'name'           => $this->faker->word,
+            'description'    => $this->faker->sentence,
+            'price'          => 1000,
+            'discount_price' => 800,
             // 'images'            => 'samsung-galaxy-s21.jpg',
             'code'             => Str::random(5),
             'category_id'      => 1,

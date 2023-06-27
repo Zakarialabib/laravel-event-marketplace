@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Livewire\Admin\Race\Edit;
 use App\Models\Category;
 use App\Models\Race;

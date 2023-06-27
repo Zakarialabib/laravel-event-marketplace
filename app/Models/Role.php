@@ -10,7 +10,5 @@ class Role extends SpatieRole
 {
     public const ROLE_ADMIN = 'admin';
 
-    public const ROLE_VENDOR = 'vendor';
-
     public const ROLE_CLIENT = 'client';
 }

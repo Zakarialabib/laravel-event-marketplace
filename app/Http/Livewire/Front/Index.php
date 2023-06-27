@@ -46,7 +46,7 @@ class Index extends Component
     {
         return Partner::select('name', 'id')->get();
     }
-    
+
     public function getFeaturedProductsProperty(): Collection
     {
         return Product::active()
@@ -71,8 +71,8 @@ class Index extends Component
         return Section::active()->limit(4)->get();
     }
 
-    public function render(): View|Factory
+    public function render()
     {
-        return view('livewire.front.index');
+        return view('livewire.front.index')->extends('layouts.app');
     }
 }

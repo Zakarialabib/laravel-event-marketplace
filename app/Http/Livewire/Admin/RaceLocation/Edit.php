@@ -29,9 +29,9 @@ class Edit extends Component
     public $listeners = [
         'editModal',
     ];
-    
+
     protected $rules = [
-        'raceLocation.name' => ['required', 'max:255'],
+        'raceLocation.name'        => ['required', 'max:255'],
         'raceLocation.description' => ['required'],
         'raceLocation.category_id' => ['required', 'integer'],
     ];
@@ -40,7 +40,6 @@ class Edit extends Component
     {
         return Category::select('name', 'id')->get();
     }
-
 
     public function editModal($raceLocation)
     {
@@ -67,19 +66,18 @@ class Edit extends Component
         //     $this->raceLocation->images = $imageName;
         // }
         if ($this->image) {
-                $imageName = Str::slug($this->raceLocation->name).'-'.Str::random(3).'.'.$this->image->extension();
-                $this->raceLocation->addMedia($this->image)->toMediaCollection('local_files');
+            $imageName = Str::slug($this->raceLocation->name).'-'.Str::random(3).'.'.$this->image->extension();
+            $this->raceLocation->addMedia($this->image)->toMediaCollection('local_files');
             // }
         }
 
         $this->raceLocation->save();
-        
+
         $this->alert('success', __('RaceLocation updated successfully.'));
-        
+
         $this->emit('refreshIndex');
 
         $this->editModal = false;
-
     }
 
     public function render(): View

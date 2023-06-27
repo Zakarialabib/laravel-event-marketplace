@@ -27,9 +27,9 @@ class Index extends Component
     public array $selected = [];
 
     protected $listeners = [
-        'refreshIndex' => '$refresh'
+        'refreshIndex' => '$refresh',
     ];
-    
+
     public array $paginationOptions;
 
     protected $queryString = [

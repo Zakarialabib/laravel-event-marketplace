@@ -49,13 +49,13 @@ class Race extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'options'  => 'json',
-        'features' => 'json',
+        'options'      => 'json',
+        'features'     => 'json',
         'social_media' => 'json',
-        'sponsors' => 'json',
-        'calendar' => 'json',
-        'course' => 'json',
-        'satuts'   => RaceStatus::class,
+        'sponsors'     => 'json',
+        'calendar'     => 'json',
+        'course'       => 'json',
+        'satuts'       => RaceStatus::class,
     ];
 
     public function location()
@@ -107,16 +107,16 @@ class Race extends Model implements HasMedia
     {
         return $query->where('date', '>', now());
     }
-    
+
     public function scopeThisYear($query)
     {
         return $query->whereYear('date', date('Y'));
     }
-    
+
     public function scopeThisMonth($query)
     {
         return $query->whereYear('date', date('Y'))
-                     ->whereMonth('date', date('m'));
+            ->whereMonth('date', date('m'));
     }
 
     public function getFormattedDateAttribute()

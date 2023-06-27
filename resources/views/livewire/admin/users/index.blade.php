@@ -28,13 +28,10 @@
             placeholder="{{ __('Search') }}" />
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
-            <x-button danger type="button" wire:click="filterRole('ADMIN')" class="ml-3">
+            <x-button danger type="button" wire:click="filterRole('admin')" class="ml-3">
                 Admin
             </x-button>
-            <x-button success type="button" wire:click="filterRole('VENOR')" class="ml-3">
-                Vendor
-            </x-button>
-            <x-button warning type="button" wire:click="filterRole('CLIENT')" class="ml-3">
+            <x-button warning type="button" wire:click="filterRole('client')" class="ml-3">
                 Client
             </x-button>
         </div>

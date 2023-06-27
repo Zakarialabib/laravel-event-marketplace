@@ -22,16 +22,16 @@ class Categories extends Component
         'load-more' => 'loadMore',
     ];
 
-    public int $perPage;
+    public $perPage;
 
-    public array $paginationOptions;
+    public $paginationOptions;
 
     public $category_id;
-    
+
     public $raceLocation_id;
 
     public $sorting;
-    
+
     public $status = true;
 
     public $sortingOptions;
@@ -47,7 +47,7 @@ class Categories extends Component
     {
         return Category::active()->get();
     }
-   
+
     public function getRaceLocationsProperty()
     {
         return RaceLocation::active()->get();
@@ -72,7 +72,6 @@ class Categories extends Component
         }
         $this->resetPage();
     }
-
 
     public function clearFilter($filter)
     {
@@ -99,12 +98,12 @@ class Categories extends Component
             'price-desc' => __('Price, high to low'),
             'date-asc'   => __('Date, new to old'),
             'date-desc'  => __('Date, old to new'),
-            'ThisYear'  => __('This year'),
+            'ThisYear'   => __('This year'),
             'ThisMonth'  => __('This month'),
         ];
     }
 
-    public function render(): View|Factory
+    public function render()
     {
         $query = Race::where('category_id', $this->category_id)
             ->when($this->raceLocation_id, function ($query) {
@@ -131,7 +130,7 @@ class Categories extends Component
         }
 
         $races = $query->paginate($this->perPage);
-        
-        return view('livewire.front.categories', compact('races'));
+
+        return view('livewire.front.categories', compact('races'))->extends('layouts.app');
     }
 }

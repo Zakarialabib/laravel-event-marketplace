@@ -103,11 +103,6 @@ class Index extends Component
         $this->selected = [];
     }
 
-    public function getVendorsProperty()
-    {
-        return User::select('name', 'id')->get();
-    }
-
     public function mount()
     {
         $this->sortBy = 'id';
@@ -189,10 +184,10 @@ class Index extends Component
              'meta_description' => $product_details->meta_description,
              'meta_keywords'    => $product_details->meta_keywords,
              'category_id'      => $product_details->category_id,
-            //  'subcategories'    => $product_details->subcategories,
-             'image'            => $product_details->image,
-             'brand_id'         => $product_details->brand_id,
-             'status'           => 0,
+             //  'subcategories'    => $product_details->subcategories,
+             'image'    => $product_details->image,
+             'brand_id' => $product_details->brand_id,
+             'status'   => 0,
          ]);
 
          $this->alert('success', __('Product Cloned successfully!'));

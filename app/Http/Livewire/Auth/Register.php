@@ -23,6 +23,7 @@ class Register extends Component
     public $city; // Set the default city to 'Casablanca'
     public $country; // Set
 
+
     public function mount()
     {
         $this->city = 'Casablanca';
@@ -48,7 +49,7 @@ class Register extends Component
             'status'   => Status::INACTIVE, // Set status to inactive by default
         ]);
 
-        $role = Role::create(['name' => 'client']);
+        $role = Role::where('name', 'client')->first();
 
         $user->assignRole($role);
 
@@ -59,10 +60,6 @@ class Register extends Component
         switch (true) {
             case $user->hasRole('admin'):
                 $homePage = RouteServiceProvider::ADMIN_HOME;
-
-                break;
-            case $user->hasRole('vendor'):
-                $homePage = RouteServiceProvider::VENDOR_HOME;
 
                 break;
             default:

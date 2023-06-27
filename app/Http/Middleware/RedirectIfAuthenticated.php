@@ -26,10 +26,6 @@ class RedirectIfAuthenticated
                     return redirect(RouteServiceProvider::ADMIN_HOME);
                 }
 
-                if (Auth::user()->hasRole('vendor')) {
-                    return redirect(RouteServiceProvider::VENDOR_HOME);
-                }
-
                 if (Auth::user()->hasRole('client')) {
                     return redirect(RouteServiceProvider::CLIENT_HOME);
                 }

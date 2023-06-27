@@ -17,18 +17,7 @@ use App\Http\Controllers\Controller;
 
 class FrontController extends Controller
 {
-    public function index()
-    {
-        $products = Product::active()->paginate(3);
-
-        return view('front.index', compact('products'));
-    }
-
-    public function catalog()
-    {
-        return view('front.catalog');
-    }
-
+ 
     public function productShow($slug)
     {
         $product = Product::where('slug', $slug)->first() ?? abort(404);
@@ -36,10 +25,6 @@ class FrontController extends Controller
         return view('front.product', compact('product'));
     }
 
-    public function categories()
-    {
-        return view('front.categories');
-    }
 
     public function categoryPage($slug)
     {

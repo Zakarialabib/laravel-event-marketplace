@@ -25,7 +25,6 @@ class ProductCategory extends Model
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
 
-
     protected $fillable = [
         'name',
         'description',
@@ -49,6 +48,4 @@ class ProductCategory extends Model
     {
         return $query->where('type', $type);
     }
-
-
 }

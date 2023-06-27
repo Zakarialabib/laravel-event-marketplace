@@ -6,8 +6,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Livewire\WithFileUploads;
 
@@ -30,7 +28,7 @@ class MultipleUploads extends Component
     public function mount($images = []): void
     {
         $this->images = $images;
-        $this->inputId = 'images-upload-' . uniqid();
+        $this->inputId = 'images-upload-'.uniqid();
     }
 
     public function updatedimages(array $images): void

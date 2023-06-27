@@ -26,7 +26,7 @@ class Edit extends Component
     public $editModal = false;
 
     public $image;
-    
+
     public $images;
 
     public $category_id;
@@ -52,20 +52,20 @@ class Edit extends Component
         'product.slug'             => ['nullable'],
         'product.name'             => ['required', 'string', 'max:255'],
         'product.price'            => ['required', 'numeric', 'max:2147483647'],
-        'product.discount_price'        => ['nullable', 'numeric', 'max:2147483647'],
+        'product.discount_price'   => ['nullable', 'numeric', 'max:2147483647'],
         'description'              => ['nullable'],
         'product.meta_title'       => ['nullable', 'string', 'max:255'],
         'product.meta_description' => ['nullable', 'string', 'max:255'],
         'product.category_id'      => ['required', 'integer'],
         // 'product.subcategories'    => ['nullable', 'array', 'min:1'],
         // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
-        'options'                  => ['nullable', 'array'],
-        'options.*.type'           => ['string', 'max:255'],
-        'options.*.value'          => ['string', 'max:255'],
+        'options'         => ['nullable', 'array'],
+        'options.*.type'  => ['string', 'max:255'],
+        'options.*.value' => ['string', 'max:255'],
         // 'product.brand_id'         => ['nullable', 'integer'],
-        'product.embeded_video'    => ['nullable'],
+        'product.embeded_video' => ['nullable'],
     ];
-    
+
     public function onImagesUpdated($image): void
     {
         $this->images = $image;
@@ -80,7 +80,6 @@ class Edit extends Component
     {
         return $this->product?->image;
     }
-
 
     public function getCategoriesProperty()
     {

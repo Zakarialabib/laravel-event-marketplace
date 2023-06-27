@@ -12,5 +12,4 @@ class LanguageController extends Controller
     {
         return view('admin.language.index');
     }
-
 }

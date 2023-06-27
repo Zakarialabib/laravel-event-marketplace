@@ -1,8 +1,8 @@
 <div>
-    <div class="pb-9 text-center border-b border-black border-opacity-5">
+    <div class="page-heading pt-8 pb-12 text-center md:pt-16 md:pb-28 bg-black border-b border-black border-opacity-5">
         <div class="relative">
             <h2 class="mb-5 md:mb-0 text-9xl xl:text-10xl leading-normal font-heading font-medium text-center">
-                Races
+                {{__('Races')}}
             </h2>
             <span class="md:absolute md:right-0 md:bottom-3 text-sm text-gray-400 font-medium">x races found</span>
         </div>

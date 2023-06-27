@@ -6,7 +6,6 @@ namespace App\Http\Livewire\Admin\Race;
 
 use App\Http\Livewire\WithSorting;
 use App\Models\Race;
-use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -90,8 +89,6 @@ class Index extends Component
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Race())->orderable;
     }
-
-   
 
     public function delete(Race $race)
     {

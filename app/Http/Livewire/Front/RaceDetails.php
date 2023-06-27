@@ -9,12 +9,11 @@ use App\Models\Race;
 
 class RaceDetails extends Component
 {
-
     public $race;
 
     public function mount($slug)
     {
-        $this->race = Race::where('slug',$slug)->firstOrFail();
+        $this->race = Race::where('slug', $slug)->firstOrFail();
     }
 
     public function render()

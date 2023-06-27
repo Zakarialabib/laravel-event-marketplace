@@ -1,37 +1,54 @@
-@section('meta')
-    <meta itemprop="url" content="{{ URL::current() }}">
-    <meta property="og:title"
-        content="@if (isset($category_id)) {{ \App\Helpers::categoryName($category_id) }} @endif">
-    <meta property="og:url" content="{{ URL::current() }}">
-@endsection
-
 <div>
-    <div class="w-full px-4 mx-auto" x-data="{ showSidebar: false }">
-        <div class="mb-4 items-center justify-between  py-2">
-            <div class="w-full md:px-4 sm:px-2 flex flex-wrap justify-center items-center">
-                <a href="{{ URL::current() }}" class="text-gray-600 font-bold uppercase text-5xl hover:text-blue-500">
-                    @if (isset($category_id))
-                        {{ \App\Helpers::categoryName($category_id) }}
-                    @endif
+    @section('title', __('Categories'))
 
-                    
-                </a>
+    @section('meta')
+        <meta itemprop="url" content="{{ URL::current() }}">
+        <meta property="og:title"
+            content="@if (isset($category_id)) {{ \App\Helpers::categoryName($category_id) }} @endif">
+        <meta property="og:url" content="{{ URL::current() }}">
+    @endsection
 
-                <div class="md:w-auto flex flex-wrap justify-center my-2 space-x-4 space-y-2 px-4">
-
-                    <button type="button" @click="showSidebar = true"
-                        class="flex lg:hidden items-center justify-center w-12 h-12 text-gray-600 hover:text-redBrick-600 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-
+    <div x-data="{ showSidebar: false }">
+        <section class="relative table w-full bg-redBrick-700 pt-16 pb-24">
+            <div class="px-4">
+                <div class="grid grid-cols-1 text-center mt-10">
+                    <h3
+                        class="uppercase text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-medium text-white rounded-b-xl">
+                        @if (isset($category_id))
+                            {{ \App\Helpers::categoryName($category_id) }}
+                        @endif
+                    </h3>
+                    <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
+                        <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
+                            <li
+                                class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-redBrick-200 pr-4">
+                                <a href="{{ route('front.index') }}">{{ __('Home') }}</a>
+                            </li>
+                            <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white hover:text-redBrick-200"
+                                aria-current="page">
+                                @if (isset($category_id))
+                                    <a href="{{ URL::Current() }}">
+                                        {{ \App\Helpers::categoryName($category_id) }}
+                                    </a>
+                                @endif
+                            </li>
+                        </ul>
+                        <div class="w-full sm:w-auto flex justify-center my-2 overflow-x-scroll">
+                            <button type="button" @click="showSidebar = true"
+                                class="flex lg:hidden items-center justify-center w-12 h-12 duration-500 ease-in-out text-white hover:text-redBrick-200">
+                                <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                <!--end grid-->
             </div>
-        </div>
+        </section>
 
-        <div class="flex flex-wrap -mx-3">
+        <div class="flex flex-wrap px-6 bg-gray-100">
             <!-- Mobile sidebar -->
             <div x-show="showSidebar" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
@@ -90,7 +107,7 @@
                 </div>
 
             </div>
-            <div class="hidden lg:block w-1/4 px-3">
+            <div class="hidden lg:block w-1/4 py-6 px-2">
                 <div class="mb-6 p-4 bg-gray-50" x-data="{ activeOnly: true }">
                     <div class="flex space-y-2 flex-col items-center justify-center">
                         <h3 class="text-xl font-bold font-heading">{{ __('Races') }}</h3>
@@ -172,90 +189,12 @@
                 </div>
 
             </div>
-            <div class="w-full lg:w-3/4 px-4" x-data="{ loading: false }">
-                <div class="mb-10 space-y-10" id="race-container">
+            <div class="w-full lg:w-3/4 py-6 px-4" x-data="{ loading: false }" wire:loading.class.delay="opacity-50">
+                <div class="mb-10 grid grid-cols-2 gap-10" id="race-container">
                     @forelse ($races as $race)
-                        <div
-                            class="flex flex-wrap items-center bg-gray-50 pt-5 pb-15 rounded-lg w-full px-4 md:-mx-4 shadow-2xl">
-                            <div class="w-full lg:w-1/3 h-full mb-6 flex justify-center">
-                                <a href="{{ route('front.raceDetails', $race->slug) }}">
-                                <img class="object-cover object-center w-full rounded-xl h-72 lg:h-96"
-                                    src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}">
-                                </a>
-                                <a href="{{ route('front.raceDetails', $race->slug) }}"
-                                    class="cursor-pointer absolute bottom-0 inline-flex items-center md:text-lg bg-redBrick-600 py-6 px-8 front-bold rounded-full text-white hover:bg-redBrick-800 hover:text-redBrick-200 focus:bg-redBrick-800 font-semibold">
-                                    <span class="mr-3">{{ __('Check race') }}</span>
-                                    <svg width="8" height="10" viewbox="0 0 8 10" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7.94667 4.74665C7.91494 4.66481 7.86736 4.59005 7.80666 4.52665L4.47333 1.19331C4.41117 1.13116 4.33738 1.08185 4.25617 1.04821C4.17495 1.01457 4.08791 0.997253 4 0.997253C3.82246 0.997253 3.6522 1.06778 3.52667 1.19331C3.46451 1.25547 3.4152 1.32927 3.38156 1.41048C3.34792 1.4917 3.33061 1.57874 3.33061 1.66665C3.33061 1.84418 3.40113 2.01445 3.52667 2.13998L5.72667 4.33331H0.666667C0.489856 4.33331 0.320286 4.40355 0.195262 4.52858C0.070238 4.6536 0 4.82317 0 4.99998C0 5.17679 0.070238 5.34636 0.195262 5.47138C0.320286 5.59641 0.489856 5.66665 0.666667 5.66665H5.72667L3.52667 7.85998C3.46418 7.92196 3.41458 7.99569 3.38074 8.07693C3.34689 8.15817 3.32947 8.24531 3.32947 8.33331C3.32947 8.42132 3.34689 8.50846 3.38074 8.5897C3.41458 8.67094 3.46418 8.74467 3.52667 8.80665C3.58864 8.86913 3.66238 8.91873 3.74361 8.95257C3.82485 8.98642 3.91199 9.00385 4 9.00385C4.08801 9.00385 4.17514 8.98642 4.25638 8.95257C4.33762 8.91873 4.41136 8.86913 4.47333 8.80665L7.80666 5.47331C7.86736 5.40991 7.91494 5.33515 7.94667 5.25331C8.01334 5.09101 8.01334 4.90895 7.94667 4.74665Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                            <div class="w-full lg:w-1/2 md:px-4 py-10">
-
-                                <p
-                                    class="block mb-4 leading-6 text-gray-800 hover:text-gray-900 font-bold hover:underline">
-                                    {{ $race->date }}
-                                </p>
-                                <a class="inline-block mb-4 text-2xl leading-6 text-gray-800 hover:text-gray-900 font-bold hover:underline"
-                                    href="{{ route('front.raceDetails', $race->slug) }}">{{ $race->name }}</a>
-                                <div class="mb-4">
-                                    <span class="text-sm md:text-base font-medium text-gray-500">Race Location:</span>
-                                    <span class="text-base md:text-lg">{{ $race?->location->name }}</span>
-                                </div>
-
-                                <div class="mb-4">
-                                    <span class="text-sm md:text-base font-medium text-gray-500">Category:</span>
-                                    <span class="text-base md:text-lg">{{ $race?->category->name }}</span>
-                                </div>
-
-                                <div class="mb-4">
-                                    <span class="text-sm md:text-base font-medium text-gray-500">Number of Days:</span>
-                                    <span class="text-base md:text-lg">{{ $race->number_of_days }}</span>
-                                </div>
-
-                                <div class="mb-4">
-                                    <span class="text-sm md:text-base font-medium text-gray-500">Number of
-                                        Racers:</span>
-                                    <span class="text-base md:text-lg">{{ $race->number_of_racers }}</span>
-                                </div>
-
-                                <div class="mb-4">
-                                    <span class="text-sm md:text-base font-medium text-gray-500">Price:</span>
-                                    <span class="text-base md:text-lg">{{ $race->price }} DH</span>
-                                </div>
-
-                                @if ($race->social_media)
-                                    <div class="mb-4">
-                                        <x-theme.social-media-icons :socialMedia="$race->social_media" />
-                                    </div>
-                                @else
-                                    <p class="block text-base md:text-lg text-gray-400">No social media available.</p>
-                                @endif
-
-                                @if ($race->course)
-                                    <div class="mb-7">
-                                        <ul>
-                                            @foreach (json_decode($race->course) as $key => $course)
-                                                <li class="text-base inline-flex gap-2 md:text-lg">
-                                                    <span
-                                                        class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-redBrick-500 hover:bg-redBrick-800 text-white">
-                                                        {{ ucfirst($key) }}
-                                                        </label>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @else
-                                    <p class="block text-base md:text-lg text-gray-400">No course details available.
-                                    </p>
-                                @endif
-                            </div>
-                        </div>
+                        <x-race-card :race="$race" view="grid" />
                     @empty
-                        <div class="bg-gray-50 py-10 mb-10 rounded-lg w-full px-4 md:-mx-4 shadow-2xl">
+                        <div class="col-span-full bg-gray-50 py-10 mb-10 w-full px-4 shadow-xl">
                             <h3 class="text-3xl text-center font-bold font-heading text-blue-900">
                                 {{ __('No Races found') }}
                             </h3>

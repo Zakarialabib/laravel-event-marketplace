@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use Carbon\Carbon;
@@ -10,7 +12,7 @@ class Calendar extends Component
 {
     public $year;
     public $month;
-    public $events = []; 
+    public $events = [];
 
     public function mount()
     {
@@ -57,7 +59,7 @@ class Calendar extends Component
 
         while ($startOfMonth->lte($endOfMonth)) {
             $calendar[] = [
-                'date' => $startOfMonth->copy(),
+                'date'   => $startOfMonth->copy(),
                 'events' => $this->events->where('date', $startOfMonth->toDateString()),
             ];
 
@@ -67,4 +69,3 @@ class Calendar extends Component
         return $calendar;
     }
 }
-

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Race;
 
 use App\Models\Race;
-use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -26,15 +24,14 @@ class Image extends Component
     public $image_url = null;
 
     public $imageModal = false;
-    
+
     public $listeners = [
         'imageModal', 'saveImage',
     ];
-    
-    protected $rules = [
-        'images'    => ['required', 'array'],
-    ];
 
+    protected $rules = [
+        'images' => ['required', 'array'],
+    ];
 
     public function imageModal($id)
     {
@@ -50,31 +47,27 @@ class Image extends Component
 
     public function saveImage()
     {
+        if ($this->image_url) {
+            $imageName = Str::random(10).'.jpg';
 
-            if ($this->image_url) {
+            $this->race->addMediaFromUrl($this->image_url)->toMediaCollection('local_files');
 
-                $imageName = Str::random(10).'.jpg';
-                
-                $this->race->addMediaFromUrl($this->image_url)->toMediaCollection('local_files');
+            $this->race->image = $imageName;
+        }
 
-                $this->race->image = $imageName;
+        if ($this->images) {
+            foreach ($this->images as $image) {
+                $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
             }
-            
-            if ($this->images) {
-                foreach ($this->images as $image) {
-                    $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
-                }
-            }
+        }
 
-            $this->race->save();
+        $this->race->save();
 
-            $this->alert('success', __('Race image updated successfully.'));
+        $this->alert('success', __('Race image updated successfully.'));
 
-            $this->emit('refreshIndex');
+        $this->emit('refreshIndex');
 
-            $this->imageModal = false;
-
-        
+        $this->imageModal = false;
     }
 
     public function render(): View|Factory

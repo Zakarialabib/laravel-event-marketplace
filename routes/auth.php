@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Auth\SocialAuth;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -59,3 +60,10 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+
+Route::get('/login/facebook', [SocialAuth::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('/login/facebook/callback', [SocialAuth::class, 'handleFacebookCallback']);
+
+Route::get('/login/google', [SocialAuth::class, 'redirectToGoogle'])->name('login.google');
+Route::get('/login/google/callback', [SocialAuth::class, 'handleGoogleCallback']);

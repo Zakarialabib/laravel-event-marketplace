@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Race;
 
 use App\Models\Race;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 

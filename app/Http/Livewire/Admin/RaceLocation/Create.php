@@ -27,7 +27,7 @@ class Create extends Component
     public $image;
 
     protected $rules = [
-        'raceLocation.name' => ['required', 'max:255'],
+        'raceLocation.name'        => ['required', 'max:255'],
         'raceLocation.description' => ['required'],
         'raceLocation.category_id' => ['required', 'integer'],
     ];
@@ -59,7 +59,7 @@ class Create extends Component
     public function create()
     {
         $this->validate();
-        
+
         $this->raceLocation->slug = Str::slug($this->raceLocation->name);
 
         if ($this->image) {

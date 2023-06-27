@@ -126,12 +126,12 @@
                             <div class="space-y-4 flex flex-col items-center justify-center my-4">
                                 @foreach ($social_media as $index => $media)
                                     <div class="flex flex-row w-full items-center space-x-4">
-                                        <input type="text" placeholder="Social Media Name"
+                                        <x-input type="text" placeholder="Social Media Name"
                                             name="social_media_name"
-                                            wire:model.lazy="social_media.{{ $index }}.name">
-                                        <input type="text" placeholder="Social Media Link"
+                                            wire:model.lazy="social_media.{{ $index }}.name" />
+                                        <x-input type="text" placeholder="Social Media Link"
                                             name="social_media_link"
-                                            wire:model.lazy="social_media.{{ $index }}.value">
+                                            wire:model.lazy="social_media.{{ $index }}.value" />
                                         <x-button danger type="button"
                                             wire:click="removeSocialMedia({{ $index }})">
                                             <i class="fa fa-trash"></i>
@@ -153,7 +153,8 @@
                                         <textarea wire:model.lazy="courses.{{ $index }}.content" placeholder="Course Content"
                                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"></textarea>
                                         <x-button danger type="button"
-                                            wire:click="removeCourse({{ $index }})">{{ __('Remove') }}
+                                            wire:click="removeCourse({{ $index }})">
+                                            <i class="fa fa-trash"></i>
                                         </x-button>
                                     </div>
                                 @endforeach
@@ -175,7 +176,8 @@
                                             placeholder="Sponsor Link"
                                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                                         <x-button danger type="button"
-                                            wire:click="removeSponsor({{ $index }})">{{ __('Remove') }}
+                                            wire:click="removeSponsor({{ $index }})">
+                                            <i class="fa fa-trash"></i>
                                         </x-button>
                                     </div>
                                 @endforeach
@@ -214,7 +216,7 @@
                                             <i class="fa fa-trash"></i>
                                         </x-button>
                                     </div>
-                                    <div clas="w-full text-center space-x-2">
+                                    <div clas="w-full flex flex-wrap text-center space-x-2">
                                         @foreach ($day['events'] as $eventIndex => $event)
                                             <input type="text"
                                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"

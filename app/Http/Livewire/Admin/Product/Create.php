@@ -47,17 +47,17 @@ class Create extends Component
     protected $rules = [
         'product.name'             => ['required', 'string', 'max:255'],
         'product.price'            => ['required', 'numeric', 'max:2147483647'],
-        'product.discount_price'        => ['required', 'numeric', 'max:2147483647'],
+        'product.discount_price'   => ['required', 'numeric', 'max:2147483647'],
         'description'              => ['nullable'],
         'product.meta_title'       => ['nullable', 'string', 'max:255'],
         'product.meta_description' => ['nullable', 'string', 'max:255'],
         'product.category_id'      => ['required', 'integer'],
         // 'product.subcategories'    => ['required', 'array', 'min:1'],
         // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
-        'options.*.type'           => ['required', 'string', 'in:color,size'],
-        'options.*.value'          => ['required_if:options.*.type,color', 'string'],
+        'options.*.type'  => ['required', 'string', 'in:color,size'],
+        'options.*.value' => ['required_if:options.*.type,color', 'string'],
         // 'product.brand_id'         => ['nullable', 'integer'],
-        'product.embeded_video'    => ['nullable'],
+        'product.embeded_video' => ['nullable'],
     ];
 
     public function updatedDescription($value)

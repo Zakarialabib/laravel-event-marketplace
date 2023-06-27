@@ -1,126 +1,40 @@
 <div>
+    @section('title', __('Home'))
+
+    <x-topheader />
+    
     <div class="relative mx-auto mb-5">
-        <section class="w-full mx-auto bg-gray-900">
+        <section class="w-full mx-auto bg-gray-900 h-screen relative">
             @foreach ($this->sliders as $slider)
-                <div class="relative">
-                    <div class="absolute inset-0 bg-black opacity-75" style="background-color:{{ $slider->bg_color }}">
+                <div class="relative h-screen flex items-center justify-center">
+                    <div class="absolute inset-0 bg-black opacity-75" 
+                        style="background-image: url({{ $slider->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;background-color:{{ $slider->bg_color }}">
                     </div>
-                    <div class="flex flex-wrap -mx-4 py-20 px-4"
-                        style="background-image: url({{ $slider->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
-                        <div class="w-full px-10 lg:mb-5 sm:mb-2 z-50">
-                            <div class="lg:py-5 py-10 text-white px-2">
-                                <h5 class="xl:text-2xl md:text-xl sm:text-md font-bold mb-2">
-                                    {{ $slider->subtitle }}
-                                </h5>
-                                <h2
-                                    class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
-                                    {{ $slider->title }}
-                                </h2>
-                                <p class="text-md font-medium my-4">
-                                    {{ $slider->description }}
-                                </p>
-                            </div>
+                    <div class="max-w-3xl w-full py-10 px-6 mb-5 sm:mb-2 z-20">
+                        <div class="lg:py-5 py-10 text-white px-8">
+                            <h5 class="xl:text-2xl md:text-xl sm:text-md font-bold mb-2">
+                                {{ $slider->subtitle }}
+                            </h5>
+                            <h2
+                                class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
+                                {{ $slider->title }}
+                            </h2>
+                            <p class="text-md font-medium my-4">
+                                {{ $slider->description }}
+                            </p>
                         </div>
                     </div>
                 </div>
             @endforeach
         </section>
-        <section class="pb-24 pt-10 px-10 bg-redBrick-600">
+        <section class="px-10 md:py-14 lg:py-16 xl:py-[75px] bg-redBrick-600">
             <h3
                 class="xl:text-5xl md:text-2xl sm:text-lg text-white hover:text-redBrick-500 uppercase text-center font-bold mb-2 cursor-pointer py-10">
                 {{ __('Upcoming Races') }}
             </h3>
             <div class="w-full mb-10 px-6 space-y-10">
                 @forelse ($this->races as $race)
-                    <div
-                        class="flex flex-wrap items-center bg-gray-50 rounded-lg w-full border-2 border-redBrick-800 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
-                        <div class="w-full lg:w-1/2 flex items-center md:items-start relative h-72 lg:h-96"
-                            style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
-                            <div class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl 
-                                "><p class="font-medium leading-leading-tight">
-                                    {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
-                                <p class="font-extrabold text-2xl leading-tight">
-                                    {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
-                                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
-                            </div>
-                        </div>
-                        <div class="w-full lg:w-1/2 py-10 relative">
-                            <div class="px-4 text-center">
-                                <a class="block mb-4 text-2xl leading-6 text-gray-800 hover:text-gray-900 font-bold hover:underline"
-                                    href="{{ route('front.raceDetails', $race->slug) }}">
-                                    {{ $race->name }}
-                                </a>
-                                <div class="flex flex-wrap py-4 gap-8 justify-center items-center">
-                                    <p class="flex items-center">
-                                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </span>
-                                        <span class="text-base md:text-lg">{{ $race->location->name }}</span>
-                                    </p>
-                                    <p class="flex items-center">
-                                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                            <i class="fas fa-tags"></i>
-                                        </span>
-                                        <span class="text-base md:text-lg">{{ $race->category->name }}</span>
-                                    </p>
-                                    <p class="flex items-center">
-                                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </span>
-                                        <span class="text-base md:text-lg">{{ $race->number_of_days }}
-                                            {{ __('days') }}</span>
-                                    </p>
-                                    <p class="flex items-center">
-                                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                            <i class="fas fa-users"></i>
-                                        </span>
-                                        <span class="text-base md:text-lg">{{ $race->number_of_racers }}</span>
-                                    </p>
-                                    <p class="flex items-center">
-                                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                            <i class="fas fa-money-bill-wave"></i>
-                                        </span>
-                                        <span class="text-base md:text-lg">{{ $race->price }} DH</span>
-                                    </p>
-                                    @if ($race->course)
-                                        <p class="flex items-center">
-                                        <ul>
-                                            @foreach (json_decode($race->course) as $key => $course)
-                                                <li class="text-base inline-flex gap-2 md:text-lg">
-                                                    <span
-                                                        class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-redBrick-500 hover:bg-redBrick-800 text-white">
-                                                        {{ ucfirst($key) }}
-                                                    </span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                        </p>
-                                    @else
-                                        <p class="block text-base md:text-lg text-gray-400">No course details available.
-                                        </p>
-                                    @endif
-                                    <div class="py-2 flex w-full">
-                                        <a href="{{ route('front.raceDetails', $race->slug) }}"
-                                            class="bottom-0 w-full text-center cursor-pointer bg-redBrick-600 py-4 px-2 text-lg front-bold text-white hover:bg-redBrick-800 hover:text-redBrick-100 focus:bg-redBrick-800 font-semibold uppercase">
-                                            {{ __('Check race') }}
-                                        </a>
-                                    </div>
-                                </div>
-
-                                {{-- @if ($race->social_media)
-                                    <p class="mb-4">
-                                        <x-theme.social-media-icons :socialMedia="$race->social_media" />
-                                    </p>
-                                @else
-                                    <p class="block text-base md:text-lg text-gray-400">
-                                        {{ __('No social media available') }}.
-                                    </p>
-                                @endif --}}
-
-
-                            </div>
-                        </div>
-                    </div>
+                    <x-race-card :race="$race" view="list" />
                 @empty
                     <div class="bg-gray-50 py-10 mb-10 rounded-lg w-full px-4 md:-mx-4 shadow-2xl">
                         <h3 class="text-3xl text-center font-bold font-heading text-blue-900">
@@ -131,25 +45,28 @@
             </div>
         </section>
 
-        <section class="h-auto bg-gray-100 text-black px-10 py-10 ">
+        <section class="h-auto bg-gray-100 text-black px-10 md:py-14 lg:py-16 xl:py-[75px]">
             <h5 class="xl:text-3xl md:text-xl sm:text-lg uppercase pb-4 text-center font-bold mb-2 cursor-pointer">
                 {{ __('Races Locations') }}
             </h5>
             <hr>
             <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-6 mt-4">
                 @foreach ($this->raceLocations as $raceLocation)
-                    <div
-                        class="flex flex-col h-max justify-between items-center rounded-xl bg-gray-50 shadow-xl transition duration-300 ease-in-out delay-200 transform  md:hover:translate-x-0 md:hover:-translate-y-4">
-                        <img class="opacity-75 rounded w-full h-auto"
-                            src="{{ $raceLocation->getFirstMediaUrl('local_files') }}" />
-                        <p
-                            class="relative z-50 xl:text-xl md:text-lg font-semibold text-center py-4 tracking-tight text-black px-4">
-                            {{ $raceLocation->name }}
-                        </p>
-                        <p class="relative w-full text-lg sm:text-sm z-50 font-medium text-center py-4 px-2 text-black">
-                            {{ $raceLocation->description }}
-                        </p>
-                    </div>
+                    <figure
+                        class="shadow-xl transition duration-300 ease-in-out delay-200 transform  md:hover:translate-x-0 md:hover:-translate-y-4 mb-6">
+                        <div class="glightbox group relative block h-full overflow-hidden bg-gray-200 text-center">
+                            <img class="aspect-video w-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
+                                src="{{ $raceLocation->getFirstMediaUrl('local_files') }}" />
+                            <h3
+                                class="py-4 font-bold leading-tight text-primary dark:text-white lg:text-lg lg:leading-6">
+                                {{ $raceLocation->name }}
+                            </h3>
+
+                            <p class="text-sm leading-tight tracking-tighter text-center py-6">
+                                {!! $raceLocation->description !!}
+                            </p>
+                        </div>
+                    </figure>
                 @endforeach
             </div>
         </section>

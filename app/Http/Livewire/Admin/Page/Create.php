@@ -29,7 +29,7 @@ class Create extends Component
 
     public $listeners = [
         'createPage',
-        'quill_value_updated' =>  Quill::EVENT_VALUE_UPDATED,
+        'quill_value_updated' => Quill::EVENT_VALUE_UPDATED,
     ];
 
     public function quill_value_updated($value)

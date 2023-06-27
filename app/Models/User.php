@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Enums\Status;
+use App\Enums\RoleType;
 use Spatie\Permission\Traits\HasRoles;
 use App\Support\HasAdvancedFilter;
 
@@ -29,7 +30,7 @@ class User extends Authenticatable
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -75,11 +76,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->roles->pluck('name')->contains(Role::ROLE_ADMIN);
+        return $this->roles->pluck('name')->contains(RoleType::ADMIN);
     }
 
     public function isClient()
     {
-        return $this->roles->pluck('name')->contains(Role::ROLE_CLIENT);
+        return $this->roles->pluck('name')->contains(RoleType::CLIENT);
     }
 }

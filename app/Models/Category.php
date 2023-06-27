@@ -25,7 +25,7 @@ class Category extends Model
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
- 
+
     protected $fillable = [
         'name',
         'images',

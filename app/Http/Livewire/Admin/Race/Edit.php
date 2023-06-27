@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Admin\Race;
 use App\Models\Category;
 use App\Models\Race;
 use App\Models\RaceLocation;
-use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -38,7 +37,7 @@ class Edit extends Component
 
     public $calendar = [];
 
-    public $description;    
+    public $description;
 
     public array $listsForFields = [];
 
@@ -52,7 +51,7 @@ class Edit extends Component
         'race.number_of_days'   => ['required', 'numeric', 'max:2147483647'],
         'race.number_of_racers' => ['required', 'numeric', 'max:2147483647'],
         'description'           => ['nullable'],
-        // 'images'    => [ 'nullable'],
+        'images'    => [ 'nullable'],
 
         // 'race.meta_title'       => ['nullable', 'string', 'max:255'],
         // 'race.meta_description' => ['nullable', 'string', 'max:255'],
@@ -69,10 +68,10 @@ class Edit extends Component
 
         'features.*' => ['nullable'],
 
-        'calendar.*.date' => ['nullable'],
+        'calendar.*.date'                => ['nullable'],
         'calendar.*.events.*.start_time' => ['nullable'],
-        'calendar.*.events.*.end_time' => ['nullable'],
-        'calendar.*.events.*.activity' => ['nullable'],
+        'calendar.*.events.*.end_time'   => ['nullable'],
+        'calendar.*.events.*.activity'   => ['nullable'],
 
         'options.*.type'  => ['nullable'],
         'options.*.value' => ['nullable'],
@@ -89,18 +88,16 @@ class Edit extends Component
         $this->images = $images;
     }
 
-
     public function addFeature()
     {
         $this->features[] = '';
     }
-    
+
     public function removeFeature($index)
     {
         unset($this->features[$index]);
         $this->features = array_values($this->features);
     }
-
 
     public function addOption()
     {
@@ -159,16 +156,15 @@ class Edit extends Component
         $this->courses = array_values($this->courses);
     }
 
-
     public function addRaceDate()
     {
         $this->calendar[] = [
-            'date' => '',
+            'date'   => '',
             'events' => [
                 [
                     'start_time' => '',
-                    'end_time' => '',
-                    'activity' => '',
+                    'end_time'   => '',
+                    'activity'   => '',
                 ],
             ],
         ];
@@ -189,8 +185,8 @@ class Edit extends Component
     {
         $this->calendar[$date]['events'][] = [
             'start_time' => '',
-            'end_time' => '',
-            'activity' => '',
+            'end_time'   => '',
+            'activity'   => '',
         ];
     }
 
@@ -198,7 +194,6 @@ class Edit extends Component
     {
         $this->images = $this->product->getMedia('local_files');
     }
-
 
     public function mount($name)
     {
@@ -209,17 +204,16 @@ class Edit extends Component
         $this->race = Race::whereName($name)->firstOrFail();
 
         $this->description = $this->race->description;
-        
+
         $this->options = $this->race->options ?? [];
-        
+
         $this->calendar = $this->race->calendar ?? [];
         $this->social_media = $this->race->social_media ?? [];
         $this->features = $this->race->features ?? [];
-        $this->courses = $this->race->courses ?? [];
+        $this->courses = $this->race->course ?? [];
         $this->sponsors = $this->race->sponsors ?? [];
 
         $this->images = $this->race->getMedia('local_files');
-
     }
 
     public function update()
@@ -227,7 +221,7 @@ class Edit extends Component
         $this->validate();
 
         if (empty($this->images)) {
-            foreach($this->images as $image) {
+            foreach ($this->images as $image) {
                 $this->race->addMedia($image)->toMediaCollection('local_files');
             }
         }
@@ -237,7 +231,7 @@ class Edit extends Component
         $this->race->options = $this->options;
 
         $this->race->social_media = $this->social_media;
-        
+
         $this->race->sponsors = $this->sponsors;
 
         $this->race->course = $this->courses;
@@ -251,7 +245,6 @@ class Edit extends Component
         $this->alert('success', __('Race updated successfully'));
 
         return redirect()->route('admin.races');
-
     }
 
     public function getCategoriesProperty()

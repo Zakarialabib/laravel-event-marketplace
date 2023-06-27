@@ -27,10 +27,6 @@ class AuthRole
                 return $next($request);
             }
 
-            if ($role === $user->hasRole('vendor')) {
-                return $next($request);
-            }
-
             if ($role === $user->hasRole('client')) {
                 return $next($request);
             }

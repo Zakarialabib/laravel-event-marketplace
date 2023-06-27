@@ -8,6 +8,15 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $isStoreOwner = true;
+
+    protected $listeners = ['storeOwnerChanged' => 'hideLoginForm'];
+
+    public function hideLoginForm()
+    {
+        $this->isStoreOwner = false;
+    }
+
     public function render()
     {
         return view('livewire.auth.index');

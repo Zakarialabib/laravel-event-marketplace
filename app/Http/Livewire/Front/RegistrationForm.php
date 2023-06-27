@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Helpers;
 use App\Models\Registration;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,6 +16,7 @@ use Spatie\Permission\Models\Role;
 use App\Mail\RegistrationConfirmation;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\Status;
+use Throwable;
 
 class RegistrationForm extends Component
 {
@@ -25,7 +25,7 @@ class RegistrationForm extends Component
     public $race;
 
     public $registration;
-    
+
     public $additionalServices = false;
 
     public $existingSubmission;
@@ -58,7 +58,7 @@ class RegistrationForm extends Component
         $this->country = 'Maroc';
 
         $this->existingSubmission = Registration::where('participant_id', Auth::id())
-                                                ->first();
+            ->first();
     }
 
     public function render(): View|Factory
@@ -68,52 +68,51 @@ class RegistrationForm extends Component
 
     public function store()
     {
-
         if ($this->existingSubmission) {
             $this->alert('error', __('You already have a submission'));
+
             return;
         }
 
         try {
-            
             $this->validate();
 
             $this->registration->save();
 
             $user = User::create([
-                'name'     => $this->registration->first_name.' '.$this->registration->last_name,
-                'email'    => $this->registration->email,
-                'phone'    => $this->registration->phone,
-                'city'     => $this->registration->city,
-                'country'  => $this->registration->country,
-                'status'   => Status::INACTIVE, // Set status to inactive by default
+                'name'    => $this->registration->first_name.' '.$this->registration->last_name,
+                'email'   => $this->registration->email,
+                'phone'   => $this->registration->phone,
+                'city'    => $this->registration->city,
+                'country' => $this->registration->country,
+                'status'  => Status::INACTIVE, // Set status to inactive by default
             ]);
-    
+
             $role = Role::create(['name' => 'client']);
-    
+
             $user->assignRole($role);
-            
+
             // Generate a random password for the user
             $password = Str::random(10);
             $user->password = bcrypt($password);
             $user->save();
 
             event(new Registered($user));
-    
+
             Auth::login($user, true);
 
-            if($this->newsletters){
+            if ($this->newsletters) {
                 Newsletters::create([
                     'email' => $this->registration->email,
                 ]);
             }
-            
+
             Mail::to($this->registration->email)->send(new RegistrationConfirmation($user, $password));
 
             $this->alert('success', __('Your order has been sent successfully!'));
 
             $this->reset();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             //throw $th;
         }
     }

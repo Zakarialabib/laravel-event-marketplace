@@ -53,8 +53,6 @@
         {!! Helpers::settings('body_tags') !!}
     @endif
 
-    <x-topheader />
-
     <x-header />
 
     {{-- <x-bottomheader /> --}}
@@ -65,7 +63,7 @@
         {{ $slot }}
     @endisset
 
-    <x-footer />
+    <x-theme.footer />
 
    @include('partials.front.js')
 </body>

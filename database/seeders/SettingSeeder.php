@@ -104,6 +104,10 @@ class SettingSeeder extends Seeder
             'value' => 'Site is under maintenance',
         ],
         [
+            'key'   => 'site_maintenance',
+            'value' => false,
+        ],
+        [
             'key'   => 'site_return',
             'value' => '0',
         ],

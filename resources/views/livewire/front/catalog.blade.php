@@ -1,45 +1,57 @@
 <div>
-    <div class="w-full px-4 mx-auto">
-        <div class="mb-10 items-center justify-between bg-white py-4">
-            <div class="w-full md:px-4 sm:px-2 flex flex-wrap justify-between">
-                <ul class="flex flex-wrap items-center gap-2 py-4 md:py-2 ">
-                    <li class="inline-flex">
-                        <a href="/" class="text-gray-600 hover:text-blue-500">
-                            <svg class="w-5 h-auto fill-current mx-2 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="#000000">
-                                <path d="M0 0h24v24H0V0z" fill="none" />
-                                <path
-                                    d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" />
-                            </svg>
-                        </a>
-                        <span class="mx-2 h-auto text-gray-400 font-medium">/</span>
-                    </li>
-                    <li class="inline-flex">
-                        <a href="{{ URL::current() }}" class="text-gray-600 hover:text-blue-500">
-                            {{ __('Store') }}
-                        </a>
-                    </li>
-                </ul>
-                <div class="w-full sm:w-auto flex justify-center my-2 overflow-x-scroll">
-                    <select
-                        class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
-                        id="sortBy" wire:model.lazy="sorting">
-                        <option disabled>{{ __('Choose filters') }}</option>
-                        @foreach ($sortingOptions as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                    <select
-                        class="px-5 py-3 mr-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
-                        id="perPage" wire:model="perPage">
-                        <option value="20" selected>20 {{ __('Items') }}</option>
-                        <option value="50">50 {{ __('Items') }}</option>
-                        <option value="100">100 {{ __('Items') }}</option>
-                    </select>
+    @section('title', __('Catalog'))
+
+    @section('meta')
+        <meta itemprop="url" content="{{ URL::current() }}">
+        <meta property="og:title"
+            content="{{__('Catalog')}}">
+        <meta property="og:url" content="{{ URL::current() }}">
+    @endsection
+
+    <div x-data="{ showSidebar: false }">
+        <section class="relative table w-full bg-redBrick-700 pt-16 pb-24">
+            <div class="px-4">
+                <div class="grid grid-cols-1 text-center mt-10">
+                    <h3
+                        class="uppercase text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-medium text-white rounded-b-xl">
+                        {{ __('Catalog of products') }}
+                    </h3>
+                    <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
+                        <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
+                            <li
+                                class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-white pr-4">
+                                <a href="{{ route('front.index') }}">{{ __('Home') }}</a>
+                            </li>
+                            <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white"
+                                aria-current="page">
+                                <a href="{{ URL::Current() }}">
+                                    {{ __('Catalog of products') }}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="w-full sm:w-auto flex justify-center my-2 overflow-x-scroll">
+                            <select
+                                class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
+                                id="sortBy" wire:model.lazy="sorting">
+                                <option disabled>{{ __('Choose filters') }}</option>
+                                @foreach ($sortingOptions as $value => $label)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
+                            <select
+                                class="px-5 py-3 mr-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
+                                id="perPage" wire:model="perPage">
+                                <option value="20" selected>20 {{ __('Items') }}</option>
+                                <option value="50">50 {{ __('Items') }}</option>
+                                <option value="100">100 {{ __('Items') }}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+                <!--end grid-->
             </div>
-        </div>
-        <div class="flex flex-wrap -mx-3">
+        </section>
+        <div class="flex flex-wrap px-6 bg-gray-100">
             <!-- Mobile sidebar -->
             <div x-show="showSidebar" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
@@ -73,7 +85,7 @@
                 </div>
                 <div class="border-t border-gray-900 mt-4 py-2"></div>
             </div>
-            <div class="hidden lg:block w-1/4 px-3">
+            <div class="hidden lg:block w-1/4 py-6 px-2">
                 <div class="mb-6 p-4 bg-gray-50" x-data="{ openCategory: true }">
                     <div class="flex justify-between mb-8">
                         <h3 class="text-xl font-bold font-heading">{{ __('Category') }}</h3>
@@ -100,7 +112,7 @@
                     @endif
                 </div>
             </div>
-            <div class="w-full lg:w-3/4 px-4" wire:loading.class.delay="opacity-50">
+            <div class="w-full lg:w-3/4 py-6 px-4" wire:loading.class.delay="opacity-50">
                 <div itemscope itemtype="https://schema.org/ItemList">
                     <div class="grid gap-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 mb-10">
                         @forelse ($products as $product)

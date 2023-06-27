@@ -35,12 +35,8 @@ class Login extends Component
             auth()->login($user, $this->remember_me);
 
             switch (true) {
-                case Auth::user()->hasRole('admin'):
+                case $user->hasRole('admin'):
                     $homePage = RouteServiceProvider::ADMIN_HOME;
-
-                    break;
-                case Auth::user()->hasRole('vendor'):
-                    $homePage = RouteServiceProvider::VENDOR_HOME;
 
                     break;
                 default:

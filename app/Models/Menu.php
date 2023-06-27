@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,15 +12,15 @@ class Menu extends Model
     use HasAdvancedFilter;
 
     public const ATTRIBUTES = [
-        'id', 'name', 'type','status',
+        'id', 'name', 'type', 'status',
     ];
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
-        'name','label','url','type','sort_order','placement',
-        'parent_id','new_window','icon','status'
+        'name', 'label', 'url', 'type', 'sort_order', 'placement',
+        'parent_id', 'new_window', 'icon', 'status',
     ];
 
     public function scopeActive($query): void

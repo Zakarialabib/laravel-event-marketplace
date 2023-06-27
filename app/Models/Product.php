@@ -55,7 +55,7 @@ class Product extends Model implements HasMedia
     }
 
     // Scope to filter products by category
-    public function scopeActive($query) 
+    public function scopeActive($query)
     {
         return $query->where('status', true);
     }

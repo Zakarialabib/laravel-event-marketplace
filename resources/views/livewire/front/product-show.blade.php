@@ -15,15 +15,15 @@
 @endsection
 
 <div>
-    <div class="my-5">
+    <section class="relative table w-full pt-16 py-24">
         <div itemtype="https://schema.org/Product" itemscope>
 
             <meta itemprop="name" content="{{ $product->name }}" />
             <meta itemprop="description" content="{{ $product->description }}" />
 
-            <div class="mx-auto px-4">
-                <div class="flex flex-wrap -mx-4 mb-14">
-                    <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
+            <div class="mx-auto px-6 my-10">
+                <div class="flex flex-wrap mb-14">
+                    <div class="w-full md:w-1/2 px-4 mb-8 mt-10 md:mb-0">
                         <x-product-carousel :product="$product" />
                     </div>
 
@@ -31,7 +31,7 @@
                         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                             <div class="mb-5 pb-5 border-b">
                                 <span class="text-gray-500">
-                                    {{ $product->category?->name }} / 
+                                    {{ $product->category?->name }} /
                                     {{-- @isset($product->brand)
                                         <a href="{{ route('front.brandPage', $product->brand?->slug) }}">{{ $product->brand?->name }}</a>
                                     @endisset
@@ -103,7 +103,7 @@
                                 </div>
                                 <div>
                                     @if ($product->status == 1)
-                                    <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-redBrick-400 hover:bg-redBrick-200 transition cursor-pointer"
+                                        <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-redBrick-400 hover:bg-redBrick-200 transition cursor-pointer"
                                             wire:click="AddToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">
                                             {{ __('Add to cart') }}
                                         </a>
@@ -199,8 +199,8 @@
                     </div> --}}
                 </div>
             </div>
-            
-            <div class="mx-auto px-4 mt-5">
+
+            <div class="mx-auto px-6">
                 <h4 class="mb-2 text-xl font-bold font-heading">
                     {{ __('Related Products') }}
                 </h4>
@@ -211,5 +211,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>

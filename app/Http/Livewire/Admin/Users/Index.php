@@ -32,7 +32,7 @@ class Index extends Component
 
     public $filterRole;
 
-    public int $perPage;
+    public $perPage;
 
     public array $orderable;
 
@@ -110,19 +110,13 @@ class Index extends Component
             'order_direction' => $this->sortDirection,
         ]);
 
-        if ($this->filterRole === 'ADMIN') {
+        if ($this->filterRole === 'admin') {
             $query->where(function ($query) {
                 $query->whereHas('roles', function ($query) {
                     $query->where('name', $this->filterRole);
                 });
             });
-        } elseif ($this->filterRole === 'VENDOR') {
-            $query->where(function ($query) {
-                $query->whereHas('roles', function ($query) {
-                    $query->where('name', $this->filterRole);
-                });
-            });
-        } elseif ($this->filterRole === 'CLIENT') {
+        } elseif ($this->filterRole === 'client') {
             $query->where(function ($query) {
                 $query->whereHas('roles', function ($query) {
                     $query->where('name', $this->filterRole);

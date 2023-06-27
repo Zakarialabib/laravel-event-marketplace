@@ -17,7 +17,7 @@ class Catalog extends Component
     use WithPagination;
     use WithSorting;
 
-    public int $perPage = 25;
+    public $perPage = 25;
 
     public $paginationOptions = [25, 50, 100];
 
@@ -45,7 +45,6 @@ class Catalog extends Component
         $this->resetPage();
     }
 
-
     public function clearFilter($filter)
     {
         if ($filter) {
@@ -72,7 +71,7 @@ class Catalog extends Component
         ];
     }
 
-    public function render(): View|Factory
+    public function render()
     {
         $query = Product::active()
             ->when($this->category_id, function ($query) {
@@ -95,7 +94,7 @@ class Catalog extends Component
             $products = $query->paginate($this->perPage);
         }
 
-        return view('livewire.front.catalog', compact('products'));
+        return view('livewire.front.catalog', compact('products'))->extends('layouts.app');
     }
 
     public function getCategoriesProperty()

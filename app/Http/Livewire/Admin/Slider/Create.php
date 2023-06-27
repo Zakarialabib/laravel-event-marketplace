@@ -25,15 +25,21 @@ class Create extends Component
     public $slider;
 
     public $image;
+    public $description;
 
     public $listeners = [
         'createSlider',
     ];
 
+    public function updatedDescription($value)
+    {
+        $this->description = $value;
+    }
+
     public array $rules = [
         'slider.title'         => ['required', 'string', 'max:255'],
         'slider.subtitle'      => ['nullable', 'string'],
-        'slider.description'       => ['nullable'],
+        'description'   => ['nullable'],
         'slider.link'          => ['nullable', 'string'],
         'slider.language_id'   => ['nullable'],
         'slider.bg_color'      => ['nullable'],
@@ -55,6 +61,7 @@ class Create extends Component
         $this->resetValidation();
 
         $this->slider = new Slider();
+        $this->description = "";
 
         $this->createSlider = true;
     }
@@ -73,6 +80,8 @@ class Create extends Component
 
                 $this->slider->image = $imageName;
             }
+            
+            $this->slider->description = $this->description;
 
             $this->slider->save();
 

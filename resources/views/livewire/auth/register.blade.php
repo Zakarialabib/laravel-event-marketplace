@@ -4,6 +4,7 @@
 
     <form wire:submit.prevent="register">
 
+       
         <div class="flex flex-wrap space-y-2 mx-2">
             <!-- Name -->
             <div class="lg:w-1/2 sm:w-full px-2">
@@ -70,7 +71,6 @@
 
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
-
         </div>
 
         <div class="flex px-4 items-center justify-between mt-4">

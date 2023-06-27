@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire\Admin\Race; 
+namespace App\Http\Livewire\Admin\Race;
 
 use App\Models\Category;
 use App\Models\Race;
@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Http\Livewire\Quill;
 
 class Create extends Component
 {
@@ -73,10 +72,10 @@ class Create extends Component
         'features.*.name'  => ['nullable', 'string'],
         'features.*.value' => ['nullable', 'string'],
 
-        'calendar.*.date' => ['nullable'],
+        'calendar.*.date'                => ['nullable'],
         'calendar.*.events.*.start_time' => ['nullable'],
-        'calendar.*.events.*.end_time' => ['nullable'],
-        'calendar.*.events.*.activity' => ['nullable', 'string'],
+        'calendar.*.events.*.end_time'   => ['nullable'],
+        'calendar.*.events.*.activity'   => ['nullable', 'string'],
 
         'options.*.type'  => ['nullable', 'string'],
         'options.*.value' => ['nullable', 'string'],
@@ -117,15 +116,15 @@ class Create extends Component
 
             $this->race->images = $imageName;
         }
-        
+
         // $this->race->social_media[] = $this->social_media;
-        
+
         // $this->race->sponsors[] = $this->sponsors;
-        
+
         // $this->race->courses[] = $this->courses;
-        
+
         // $this->race->features[] = $this->features;
-        
+
         $this->race->options = $this->options;
 
         $this->race->calendar = $this->calendar;
@@ -142,12 +141,12 @@ class Create extends Component
     public function addRaceDate()
     {
         $this->calendar[] = [
-            'date' => '',
+            'date'   => '',
             'events' => [
                 [
                     'start_time' => '',
-                    'end_time' => '',
-                    'activity' => '',
+                    'end_time'   => '',
+                    'activity'   => '',
                 ],
             ],
         ];
@@ -168,8 +167,8 @@ class Create extends Component
     {
         $this->calendar[$date]['events'][] = [
             'start_time' => '',
-            'end_time' => '',
-            'activity' => '',
+            'end_time'   => '',
+            'activity'   => '',
         ];
     }
 

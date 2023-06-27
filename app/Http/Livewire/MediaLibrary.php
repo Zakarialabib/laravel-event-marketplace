@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use Livewire\Component;
@@ -9,7 +11,6 @@ use Intervention\Image\Facades\Image;
 
 class MediaLibrary extends Component
 {
-  
     public $model;
     public $editModal = false;
     public $media;
@@ -17,9 +18,9 @@ class MediaLibrary extends Component
     public $mediaItems;
 
     public $cropData = [
-        'x' => 0,
-        'y' => 0,
-        'width' => 0,
+        'x'      => 0,
+        'y'      => 0,
+        'width'  => 0,
         'height' => 0,
     ];
 
@@ -38,9 +39,9 @@ class MediaLibrary extends Component
 
         // Clear crop data
         $this->cropData = [
-            'x' => 0,
-            'y' => 0,
-            'width' => 0,
+            'x'      => 0,
+            'y'      => 0,
+            'width'  => 0,
             'height' => 0,
         ];
         $this->editModal = false;
@@ -89,15 +90,18 @@ class MediaLibrary extends Component
                 $this->mediaItems = Media::where('model_type', 'App\Models\Race')
                     ->where('collection_name', 'local_files')
                     ->get();
+
                 break;
             case 'Race Location':
                 $this->mediaItems = Media::where('model_type', 'App\Models\RaceLocation')
                     ->where('collection_name', 'local_files')
                     ->get();
+
                 break;
-            // Add more cases for other models as needed
+                // Add more cases for other models as needed
             default:
                 $this->mediaItems = collect();
+
                 break;
         }
     }
@@ -105,7 +109,7 @@ class MediaLibrary extends Component
     protected function getModels()
     {
         return [
-            'App\Models\Race' => 'Race',
+            'App\Models\Race'         => 'Race',
             'App\Models\RaceLocation' => 'Race Location',
             // Add more models as needed
         ];
