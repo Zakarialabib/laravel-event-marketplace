@@ -13,7 +13,7 @@
             <div class="px-4">
                 <div class="grid grid-cols-1 text-center mt-10">
                     <h3
-                        class="uppercase text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-medium text-white rounded-b-xl">
+                        class="uppercase mb-4 text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-bold text-white cursor-pointer">
                         @if (isset($category_id))
                             {{ \App\Helpers::categoryName($category_id) }}
                         @endif
@@ -109,6 +109,17 @@
             </div>
             <div class="hidden lg:block w-1/4 py-6 px-2">
                 <div class="mb-6 p-4 bg-gray-50" x-data="{ activeOnly: true }">
+                    <div class="flex space-y-2 flex-col items-center justify-center mb-8">
+                        <h3 class="text-xl font-bold font-heading">{{ __('Filters') }}</h3>
+                        <select
+                            class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
+                            id="sortBy" wire:model.lazy="sorting">
+                            <option disabled>{{ __('Choose filters') }}</option>
+                            @foreach ($sortingOptions as $value => $label)
+                                <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="flex space-y-2 flex-col items-center justify-center">
                         <h3 class="text-xl font-bold font-heading">{{ __('Races') }}</h3>
                         <div class="flex flex-row space-x-2">
@@ -126,19 +137,6 @@
                     </div>
                 </div>
 
-                <div class="mb-6 p-4 bg-gray-50">
-                    <div class="flex space-y-2 flex-col items-center justify-center mb-8">
-                        <h3 class="text-xl font-bold font-heading">{{ __('Filters') }}</h3>
-                        <select
-                            class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
-                            id="sortBy" wire:model.lazy="sorting">
-                            <option disabled>{{ __('Choose filters') }}</option>
-                            @foreach ($sortingOptions as $value => $label)
-                                <option value="{{ $value }}">{{ $label }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="mb-6 p-4 bg-gray-50" x-data="{ openCategory: true }">
                     <div class="flex justify-between mb-8">
                         <h3 class="text-xl font-bold font-heading">{{ __('Category') }}</h3>
@@ -190,7 +188,7 @@
 
             </div>
             <div class="w-full lg:w-3/4 py-6 px-4" x-data="{ loading: false }" wire:loading.class.delay="opacity-50">
-                <div class="mb-10 grid grid-cols-2 gap-10" id="race-container">
+                <div class="mb-10 grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 md:gap-4" id="race-container">
                     @forelse ($races as $race)
                         <x-race-card :race="$race" view="grid" />
                     @empty

@@ -7,7 +7,7 @@
                 </p>
             </div>
             <div class="bg-white rounded p-4 mx-6">
-                <div class="grid grid-cols-2 gap-4 items-cente">
+                <div class="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-cente">
                     <p>
                         <label class="font-bold font-heading text-gray-600" for="number_of_participants">
                             {{ __('Nombre de participants') }} (si relais)</label>

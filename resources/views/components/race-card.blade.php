@@ -3,19 +3,18 @@
 @if ($view == 'list')
     <div
         class="flex flex-wrap items-center bg-gray-50 rounded-lg w-full border-2 border-redBrick-800 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
-        <div class="w-full lg:w-1/2 flex items-center md:items-start relative h-72 lg:h-96 
-                                    transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
+        <a href="{{ route('front.raceDetails', $race->slug) }}"
+            class="w-full lg:w-1/2 flex items-center md:items-start relative h-72 lg:h-96 transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
             style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
             <div
-                class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl 
-                                ">
+                class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
                 <p class="font-medium leading-leading-tight">
                     {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
                 <p class="font-extrabold text-2xl leading-tight">
                     {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
                 <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
             </div>
-        </div>
+        </a>
         <div class="w-full lg:w-1/2 py-10 relative">
             <div class="px-4 text-center">
                 <a class="block mb-4 text-2xl leading-6 text-gray-800 hover:text-gray-900 font-bold hover:underline"
@@ -55,9 +54,9 @@
                         <span class="text-base md:text-lg capitalize">{{ $race->price }} DH</span>
                     </p>
                     @if ($race->course)
-                        <ul class="flex items-center">
+                        <ul class="flex items-center gap-4">
                             @foreach ($race->course as $key => $course)
-                                <li class="text-base inline-flex gap-2 md:text-lg">
+                                <li class="text-base inline-flex md:text-lg">
                                     <span
                                         class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-redBrick-500 hover:bg-redBrick-800 text-white">
                                         {{ $course['name'] }}
@@ -65,9 +64,6 @@
                                 </li>
                             @endforeach
                         </ul>
-                    @else
-                        <p class="block text-base md:text-lg capitalize text-gray-400">No course details available.
-                        </p>
                     @endif
                     <div class="py-2 flex w-full">
                         <a href="{{ route('front.raceDetails', $race->slug) }}"
@@ -131,9 +127,9 @@
                 </li>
             </ul>
             @if ($race->course)
-                <ul class="w-full pb-4 text-center border-b border-gray-100 dark:border-gray-800 ">
+                <ul class="flex gap-4 w-full pb-4 text-center border-b border-gray-100 dark:border-gray-800 ">
                     @foreach ($race->course as $key => $course)
-                        <li class="text-base inline-flex gap-2 md:text-lg">
+                        <li class="text-base inline-flex md:text-lg">
                             <span
                                 class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-redBrick-500 hover:bg-redBrick-800 text-white">
                                 {{ $course['name'] }}

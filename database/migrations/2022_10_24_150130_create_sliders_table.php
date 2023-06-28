@@ -22,6 +22,7 @@ return new class () extends Migration {
             $table->string('image')->nullable();
             $table->string('bg_color')->nullable();
             $table->string('text_color')->nullable();
+            $table->text('label')->nullable();
             $table->string('slider_settings')->nullable();
             $table->boolean('featured')->default(false);
             $table->string('link')->nullable();

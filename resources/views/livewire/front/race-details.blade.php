@@ -6,7 +6,7 @@
             <div class="grid grid-cols-1 text-center mt-10">
                 <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
                     <h3
-                        class="uppercase text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-medium text-white rounded-b-xl">
+                        class="uppercase mb-4 text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-bold text-white cursor-pointer">
                         {{ $race->name }} {{ \Carbon\Carbon::parse($race->date)->format('F,d,Y') }}
                     </h3>
                     <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
@@ -212,8 +212,8 @@
                             class="w-full text-center mb-6 py-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold uppercase text-gray-800">
                             {{ __('Calendar') }}
                         </p>
-                        <div class="pb-6 px-6 overflow-x-auto">
-                        <table class="w-full border-collapse text-center border bg-white shadow-md">
+                        <div class="pb-6 px-6 mx-2 overflow-x-auto scrollbar__inverted">
+                        <table class="table-auto w-full border-collapse text-center border bg-white shadow-md">
                             <thead>
                                 <tr class="bg-red-500 text-white">
                                     <th class="text-left py-2 px-3">{{ __('Date') }}</th>
@@ -276,22 +276,16 @@
             <div x-show="activeTab === 'tab4'">
                 @livewire('front.registration-form', ['race' => $race])
             </div>
+            @if ($race->social_media)
             <div class="flex flex-wrap bg-gray-100 items-center py-6 w-full ">
-
-                @if ($race->social_media)
-                    <div class="w-full px-4 flex flex-wrap justify-center space-x-2 mb-4 ">
-                        <p class="w-full text-center mb-6 text-2xl font-medium text-gray-500">
-                            {{ __('Social Media') }}:
-                        </p>
-                        <x-theme.social-media-icons :socialMedia="$race->social_media" />
-                    </div>
-                @else
-                    <p class="block text-base md:text-lg text-gray-400">{{ __('No social media available') }}.
+                <div class="w-full px-4 flex flex-wrap justify-center space-x-2 mb-4 ">
+                    <p class="w-full text-center mb-6 text-2xl font-medium text-gray-500">
+                        {{ __('Social Media') }}:
                     </p>
-                @endif
-
-
+                    <x-theme.social-media-icons :socialMedia="$race->social_media" />
+                </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

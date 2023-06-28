@@ -46,6 +46,14 @@
                             wire:model="slider.embeded_video" />
                         <x-input-error :messages="$errors->get('slider.embeded_video')" for="slider.link" class="mt-2" />
                     </div>
+
+                    {{-- <div class="xl:w-1/2 md:w-full px-2">
+                        <x-label for="label" :value="__('Label')" />
+                        <x-input id="label" class="block mt-1 w-full" type="text" name="label"
+                            wire:model.lazy="slider.label" />
+                        <x-input-error :messages="$errors->get('slider.label')" for="slider.link" class="mt-2" />
+                    </div> --}}
+
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="link" :value="__('Link')" />
                         <x-input id="link" class="block mt-1 w-full" type="text" name="link"

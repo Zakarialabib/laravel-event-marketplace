@@ -3,7 +3,7 @@
         scrollPosition = window.scrollY;
         isSticky = scrollPosition >= 0;
     })" :class="{ 'bg-black': isSticky, 'bg-transparent': !isSticky }"
-        class="text-white fixed inset-x-0 inset-y-5 top-0 shadow w-full z-50 lg:min-h-20 h-20 px-6 py-4">
+        class="text-white fixed inset-x-0 top-0 shadow w-full z-50 lg:min-h-20 h-20 px-6 py-4">
         <div class="relative flex items-center justify-between">
             <a class="pl-4 lg:text-3xl sm:text-xl font-bold font-heading text-white" href="{{ route('front.index') }}">
                 <img class="w-auto h-14" src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy"

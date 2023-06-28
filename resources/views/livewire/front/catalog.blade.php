@@ -13,7 +13,7 @@
             <div class="px-4">
                 <div class="grid grid-cols-1 text-center mt-10">
                     <h3
-                        class="uppercase text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-medium text-white rounded-b-xl">
+                        class="uppercase mb-4 text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-bold text-white cursor-pointer">
                         {{ __('Catalog of products') }}
                     </h3>
                     <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
