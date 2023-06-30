@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use App\Enums\Status;
+use Livewire\Redirector;
 
 class Register extends Component
 {

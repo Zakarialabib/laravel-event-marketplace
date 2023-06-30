@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Auth\Passwords;
 
 use Livewire\Component;
+use Livewire\Redirector;
 
 class Confirm extends Component
 {

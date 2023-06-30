@@ -42,7 +42,7 @@ class Sponsor extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('sponsors');
+        $this->addMediaCollection('local_files');
     }
 
     public function registerMediaConversions($media = null): void
@@ -50,7 +50,7 @@ class Sponsor extends Model implements HasMedia
         $this->addMediaConversion('medium')
             ->width(500)
             ->height(500)
-            ->performOnCollections('sponsors')
+            ->performOnCollections('local_files')
             ->withResponsiveImages()
             ->format('webp');
     }

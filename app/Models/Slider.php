@@ -22,15 +22,12 @@ class Slider extends Model implements HasMedia
 
     public $table = 'sliders';
 
-    public $orderable = [
-        'id', 'title', 'subtitle', 'featured', 'link', 'language_id',
+    public const ATTRIBUTES = [
+        'id', 'title', 'status', 'language_id',
     ];
 
-    public $filterable = [
-        'id', 'title', 'subtitle', 'featured', 'link', 'language_id',
-    ];
-
-    public $timestamps = false;
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'title', 'subtitle', 'description', 'embeded_video', 'image',
@@ -52,7 +49,7 @@ class Slider extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('sliders');
+        $this->addMediaCollection('local_files');
     }
 
     public function registerMediaConversions($media = null): void
@@ -60,7 +57,7 @@ class Slider extends Model implements HasMedia
         $this->addMediaConversion('large')
             ->width(1000)
             ->height(400)
-            ->performOnCollections('sliders')
+            ->performOnCollections('local_files')
             ->withResponsiveImages()
             ->format('webp');
     }

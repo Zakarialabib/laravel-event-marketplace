@@ -36,37 +36,17 @@ class Section extends Model implements HasMedia
 
     public $table = 'sections';
 
-    public $orderable = [
+    public const ATTRIBUTES = [
         'id',
-        'featured_title',
-        'label',
         'status',
-        'subtitle',
         'title',
-        'description',
-        'image',
-        'bg_color',
         'position',
         'page',
-        'link',
         'language_id',
     ];
 
-    public $filterable = [
-        'id',
-        'featured_title',
-        'label',
-        'status',
-        'subtitle',
-        'title',
-        'description',
-        'image',
-        'bg_color',
-        'position',
-        'page',
-        'link',
-        'language_id',
-    ];
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'featured_title',
@@ -102,7 +82,7 @@ class Section extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('sliders');
+        $this->addMediaCollection('local_files');
     }
 
     public function registerMediaConversions($media = null): void
@@ -110,7 +90,7 @@ class Section extends Model implements HasMedia
         $this->addMediaConversion('large')
             ->width(1000)
             ->height(400)
-            ->performOnCollections('sliders')
+            ->performOnCollections('local_files')
             ->withResponsiveImages()
             ->format('webp');
     }

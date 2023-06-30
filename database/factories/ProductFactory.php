@@ -31,6 +31,21 @@ class ProductFactory extends Factory
             'slug'             => Str::slug($this->faker->word).'-'.Str::random(5),
             'meta_title'       => $this->faker->word,
             'meta_description' => $this->faker->sentence,
+            'options'           => json_encode([
+                'color' => [
+                    '#000000',
+                    '#ffffff',
+                    '#ff0000',
+                    '#00ff00',
+                    '#0000ff',
+                ],
+                'size' => [
+                    'S',
+                    'M',
+                    'L',
+                    'XL',
+                ],
+            ]),
             'status'           => 1,
         ];
     }

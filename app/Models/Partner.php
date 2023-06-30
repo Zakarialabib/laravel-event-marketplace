@@ -43,7 +43,7 @@ class Partner extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('partners');
+        $this->addMediaCollection('local_files');
     }
 
     public function registerMediaConversions(): void
@@ -51,7 +51,7 @@ class Partner extends Model implements HasMedia
         $this->addMediaConversion('medium')
             ->width(500)
             ->height(500)
-            ->performOnCollections('partners')
+            ->performOnCollections('local_files')
             ->withResponsiveImages()
             ->format('webp');
     }

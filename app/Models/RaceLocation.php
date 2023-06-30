@@ -53,7 +53,7 @@ class RaceLocation extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('race_locations');
+        $this->addMediaCollection('local_files');
     }
 
     public function registerMediaConversions($media = null): void
@@ -61,7 +61,7 @@ class RaceLocation extends Model implements HasMedia
         $this->addMediaConversion('large')
             ->width(1000)
             ->height(1000)
-            ->performOnCollections('race_locations')
+            ->performOnCollections('local_files')
             ->withResponsiveImages()
             ->format('webp');
     }

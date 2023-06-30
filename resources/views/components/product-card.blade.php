@@ -4,12 +4,13 @@
     <div itemprop="sku" content="{{ $product->code }}"></div>
     <div itemprop="description" content="{{ $product->description }}"></div>
 
-    <div class="mb-5 bg-white rounded-xl shadow-2xl sm:w-full">
+    <div class="mb-5 bg-white rounded-xl shadow-2xl sm:w-full relative">
         <div class="relative text-left">
-            <a href="{{ route('front.product', $product->slug) }}" class="flex justify-center mb-4" itemprop="url">
-                <img class="lg:h-[250px] md:h-[150px] object-fill"
-                    src="{{ $product->getFirstMediaUrl('local_files') }}" onerror="this.onerror=null; this.remove();"
-                    alt="{{ $product->name }}" loading="lazy" />
+            <a href="{{ route('front.product', $product->slug) }}"
+                class="flex mx-auto mb-4 lg:h-[250px] md:h-[180px] rounded-t-lg"
+                style="background-image: url('{{ $product->getFirstMediaUrl('local_files') }}');
+                background-position: center;background-size: cover;"
+                onerror="this.onerror=null; this.remove();">
                 <meta itemprop="image" content="{{ $product->getFirstMediaUrl('local_files') }}" />
             </a>
 
@@ -22,13 +23,22 @@
             @endif
         </div>
         <div class="px-2 pb-4 text-left">
-            <div class="w-full flex-none text-sm flex items-center justify-center text-gray-600">
+            @if($product->category)
+            <div
+                class="absolute top-3.5 md:top-5 3xl:top-7 ltr:left-3.5 rtl:right-3.5 ltr:md:left-5 rtl:md:right-5 ltr:3xl:left-7 rtl:3xl:right-7 flex flex-col gap-y-1 items-start">
+                <span
+                    class="bg-indigo-600 text-white text-10px md:text-xs leading-5 rounded-md inline-block px-1.5 sm:px-1.5 xl:px-2 py-0.5 sm:py-1">
+                    <p><span class="hidden sm:inline">{{ $product->category->name }}</span></p>
+                </span>
+            </div>
+            @endif
+            <div class="w-full flex-none text-sm flex items-center justify-center text-gray-600 py-2">
                 @if ($product->status == 1)
-                    <div class="text-sm font-bold">
+                    <div class="text-xs font-medium">
                         <span class="text-green-500">● {{ __('In Stock') }}</span>
                     </div>
                 @else
-                    <div class="text-sm font-bold">
+                    <div class="text-xs font-medium">
                         <span class="text-red-500">●
                             {{ __('Out of Stock') }}</span>
                     </div>
@@ -37,13 +47,13 @@
             </div>
 
             <a href="{{ route('front.product', $product->slug) }}">
-                <h4 class="block text-center mb-2 lg:text-md md:text-sm font-bold font-heading text-redBrick-600 hover:text-redBrick-800"
+                <h4 class="block text-center mb-2 text-md md:text-sm font-bold font-heading text-redBrick-900 hover:text-redBrick-600 uppercase"
                     itemprop="name">
                     {{ Str::limit($product->name, 40) }}</h4>
             </a>
 
             <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p class="text-center text-redBrick-400 hover:text-redBrick-800 font-bold text-md mt-2"><span
+                <p class="text-center text-black hover:text-redBrick-800 font-bold text-md mt-2"><span
                         itemprop="price">{{ $product->price }}</span>DH
 
                     @if ($product->discount_price && $product->discount != 0)

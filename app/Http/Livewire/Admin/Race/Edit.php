@@ -10,6 +10,7 @@ use App\Models\RaceLocation;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Redirector;
 
 class Edit extends Component
 {

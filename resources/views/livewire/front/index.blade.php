@@ -10,13 +10,13 @@
                     <div class="absolute inset-0 bg-black opacity-75"
                         style="background-image: url({{ $slider->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;background-color:{{ $slider->bg_color }}">
                     </div>
-                    <div class="w-full py-10 px-6 mb-5 sm:mb-2 z-20">
+                    <div class="w-full pt-12 pb-10 px-6 mb-5 sm:mb-2 z-20">
                         <div class="lg:py-5 py-10 flex flex-col text-center w-full text-white px-16 lg:px-24">
-                            <h5 class="text-md sm:text-sm text-redBrick-600 tracking-widest font-medium title-font mb-1">
+                            <h5 class="text-md sm:text-sm text-redBrick-100 tracking-widest font-medium title-font mb-1">
                                 {{ $slider->subtitle }}
                             </h5>
                             <h2
-                                class="max-w-5xl tracking-tighter text-4xl font-bold leading-snug sm:text-[50px] lg:text-[60px] xl:text-[80px] lg:max-w-7xl title-font text-gray-300 py-6 sm:py-0">
+                                class="max-w-5xl tracking-tighter text-4xl font-bold leading-snug sm:text-[45px] lg:text-[55px] xl:text-[65px] lg:max-w-7xl title-font py-6 sm:py-0">
                                 {{ $slider->title }}
                             </h2>
                             <p class="max-w-xl mx-auto mt-8 leading-relaxed text-base">
@@ -44,7 +44,7 @@
                 @forelse ($this->races as $race)
                     <x-race-card :race="$race" view="list" />
                 @empty
-                    <div class="bg-gray-50 py-10 mb-10 rounded-lg w-full px-4 md:-mx-4 shadow-2xl">
+                    <div class="col-span-full bg-gray-50 py-10 mb-10 rounded-lg w-full px-4 md:-mx-4 shadow-2xl">
                         <h3 class="text-3xl text-center font-bold font-heading text-blue-900">
                             {{ __('No Races found') }}
                         </h3>
@@ -158,7 +158,7 @@
             document.addEventListener('livewire:load', function() {
 
                 var swiper = new Swiper('.mySwiper', {
-                    slidesPerView: 4,
+                    slidesPerView: 'auto',
                     spaceBetween: 20,
                     loop: true,
                     grabCursor: true,

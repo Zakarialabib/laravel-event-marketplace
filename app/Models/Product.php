@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Support\HasAdvancedFilter;
+use App\Enums\Status;
 
 class Product extends Model implements HasMedia
 {
@@ -39,7 +40,7 @@ class Product extends Model implements HasMedia
 
     protected $casts = [
         'options' => 'json',
-        // 'status' => ProductStatus::class,
+        'status' => Status::class,
     ];
 
     // Define the relationship with the ProductCategory model
@@ -62,7 +63,7 @@ class Product extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('products');
+        $this->addMediaCollection('local_files');
     }
 
     public function registerMediaConversions($media = null): void
@@ -70,7 +71,7 @@ class Product extends Model implements HasMedia
         $this->addMediaConversion('large')
             ->width(1000)
             ->height(1000)
-            ->performOnCollections('products')
+            ->performOnCollections('local_files')
             ->withResponsiveImages()
             ->format('webp');
     }

@@ -123,6 +123,7 @@ class Create extends Component
 
         // $this->product->subcategories = $this->subcategories;
         $this->product->description = $this->description;
+        $this->product->options = $this->options;
 
         $this->product->save();
 

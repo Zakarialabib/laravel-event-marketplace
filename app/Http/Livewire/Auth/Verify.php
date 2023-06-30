@@ -7,7 +7,7 @@ namespace App\Http\Livewire\Auth;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-
+use Livewire\Redirector;
 class Verify extends Component
 {
     use LivewireAlert;

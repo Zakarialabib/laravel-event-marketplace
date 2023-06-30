@@ -32,12 +32,12 @@ class BlogCategory extends Model
 
     public function blogs()
     {
-        return $this->hasMany('App\Models\Blog', 'category_id');
+        return $this->hasMany(Blog::class);
     }
 
     public function language()
     {
-        return $this->belongsTo('App\Models\Language', 'language_id')->withDefault();
+        return $this->belongsTo(Language::class);
     }
 
     public function setSlugAttribute($value)

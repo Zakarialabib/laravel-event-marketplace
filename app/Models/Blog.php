@@ -40,6 +40,18 @@ class Blog extends Model implements HasMedia
         'language_id',
     ];
 
+    /**
+     * Scope a query to only include active products.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     * @return void
+     */
+    public function scopeActive($query)
+    {
+        $query->where('status', true);
+    }
+
     public function category()
     {
         return $this->belongsTo(BlogCategory::class);
@@ -52,7 +64,7 @@ class Blog extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('blogs');
+        $this->addMediaCollection('local_files');
     }
 
     public function registerMediaConversions($media = null): void
@@ -60,7 +72,7 @@ class Blog extends Model implements HasMedia
         $this->addMediaConversion('large')
             ->width(800)
             ->height(800)
-            ->performOnCollections('blogs')
+            ->performOnCollections('local_files')
             ->format('webp');
     }
 }
