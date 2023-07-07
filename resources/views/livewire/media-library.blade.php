@@ -20,6 +20,7 @@
                     this.imageGalleryImageIndex = event.target.dataset.index;
                     this.imageGalleryActiveUrl = event.target.src;
                     this.imageGalleryOpened = true;
+                    $wire.setActiveImage(event.target.dataset.index);
                 },
                 imageGalleryClose() {
                     this.imageGalleryOpened = false;
@@ -32,6 +33,7 @@
                         this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) + 1;
                     }
                     this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                    $wire.setActiveImage(this.imageGalleryImageIndex);
                 },
                 imageGalleryPrev() {
                     if (this.imageGalleryImageIndex == 1) {
@@ -40,6 +42,7 @@
                         this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) - 1;
                     }
                     this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                    $wire.setActiveImage(this.imageGalleryImageIndex);
                 },
             }" @image-gallery-next.window="imageGalleryNext()"
                 @image-gallery-prev.window="imageGalleryPrev()" @keyup.right.window="imageGalleryNext();"
@@ -71,58 +74,17 @@
                         x-transition:leave-end="opacity-0" @keydown.window.escape="imageGalleryClose"
                         class="fixed inset-0 mx-auto bg-black bg-opacity-50 z-50 flex items-center justify-center">
                         <div class="relativ bg-white flex justify-center mx-auto p-6">
-                            <img x-bind:src="imageGalleryActiveUrl" class="max-w-lg max-h-full select-none"
-                                draggable="false" alt="">
+                            <x-cropper :accepted-file-types="['image/jpeg', 'image/png']" 
+                                :can-reorder="false" :state="entangle('image')" :viewport-width="300"
+                                :viewport-height="200" :boundary-width="400" :boundary-height="300" :show-zoomer="true"
+                                :is-avatar="true" :image-crop-aspect-ratio="16 / 9" :image-preview-height="150" :image-resize-mode="'contain'"
+                                :image-resize-target-height="400" :image-resize-target-width="600" :image-format="'jpeg'" :image-quality="0.8"
+                                :id="'cropper1'" />
 
-                            <div class="px-4">
-                                <div class="grid grid-cols-1 gap-4 py-4">
-                                    <p>
-                                        <label for="crop-x">Crop X:</label>
-                                        <x-input type="number" id="crop-x" wire:model.lazy="cropData.x" />
-                                    </p>
-                                    <p>
-                                        <label for="crop-y">Crop Y:</label>
-                                        <x-input type="number" id="crop-y" wire:model.lazy="cropData.y" />
-                                    </p>
-                                    <p>
-                                        <label for="crop-width">Crop Width:</label>
-                                        <x-input type="number" id="crop-width" wire:model.lazy="cropData.width" />
-                                    </p>
-                                    <p>
-                                        <label for="crop-height">Crop Height:</label>
-                                        <x-input type="number" id="crop-height" wire:model.lazy="cropData.height" />
-                                    </p>
-                                    <x-button type="button" @click="imageGalleryClose" secondary>
-                                        Close
-                                    </x-button>
-                                    <x-button type="button" primary wire:click="cropImage">Crop Image</x-button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </template>
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-        <script>
-            document.addEventListener('livewire:load', function() {
-                const image = document.getElementById('image-preview');
-                const cropper = new Cropper(image, {
-                    viewMode: 1,
-                    autoCropArea: 1,
-                    crop: function(event) {
-                        @this.set('cropData', {
-                            x: event.detail.x,
-                            y: event.detail.y,
-                            width: event.detail.width,
-                            height: event.detail.height,
-                        });
-                    },
-                });
-            });
-        </script>
-    @endpush
 </div>

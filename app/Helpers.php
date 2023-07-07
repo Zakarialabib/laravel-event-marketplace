@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App;
 
 use App\Models\Category;
+use App\Models\ProductCategory;
 use App\Models\Currency;
 use App\Models\Settings;
 use App\Models\Subcategory;
 use App\Models\PageSetting;
+use App\Models\Faq;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -49,10 +51,24 @@ class Helpers
             ->select('id', 'name')
             ->get();
     }
+   
+    public static function getActiveFaqs()
+    {
+        return Faq::active()
+            ->select('id', 'title', 'description')
+            ->get();
+    }
+ 
+    public static function getActiveProductCategories()
+    {
+        return ProductCategory::active()
+            ->select('id', 'name')
+            ->get();
+    }
 
     public static function categoryName($category_id)
     {
-        return Category::find($category_id)->name;
+        return Category::find($category_id)->name ?? null;
     }
 
     public static function subcategoryName($subcategory_id)

@@ -66,7 +66,7 @@ class RegistrationForm extends Component
         return view('livewire.front.registration-form');
     }
 
-    public function store()
+    public function register()
     {
         if ($this->existingSubmission) {
             $this->alert('error', __('You already have a submission'));
@@ -111,7 +111,7 @@ class RegistrationForm extends Component
 
             $this->alert('success', __('Your order has been sent successfully!'));
 
-            $this->reset();
+            return redirect()->route('front.checkout');
         } catch (Throwable $th) {
             //throw $th;
         }

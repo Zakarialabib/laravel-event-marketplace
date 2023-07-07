@@ -7,7 +7,7 @@
     <div class="mb-5 bg-white rounded-xl shadow-2xl sm:w-full relative">
         <div class="relative text-left">
             <a href="{{ route('front.product', $product->slug) }}"
-                class="flex mx-auto mb-4 lg:h-[250px] md:h-[180px] rounded-t-lg"
+                class="flex mx-auto mb-4 h-[180px] lg:h-[250px] rounded-t-lg"
                 style="background-image: url('{{ $product->getFirstMediaUrl('local_files') }}');
                 background-position: center;background-size: cover;"
                 onerror="this.onerror=null; this.remove();">
@@ -47,13 +47,13 @@
             </div>
 
             <a href="{{ route('front.product', $product->slug) }}">
-                <h4 class="block text-center mb-2 text-md md:text-sm font-bold font-heading text-redBrick-900 hover:text-redBrick-600 uppercase"
+                <h4 class="block text-center mb-2 text-md md:text-sm font-bold font-heading text-green-900 hover:text-green-600 uppercase"
                     itemprop="name">
                     {{ Str::limit($product->name, 40) }}</h4>
             </a>
 
             <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <p class="text-center text-black hover:text-redBrick-800 font-bold text-md mt-2"><span
+                <p class="text-center text-black hover:text-green-800 font-bold text-md mt-2"><span
                         itemprop="price">{{ $product->price }}</span>DH
 
                     @if ($product->discount_price && $product->discount != 0)

@@ -96,9 +96,4 @@ class Catalog extends Component
 
         return view('livewire.front.catalog', compact('products'))->extends('layouts.app');
     }
-
-    public function getCategoriesProperty()
-    {
-        return ProductCategory::active()->get();
-    }
 }

@@ -30,6 +30,7 @@ class RaceFactory extends Factory
             'category_id'      => 1,
             // 'images' => \App\Helpers::addMediaFromUrlToCollection(new Race(), $this->faker->imageUrl(), 'races')->file_name,
             'slug'             => Str::slug($this->faker->word),
+            'registration_deadline'   => date('Y-m-d', strtotime('+30 day')),
             'number_of_days'   => $this->faker->randomNumber(1),
             'number_of_racers' => $this->faker->randomNumber(3),
             'price'            => $this->faker->randomFloat(2, 10, 100),

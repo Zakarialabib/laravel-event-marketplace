@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Support\HasAdvancedFilter;
+
+class Faq extends Model
+{
+    use HasFactory;
+    use HasAdvancedFilter;
+    
+    public const ATTRIBUTES = [
+        'id',
+        'title',
+        'status',
+        'language_id',
+    ];
+
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'image',
+        'status',
+        'language_id',
+    ];
+
+    /**
+     * Scope a query to only include active products.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     * @return void
+     */
+    public function scopeActive($query)
+    {
+        $query->where('status', true);
+    }
+}

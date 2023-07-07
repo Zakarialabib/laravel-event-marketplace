@@ -8,7 +8,7 @@
     @endsection
 
     <div x-data="{ showSidebar: false }">
-        <section class="relative table w-full bg-redBrick-700 pt-16 pb-24">
+        <section class="relative table w-full bg-green-700 pt-16 pb-24">
             <div class="px-4">
                 <div class="grid grid-cols-1 text-center mt-10">
                     <h3
@@ -82,7 +82,7 @@
                 </div>
                 <div class="swiper-container" x-ref="container">
                     <div class="swiper-wrapper">
-                        @foreach ($this->categories as $category)
+                        @foreach (Helpers::getActiveProductCategories() as $category)
                             <div class="swiper-slide w-auto px-4">
                                 <div class="relative inline-flex mb-3.5 md:mb-4 lg:mb-5 xl:mb-6 mx-auto rounded-full">
                                     <button type="button" wire:click="filterType('category', {{ $category->id }})">
@@ -153,11 +153,11 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach ($this->categories as $category)
+                        @foreach (Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('category', {{ $category->id }})">
                                     <span
-                                        class="inline-block px-2 py-2 text-sm font-bold font-heading text-redBrick-500 hover:underline">
+                                        class="inline-block px-2 py-2 text-sm font-bold font-heading text-green-500 hover:underline">
                                         {{ $category->name }} <small>
                                         </small>
                                     </span>
@@ -177,7 +177,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach ($this->categories as $category)
+                        @foreach (Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('category', {{ $category->id }})">
                                     <span class="inline-block px-4 py-2 text-sm font-bold font-heading text-blue-300">

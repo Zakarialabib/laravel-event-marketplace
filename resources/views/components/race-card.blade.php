@@ -2,9 +2,9 @@
 
 @if ($view == 'list')
     <div
-        class="flex flex-wrap items-center bg-gray-50 rounded-lg w-full border-2 border-redBrick-800 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
+        class="flex flex-wrap items-center bg-gray-50 rounded-lg w-full border-2 border-green-800 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
         <a href="{{ route('front.raceDetails', $race->slug) }}"
-            class="w-full lg:w-1/2 flex items-center md:items-start relative h-72 lg:h-96 transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
+            class="w-full lg:w-1/2 flex items-center md:items-start relative h-full transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
             style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
             <div
                 class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
@@ -22,6 +22,12 @@
                     {{ $race->name }}
                 </a>
                 <div class="flex flex-wrap py-4 gap-8 justify-center items-center">
+                    <p class="flex items-center">
+                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
+                            {{__('Online Registration Deadline')}}
+                        </span>
+                        <span class="text-base md:text-lg capitalize">{{ $race->registration_deadline }}</span>
+                    </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
                             <i class="fas fa-map-marker-alt"></i>
@@ -53,12 +59,13 @@
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->price }} DH</span>
                     </p>
+                  
                     @if ($race->course)
                         <ul class="flex items-center gap-4">
                             @foreach ($race->course as $key => $course)
                                 <li class="text-base inline-flex md:text-lg">
                                     <span
-                                        class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-redBrick-500 hover:bg-redBrick-800 text-white">
+                                        class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
                                         {{ $course['name'] }}
                                     </span>
                                 </li>
@@ -67,7 +74,7 @@
                     @endif
                     <div class="py-2 flex w-full">
                         <a href="{{ route('front.raceDetails', $race->slug) }}"
-                            class="bottom-0 w-full text-center cursor-pointer bg-redBrick-600 py-4 px-2 text-lg front-bold text-white hover:bg-redBrick-800 hover:text-redBrick-100 focus:bg-redBrick-800 font-semibold uppercase">
+                            class="bottom-0 w-full text-center cursor-pointer bg-green-600 py-4 px-2 text-lg front-bold text-white hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
                             {{ __('Check race') }}
                         </a>
                     </div>
@@ -131,7 +138,7 @@
                     @foreach ($race->course as $key => $course)
                         <li class="text-base inline-flex md:text-lg">
                             <span
-                                class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-redBrick-500 hover:bg-redBrick-800 text-white">
+                                class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
                                 {{ $course['name'] }}
                             </span>
                         </li>
@@ -145,7 +152,7 @@
                 </li>
                 <li>
                     <a href="{{ route('front.raceDetails', $race->slug) }}"
-                        class="bottom-0 w-full rounded-2xl px-6 text-center cursor-pointer bg-redBrick-600 py-4 text-lg front-bold text-white hover:bg-redBrick-800 hover:text-redBrick-100 focus:bg-redBrick-800 font-semibold uppercase">
+                        class="bottom-0 w-full rounded-2xl px-6 text-center cursor-pointer bg-green-600 py-4 text-lg front-bold text-white hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
                         {{ __('Check race') }}
                     </a>
                 </li>

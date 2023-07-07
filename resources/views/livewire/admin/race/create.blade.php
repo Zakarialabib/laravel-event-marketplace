@@ -17,6 +17,12 @@
                             <x-input-error :messages="$errors->get('name')" for="name" class="mt-2" />
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                            <x-label for="registration_deadline" :value="__('Number of days')" required />
+                            <x-input id="registration_deadline" class="block mt-1 w-full" type="number" name="registration_deadline"
+                                wire:model="race.registration_deadline" required />
+                            <x-input-error :messages="$errors->get('registration_deadline')" for="registration_deadline" class="mt-2" />
+                        </div>
+                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="number_of_days" :value="__('Number of days')" required />
                             <x-input id="number_of_days" class="block mt-1 w-full" type="number" name="number_of_days"
                                 wire:model="race.number_of_days" required />

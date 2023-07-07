@@ -3,44 +3,16 @@
 
     <x-topheader />
 
-    <div class="relative mx-auto mb-5">
+    <div class="relative mx-auto">
         <section class="w-full mx-auto bg-gray-900 h-screen relative">
-            @foreach ($this->sliders as $slider)
-                <div class="relative h-screen flex items-center justify-center">
-                    <div class="absolute inset-0 bg-black opacity-75"
-                        style="background-image: url({{ $slider->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;background-color:{{ $slider->bg_color }}">
-                    </div>
-                    <div class="w-full pt-12 pb-10 px-6 mb-5 sm:mb-2 z-20">
-                        <div class="lg:py-5 py-10 flex flex-col text-center w-full text-white px-16 lg:px-24">
-                            <h5 class="text-md sm:text-sm text-redBrick-100 tracking-widest font-medium title-font mb-1">
-                                {{ $slider->subtitle }}
-                            </h5>
-                            <h2
-                                class="max-w-5xl tracking-tighter text-4xl font-bold leading-snug sm:text-[45px] lg:text-[55px] xl:text-[65px] lg:max-w-7xl title-font py-6 sm:py-0">
-                                {{ $slider->title }}
-                            </h2>
-                            <p class="max-w-xl mx-auto mt-8 leading-relaxed text-base">
-                                {!! $slider->description !!}
-                            </p>
-                            @if ($slider->link)
-                                <p class="flex justify-center text-center pt-5">
-                                    <a href="{{ $slider->link }}"
-                                        class="bg-redBrick-600 inline-flex items-center justify-center rounded-lg py-4 px-6 text-center text-base font-normal text-white hover:bg-opacity-90 sm:px-10 lg:px-8 xl:px-10">
-                                        {{ __('Get Started') }}
-                                    </a>
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            <x-theme.slider :sliders="$this->sliders" />
         </section>
-        <section class="md:px-4 lg:px-10 py-16 md:py-14 lg:py-16 bg-redBrick-600">
+        <section class="md:px-4 lg:px-10 py-16 md:py-14 lg:py-16">
             <h3
-                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold text-white cursor-pointer pb-10 text-center">
+                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tighter font-heading text-black cursor-pointer pb-10 text-center">
                 {{ __('Upcoming Races') }}
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-4 mt-4 space-y-4 px-5">
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-x-8 mt-4 gap-y-4">
                 @forelse ($this->races as $race)
                     <x-race-card :race="$race" view="list" />
                 @empty
@@ -53,17 +25,17 @@
             </div>
         </section>
 
-        <section class="h-auto bg-gray-100 text-black md:px-4 lg:px-10 py-16 md:py-14 lg:py-16">
+        <section class="h-auto bg-gray-50 text-black md:px-4 lg:px-10 py-4 md:py-6 lg:py-10">
             <h5
-                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold cursor-pointer py-10 text-center">
+                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tighter font-heading cursor-pointer py-10 text-center">
                 {{ __('Races Locations') }}
             </h5>
             <hr>
             <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-6 mt-4 px-5">
                 @foreach ($this->raceLocations as $raceLocation)
                     <figure
-                        class="shadow-xl transition duration-300 ease-in-out delay-200 transform  md:hover:translate-x-0 md:hover:-translate-y-4 mb-6">
-                        <div class="glightbox group relative block h-full overflow-hidden bg-gray-200 text-center">
+                        class="p-4 md:p-6 mb-8 md:mb-0 shadow-2xl rounded-5xl bg-white transition duration-300 ease-in-out delay-200 transform  md:hover:translate-x-0 md:hover:-translate-y-4">
+                        <div class="glightbox group relative block h-full overflow-hidden text-center">
                             <img class="aspect-video w-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
                                 src="{{ $raceLocation->getFirstMediaUrl('local_files') }}" />
                             <h3
@@ -79,48 +51,11 @@
                 @endforeach
             </div>
         </section>
-
-        @livewire('front.resources')
-
-        @if (count($this->featuredProducts) > 0)
-            <section class="bg-gray-900 py-10 mx-auto px-4 text-center text-white">
-                <h2
-                    class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold text-white cursor-pointer pb-10 text-center">
-                    <a href="https://www.example-store.com" target="_blank" rel="noopener">
-                        {{ __('Visit Store') }}
-                    </a>
-                </h2>
-
-                <p class="text-center mb-6">Gear up for success! Visit our online store to explore a
-                    wide
-                    range of high-quality products designed for endurance athletes.</p>
-
-                <hr>
-                <div class="mt-10 px-4">
-                    {{-- <h3 class="text-2xl font-semibold mb-6 text-gray-100">{{ __('Featured Products') }}</h3> --}}
-
-                    <div class="Swiper mySwiper relative w-full h-auto">
-                        <div class="swiper-wrapper">
-                            @foreach ($this->featuredProducts as $product)
-                                <div class="swiper-slide">
-                                    <x-product-card :product="$product" />
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-            </section>
-        @endif
-
-        <section class="px-5 py-12 lg:px-16 bg-gray-50">
-            <h5
-                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold cursor-pointer pb-10 text-center">
-                {{ __('Sponsors') }}
-            </h5>
-            <div class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-center">
+        <section class="w-ful bg-green-50 py-12 px-8 lg:ml-auto bg-opacity-80">
+            <h3 class="font-heading text-3xl xl:text-6xl leading-tighter pb-6 text-center">{{ __('Sponsors') }}</h3>
+            <div class="flex flex-wrap items-center justify-center -mx-2 -mb-12 gap-x-6">
                 @foreach ($this->sponsors as $sponsor)
-                    <div class="py-4 relative rounded-xl">
+                    <div class="w-1/2 md:w-1/3 lg:w-1/6 px-2 mb-12">
                         <img class="mx-auto w-56 h-auto my-4 filter grayscale transition duration-300 hover:grayscale-0"
                             src="{{ $sponsor->getFirstMediaUrl('local_files') }}" alt="{{ $sponsor->name }}">
                         <p
@@ -131,6 +66,30 @@
                 @endforeach
             </div>
         </section>
+
+        @livewire('front.resources')
+
+        @if (count($this->featuredProducts) > 0)
+            <section class="bg-gray-900 py-10 mx-auto px-4 text-center text-white">
+                <h2
+                    class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold text-white cursor-pointer pb-10 text-center">
+                    <a href="{{ route('front.catalog') }}">
+                        {{ __('Visit Store') }}
+                    </a>
+                </h2>
+
+                <p class="text-center mb-6">Gear up for success! Visit our online store to explore a
+                    wide
+                    range of high-quality products designed for endurance athletes.</p>
+
+                <hr>
+                <div class="relative">
+                <x-product-slider :products="$this->featuredProducts" />
+                </div>
+            </section>
+        @endif
+
+        
         @if (count($this->sections) > 0)
             <section class="py-5 px-4 mx-auto bg-gray-100">
                 <div class="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full py-10">
@@ -153,49 +112,4 @@
             </section>
         @endif
     </div>
-    @push('scripts')
-        <script>
-            document.addEventListener('livewire:load', function() {
-
-                var swiper = new Swiper('.mySwiper', {
-                    slidesPerView: 'auto',
-                    spaceBetween: 20,
-                    loop: true,
-                    grabCursor: true,
-                    breakpoints: {
-                        250: {
-                            slidesPerView: 1,
-                            spaceBetween: 15,
-                        },
-                        360: {
-                            slidesPerView: 2,
-                            spaceBetween: 20,
-                        },
-                        640: {
-                            slidesPerView: 3,
-                            spaceBetween: 20,
-                        },
-                        768: {
-                            slidesPerView: 3,
-                            spaceBetween: 40,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                            spaceBetween: 50,
-                        },
-                        1200: {
-                            slidesPerView: 6,
-                            spaceBetween: 50,
-                        },
-                    },
-                    pagination: {
-                        el: ".swiper-pagination",
-                        type: 'bullets',
-                        clickable: true,
-                    },
-                });
-
-            });
-        </script>
-    @endpush
 </div>

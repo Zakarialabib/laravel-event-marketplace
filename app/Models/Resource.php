@@ -7,12 +7,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Resource extends Model
+class Resource extends Model implements HasMedia
 {
     use HasFactory;
     use HasAdvancedFilter;
-
+    use InteractsWithMedia;
+    
     public const ATTRIBUTES = [
         'id',
         'title',
@@ -40,5 +43,21 @@ class Resource extends Model
     public function scopeSearchByTitle($query, $searchTerm)
     {
         return $query->where('title', 'like', '%'.$searchTerm.'%');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('local_files');
+    }
+
+    public function registerMediaConversions($media = null): void
+    {
+        $this->addMediaConversion('large')
+            ->width(1000)
+            ->height(1000)
+            ->quality(90)
+            ->performOnCollections('local_files')
+            ->withResponsiveImages()
+            ->format('webp');
     }
 }

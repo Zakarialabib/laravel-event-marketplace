@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../css/app.css'; 
+import '../css/cropper.css'; 
 import '../css/select.css'; 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
@@ -11,6 +12,8 @@ import 'swiper/css/bundle';
 window.Swiper = swiper;
 
 import "@fortawesome/fontawesome-free/css/all.css";
+
+import Croppie from './cropper'
 
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';

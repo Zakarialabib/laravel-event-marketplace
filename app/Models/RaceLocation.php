@@ -31,9 +31,17 @@ class RaceLocation extends Model implements HasMedia
         'description',
         'images',
         'options',
+        'date',
+        'latitude',
+        'longitude',
         'category_id',
         'status',
     ];
+
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
 
     public function category()
     {

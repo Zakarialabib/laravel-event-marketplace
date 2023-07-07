@@ -26,7 +26,7 @@ class Categories extends Component
 
     public $paginationOptions;
 
-    public $category_id;
+    public $category_name;
 
     public $raceLocation_id;
 
@@ -39,14 +39,9 @@ class Categories extends Component
     public $selectedFilters = [];
 
     protected $queryString = [
-        'category_id' => ['except' => '', 'as' => 'c'],
-        'sorting'     => ['except' => '', 'as' => 'f'],
+        'category_name' => ['except' => '', 'as' => 'type'],
+        'sorting'     => ['except' => '', 'as' => 'filter'],
     ];
-
-    public function getCategoriesProperty()
-    {
-        return Category::active()->get();
-    }
 
     public function getRaceLocationsProperty()
     {
@@ -62,11 +57,11 @@ class Categories extends Component
     {
         switch ($type) {
             case 'category':
-                $this->category_id = $value;
+                $this->category_name = $value;
 
                 break;
             case 'location':
-                $this->raceLocation_id = [$value];
+                $this->raceLocation_id = $value;
 
                 break;
         }
@@ -76,7 +71,7 @@ class Categories extends Component
     public function clearFilter($filter)
     {
         if ($filter) {
-            $this->category_id = null;
+            $this->category_name = null;
             unset($this->selectedFilters['category']);
         }
         $this->resetPage();
@@ -105,11 +100,13 @@ class Categories extends Component
 
     public function render()
     {
-        $query = Race::where('category_id', $this->category_id)
+        $query = Race::where('status', $this->status)
+            ->when($this->category_name, function ($query) {
+                $query->where('category_id', Category::where('name', $this->category_name)->first()->id);
+            })
             ->when($this->raceLocation_id, function ($query) {
                 return $query->where('race_location_id', $this->raceLocation_id);
-            })
-            ->where('status', $this->status);
+            });
 
         if ($this->sorting === 'name') {
             $races = $query->orderBy('name', 'asc')->paginate($this->perPage);

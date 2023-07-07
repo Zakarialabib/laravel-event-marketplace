@@ -1,6 +1,20 @@
 <div>
+
+    @section('meta')
+        <meta itemprop="url" content="{{ URL::current() }}" />
+        <meta property="og:title" content="{{ $race->meta_title }}">
+        <meta property="og:description" content="{!! $race->meta_description !!}">
+        <meta property="og:url" content="{{ URL::current() }}">
+        <meta property="og:image" content="{{ $race->getFirstMediaUrl('local_files') }}">
+        <meta property="og:image:secure_url" content="{{ $race->getFirstMediaUrl('local_files') }}">
+        <meta property="og:image:width" content="1000">
+        <meta property="og:image:height" content="1000">
+    @endsection
+
+    @section('title', $race->name)
+
     <section style="background-image: url({{ $race->getFirstMediaUrl('local_files') }})"
-        class="relative table w-full py-64 bg-center bg-no-repeat bg-cover border-b shadow-md border-redBrick-700">
+        class="relative table w-full py-64 bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
         <div class="absolute inset-0 bg-black opacity-60"></div>
         <div class="px-4">
             <div class="grid grid-cols-1 text-center mt-10">
@@ -27,87 +41,94 @@
                             </a>
                         </li>
                     </ul>
-
+                    <p class="text-white text-sm md:text-base lg:text-lg mt-4">
+                        {{ $race->registration_deadline }}
+                    </p>
+                    @if ($race->social_media)
+                        <div class="flex flex-wrap items-center py-6 w-full ">
+                            <div class="w-full px-4 flex flex-wrap text-white justify-center space-x-2 mb-4 ">
+                                <x-theme.social-media-icons :socialMedia="$race->social_media" />
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
-    <div class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '' }">
-        <div class="w-full md:w-1/4 lg:pb-14 sm:pb-0 h-auto bg-gray-100">
+    <section class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '' }">
+        <div class="w-full h-auto pb-5">
             <!-- Tab buttons -->
-            <div
-                class="w-full grid grid-cols-1 xl:grid-cols-1 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-2 xs:grid-cols-2 relative">
+            <div class="w-full flex flex-wrap justify-center relative bg-gray-100 border-b-2 border-green-600">
                 <button
-                    class="w-full py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold bg-gray-100 text-red-600 uppercase border-b-2 border-redBrick-600 hover:border-red-500 focus:outline-none focus:border-red-500 cursor-pointer"
+                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab0'"
                     :class="{
                         'border-red-700': activeTab === 'tab0',
-                        'bg-redBrick-700': activeTab === 'tab0',
-                        'text-redBrick-200': activeTab === 'tab0',
+                        'bg-green-700': activeTab === 'tab0',
+                        'text-green-200': activeTab === 'tab0',
                         'hover:text-red-500': activeTab === 'tab0',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-redBrick-100': activeTab === 'tab0' }">
-                        Overview
+                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab0' }">
+                        {{ __('Overview') }}
                     </h4>
                 </button>
                 <button
-                    class="w-full py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold bg-gray-100 text-red-600 uppercase border-b-2 border-redBrick-600 hover:border-red-500 focus:outline-none focus:border-red-500 cursor-pointer"
+                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab1'"
                     :class="{
                         'border-red-700': activeTab === 'tab1',
-                        'bg-redBrick-700': activeTab === 'tab1',
-                        'text-redBrick-200': activeTab === 'tab1',
+                        'bg-green-700': activeTab === 'tab1',
+                        'text-green-200': activeTab === 'tab1',
                         'hover:text-red-500': activeTab === 'tab1',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-redBrick-100': activeTab === 'tab1' }">
-                        Detail
+                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab1' }">
+                        {{ __('Details') }}
                     </h4>
                 </button>
                 <button
-                    class="w-full py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold bg-gray-100 text-red-600 uppercase border-b-2 border-redBrick-600 hover:border-red-500 focus:outline-none focus:border-red-500 cursor-pointer"
+                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab2'"
                     :class="{
                         'border-red-700': activeTab === 'tab2',
-                        'bg-redBrick-700': activeTab === 'tab2',
-                        'text-redBrick-200': activeTab === 'tab2',
+                        'bg-green-700': activeTab === 'tab2',
+                        'text-green-200': activeTab === 'tab2',
                         'hover:text-red-500': activeTab === 'tab2',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-redBrick-100': activeTab === 'tab2' }">
-                        Calendar
+                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab2' }">
+                        {{ __('Calendar') }}
                     </h4>
 
                 </button>
                 <button
-                    class="w-full py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold bg-gray-100 text-red-600 uppercase border-b-2 border-redBrick-600 hover:border-red-500 focus:outline-none focus:border-red-500 cursor-pointer"
+                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab3'"
                     :class="{
                         'border-red-700': activeTab === 'tab3',
-                        'bg-redBrick-700': activeTab === 'tab3',
-                        'text-redBrick-200': activeTab === 'tab3',
+                        'bg-green-700': activeTab === 'tab3',
+                        'text-green-200': activeTab === 'tab3',
                         'hover:text-red-500': activeTab === 'tab3',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-redBrick-100': activeTab === 'tab3' }">
-                        Sponsors
+                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab3' }">
+                        {{ __('Sponsors') }}
                     </h4>
                 </button>
                 <button
-                    class="w-full py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold bg-gray-100 text-red-600 uppercase border-b-2 border-redBrick-600 hover:border-red-500 focus:outline-none focus:border-red-500 cursor-pointer"
+                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab4'"
                     :class="{
                         'border-red-700': activeTab === 'tab4',
-                        'bg-redBrick-700': activeTab === 'tab4',
-                        'text-redBrick-200': activeTab === 'tab4',
+                        'bg-green-700': activeTab === 'tab4',
+                        'text-green-200': activeTab === 'tab4',
                         'hover:text-red-500': activeTab === 'tab4',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-redBrick-100': activeTab === 'tab4' }">
-                        Regitration
+                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab4' }">
+                        {{ __('Regitration') }}
                     </h4>
                 </button>
             </div>
-
         </div>
 
-        <div class="w-full md:w-3/4 h-auto">
+        <div class="w-full h-auto">
 
             <!-- Tab content -->
             <div x-show="activeTab === 'tab0'">
@@ -161,20 +182,20 @@
                                     @if ($categoryName == $key || $categoryName == 'triathlon')
                                         <div class="w-full">
                                             <button
-                                                class="w-full py-5 px-8 sm:py-2 sm:px-5 text-center font-bold text-redBrick-800 uppercase border-b-2 border-redBrick-400 focus:outline-none cursor-pointer"
+                                                class="w-full py-5 px-8 sm:py-2 sm:px-5 text-center font-bold text-green-800 uppercase border-b-2 border-green-400 focus:outline-none cursor-pointer"
                                                 type="button" @click="tabs = '{{ $key }}'"
                                                 :class="{
-                                                    'border-redBrick-800': tabs === '{{ $key }}',
-                                                    'text-redBrick-100': tabs === '{{ $key }}',
-                                                    'bg-redBrick-700': tabs === '{{ $key }}',
-                                                    'hover:bg-redBrick-600': tabs !== '{{ $key }}',
-                                                    'hover:text-redBrick-100': tabs !== '{{ $key }}',
-                                                    'hover:border-redBrick-600': tabs !== '{{ $key }}',
+                                                    'border-green-800': tabs === '{{ $key }}',
+                                                    'text-green-100': tabs === '{{ $key }}',
+                                                    'bg-green-700': tabs === '{{ $key }}',
+                                                    'hover:bg-green-600': tabs !== '{{ $key }}',
+                                                    'hover:text-green-100': tabs !== '{{ $key }}',
+                                                    'hover:border-green-600': tabs !== '{{ $key }}',
                                                 }">
                                                 <h4 class="inline-block"
                                                     :class="{
-                                                        'text-redBrick-100': tabs === '{{ $key }}',
-                                                        'border-redBrick-800': tabs === '{{ $key }}',
+                                                        'text-green-100': tabs === '{{ $key }}',
+                                                        'border-green-800': tabs === '{{ $key }}',
                                                     }">
                                                     {{ $course['name'] }}
                                                 </h4>
@@ -213,34 +234,34 @@
                             {{ __('Calendar') }}
                         </p>
                         <div class="pb-6 px-6 mx-2 overflow-x-auto scrollbar__inverted">
-                        <table class="table-auto w-full border-collapse text-center border bg-white shadow-md">
-                            <thead>
-                                <tr class="bg-red-500 text-white">
-                                    <th class="text-left py-2 px-3">{{ __('Date') }}</th>
-                                    <th class="w-1/4 py-2 px-3">{{ __('Start Time') }}</th>
-                                    <th class="w-1/4 py-2 px-3">{{ __('End Time') }}</th>
-                                    <th class="w-1/2 py-2 px-3">{{ __('Activity') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($race->calendar as $data)
-                                    <tr class="border-b bg-gray-100">
-                                        <td class="text-left py-2 px-3 font-bold">{{ $data['date'] }}</td>
-                                        <td class="py-2 px-3"></td>
-                                        <td class="py-2 px-3"></td>
-                                        <td class="py-2 px-3"></td>
+                            <table class="table-auto w-full border-collapse text-center border bg-white shadow-md">
+                                <thead>
+                                    <tr class="bg-red-500 text-white">
+                                        <th class="text-left py-2 px-3">{{ __('Date') }}</th>
+                                        <th class="w-1/4 py-2 px-3">{{ __('Start Time') }}</th>
+                                        <th class="w-1/4 py-2 px-3">{{ __('End Time') }}</th>
+                                        <th class="w-1/2 py-2 px-3">{{ __('Activity') }}</th>
                                     </tr>
-                                    @foreach ($data['events'] as $event)
-                                        <tr class="border-b">
+                                </thead>
+                                <tbody>
+                                    @foreach ($race->calendar as $data)
+                                        <tr class="border-b bg-gray-100">
+                                            <td class="text-left py-2 px-3 font-bold">{{ $data['date'] }}</td>
                                             <td class="py-2 px-3"></td>
-                                            <td class="py-2 px-3">{{ $event['start_time'] }}</td>
-                                            <td class="py-2 px-3">{{ $event['end_time'] }}</td>
-                                            <td class="py-2 px-3">{{ $event['activity'] }}</td>
+                                            <td class="py-2 px-3"></td>
+                                            <td class="py-2 px-3"></td>
                                         </tr>
+                                        @foreach ($data['events'] as $event)
+                                            <tr class="border-b">
+                                                <td class="py-2 px-3"></td>
+                                                <td class="py-2 px-3">{{ $event['start_time'] }}</td>
+                                                <td class="py-2 px-3">{{ $event['end_time'] }}</td>
+                                                <td class="py-2 px-3">{{ $event['activity'] }}</td>
+                                            </tr>
+                                        @endforeach
                                     @endforeach
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
                         </div>
                     @else
                         <p class="block text-base md:text-lg text-gray-400">{{ __('No calendar available') }}.</p>
@@ -276,16 +297,66 @@
             <div x-show="activeTab === 'tab4'">
                 @livewire('front.registration-form', ['race' => $race])
             </div>
-            @if ($race->social_media)
-            <div class="flex flex-wrap bg-gray-100 items-center py-6 w-full ">
-                <div class="w-full px-4 flex flex-wrap justify-center space-x-2 mb-4 ">
-                    <p class="w-full text-center mb-6 text-2xl font-medium text-gray-500">
-                        {{ __('Social Media') }}:
-                    </p>
-                    <x-theme.social-media-icons :socialMedia="$race->social_media" />
-                </div>
-            </div>
-            @endif
         </div>
-    </div>
+    </section>
+    <section class="py-18 2xl:py-36 font-medium overflow-hidden bg-green-50" x-data="{
+        expandFaq: null,
+        slideIndex: 0,
+        totalSlides: {{ count(Helpers::getActiveFaqs()) }},
+        nextSlide() {
+            this.slideIndex = (this.slideIndex + 1) % this.totalSlides;
+        },
+        prevSlide() {
+            this.slideIndex = (this.slideIndex - 1 + this.totalSlides) % this.totalSlides;
+        },
+        goToSlide(index) {
+            this.slideIndex = index;
+        }
+    }">
+        <div class="container relative px-4 py-10 mx-auto">
+            
+            <h2 class="mb-10 font-heading text-9xl md:text-10xl xl:text-11xl leading-tight">
+                {{ "FAQ's" }}</h2>
+                <div class="flex transition-all duration-500 relative" :style="{ left: -(slideIndex * 100) + '%' }">
+                @foreach (Helpers::getActiveFaqs() as $index => $faq)
+                    <div class="flex-shrink-0 px-4 lg:px-1 w-full lg:w-1/3">
+                        <div class="relative py-9 px-16 h-full bg-white rounded-3xl">
+                            <h3 class="font-heading mb-4 text-3xl md:text-4xl font-bold leading-tighter">{{ $faq->title }}</h3>
+                            <a @click="expandFaq = {{ $index }}"
+                                class="absolute -bottom-6 right-10 w-12 h-12 bg-green-500 rounded-full cursor-pointer flex items-center justify-center">
+                                <i class="fas fa-arrow-down text-white"></i>
+                            </a>
+                            <div x-show="expandFaq === {{ $index }}"
+                                x-transition:enter="transition ease-out duration-300"
+                                x-transition:enter-start="opacity-0 transform scale-90"
+                                x-transition:enter-end="opacity-100 transform scale-100"
+                                x-transition:leave="transition ease-in duration-200"
+                                x-transition:leave-start="opacity-100 transform scale-100"
+                                x-transition:leave-end="opacity-0 transform scale-90"
+                                class="py-10 mt-6 border-t border-gray-200">
+                                <p class="text-md">{{ $faq->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="mt-10 flex items-center mx-auto w-full md:w-1/2 xl:w-full max-w-max">
+                <a @click="prevSlide" class="mr-4 lg:mr-8 xl:mr-24 cursor-pointer">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="flex mx-auto w-56 lg:w-96 h-px bg-gray-100" style="height: 2px;">
+                    @foreach (Helpers::getActiveFaqs() as $index => $slider)
+                        <div class="w-14 h-1 bg-gray-300 cursor-pointer transition-colors hover:bg-red-500 bg-opacity-50"
+                            :class="{ 'bg-red-500': slideIndex === {{ $index }} }"
+                            @click="goToSlide({{ $index }})"></div>
+                    @endforeach
+                    <a class="w-2/3 bg-white" href="#"></a>
+                </div>
+                <a @click="nextSlide" class="ml-4 lg:ml-8 xl:ml-24 cursor-pointer">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
 </div>

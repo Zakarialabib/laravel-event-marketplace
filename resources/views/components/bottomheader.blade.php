@@ -1,15 +1,15 @@
 <div x-data="{ isMenuOpen: false }"
-    class="px-6 py-2 bg-gradient-to-l from-redBrick-400 via-redBrick-600 to-redBrick-800 text-white relative shadow-lg" x-cloak>
+    class="px-6 py-2 bg-gradient-to-l from-green-400 via-green-600 to-green-800 text-white relative shadow-lg" x-cloak>
     <div class="hidden md:flex justify-center">
         <div class="flex items-center justify-center space-x-4">
             @foreach (\App\Helpers::getActiveCategories() as $category)
-                <a href="{{ route('front.categories') }}?c={{ $category->id }}"
-                    class="lg:text-md md:text-sm text-center uppercase font-semibold font-heading hover:text-redBrick-400 hover:underline">
+                <a href="{{ route('front.categories') }}?type={{ $category->name }}"
+                    class="lg:text-md md:text-sm text-center uppercase font-semibold font-heading hover:text-green-400 hover:underline">
                     {{ $category->name }}
                 </a>
             @endforeach
             <button type="button"
-                class="lg:text-md md:text-sm text-center uppercase font-semibold font-heading hover:text-redBrick-400 hover:underline"
+                class="lg:text-md md:text-sm text-center uppercase font-semibold font-heading hover:text-green-400 hover:underline"
                 x-on:click="isMenuOpen = !isMenuOpen" @mouseenter="isMenuOpen = true" @click.away="isMenuOpen = false">
                 {{ __('Races') }} <small class="inline-block align-middle text-gray-100">&#9660;</small>
             </button>
@@ -25,7 +25,7 @@
             @click.away="isMenuOpen = false">
             {{-- @foreach (\App\Helpers::getActiveBrands() as $brand)
                 <a class="" href="{{ route('front.brandPage', $brand->slug) }}">
-                    <p class="mb-3 text-lg font-bold font-heading text-redBrick-900 hover:text-redBrick-600 hover:underline">
+                    <p class="mb-3 text-lg font-bold font-heading text-green-900 hover:text-green-600 hover:underline">
                         {{ $brand->name }}
                     </p>
                 </a>

@@ -1,3 +1,5 @@
+<div>
+    
 @section('meta')
     <meta itemprop="url" content="{{ URL::current() }}" />
     <meta property="og:title" content="{{ $product->meta_title }}">
@@ -14,7 +16,7 @@
     <meta property="product:price:currency" content="MAD">
 @endsection
 
-<div>
+
     <section class="relative table w-full pt-16 py-24">
         <div itemtype="https://schema.org/Product" itemscope>
 
@@ -133,7 +135,7 @@
                                 </div>
                                 <div>
                                     @if ($product->status == 1)
-                                        <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-redBrick-400 hover:bg-redBrick-200 transition cursor-pointer"
+                                        <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-green-400 hover:bg-green-200 transition cursor-pointer"
                                             wire:click="AddToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">
                                             {{ __('Add to cart') }}
                                         </a>
@@ -187,21 +189,21 @@
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             <button @click="activeTab = 'description'"
-                                :class="activeTab === 'description' ? 'text-redBrick-400' : ''">
+                                :class="activeTab === 'description' ? 'text-green-400' : ''">
                                 {{ __('Description') }}
                             </button>
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             <button @click="activeTab = 'shipping'"
-                                :class="activeTab === 'shipping' ? 'text-redBrick-400' : ''">
+                                :class="activeTab === 'shipping' ? 'text-green-400' : ''">
                                 {{ __('Shipping & Returns') }}
                             </button>
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
                             {{-- <button @click="activeTab = 'brands'"
-                                :class="activeTab === 'brands' ? 'text-redBrick-400' : ''">
+                                :class="activeTab === 'brands' ? 'text-green-400' : ''">
                                 {{ __('Product Brand') }}
                             </button> --}}
                         </div>

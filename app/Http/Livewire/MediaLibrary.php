@@ -16,38 +16,7 @@ class MediaLibrary extends Component
     public $media;
     public $models;
     public $mediaItems;
-
-    public $cropData = [
-        'x'      => 0,
-        'y'      => 0,
-        'width'  => 0,
-        'height' => 0,
-    ];
-
-    public function cropImage()
-    {
-        // Access crop data
-        $x = $this->cropData['x'];
-        $y = $this->cropData['y'];
-        $width = $this->cropData['width'];
-        $height = $this->cropData['height'];
-
-        // Perform cropping operations based on the crop data
-        $image = Image::make($this->media->getPath());
-        $image->crop($width, $height, $x, $y);
-        $image->save();
-
-        // Clear crop data
-        $this->cropData = [
-            'x'      => 0,
-            'y'      => 0,
-            'width'  => 0,
-            'height' => 0,
-        ];
-        $this->editModal = false;
-        // Refresh media items
-        $this->refreshMediaItems();
-    }
+    public $image;
 
     public function editMedia($id)
     {
@@ -61,7 +30,6 @@ class MediaLibrary extends Component
         Storage::disk($media->disk)->delete($media->getPath());
         $media->delete();
 
-        // Refresh media items
         $this->refreshMediaItems();
     }
 
@@ -113,5 +81,11 @@ class MediaLibrary extends Component
             'App\Models\RaceLocation' => 'Race Location',
             // Add more models as needed
         ];
+    }
+
+    public function setActiveImage($index)
+    {
+        $media = $this->mediaItems[$index - 1];
+        $this->image = $media->getUrl();
     }
 }

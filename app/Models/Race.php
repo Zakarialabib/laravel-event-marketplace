@@ -35,6 +35,11 @@ class Race extends Model implements HasMedia
         'date',
         'race_location_id',
         'category_id',
+        'docs_link',
+        'google_calendar',
+        'start_registration',
+        'end_registration',
+        'registration_deadline',
         'number_of_days',
         'number_of_racers',
         'price',
@@ -56,6 +61,10 @@ class Race extends Model implements HasMedia
         'calendar'     => 'json',
         'course'       => 'json',
         'satuts'       => RaceStatus::class,
+        'start_registration' => 'datetime',
+        'end_registration' => 'datetime',
+        'registration_deadline' => 'datetime',
+        'date' => 'datetime',
     ];
 
     public function location()
@@ -141,7 +150,7 @@ class Race extends Model implements HasMedia
             ->height(1000)
             ->quality(90)
             ->performOnCollections('local_files')
-            // ->withResponsiveImages()
+            ->withResponsiveImages()
             ->format('webp');
     }
 }

@@ -58,7 +58,7 @@ class Index extends Component
 
     public function getSlidersProperty(): Collection
     {
-        return Slider::active()->take(1)->get();
+        return Slider::active()->take(5)->get();
     }
 
     public function getFeaturedbannerProperty()
