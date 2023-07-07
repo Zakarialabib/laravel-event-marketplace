@@ -23,7 +23,7 @@ class CurrenciesSeeder extends Seeder
                 'symbol'     => 'DH',
                 'position'   => 'right',
                 'value'      => 1,
-                'is_default' => 1,
+                'is_default' => true,
             ],
 
         ]);

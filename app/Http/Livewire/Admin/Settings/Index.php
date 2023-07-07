@@ -25,6 +25,10 @@ class Index extends Component
     public $logoFile;
 
     public $iconFile;
+    
+    public $breadCrumb;
+    
+    public $breadCrumbImg;
 
     public $favicon;
 
@@ -80,8 +84,6 @@ class Index extends Component
 
     public $site_contact;
 
-    protected $listeners = ['save', 'uploadFavicon', 'uploadLogo'];
-
     public function mount()
     {
         $this->company_name = Helpers::settings('company_name');
@@ -91,6 +93,7 @@ class Index extends Component
         $this->company_address = Helpers::settings('company_address');
         $this->siteImage = Helpers::settings('site_logo');
         $this->favicon = Helpers::settings('site_favicon');
+        $this->breadCrumb = Helpers::settings('site_breadCrumb_img');
         $this->social_facebook = Helpers::settings('social_facebook');
         $this->social_twitter = Helpers::settings('social_twitter');
         $this->social_instagram = Helpers::settings('social_instagram');
@@ -161,6 +164,19 @@ class Index extends Component
             $this->alert('success', __('Favicon updated successfully!'));
             $this->iconFile = '';
             $this->favicon = $favicon;
+        } else {
+            $this->alert('error', __('Unable to upload your image'));
+        }
+    }
+    public function uploadbreadCrumb()
+    {
+        $breadCrumb = $this->upload($this->breadCrumbImg, $this->breadCrumbImg, 'breadCrumbImg');
+
+        if ($breadCrumb) {
+            Settings::set('site_breadCrumb_img', $breadCrumb);
+            $this->alert('success', __('breadcrumb Image updated successfully!'));
+            $this->breadCrumbImg = '';
+            $this->breadCrumbImg = $breadCrumb;
         } else {
             $this->alert('error', __('Unable to upload your image'));
         }

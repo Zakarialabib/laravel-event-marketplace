@@ -52,6 +52,10 @@ class SettingSeeder extends Seeder
             'value' => '',
         ],
         [
+            'key'   => 'site_breadCrumb_img',
+            'value' => '',
+        ],
+        [
             'key'   => 'page_status',
             'value' => '1',
         ],

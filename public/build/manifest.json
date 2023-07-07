@@ -37,7 +37,7 @@
     "isEntry": true,
     "css": [
       "assets/app.39a57f62.css",
-      "assets/app.6ca0f04b.css"
+      "assets/app.fc6e1cdf.css"
     ],
     "assets": [
       "assets/fa-brands-400.74833209.woff2",
@@ -51,7 +51,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app.6ca0f04b.css",
+    "file": "assets/app.fc6e1cdf.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },

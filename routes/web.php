@@ -7,6 +7,7 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Livewire\Front\Index as FrontIndex;
 use App\Http\Livewire\Front\Categories as CategoryIndex;
 use App\Http\Livewire\Front\Catalog as CatalogIndex;
+use App\Http\Livewire\Front\Races as RacesIndex;
 use App\Http\Livewire\Front\RaceDetails;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ Route::group(['middleware' => 'firewall.all'], function () {
     Route::get('/catalog', CatalogIndex::class)->name('front.catalog');
     Route::get('/categories', CategoryIndex::class)->name('front.categories');
 
-    Route::get('/races', [FrontController::class, 'races'])->name('front.races');
+    Route::get('/races',  RacesIndex::class)->name('front.races');
     Route::get('/racedetails/{slug}', RaceDetails::class)->name('front.raceDetails');
 
     Route::get('/catalog/{slug}', [FrontController::class, 'productShow'])->name('front.product');

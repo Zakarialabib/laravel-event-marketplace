@@ -143,7 +143,7 @@
                         </x-table.td>
 
                         <x-table.td>
-                            {{ $race->price }}DH
+                            {{ Helpers::format_currency($race->price) }}
                         </x-table.td>
 
                         <x-table.td>

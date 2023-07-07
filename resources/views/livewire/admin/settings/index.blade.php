@@ -96,6 +96,35 @@
                         </div>
                     </div>
                 </div>
+                <div class="w-full px-2">
+                    <div class="flex flex-col">
+                        <div class="w-1/2">
+                            @if ($breadCrumb != null)
+                                <img src="{{ asset('images/theme/' . $breadCrumb) }}" id="bradCrumbImg"
+                                    style="width: 200px; height: 150px;">
+                            @else
+                                <img src="https://via.placeholder.com/250x150?text=Placeholder+Image" id="bradCrumbImg"
+                                    style="width: 200px; height: 150px;">
+                            @endif
+                        </div>
+                        <div class="w-3/4">
+                            <div class="mb-4">
+                                <x-label for="bradCrumbImg" :value="__('Import BreadCrumb Image')" />
+                                <x-input type="file" wire:model="bradCrumbImg" />
+                                <x-input-error for="bradCrumbImg" :messages="$errors->first('bradCrumbImg')" />
+
+                                <div class="mt-5">
+                                    <x-button type="submit" wire:click.prevent='uploadbreadCrumb()' primary>
+                                        <i class="fas fa-upload"></i>
+                                        {{ __('Import') }}
+                                    </x-button>
+                                </div>
+                                <small
+                                    class="text-red-500">{{ __('Extensions accepted (jpeg,png,jpg,gif,svg), Max size 1048kb.') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="w-full flex flex-wrap">

@@ -7,16 +7,18 @@
         <section class="w-full mx-auto bg-gray-900 h-screen relative">
             <x-theme.slider :sliders="$this->sliders" />
         </section>
-        <section class="md:px-4 lg:px-10 py-16 md:py-14 lg:py-16">
+        <section class="lg:px-10 sm:px-6 lg:py-16 md:py-14">
             <h3
                 class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tighter font-heading text-black cursor-pointer pb-10 text-center">
                 {{ __('Upcoming Races') }}
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-x-8 mt-4 gap-y-4">
+            <div class="flex flex-wrap items-center mt-4 space-y-4">
                 @forelse ($this->races as $race)
-                    <x-race-card :race="$race" view="list" />
+                    <div class="relative lg:w-1/2 sm:w-full px-4">
+                        <x-race-card :race="$race" view="list" />
+                    </div>
                 @empty
-                    <div class="col-span-full bg-gray-50 py-10 mb-10 rounded-lg w-full px-4 md:-mx-4 shadow-2xl">
+                    <div class="w-full bg-gray-50 py-10 mb-10 rounded-lg px-4 md:-mx-4 shadow-2xl">
                         <h3 class="text-3xl text-center font-bold font-heading text-blue-900">
                             {{ __('No Races found') }}
                         </h3>
@@ -78,18 +80,18 @@
                     </a>
                 </h2>
 
-                <p class="text-center mb-6">Gear up for success! Visit our online store to explore a
-                    wide
-                    range of high-quality products designed for endurance athletes.</p>
+                <p class="text-center mb-6">
+                    {{ __('We have a wide range of products for you to choose from') }}
+                </p>
 
                 <hr>
                 <div class="relative">
-                <x-product-slider :products="$this->featuredProducts" />
+                    <x-product-slider :products="$this->featuredProducts" />
                 </div>
             </section>
         @endif
 
-        
+
         @if (count($this->sections) > 0)
             <section class="py-5 px-4 mx-auto bg-gray-100">
                 <div class="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full py-10">

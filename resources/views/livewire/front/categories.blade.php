@@ -176,7 +176,7 @@
                         </button>
                     </div>
                     <ul x-show="openRaceLocation">
-                        @foreach ($this->raceLocations as $location)
+                        @foreach (Helpers::getActiveRaceLocations() as $location)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('location', {{ $location->id }})">
                                     <span

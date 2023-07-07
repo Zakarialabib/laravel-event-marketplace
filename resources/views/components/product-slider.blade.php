@@ -29,10 +29,6 @@
                         slidesPerView: 4,
                         spaceBetween: 50,
                     },
-                    1200: {
-                        slidesPerView: 6,
-                        spaceBetween: 50,
-                    },
                 },
                 pagination: {
                     el: '.swiper-pagination',

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\ProductCategory;
 use App\Models\Currency;
 use App\Models\Settings;
+use App\Models\RaceLocation;
 use App\Models\Subcategory;
 use App\Models\PageSetting;
 use App\Models\Faq;
@@ -62,6 +63,13 @@ class Helpers
     public static function getActiveProductCategories()
     {
         return ProductCategory::active()
+            ->select('id', 'name')
+            ->get();
+    }
+   
+    public static function getActiveRaceLocations()
+    {
+        return RaceLocation::active()
             ->select('id', 'name')
             ->get();
     }
@@ -235,8 +243,8 @@ class Helpers
         $symbol = $currency->symbol;
 
         return $position === 'prefix'
-            ? $symbol.number_format((float) $value, 2, '.', ',')
-            : number_format((float) $value, 2, '.', ',').$symbol;
+            ? $symbol.number_format((float) $value, 0, '.', ',')
+            : number_format((float) $value, 0, '.', ',').' '.$symbol;
     }
 
     public static function handleUpload($image, $width, $height, $productName)

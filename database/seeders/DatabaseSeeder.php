@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
             LanguagesSeeder::class,
             SettingSeeder::class,
-            // FeaturedBannerSeeder::class,
+            CurrenciesSeeder::class,
             BlogSeeder::class,
             SliderSeeder::class,
             PermissionsDemoSeeder::class,

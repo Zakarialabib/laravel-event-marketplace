@@ -161,7 +161,7 @@
 
                         <div class="mb-4">
                             <span class="text-sm md:text-base font-medium text-gray-500">{{ __('Price') }}:</span>
-                            <span class="text-base md:text-lg">{{ $race->price }} DH</span>
+                            <span class="text-base md:text-lg">{{ Helpers::format_currency($race->price) }}</span>
                         </div>
                     </div>
                 </div>

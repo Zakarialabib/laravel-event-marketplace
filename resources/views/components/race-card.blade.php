@@ -6,8 +6,7 @@
         <a href="{{ route('front.raceDetails', $race->slug) }}"
             class="w-full lg:w-1/2 flex items-center md:items-start relative h-full transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
             style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
-            <div
-                class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
+            <div class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
                 <p class="font-medium leading-leading-tight">
                     {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
                 <p class="font-extrabold text-2xl leading-tight">
@@ -24,7 +23,7 @@
                 <div class="flex flex-wrap py-4 gap-8 justify-center items-center">
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            {{__('Online Registration Deadline')}}
+                            {{ __('Online Registration Deadline') }}
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->registration_deadline }}</span>
                     </p>
@@ -57,9 +56,9 @@
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
                             <i class="fas fa-money-bill-wave"></i>
                         </span>
-                        <span class="text-base md:text-lg capitalize">{{ $race->price }} DH</span>
+                        <span class="text-base md:text-lg capitalize">{{ Helpers::format_currency($race->price) }}</span>
                     </p>
-                  
+
                     @if ($race->course)
                         <ul class="flex items-center gap-4">
                             @foreach ($race->course as $key => $course)
@@ -148,7 +147,7 @@
             <ul class="pt-6 grid grid-cols-2 gap-4 justify-center items-center list-none py-6">
                 <li>
                     <span class="text-slate-400">{{ __('Price') }}</span>
-                    <p class="text-lg font-medium">{{ $race->price }} DH</p>
+                    <p class="text-lg font-medium">{{ Helpers::format_currency($race->price) }}</p>
                 </li>
                 <li>
                     <a href="{{ route('front.raceDetails', $race->slug) }}"
