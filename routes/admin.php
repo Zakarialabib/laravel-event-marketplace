@@ -29,6 +29,7 @@ use App\Http\Livewire\Admin\ProductCategory\Index as ProductCategoryIndex;
 use App\Http\Livewire\Admin\Email\Index as EmailIndex;
 use App\Http\Livewire\Admin\Menu\Index as MenuIndex;
 use App\Http\Livewire\Admin\Backup\Index as BackupIndex;
+use App\Http\Livewire\Admin\Shipping\Index as ShippingIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,6 +89,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
     Route::get('/smpt', [SmptController::class, 'index'])->name('smpt');
     Route::get('/language', LanguageIndex::class)->name('language');
+    Route::get('/shipping', ShippingIndex::class)->name('setting.shipping');
     Route::get('/backup', BackupIndex::class)->name('setting.backup');
     Route::get('/translation/{code}', EditTranslation::class)->name('translation');
     Route::get('/roles', [RolesController::class, 'index'])->name('roles');

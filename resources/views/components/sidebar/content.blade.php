@@ -118,7 +118,8 @@
         <x-sidebar.sublink title="{{ __('Settings') }}" href="{{ route('admin.settings') }}" :active="request()->routeIs('admin.settings')" />
         <x-sidebar.sublink title="{{ __('Languages') }}" href="{{ route('admin.language') }}" :active="request()->routeIs('admin.language')" />
         {{-- @endcan --}}
-        <x-sidebar.sublink title="{{ __('Popup Settings') }}" href="{{ route('admin.setting.popupsettings') }}"
+        <x-sidebar.sublink title="{{ __('Shipping') }}" href="{{ route('admin.setting.shipping') }}" :active="request()->routeIs('admin.setting.shipping')" />
+        {{-- <x-sidebar.sublink title="{{ __('Popup Settings') }}" href="{{ route('admin.setting.popupsettings') }}" --}}
             :active="request()->routeIs('admin.setting.popupsettings')" />
         <x-sidebar.sublink title="{{ __('Redirects') }}" href="{{ route('admin.setting.redirects') }}"
             :active="request()->routeIs('admin.setting.redirects')" />
