@@ -123,6 +123,15 @@
 
 
                 <div class="w-full flex flex-wrap py-6 justify-between gap-4">
+                    <p class="w-full">
+                        <label for="helthInformation"
+                            class="font-bold font-heading text-gray-600">{{ __('Health Informations') }}</label>
+                        <textarea wire:model.defer="race.helthInformation" name="" id="" rows="5"
+                            class="w-full border border-gray-200 rounded-md"></textarea>
+                        @error('race.helthInformation')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </p>
                     <div class="">
                         <label for=""
                             class="font-bold font-heading text-gray-600">{{ __('has Medical History') }}</label>

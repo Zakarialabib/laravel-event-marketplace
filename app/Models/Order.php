@@ -50,6 +50,24 @@ class Order extends Model
         'type'   => OrderType::class,
     ];
 
+    public static function generateReference()
+    {
+        $lastOrder = self::latest()->first();
+
+        if ($lastOrder) {
+            $number = substr($lastOrder->reference, -6) + 1;
+        } else {
+            $number = 1;
+        }
+
+        return date('Ymd').'-'.sprintf('%06d', $number);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class , 'order_id');
+    }
+
     // Define the relationship with the User model
     public function user()
     {

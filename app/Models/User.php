@@ -13,14 +13,18 @@ use App\Enums\Status;
 use App\Enums\RoleType;
 use Spatie\Permission\Traits\HasRoles;
 use App\Support\HasAdvancedFilter;
+use App\Traits\HasUuid;
 
 class User extends Authenticatable
 {
+    use HasUuid;
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
     use HasRoles;
     use HasAdvancedFilter;
+    
+    protected $primaryKey = 'uuid';
 
     public const ATTRIBUTES = [
         'id',
@@ -37,10 +41,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'uuid',
         'name',
         'email',
+        // 'status',
         'password',
-        'date',
     ];
 
     /**

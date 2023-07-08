@@ -50,6 +50,8 @@ class Edit extends Component
         'race.category_id'           => ['required', 'integer'],
         'race.number_of_days'        => ['required', 'numeric', 'max:2147483647'],
         'race.registration_deadline' => ['required', 'date'],
+        'race.start_registration' => ['required', 'date'],
+        'race.end_registration' => ['required', 'date'],
         'race.number_of_racers'      => ['required', 'numeric', 'max:2147483647'],
         'description'                => ['nullable'],
         'images'                     => ['nullable'],

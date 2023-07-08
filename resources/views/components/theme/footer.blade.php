@@ -1,4 +1,4 @@
-<footer class="w-full mt-auto bg-gradient-to-r from-[#FCF1F4] to-[#EDFBF9] dark:bg-transparent dark:bg-gradient-to-b dark:from-white/[0.03] dark:to-transparent">
+<footer class="w-full mt-auto divide-y-2">
     <div class="px-6">
         <div class="grid gap-y-10 gap-x-4 py-14 sm:grid-cols-3 lg:grid-cols-5 lg:py-[100px]">
             <div class="relative">
@@ -51,7 +51,7 @@
             </div>
             <div>
                 <ul class="flex flex-col gap-3 font-bold">
-                    <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{__('Legal')}}</li>
+                    <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{__('About us')}}</li>
                     <li>
                         <a href="terms-conditions.html" class="inline-block transition hover:scale-110 hover:text-secondary">Terms &amp; Conditions</a>
                     </li>

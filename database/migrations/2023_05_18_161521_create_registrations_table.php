@@ -20,6 +20,7 @@ return new class () extends Migration {
             $table->timestamp('date')->nullable();
             $table->text('additional_informations')->nullable();
             $table->json('additional_services')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

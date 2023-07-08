@@ -24,7 +24,7 @@
                                     href="{{ route('login.facebook') }}">
                                     <span class="mr-1">
                                         <img alt="..." class="w-5 mr-1"
-                                            src="{{ asset('images/login/github.svg') }}">
+                                            src="{{ asset('images/login/facebook.svg') }}">
                                     </span>
                                     <p>{{ __('Login with Facebook') }}</p>
                                 </a>

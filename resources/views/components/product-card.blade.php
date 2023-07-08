@@ -9,8 +9,7 @@
             <a href="{{ route('front.product', $product->slug) }}"
                 class="flex mx-auto mb-4 h-[180px] lg:h-[250px] rounded-t-lg"
                 style="background-image: url('{{ $product->getFirstMediaUrl('local_files') }}');
-                background-position: center;background-size: cover;"
-                onerror="this.onerror=null; this.remove();">
+                background-position: center;background-size: cover;">
                 <meta itemprop="image" content="{{ $product->getFirstMediaUrl('local_files') }}" />
             </a>
 

@@ -25,6 +25,7 @@ return new class () extends Migration {
             $table->string('meta_description')->nullable();
             $table->boolean('featured')->default(false);
             $table->boolean('status')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

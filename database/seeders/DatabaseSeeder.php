@@ -27,19 +27,14 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             SliderSeeder::class,
             PermissionsDemoSeeder::class,
-
-            // RolesSeeder::class,
             PermissionsSeeder::class,
-            // PermissionRoleSeeder::class,
-            // SuperUserSeeder::class,
-            // RoleUserSeeder::class,
-
             SponsorSeeder::class,
             CategorySeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
             RaceLocationSeeder::class,
             RaceSeeder::class,
+            FAQSeeder::class,
 
             // PageSettingsSeeder::class,
         ]);

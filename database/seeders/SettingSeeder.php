@@ -32,16 +32,12 @@ class SettingSeeder extends Seeder
             'value' => 'Casablanca, Maroc',
         ],
         [
-            'key'   => 'currency_code',
-            'value' => 'MAD',
+            'key'   => 'primary_color',
+            'value' => '#ff0000',
         ],
         [
-            'key'   => 'currency_symbol',
-            'value' => 'DH',
-        ],
-        [
-            'key'   => 'currency_position',
-            'value' => 'right',
+            'key'   => 'secondary_color',
+            'value' => '#000000',
         ],
         [
             'key'   => 'site_logo',

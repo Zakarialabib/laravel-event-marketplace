@@ -1,7 +1,7 @@
 <div>
     <x-modal wire:model="editModal">
         <x-slot name="title">
-            {{ __('Edit Parnter') }}
+            {{ __('Edit Partner') }}
         </x-slot>
 
         <x-slot name="content">

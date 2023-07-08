@@ -9,6 +9,7 @@ use App\Http\Livewire\Front\Categories as CategoryIndex;
 use App\Http\Livewire\Front\Catalog as CatalogIndex;
 use App\Http\Livewire\Front\Races as RacesIndex;
 use App\Http\Livewire\Front\Checkout as CheckoutIndex;
+use App\Http\Livewire\Front\CheckoutRace as CheckoutRace;
 use App\Http\Livewire\Front\RaceDetails;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
@@ -45,13 +46,16 @@ Route::group(['middleware' => 'firewall.all'], function () {
     Route::get('/generate-sitemap', [FrontController::class, 'generateSitemaps'])->name('generate-sitemaps');
     Route::get('/redirect/{url}', [FrontController::class, 'redirect'])->name('redirect');
     
-    Route::get('/caisse', CheckoutIndex::class)->name('front.checkout');
-
+    Route::get('/confirmation-shopping', CheckoutIndex::class)->name('front.checkout');
+    
     Route::get('/approval', function () {
         return view('auth.approval');
     })->name('auth.approval');
 
     Route::middleware('auth')->group(function () {
+        
+        Route::get('/confirmation-inscription', CheckoutRace::class)->name('front.checkout-race');
+        
         Route::get('/mon-compte', [FrontController::class, 'myaccount'])->name('front.myaccount');
     });
 

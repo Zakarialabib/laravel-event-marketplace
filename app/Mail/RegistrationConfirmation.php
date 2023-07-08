@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
+use App\Models\User;
 
 class RegistrationConfirmation extends Mailable
 {
@@ -25,11 +26,11 @@ class RegistrationConfirmation extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.orders.shipped',
+            markdown: 'emails.registration-confirmation',
             with: [
                 'url'      => '/login',
                 'user'     => $this->user,
-                'password' => $this->password,
+                'password' => $this->user->password,
             ],
         );
     }

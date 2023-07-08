@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->dateTime('start_registration');
             $table->dateTime('end_registration');
             $table->dateTime('registration_deadline')->nullable();
-            $table->boolean('google_calendar');
+            $table->boolean('google_calendar')->default(false);
             $table->string('docs_link')->nullable();
             $table->string('google_calendar_id')->nullable();
             $table->string('images')->nullable();
@@ -38,6 +38,7 @@ return new class () extends Migration {
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->boolean('status')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

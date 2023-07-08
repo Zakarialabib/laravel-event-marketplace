@@ -36,9 +36,11 @@ class AddToCart extends Component
         $this->product = $product;
     }
 
-    public function AddToCart(Product $product_id)
+    public function AddToCart($product_id)
     {
-        Cart::instance('shopping')->add($product_id, $this->quantity)->associate('App\Models\Product');
+        $product = Product::find($product_id);
+
+        Cart::instance('shopping')->add($product->price, $product->name, $this->quantity, $product->price)->associate('App\Models\Product');
 
         $this->emit('cartCountUpdated');
 

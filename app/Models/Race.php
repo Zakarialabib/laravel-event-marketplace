@@ -5,18 +5,23 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Gloudemans\Shoppingcart\CanBeBought;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use App\Enums\RaceStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Race extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use HasFactory;
     use HasAdvancedFilter;
-
+    use SoftDeletes;
+    use CanBeBought;
+    
     public const ATTRIBUTES = [
         'id',
         'name',

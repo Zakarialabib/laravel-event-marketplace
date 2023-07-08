@@ -14,13 +14,14 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('redirects', function (Blueprint $table) {
+        Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
-            $table->string('old_url');
-            $table->string('new_url')->nullable();
-            $table->string('http_status_code')->nullable();
+            $table->string('email', 191)->unique();
+            $table->string('name', 191)->nullable();
+            $table->string('tag', 255)->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +32,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('redirects');
+        Schema::dropIfExists('subscribers');
     }
 };

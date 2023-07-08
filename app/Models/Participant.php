@@ -6,10 +6,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasUuid;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\Status;
 
 class Participant extends Model
 {
     use HasFactory;
+    use HasUuid;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -24,6 +29,7 @@ class Participant extends Model
         'zip_code',
         'emergency_contact_name',
         'emergency_contact_phone_number',
+        'health_informations',
         'has_medical_history',
         'is_taking_medications',
         'has_medication_allergies',
@@ -34,7 +40,7 @@ class Participant extends Model
     ];
 
     protected $casts = [
-        // 'status' => Status::class,
+        'status' => Status::class,
     ];
 
     public function raceLocation()

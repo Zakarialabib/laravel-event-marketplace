@@ -74,7 +74,7 @@
                     <div class="py-2 flex w-full">
                         <a href="{{ route('front.raceDetails', $race->slug) }}"
                             class="bottom-0 w-full text-center cursor-pointer bg-green-600 py-4 px-2 text-lg front-bold text-white hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
-                            {{ __('Check race') }}
+                            {{ __('See more') }}
                         </a>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                 <li>
                     <a href="{{ route('front.raceDetails', $race->slug) }}"
                         class="bottom-0 w-full rounded-2xl px-6 text-center cursor-pointer bg-green-600 py-4 text-lg front-bold text-white hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
-                        {{ __('Check race') }}
+                        {{ __('See more') }}
                     </a>
                 </li>
             </ul>
