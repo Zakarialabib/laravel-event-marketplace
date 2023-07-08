@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Page;
 
 use App\Models\Page;
-use App\Models\PageSetting;
+use App\Models\Pagesetting;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -78,7 +78,7 @@ class Create extends Component
 
         $this->page->save();
 
-        $pageSettings = new PageSetting([
+        $pageSettings = new Pagesetting([
             'page_id'     => $this->page->id,
             'language_id' => $this->page->language_id,
         ]);

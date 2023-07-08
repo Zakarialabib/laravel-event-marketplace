@@ -21,7 +21,7 @@
                         <x-label for="category_id" :value="__('Category')" required />
                         <x-select-list
                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="category_id" name="category_id" wire:model.lazy="blog.category_id" :options="$this->listsForFields['categories']" />
+                            id="category_id" name="category_id" wire:model.lazy="blog.category_id" :options="$this->categories" />
                         <x-input-error :messages="$errors->get('blog.category_id')" for="blog.category_id" class="mt-2" />
                     </div>
 
@@ -29,7 +29,7 @@
                         <x-label for="language_id" :value="__('Language')" required />
                         <x-select-list
                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="language_id" name="language_id" wire:model.lazy="blog.language_id" :options="$this->listsForFields['languages']" />
+                            id="language_id" name="language_id" wire:model.lazy="blog.language_id" :options="$this->languages" />
                         <x-input-error :messages="$errors->get('blog.language_id')" for="blog.language_id" class="mt-2" />
                     </div>
 

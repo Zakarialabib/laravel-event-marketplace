@@ -6,7 +6,7 @@ namespace App\Http\Livewire\Admin\Page;
 
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\PageSetting;
+use App\Models\Pagesetting;
 use App\Http\Livewire\WithSorting;
 use Livewire\WithPagination;
 
@@ -172,9 +172,9 @@ class Settings extends Component
         $this->footerSettings[] = $column;
     }
 
-    public function updatePageSettings($id)
+    public function updatePagesettings($id)
     {
-        $this->settings = PageSettings::where('page_id', $id)->first();
+        $this->settings = Pagesettings::where('page_id', $id)->first();
 
         $this->validate([
             'header'             => 'nullable|string',

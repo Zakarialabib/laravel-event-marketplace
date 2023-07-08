@@ -36,13 +36,6 @@ class Create extends Component
         'blog.meta_desc'   => 'nullable|max:200',
     ];
 
-    public function mount(Blog $blog)
-    {
-        $this->blog = $blog;
-
-        $this->initListsForFields();
-    }
-
     public function render(): View|Factory
     {
         // abort_if(Gate::denies('blog_create'), 403);
@@ -55,6 +48,8 @@ class Create extends Component
         $this->resetErrorBag();
 
         $this->resetValidation();
+
+        $this->blog = new Blog();
 
         $this->createBlog = true;
     }
@@ -80,9 +75,13 @@ class Create extends Component
         $this->createBlog = false;
     }
 
-    protected function initListsForFields(): void
+    public function getBlogCategoriesProperty()
     {
-        $this->listsForFields['categories'] = BlogCategory::pluck('title', 'id')->toArray();
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+        return BlogCategory::select('title', 'id')->get();
+    }
+
+    public function getLanguagesProperty()
+    {
+        return Language::select('name', 'id')->get();
     }
 }

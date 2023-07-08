@@ -62,7 +62,7 @@
                     </x-table.tr>
                     <x-table.tr x-show="openSettings === {{ $pagesetting->id }}" class="bg-gray-100">
                         <x-table.td colspan="4">
-                            <form wire:submit.prevent="updatePageSettings({{ $pagesetting->id }})">
+                            <form wire:submit.prevent="updatePagesettings({{ $pagesetting->id }})">
                             </form>
                         </x-table.td>
                     </x-table.tr>

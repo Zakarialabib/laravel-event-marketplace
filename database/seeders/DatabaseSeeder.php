@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             RaceSeeder::class,
             FAQSeeder::class,
 
-            // PageSettingsSeeder::class,
+            // PagesettingsSeeder::class,
         ]);
 
         \App\Models\Race::factory(10)->create();

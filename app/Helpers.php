@@ -11,7 +11,7 @@ use App\Models\Page;
 use App\Models\Settings;
 use App\Models\RaceLocation;
 use App\Models\Subcategory;
-use App\Models\PageSetting;
+use App\Models\Pagesetting;
 use App\Models\Faq;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -38,10 +38,10 @@ class Helpers
 
     public static function pageSettings()
     {
-        $pageSettings = PageSetting::where('is_default', true)->first();
+        $pageSettings = Pagesetting::where('is_default', true)->first();
 
         if ( ! $pageSettings) {
-            $pageSettings = PageSetting::first();
+            $pageSettings = Pagesetting::first();
         }
 
         return $pageSettings;

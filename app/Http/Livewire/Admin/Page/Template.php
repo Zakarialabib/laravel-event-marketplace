@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Page;
 
 use App\Models\Page;
-use App\Models\PageSetting;
+use App\Models\Pagesetting;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -62,7 +62,7 @@ class Template extends Component
 
         // dd($page);
 
-        $pageSettings = new PageSetting([
+        $pageSettings = new Pagesetting([
             'page_id' => $page->id,
             // 'language_id' => $page->language_id ?? null,
         ]);

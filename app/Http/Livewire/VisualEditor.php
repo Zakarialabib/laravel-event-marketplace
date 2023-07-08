@@ -468,7 +468,7 @@ class VisualEditor extends Component
 
     public function store()
     {
-        // PageSettings::find(1);
+        // Pagesettings::find(1);
         // $this->menuWidget =
     }
 

@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\PageSetting;
+use App\Models\Pagesetting;
 
-class PageSettingsSeeder extends Seeder
+class PagesettingsSeeder extends Seeder
 {
     /** Run the database seeds. */
     public function run(): void
     {
-        PageSetting::create([
+        Pagesetting::create([
             'id'             => 1,
             'headerSettings' => json_encode([
                 'numberOfColumns' => 1,
