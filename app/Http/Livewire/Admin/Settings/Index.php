@@ -25,9 +25,9 @@ class Index extends Component
     public $logoFile;
 
     public $iconFile;
-    
+
     public $breadCrumb;
-    
+
     public $breadCrumbImg;
 
     public $favicon;
@@ -168,6 +168,7 @@ class Index extends Component
             $this->alert('error', __('Unable to upload your image'));
         }
     }
+
     public function uploadbreadCrumb()
     {
         $breadCrumb = $this->upload($this->breadCrumbImg, $this->breadCrumbImg, 'breadCrumbImg');

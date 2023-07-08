@@ -1,4 +1,4 @@
-<div x-data="{ isSidebar: false, }">
+<div x-data="{ isSidebar: false, }" class="relative">
     <header x-data="{ isSticky: true, scrollPosition: 0 }" x-init="window.addEventListener('scroll', () => {
         scrollPosition = window.scrollY;
         isSticky = scrollPosition >= 0;
@@ -108,10 +108,12 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('login')">
+                            {{-- route with anchor login  --}}
+                            <x-dropdown-link href="{{ route('auth.index') }}" x-on:click.prevent="isTab = 'login'">
                                 {{ __('Login') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('register')">
+                            {{-- route with anchor --}}
+                            <x-dropdown-link href="{{ route('auth.index') }}" x-on:click.prevent="isTab = 'register'">
                                 {{ __('Register') }}
                             </x-dropdown-link>
                         </x-slot>
@@ -171,7 +173,7 @@
                     @foreach (\App\Helpers::getActiveCategories() as $category)
                         <li>
                             <a href="{{ route('front.categories') }}?type={{ $category->name }}"
-                                class="text-lg text-green-800 text-center font-semibold leading-5 font-heading hover:text-green-800 hover:underline py-2 transition-colors text-primary hover:text-accent dark:text-white dark:hover:text-accent">
+                                class="text-sans text-sm uppercase text-green-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
                                 {{ $category->name }}
                             </a>
                         </li>
@@ -181,22 +183,22 @@
 
             <div class="border-t border-gray-900 py-2"></div>
 
-            <ul class="lg:text-3xl sm:text-xl font-bold font-heading mb-4" x-data="{ isBrand: false }">
+            <ul class="lg:text-3xl sm:text-xl font-bold font-heading mb-4" x-data="{ isProduct: false }">
                 <li class="mb-2 hover:underline hover:text-green-500">
-                    <button @click="isBrand = !isBrand" type="button">
-                        {{ __('Partners') }}
+                    <button @click="isProduct = !isProduct" type="button">
+                        {{ __('Products') }}
                         <i class="fas fa-angle-down pl-5"></i>
                     </button>
                 </li>
-                <ul x-show="isBrand" class="py-2 space-y-4 font-semibold font-heading">
-                    {{-- @foreach (\App\Helpers::getActiveBrands() as $brand)
-                            <li>
-                                <a href="{{ route('front.brands') }}?c={{ $brand->id }}"
-                                    class="text-lg text-green-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
-                                    {{ $brand->name }}
-                                </a>
-                            </li>
-                        @endforeach --}}
+                <ul x-show="isProduct" class="py-2 space-y-4 font-semibold font-heading">
+                    @foreach (\App\Helpers::getActiveProductCategories() as $category)
+                        <li>
+                            <a href="{{ route('front.catalog') }}?c={{ $category->id }}"
+                                class="text-sans text-sm uppercase text-green-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
+                                {{ $category->name }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </ul>
 
@@ -233,12 +235,14 @@
                     <div class="border-t border-gray-900 py-2"></div>
                     <div class="w-full lg:text-3xl sm:text-xl font-bold font-heading">
                         <div class="py-3">
-                            <a class="hover:text-green-500" href="{{ route('login') }}">{{ __('Login') }}
+                            <a class="hover:text-green-500" href="{{ route('auth.index') }}"
+                                x-on:click.prevent="isTab = 'login'">{{ __('Login') }}
                             </a>
                         </div>
                         {{ __('or') }}
                         <div class="py-3">
-                            <a class="hover:text-green-500" href="{{ route('register') }}">
+                            <a class="hover:text-green-500" href="{{ route('auth.index') }}"
+                                x-on:click.prevent="isTab = 'register'">
                                 {{ __('Register') }}</a>
                         </div>
                     </div>

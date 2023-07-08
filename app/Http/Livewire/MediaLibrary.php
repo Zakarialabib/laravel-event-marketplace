@@ -7,7 +7,6 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Intervention\Image\Facades\Image;
 
 class MediaLibrary extends Component
 {

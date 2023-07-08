@@ -92,7 +92,7 @@
                     </x-table.td> --}}
 
                     <x-table.td>
-                        {{ $product->price }}DH
+                        {{ Helpers::format_currency($product->price) }}
                         @if ($product->discount_price)
                             // {{ $product->discount_price }}DH
                         @endif

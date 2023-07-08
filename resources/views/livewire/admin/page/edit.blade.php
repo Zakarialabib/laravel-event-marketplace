@@ -21,9 +21,8 @@
                     </div>
 
                     <div class="w-full px-2">
-                        <x-label for="details" :value="__('Details')" />
-                        <livewire:quill :value="$description" />
-                        <x-input-error :messages="$errors->get('page.details')" for="page.details" class="mt-2" />
+                        <x-label for="description" :value="__('Description')" />
+                        <x-trix name="description" wire:model.lazy="description" />
                     </div>
                     
                     <div class="w-full py-2 px-3">

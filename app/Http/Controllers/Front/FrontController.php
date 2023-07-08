@@ -17,14 +17,12 @@ use App\Http\Controllers\Controller;
 
 class FrontController extends Controller
 {
- 
     public function productShow($slug)
     {
         $product = Product::where('slug', $slug)->first() ?? abort(404);
 
         return view('front.product', compact('product'));
     }
-
 
     public function categoryPage($slug)
     {
@@ -38,12 +36,12 @@ class FrontController extends Controller
         return view('front.subcategories');
     }
 
-     public function SubcategoryPage($slug)
-     {
-         $subcategory = Subcategory::where('slug', $slug)->first() ?? abort(404);
+    public function SubcategoryPage($slug)
+    {
+        $subcategory = Subcategory::where('slug', $slug)->first() ?? abort(404);
 
-         return view('front.subcategory-page', compact('subcategory'));
-     }
+        return view('front.subcategory-page', compact('subcategory'));
+    }
 
     public function brands()
     {

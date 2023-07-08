@@ -8,6 +8,7 @@ use App\Http\Livewire\Front\Index as FrontIndex;
 use App\Http\Livewire\Front\Categories as CategoryIndex;
 use App\Http\Livewire\Front\Catalog as CatalogIndex;
 use App\Http\Livewire\Front\Races as RacesIndex;
+use App\Http\Livewire\Front\Checkout as CheckoutIndex;
 use App\Http\Livewire\Front\RaceDetails;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
@@ -43,6 +44,8 @@ Route::group(['middleware' => 'firewall.all'], function () {
     Route::get('/page/{slug}', [FrontController::class, 'dynamicPage'])->name('front.dynamicPage');
     Route::get('/generate-sitemap', [FrontController::class, 'generateSitemaps'])->name('generate-sitemaps');
     Route::get('/redirect/{url}', [FrontController::class, 'redirect'])->name('redirect');
+    
+    Route::get('/caisse', CheckoutIndex::class)->name('front.checkout');
 
     Route::get('/approval', function () {
         return view('auth.approval');

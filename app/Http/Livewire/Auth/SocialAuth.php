@@ -10,7 +10,6 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Enums\Status;
-use Livewire\Redirector;
 
 class SocialAuth extends Component
 {

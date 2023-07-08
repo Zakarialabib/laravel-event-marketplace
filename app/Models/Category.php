@@ -52,7 +52,7 @@ class Category extends Model
         return $query->where('type', $type);
     }
 
-      // Accessor for formatted category name
+    // Accessor for formatted category name
     public function getFormattedNameAttribute()
     {
         return ucfirst($this->name);

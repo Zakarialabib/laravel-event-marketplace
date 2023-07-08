@@ -58,7 +58,6 @@ class Slider extends Model implements HasMedia
             ->width(1000)
             ->height(400)
             ->performOnCollections('local_files')
-            ->withResponsiveImages()
             ->format('webp');
     }
 }

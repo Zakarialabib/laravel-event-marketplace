@@ -11,8 +11,6 @@ use App\Models\RaceLocation;
 use App\Models\Sponsor;
 use App\Models\Section;
 use App\Models\Slider;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 

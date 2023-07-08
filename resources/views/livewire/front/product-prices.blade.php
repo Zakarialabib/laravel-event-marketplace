@@ -4,7 +4,7 @@
         <div class="h-[3rem] w-auto">
             <input type="text" wire:model.debounce.300="search" placeholder="{{ __('Search for products') }}"
                 autocomplete=""
-                class="w-full h-full text-lg border-0 focus:ring-transparent bg-gray-100 text-gray-900 text-xs focus:outline-none py-2 rounded-md">
+                class="w-full h-full lg:text-lg border-0 focus:ring-transparent bg-gray-100 text-gray-900 text-xs focus:outline-none py-2 rounded-md">
         </div>
 
         <div class="block">

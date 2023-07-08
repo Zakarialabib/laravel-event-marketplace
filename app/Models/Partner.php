@@ -52,7 +52,6 @@ class Partner extends Model implements HasMedia
             ->width(500)
             ->height(500)
             ->performOnCollections('local_files')
-            ->withResponsiveImages()
             ->format('webp');
     }
 }

@@ -55,40 +55,40 @@ class ProductShow extends Component
         $this->quantity += 1;
     }
 
-     public function AddToCart($product_id)
-     {
-         $product = Product::find($product_id);
+    public function AddToCart($product_id)
+    {
+        $product = Product::find($product_id);
 
-         $this->product_id = $product->id;
-         $this->product_name = $product->name;
-         $this->product_price = $product->price;
-         $this->product_qty = $this->quantity;
+        $this->product_id = $product->id;
+        $this->product_name = $product->name;
+        $this->product_price = $product->price;
+        $this->product_qty = $this->quantity;
 
-         Cart::instance('shopping')->add($this->product_id, $this->product_name, $this->product_qty, $this->product_price)->associate('App\Models\Product');
+        Cart::instance('shopping')->add($this->product_id, $this->product_name, $this->product_qty, $this->product_price)->associate('App\Models\Product');
 
-         $this->emit('cartCountUpdated');
+        $this->emit('cartCountUpdated');
 
-         $this->alert(
-             'success',
-             __('Product added to cart successfully!'),
-             [
-                 'position'          => 'center',
-                 'timer'             => 3000,
-                 'toast'             => true,
-                 'text'              => '',
-                 'confirmButtonText' => 'Ok',
-                 'cancelButtonText'  => 'Cancel',
-                 'showCancelButton'  => false,
-                 'showConfirmButton' => false,
-             ]
-         );
-     }
+        $this->alert(
+            'success',
+            __('Product added to cart successfully!'),
+            [
+                'position'          => 'center',
+                'timer'             => 3000,
+                'toast'             => true,
+                'text'              => '',
+                'confirmButtonText' => 'Ok',
+                'cancelButtonText'  => 'Cancel',
+                'showCancelButton'  => false,
+                'showConfirmButton' => false,
+            ]
+        );
+    }
 
     public function mount(Product $product)
     {
         $this->product = $product;
 
-        $this->product->options = json_decode($this->product->options);
+        $this->product->options = json_decode($product->options);
 
         // $this->brand_products = Product::active()->where('brand_id', $product->brand_id)->take(3)->get();
         $this->relatedProducts = Product::active()

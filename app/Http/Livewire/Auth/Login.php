@@ -8,7 +8,6 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\User;
-use Livewire\Redirector;
 
 class Login extends Component
 {

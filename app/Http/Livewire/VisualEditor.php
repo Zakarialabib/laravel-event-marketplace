@@ -419,11 +419,11 @@ class VisualEditor extends Component
         $this->cardContent = array_values($this->cardContent);
     }
 
-       public function removeTextContent($itemIndex): void
-       {
-           $this->textContent[$itemIndex] = '';
-           unset($this->textContent[$itemIndex]);
-       }
+    public function removeTextContent($itemIndex): void
+    {
+        $this->textContent[$itemIndex] = '';
+        unset($this->textContent[$itemIndex]);
+    }
 
     public function removeLogo()
     {

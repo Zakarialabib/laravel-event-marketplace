@@ -70,27 +70,27 @@ class Brands extends Component
         $this->resetPage();
     }
 
-      public function clearFilter($filter)
-      {
-          switch($filter) {
-              case 'category':
-                  $this->category_id = null;
-                  unset($this->selectedFilters['category']);
+    public function clearFilter($filter)
+    {
+        switch($filter) {
+            case 'category':
+                $this->category_id = null;
+                unset($this->selectedFilters['category']);
 
-                  break;
-              case 'subcategory':
-                  $this->subcategory_id = null;
-                  unset($this->selectedFilters['subcategory']);
+                break;
+            case 'subcategory':
+                $this->subcategory_id = null;
+                unset($this->selectedFilters['subcategory']);
 
-                  break;
-              case 'brand':
-                  $this->brand_id = null;
-                  unset($this->selectedFilters['brand']);
+                break;
+            case 'brand':
+                $this->brand_id = null;
+                unset($this->selectedFilters['brand']);
 
-                  break;
-          }
-          $this->resetPage();
-      }
+                break;
+        }
+        $this->resetPage();
+    }
 
     public function mount()
     {

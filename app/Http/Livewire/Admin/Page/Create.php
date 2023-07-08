@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Http\Livewire\Quill;
 
 class Create extends Component
 {
@@ -25,22 +24,21 @@ class Create extends Component
 
     public $image;
 
-    public $details;
+    public $description;
 
     public $listeners = [
         'createPage',
-        'quill_value_updated' => Quill::EVENT_VALUE_UPDATED,
     ];
 
-    public function quill_value_updated($value)
+    public function updatedDescription($value)
     {
-        $this->page->details = $value;
+        $this->description = $value;
     }
 
     protected $rules = [
         'page.title'            => ['required', 'string', 'max:255'],
         'page.slug'             => ['required', 'max:255'],
-        'page.details'          => ['required'],
+        'description'           => ['required'],
         'page.meta_title'       => ['nullable', 'max:255'],
         'page.meta_description' => ['nullable', 'max:255'],
         'page.language_id'      => ['nullable'],
@@ -61,7 +59,7 @@ class Create extends Component
 
         $this->page = new Page();
 
-        $this->description = $this->page->details;
+        $this->description = $this->page->description;
 
         $this->createPage = true;
     }
@@ -72,10 +70,10 @@ class Create extends Component
 
         $this->page->slug = Str::slug($this->page->name);
 
-        if ($this->photo) {
-            $imageName = Str::slug($this->page->name).'-'.date('Y-m-d H:i:s').'.'.$this->photo->extension();
-            $this->photo->storeAs('pages', $imageName);
-            $this->page->photo = $imageName;
+        if ($this->description) {
+            $imageName = Str::slug($this->page->name).'-'.date('Y-m-d H:i:s').'.'.$this->description->extension();
+            $this->description->storeAs('pages', $imageName);
+            $this->page->description = $imageName;
         }
 
         $this->page->save();

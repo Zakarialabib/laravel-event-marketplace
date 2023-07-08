@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         View::share('languages', $this->getLanguages());
-        
+
         Factory::macro('getImageUrl', function (int $width, int $height): string {
             return sprintf(
                 'https://picsum.photos/%d/%d',
@@ -55,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
 
     private function getLanguages()
     {
-        if (!Schema::hasTable('languages')) {
+        if ( ! Schema::hasTable('languages')) {
             return [];
         }
 
@@ -68,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $sessionLocale = Session::get('locale');
 
-        if (!empty($sessionLocale) && in_array($sessionLocale, array_keys($this->getLanguages()))) {
+        if ( ! empty($sessionLocale) && in_array($sessionLocale, array_keys($this->getLanguages()))) {
             App::setLocale($sessionLocale);
         } else {
             $defaultLanguage = Language::where('is_default', true)->first();

@@ -54,17 +54,17 @@ class Race extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'options'      => 'json',
-        'features'     => 'json',
-        'social_media' => 'json',
-        'sponsors'     => 'json',
-        'calendar'     => 'json',
-        'course'       => 'json',
-        'satuts'       => RaceStatus::class,
-        'start_registration' => 'datetime',
-        'end_registration' => 'datetime',
+        'options'               => 'json',
+        'features'              => 'json',
+        'social_media'          => 'json',
+        'sponsors'              => 'json',
+        'calendar'              => 'json',
+        'course'                => 'json',
+        'satuts'                => RaceStatus::class,
+        'start_registration'    => 'datetime',
+        'end_registration'      => 'datetime',
         'registration_deadline' => 'datetime',
-        'date' => 'datetime',
+        'date'                  => 'datetime',
     ];
 
     public function location()
@@ -150,7 +150,6 @@ class Race extends Model implements HasMedia
             ->height(1000)
             ->quality(90)
             ->performOnCollections('local_files')
-            ->withResponsiveImages()
             ->format('webp');
     }
 }

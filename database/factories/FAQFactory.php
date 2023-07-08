@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator as Faker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FAQ>
@@ -18,8 +19,9 @@ class FAQFactory extends Factory
     public function definition(): array
     {
         $faker = \Faker\Factory::create();
+
         return [
-            'title' => $faker->sentence(),
+            'title'       => $faker->sentence(),
             'description' => $faker->paragraph(),
         ];
     }

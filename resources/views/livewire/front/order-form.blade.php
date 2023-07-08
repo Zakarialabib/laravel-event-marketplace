@@ -1,11 +1,24 @@
 <div>
-    <form wire:submit.prevent="save" class="container mx-auto mb-4">
+    <form wire:submit.prevent="save" class="mx-auto mb-4 border-b" x-data="{ isOpen: false }">
         <div class="flex justify-center mb-4">
             <h5 class="text-gray-500 font-bold text-center text-md font-heading uppercase py-2">
-                {{ __('Order Now') }}
+                <button type="button" class="text-blue-500 hover:text-blue-300 transition cursor-pointer"
+                    x-on:click="isOpen = !isOpen">
+                    <i class="fas fa-chevron-down"></i>
+                    {{ __('Order Now') }}
+                    <i class="fas fa-chevron-down"></i>
+                </button>
             </h5>
         </div>
-        <div class="flex flex-wrap items-center">
+        <div class="flex flex-wrap items-center" x-show="isOpen" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 transform scale-90"
+        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-0 transform scale-90"
+        x-cloak>
+
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('FullName') }}</label>
                 <input wire:model="name"

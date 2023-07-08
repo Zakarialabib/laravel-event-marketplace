@@ -18,11 +18,12 @@ return new class () extends Migration {
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->text('details');
+            $table->text('description');
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('image')->nullable();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

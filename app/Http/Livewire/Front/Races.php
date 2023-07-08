@@ -6,10 +6,7 @@ namespace App\Http\Livewire\Front;
 
 use App\Http\Livewire\WithSorting;
 use App\Models\RaceLocation;
-use App\Models\Category;
 use App\Models\Race;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -39,7 +36,7 @@ class Races extends Component
     public $selectedFilters = [];
 
     protected $queryString = [
-        'sorting'     => ['except' => '', 'as' => 'filter'],
+        'sorting' => ['except' => '', 'as' => 'filter'],
     ];
 
     public function getRaceLocationsProperty()

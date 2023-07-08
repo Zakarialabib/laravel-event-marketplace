@@ -13,15 +13,17 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Auth\SocialAuth;
+use App\Http\Livewire\Auth\Index as AuthIndex;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    // Route::get('register', [RegisteredUserController::class, 'create'])
+    //     ->name('register');
+    Route::get('auth', AuthIndex::class)->name('auth.index');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    //     ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
@@ -60,7 +62,6 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
-
 
 Route::get('/login/facebook', [SocialAuth::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('/login/facebook/callback', [SocialAuth::class, 'handleFacebookCallback']);

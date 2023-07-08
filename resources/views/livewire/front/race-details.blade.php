@@ -56,74 +56,59 @@
         </div>
     </section>
     <section class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '' }">
-        <div class="w-full h-auto pb-5">
+        <div class="w-full h-auto max-w-screen-xl mx-auto pb-5">
             <!-- Tab buttons -->
-            <div class="w-full flex flex-wrap justify-center relative bg-gray-100 border-b-2 border-green-600">
+            <div class="overflow-y-auto flex lg:justify-center sm:justify-start text-sm relative bg-gray-100 border-b-2 border-green-600">
                 <button
-                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
+                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab0'"
                     :class="{
-                        'border-red-700': activeTab === 'tab0',
                         'bg-green-700': activeTab === 'tab0',
-                        'text-green-200': activeTab === 'tab0',
-                        'hover:text-red-500': activeTab === 'tab0',
+                        'text-white': activeTab === 'tab0',
+                        'hover:text-green-400': activeTab === 'tab0',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab0' }">
-                        {{ __('Overview') }}
-                    </h4>
+                    {{ __('Overview') }}
                 </button>
                 <button
-                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
+                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab1'"
                     :class="{
-                        'border-red-700': activeTab === 'tab1',
                         'bg-green-700': activeTab === 'tab1',
-                        'text-green-200': activeTab === 'tab1',
-                        'hover:text-red-500': activeTab === 'tab1',
+                        'text-white': activeTab === 'tab1',
+                        'hover:text-green-400': activeTab === 'tab1',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab1' }">
-                        {{ __('Details') }}
-                    </h4>
+                    {{ __('Details') }}
                 </button>
                 <button
-                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
+                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab2'"
                     :class="{
-                        'border-red-700': activeTab === 'tab2',
                         'bg-green-700': activeTab === 'tab2',
-                        'text-green-200': activeTab === 'tab2',
-                        'hover:text-red-500': activeTab === 'tab2',
+                        'text-white': activeTab === 'tab2',
+                        'hover:text-green-400': activeTab === 'tab2',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab2' }">
-                        {{ __('Calendar') }}
-                    </h4>
+                    {{ __('Calendar') }}
 
                 </button>
                 <button
-                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
+                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab3'"
                     :class="{
-                        'border-red-700': activeTab === 'tab3',
                         'bg-green-700': activeTab === 'tab3',
-                        'text-green-200': activeTab === 'tab3',
-                        'hover:text-red-500': activeTab === 'tab3',
+                        'text-white': activeTab === 'tab3',
+                        'hover:text-green-400': activeTab === 'tab3',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab3' }">
-                        {{ __('Sponsors') }}
-                    </h4>
+                    {{ __('Sponsors') }}
                 </button>
                 <button
-                    class="inline-flex items-center py-3 md:px-8 sm:py-2 sm:px-5 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
+                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
                     type="button" @click="activeTab = 'tab4'"
                     :class="{
-                        'border-red-700': activeTab === 'tab4',
                         'bg-green-700': activeTab === 'tab4',
-                        'text-green-200': activeTab === 'tab4',
-                        'hover:text-red-500': activeTab === 'tab4',
+                        'text-white': activeTab === 'tab4',
+                        'hover:text-green-400': activeTab === 'tab4',
                     }">
-                    <h4 class="inline-block" :class="{ 'text-green-100': activeTab === 'tab4' }">
-                        {{ __('Regitration') }}
-                    </h4>
+                    {{ __('Regitration') }}
                 </button>
             </div>
         </div>
@@ -314,14 +299,15 @@
         }
     }">
         <div class="container relative px-4 py-10 mx-auto">
-            
+
             <h2 class="mb-10 font-heading text-9xl md:text-10xl xl:text-11xl leading-tight">
                 {{ "FAQ's" }}</h2>
-                <div class="flex transition-all duration-500 relative" :style="{ left: -(slideIndex * 100) + '%' }">
+            <div class="flex transition-all duration-500 relative" :style="{ left: -(slideIndex * 100) + '%' }">
                 @foreach (Helpers::getActiveFaqs() as $index => $faq)
                     <div class="flex-shrink-0 px-4 lg:px-1 w-full lg:w-1/3">
                         <div class="relative py-9 px-16 h-full bg-white rounded-3xl">
-                            <h3 class="font-heading mb-4 text-3xl md:text-4xl font-bold leading-tighter">{{ $faq->title }}</h3>
+                            <h3 class="font-heading mb-4 text-3xl md:text-4xl font-bold leading-tighter">
+                                {{ $faq->title }}</h3>
                             <a @click="expandFaq = {{ $index }}"
                                 class="absolute -bottom-6 right-10 w-12 h-12 bg-green-500 rounded-full cursor-pointer flex items-center justify-center">
                                 <i class="fas fa-arrow-down text-white"></i>

@@ -20,9 +20,8 @@
                         <x-input wire:model.lazy="page.slug" type="text" id="slug" required />
                     </div>
                     <div class="w-full px-2">
-                        <x-label for="details" :value="__('Details')" />
-                        <livewire:quill :value="$details" />
-                        <x-input-error :messages="$errors->get('page.details')" for="page.details" class="mt-2" />
+                        <x-label for="description" :value="__('Description')" />
+                        <x-trix name="description" wire:model.lazy="description" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="meta_title" :value="__('Meta title')" />

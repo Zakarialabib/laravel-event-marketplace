@@ -180,13 +180,13 @@ class Checkout extends Component
         }
     }
 
-      public function decreaseQuantity($rowId)
-      {
-          $cartItem = Cart::instance('shopping')->get($rowId);
-          $qty = $cartItem->qty - 1;
-          Cart::instance('shopping')->update($rowId, $qty);
-          $this->emit('checkoutCartUpdated');
-      }
+    public function decreaseQuantity($rowId)
+    {
+        $cartItem = Cart::instance('shopping')->get($rowId);
+        $qty = $cartItem->qty - 1;
+        Cart::instance('shopping')->update($rowId, $qty);
+        $this->emit('checkoutCartUpdated');
+    }
 
     public function increaseQuantity($rowId)
     {
@@ -225,6 +225,6 @@ class Checkout extends Component
 
     public function render(): View|Factory
     {
-        return view('livewire.front.checkout');
+        return view('livewire.front.checkout')->extends('layouts.app');
     }
 }

@@ -42,10 +42,10 @@ class Newsletters extends Component
         return view('livewire.front.newsletters');
     }
 
-     public function updated($propertyName): void
-     {
-         $this->validateOnly($propertyName);
-     }
+    public function updated($propertyName): void
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function subscribe()
     {

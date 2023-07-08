@@ -111,31 +111,31 @@ class Index extends Component
         return view('livewire.admin.section.index', compact('sections'));
     }
 
-      // Section  Delete
-      public function delete(Section $section)
-      {
-          //   abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    // Section  Delete
+    public function delete(Section $section)
+    {
+        //   abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-          $section->delete();
+        $section->delete();
 
-          $this->alert('warning', __('Section Deleted successfully!'));
-      }
+        $this->alert('warning', __('Section Deleted successfully!'));
+    }
 
-     // Section  Clone
-     public function clone(Section $section)
-     {
-         $section_details = Section::find($section->id);
+    // Section  Clone
+    public function clone(Section $section)
+    {
+        $section_details = Section::find($section->id);
 
-         Section::create([
-             'language_id' => $section_details->language_id,
-             'page'        => $section_details->page,
-             'title'       => $section_details->title,
-             'subtitle'    => $section_details->subtitle,
-             'link'        => $section_details->link,
-             'image'       => $section_details->image,
-             'description' => $section_details->description,
-             'status'      => 0,
-         ]);
-         $this->alert('success', __('Section Cloned successfully!'));
-     }
+        Section::create([
+            'language_id' => $section_details->language_id,
+            'page'        => $section_details->page,
+            'title'       => $section_details->title,
+            'subtitle'    => $section_details->subtitle,
+            'link'        => $section_details->link,
+            'image'       => $section_details->image,
+            'description' => $section_details->description,
+            'status'      => 0,
+        ]);
+        $this->alert('success', __('Section Cloned successfully!'));
+    }
 }

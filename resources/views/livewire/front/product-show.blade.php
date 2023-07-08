@@ -1,21 +1,20 @@
 <div>
-    
-@section('meta')
-    <meta itemprop="url" content="{{ URL::current() }}" />
-    <meta property="og:title" content="{{ $product->meta_title }}">
-    <meta property="og:description" content="{!! $product->meta_description !!}">
-    <meta property="og:url" content="{{ URL::current() }}">
-    <meta property="og:image" content="{{ asset('images/products/' . $product->image) }}">
-    <meta property="og:image:secure_url" content="{{ asset('images/products/' . $product->image) }}">
-    <meta property="og:image:width" content="1000">
-    <meta property="og:image:height" content="1000">
-    {{-- <meta property="product:brand" content="{{ $product->brand?->name }}"> --}}
-    <meta property="product:availability" content="in stock">
-    <meta property="product:condition" content="new">
-    <meta property="product:price:amount" content="{{ $product->price }}">
-    <meta property="product:price:currency" content="MAD">
-@endsection
 
+    @section('meta')
+        <meta itemprop="url" content="{{ URL::current() }}" />
+        <meta property="og:title" content="{{ $product->meta_title }}">
+        <meta property="og:description" content="{!! $product->meta_description !!}">
+        <meta property="og:url" content="{{ URL::current() }}">
+        <meta property="og:image" content="{{ asset('images/products/' . $product->image) }}">
+        <meta property="og:image:secure_url" content="{{ asset('images/products/' . $product->image) }}">
+        <meta property="og:image:width" content="1000">
+        <meta property="og:image:height" content="1000">
+        {{-- <meta property="product:brand" content="{{ $product->brand?->name }}"> --}}
+        <meta property="product:availability" content="in stock">
+        <meta property="product:condition" content="new">
+        <meta property="product:price:amount" content="{{ $product->price }}">
+        <meta property="product:price:currency" content="MAD">
+    @endsection
 
     <section class="relative table w-full pt-16 py-24">
         <div itemtype="https://schema.org/Product" itemscope>
@@ -49,7 +48,7 @@
                             <div itemprop="offers" itemtype="https://schema.org/AggregateOffer" itemscope>
                                 <p class="inline-block mb-4 text-2xl font-bold font-heading">
                                     <span>
-                                        {{ $product->price }}DH
+                                        {{ Helpers::format_currency($product->price) }}
                                     </span>
                                     @if ($product->old_price && $product->discount != 0)
                                         <span class="bg-red-500 text-white rounded-xl px-4 py-2 text-sm ml-4">
@@ -70,19 +69,19 @@
                                 @if ($product->old_price && $product->discount != 0)
                                     <p class="mb-8 text-blue-300">
                                         <span class="font-normal text-base text-gray-400 line-through">
-                                            {{ $product->old_price }}DH
+                                            {{ Helpers::format_currency($product->old_price) }}DH
                                         </span>
                                     </p>
                                 @endif
                             </div>
                             @if ($product->options['size'])
                                 <div class="mb-4">
-                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">size
+                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">{{__('Size')}}
                                     </h3>
-                                    <ul class="flex flex-wrap colors ltr:-mr-3 rtl:-ml-3">
+                                    <ul class="flex flex-wrap colors -mr-3 rtl:-ml-3">
                                         @foreach ($product->options['size'] as $index => $option)
                                             <li
-                                                class="cursor-pointer rounded border  w-9 md:w-11 h-9 md:h-11 p-1 mb-2 md:mb-3 ltr:mr-2 rtl:ml-2 ltr:md:mr-3 rtl:md:ml-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
+                                                class="cursor-pointer rounded border w-11 h-11 p-2 mb-2 md:mb-3 mr-2 rtl:ml-2 md:mr-3 rtl:md:ml-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
                                                 <span class="block w-full h-full rounded">
                                                     {{ $option }}
                                                 </span>
@@ -93,12 +92,12 @@
                             @endif
                             @if ($product->options['color'])
                                 <div class="mb-4">
-                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">color
+                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">{{__('Color')}}
                                     </h3>
-                                    <ul class="flex flex-wrap colors ltr:-mr-3 rtl:-ml-3">
+                                    <ul class="flex flex-wrap colors -mr-3 rtl:-ml-3">
                                         @foreach ($product->options['color'] as $index => $option)
                                             <li
-                                                class="cursor-pointer rounded border  w-9 md:w-11 h-9 md:h-11 p-1 mb-2 md:mb-3 ltr:mr-2 rtl:ml-2 ltr:md:mr-3 rtl:md:ml-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
+                                                class="cursor-pointer rounded border  w-9 md:w-11 h-9 md:h-11 p-1 mb-2 md:mb-3 mr-2 rtl:ml-2 md:mr-3 rtl:md:ml-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
                                                 <span class="block w-full h-full rounded"
                                                     style="background-color: {{ $option }};"></span>
                                             </li>
@@ -106,7 +105,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <div class="flex mb-5 pb-5 border-b">
+                            <div class="flex items-center mb-5 pb-5 border-b">
                                 <div class="mr-6">
                                     <div
                                         class="inline-flex items-center px-4 font-semibold font-heading text-gray-500 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
@@ -149,18 +148,18 @@
 
                             <livewire:front.order-form :product="$product" />
 
-                            <ul class="my-4 ">
+                            <ul class="w-full flex flex-wrap justify-between my-4 ">
                                 <li class="text-gray-500 py-1">
                                     <i class="text-blue-600 fa fa-check" aria-hidden="true"></i>
                                     {{ __('Fast delivery') }}
                                 </li>
                                 <li class="text-gray-500 py-1">
                                     <i class="text-blue-600 fa fa-check" aria-hidden="true"></i>
-                                    {{ __('Watch specialist over 40 years of experience') }}
+                                    {{ __('Free return') }}
                                 </li>
                                 <li class="text-gray-500 py-1">
                                     <i class="text-blue-600 fa fa-check" aria-hidden="true"></i>
-                                    <strong>{{ __('Official dealer') }}</strong>
+                                    {{ __('Free shipping') }}
                                 </li>
                             </ul>
 
@@ -244,4 +243,6 @@
             </div>
         </div>
     </section>
+    
+    @livewire('front.cart-count')
 </div>

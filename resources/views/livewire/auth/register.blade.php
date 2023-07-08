@@ -74,7 +74,7 @@
         </div>
 
         <div class="flex px-4 items-center justify-between mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" x-on:click.prevent="isTab = 'login'">
                 {{ __('Already registered?') }}
             </a>
 

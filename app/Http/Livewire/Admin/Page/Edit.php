@@ -31,19 +31,19 @@ class Edit extends Component
         Quill::EVENT_VALUE_UPDATED,
     ];
 
-    public function quill_value_updated($value)
+    public function updatedDescription($value)
     {
-        $this->page->details = $value;
+        $this->description = $value;
     }
 
-   protected $rules = [
-       'page.title'            => ['required', 'string', 'max:255'],
-       'page.slug'             => ['required', 'max:255'],
-       'page.details'          => ['required'],
-       'page.meta_title'       => ['nullable', 'max:255'],
-       'page.meta_description' => ['nullable', 'max:255'],
-       'page.language_id'      => ['nullable', 'integer'],
-   ];
+    protected $rules = [
+        'page.title'            => ['required', 'string', 'max:255'],
+        'page.slug'             => ['required', 'max:255'],
+        'description'           => ['required'],
+        'page.meta_title'       => ['nullable', 'max:255'],
+        'page.meta_description' => ['nullable', 'max:255'],
+        'page.language_id'      => ['nullable', 'integer'],
+    ];
 
     public function render(): View|Factory
     {
@@ -62,7 +62,7 @@ class Edit extends Component
 
         $this->image = $this->page->image;
 
-        $this->description = $this->page->details;
+        $this->description = $this->page->description;
 
         $this->editModal = true;
     }

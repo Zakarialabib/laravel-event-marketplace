@@ -1,12 +1,7 @@
 <div>
-    <section x-data="{ isTab: 'login' }" class="w-screen pt-16 pb-24">
-        <div class="flex flex-col justify-center items-center"
+    <section x-data="{ isTab: 'login' }" class="w-screen ">
+        <div class="flex flex-col justify-center items-center py-24"
             style="background-image: url(https://picsum.photos/seed/picsum/1920/1080);background-position: center center;background-size: fill;">
-            <a class="text-3xl pt-10 pb-8 px-10 text-center font-bold text-white" href="#">
-                <img class="h-24 w-auto" src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy"
-                    alt="{{ Helpers::settings('site_title') }}" />
-            </a>
-
             <div class="w-full lg:w-6/12 sm:w-8/12 px-4">
                 <div
                     class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-50 border-0">
@@ -43,7 +38,7 @@
                                 </a>
                             @endif
                         </div>
-                        <div x-show="isTab === 'login'">
+                        <div x-show="isTab === 'login'" id="login">
                             <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                                 <div class="text-gray-500 text-center mb-3 font-bold uppercase text-xl">
                                     <small>{{ __('Or sign in with credentials') }}</small>
@@ -51,7 +46,7 @@
                             </div>
                             @livewire('auth.login')
                         </div>
-                        <div x-show="isTab === 'register'">
+                        <div x-show="isTab === 'register'" id="register">
                             <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                                 <div class="text-gray-500 text-center mb-3 font-bold">
                                     <small>{{ __('Register as') }}</small>

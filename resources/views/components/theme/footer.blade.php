@@ -34,7 +34,9 @@
                     <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{__('Quick Menu')}}</li>
                     <li><a href="{{ route('front.index')}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{__('Home')}}</a></li>
                     <li><a href="{{ route('front.races')}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{__('Races')}}</a></li>
-                    <li><a href="{{ route('front.about')}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{__('About Us')}}</a></li>
+                    @foreach (Helpers::getActivePages() as $page)
+                    <li><a href="{{ route('front.dynamicPage', $page->slug)}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{ $page->title }}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <div>

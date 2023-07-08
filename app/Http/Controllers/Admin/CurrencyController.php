@@ -81,18 +81,18 @@ class CurrencyController extends Controller
         //--- Redirect Section Ends
     }
 
-      public function status($id1, $id2)
-      {
-          $data = Currency::findOrFail($id1);
-          $data->is_default = $id2;
-          $data->update();
-          $data = Currency::where('id', '!=', $id1)->update(['is_default' => 0]);
-          //--- Redirect Section
-          $msg = __('Data Updated Successfully.');
+    public function status($id1, $id2)
+    {
+        $data = Currency::findOrFail($id1);
+        $data->is_default = $id2;
+        $data->update();
+        $data = Currency::where('id', '!=', $id1)->update(['is_default' => 0]);
+        //--- Redirect Section
+        $msg = __('Data Updated Successfully.');
 
-          return response()->json($msg);
-          //--- Redirect Section Ends
-      }
+        return response()->json($msg);
+        //--- Redirect Section Ends
+    }
 
     public function destroy($id)
     {

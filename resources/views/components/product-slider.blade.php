@@ -53,7 +53,7 @@
         },
     
     }" x-init="init">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper overflow-y-auto">
             @foreach ($products as $index => $product)
                 <div class="swiper-slide">
                     <x-product-card :product="$product" />

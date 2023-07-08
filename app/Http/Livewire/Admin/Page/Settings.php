@@ -83,94 +83,94 @@ class Settings extends Component
         $this->selected = [];
     }
 
-     // Menu manipulation
-     public function addMenu()
-     {
-         $this->menuItems[] = [
-             'menuName' => '',
-             'items'    => [
-                 [
-                     'label' => '',
-                     'url'   => '',
-                 ],
-             ],
-         ];
-     }
+    // Menu manipulation
+    public function addMenu()
+    {
+        $this->menuItems[] = [
+            'menuName' => '',
+            'items'    => [
+                [
+                    'label' => '',
+                    'url'   => '',
+                ],
+            ],
+        ];
+    }
 
-     public function removeMenu($index)
-     {
-         unset($this->menuItems[$index]);
-         $this->menuItems = array_values($this->menuItems);
-     }
+    public function removeMenu($index)
+    {
+        unset($this->menuItems[$index]);
+        $this->menuItems = array_values($this->menuItems);
+    }
 
-     public function addMenuItem($index)
-     {
-         $this->menuItems[$index]['items'][] = [
-             'label' => '',
-             'url'   => '',
-         ];
-     }
+    public function addMenuItem($index)
+    {
+        $this->menuItems[$index]['items'][] = [
+            'label' => '',
+            'url'   => '',
+        ];
+    }
 
-     public function removeMenuItem($menuIndex, $itemIndex)
-     {
-         unset($this->menuItems[$menuIndex]['items'][$itemIndex]);
-         $this->menuItems[$menuIndex]['items'] = array_values($this->menuItems[$menuIndex]['items']);
-     }
+    public function removeMenuItem($menuIndex, $itemIndex)
+    {
+        unset($this->menuItems[$menuIndex]['items'][$itemIndex]);
+        $this->menuItems[$menuIndex]['items'] = array_values($this->menuItems[$menuIndex]['items']);
+    }
 
-     public function saveMenuItems()
-     {
-         foreach ($this->menuItems as $index => $menu) {
-             $menuName = $menu['menuName'];
+    public function saveMenuItems()
+    {
+        foreach ($this->menuItems as $index => $menu) {
+            $menuName = $menu['menuName'];
 
-             foreach ($menu['items'] as $item) {
-                 $label = $item['label'];
-                 $url = $item['url'];
-             }
-         }
-     }
+            foreach ($menu['items'] as $item) {
+                $label = $item['label'];
+                $url = $item['url'];
+            }
+        }
+    }
 
-     public function usePredefinedMenu(): void
-     {
-         $this->menuItems[] = [
-             'menuName' => 'Main Menu',
-             'items'    => [
-                 ['label' => 'Home', 'url' => '/'],
-                 ['label' => 'About', 'url' => '/about'],
-                 ['label' => 'Contact', 'url' => '/contact'],
-             ],
-         ];
-     }
+    public function usePredefinedMenu(): void
+    {
+        $this->menuItems[] = [
+            'menuName' => 'Main Menu',
+            'items'    => [
+                ['label' => 'Home', 'url' => '/'],
+                ['label' => 'About', 'url' => '/about'],
+                ['label' => 'Contact', 'url' => '/contact'],
+            ],
+        ];
+    }
 
-     // Header settings
-     public function saveHeaderSettings()
-     {
-         $column = [
-             'numberOfColumns' => $this->headerSettings['numberOfColumns'],
-             'headerHeight'    => $this->headerSettings['headerHeight'],
-             'logoUrl'         => $this->headerSettings['logoUrl'],
-             'logoSize'        => $this->headerSettings['logoSize'],
-             'logoPosition'    => $this->headerSettings['logoPosition'],
-             'hasSearchIcon'   => $this->headerSettings['hasSearchIcon'],
-             'searchIcon'      => $this->headerSettings['searchIcon'],
-         ];
+    // Header settings
+    public function saveHeaderSettings()
+    {
+        $column = [
+            'numberOfColumns' => $this->headerSettings['numberOfColumns'],
+            'headerHeight'    => $this->headerSettings['headerHeight'],
+            'logoUrl'         => $this->headerSettings['logoUrl'],
+            'logoSize'        => $this->headerSettings['logoSize'],
+            'logoPosition'    => $this->headerSettings['logoPosition'],
+            'hasSearchIcon'   => $this->headerSettings['hasSearchIcon'],
+            'searchIcon'      => $this->headerSettings['searchIcon'],
+        ];
 
-         // Save the values to the headerLayout component
-         $this->headerSettings[] = $column;
-     }
+        // Save the values to the headerLayout component
+        $this->headerSettings[] = $column;
+    }
 
-     // Footer settings
-     public function saveFooterSettings()
-     {
-         $column = [
-             'numberOfColumns' => $this->footerSettings['numberOfColumns'],
-             'footerHeight'    => $this->footerSettings['footerHeight'],
-             'hasSocialIcons'  => $this->footerSettings['hasSocialIcons'],
-             'socialIcons'     => $this->footerSettings['socialIcons'],
-         ];
+    // Footer settings
+    public function saveFooterSettings()
+    {
+        $column = [
+            'numberOfColumns' => $this->footerSettings['numberOfColumns'],
+            'footerHeight'    => $this->footerSettings['footerHeight'],
+            'hasSocialIcons'  => $this->footerSettings['hasSocialIcons'],
+            'socialIcons'     => $this->footerSettings['socialIcons'],
+        ];
 
-         // Save the values to the footerLayout component
-         $this->footerSettings[] = $column;
-     }
+        // Save the values to the footerLayout component
+        $this->footerSettings[] = $column;
+    }
 
     public function updatePageSettings($id)
     {

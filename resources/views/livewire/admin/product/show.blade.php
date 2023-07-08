@@ -61,7 +61,7 @@
                                     {{ __('Price') }}
                                 </x-table.th>
                                 <x-table.td>
-                                    {{ $product?->price }}
+                                    {{ Helpers::format_currency($product?->price) }}
                                 </x-table.td>
                             </x-table.tr>
 

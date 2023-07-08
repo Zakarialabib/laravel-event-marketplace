@@ -54,31 +54,31 @@
 
                         </div>
                         <button type="button" @click="showSidebar = true"
-                        class="flex lg:hidden items-center justify-center w-12 h-12 duration-500 ease-in-out text-white hover:text-green-200">
-                        <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+                            class="flex lg:hidden items-center justify-center w-12 h-12 duration-500 ease-in-out text-white hover:text-green-200">
+                            <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="sm:flex sm:flex-wrap mb-10 xl:mb-24">
-        @foreach ($races as $race)
-            <div class="md:pl-7 w-full px-10 shadow-xl bg-gray-50">
-                <div class="w-full mb-4">
+    <section class="w-full pb-10">
+        <div class="sm:flex sm:flex-wrap mb-10 xl:mb-24">
+            @foreach ($races as $race)
+                <div class="md:px-6 w-full px-10 py-6 drop-shadow-xl bg-gray-100">
                     <div class="xl:flex xl:items-center p-10 xl:pb-12 xl:px-14 xl:pt-16 bg-white rounded-3xl">
                         <div class="mb-8 xl:mb-0 xl:w-4/12 xl:pr-6">
-                            <a href="{{ route('front.raceDetails', $race->slug) }}">
-                                <img class="mx-auto object-cover" src="{{ $race->getFirstMediaUrl('local_files') }}"
-                                    alt="{{ $race->name }}">
+                            <a href="{{ route('front.raceDetails', $race->slug) }}"
+                                class="w-full flex items-center md:items-start relative h-full transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
+                                style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;height:27rem">
                             </a>
                         </div>
-                        <div class="xl:w-8/12">
-                            <div class="xl:flex xl:justify-between xl:items-start mb-4 xl:mb-20">
+                        <div class="xl:w-8/12 xl:block md:flex items-center">
+                            <div class="xl:flex xl:justify-between xl:items-start mb-4 xl:mb-20 xl:w-full md:w-1/2">
                                 <div class="xl:pr-3 mb-6 xl:mb-0 xl:w-8/12">
                                     <a href="{{ route('front.raceDetails', $race->slug) }}">
                                         <p class="mb-4 text-xl leading-8 font-heading font-medium hover:underline">
@@ -129,15 +129,16 @@
                                     <span>{{ Helpers::format_currency($race->price) }}</span>
                                 </p>
                             </div>
-                            <div class="flex flex-wrap items-center">
-                                <div class="w-1/2 xl:w-6/12">
+                            <div
+                                class="flex xl:flex-wrap text-center items-center md:flex-col xl:w-full md:w-1/2 md:my-auto">
+                                <div class="w-1/2 xl:w-6/12 md:w-1/3 mx-auto mb-4">
 
                                     @if ($race->course)
                                         <ul class="flex items-center gap-4">
                                             @foreach ($race->course as $key => $course)
-                                                <li class="text-base inline-flex md:text-lg">
+                                                <li class="text-sans inline-flex md:text-lg">
                                                     <span
-                                                        class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
+                                                        class="text-lg uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
                                                         {{ $course['name'] }}
                                                     </span>
                                                 </li>
@@ -145,10 +146,10 @@
                                         </ul>
                                     @endif
                                 </div>
-                                <div class="w-1/2 xl:w-2/12">
+                                <div class="w-1/2 xl:w-2/12 md:w-1/3 mx-auto">
                                     {{ \Carbon\Carbon::parse($race->date)->format('F,d,Y') }}
                                 </div>
-                                <div class="mt-6 xl:mt-0 w-full xl:w-4/12">
+                                <div class="mt-6 xl:mt-0 w-full xl:w-4/12 md:w-1/3 mx-auto">
                                     <div class="lg:mx-auto xl:mr-0 lg:max-w-max"><a
                                             class="block py-4 px-10 w-full text-lg leading-5 text-white font-medium tracking-tighter font-heading text-center bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"
                                             href="{{ route('front.raceDetails', $race->slug) }}">
@@ -160,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+    </section>
 </div>

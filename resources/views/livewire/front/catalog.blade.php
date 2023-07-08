@@ -76,7 +76,7 @@
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-            })" class="relative w-10/12 mx-auto flex flex-row">
+            })" class="relative w-10/12 mx-auto flex flex-row overflow-y-auto">
                 <div class="absolute inset-y-0 left-0 z-10 flex items-center">
                     <button @click="swiper.slidePrev()"
                         class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
@@ -183,5 +183,5 @@
             </div>
         </div>
     </div>
-
+    @livewire('front.cart-count')
 </div>

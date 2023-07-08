@@ -8,8 +8,6 @@ use App\Http\Livewire\WithSorting;
 use App\Models\RaceLocation;
 use App\Models\Category;
 use App\Models\Race;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -40,7 +38,7 @@ class Categories extends Component
 
     protected $queryString = [
         'category_name' => ['except' => '', 'as' => 'type'],
-        'sorting'     => ['except' => '', 'as' => 'filter'],
+        'sorting'       => ['except' => '', 'as' => 'filter'],
     ];
 
     public function getRaceLocationsProperty()

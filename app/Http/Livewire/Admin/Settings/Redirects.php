@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Redirector;
 
 class Redirects extends Component
 {

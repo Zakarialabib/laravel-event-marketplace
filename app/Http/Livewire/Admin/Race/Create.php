@@ -47,15 +47,15 @@ class Create extends Component
 
     protected $rules = [
 
-        'race.name'             => ['required', 'string', 'max:255'],
-        'race.date'             => ['required', 'date', 'max:255'],
-        'race.price'            => ['required', 'numeric', 'max:2147483647'],
-        'race.race_location_id' => ['required', 'integer'],
-        'race.category_id'      => ['required', 'integer'],
-        'race.number_of_days'   => ['required', 'numeric', 'max:2147483647'],
-        'race.registration_deadline'   => ['required', 'date'],
-        'race.number_of_racers' => ['required', 'numeric', 'max:2147483647'],
-        'description'           => ['nullable'],
+        'race.name'                  => ['required', 'string', 'max:255'],
+        'race.date'                  => ['required', 'date', 'max:255'],
+        'race.price'                 => ['required', 'numeric', 'max:2147483647'],
+        'race.race_location_id'      => ['required', 'integer'],
+        'race.category_id'           => ['required', 'integer'],
+        'race.number_of_days'        => ['required', 'numeric', 'max:2147483647'],
+        'race.registration_deadline' => ['required', 'date'],
+        'race.number_of_racers'      => ['required', 'numeric', 'max:2147483647'],
+        'description'                => ['nullable'],
 
         // 'race.meta_title'       => ['nullable', 'string', 'max:255'],
         // 'race.meta_description' => ['nullable', 'string', 'max:255'],

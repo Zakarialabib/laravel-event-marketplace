@@ -18,20 +18,20 @@ class RaceSeeder extends Seeder
     {
         Race::insert([
             [
-                'id'               => 1,
-                'name'             => 'Triathlon Dar Bouazza',
-                'description'      => 'Triathlon Dar Bouazza',
-                'images'           => \App\Helpers::addMediaFromUrlToCollection(new Race(), 'https://static.lematin.ma/files/lematin/images/articles/2017/09/Triathlon-.jpg', 'local_files')->file_name,
-                'date'             => '2023-10-10',
-                'slug'             => 'triatlhon-dar-bouazza-casablanca',
-                'race_location_id' => 1,
-                'category_id'      => 1,
-                'registration_deadline'   => date('Y-m-d', strtotime('+30 day')),
-                'number_of_days'   => 3,
-                'number_of_racers' => 100,
-                'price'            => 1000,
-                'discount_price'   => 800,
-                'social_media'     => json_encode([
+                'id'                    => 1,
+                'name'                  => 'Triathlon Dar Bouazza',
+                'description'           => 'Triathlon Dar Bouazza',
+                'images'                => \App\Helpers::addMediaFromUrlToCollection(new Race(), 'https://static.lematin.ma/files/lematin/images/articles/2017/09/Triathlon-.jpg', 'local_files')->file_name,
+                'date'                  => '2023-10-10',
+                'slug'                  => 'triatlhon-dar-bouazza-casablanca',
+                'race_location_id'      => 1,
+                'category_id'           => 1,
+                'registration_deadline' => date('Y-m-d', strtotime('+30 day')),
+                'number_of_days'        => 3,
+                'number_of_racers'      => 100,
+                'price'                 => 1000,
+                'discount_price'        => 800,
+                'social_media'          => json_encode([
                     ['name' => 'Facebook', 'value' => 'https://www.facebook.com/triathlondarabouazza'],
                     ['name' => 'Instagram', 'value' => 'https://www.instagram.com/triathlondarabouazza'],
                 ]),
@@ -40,9 +40,9 @@ class RaceSeeder extends Seeder
                     ['name' => 'XYZ Corporation', 'image' => 'https://example.com/images/xyz.png', 'link' => 'https://www.xyz.com'],
                 ]),
                 'course' => json_encode([
-                    ['name' => 'swim' ,'content' => 'Swim course details'],
-                    ['name' => 'bike' , 'content' => 'Bike course details'],
-                    ['name' => 'run' ,'content' => 'Run course details'],
+                    ['name' => 'swim', 'content' => 'Swim course details'],
+                    ['name' => 'bike', 'content' => 'Bike course details'],
+                    ['name' => 'run', 'content' => 'Run course details'],
                 ]),
                 'features' => json_encode([
                     'Tshirt',

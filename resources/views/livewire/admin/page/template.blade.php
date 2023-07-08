@@ -28,9 +28,9 @@
                             <x-input wire:model.lazy="selectedTemplate.slug" type="text" />
                         </div>
                         <div class="w-full px-2">
-                            <x-label for="details" :value="__('Details')" />
-                            <x-input.textarea wire:model.lazy="selectedTemplate.details" id="details" />
-                            <x-input-error :messages="$errors->get('selectedTemplate.details')" for="selectedTemplate.details" class="mt-2" />
+                            <x-label for="description" :value="__('Description')" />
+                            <x-input.textarea wire:model.lazy="selectedTemplate.description" id="description" />
+                            <x-input-error :messages="$errors->get('selectedTemplate.description')" for="selectedTemplate.description" class="mt-2" />
                         </div>
 
                         <div class="xl:w-1/2 md:w-full px-2">

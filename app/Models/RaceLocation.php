@@ -42,7 +42,6 @@ class RaceLocation extends Model implements HasMedia
         'date' => 'datetime',
     ];
 
-
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -70,7 +69,6 @@ class RaceLocation extends Model implements HasMedia
             ->width(1000)
             ->height(1000)
             ->performOnCollections('local_files')
-            ->withResponsiveImages()
             ->format('webp');
     }
 }

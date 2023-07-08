@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use App\Enums\Status;
-use Livewire\Redirector;
 
 class Register extends Component
 {
@@ -23,7 +22,6 @@ class Register extends Component
     public $phone;
     public $city; // Set the default city to 'Casablanca'
     public $country; // Set
-
 
     public function mount()
     {

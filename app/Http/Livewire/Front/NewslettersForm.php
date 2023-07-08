@@ -59,7 +59,7 @@ class NewslettersForm extends Component
         }
     }
 
-     /* @var array */
+    /* @var array */
     private function resetInputFields()
     {
         $this->email = '';

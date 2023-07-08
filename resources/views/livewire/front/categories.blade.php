@@ -3,8 +3,7 @@
 
     @section('meta')
         <meta itemprop="url" content="{{ URL::current() }}">
-        <meta property="og:title"
-            content="@if (isset($category_name)) {{ $category_name }} @endif">
+        <meta property="og:title" content="@if (isset($category_name)) {{ $category_name }} @endif">
         <meta property="og:url" content="{{ URL::current() }}">
     @endsection
 
@@ -51,7 +50,7 @@
         <section class="mb-10 md:mb-11 lg:mb-12 xl:mb-14 lg:pb-1 xl:pb-0">
             <div class="flex items-center justify-center -mt-2 pb-0.5 mb-4 md:mb-5 lg:mb-6 2xl:mb-7 3xl:mb-8">
                 <h3 class="text-lg pt-5 md:text-xl lg:text-2xl 2xl:text-3xl xl:leading-10 font-bold text-heading">
-                    {{ __('Shop By Category') }}
+                    {{ __('Race By Type') }}
                 </h3>
             </div>
             <div x-data="{ swiper: null }" x-init="swiper = new Swiper($refs.container, {
@@ -67,7 +66,8 @@
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-            })" class="relative w-10/12 mx-auto flex flex-row">
+            })"
+                class="relative w-10/12 mx-auto flex flex-row overflow-y-auto">
                 <div class="absolute inset-y-0 left-0 z-10 flex items-center">
                     <button @click="swiper.slidePrev()"
                         class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
@@ -83,7 +83,7 @@
                         @foreach (Helpers::getActiveCategories() as $category)
                             <div class="swiper-slide w-auto px-4">
                                 <div class="relative inline-flex mb-3.5 md:mb-4 lg:mb-5 xl:mb-6 mx-auto rounded-full">
-                                    <button type="button" wire:click="filterType('category', '{{ $category->name }}')">
+                                    <button type="button" wire:click="filterType('category', {{ $category->name }})">
                                         <div class="flex">
                                             <span
                                                 style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px none; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
@@ -95,20 +95,7 @@
                                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                                     decoding="async" data-nimg="intrinsic"
                                                     class="object-cover bg-gray-300 rounded-full"
-                                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: medium none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"><noscript></noscript></span>
-                                        </div>
-                                        <div
-                                            class="absolute top left bg-black w-full h-full opacity-0 transition-opacity duration-300 group-hover:opacity-30 rounded-full">
-                                        </div>
-                                        <div class="absolute top left h-full w-full flex items-center justify-center">
-                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                viewBox="0 0 512 512"
-                                                class="text-white text-base sm:text-xl lg:text-2xl xl:text-3xl transform opacity-0 scale-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-100"
-                                                height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z">
-                                                </path>
-                                            </svg>
+                                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: medium none; margin: auto; display: block; width: 0px; height: 0px; min-width: 50%; max-width: 100%; min-height: 50%; max-height: 100%;"></span>
                                         </div>
                                         <h4
                                             class="text-heading text-sm md:text-base xl:text-lg font-semibold capitalize">
@@ -271,13 +258,14 @@
                 </div>
 
             </div>
-            <div class="w-full lg:w-3/4 py-6 px-4" x-data="{ loading: false }" wire:loading.class.delay="opacity-50">
-                <div class="mb-10 grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 md:gap-4"
-                    id="race-container">
+            <div class="xl:w-3/4 md:w-full py-6 px-4" x-data="{ loading: false }" wire:loading.class.delay="opacity-50">
+                <div class="mb-10 flex flex-wrap gap-6 md:gap-4" id="race-container">
                     @forelse ($races as $race)
-                        <x-race-card :race="$race" view="grid" />
+                        <div class="xl:w-1/2 md:w-full">
+                            <x-race-card :race="$race" view="grid" />
+                        </div>
                     @empty
-                        <div class="col-span-full bg-gray-50 py-10 mb-10 w-full px-4 shadow-xl">
+                        <div class="w-full bg-gray-50 py-10 mb-10 px-4 shadow-xl">
                             <h3 class="text-3xl text-center font-bold font-heading text-blue-900">
                                 {{ __('No Races found') }}
                             </h3>

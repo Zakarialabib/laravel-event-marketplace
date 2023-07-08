@@ -40,7 +40,7 @@ class Product extends Model implements HasMedia
 
     protected $casts = [
         'options' => 'json',
-        'status' => Status::class,
+        'status'  => Status::class,
     ];
 
     // Define the relationship with the ProductCategory model
@@ -72,7 +72,6 @@ class Product extends Model implements HasMedia
             ->width(1000)
             ->height(1000)
             ->performOnCollections('local_files')
-            ->withResponsiveImages()
             ->format('webp');
     }
 }

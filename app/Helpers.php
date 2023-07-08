@@ -7,6 +7,7 @@ namespace App;
 use App\Models\Category;
 use App\Models\ProductCategory;
 use App\Models\Currency;
+use App\Models\Page;
 use App\Models\Settings;
 use App\Models\RaceLocation;
 use App\Models\Subcategory;
@@ -52,25 +53,33 @@ class Helpers
             ->select('id', 'name')
             ->get();
     }
-   
+
     public static function getActiveFaqs()
     {
         return Faq::active()
             ->select('id', 'title', 'description')
             ->get();
     }
- 
+
     public static function getActiveProductCategories()
     {
         return ProductCategory::active()
             ->select('id', 'name')
             ->get();
     }
-   
+
     public static function getActiveRaceLocations()
     {
         return RaceLocation::active()
             ->select('id', 'name')
+            ->get();
+    }
+
+    public static function getActivePages()
+    {
+        return Page::select('id', 'slug', 'title')
+            ->inRandomOrder()
+            ->take(5)
             ->get();
     }
 

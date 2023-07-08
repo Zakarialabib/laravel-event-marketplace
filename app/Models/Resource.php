@@ -15,7 +15,7 @@ class Resource extends Model implements HasMedia
     use HasFactory;
     use HasAdvancedFilter;
     use InteractsWithMedia;
-    
+
     public const ATTRIBUTES = [
         'id',
         'title',
@@ -57,7 +57,6 @@ class Resource extends Model implements HasMedia
             ->height(1000)
             ->quality(90)
             ->performOnCollections('local_files')
-            ->withResponsiveImages()
             ->format('webp');
     }
 }

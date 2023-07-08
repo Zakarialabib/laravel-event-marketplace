@@ -5,7 +5,7 @@
         class="flex flex-wrap items-center bg-gray-50 rounded-lg w-full border-2 border-green-800 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
         <a href="{{ route('front.raceDetails', $race->slug) }}"
             class="w-full lg:w-1/2 flex items-center md:items-start relative h-full transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
-            style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;">
+            style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;height:27rem">
             <div class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
                 <p class="font-medium leading-leading-tight">
                     {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>

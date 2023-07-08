@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
