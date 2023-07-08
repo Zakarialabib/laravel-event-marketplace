@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "akaunting/laravel-firewall": "^2.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
         "jantinnerezo/livewire-alert": "^2.2",

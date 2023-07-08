@@ -9,9 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use App\Enums\Status;
 use Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Category extends Model
+class Category extends Model implements HasMedia
 {
+
+    use InteractsWithMedia;
     use HasFactory;
     use HasAdvancedFilter;
 
@@ -62,5 +66,19 @@ class Category extends Model
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('local_files');
+    }
+
+    public function registerMediaConversions($media = null): void
+    {
+        $this->addMediaConversion('medium')
+            ->width(500)
+            ->height(500)
+            ->performOnCollections('local_files')
+            ->format('webp');
     }
 }

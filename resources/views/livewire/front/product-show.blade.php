@@ -76,7 +76,8 @@
                             </div>
                             @if ($product->options['size'])
                                 <div class="mb-4">
-                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">{{__('Size')}}
+                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">
+                                        {{ __('Size') }}
                                     </h3>
                                     <ul class="flex flex-wrap colors -mr-3 rtl:-ml-3">
                                         @foreach ($product->options['size'] as $index => $option)
@@ -92,7 +93,8 @@
                             @endif
                             @if ($product->options['color'])
                                 <div class="mb-4">
-                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">{{__('Color')}}
+                                    <h3 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">
+                                        {{ __('Color') }}
                                     </h3>
                                     <ul class="flex flex-wrap colors -mr-3 rtl:-ml-3">
                                         @foreach ($product->options['color'] as $index => $option)
@@ -133,7 +135,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    @if ($product->status == 1)
+                                    @if ($product->status === true)
                                         <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-green-400 hover:bg-green-200 transition cursor-pointer"
                                             wire:click="AddToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">
                                             {{ __('Add to cart') }}
@@ -243,6 +245,6 @@
             </div>
         </div>
     </section>
-    
+
     @livewire('front.cart-count')
 </div>

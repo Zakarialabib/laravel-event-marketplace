@@ -32,7 +32,7 @@
             </div>
             @endif
             <div class="w-full flex-none text-sm flex items-center justify-center text-gray-600 py-2">
-                @if ($product->status == 1)
+                @if ($product->status === true)
                     <div class="text-xs font-medium">
                         <span class="text-green-500">● {{ __('In Stock') }}</span>
                     </div>
