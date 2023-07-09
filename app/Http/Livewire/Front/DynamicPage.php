@@ -9,10 +9,9 @@ use App\Models\Page;
 
 class DynamicPage extends Component
 {
-
     public $page;
     
-    public function getSectionsProprerty()
+    public function getSectionsProperty()
     {
         return Section::active()->where('page', $this->page->slug)->get();
     }
