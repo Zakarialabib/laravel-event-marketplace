@@ -40,9 +40,9 @@
         </x-slot>
         <x-table.tbody>
             @forelse($pages as $id=>$page)
-                <x-table.tr>
-                    <x-table.td>
-                        {{ $id }}
+            <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $page->id }}">
+                <x-table.td>
+                    <input type="checkbox" value="{{ $page->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
                         {{ $page->title }}

@@ -51,42 +51,42 @@
                         <input type="checkbox" value="{{ $section->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        @if ($section->page == \App\Models\Section::ABOUT_PAGE)
+                        @if ($section->page == \App\Enums\PageType::ABOUT_PAGE)
                             <a href="{{ route('front.about') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('About') }}
                             </a>
-                        @elseif($section->page == \App\Models\Section::HOME_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::HOME_PAGE)
                             <a href="{{ route('front.index') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Home') }}
                             </a>
-                        @elseif($section->page == \App\Models\Section::BRAND_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::BRAND_PAGE)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Brand') }}
                             </a>
-                        @elseif($section->page == \App\Models\Section::BLOG_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::BLOG_PAGE)
                             <a href="{{ route('front.blogs') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Blog') }}
                             </a>
-                        @elseif($section->page == \App\Models\Section::CATALOG_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::CATALOG_PAGE)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Catalog') }}
                             </a>
-                        @elseif($section->page == \App\Models\Section::BRANDS_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::BRANDS_PAGE)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Brands') }}
                             </a>
-                        @elseif($section->page == \App\Models\Section::PRODUCT_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::PRODUCT_PAGE)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Products') }}
                             </a>
-                        @elseif($section->page == \App\Models\Section::CONTACT_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::CONTACT_PAGE)
                             <a href="{{ route('front.contact') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Contact') }}

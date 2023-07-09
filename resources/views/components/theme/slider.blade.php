@@ -75,16 +75,22 @@
                     <div class="absolute bottom-0 w-full h-1/2 z-0 bg-gradient-to-t from-black to-transparent"></div>
                     <div
                         class="flex flex-col max-w-[1400px] items-center mx-auto my-auto text-center relative z-10 px-24 sm:px-18 lg:px-24">
-                        <div class="my-4 font-bold text-xl text-white leading-[0.95] lg:text-5xl">{{ $slider->subtitle }}
+                        <div class="my-4 font-bold text-xl text-white leading-[0.95] lg:text-5xl">
+                            {{ $slider->title }}
                         </div>
-                        <div class="mb-4 text-3xl md:text-4xl font-heading font-bold text-white leading-normal lg:text-sm">{{ $slider->title }}
+                        <div
+                            class="mb-4 text-3xl md:text-4xl font-heading font-bold text-white leading-normal lg:text-sm">
+                            {{ $slider->subtitle }}
                         </div>
-                        <p class="pb-10 text-md text-white leading-normal lg:text-sm lg:pt-0">{!! $slider->description !!}
+                        <p class="pb-10 text-md text-white leading-normal lg:text-sm lg:pt-0">
+                            {!! $slider->description !!}
                         </p>
-                        <a href="{{ $slider->link }}"
-                            class="uppercase bg-[#fc1b1b] text-white h-12 inline-flex px-12 justify-center items-center text-sm font-oswald tracking-wider outline-none transition-colors hover:bg-[#b00303]">
-                            {{ __('Read More') }}
-                        </a>
+                        @if ($slider->link)
+                            <a href="{{ $slider->link }}"
+                                class="uppercase bg-[#fc1b1b] text-white h-12 inline-flex px-12 justify-center items-center text-sm font-oswald tracking-wider outline-none transition-colors hover:bg-[#b00303]">
+                                {{ __('Read More') }}
+                            </a>
+                        @endif
                     </div>
                 </div>
             @endforeach

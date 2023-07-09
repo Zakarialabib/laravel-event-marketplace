@@ -30,7 +30,6 @@ class Create extends Component
 
     public $listeners = [
         'createSection',
-        Quill::EVENT_VALUE_UPDATED,
     ];
 
     public array $rules = [
@@ -40,15 +39,15 @@ class Create extends Component
         'section.featured_title' => ['nullable', 'string', 'max:255'],
         'section.subtitle'       => ['nullable', 'string', 'max:255'],
         'section.label'          => ['nullable', 'string', 'max:255'],
-        'section.description'    => ['nullable'],
+        'description'    => ['nullable'],
         'section.bg_color'       => ['nullable'],
         'section.position'       => ['nullable'],
         'section.link'           => ['nullable'],
     ];
 
-    public function quill_value_updated($value)
+    public function updatedDescription($value)
     {
-        $this->section->description = $value;
+        $this->description = $value;
     }
 
     public function createSection()
@@ -58,6 +57,8 @@ class Create extends Component
         $this->resetValidation();
 
         $this->section = new Section();
+
+        $this->description = "";
 
         $this->createSection = true;
     }
@@ -82,6 +83,8 @@ class Create extends Component
             $this->section->image = $imageName;
         }
 
+        $this->section->description = $this->description;
+        
         $this->section->save();
 
         $this->emit('refreshIndex');

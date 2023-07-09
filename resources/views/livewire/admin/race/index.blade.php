@@ -133,7 +133,7 @@
                                 wire:loading.attr="disabled">
                                 {{ Str::limit($race->name, 55) }}
                             </button>
-                            <a class="ml-2 text-blue-500" href="" target="_blank">
+                            <a class="ml-2 text-blue-500" href="{{ route('front.raceDetails', $race->slug) }}" target="_blank">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <br>

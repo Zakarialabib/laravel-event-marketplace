@@ -11,6 +11,11 @@ class DynamicPage extends Component
 {
 
     public $page;
+    
+    public function getSectionsProprerty()
+    {
+        return Section::active()->where('page', $this->page->slug)->get();
+    }
 
     public function mount($slug)
     {

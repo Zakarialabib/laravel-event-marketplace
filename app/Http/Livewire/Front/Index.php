@@ -13,6 +13,7 @@ use App\Models\Section;
 use App\Models\Slider;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use App\Enums\PageType;
 
 class Index extends Component
 {
@@ -42,7 +43,7 @@ class Index extends Component
 
     public function getPartnersProperty(): Collection
     {
-        return Partner::select('name', 'id')->get();
+        return Partner::active()->select('name', 'id')->get();
     }
 
     public function getFeaturedProductsProperty(): Collection
@@ -66,7 +67,10 @@ class Index extends Component
 
     public function getSectionsProperty(): Collection
     {
-        return Section::active()->limit(4)->get();
+        return Section::active()
+                    ->where('page', PageType::HOME)
+                    ->limit(4)
+                    ->get();
     }
 
     public function render()

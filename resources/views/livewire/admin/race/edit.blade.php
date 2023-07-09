@@ -117,7 +117,7 @@
                 <div class="px-3 mb-2">
                     <x-label for="date" :value="__('Date')" required />
                     <x-date-picker id="date_id" picker="date" required name="date"
-                        wire:model.lazy="race.date" />
+                        wire:model="race.date" />
                     <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
                 </div>
             </div>

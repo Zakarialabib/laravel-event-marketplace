@@ -22,7 +22,6 @@ class Edit extends Component
 
     public $listeners = [
         'editModal',
-        Quill::EVENT_VALUE_UPDATED,
     ];
 
     public $editModal = false;
@@ -38,12 +37,12 @@ class Edit extends Component
         'section.page'        => ['nullable'],
         'section.title'       => ['nullable', 'string', 'max:255'],
         'section.subtitle'    => ['nullable', 'string', 'max:255'],
-        'section.description' => ['nullable'],
+        'description' => ['nullable'],
     ];
 
-    public function quill_value_updated($value)
+    public function updatedDescription($value)
     {
-        $this->section->description = $value;
+        $this->description = $value;
     }
 
     public function editModal($section)
@@ -71,6 +70,8 @@ class Edit extends Component
                 $this->image->storeAs('sections', $imageName);
                 $this->section->image = $imageName;
             }
+
+            $this->product->description = $this->description;
 
             $this->section->save();
 

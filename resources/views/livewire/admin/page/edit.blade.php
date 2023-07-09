@@ -27,7 +27,9 @@
                     
                     <div class="w-full py-2 px-3">
                         <x-label for="image" :value="__('Image')" />
-                        <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
+                        <x-media-upload title="{{ __('Brand Logo') }}" name="image" wire:model="image"
+                                :file="$image" :preview="$image" single types="PNG / JPEG / WEBP"
+                                fileTypes="image/*" />
                         <x-input-error :messages="$errors->get('image')" for="image" class="mt-2" />
                     </div>
 

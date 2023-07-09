@@ -80,8 +80,8 @@
                     </div>
                     <div class="w-full px-2">
                         <x-label for="description" :value="__('Description')" />
-                        <livewire:quill :value="$description" wire:model.lazy="section.description" />
-                        <x-input-error :messages="$errors->get('section.description')" for="section.description" class="mt-2" />
+                        <x-trix name="description" wire:model.lazy="description" class="mt-1" />
+                        <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
 
                     <div class="w-full px-2">

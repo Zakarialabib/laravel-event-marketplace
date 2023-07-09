@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\PageType; 
+use App\Enums\Status;
 
 class Section extends Model implements HasMedia
 {
@@ -16,23 +18,7 @@ class Section extends Model implements HasMedia
     use InteractsWithMedia;
     use HasAdvancedFilter;
 
-    public const HOME_PAGE = 1;
-
-    public const ABOUT_PAGE = 2;
-
-    public const BRAND_PAGE = 3;
-
-    public const BLOG_PAGE = 4;
-
-    public const CATALOG_PAGE = 5;
-
-    public const BRANDS_PAGE = 6;
-
-    public const CONTACT_PAGE = 7;
-
-    public const PRODUCT_PAGE = 8;
-
-    public const PRIVACY_PAGE = 9;
+ 
 
     public $table = 'sections';
 
@@ -62,6 +48,12 @@ class Section extends Model implements HasMedia
         'link',
         'language_id',
     ];
+
+    protected $casts = [
+        'page' => PageType::class,
+        'satuts' => Status::class,
+    ];
+
 
     /**
      * Scope a query to only include active products.

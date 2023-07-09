@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Enums\Status;
 
 class Partner extends Model implements HasMedia
 {
@@ -38,8 +39,20 @@ class Partner extends Model implements HasMedia
     protected $casts = [
         'images'            => 'json',
         'social_media_urls' => 'json',
-        // 'status' => Status::class,
+        'status' => Status::class,
     ];
+
+    /**
+     * Scope a query to only include active products.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     * @return void
+     */
+    public function scopeActive($query)
+    {
+        $query->where('status', true);
+    }
 
     public function registerMediaCollections(): void
     {

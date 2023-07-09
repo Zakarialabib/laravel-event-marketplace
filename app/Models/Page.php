@@ -8,6 +8,7 @@ use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Enums\Status;
 
 class Page extends Model implements HasMedia
 {
@@ -27,6 +28,10 @@ class Page extends Model implements HasMedia
 
     protected $fillable = [
         'title', 'slug', 'description', 'meta_title', 'meta_description', 'language_id', 'image',
+    ];
+
+    protected $casts = [
+        'satuts' => Status::class,
     ];
 
     /**

@@ -120,7 +120,7 @@ class RegistrationForm extends Component
                         ]);
                     }
                     
-                    Cart::instance('shopping')->add($this->race->id)->associate('App\Models\Race');
+                    // Cart::instance('shopping')->add($this->race->id)->associate('App\Models\Race');
 
                     return $next($participant);
                 },    

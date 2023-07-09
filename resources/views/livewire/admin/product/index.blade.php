@@ -34,8 +34,8 @@
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <input type="text" wire:model.debounce.300ms="search"
-            class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-            placeholder="{{ __('Search') }}" />
+                class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                placeholder="{{ __('Search') }}" />
         </div>
     </div>
 
@@ -53,9 +53,7 @@
             <x-table.th sortable wire:click="sortBy('price')" :direction="$sorts['price'] ?? null">
                 {{ __('Price') }} / {{ __('Old Price') }}
             </x-table.th>
-            <x-table.th>
-                {{ __('Image') }}
-            </x-table.th>
+
             <x-table.th sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">
                 {{ __('Status') }}
             </x-table.th>
@@ -70,12 +68,15 @@
                         <input type="checkbox" value="{{ $product->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        @if ($product->hasMedia('local_files'))
-                        <img src="{{ $product->getFirstMediaUrl('local_files') }}" alt="{{ $product->name }}"
-                            class="w-10 h-10 rounded-full object-cover">
+                        <x-button type="button" success wire:click="$emit('imageModal', {{ $product->id }})"
+                            wire:key="image-{{ $product->id }}">
+                            @if ($product->hasMedia('local_files'))
+                                <img src="{{ $product->getFirstMediaUrl('local_files') }}" alt="{{ $product->name }}"
+                                    class="w-10 h-10 rounded-full object-cover">
                             @else
-                            <p>No product image available.</p>
-                        @endif
+                                <p>{{ __('No product image available.') }}</p>
+                            @endif
+                        </x-button>
                     </x-table.td>
                     <x-table.td>
                         <button type="button" wire:click="$emit('showModal',{{ $product->id }})">
@@ -87,9 +88,6 @@
                             <i class="fas fa-eye"></i>
                         </a>
                     </x-table.td>
-                    {{-- <x-table.td>
-                        <livewire:select :model="$product" key="{{ $product->id }}" />
-                    </x-table.td> --}}
 
                     <x-table.td>
                         {{ Helpers::format_currency($product->price) }}
@@ -97,12 +95,7 @@
                             // {{ $product->discount_price }}DH
                         @endif
                     </x-table.td>
-                    <x-table.td>
-                        <x-button type="button" success wire:click="$emit('imageModal', {{ $product->id }})"
-                            wire:key="image-{{ $product->id }}">
-                            <i class="fas fa-image"></i>
-                        </x-button>
-                    </x-table.td>
+
                     <x-table.td>
                         <livewire:toggle-button :model="$product" field="status" key="{{ $product->id }}" />
                     </x-table.td>
@@ -224,7 +217,6 @@
 </div>
 
 @push('scripts')
-    
     <script>
         document.addEventListener('livewire:load', function() {
             window.livewire.on('deleteModal', productId => {
