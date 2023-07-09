@@ -207,9 +207,9 @@
             </div> --}}
             <div class="flex flex-wrap mb-4">
                 <div class="lg:w-1/2 sm:w-full px-2">
-                    <x-label for="priamry_color" :value="__('Primary Color')" />
-                    <input wire:model="priamry_color" type="color" id="priamry_color" name="currency_code" />
-                    <x-input-error for="priamry_color" :messages="$errors->first('priamry_color')" />
+                    <x-label for="primary_color" :value="__('Primary Color')" />
+                    <input wire:model="primary_color" type="color" id="primary_color" name="currency_code" />
+                    <x-input-error for="primary_color" :messages="$errors->first('primary_color')" />
                 </div>
                 <div class="lg:w-1/2 sm:w-full px-2">
                     <x-label for="secondary_color" :value="__('Secondary Color')" />

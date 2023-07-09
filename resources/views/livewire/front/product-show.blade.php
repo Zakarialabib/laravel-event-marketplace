@@ -20,7 +20,7 @@
         <div itemtype="https://schema.org/Product" itemscope>
 
             <meta itemprop="name" content="{{ $product->name }}" />
-            <meta itemprop="description" content="{{ $product->description }}" />
+            <meta itemprop="description" content="{!! $product->description !!}" />
 
             <div class="mx-auto px-6 my-10">
                 <div class="flex flex-wrap mb-14">

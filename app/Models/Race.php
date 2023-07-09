@@ -13,6 +13,7 @@ use App\Enums\RaceStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\HasGlobalDate;
 
 class Race extends Model implements HasMedia
 {
@@ -21,7 +22,8 @@ class Race extends Model implements HasMedia
     use HasAdvancedFilter;
     use SoftDeletes;
     use CanBeBought;
-    
+    use HasGlobalDate;
+
     public const ATTRIBUTES = [
         'id',
         'name',
@@ -66,10 +68,7 @@ class Race extends Model implements HasMedia
         'calendar'              => 'json',
         'course'                => 'json',
         'satuts'                => RaceStatus::class,
-        'start_registration'    => 'datetime',
-        'end_registration'      => 'datetime',
-        'registration_deadline' => 'datetime',
-        'date'                  => 'datetime',
+        'date'                => 'date',
     ];
 
     public function location()
@@ -133,15 +132,7 @@ class Race extends Model implements HasMedia
             ->whereMonth('date', date('m'));
     }
 
-    public function getFormattedDateAttribute()
-    {
-        return $this->date->format('Y-m-d');
-    }
-
-    public function setFormattedDateAttribute($value)
-    {
-        $this->attributes['date'] = \Carbon\Carbon::createFromFormat('Y-m-d', $value);
-    }
+   
 
     public function registerMediaCollections(): void
     {

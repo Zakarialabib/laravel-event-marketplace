@@ -31,3 +31,12 @@
   .border-secondary {
     border-color: var(--secondary-color);
   }
+
+
+.flatpickr input[type=text].form-control {
+  @apply border-0 px-3 py-3 pl-10 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
+}
+
+.flatpickr input[type=text].form-control:required {
+  @apply border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
+}

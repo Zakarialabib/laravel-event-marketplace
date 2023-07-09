@@ -114,16 +114,16 @@
             </div>
         </div>
 
-        <div class="w-full flex items-center h-full">
-            <div class="w-1/4 px-4 py-6">
+        <div class="w-full flex items-center h-full py-6">
+            <div class="xl:w-1/4 md:w-full px-4">
                 <p class="text-black text-sm md:text-base lg:text-lg mt-4">
                     {{ __('Registration deadline') }}
                 </p>
                 <p class="text-black text-sm md:text-base lg:text-lg mt-4">
-                    {{ $race->registration_deadline->format('d-m-Y') }}
+                    {{ Helpers::format_date($race->registration_deadline) }}
                 </p>
             </div>
-            <div class="w-3/4">
+            <div class="xl:w-3/4 md:w-full">
                 <!-- Tab content -->
                 <div x-show="activeTab === 'tab0'" class="w-full text-center mb-5">
                     <h3

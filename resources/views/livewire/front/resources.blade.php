@@ -11,7 +11,7 @@
                         <img src="path/to/resource-image.jpg" alt="Resource Image" class="w-full mb-4">
                         <h3 class="text-xl font-semibold mb-2">{{ $resource->name }}</h3>
                         <p class="text-gray-700 mb-4">
-                            {{ $resource->description }}
+                            {!! $resource->description !!}
                         </p>
                         <a href="#" class="text-blue-600 font-semibold hover:underline">{{__('Read More')}}</a>
                     </div>

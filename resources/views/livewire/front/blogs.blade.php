@@ -1,13 +1,14 @@
-@section('title', __('Blog'))
-<x-app-layout>
-    <section class="relative items-center w-full px-5 py-10 mx-auto md:px-12 lg:px-24 max-w-7xl">
+<div>
+    @section('title', __('Blog'))
+
+    <section class="relative items-center w-full px-5 py-16 mx-auto md:px-12 lg:px-24 max-w-7xl bg-gray-100">
         <h1
             class="text-5xl md:text-6xl lg:text-7xl px-10 text-center leading-tight text-green-600 font-bold tracking-tighter mt-20 cursor-pointer">
             <span class="hover:underline transition duration-200 ease-in-out uppercase">{{ __('Resources') }}</span>
         </h1>
         <p class="text-2xl font-light text-gray-400 text-center my-4">{{ __('Browse the latest news & resources') }}</p>
         <div class="container mx-auto py-4">
-            {{-- <div class="flex justify-center gap-4 mt-2">
+            <div class="flex justify-center gap-4 mt-2">
                 <button
                     class="px-4 py-2 text-sm font-semibold text-green-500 border-2 border-green-500 rounded-full hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white"
                     wire:click="$emit('categorySelected', null)">
@@ -20,7 +21,7 @@
                         {{ $category->title }}
                     </button>
                 @endforeach
-            </div> --}}
+            </div>
 
             <div class="grid grid-cols-1 gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3">
                 @forelse ($blogs as $blog)
@@ -45,4 +46,4 @@
             </div>
         </div>
     </section>
-</x-app-layout>
+</div>

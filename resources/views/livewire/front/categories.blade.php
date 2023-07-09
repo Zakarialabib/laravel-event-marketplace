@@ -24,6 +24,7 @@
                             <li
                                 class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-green-200 pr-4">
                                 <a href="{{ route('front.index') }}">{{ __('Home') }}</a>
+                                <span class="px-2 text-white"> > </span>
                             </li>
                             <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white hover:text-green-200"
                                 aria-current="page">

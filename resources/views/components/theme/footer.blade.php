@@ -32,11 +32,9 @@
             <div>
                 <ul class="flex flex-col gap-3 font-bold">
                     <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{__('Quick Menu')}}</li>
-                    <li><a href="{{ route('front.index')}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{__('Home')}}</a></li>
-                    <li><a href="{{ route('front.races')}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{__('Races')}}</a></li>
-                    @foreach (Helpers::getActivePages() as $page)
-                    <li><a href="{{ route('front.dynamicPage', $page->slug)}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{ $page->title }}</a></li>
-                    @endforeach
+                    <li><a href="{{ route('front.index')}}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{__('Home')}}</a></li>
+                    <li><a href="{{ route('front.races')}}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{__('Races')}}</a></li>
+                    
                 </ul>
             </div>
             <div>
@@ -44,7 +42,7 @@
                     <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{__('Categories')}}</li>
                     @foreach (\App\Helpers::getActiveCategories() as $category)
                     <li>
-                        <a href="{{ route('front.categories')}}" class="inline-block transition hover:scale-110 hover:text-secondary">{{ $category->name }}</a>
+                        <a href="{{ route('front.categories')}}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{ $category->name }}</a>
                     </li>    
                     @endforeach
                 </ul>
@@ -52,14 +50,10 @@
             <div>
                 <ul class="flex flex-col gap-3 font-bold">
                     <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{__('About us')}}</li>
-                    <li>
-                        <a href="terms-conditions.html" class="inline-block transition hover:scale-110 hover:text-secondary">Terms &amp; Conditions</a>
-                    </li>
-                    <li>
-                        <a href="privacy-policy.html" class="inline-block transition hover:scale-110 hover:text-secondary">Privacy Policy</a>
-                    </li>
-                    <li><a href="faq.html" class="inline-block transition hover:scale-110 hover:text-secondary">FAQs</a></li>
-                    <li><a href="{{ route('front.blog') }}" class="inline-block transition hover:scale-110 hover:text-secondary">{{__('Blog')}}</a></li>
+                    @foreach (Helpers::getActivePages() as $page)
+                    <li><a href="{{ route('front.dynamicPage', $page->slug)}}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{ $page->title }}</a></li>
+                    @endforeach
+                    <li><a href="{{ route('front.blog') }}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{__('Blog')}}</a></li>
                 </ul>
             </div>
             <div>
@@ -69,7 +63,7 @@
                         {{ Helpers::settings('company_address') }}
                     </li>
                     <li>
-                        <a href="tel:+(617) 254-2333" class="inline-block transition hover:scale-110 hover:text-secondary">{{ Helpers::settings('company_phone') }}</a>
+                        <a href="tel:+(617) 254-2333" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{ Helpers::settings('company_phone') }}</a>
                     </li>
                 </ul>
             </div>

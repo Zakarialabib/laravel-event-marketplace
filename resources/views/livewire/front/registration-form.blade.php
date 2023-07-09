@@ -10,7 +10,7 @@
             <div class="bg-white rounded p-4 mx-6">
                 <x-validation-errors class="mb-4" :errors="$errors" />
                 <div class="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-cente">
-                    <p>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" for="number_of_participants">
                             {{ __('Nombre de participants') }}{{__(' (si relais)')}}</label>
                         <x-input type="number" id="number_of_participants"
@@ -18,71 +18,72 @@
                         @error('numberOfParticipants')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('Email') }}</label>
                         <x-input wire:model.defer="race.email" required type="email" />
                         @error('race.email')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('First name') }}</label>
                         <x-input wire:model.defer="race.firstName" required type="text" />
                         @error('race.firstName')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('Last name') }}</label>
                         <x-input wire:model.defer="race.lastName" required type="text" />
                         @error('race.lastName')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('Phone') }}</label>
                         <x-input wire:model.defer="race.phoneNumber" required type="number" />
                         @error('race.phoneNumber')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('Country') }}</label>
                         <x-input wire:model.defer="race.country" type="text" required />
                         @error('race.country')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('City') }}</label>
                         <x-input wire:model.defer="race.city" required type="text" />
                         @error('city')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" for="">{{ __('Zip Code') }}</label>
                         <x-input wire:model.defer="race.zipCode" type="text" />
                         @error('zipCode')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('date Of Birth') }}</label>
-                        <x-input wire:model.defer="race.dateOfBirth" type="date" />
+                        <x-date-picker id="date_id" picker="date" required name="date"
+                        wire:model="race.dateOfBirth" />
                         @error('dateOfBirth')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label class="font-bold font-heading text-gray-600" required
                             for="">{{ __('Gender') }}</label>
                         <select wire:model.defer="race.gender"
@@ -93,37 +94,36 @@
                         @error('gender')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p class="col-span-full">
-                        <label class="font-bold font-heading text-gray-600" required
-                            for="">{{ __('Address') }}</label>
-                        <x-input wire:model.defer="race.address" type="text" />
-                        @error('address')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label for=""
                             class="font-bold font-heading text-gray-600">{{ __('Emergency Contact Name') }}</label>
                         <x-input wire:model.defer="race.emergencyContactName" type="text" />
                         @error('address')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <label for=""
                             class="font-bold font-heading text-gray-600">{{ __('Emergency Contact Phone Number') }}</label>
                         <x-input wire:model.defer="race.emergencyContactPhoneNumber" type="number" />
                         @error('emergencyContactPhoneNumber')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
+                    </div>
+                    <div class="col-span-full">
+                        <label class="font-bold font-heading text-gray-600" required
+                            for="">{{ __('Address') }}</label>
+                        <x-input wire:model.defer="race.address" type="text" />
+                        @error('address')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    
                 </div>
 
-
-
                 <div class="w-full flex flex-wrap py-6 justify-between gap-4">
-                    <p class="w-full">
+                    <div class="w-full">
                         <label for="helthInformation"
                             class="font-bold font-heading text-gray-600">{{ __('Health Informations') }}</label>
                         <textarea wire:model.defer="race.helthInformation" name="" id="" rows="5"
@@ -131,7 +131,7 @@
                         @error('race.helthInformation')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </p>
+                    </div>
                     <div class="">
                         <label for=""
                             class="font-bold font-heading text-gray-600">{{ __('has Medical History') }}</label>
@@ -163,18 +163,18 @@
                 @endif
 
                 <div
-                    class="w-full grid grid-cols-2 sm:grid sm:grid-cols-1 py-4 gap-4 justify-between sm:justify-center">
-                    <p>{{ __('We will send details about your registration your email with account access') }}</p>
+                    class="w-full grid grid-cols-2 sm:grid sm:grid-cols-1 py-2 gap-2 justify-between sm:justify-center">
+                    
                     <div class="flex items-center text-left py-2 mb-2">
                         <label for=""
                             class="font-bold font-heading pr-6 text-gray-600 py-4">{{ __('Register into promotional email') }}</label>
-
                         <x-input.checkbox wire:model.defer="newsletters" type="checkbox" />
                     </div>
                     <button type="submit" wire:loading.attr="disabled"
                         class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-green-600 hover:bg-green-200 transition cursor-pointer">
                         {{ __('Registration') }}
                     </button>
+                    <small>{{ __('We will send details about your registration your email with account access') }}</small>
                 </div>
             </div>
         </div>

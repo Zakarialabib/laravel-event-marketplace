@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
+use App\Traits\HasGlobalDate;
 
 class Order extends Model
 {
     use HasFactory;
+    use HasGlobalDate;
 
     public const ATTRIBUTES = [
         'id',

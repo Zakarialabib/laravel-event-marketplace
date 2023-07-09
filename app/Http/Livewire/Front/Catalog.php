@@ -14,7 +14,7 @@ class Catalog extends Component
     use WithPagination;
     use WithSorting;
 
-    public $perPage = 25;
+    public $perPage = 15;
 
     public $paginationOptions = [25, 50, 100];
 

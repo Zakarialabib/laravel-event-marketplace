@@ -18,20 +18,20 @@
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="start_registration" :value="__('Registration starts at')" required />
-                            <x-input-date id="start_registration" class="block mt-1 w-full" type="date"
-                                name="start_registration" wire:model="race.start_registration" required />
+                            <x-date-picker id="start_registration" picker="date" required name="start_registration"
+                            wire:model="race.start_registration" />
                             <x-input-error :messages="$errors->get('start_registration')" for="start_registration" class="mt-2" />
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="end_registration" :value="__('Registration ends at')" required />
-                            <x-input-date id="end_registration" class="block mt-1 w-full" type="date"
-                                name="end_registration" wire:model="race.end_registration" required />
+                            <x-date-picker id="end_registration" picker="date" required name="end_registration"
+                                wire:model="race.end_registration" />
                             <x-input-error :messages="$errors->get('end_registration')" for="end_registration" class="mt-2" />
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="registration_deadline" :value="__('Registration deadline')" required />
-                            <x-input-date id="registration_deadline" class="block mt-1 w-full" type="number"
-                                name="registration_deadline" wire:model="race.registration_deadline" required />
+                            <x-date-picker id="registration_deadline" picker="date" required name="registration_deadline"
+                                wire:model.lazy="race.registration_deadline" />
                             <x-input-error :messages="$errors->get('registration_deadline')" for="registration_deadline" class="mt-2" />
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
@@ -86,10 +86,9 @@
 
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="date" :value="__('Date')" required />
-                            <x-input id="date" class="block mt-1 w-full" type="date" name="date"
-                                wire:model="race.date" />
+                            <x-date-picker id="race-date" picker="date" name="date"
+                                required wire:model="race.date" />
                             <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
-
                         </div>
 
 

@@ -6,10 +6,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasGlobalDate;
 
 class Payment extends Model
 {
     use HasFactory;
+    use HasGlobalDate;
 
     protected $fillable = [
         'participant_id',

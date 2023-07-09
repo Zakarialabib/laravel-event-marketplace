@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Carbon\Carbon;
 
 class Helpers
 {
@@ -78,6 +79,15 @@ class Helpers
     public static function getActivePages()
     {
         return Page::select('id', 'slug', 'title')
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
+    }
+
+    public static function getActiveBlogs()
+    {
+        return Blog::active()
+            ->select(['id', 'title', 'slug','image','description','created_at'])
             ->inRandomOrder()
             ->take(5)
             ->get();
@@ -255,6 +265,23 @@ class Helpers
             ? $symbol.number_format((float) $value, 0, '.', ',')
             : number_format((float) $value, 0, '.', ',').' '.$symbol;
     }
+
+    public static function format_date($value)
+    {
+        if ($value instanceof \DateTimeInterface) {
+            return $value->format('Y-m-d');
+        }
+    
+        $date = Carbon::createFromFormat('Y-m-d', substr($value, 0, 10));
+    
+        if ($date === false) {
+            // Handle invalid date format
+            return null;
+        }
+    
+        return $date->format('Y-m-d');
+    }
+    
 
     public static function handleUpload($image, $width, $height, $productName)
     {

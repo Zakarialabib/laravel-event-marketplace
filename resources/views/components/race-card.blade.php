@@ -23,9 +23,10 @@
                 <div class="flex flex-wrap py-4 gap-8 justify-center items-center">
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            {{ __('Online Registration Deadline') }}
+                            <i class="fas fa-calendar-check mr-2"></i>
+                            {{ __('Registration Deadline') }}
                         </span>
-                        <span class="text-base md:text-lg capitalize">{{ $race->registration_deadline }}</span>
+                        <span class="text-base md:text-lg capitalize">{{ Helpers::format_date($race->registration_deadline) }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">

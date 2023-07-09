@@ -85,7 +85,7 @@
                                             {{ $race->name }}
                                         </p>
                                         <p class="text-darkBlueGray-400 py-4">
-                                            {{ $race->description }}
+                                            {!! $race->description !!}
                                         </p>
                                         <p class="flex items-center">
                                             <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
@@ -130,9 +130,8 @@
                                 </p>
                             </div>
                             <div
-                                class="flex xl:flex-wrap text-center items-center md:flex-col xl:w-full md:w-1/2 md:my-auto">
-                                <div class="w-1/2 xl:w-6/12 md:w-1/3 mx-auto mb-4">
-
+                                class="flex xl:flex-row text-center items-center md:flex-col xl:w-full md:w-1/2 md:my-auto">
+                                <div class="w-1/2 xl:w-1/3 lg:w-6/12 md:w-1/3 mx-auto mb-4">
                                     @if ($race->course)
                                         <ul class="flex items-center gap-4">
                                             @foreach ($race->course as $key => $course)
@@ -146,10 +145,10 @@
                                         </ul>
                                     @endif
                                 </div>
-                                <div class="w-1/2 xl:w-2/12 md:w-1/3 mx-auto">
+                                <div class="w-1/2 xl:w-1/3 lg::w-2/12 md:w-1/3 mx-auto">
                                     {{ \Carbon\Carbon::parse($race->date)->format('F,d,Y') }}
                                 </div>
-                                <div class="mt-6 xl:mt-0 w-full xl:w-4/12 md:w-1/3 mx-auto">
+                                <div class="mt-6 xl:mt-0 w-full xl:w-1/3 lg::w-4/12 md:w-1/3 mx-auto">
                                     <div class="lg:mx-auto xl:mr-0 lg:max-w-max"><a
                                             class="block py-4 px-10 w-full text-lg leading-5 text-white font-medium tracking-tighter font-heading text-center bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"
                                             href="{{ route('front.raceDetails', $race->slug) }}">

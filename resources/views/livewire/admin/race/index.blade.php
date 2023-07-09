@@ -122,7 +122,7 @@
                                         class="w-10 h-10 rounded-full object-cover">
                                 </button>
                             @else
-                                <p>No race image available.</p>
+                                <p>{{__('No race image available')}}.</p>
                             @endif
                         </x-table.td>
                         <x-table.td>

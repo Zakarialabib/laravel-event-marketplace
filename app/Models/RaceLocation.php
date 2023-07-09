@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Enums\Status;
+use App\Traits\HasGlobalDate;
 
 class RaceLocation extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use HasFactory;
     use HasAdvancedFilter;
+    use HasGlobalDate;
 
     public const ATTRIBUTES = [
         'id',
@@ -39,7 +42,7 @@ class RaceLocation extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'date' => 'datetime',
+        'status' => Status::class,
     ];
 
     public function category()

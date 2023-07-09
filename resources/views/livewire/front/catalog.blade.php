@@ -26,6 +26,7 @@
                                 <a href="{{ URL::Current() }}">
                                     {{ __('Catalog of products') }}
                                 </a>
+                                <span class="px-2 text-white"> > </span>
                             </li>
                         </ul>
                         <div class="w-full sm:w-auto flex justify-center my-2 overflow-x-scroll">

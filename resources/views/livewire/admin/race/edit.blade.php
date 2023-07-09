@@ -35,7 +35,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -43,44 +42,44 @@
         <x-validation-errors class="mb-4" :errors="$errors" />
         <form wire:submit.prevent="update">
             <div class="grid grid-cols-2 gap-4 mb-3">
-                <p class="px-3 mb-2">
+                <div class="px-3 mb-2">
                     <x-label for="name" :value="__('Race Name')" required autofocus />
                     <x-input id="name" class="block mt-1 w-full" type="text" name="name"
                         wire:model.lazy="race.name" required autofocus />
                     <x-input-error :messages="$errors->get('name')" for="name" class="mt-2" />
-                </p>
-                <p class="px-3 mb-2">
+                </div>
+                <div class="px-3 mb-2">
                     <x-label for="start_registration" :value="__('Registration starts at')" required />
-                    <x-input-date id="start_registration" class="block mt-1 w-full" type="date"
-                        name="start_registration" wire:model="race.start_registration" required />
+                    <x-date-picker id="start_registration_id" picker="date" required name="start_registration"
+                    wire:model="race.start_registration" />
                     <x-input-error :messages="$errors->get('start_registration')" for="start_registration" class="mt-2" />
-                </p>
-                <p class="px-3 mb-2">
+                </div>
+                <div class="px-3 mb-2">
                     <x-label for="end_registration" :value="__('Registration ends at')" required />
-                    <x-input-date id="end_registration" class="block mt-1 w-full" type="date" name="end_registration"
-                        wire:model="race.end_registration" required />
+                    <x-date-picker id="end_registration_id" picker="date" required name="end_registration"
+                        wire:model="race.end_registration" />
                     <x-input-error :messages="$errors->get('end_registration')" for="end_registration" class="mt-2" />
-                </p>
-                <p class="px-3 mb-2">
+                </div>
+                <div class="px-3 mb-2">
                     <x-label for="registration_deadline" :value="__('Registration deadline')" required />
-                    <x-input-date id="registration_deadline" class="block mt-1 w-full" type="date"
-                        name="registration_deadline" wire:model="race.registration_deadline" required />
+                    <x-date-picker id="registration_deadline_id" picker="date" required name="registration_deadline"
+                        wire:model="race.registration_deadline" />
                     <x-input-error :messages="$errors->get('registration_deadline')" for="registration_deadline" class="mt-2" />
-                </p>
-                <p class="px-3 mb-2">
+                </div>
+                <div class="px-3 mb-2">
                     <x-label for="number_of_days" :value="__('Number of days')" required />
                     <x-input id="number_of_days" class="block mt-1 w-full" type="number" name="number_of_days"
                         wire:model.lazy="race.number_of_days" required />
                     <x-input-error :messages="$errors->get('number_of_days')" for="number_of_days" class="mt-2" />
-                </p>
-                <p class="px-3 mb-2">
-                    <x-label for="number_of_racers" :value="__('Number of racers')" required />
+                </div>
+                <div class="px-3 mb-2">
+                    <x-label for="number_of_racers" :value="__('Number of Racers')" required />
                     <x-input id="number_of_racers" class="block mt-1 w-full" type="number" name="number_of_racers"
                         wire:model.lazy="race.number_of_racers" required />
                     <x-input-error :messages="$errors->get('number_of_racers')" for="number_of_racers" class="mt-2" />
-                </p>
+                </div>
 
-                <p class="px-3 mb-2">
+                <div class="px-3 mb-2">
                     <x-label for="category_id" :value="__('Category')" required />
                     <select
                         class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
@@ -91,9 +90,9 @@
                         @endforeach
                         <x-input-error :messages="$errors->get('race.category_id')" for="race.category_id" class="mt-2" />
                     </select>
-                </p>
+                </div>
 
-                <p class="px-3 mb-2">
+                <div class="px-3 mb-2">
                     <x-label for="race_location_id" :value="__('Locations')" />
                     <select id="race_location_id" name="race_location_id"
                         class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
@@ -105,35 +104,34 @@
                         @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('race.race_location_id')" for="race_location_id" class="mt-2" />
-                </p>
+                </div>
 
-                <p class="px-3 mb-2">
+                <div class="px-3 mb-2">
                     <x-label for="price" :value="__('Price')" required />
                     <x-input id="price" class="block mt-1 w-full" type="number" name="price"
                         wire:model.lazy="race.price" required />
                     <x-input-error :messages="$errors->get('price')" for="price" class="mt-2" />
 
-                </p>
+                </div>
 
-                <p class="px-3 mb-2">
+                <div class="px-3 mb-2">
                     <x-label for="date" :value="__('Date')" required />
-                    <x-input id="date" class="block mt-1 w-full" type="date" name="date"
+                    <x-date-picker id="date_id" picker="date" required name="date"
                         wire:model.lazy="race.date" />
                     <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
-
-                </p>
+                </div>
             </div>
 
-            <p class="w-full px-3 mb-6 lg:mb-0">
+            <div class="w-full px-3 mb-6 lg:mb-0">
                 <x-label for="description" :value="__('Description')" />
                 <x-trix name="description" wire:model.lazy="description" wire:key="description-{{ $description }}"
-                    class="mt-1" />
-            </p>
+                    div class="mt-1" />
+            </div>
 
-            <p class="w-full px-4 my-2">
+            <div class="w-full px-4 my-2">
                 <x-label for="images" :value="__('Images')" />
                 @livewire('multiple-uploads')
-            </p>
+            </div>
 
 
             <x-accordion title="{{ __('More Details') }}">
@@ -258,7 +256,7 @@
 
                         <div class="flex justify-center mb-4">
                             <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                                wire:click="addRaceDate">Add Race Date</button>
+                                wire:click="addRaceDate">{{ __('Add Race Date') }}</button>
                         </div>
                     </div>
 

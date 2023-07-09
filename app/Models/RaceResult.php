@@ -7,11 +7,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use App\Traits\HasGlobalDate;
 
 class RaceResult extends Model
 {
     use HasFactory;
     use HasAdvancedFilter;
+    use HasGlobalDate;
 
     public const ATTRIBUTES = [
         'id',

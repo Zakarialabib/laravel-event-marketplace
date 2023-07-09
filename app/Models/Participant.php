@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\Status;
+use App\Traits\HasGlobalDate;
 
 class Participant extends Model
 {
     use HasFactory;
     use HasUuid;
     use SoftDeletes;
+    use HasGlobalDate;
 
     protected $fillable = [
         'name',

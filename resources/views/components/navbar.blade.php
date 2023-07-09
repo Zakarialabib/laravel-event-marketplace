@@ -1,5 +1,5 @@
 <nav aria-label="secondary" x-data="{ open: false }"
-    class="sticky top-0 z-10 flex items-center justify-between px-4 py-4 transition-transform duration-500 shadow"
+    class="bg-white sticky top-0 z-10 flex items-center justify-between px-4 py-4 transition-transform duration-500 drop-shadow-md"
     :class="{
         '-translate-y-full': scrollingDown,
         'translate-y-0': scrollingUp,
@@ -14,9 +14,9 @@
 
     <div class="flex items-center gap-3">
         <div class="md:flex hidden flex-wrap items-center">
-            <a target="__blank" href="{{ route('front.index')}}" class="text-gray-800 mr-4" >
-                <i class="fa fa-eye w-6 h-6"></i>
-            </a>
+            <x-button secondary target="__blank" href="{{ route('front.index')}}" class="mr-2">
+                <i class="fa fa-eye w-4 h-4"></i>
+            </x-button>
             <x-button type="button" secondary id="fullScreen">
                 <i class="fa fa-expand w-4 h-4"></i>
             </x-button>
@@ -28,7 +28,7 @@
             <x-dropdown align="right" width="60">
                 <x-slot name="trigger">
                     <x-button type="button" primary>
-                        {{ Auth::user()->first_name }} 
+                        {{ Auth::user()->name }} 
                     </x-button>
                 </x-slot>
 

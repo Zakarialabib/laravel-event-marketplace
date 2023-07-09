@@ -15,7 +15,7 @@
                     @foreach (\App\Helpers::getActiveCategories() as $category)
                         <li>
                             <a href="{{ route('front.categories') }}?type={{ $category->name }}"
-                                class="relative inline-flex items-center hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 uppercase">
+                                class="relative inline-flex items-center hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 hover:underline focus:underline uppercase">
                                 {{ $category->name }}
                             </a>
                         </li>

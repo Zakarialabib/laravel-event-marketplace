@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasUuid;
+use App\Traits\HasGlobalDate;
 
 class Registration extends Model
 {
     use HasFactory;
     use HasUuid;
     use SoftDeletes;
+    use HasGlobalDate;
 
     protected $fillable = [
         'participant_id',

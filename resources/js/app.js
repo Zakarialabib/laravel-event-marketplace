@@ -2,6 +2,7 @@ import './bootstrap';
 import '../css/app.css'; 
 import '../css/cropper.css'; 
 import '../css/select.css'; 
+import '../css/theme.css'; 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 import {livewire_hot_reload} from 'virtual:livewire-hot-reload'
@@ -12,6 +13,10 @@ import 'swiper/css/bundle';
 window.Swiper = swiper;
 
 import "@fortawesome/fontawesome-free/css/all.css";
+
+import flatpickr from "flatpickr";
+import 'flatpickr/dist/flatpickr.min.css';
+window.flatpickr = flatpickr;
 
 import Croppie from './cropper'
 

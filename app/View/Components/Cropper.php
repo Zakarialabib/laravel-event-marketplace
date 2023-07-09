@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Views\Components;
+namespace App\View\Components;
 
 use Closure;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
