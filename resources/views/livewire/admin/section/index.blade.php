@@ -8,16 +8,20 @@
                         <option value="{{ $value }}">{{ $value }}</option>
                     @endforeach
                 </select>
-
-                @if ($this->selectedCount)
-                    <p class="text-sm leading-5">
-                        <span class="font-medium">
-                            {{ $this->selectedCount }}
-                        </span>
-                        {{ __('Entries selected') }}
-                    </p>
-                @endif
             </div>
+            @if ($this->selected)
+                <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
+                    <i class="fas fa-trash"></i>
+                </x-button>
+            @endif
+            @if ($this->selectedCount)
+                <p class="text-sm leading-5">
+                    <span class="font-medium">
+                        {{ $this->selectedCount }}
+                    </span>
+                    {{ __('Entries selected') }}
+                </p>
+            @endif
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <div class="my-2 my-md-0">
@@ -51,42 +55,42 @@
                         <input type="checkbox" value="{{ $section->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        @if ($section->page == \App\Enums\PageType::ABOUT_PAGE)
+                        @if ($section->page == \App\Enums\PageType::ABOUT)
                             <a href="{{ route('front.about') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('About') }}
                             </a>
-                        @elseif($section->page == \App\Enums\PageType::HOME_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::HOME)
                             <a href="{{ route('front.index') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Home') }}
                             </a>
-                        @elseif($section->page == \App\Enums\PageType::BRAND_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::BRAND)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Brand') }}
                             </a>
-                        @elseif($section->page == \App\Enums\PageType::BLOG_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::BLOG)
                             <a href="{{ route('front.blogs') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Blog') }}
                             </a>
-                        @elseif($section->page == \App\Enums\PageType::CATALOG_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::CATALOG)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Catalog') }}
                             </a>
-                        @elseif($section->page == \App\Enums\PageType::BRANDS_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::BRANDS)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Brands') }}
                             </a>
-                        @elseif($section->page == \App\Enums\PageType::PRODUCT_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::PRODUCT)
                             <a href=""
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Products') }}
                             </a>
-                        @elseif($section->page == \App\Enums\PageType::CONTACT_PAGE)
+                        @elseif($section->page == \App\Enums\PageType::CONTACT)
                             <a href="{{ route('front.contact') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Contact') }}
@@ -138,26 +142,28 @@
 
 
     <livewire:admin.section.create />
-</div>
 
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:load', function() {
-            window.livewire.on('deleteModal', sectionId => {
-                Swal.fire({
-                    title: __("Are you sure?"),
-                    text: __("You won't be able to revert this!"),
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: __("Yes, delete it!")
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.livewire.emit('delete', sectionId)
-                    }
+
+    @push('scripts')
+        <script>
+            document.addEventListener('livewire:load', function() {
+                window.livewire.on('deleteModal', sectionId => {
+                    Swal.fire({
+                        title: __("Are you sure?"),
+                        text: __("You won't be able to revert this!"),
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: __("Yes, delete it!")
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.livewire.emit('delete', sectionId)
+                        }
+                    })
                 })
             })
-        })
-    </script>
-@endpush
+        </script>
+    @endpush
+
+</div>

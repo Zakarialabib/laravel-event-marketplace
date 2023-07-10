@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Front;
 
 use Livewire\Component;
 use App\Models\Page;
+use App\Models\Section;
 
 class DynamicPage extends Component
 {

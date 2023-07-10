@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Admin\Page;
 
 use App\Models\Page;
 use App\Models\Pagesetting;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -59,7 +60,7 @@ class Create extends Component
 
         $this->page = new Page();
 
-        $this->description = $this->page->description;
+        $this->description = '';
 
         $this->createPage = true;
     }

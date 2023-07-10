@@ -77,7 +77,8 @@
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-            })" class="relative w-10/12 mx-auto flex flex-row overflow-y-auto">
+            })"
+                class="relative w-10/12 mx-auto flex flex-row overflow-y-auto">
                 <div class="absolute inset-y-0 left-0 z-10 flex items-center">
                     <button @click="swiper.slidePrev()"
                         class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
@@ -183,6 +184,25 @@
                 </div>
             </div>
         </div>
+        @if (count($this->sections) > 0)
+            <section class="py-5 px-10 mx-auto bg-gray-100">
+                @foreach ($this->sections as $section)
+                    <div class="px-3 relative h-full text-center py-16 bg-white">
+                        <div class="pb-12 border-b">
+                            <h3 class="mb-4 text-xl font-bold font-heading">{{ $section->title }}</h3>
+                            @if ($section->subtitle)
+                                <p>{{ $section->subtitle }}</p>
+                            @endif
+                        </div>
+                        <div class="py-5 px-4 text-center">
+                            <p class="text-lg text-gray-500">
+                                {!! $section->description !!}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </section>
+        @endif
     </div>
     @livewire('front.cart-count')
 </div>

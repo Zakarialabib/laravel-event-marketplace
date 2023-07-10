@@ -8,6 +8,8 @@ use Livewire\Component;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use Livewire\WithPagination;
+use App\Models\Section;
+use App\Enums\PageType;
 
 class Blogs extends Component
 {
@@ -25,6 +27,11 @@ class Blogs extends Component
     public function getCategoriesProperty()
     {
         return BlogCategory::select('id', 'title')->get();
+    }
+
+    public function getSectionsProperty()
+    {
+        return Section::active()->where('page', PageType::BLOG)->get();
     }
 
     public function render()

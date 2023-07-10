@@ -8,13 +8,16 @@ use App\Http\Livewire\WithSorting;
 use App\Models\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Index extends Component
 {
     use WithPagination;
     use WithSorting;
+    use LivewireAlert;
 
     public $listeners = [
         'refreshIndex' => '$refresh',
@@ -100,7 +103,7 @@ class Index extends Component
 
     public function deleteSelected()
     {
-        abort_if(Gate::denies('page_delete'), 403);
+        // abort_if(Gate::denies('page_delete'), 403);
 
         Page::whereIn('id', $this->selected)->delete();
 

@@ -38,7 +38,7 @@
                                 wire:model.defer="selectedTemplate.bg_color" />
                             <x-input-error :messages="$errors->get('selectedTemplate.bg_color')" for="selectedTemplate.bg_color" class="mt-2" />
                         </div>
-    
+
                         <div class="xl:w-1/2 md:w-full px-2">
                             <x-label for="link" :value="__('Link')" />
                             <x-input id="link" class="block mt-1 w-full" type="text" name="link"
@@ -57,30 +57,23 @@
                             </select>
                             <x-input-error :messages="$errors->get('selectedTemplate.language_id')" for="selectedTemplate.language_id" class="mt-2" />
                         </div> --}}
-    
+
                         <div class="lg:w-1/2 sm:w-full px-2">
                             <x-label for="page" :value="__('Page')" />
                             <select wire:model="selectedTemplate.page"
                                 class="p-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
                                 name="page">
                                 <option value="" selected>{{ __('Select a Page') }}</option>
-                                <option value="1">{{ __('Home Page') }}</option>
-                                <option value="2">{{ __('About Page') }}</option>
-                                <option value="3">{{ __('Partner Page') }}</option>
-                                <option value="4">{{ __('Blog Page') }}</option>
-                                <option value="7">{{ __('Contact Page') }}</option>
-                                <option value="8">{{ __('Products Page') }}</option>
-                                <option value="9">{{ __('Privacy Page') }}</option>
+                                @foreach (\App\Enums\PageType::values() as $value => $name)
+                                    <option value="{{ $value }}">{{ $name }}</option>
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('selectedTemplate.page')" for="selectedTemplate.page" class="mt-2" />
                         </div>
-    
+
                         <div class="w-full py-4 px-2">
                             <x-label for="image" :value="__('Image')" />
                             <x-input type="file" wire:model="selectedTemplate.image" id="image" />
-                            <p class="help-block text-info">
-                                {{ __('Upload 670X418 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-                            </p>
                             <x-input-error :messages="$errors->get('selectedTemplate.image')" for="selectedTemplate.image" class="mt-2" />
                         </div>
                     </div>

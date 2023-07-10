@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::insert([
+        $categories = [
             [
                 'id'          => 1,
                 'name'        => 'Runing',
@@ -41,6 +41,15 @@ class CategorySeeder extends Seeder
                 'type'        => 'race',
                 'status'      => true,
             ],
-        ]);
+        ];
+
+
+        foreach ($categories as $category) {
+            $newCategory = Category::create($category);
+
+            $newCategory->addMediaFromUrl($this->getImageUrl(500, 500))
+            ->toMediaCollection('local_files');
+        }
+
     }
 }

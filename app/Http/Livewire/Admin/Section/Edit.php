@@ -37,6 +37,7 @@ class Edit extends Component
         'section.page'        => ['nullable'],
         'section.title'       => ['nullable', 'string', 'max:255'],
         'section.subtitle'    => ['nullable', 'string', 'max:255'],
+        'section.bg_color'    => ['nullable', 'string', 'max:255'],
         'description' => ['nullable'],
     ];
 
@@ -62,25 +63,28 @@ class Edit extends Component
 
     public function update()
     {
-        try {
-            $this->validate();
-
+        $this->validate();
+        
+        // try {
+            
             if ($this->image) {
                 $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
                 $this->image->storeAs('sections', $imageName);
                 $this->section->image = $imageName;
             }
 
-            $this->product->description = $this->description;
+            $this->section->description = $this->description;
 
             $this->section->save();
 
             $this->alert('success', __('Section updated successfully!'));
 
+            $this->emit('refreshIndex');
+
             $this->editModal = false;
-        } catch (Throwable $th) {
-            $this->alert('warning', __('Section was not updated!'));
-        }
+        // } catch (Throwable $th) {
+        //     $this->alert('warning', __('Section was not updated!'));
+        // }
     }
 
     public function getLanguagesProperty(): Collection

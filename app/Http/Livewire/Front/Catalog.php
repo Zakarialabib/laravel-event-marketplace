@@ -8,7 +8,8 @@ use App\Http\Livewire\WithSorting;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use App\Models\Section;
+use App\Enums\PageType;
 class Catalog extends Component
 {
     use WithPagination;
@@ -30,6 +31,11 @@ class Catalog extends Component
         // 'category_id' => ['except' => '', 'as' => 'c'],
         // 'sorting'     => ['except' => '', 'as' => 'f'],
     ];
+
+    public function getSectionsProperty()
+    {
+        return Section::active()->where('page', PageType::CATALOG)->get();
+    }
 
     public function filterType($type, $value)
     {

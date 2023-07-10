@@ -2,9 +2,6 @@
     <div class="flex flex-wrap justify-center">
         <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
             <div class="my-2 my-md-0">
-                <p class="leading-5 text-black mb-1 text-sm ">
-                    {{ __('Show items per page') }}
-                </p>
                 <select wire:model="perPage" name="perPage"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                     @foreach ($paginationOptions as $value)
@@ -12,6 +9,19 @@
                     @endforeach
                 </select>
             </div>
+            @if ($this->selected)
+                <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
+                    <i class="fas fa-trash"></i>
+                </x-button>
+            @endif
+            @if ($this->selectedCount)
+                <p class="text-sm leading-5">
+                    <span class="font-medium">
+                        {{ $this->selectedCount }}
+                    </span>
+                    {{ __('Entries selected') }}
+                </p>
+            @endif
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <div class="my-2 my-md-0">
@@ -22,7 +32,7 @@
         </div>
     </div>
 
-    
+
 
     <x-table>
         <x-slot name="thead">
@@ -40,15 +50,15 @@
         </x-slot>
         <x-table.tbody>
             @forelse($pages as $id=>$page)
-            <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $page->id }}">
-                <x-table.td>
-                    <input type="checkbox" value="{{ $page->id }}" wire:model="selected">
+                <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $page->id }}">
+                    <x-table.td>
+                        <input type="checkbox" value="{{ $page->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
                         {{ $page->title }}
                     </x-table.td>
                     <x-table.td>
-                        <a href="{{ route('front.dynamicPage' , $page->slug )}}" target="_blank">
+                        <a href="{{ route('front.dynamicPage', $page->slug) }}" target="_blank">
                             {{ $page->slug }}
                         </a>
                     </x-table.td>
@@ -88,7 +98,7 @@
             {{ $pages->links() }}
         </div>
     </div>
-    
+
     <livewire:admin.page.edit />
 
     <livewire:admin.page.create />

@@ -11,7 +11,8 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Http\Livewire\Quill;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
 
 class Edit extends Component
 {
@@ -28,7 +29,6 @@ class Edit extends Component
 
     public $listeners = [
         'editModal',
-        Quill::EVENT_VALUE_UPDATED,
     ];
 
     public function updatedDescription($value)
@@ -60,7 +60,7 @@ class Edit extends Component
 
         $this->page = Page::findOrFail($page);
 
-        $this->image = $this->page->image;
+        $this->image = $this->page->image ?? "";
 
         $this->description = $this->page->description;
 
@@ -71,9 +71,7 @@ class Edit extends Component
     {
         $this->validate();
 
-        $this->page->slug = Str::slug($this->page->name);
-
-        if ($this->image) {
+        if ($this->image instanceof UploadedFile && $this->image->isValid()) {
             $imageName = Str::slug($this->page->name).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
             $this->image->storeAs('pages', $imageName);
             $this->page->image = $imageName;
@@ -81,9 +79,9 @@ class Edit extends Component
 
         $this->page->save();
 
-        $this->emit('refreshIndex');
-
         $this->alert('success', __('Page updated successfully.'));
+        
+        $this->emit('refreshIndex');
 
         $this->editModal = false;
     }

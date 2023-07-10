@@ -31,8 +31,6 @@ class Index extends Component
         'showModal',  'delete',
     ];
 
-    public $refreshIndex;
-
     public $showModal = false;
 
     public int $perPage;
@@ -137,5 +135,14 @@ class Index extends Component
             'status'      => 0,
         ]);
         $this->alert('success', __('Section Cloned successfully!'));
+    }
+
+    public function deleteSelected(): void
+    {
+        // abort_if(Gate::denies('section_delete'), 403);
+
+        Section::whereIn('id', $this->selected)->delete();
+
+        $this->resetSelected();
     }
 }

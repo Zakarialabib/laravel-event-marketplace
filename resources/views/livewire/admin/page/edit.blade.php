@@ -17,12 +17,12 @@
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="slug" :value="__('Slug')" required />
-                        <x-input wire:model.lazy="page.slug" type="text" id="slug" required />
+                        <x-input wire:model.lazy="page.slug" type="text" id="slug" disabled />
                     </div>
 
                     <div class="w-full px-2">
                         <x-label for="description" :value="__('Description')" />
-                        <x-trix name="description" wire:model.lazy="description" />
+                        <x-trix name="descriptionPage" wire:model.lazy="description" />
                     </div>
                     
                     <div class="w-full py-2 px-3">

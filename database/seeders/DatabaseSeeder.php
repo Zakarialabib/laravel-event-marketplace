@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             RaceLocationSeeder::class,
             RaceSeeder::class,
-            FAQSeeder::class,
+            FaqSeeder::class,
 
             // PagesettingsSeeder::class,
         ]);
