@@ -10,7 +10,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Shipping;
 use App\Models\User;
-use Gloudemans\registrationcart\Facades\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
