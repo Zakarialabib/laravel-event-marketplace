@@ -27,6 +27,9 @@ class Catalog extends Component
 
     public $selectedCategory = null;
 
+    public $minPrice;
+    public $maxPrice;
+
     protected $queryString = [
         // 'category_id' => ['except' => '', 'as' => 'c'],
         // 'sorting'     => ['except' => '', 'as' => 'f'],
@@ -72,6 +75,8 @@ class Catalog extends Component
             'date-asc'   => __('Date, new to old'),
             'date-desc'  => __('Date, old to new'),
         ];
+        $this->minPrice = Product::active()->min('price');
+        $this->maxPrice = Product::active()->max('price');
     }
 
     public function render()
@@ -79,8 +84,14 @@ class Catalog extends Component
         $query = Product::active()
             ->when($this->category_id, function ($query) {
                 return $query->where('category_id', '>=', $this->category_id);
+            })
+            ->when($this->minPrice, function ($query) {
+                return $query->where('price', '>=', $this->minPrice);
+            })
+            ->when($this->maxPrice, function ($query) {
+                return $query->where('price', '<=', $this->maxPrice);
             });
-
+    
         if ($this->sorting === 'name') {
             $products = $query->orderBy('name', 'asc')->paginate($this->perPage);
         } elseif ($this->sorting === 'name-desc') {
@@ -96,7 +107,8 @@ class Catalog extends Component
         } else {
             $products = $query->paginate($this->perPage);
         }
-
+    
         return view('livewire.front.catalog', compact('products'))->extends('layouts.app');
     }
+    
 }

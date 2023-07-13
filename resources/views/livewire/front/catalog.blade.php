@@ -18,8 +18,9 @@
                     <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
                         <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
                             <li
-                                class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-white pr-4">
+                                class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-white">
                                 <a href="{{ route('front.index') }}">{{ __('Home') }}</a>
+                                <span class="px-2 text-white"> > </span>
                             </li>
                             <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white"
                                 aria-current="page">
@@ -55,7 +56,6 @@
                         </div>
                     </div>
                 </div>
-                <!--end grid-->
             </div>
         </section>
         <div class="hidden lg:block mb-6 md:mb-0">
@@ -77,8 +77,7 @@
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-            })"
-                class="relative w-10/12 mx-auto flex flex-row mb-6">
+            })" class="relative w-10/12 mx-auto flex flex-row mb-6">
                 <div class="absolute inset-y-0 left-0 z-10 flex items-center">
                     <button @click="swiper.slidePrev()"
                         class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
@@ -92,30 +91,30 @@
                 <div class="swiper-container" x-ref="container">
                     <div class="swiper-wrapper">
                         @foreach (Helpers::getActiveProductCategories() as $category)
-                        <div class="swiper-slide w-auto px-4">
-                            <div x-data="{ active: '{{ $category->id }}' === '{{ $category_id }}' }" x-init="$watch('active', value => value ? $wire.category_id = '{{ $category->id }}' : '')"
-                                class="relative inline-flex mx-auto rounded-full">
-                                <button type="button"
-                                    @class="{ 'border-2 border-black bg-opacity-30': active, 'border': !active }"
-                                    wire:click="filterType('category', '{{ $category->id }}')">
-                                    <div class="flex items-center justify-center w-32 h-32 rounded-full bg-gray-300">
-                                        <h4
-                                            class="text-base text-white font-semibold capitalize">
-                                            {{ $category->name }}
-                                        </h4>
-                                    </div>
-                                </button>
-                                @if ($category_id == $category->id)
-                                    <div class="absolute top-0 right-0 mt-2 mr-2">
-                                        <button
-                                            class="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white focus:outline-none"
-                                            wire:click="clearFilter('category', '{{ $category->id }}')">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                @endif
+                            <div class="swiper-slide w-auto px-4">
+                                <div x-data="{ active: '{{ $category->id }}' === '{{ $category_id }}' }" x-init="$watch('active', value => value ? $wire.category_id = '{{ $category->id }}' : '')"
+                                    class="relative inline-flex mx-auto rounded-full">
+                                    <button type="button"
+                                        @class="{ 'border-2 border-black bg-opacity-30': active, 'border': !active }"
+                                        wire:click="filterType('category', '{{ $category->id }}')">
+                                        <div
+                                            class="flex items-center justify-center w-32 h-32 rounded-full bg-gray-300">
+                                            <h4 class="text-base text-white font-semibold capitalize">
+                                                {{ $category->name }}
+                                            </h4>
+                                        </div>
+                                    </button>
+                                    @if ($category_id == $category->id)
+                                        <div class="absolute top-0 right-0 mt-2 mr-2">
+                                            <button
+                                                class="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white focus:outline-none"
+                                                wire:click="clearFilter('category', '{{ $category->id }}')">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -166,7 +165,23 @@
                 <div class="border-t border-gray-900 mt-4 py-2"></div>
             </div>
 
-            <div class="w-full py-6 px-4" wire:loading.class.delay="opacity-50">
+            <div class="hidden lg:block w-1/4 px-3">
+                <div class="mb-6 p-4 bg-gray-50">
+                    <h3 class="mb-8 text-2xl font-bold font-heading">{{ __('Price budget') }}</h3>
+
+                    <div x-data="{ minPrice: {{ $minPrice }}, maxPrice: {{ $maxPrice }} }">
+                        <div class="mb-6">
+                            <input type="range" min="{{ $minPrice }}" max="{{ $maxPrice }}" step="1" x-model="minPrice" @input="$wire.minPrice = minPrice">
+                            <input type="range" min="{{ $minPrice }}" max="{{ $maxPrice }}" step="1" x-model="maxPrice" @input="$wire.maxPrice = maxPrice">
+                        </div>
+                        <div class="text-sm text-center">
+                            Price Range: <span x-text="minPrice"></span>DH - <span x-text="maxPrice"></span>DH
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-3/4 px-4" wire:loading.class.delay="opacity-50">
                 <div itemscope itemtype="https://schema.org/ItemList">
                     <div class="grid gap-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 mb-10">
                         @forelse ($products as $product)
