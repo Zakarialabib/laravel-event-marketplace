@@ -78,7 +78,7 @@
                     prevEl: '.swiper-button-prev',
                 },
             })"
-                class="relative w-10/12 mx-auto flex flex-row overflow-y-auto">
+                class="relative w-10/12 mx-auto flex flex-row mb-6">
                 <div class="absolute inset-y-0 left-0 z-10 flex items-center">
                     <button @click="swiper.slidePrev()"
                         class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
@@ -92,29 +92,30 @@
                 <div class="swiper-container" x-ref="container">
                     <div class="swiper-wrapper">
                         @foreach (Helpers::getActiveProductCategories() as $category)
-                            <div class="swiper-slide w-auto px-4">
-                                <div class="relative inline-flex mb-3.5 md:mb-4 lg:mb-5 xl:mb-6 mx-auto rounded-full">
-                                    <button type="button" wire:click="filterType('category', '{{ $category->id }}')">
-                                        <div class="flex">
-                                            <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px none; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                                                <span
-                                                    style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px none; margin: 0px; padding: 0px; max-width: 100%;">
-                                                    <img style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px none; margin: 0px; padding: 0px;"
-                                                        alt="" aria-hidden="true"
-                                                        src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27180%27%20height=%27180%27/%3e"></span><img
-                                                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                                                    decoding="async" data-nimg="intrinsic"
-                                                    class="object-cover bg-gray-300 rounded-full"
-                                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: medium none; margin: auto; display: block; width: 0px; height: 0px; min-width: 50%; max-width: 100%; min-height: 50%; max-height: 100%;"></span>
-                                        </div>
+                        <div class="swiper-slide w-auto px-4">
+                            <div x-data="{ active: '{{ $category->id }}' === '{{ $category_id }}' }" x-init="$watch('active', value => value ? $wire.category_id = '{{ $category->id }}' : '')"
+                                class="relative inline-flex mx-auto rounded-full">
+                                <button type="button"
+                                    @class="{ 'border-2 border-black bg-opacity-30': active, 'border': !active }"
+                                    wire:click="filterType('category', '{{ $category->id }}')">
+                                    <div class="flex items-center justify-center w-32 h-32 rounded-full bg-gray-300">
                                         <h4
-                                            class="text-heading text-sm md:text-base xl:text-lg font-semibold capitalize">
+                                            class="text-base text-white font-semibold capitalize">
                                             {{ $category->name }}
                                         </h4>
-                                    </button>
-                                </div>
+                                    </div>
+                                </button>
+                                @if ($category_id == $category->id)
+                                    <div class="absolute top-0 right-0 mt-2 mr-2">
+                                        <button
+                                            class="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white focus:outline-none"
+                                            wire:click="clearFilter('category', '{{ $category->id }}')">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -171,7 +172,7 @@
                         @forelse ($products as $product)
                             <x-product-card :product="$product" />
                         @empty
-                            <div class="col-span-full">
+                            <div class="col-span-full text-center mt-6">
                                 <h3 class="text-3xl font-bold font-heading text-blue-900">
                                     {{ __('No products found') }}
                                 </h3>

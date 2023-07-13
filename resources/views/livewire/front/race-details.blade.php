@@ -57,7 +57,6 @@
     </section>
     <section class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '' }">
         <div class="w-full h-auto max-w-screen-xl mx-auto pb-5">
-            <!-- Tab buttons -->
             <div
                 class="overflow-y-auto flex sm:justify-start lg:justify-center text-sm relative bg-gray-100 border-b-2 border-green-600">
                 <button
@@ -114,9 +113,9 @@
             </div>
         </div>
 
-        <div class="w-full flex items-center h-full py-6">
+        <div class="w-full flex flex-wrap items-center h-full py-6">
             <div class="xl:w-1/4 md:w-full px-4">
-                <p class="text-black text-sm md:text-base lg:text-lg mt-4">
+                <p class="text-black text-sm md:text-base lg:text-lg lg:text-center mt-4">
                     {{ __('Registration deadline') }}
                 </p>
                 <p class="text-black text-sm md:text-base lg:text-lg mt-4">

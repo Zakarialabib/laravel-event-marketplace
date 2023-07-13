@@ -18,25 +18,26 @@
                     </div>
                     <div>
                         <x-label required for="email" :value="__('Email')" />
-                        <x-input wire:model.defer="race.email" required id="email" name="email" type="email" />
+                        <x-input wire:model.defer="race.email" required id="email" name="email" type="email"
+                        autocomplete="email" />
                         <x-input-error :messages="$errors->get('race.email')" for="race.email" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="firstName" :value="__('First name')" />
                         <x-input wire:model.defer="race.firstName" required type="text" id="firstName"
-                            name="firstName" required />
+                            name="firstName" required autocomplete="firstName" />
                         <x-input-error :messages="$errors->get('race.firstName')" for="race.firstName" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="lastName" :value="__('Last name')" />
                         <x-input wire:model.defer="race.lastName" required type="text" id="lastName"
-                            name="lastName" />
+                            name="lastName" autocomplete="lastName" />
                         <x-input-error :messages="$errors->get('race.lastName')" for="race.lastName" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="phoneNumber" :value="__('Phone number')" />
                         <x-input wire:model.defer="race.phoneNumber" required type="number" id="phoneNumber"
-                            name="phoneNumber" />
+                            name="phoneNumber" autocomplete="phoneNumber" />
                         <x-input-error :messages="$errors->get('race.phoneNumber')" for="race.phoneNumber" class="mt-2" />
                     </div>
                     <div>
@@ -52,7 +53,7 @@
                     </div>
                     <div>
                         <x-label for="zipCode" :value="__('Zip code')" />
-                        <x-input wire:model.defer="race.zipCode" type="text" />
+                        <x-input wire:model.defer="race.zipCode" type="text" id="zipCode" name="zipCode" />
                         <x-input-error :messages="$errors->get('race.zipCode')" for="race.zipCode" class="mt-2" />
                     </div>
                     <div>
@@ -63,8 +64,9 @@
                     </div>
                     <div>
                         <x-label required :value="__('Gender')" for="gender" />
-                        <select wire:model.defer="race.gender"
+                        <select wire:model.defer="race.gender" id="gender"
                             class="block w-full py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
+                            <option>{{ __('Select options') }}</option>
                             <option value="Men">{{ __('Men') }}</option>
                             <option value="Women">{{ __('Women') }}</option>
                         </select>

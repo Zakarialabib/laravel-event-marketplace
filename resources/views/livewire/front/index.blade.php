@@ -57,7 +57,7 @@
             <h3 class="font-heading text-3xl xl:text-6xl leading-tighter pb-6 text-center">{{ __('Sponsors') }}</h3>
             <div class="flex flex-wrap items-center justify-center -mx-2 -mb-12 gap-x-6">
                 @foreach ($this->sponsors as $sponsor)
-                    <div class="w-1/2 md:w-1/3 lg:w-1/6 px-2 mb-12">
+                    <div class="w-1/4 sm:w-1/2 md:w-1/3 lg:w-1/6 px-2 mb-12">
                         <img class="mx-auto w-56 h-auto my-4 filter grayscale transition duration-300 hover:grayscale-0"
                             src="{{ $sponsor->getFirstMediaUrl('local_files') }}" alt="{{ $sponsor->name }}">
                         <p

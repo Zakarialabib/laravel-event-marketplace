@@ -11,6 +11,7 @@ use App\Http\Livewire\Front\Races as RacesIndex;
 use App\Http\Livewire\Front\Checkout as CheckoutIndex;
 use App\Http\Livewire\Front\CheckoutRace as CheckoutRace;
 use App\Http\Livewire\Front\Blogs as BlogIndex;
+use App\Http\Livewire\Front\BlogShow;
 use App\Http\Livewire\Front\DynamicPage;
 use App\Http\Livewire\Front\RaceDetails;
 use App\Http\Controllers\UploadController;
@@ -41,8 +42,8 @@ Route::get('/racedetails/{slug}', RaceDetails::class)->name('front.raceDetails')
 Route::get('/catalog/{slug}', [FrontController::class, 'productShow'])->name('front.product');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::get('/a-propos', [FrontController::class, 'about'])->name('front.about');
-Route::get('/blogs', BlogIndex::class)->name('front.blog');
-Route::get('/blog/{slug}', [FrontController::class, 'blogPage'])->name('front.blogPage');
+Route::get('/resources', BlogIndex::class)->name('front.blog');
+Route::get('/resource/{slug}', BlogShow::class)->name('front.blogPage');
 Route::get('/page/{slug}', DynamicPage::class)->name('front.dynamicPage');
 Route::get('/generate-sitemap', [FrontController::class, 'generateSitemaps'])->name('generate-sitemaps');
 Route::get('/redirect/{url}', [FrontController::class, 'redirect'])->name('redirect');
