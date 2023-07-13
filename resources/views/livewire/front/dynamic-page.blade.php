@@ -11,6 +11,11 @@
             <p class="py-10 text-black">{!! $page->description !!}</p>
         </article>
     </section>
+
+    @if ($page->section == 'contact')
+        @livewire('front.contact')
+    @endif
+    
     @if (count($this->sections) > 0)
         <section class="py-5 px-10 mx-auto bg-gray-100">
             @foreach ($this->sections as $section)

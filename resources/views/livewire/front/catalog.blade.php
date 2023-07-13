@@ -94,7 +94,7 @@
                         @foreach (Helpers::getActiveProductCategories() as $category)
                             <div class="swiper-slide w-auto px-4">
                                 <div class="relative inline-flex mb-3.5 md:mb-4 lg:mb-5 xl:mb-6 mx-auto rounded-full">
-                                    <button type="button" wire:click="filterType('category', {{ $category->id }})">
+                                    <button type="button" wire:click="filterType('category', '{{ $category->id }}')">
                                         <div class="flex">
                                             <span
                                                 style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px none; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
@@ -151,7 +151,7 @@
                     <ul x-show="openCategory">
                         @foreach (Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
-                                <button type="button" wire:click="filterType('category', {{ $category->id }})">
+                                <button type="button" wire:click="filterType('category', '{{ $category->id }}')">
                                     <span
                                         class="inline-block px-2 py-2 text-sm font-bold font-heading text-green-500 hover:underline">
                                         {{ $category->name }} <small>

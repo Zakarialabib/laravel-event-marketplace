@@ -84,7 +84,7 @@
                         @foreach (Helpers::getActiveCategories() as $category)
                             <div class="swiper-slide w-auto px-4">
                                 <div class="relative inline-flex mb-3.5 md:mb-4 lg:mb-5 xl:mb-6 mx-auto rounded-full">
-                                    <button type="button" wire:click="filterType('category', {{ $category->name }})">
+                                    <button type="button" wire:click="filterType('category', '{{ $category->name }}')">
                                         <div class="flex">
                                             <span
                                                 style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px none; margin: 0px; padding: 0px; position: relative; max-width: 100%;">

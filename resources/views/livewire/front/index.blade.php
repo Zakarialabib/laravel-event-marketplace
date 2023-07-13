@@ -72,9 +72,9 @@
         @livewire('front.resources')
 
         @if (count($this->featuredProducts) > 0)
-            <section class="bg-gray-900 py-10 mx-auto px-4 text-center text-white">
+            <section class="py-10 mx-auto px-4 text-center text-black">
                 <h2
-                    class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold text-white cursor-pointer pb-10 text-center">
+                    class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold cursor-pointer pb-10 text-center">
                     <a href="{{ route('front.catalog') }}">
                         {{ __('Visit Store') }}
                     </a>
@@ -85,7 +85,7 @@
                 </p>
 
                 <hr>
-                <div class="relative">
+                <div class="relative mb-6">
                     <x-product-slider :products="$this->featuredProducts" />
                 </div>
             </section>

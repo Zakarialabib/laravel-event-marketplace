@@ -11,40 +11,43 @@
                 <x-validation-errors class="mb-4" :errors="$errors" />
                 <div class="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-cente">
                     <div>
-
-                        <x-label for="number_of_participants" for="number_of_participants" :value="__('Number of participants (si relais)')" />
-                        <x-input type="number" id="number_of_participants"
+                        <x-label for="numberOfParticipants" :value="__('Number of participants (si relais)')" />
+                        <x-input type="number" id="numberOfParticipants" name="numberOfParticipants"
                             wire:model.defer="race.numberOfParticipants" />
                         <x-input-error :messages="$errors->get('race.numberOfParticipants')" for="race.numberOfParticipants" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="email" :value="__('Email')" />
-                        <x-input wire:model.defer="race.email" required type="email" />
+                        <x-input wire:model.defer="race.email" required id="email" name="email" type="email" />
                         <x-input-error :messages="$errors->get('race.email')" for="race.email" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="firstName" :value="__('First name')" />
-                        <x-input wire:model.defer="race.firstName" required type="text" required />
+                        <x-input wire:model.defer="race.firstName" required type="text" id="firstName"
+                            name="firstName" required />
                         <x-input-error :messages="$errors->get('race.firstName')" for="race.firstName" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="lastName" :value="__('Last name')" />
-                        <x-input wire:model.defer="race.lastName" required type="text" />
+                        <x-input wire:model.defer="race.lastName" required type="text" id="lastName"
+                            name="lastName" />
                         <x-input-error :messages="$errors->get('race.lastName')" for="race.lastName" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="phoneNumber" :value="__('Phone number')" />
-                        <x-input wire:model.defer="race.phoneNumber" required type="number" />
+                        <x-input wire:model.defer="race.phoneNumber" required type="number" id="phoneNumber"
+                            name="phoneNumber" />
                         <x-input-error :messages="$errors->get('race.phoneNumber')" for="race.phoneNumber" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="country" :value="__('Country')" />
-                        <x-input wire:model.defer="race.country" type="text" required />
+                        <x-input wire:model.defer="race.country" type="text" required id="country"
+                            name="country" />
                         <x-input-error :messages="$errors->get('race.country')" for="race.country" class="mt-2" />
                     </div>
                     <div>
                         <x-label required for="city" :value="__('City')" />
-                        <x-input wire:model.defer="race.city" required type="text" />
+                        <x-input wire:model.defer="race.city" required type="text" id="city" name="city" />
                         <x-input-error :messages="$errors->get('race.city')" for="race.city" class="mt-2" />
                     </div>
                     <div>
@@ -69,17 +72,20 @@
                     </div>
                     <div>
                         <x-label for="emergencyContactName" :value="__('Emergency contact name')" />
-                        <x-input wire:model.defer="race.emergencyContactName" name="emergencyContactName" type="text" />
+                        <x-input wire:model.defer="race.emergencyContactName" name="emergencyContactName"
+                            type="text" />
                         <x-input-error :messages="$errors->get('race.emergencyContactName')" for="race.emergencyContactName" class="mt-2" />
                     </div>
                     <div>
                         <x-label for="emergencyContactPhoneNumber" :value="__('Emergency contact phone number')" />
-                        <x-input wire:model.defer="race.emergencyContactPhoneNumber" name="emergencyContactPhoneNumber" type="number" />
+                        <x-input wire:model.defer="race.emergencyContactPhoneNumber" name="emergencyContactPhoneNumber"
+                            type="number" />
                         <x-input-error :messages="$errors->get('race.emergencyContactPhoneNumber')" for="race.emergencyContactPhoneNumber" class="mt-2" />
                     </div>
                     <div class="col-span-full">
                         <x-label required for="address" :value="__('Address')" />
-                        <x-input wire:model.defer="race.address" type="text" required />
+                        <x-input wire:model.defer="race.address" type="text" required id="address"
+                            name="address" />
                         <x-input-error :messages="$errors->get('race.address')" for="race.address" class="mt-2" />
                     </div>
 
@@ -91,7 +97,7 @@
                             class="font-bold font-heading text-gray-600">{{ __('Health Informations') }}</label>
                         <textarea wire:model.defer="race.helthInformation" name="" id="" rows="5"
                             class="w-full border border-gray-200 rounded-md"></textarea>
-                            <x-input-error :messages="$errors->get('race.helthInformation')" for="race.helthInformation" class="mt-2" />
+                        <x-input-error :messages="$errors->get('race.helthInformation')" for="race.helthInformation" class="mt-2" />
                     </div>
                     <div class="">
                         <label for=""

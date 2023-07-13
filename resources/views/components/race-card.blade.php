@@ -74,7 +74,7 @@
                     @endif
                     <div class="py-2 flex w-full">
                         <a href="{{ route('front.raceDetails', $race->slug) }}"
-                            class="bottom-0 w-full text-center cursor-pointer bg-green-600 py-4 px-2 text-lg front-bold text-white hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
+                            class="bottom-0 w-full text-center cursor-pointer border-2 border-green-600 py-3 px-2 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
                             {{ __('See more') }}
                         </a>
                     </div>
@@ -134,7 +134,7 @@
                 </li>
             </ul>
             @if ($race->course)
-                <ul class="flex gap-4 w-full pb-4 text-center border-b border-gray-100 dark:border-gray-800 ">
+                <ul class="flex gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
                     @foreach ($race->course as $key => $course)
                         <li class="text-base inline-flex md:text-lg">
                             <span
@@ -152,7 +152,7 @@
                 </li>
                 <li>
                     <a href="{{ route('front.raceDetails', $race->slug) }}"
-                        class="bottom-0 w-full rounded-2xl px-6 text-center cursor-pointer bg-green-600 py-4 text-lg front-bold text-white hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
+                        class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-3 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
                         {{ __('See more') }}
                     </a>
                 </li>
