@@ -23,13 +23,6 @@
                 <div class="flex flex-wrap py-4 gap-8 justify-center items-center">
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            <i class="fas fa-calendar-check mr-2"></i>
-                            {{ __('Registration Deadline') }}
-                        </span>
-                        <span class="text-base md:text-lg capitalize">{{ Helpers::format_date($race->registration_deadline) }}</span>
-                    </p>
-                    <p class="flex items-center">
-                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
                             <i class="fas fa-map-marker-alt"></i>
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->location->name }}</span>
@@ -72,11 +65,20 @@
                             @endforeach
                         </ul>
                     @endif
-                    <div class="py-2 flex w-full">
+                    <div class="py-2 flex flex-col w-full justify-center">
                         <a href="{{ route('front.raceDetails', $race->slug) }}"
                             class="bottom-0 w-full text-center cursor-pointer border-2 border-green-600 py-3 px-2 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">
                             {{ __('See more') }}
                         </a>
+                        @php
+                        $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
+                        @endphp
+
+                        @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
+                            <p class="text-sm text-gray-500 mt-2">{{ __('Registration closed') }}</p>
+                        @else
+                            <p class="text-sm text-gray-500 mt-2">{{ __('Registration open') }}</p>
+                        @endif
                     </div>
                 </div>
             </div>

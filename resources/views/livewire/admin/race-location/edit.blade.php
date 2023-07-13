@@ -31,14 +31,14 @@
                 </div>
                 <div class="w-full">
                     <x-label for="description" :value="__('Description')" />
-                    <x-input id="description" class="block mt-1 w-full" type="text" name="description"
-                        wire:model.lazy="raceLocation.description" />
+                    <textarea id="description" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" name="description" rows="5"
+                            wire:model.lazy="raceLocation.description"></textarea>
                     <x-input-error :messages="$errors->get('raceLocation.description')" for="raceLocation.description" class="mt-2" />
                 </div>
 
                 <div class="w-full my-2">
-                    <x-label for="image" :value="__('Race Image')" />
-                    <x-media-upload title="{{ __('Race Image') }}" name="image" wire:model="image" :file="$image"
+                    <x-label for="image" :value="__('Image')" />
+                    <x-media-upload title="{{ __('Image') }}" name="image" wire:model="image" :file="$image"
                         single types="PNG / JPEG / WEBP" fileTypes="image/*" />
                 </div>
 

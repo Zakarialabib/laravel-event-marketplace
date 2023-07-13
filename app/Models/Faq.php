@@ -31,6 +31,10 @@ class Faq extends Model
         'language_id',
     ];
 
+    protected $casts = [
+        'status' => Status::class,
+    ];
+
     /**
      * Scope a query to only include active products.
      *
@@ -40,6 +44,6 @@ class Faq extends Model
      */
     public function scopeActive($query)
     {
-        $query->where('status', true);
+        return $query->where('status', Status::ACTIVE);
     }
 }

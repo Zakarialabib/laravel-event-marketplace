@@ -12,35 +12,45 @@
                 <div class="flex flex-wrap -mx-3 space-y-0">
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="title" :value="__('Name')" />
-                        <x-input id="title" class="block mt-1 w-full" type="text" name="title"
+                        <x-input id="title" class="block mt-1 w-full" type="text" name="title" required
                             wire:model.lazy="blog.title" />
                         <x-input-error :messages="$errors->get('blog.title')" for="blog.title" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="slug" :value="__('Slug')" />
-                        <x-input id="slug" class="block mt-1 w-full" type="text" name="slug"
+                        <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" disabled
                             wire:model.lazy="blog.slug" />
                         <x-input-error :messages="$errors->get('blog.slug')" for="blog.slug" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="category_id" :value="__('Category')" required />
-                        <x-select-list
+                        <select required
                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="category_id" name="category_id" wire:model.lazy="blog.category_id" :options="$this->categories" />
+                            id="category_id" name="category_id" wire:model.lazy="blog.category_id">
+                            <option value="">{{ __('Select Category') }}</option>
+                            @foreach ($this->categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                        </select>
                         <x-input-error :messages="$errors->get('blog.category_id')" for="blog.category_id" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="language_id" :value="__('Language')" required />
-                        <x-select-list
+                        <select
                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="language_id" name="language_id" wire:model.lazy="blog.language_id" :options="$this->languages" />
+                            required
+                            id="language_id" name="language_id" wire:model.lazy="blog.language_id">
+                            <option value="">{{ __('Select Language') }}</option>
+                            @foreach ($this->languages as $language)
+                                <option value="{{ $language->id }}">{{ $language->name }}</option>
+                            @endforeach
+                        </select>
                         <x-input-error :messages="$errors->get('blog.language_id')" for="blog.language_id" class="mt-2" />
                     </div>
 
                     <div class="w-full px-3 mb-4">
-                        <x-label for="details" :value="__('Description')" required />
-                        <x-input.rich-text wire:model.lazy="blog.details" id="details" name="details"
-                            endpoint="/uploads" {{-- value="{!! $this->blog->details !!}" --}}  />
+                        <x-label for="description" :value="__('Description')" required />
+                        <x-trix name="description" wire:model.lazy="description" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="meta_title" :value="__('Meta title')" />

@@ -25,8 +25,6 @@ class Index extends Component
 
     public $category;
 
-    public $name;
-
     public $file;
 
     public $listeners = [

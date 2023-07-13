@@ -58,7 +58,7 @@ class Edit extends Component
         $this->emit('refreshIndex');
     }
 
-    public function getLanguagesProperty(): Collection
+    public function getLanguagesProperty()
     {
         return Language::select('name', 'id')->get();
     }

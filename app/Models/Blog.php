@@ -8,6 +8,7 @@ use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Enums\Status;
 
 class Blog extends Model implements HasMedia
 {
@@ -29,7 +30,7 @@ class Blog extends Model implements HasMedia
 
     protected $fillable = [
         'title',
-        'details',
+        'description',
         'image',
         'slug',
         'status',
@@ -38,6 +39,15 @@ class Blog extends Model implements HasMedia
         'meta_title',
         'meta_desc',
         'language_id',
+    ];
+
+      /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'status'            => Status::class,
     ];
 
     /**
@@ -49,7 +59,7 @@ class Blog extends Model implements HasMedia
      */
     public function scopeActive($query)
     {
-        $query->where('status', true);
+        return $query->where('status', Status::ACTIVE);
     }
 
     public function category()

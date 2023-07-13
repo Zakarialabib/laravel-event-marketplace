@@ -19,7 +19,6 @@ return new class () extends Migration {
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('status')->default(true);
-            $table->boolean('featured')->default(false);
             $table->text('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();

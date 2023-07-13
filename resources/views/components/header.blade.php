@@ -15,14 +15,14 @@
                     @foreach (\App\Helpers::getActiveCategories() as $category)
                         <li>
                             <a href="{{ route('front.categories') }}?type={{ $category->name }}"
-                                class="relative inline-flex items-center hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 hover:underline focus:underline uppercase">
+                                class="relative inline-flex items-center {{ request()->query('type') == $category->name ? 'text-green-400 underline' : '' }} hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 hover:underline focus:underline uppercase">
                                 {{ $category->name }}
                             </a>
                         </li>
                     @endforeach
                     <li>
                         <a href="{{ route('front.catalog') }}"
-                            class="relative inline-flex items-center hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 uppercase">
+                            class="relative inline-flex items-center {{ request()->routeIs('front.catalog') ? 'text-green-400 underline' : '' }} hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 hover:underline focus:underline uppercase">
                             {{ __('Store') }}
                         </a>
                     </li>
@@ -173,7 +173,7 @@
                     @foreach (\App\Helpers::getActiveCategories() as $category)
                         <li>
                             <a href="{{ route('front.categories') }}?type={{ $category->name }}"
-                                class="text-sans text-sm uppercase text-green-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
+                                class="text-sans text-sm uppercase  {{ request()->query('type') == $category->name ? 'text-green-400 underline' : '' }}  text-green-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
                                 {{ $category->name }}
                             </a>
                         </li>
@@ -193,8 +193,8 @@
                 <ul x-show="isProduct" class="py-2 space-y-4 font-semibold font-heading">
                     @foreach (\App\Helpers::getActiveProductCategories() as $category)
                         <li>
-                            <a href="{{ route('front.catalog') }}?c={{ $category->id }}"
-                                class="text-sans text-sm uppercase text-green-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
+                            <a href="{{ route('front.catalog') }}"
+                                class="text-sans text-sm uppercase  {{ request()->routeIs('front.catalog') ? 'text-green-400 underline' : '' }}  text-green-800 text-center font-semibold leading-5 font-heading hover:text-gray-800 hover:underline">
                                 {{ $category->name }}
                             </a>
                         </li>

@@ -38,12 +38,12 @@
     <x-table>
         <x-slot name="thead">
             <x-table.th>#</x-table.th>
-            <x-table.th sortable wire:click="sortBy('name')" :direction="$sorts['name'] ?? null">
-                {{ __('Name') }}
-                @include('components.table.sort', ['field' => 'name'])
+            <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
+                {{ __('Title') }}
+                @include('components.table.sort', ['field' => 'title'])
             </x-table.th>
             <x-table.th>
-                {{ __('Featured') }}
+                {{ __('Status') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Actions') }}
@@ -59,29 +59,17 @@
                         {{ $blogcategory->title }}
                     </x-table.td>
                     <x-table.td>
-                        <livewire:toggle-button :model="$blogcategory" field="featured" key="{{ $blogcategory->id }}" />
+                        <livewire:toggle-button :model="$blogcategory" field="status" key="{{ $blogcategory->id }}" />
                     </x-table.td>
                     <x-table.td>
-                        <x-dropdown
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
-                            <x-slot name="trigger">
-                                <button type="button"
-                                    class="px-4 text-base font-semibold text-gray-500 hover:text-sky-800">
-                                    <i class="fas fa-angle-double-down"></i>
-                                </button>
-                            </x-slot>
-                            <x-slot name="content">
-                                <x-button primary type="button"
-                                    wire:click="$emit('editModal', {{ $blogcategory->id }})"
-                                    wire:loading.attr="disabled">
-                                    <i class="fas fa-edit"></i>
-                                </x-button>
-                                <x-button danger type="button" wire:click="deleteModal({{ $blogcategory->id }})"
-                                    wire:loading.attr="disabled">
-                                    <i class="fas fa-trash-alt"></i>
-                                </x-button>
-                            </x-slot>
-                        </x-dropdown>
+                        <x-button primary type="button" wire:click="$emit('editModal', {{ $blogcategory->id }})"
+                            wire:loading.attr="disabled">
+                            <i class="fas fa-edit"></i>
+                        </x-button>
+                        <x-button danger type="button" wire:click="deleteModal({{ $blogcategory->id }})"
+                            wire:loading.attr="disabled">
+                            <i class="fas fa-trash-alt"></i>
+                        </x-button>
                     </x-table.td>
                 </x-table.tr>
             @empty

@@ -11,24 +11,20 @@ use Livewire\WithPagination;
 use App\Models\Section;
 use App\Enums\PageType;
 
-class Blogs extends Component
+class BlogSHow extends Component
 {
-    use WithPagination;
+    public $blog;
 
-    public $category;
-
-    protected $listeners = ['categorySelected'];
-
-    public function categorySelected($category)
+    public function mount($slug)
     {
-        $this->category = $category;
+        $this->blog = Blog::where('slug', $slug)->firstOrFail();
     }
 
     public function getCategoriesProperty()
     {
         return BlogCategory::select('id', 'title')->get();
     }
-    
+
     public function getFeaturedBlogsProperty()
     {
         return Blog::active()->where('featured', true)->get();
@@ -38,14 +34,9 @@ class Blogs extends Component
     {
         return Section::active()->where('page', PageType::BLOG)->get();
     }
-
+    
     public function render()
     {
-        $blogs = Blog::with('category')
-            ->when('category', function ($query) {
-                $query->where('category_id', $this->category);
-            })->paginate(6);
-
-        return view('livewire.front.blogs', compact('blogs'))->extends('layouts.app');
+        return view('livewire.front.blog-show')->extends('layouts.app');
     }
 }

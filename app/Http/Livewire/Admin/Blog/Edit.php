@@ -24,6 +24,8 @@ class Edit extends Component
     public $image;
 
     public $blog;
+    
+    public $description;
 
     public $listeners = ['editModal'];
 
@@ -31,11 +33,16 @@ class Edit extends Component
         'blog.title'       => 'required|min:3|max:255',
         'blog.category_id' => 'required|integer',
         'blog.slug'        => 'required|string',
-        'blog.details'     => 'required|min:3',
+        'description'     => 'required|min:3',
         'blog.language_id' => 'nullable|integer',
         'blog.meta_title'  => 'nullable|max:100',
         'blog.meta_desc'   => 'nullable|max:200',
     ];
+
+    public function updatedDescription($value)
+    {
+        $this->description = $value;
+    }
 
     public function render(): View|Factory
     {
@@ -67,6 +74,8 @@ class Edit extends Component
             $this->blog->image = $imageName;
         }
 
+        $this->blog->description = $this->description;
+
         $this->blog->save();
 
         $this->emit('refreshIndex');
@@ -76,7 +85,7 @@ class Edit extends Component
         $this->editModal = false;
     }
 
-    public function getBlogCategoriesProperty()
+    public function getCategoriesProperty()
     {
         return BlogCategory::select('title', 'id')->get();
     }

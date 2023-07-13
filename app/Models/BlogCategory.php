@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Status;
 
 class BlogCategory extends Model
 {
@@ -14,7 +15,6 @@ class BlogCategory extends Model
     public const ATTRIBUTES = [
         'id',
         'title',
-        'featured',
         'language_id',
     ];
 
@@ -26,10 +26,18 @@ class BlogCategory extends Model
         'description',
         'meta_tag',
         'meta_description',
-        'featured',
         'language_id',
     ];
 
+    protected $casts = [
+        'status' => Status::class,
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', Status::ACTIVE);
+    }
+    
     public function blogs()
     {
         return $this->hasMany(Blog::class);

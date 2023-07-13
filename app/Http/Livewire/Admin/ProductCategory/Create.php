@@ -17,40 +17,40 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $listeners = ['createCategory'];
+    public $listeners = ['createModal'];
 
-    public $createCategory;
+    public $createModal;
 
     public $category;
 
     public $image;
 
     public array $rules = [
-        'category.name' => 'required',
+        'category.name' => 'required|min:3|max:255',
+        'category.description' => 'required|min:3',
     ];
-
-    public function mount(ProductCategory $category)
-    {
-        $this->category = $category;
-    }
 
     public function render(): View|Factory
     {
         return view('livewire.admin.product-category.create');
     }
 
-    public function createCategory()
+    public function createModal()
     {
         $this->resetErrorBag();
 
         $this->resetValidation();
 
-        $this->createCategory = true;
+        $this->category = new ProductCategory();
+
+        $this->createModal = true;
     }
 
     public function create()
     {
         $this->validate();
+
+        $this->category->slug = Str::slug($this->category->name);
 
         if ($this->image) {
             $imageName = Str::slug($this->category->name).'-'.Str::random(3).'.'.$this->image->extension();
@@ -64,6 +64,6 @@ class Create extends Component
 
         $this->alert('success', 'ProductCategory created successfully.');
 
-        $this->createCategory = false;
+        $this->createModal = false;
     }
 }

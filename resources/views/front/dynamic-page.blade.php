@@ -7,7 +7,7 @@
             <h1 class="mt-6 text-3xl text-center font-bold text-black md:text-5xl">
                 {{ $page->title }}
             </h1>
-            <p class="py-10 text-black">{!! $page->details !!}</p>
+            <p class="py-10 text-black">{!! $page->description !!}</p>
         </article>
     </section>
     <section class="py-14 dark:bg-white/[0.03] lg:py-20">

@@ -101,37 +101,37 @@
                     </tr>
                 </x-slot>
                 <x-table.tbody>
-                    @forelse($raceLocations as $category)
-                        <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $category->id }}">
+                    @forelse($raceLocations as $location)
+                        <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $location->id }}">
                             <x-table.td>
-                                <input type="checkbox" value="{{ $category->id }}" wire:model="selected">
+                                <input type="checkbox" value="{{ $location->id }}" wire:model="selected">
                             </x-table.td>
                             <x-table.td>
-                             @if ($category->hasMedia('local_files'))
-                                <img src="{{ $category->getFirstMediaUrl('local_files') }}" alt="{{ $category->name }}"
-                                    class="w-10 h-10 rounded-full object-cover">
-                                    @else
-                                    <p>No race image available.</p>
+                                @if ($location->hasMedia('local_files'))
+                                    <img src="{{ $location->getFirstMediaUrl('local_files') }}"
+                                        alt="{{ $location->name }}" class="w-10 h-10 rounded-full object-cover">
+                                @else
+                                    <p>{{ __('No race image available') }}.</p>
                                 @endif
                             </x-table.td>
                             <x-table.td>
-                                {{ $category->name }}
+                                {{ $location->name }}
                             </x-table.td>
                             <x-table.td>
-                                {{-- {{ $category->name }} --}}
+                                {{ $location->category->name }}
                             </x-table.td>
                             <x-table.td>
-                                <livewire:toggle-button :model="$category" field="status" key="{{ $category->id }}" />
+                                <livewire:toggle-button :model="$location" field="status" key="{{ $location->id }}" />
                             </x-table.td>
                             <x-table.td>
                                 <div class="flex justify-start space-x-2">
                                     <x-button primary type="button"
-                                        wire:click="$emit('editModal', {{ $category->id }})"
+                                        wire:click="$emit('editModal', {{ $location->id }})"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-edit"></i>
                                     </x-button>
                                     <x-button danger type="button"
-                                        wire:click="$emit('deleteModal', {{ $category->id }})"
+                                        wire:click="$emit('deleteModal', {{ $location->id }})"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-trash-alt"></i>
                                     </x-button>
@@ -158,7 +158,7 @@
             @livewire('admin.race-location.create')
 
             <!-- Edit Modal -->
-            @livewire('admin.race-location.edit', ['category' => $category])
+            @livewire('admin.race-location.edit', ['category' => $location])
 
             <!-- Import Modal -->
             <x-modal wire:model="importModal">

@@ -27,8 +27,9 @@ class Edit extends Component
         'editModal',
     ];
 
-    protected $rules = [
-        'category.name' => ['required', 'max:255'],
+    public array $rules = [
+        'category.name' => 'required|min:3|max:255',
+        'category.description' => 'required|min:3',
     ];
 
     public function editModal($category)

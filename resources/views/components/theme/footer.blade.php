@@ -1,4 +1,4 @@
-<footer class="w-full mt-auto divide-y-2">
+<footer class="w-full mt-auto divide-y-2 bg-white border-black border-t-2">
     <div class="px-6">
         <div class="grid gap-y-10 gap-x-4 py-14 sm:grid-cols-3 lg:grid-cols-5 lg:py-[100px]">
             <div class="relative">
@@ -53,7 +53,7 @@
                     @foreach (Helpers::getActivePages() as $page)
                     <li><a href="{{ route('front.dynamicPage', $page->slug)}}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{ $page->title }}</a></li>
                     @endforeach
-                    <li><a href="{{ route('front.blog') }}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{__('Blog')}}</a></li>
+                    <li><a href="{{ route('front.blog') }}" class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{__('Resources')}}</a></li>
                 </ul>
             </div>
             <div>
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <div class="bg-gradient-to-r from-[#FCF1F4] to-[#EDFBF9] py-5 dark:border-t-2 dark:border-white/5 dark:bg-none">
+    <div class="py-5 dark:border-t-2 dark:border-white/5 dark:bg-none">
         <div class="px-6">
             <div class="flex flex-col items-center justify-between text-center font-bold dark:text-white md:flex-row">
                 <div>

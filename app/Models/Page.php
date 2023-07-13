@@ -43,7 +43,7 @@ class Page extends Model implements HasMedia
      */
     public function scopeActive($query)
     {
-        $query->where('status', true);
+        return $query->where('status', Status::ACTIVE);
     }
 
     public function registerMediaCollections(): void

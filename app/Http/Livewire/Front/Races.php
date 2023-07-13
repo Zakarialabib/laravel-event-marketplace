@@ -21,8 +21,6 @@ class Races extends Component
 
     public $perPage;
 
-    public $paginationOptions;
-
     public $category_id;
 
     public $raceLocation_id;
@@ -51,13 +49,13 @@ class Races extends Component
 
     public function loadMore()
     {
-        $this->perPage += 25;
+        $this->perPage += 5;
     }
 
     public function mount()
     {
-        $this->perPage = 25;
-        $this->paginationOptions = [25, 50, 100];
+        $this->perPage = 5;
+
         $this->sortingOptions = [
             'name-asc'   => __('Order Alphabetic, A-Z'),
             'name-desc'  => __('Order Alphabetic, Z-A'),
