@@ -109,11 +109,11 @@
 
                         <x-slot name="content">
                             {{-- route with anchor login  --}}
-                            <x-dropdown-link href="{{ route('auth.index') }}" x-on:click.prevent="isTab = 'login'">
+                            <x-dropdown-link href="{{ route('auth.index') }}">
                                 {{ __('Login') }}
                             </x-dropdown-link>
                             {{-- route with anchor --}}
-                            <x-dropdown-link href="{{ route('auth.index') }}" x-on:click.prevent="isTab = 'register'">
+                            <x-dropdown-link href="{{ route('auth.index') }}">
                                 {{ __('Register') }}
                             </x-dropdown-link>
                         </x-slot>

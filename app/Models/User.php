@@ -44,7 +44,7 @@ class User extends Authenticatable
         'uuid',
         'name',
         'email',
-        // 'status',
+        'status',
         'password',
     ];
 

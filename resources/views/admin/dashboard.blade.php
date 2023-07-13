@@ -1,7 +1,7 @@
 @section('title', __('Dashboard'))
 <x-dashboard-layout>
  
-    @livewire('media-library')
+    {{-- @livewire('media-library') --}}
 
     <div>
         <div class="bg-white">

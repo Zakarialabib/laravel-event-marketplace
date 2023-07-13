@@ -69,12 +69,12 @@
                     </div>
                     <div>
                         <x-label for="emergencyContactName" :value="__('Emergency contact name')" />
-                        <x-input wire:model.defer="race.emergencyContactName" type="text" />
+                        <x-input wire:model.defer="race.emergencyContactName" name="emergencyContactName" type="text" />
                         <x-input-error :messages="$errors->get('race.emergencyContactName')" for="race.emergencyContactName" class="mt-2" />
                     </div>
                     <div>
                         <x-label for="emergencyContactPhoneNumber" :value="__('Emergency contact phone number')" />
-                        <x-input wire:model.defer="race.emergencyContactPhoneNumber" type="number" />
+                        <x-input wire:model.defer="race.emergencyContactPhoneNumber" name="emergencyContactPhoneNumber" type="number" />
                         <x-input-error :messages="$errors->get('race.emergencyContactPhoneNumber')" for="race.emergencyContactPhoneNumber" class="mt-2" />
                     </div>
                     <div class="col-span-full">

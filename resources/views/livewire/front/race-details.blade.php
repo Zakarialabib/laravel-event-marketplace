@@ -36,7 +36,7 @@
                             </a>
                             <span class="px-2 text-white"> > </span>
                         </li>
-                        
+
                         <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white"
                             aria-current="page">
                             <a href="{{ URL::Current() }}">
@@ -293,15 +293,15 @@
                 </div>
                 <div x-show="activeTab === 'tab4'">
                     <div class="w-full text-center mb-5">
-                    @php
-                    $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
-                    @endphp
-                    
-                    @if($registrationDeadline->isBefore(\Carbon\Carbon::now()))
-                    <p class="block text-base md:text-lg text-gray-400">{{ __('Registration is over') }}.</p>
-                    @else
-                        @livewire('front.registration-form', ['race' => $race])
-                    @endif
+                        @php
+                            $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
+                        @endphp
+
+                        @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
+                            <p class="block text-base md:text-lg text-gray-400">{{ __('Registration is over') }}.</p>
+                        @else
+                            @livewire('front.registration-form', ['race' => $race])
+                        @endif
                     </div>
                 </div>
             </div>

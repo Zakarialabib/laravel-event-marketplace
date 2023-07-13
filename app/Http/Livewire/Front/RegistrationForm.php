@@ -36,20 +36,21 @@ class RegistrationForm extends Component
     public $existingSubmission;
     public $newsletters = false;
 
+    //  upgrading validations 
     protected $rules = [
         'race.numberOfParticipants'        => 'required|integer',
-        'race.email'                       => 'required|email',
+        'race.email'                    => 'required|email:rfc,dns,spoof,filter',
         'race.firstName'                   => 'required|string',
         'race.lastName'                    => 'required|string',
         'race.gender'                      => 'required|string',
-        'race.dateOfBirth'                 => 'required|date',
-        'race.phoneNumber'                 => 'required|string',
-        'race.country'                     => 'required|string',
+        'race.dateOfBirth'                 => 'required|date|before:today',
+        'race.phoneNumber'                 => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6',
+        'race.country'                     => 'required|string|min:3|max:50',
         'race.address'                     => 'required|string',
-        'race.city'                        => 'required|string',
+        'race.city'                        => 'required|string|min:3|max:50',
         'race.zipCode'                     => 'nullable|string',
-        'race.emergencyContactName'        => 'required|string',
-        'race.emergencyContactPhoneNumber' => 'required|string',
+        'race.emergencyContactName'        => 'nullable|string',
+        'race.emergencyContactPhoneNumber' => 'nullable|numeric|min:6',
         'race.helthInformation'           => 'required',
         'race.hasMedicalHistory'           => 'boolean',
         'race.isTakingMedications'         => 'boolean',
@@ -111,15 +112,6 @@ class RegistrationForm extends Component
 
                     $participant = Participant::create($participantData);
                     
-                    if ($this->newsletters) {
-                        Subscriber::create([
-                            'email' => $participant->email,
-                            'name' => $participant->name,
-                            'tag' => 'participant', // 'participant' or 'subscriber
-                            'status' => Status::ACTIVE,
-                        ]);
-                    }
-                    
                     // Cart::instance('shopping')->add($this->race->id)->associate('App\Models\Race');
 
                     return $next($participant);
@@ -150,12 +142,16 @@ class RegistrationForm extends Component
                     Auth::login($user, true);
 
                     if ($this->newsletters) {
-                        Subscriber::create([
-                            'email' => $participant->email,
-                            'name' => $participant->name,
-                            'tag' => 'participant', // 'participant' or 'subscriber
-                            'status' => Status::ACTIVE,
-                        ]);
+                        $existingSubscriber = Subscriber::where('email', $participant->email)->first();
+                        
+                        if (!$existingSubscriber) {
+                            Subscriber::create([
+                                'email' => $participant->email,
+                                'name' => $participant->name,
+                                'tag' => 'participant', // 'participant' or 'subscriber
+                                'status' => Status::ACTIVE,
+                            ]);
+                        }
                     }
 
                     // Mail::to($participant->email)->send(new RegistrationConfirmation($user));

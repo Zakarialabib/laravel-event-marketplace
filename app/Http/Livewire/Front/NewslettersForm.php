@@ -20,12 +20,10 @@ class NewslettersForm extends Component
 
     public $email;
 
-    protected $listeners = [
-
-    ];
+    protected $listeners = [];
 
     protected $rules = [
-        'email' => 'required|email',
+        'email' => 'required|email|unique:subscribers,email',
     ];
 
     public function render(): View|Factory
@@ -40,26 +38,39 @@ class NewslettersForm extends Component
 
     public function subscribe()
     {
+        $validatedData = $this->validate();
+        
         try {
-            $validatedData = $this->validate();
+            
+            $subscriber = Subscriber::create([
+                'email' => $validatedData['email'],
+                'name' => $this->extractNameFromEmail($validatedData['email']),
+                'tag' => 'subscriber',
+                'status' => 'active',
+            ]);
 
-            Subscriber::create($validatedData);
-
-            $this->alert('success', __('Your are subscribed to our newsletters.'));
+            $this->alert('success', __('You are subscribed to our newsletters.'));
 
             $this->resetInputFields();
 
             $user = User::find(1);
-
             $user_email = $user->email;
 
-            Mail::to($user_email)->send(new SubscribedMail());
+            Mail::to($user_email)->send(new SubscribedMail($subscriber));
         } catch (Throwable $th) {
-            $this->alert('error', __('Error').$th->getMessage());
+            $this->alert('error', __('Error') . $th->getMessage());
         }
     }
 
-    /* @var array */
+    private function extractNameFromEmail(string $email): string
+    {
+        $parts = explode('@', $email);
+        $username = $parts[0];
+        $nameParts = explode('.', $username);
+        $name = implode(' ', $nameParts);
+        return ucwords($name);
+    }
+
     private function resetInputFields()
     {
         $this->email = '';

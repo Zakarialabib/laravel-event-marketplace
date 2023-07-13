@@ -21,12 +21,10 @@
                             </a>
                         </li>
                     </ul>
-
                     <div
                         class="flex flex-wrap items-center py-5 text-white w-full sm:w-auto justify-center my-2 overflow-x-scroll">
                         <div
                             class="py-2 sm:px-3 flex flex-col justify-center gap-y-4 items-center font-heading font-medium">
-
                             <span>{{ __('Location') }}</span>
                             <select name="location_id" id="location_id" wire:model.lazy="raceLocation_id"
                                 class="bg-transparent border border-gray-200 hover:border-gray-300 rounded-4xl">
@@ -40,7 +38,6 @@
                         </div>
                         <div
                             class="py-2 sm:px-3 flex flex-col justify-center gap-y-4 items-center font-heading font-medium">
-
                             <span>{{ __('Race Type') }}</span>
                             <select name="category_id" id="category_id" wire:model.lazy="category_id"
                                 class="bg-transparent border border-gray-200 hover:border-gray-300 rounded-4xl">
@@ -51,7 +48,6 @@
                                     </option>
                                 @endforeach
                             </select>
-
                         </div>
                         <button type="button" @click="showSidebar = true"
                             class="flex lg:hidden items-center justify-center w-12 h-12 duration-500 ease-in-out text-white hover:text-green-200">
@@ -92,32 +88,32 @@
                                                 {{ __('Registration Deadline') }} :
                                             </span>
                                             <span
-                                                class="text-base md:text-lg capitalize">{{ $race->registration_deadline }}</span>
+                                                class="text-base md:text-lg capitalize">{{ Helpers::format_date($race->registration_deadline) }}</span>
                                         </p>
                                         <p class="flex items-center">
                                             <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                <i class="fas fa-map-marker-alt"></i>
+                                                {{ __('Location') }} :
                                             </span>
                                             <span
                                                 class="text-base md:text-lg capitalize">{{ $race->location->name }}</span>
                                         </p>
                                         <p class="flex items-center">
                                             <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                <i class="fas fa-tags"></i>
+                                                {{ __('Type') }} :
                                             </span>
                                             <span
                                                 class="text-base md:text-lg capitalize">{{ $race->category->name }}</span>
                                         </p>
                                         <p class="flex items-center">
                                             <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                <i class="fas fa-calendar-alt"></i>
+                                                {{ __('Number of days') }} :
                                             </span>
                                             <span class="text-base md:text-lg capitalize">{{ $race->number_of_days }}
                                                 {{ __('days') }}</span>
                                         </p>
                                         <p class="flex items-center">
                                             <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                <i class="fas fa-users"></i>
+                                                {{ __('Number of racers') }} :
                                             </span>
                                             <span
                                                 class="text-base md:text-lg capitalize">{{ $race->number_of_racers }}</span>
@@ -146,11 +142,12 @@
                                     @endif
                                 </div>
                                 <div class="w-1/2 xl:w-1/3 lg::w-2/12 md:w-1/3 mx-auto">
-                                    {{ \Carbon\Carbon::parse($race->date)->format('F,d,Y') }}
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    {{ \Carbon\Carbon::parse($race->date)->format('F/d/Y') }}
                                 </div>
                                 <div class="mt-6 xl:mt-0 w-full xl:w-1/3 lg::w-4/12 md:w-1/3 mx-auto">
-                                    <div class="lg:mx-auto xl:mr-0 lg:max-w-max"><a
-                                            class="block py-4 px-10 w-full text-lg leading-5 text-white font-medium tracking-tighter font-heading text-center bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"
+                                    <div class="lg:mx-auto xl:mr-0 lg:max-w-max">
+                                        <a class="block py-4 px-10 w-full text-lg leading-5 text-white font-medium tracking-tighter font-heading text-center bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"
                                             href="{{ route('front.raceDetails', $race->slug) }}">
                                             {{ __('Read More') }}
                                         </a>

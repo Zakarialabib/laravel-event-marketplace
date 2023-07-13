@@ -16,6 +16,7 @@ return new class () extends Migration {
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->string('email', 191)->unique();
             $table->string('name', 191)->nullable();
             $table->string('tag', 255)->nullable();
