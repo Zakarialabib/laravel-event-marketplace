@@ -35,7 +35,7 @@ class Create extends Component
         'description'     => 'required|min:3',
         'blog.language_id' => 'nullable|integer',
         'blog.meta_title'  => 'nullable|max:100',
-        'blog.meta_desc'   => 'nullable|max:200',
+        'blog.meta_description'   => 'nullable|max:200',
     ];
 
     public function updatedDescription($value)

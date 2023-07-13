@@ -37,7 +37,7 @@ class Blog extends Model implements HasMedia
         'featured',
         'category_id',
         'meta_title',
-        'meta_desc',
+        'meta_description',
         'language_id',
     ];
 

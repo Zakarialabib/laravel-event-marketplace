@@ -55,10 +55,10 @@
                         <x-input-error :messages="$errors->get('blog.meta_title')" for="blog.meta_title" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
-                        <x-label for="meta_desc" :value="__('Meta Description')" />
-                        <x-input id="meta_desc" class="block mt-1 w-full" type="text" name="meta_desc"
-                            wire:model.lazy="blog.meta_desc" />
-                        <x-input-error :messages="$errors->get('blog.meta_desc')" for="blog.meta_desc" class="mt-2" />
+                        <x-label for="meta_description" :value="__('Meta Description')" />
+                        <x-input id="meta_description" class="block mt-1 w-full" type="text" name="meta_description"
+                            wire:model.lazy="blog.meta_description" />
+                        <x-input-error :messages="$errors->get('blog.meta_description')" for="blog.meta_description" class="mt-2" />
                     </div>
 
                     <div class="w-full py-2 px-3">
