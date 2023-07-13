@@ -66,11 +66,12 @@ class Categories extends Component
         $this->resetPage();
     }
 
-    public function clearFilter($filter)
+    public function clearFilter($type, $value)
     {
-        if ($filter) {
-            $this->category_name = null;
-            unset($this->selectedFilters['category']);
+        switch ($type) {
+            case 'category':
+                $this->category_name = null;
+                break;
         }
         $this->resetPage();
     }

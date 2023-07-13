@@ -1,59 +1,54 @@
 <div>
-    @section('title', __('Resources'))
 
+    @section('title', $blog?->title)
+    @section('meta')
+        <meta itemprop="datePublished" content="{{ $blog->created_at }}">
+        <meta itemprop="dateModified" content="{{ $blog->updated_at }}">
+        <meta itemprop="headline" content="{{ $blog->title }}">
+        <meta itemprop="description" content="{{ $blog->meta_description }}">
+        <meta itemprop="image" content="{{ asset('images/blog' . $blog->image) }}">
+        <meta itemprop="url" content="{{ route('front.blogPage', $blog->slug) }}">
+        <meta itemprop="publisher" content="{{ config('app.name') }}">
+        <meta itemprop="inLanguage" content="{{ $blog->language->name }}">
+        <meta itemprop="keywords" content="{{ $blog->meta_keywords }}">
+        <meta itemprop="articleSection" content="{{ $blog->category?->title }}">
+        <meta itemprop="articleBody" content="{{ $blog->description }}">
+        <meta itemprop="thumbnailUrl" content="{{ asset('images/blog' . $blog->image) }}">
+        <meta itemprop="thumbnail" content="{{ asset('images/blog' . $blog->image) }}">
+        <meta itemprop="mainEntityOfPage" content="{{ route('front.blogPage', $blog->slug) }}">
+        <meta itemprop="genre" content="{{ $blog->category?->title }}">
+        <meta itemprop="wordCount" content="{{ str_word_count(strip_tags($blog->description)) }}">
+    @endsection
     <section class="relative pt-16 bg-white">
-        <div class="items-center w-full mx-auto md:px-12 lg:px-24 max-w-7xl">
-            <h1
-                class="text-5xl md:text-6xl lg:text-7xl px-10 text-center leading-tight text-green-600 font-bold tracking-tighter mt-20 cursor-pointer">
-                <span class="hover:underline transition duration-200 ease-in-out uppercase">{{ __('Resources') }}</span>
-            </h1>
-            <p class="text-2xl font-light text-gray-400 text-center my-4">{{ __('Browse the latest news & resources') }}
-            </p>
-            <div class="container mx-auto py-4">
-                <div class="flex justify-center gap-4 mt-2">
-                    <button
-                        class="px-4 py-2 text-sm font-semibold text-green-500 border-2 border-green-500 rounded-full hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white"
-                        wire:click="$emit('categorySelected', null)">
-                        {{ __('All') }}
-                    </button>
-                    @foreach ($this->categories as $category)
-                        <button
-                            class="px-4 py-2 text-sm font-semibold text-green-500 border-2 border-green-500 rounded-full hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white"
-                            wire:click="$emit('categorySelected', {{ $category->id }})">
-                            {{ $category->title }}
-                        </button>
-                    @endforeach
-                </div>
+        <div class="items-center w-full mx-auto md:px-12 lg:px-24 max-w-7xl text-gray-900">
+            <article itemscope itemtype="http://schema.org/Article" class="max-w-prose mx-auto py-8">
 
-                <div class="grid grid-cols-1 gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3 items-center">
-                    @forelse ($blogs as $blog)
-                        <div
-                            class="border-4 border-green-600 text-green-900 hover:bg-green-900 hover:text-green-200 transition duration-300 max-w-sm rounded overflow-hidden shadow-lg py-10 px-8">
-                            <a href="{{ route('front.blogPage', $blog->slug) }}">
-                                <h4 class="text-lg mb-3 font-semibold">{{ $blog->title }}</h4>
-                            </a>
-                            <p class="mb-2 text-sm text-gray-600">{!! $blog->content !!}</p>
-
-                            <img src="{{ $blog->getFirstMediaUrl('blog') }}" class="w-100" alt="{{ $blog->title }}">
+                <img src="{{ asset('images/blog' . $blog->image) }}" alt="{{ $blog->title }}"
+                    class="w-full h-96 object-cover rounded-lg shadow-lg">
+                <div class="flex justify-between items-center mt-4">
+                    <div class="flex items-center">
+                        <div class="ml-2">
+                            <p class="text-sm font-semibold text-gray-700">{{ $blog->category?->title }}</p>
+                            <p class="text-xs text-gray-600">{{ $blog->created_at }}</p>
                         </div>
-                    @empty
-                        <div class="text-center">
-                            <p>{{ __('No entries found.') }}</p>
-                        </div>
-                    @endforelse
+                    </div>
+                </div>
+                <h1 itemprop="headline" class="mt-4 text-3xl font-bold text-gray-900 leading-tight">
+                    {{ $blog->title }}
+                </h1>
+                <div itemprop="articleBody" class="mt-4 text-gray-700 text-lg leading-relaxed">
+                    {!! $blog->description !!}
                 </div>
 
-                <div class="mt-6">
-                    {{ $blogs->links() }}
-                </div>
-            </div>
+            </article>
         </div>
+
 
         @if (count($this->featured_blogs) > 0)
             <div class="relative py-6 mx-auto px-6 bg-gray-100 ">
                 {{--  Featured Articles --}}
                 <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
-                    {{('Featured Articles')}}
+                    {{ 'Featured Articles' }}
                 </h2>
                 <div class="flex flex-wrap justify-center gap-4 py-6">
                     @foreach ($this->featured_blogs as $blog)

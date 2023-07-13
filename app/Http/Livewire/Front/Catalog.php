@@ -25,7 +25,7 @@ class Catalog extends Component
 
     public $sortingOptions;
 
-    public $selectedFilters = [];
+    public $selectedCategory = null;
 
     protected $queryString = [
         // 'category_id' => ['except' => '', 'as' => 'c'],
@@ -42,17 +42,17 @@ class Catalog extends Component
         switch ($type) {
             case 'category':
                 $this->category_id = $value;
-
                 break;
         }
         $this->resetPage();
     }
 
-    public function clearFilter($filter)
+    public function clearFilter($type, $value)
     {
-        if ($filter) {
-            $this->category_id = null;
-            unset($this->selectedFilters['category']);
+        switch ($type) {
+            case 'category':
+                $this->category_id = null;
+                break;
         }
         $this->resetPage();
     }
