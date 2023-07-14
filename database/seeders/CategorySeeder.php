@@ -16,40 +16,10 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = [
-            [
-                'id'          => 1,
-                'name'        => 'Runing',
-                'description' => 'running',
-                'slug'        => 'running',
-                'type'        => 'race',
-                'status'      => true,
-            ],
-            [
-                'id'          => 2,
-                'name'        => 'trail running',
-                'description' => 'trail running',
-                'slug'        => 'trail-running',
-                'type'        => 'race',
-                'status'      => true,
-            ],
-            [
-                'id'          => 3,
-                'name'        => 'Triathlon',
-                'description' => 'triathlon',
-                'slug'        => 'triathlon',
-                'type'        => 'race',
-                'status'      => true,
-            ],
-        ];
 
-
-        foreach ($categories as $category) {
-            $newCategory = Category::create($category);
-
-            $newCategory->addMediaFromUrl($this->getImageUrl(500, 500))
-            ->toMediaCollection('local_files');
-        }
+        Category::factory()
+            ->count(3)
+            ->create();
 
     }
 }

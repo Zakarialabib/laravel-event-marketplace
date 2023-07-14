@@ -23,29 +23,24 @@ class ProductFactory extends Factory
         return [
             'name'           => $this->faker->word,
             'description'    => $this->faker->sentence,
-            'price'          => 1000,
-            'discount_price' => 800,
-            // 'images'            => 'samsung-galaxy-s21.jpg',
+            'price' => $this->faker->randomFloat(2, 10, 100),
+            'discount_price' => $this->faker->randomFloat(2, 10, 100),
             'code'             => Str::random(5),
             'category_id'      => 1,
             'slug'             => Str::slug($this->faker->word).'-'.Str::random(5),
             'meta_title'       => $this->faker->word,
-            'meta_description' => $this->faker->sentence,
-            'options'          => json_encode([
-                'color' => [
-                    '#000000',
-                    '#ffffff',
-                    '#ff0000',
-                    '#00ff00',
-                    '#0000ff',
+            'meta_description' => Str::limit($this->faker->sentence, 165),
+            'options' => [
+                [
+                    'type' => 'color',
+                    'value' => $this->faker->randomElement(['#000000', '#ffffff', '#ff0000', '#00ff00', '#0000ff']),
                 ],
-                'size' => [
-                    'S',
-                    'M',
-                    'L',
-                    'XL',
+                [
+                    'type' => 'size',
+                    'value' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
                 ],
-            ]),
+            ],
+        
             'status' => 1,
         ];
     }

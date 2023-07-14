@@ -147,12 +147,41 @@ class Edit extends Component
 
     public function addCourse()
     {
-        $this->courses[] = [
-            'name'    => '',
-            'content' => '',
-        ];
+        $categoryName = '';
+    
+        switch ($this->race->category->name) {
+            case 'triathlon':
+                $categoryName = 'Triathlon';
+                // Add specific course types for Triathlon
+                $this->addTriathlonCourses();
+                break;
+            case 'running':
+                $categoryName = 'Running';
+                break;
+            case 'swimming':
+                $categoryName = 'Swimming';
+                break;
+            case 'cycling':
+                $categoryName = 'Cycling';
+                break;
+            default:
+                break;
+        }
     }
-
+    
+    private function addTriathlonCourses()
+    {
+        $courseTypes = ['Swim', 'Bike', 'Run'];
+    
+        foreach ($courseTypes as $courseType) {
+            $this->courses[] = [
+                'name' => $courseType . ' ' . 'Course Name',
+                'content' => '',
+            ];
+        }
+    }
+    
+    
     public function removeCourse($index)
     {
         unset($this->courses[$index]);

@@ -21,7 +21,7 @@ class ImportUpdates implements ToModel
         $product->price = $row[1];
 
         if (isset($row[2])) {
-            $product->old_price = $row[2];
+            $product->discount_price = $row[2];
         }
 
         $product->save();

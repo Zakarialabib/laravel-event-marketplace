@@ -92,6 +92,25 @@
                     </select>
                 </div>
 
+                <div class="col-span-full px-2">
+                    <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                        @foreach ($courses as $index => $course)
+                            <div class="flex flex-row w-full items-center space-x-4">
+                                <input type="text" wire:model.lazy="courses.{{ $index }}.name"
+                                    placeholder="{{__('Course name')}}" id="course_name" name="course_name"
+                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                <textarea wire:model.lazy="courses.{{ $index }}.content" placeholder="{{__('Course Content')}}"
+                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"></textarea>
+                                <x-button danger type="button" wire:click="removeCourse({{ $index }})">
+                                    <i class="fa fa-trash"></i>
+                                </x-button>
+                            </div>
+                        @endforeach
+                        <x-button primary type="button" wire:click="addCourse">{{ __('Add Course') }}
+                        </x-button>
+                    </div>
+                </div>
+
                 <div class="px-3 mb-2">
                     <x-label for="race_location_id" :value="__('Locations')" />
                     <select id="race_location_id" name="race_location_id"
@@ -156,24 +175,7 @@
                         </div>
                     </div>
 
-                    <div class="w-full px-2">
-                        <div class="space-y-4 flex flex-col items-center justify-center my-4">
-                            @foreach ($courses as $index => $course)
-                                <div class="flex flex-row w-full items-center space-x-4">
-                                    <input type="text" wire:model.lazy="courses.{{ $index }}.name"
-                                        placeholder="Course Name"
-                                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                    <textarea wire:model.lazy="courses.{{ $index }}.content" placeholder="Course Content"
-                                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"></textarea>
-                                    <x-button danger type="button" wire:click="removeCourse({{ $index }})">
-                                        <i class="fa fa-trash"></i>
-                                    </x-button>
-                                </div>
-                            @endforeach
-                            <x-button primary type="button" wire:click="addCourse">{{ __('Add Course') }}
-                            </x-button>
-                        </div>
-                    </div>
+                    
                     <div class="w-full px-2">
                         <div class="space-y-4 flex flex-col items-center justify-center my-4">
                             @foreach ($sponsors as $index => $sponsor)

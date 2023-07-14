@@ -37,7 +37,7 @@ class Product extends Model implements HasMedia
         'description',
         'category_id',
         'price',
-        'old_price',
+        'discount_price',
         'slug',
         'options',
         'status',

@@ -24,7 +24,7 @@ class ProductImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
                 'name'          => $row['nom'],
                 'description'   => $row['description'],
                 'price'         => $row['prix'],
-                'old_price'     => $row['ancien_prix'] ?? null,
+                'discount_price'     => $row['ancien_prix'] ?? null,
                 'slug'          => Str::slug($row['nom'], '-').'-'.Str::random(5),
                 'code'          => Str::random(10),
                 'category_id'   => Category::where('name', $row['categorie'])->first()->id ?? Helpers::createCategory(['name' => $row['categorie']])->id ?? null,

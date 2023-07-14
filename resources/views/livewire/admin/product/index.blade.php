@@ -68,7 +68,7 @@
                         <input type="checkbox" value="{{ $product->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        <x-button type="button" success wire:click="$emit('imageModal', {{ $product->id }})"
+                        <button type="button" wire:click="$emit('imageModal', {{ $product->id }})"
                             wire:key="image-{{ $product->id }}">
                             @if ($product->hasMedia('local_files'))
                                 <img src="{{ $product->getFirstMediaUrl('local_files') }}" alt="{{ $product->name }}"
@@ -76,7 +76,7 @@
                             @else
                                 <p>{{ __('No product image available.') }}</p>
                             @endif
-                        </x-button>
+                        </button>
                     </x-table.td>
                     <x-table.td>
                         <button type="button" wire:click="$emit('showModal',{{ $product->id }})">
