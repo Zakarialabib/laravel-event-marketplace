@@ -11,7 +11,7 @@ use App\Models\Section;
 class DynamicPage extends Component
 {
     public $page;
-    
+
     public function getSectionsProperty()
     {
         return Section::active()->where('page', $this->page->slug)->get();
@@ -21,7 +21,7 @@ class DynamicPage extends Component
     {
         $this->page = Page::where('slug', $slug)->first() ?? abort(404);
     }
-    
+
     public function render()
     {
         return view('livewire.front.dynamic-page');

@@ -26,7 +26,7 @@ class Create extends Component
     public $image;
 
     public array $rules = [
-        'category.name' => 'required|min:3|max:255',
+        'category.name'        => 'required|min:3|max:255',
         'category.description' => 'required|min:3',
     ];
 

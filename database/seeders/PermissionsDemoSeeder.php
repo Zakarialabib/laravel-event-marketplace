@@ -34,7 +34,7 @@ class PermissionsDemoSeeder extends Seeder
 
         // create demo users
         $user = \App\Models\User::factory()->create([
-            'uuid'     => Str::uuid(),
+            'id'       => Str::uuid(),
             'name'     => 'Admin',
             'email'    => 'admin@mail.com',
             'password' => bcrypt('password'),
@@ -42,7 +42,7 @@ class PermissionsDemoSeeder extends Seeder
         $user->assignRole($role1);
 
         $user = \App\Models\User::factory()->create([
-            'uuid'     => Str::uuid(),
+            'id'       => Str::uuid(),
             'name'     => 'Client',
             'email'    => 'client@mail.com',
             'password' => bcrypt('password'),

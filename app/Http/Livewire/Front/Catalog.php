@@ -10,6 +10,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Section;
 use App\Enums\PageType;
+
 class Catalog extends Component
 {
     use WithPagination;
@@ -45,6 +46,7 @@ class Catalog extends Component
         switch ($type) {
             case 'category':
                 $this->category_id = $value;
+
                 break;
         }
         $this->resetPage();
@@ -55,6 +57,7 @@ class Catalog extends Component
         switch ($type) {
             case 'category':
                 $this->category_id = null;
+
                 break;
         }
         $this->resetPage();
@@ -91,7 +94,7 @@ class Catalog extends Component
             ->when($this->maxPrice, function ($query) {
                 return $query->where('price', '<=', $this->maxPrice);
             });
-    
+
         if ($this->sorting === 'name') {
             $products = $query->orderBy('name', 'asc')->paginate($this->perPage);
         } elseif ($this->sorting === 'name-desc') {
@@ -107,8 +110,7 @@ class Catalog extends Component
         } else {
             $products = $query->paginate($this->perPage);
         }
-    
+
         return view('livewire.front.catalog', compact('products'))->extends('layouts.app');
     }
-    
 }

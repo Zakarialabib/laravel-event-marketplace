@@ -11,8 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email');
             $table->string('phone_number');
@@ -31,6 +30,7 @@ return new class () extends Migration {
             $table->boolean('sensitivities')->default(false);
             $table->boolean('status')->default(true);
             $table->foreignId('race_location_id')->constrained('race_locations')->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

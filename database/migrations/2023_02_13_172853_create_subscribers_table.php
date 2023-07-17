@@ -15,8 +15,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('subscribers', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
+            $table->uuid('id')->primary();
             $table->string('email', 191)->unique();
             $table->string('name', 191)->nullable();
             $table->string('tag', 255)->nullable();

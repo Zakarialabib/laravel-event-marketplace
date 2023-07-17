@@ -50,8 +50,8 @@ class Edit extends Component
         'race.category_id'           => ['required', 'integer'],
         'race.number_of_days'        => ['required', 'numeric', 'max:2147483647'],
         'race.registration_deadline' => ['required', 'date'],
-        'race.start_registration' => ['required', 'date'],
-        'race.end_registration' => ['required', 'date'],
+        'race.start_registration'    => ['required', 'date'],
+        'race.end_registration'      => ['required', 'date'],
         'race.number_of_racers'      => ['required', 'numeric', 'max:2147483647'],
         'description'                => ['nullable'],
         'images'                     => ['nullable'],
@@ -148,40 +148,43 @@ class Edit extends Component
     public function addCourse()
     {
         $categoryName = '';
-    
+
         switch ($this->race->category->name) {
             case 'triathlon':
                 $categoryName = 'Triathlon';
                 // Add specific course types for Triathlon
                 $this->addTriathlonCourses();
+
                 break;
             case 'running':
                 $categoryName = 'Running';
+
                 break;
             case 'swimming':
                 $categoryName = 'Swimming';
+
                 break;
             case 'cycling':
                 $categoryName = 'Cycling';
+
                 break;
             default:
                 break;
         }
     }
-    
+
     private function addTriathlonCourses()
     {
         $courseTypes = ['Swim', 'Bike', 'Run'];
-    
+
         foreach ($courseTypes as $courseType) {
             $this->courses[] = [
-                'name' => $courseType . ' ' . 'Course Name',
+                'name'    => $courseType.' '.'Course Name',
                 'content' => '',
             ];
         }
     }
-    
-    
+
     public function removeCourse($index)
     {
         unset($this->courses[$index]);

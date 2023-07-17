@@ -9,7 +9,6 @@ use App\Models\Brand;
 use App\Models\ProductCategory;
 use App\Models\Product;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;

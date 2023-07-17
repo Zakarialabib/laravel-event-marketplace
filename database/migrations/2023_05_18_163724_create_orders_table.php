@@ -11,8 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
+            $table->uuid('id')->primary();
             $table->string('reference');
             $table->decimal('amount', 10, 2);
             $table->string('payment_method', 50);
@@ -20,10 +19,9 @@ return new class () extends Migration {
             $table->boolean('shipping_status')->default(false);
             $table->string('type', 50);
             $table->timestamp('date');
-
             $table->boolean('status')->default(true);
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('race_id')->nullable()->constrained('races');
+            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignUuid('race_id')->nullable()->constrained('races');
             $table->foreignId('product_id')->nullable()->constrained('products');
             $table->timestamps();
         });

@@ -21,7 +21,6 @@ class SubscribedMail extends Mailable
      */
     public function __construct()
     {
-
     }
 
     /**

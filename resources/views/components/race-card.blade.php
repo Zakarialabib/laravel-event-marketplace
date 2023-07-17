@@ -44,7 +44,7 @@
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
                             <i class="fas fa-users"></i>
                         </span>
-                        <span class="text-base md:text-lg capitalize">{{ $race->number_of_racers }}</span>
+                        <span class="text-base md:text-lg capitalize">{{ $race->number_of_participants }} / {{ $race->number_of_racers }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">

@@ -9,8 +9,9 @@ use App\Http\Livewire\Front\Categories as CategoryIndex;
 use App\Http\Livewire\Front\Catalog as CatalogIndex;
 use App\Http\Livewire\Front\Races as RacesIndex;
 use App\Http\Livewire\Front\Checkout as CheckoutIndex;
-use App\Http\Livewire\Front\CheckoutRace as CheckoutRace;
+use App\Http\Livewire\Front\CheckoutRace;
 use App\Http\Livewire\Front\Blogs as BlogIndex;
+use App\Http\Livewire\Account\Index as AccountIndex;
 use App\Http\Livewire\Front\BlogShow;
 use App\Http\Livewire\Front\DynamicPage;
 use App\Http\Livewire\Front\RaceDetails;
@@ -55,14 +56,12 @@ Route::get('/approval', function () {
 })->name('auth.approval');
 
 Route::middleware('auth')->group(function () {
-    
     Route::get('/confirmation-inscription', CheckoutRace::class)->name('front.checkout-race');
-    
-    Route::get('/mon-compte', [FrontController::class, 'myaccount'])->name('front.myaccount');
+
+    Route::get('/mon-compte', AccountIndex::class)->name('front.myaccount');
 });
 
 Route::post('/uploads', [UploadController::class, 'upload'])->name('upload');
-
 
 // Route::fallback(function (Request $request) {
 //     return app()->make(ErrorController::class)->notFound($request);

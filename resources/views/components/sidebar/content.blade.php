@@ -16,7 +16,8 @@
             </span>
         </x-slot>
         {{-- @can('category_access') --}}
-        <x-sidebar.sublink title="{{ __('Categories') }}" href="{{ route('admin.product-categories') }}" :active="request()->routeIs('admin.product-categories')" />
+        <x-sidebar.sublink title="{{ __('Categories') }}" href="{{ route('admin.product-categories') }}"
+            :active="request()->routeIs('admin.product-categories')" />
         {{-- @endcan --}}
 
         <x-sidebar.sublink title="{{ __('All Products') }}" href="{{ route('admin.products') }}" :active="request()->routeIs('admin.products')" />
@@ -46,6 +47,8 @@
         @can('order_access')
             <x-sidebar.sublink title="{{ __('Order Forms') }}" href="{{ route('admin.orderforms') }}" :active="request()->routeIs('admin.orderforms')" />
         @endcan
+        <x-sidebar.sublink title="{{ __('Registrations') }}" href="{{ route('admin.registrations') }}"
+            :active="request()->routeIs('admin.registrations')" />
     </x-sidebar.dropdown>
 
     <x-sidebar.dropdown title="{{ 'Blog' }}" :active="request()->routeIs(['admin.blogs', 'admin.blogcategories'])">
@@ -118,9 +121,10 @@
         <x-sidebar.sublink title="{{ __('Settings') }}" href="{{ route('admin.settings') }}" :active="request()->routeIs('admin.settings')" />
         <x-sidebar.sublink title="{{ __('Languages') }}" href="{{ route('admin.language') }}" :active="request()->routeIs('admin.language')" />
         {{-- @endcan --}}
-        <x-sidebar.sublink title="{{ __('Shipping') }}" href="{{ route('admin.setting.shipping') }}" :active="request()->routeIs('admin.setting.shipping')" />
+        <x-sidebar.sublink title="{{ __('Shipping') }}" href="{{ route('admin.setting.shipping') }}"
+            :active="request()->routeIs('admin.setting.shipping')" />
         {{-- <x-sidebar.sublink title="{{ __('Popup Settings') }}" href="{{ route('admin.setting.popupsettings') }}" 
-            :active="request()->routeIs('admin.setting.popupsettings')" />--}}
+            :active="request()->routeIs('admin.setting.popupsettings')" /> --}}
         <x-sidebar.sublink title="{{ __('Redirects') }}" href="{{ route('admin.setting.redirects') }}"
             :active="request()->routeIs('admin.setting.redirects')" />
 

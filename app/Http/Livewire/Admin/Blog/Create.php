@@ -24,18 +24,18 @@ class Create extends Component
     public $image;
 
     public $blog;
-    
+
     public $description;
 
     public $listeners = ['createBlog'];
 
     protected $rules = [
-        'blog.title'       => 'required|min:3|max:255',
-        'blog.category_id' => 'required|integer',
-        'description'     => 'required|min:3',
-        'blog.language_id' => 'nullable|integer',
-        'blog.meta_title'  => 'nullable|max:100',
-        'blog.meta_description'   => 'nullable|max:200',
+        'blog.title'            => 'required|min:3|max:255',
+        'blog.category_id'      => 'required|integer',
+        'description'           => 'required|min:3',
+        'blog.language_id'      => 'nullable|integer',
+        'blog.meta_title'       => 'nullable|max:100',
+        'blog.meta_description' => 'nullable|max:200',
     ];
 
     public function updatedDescription($value)

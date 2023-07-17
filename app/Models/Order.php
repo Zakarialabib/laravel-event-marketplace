@@ -67,7 +67,7 @@ class Order extends Model
 
     public function notifications()
     {
-        return $this->hasMany(Notification::class , 'order_id');
+        return $this->hasMany(Notification::class, 'order_id');
     }
 
     // Define the relationship with the User model

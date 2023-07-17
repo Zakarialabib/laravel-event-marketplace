@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Race;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class RaceSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class RaceSeeder extends Seeder
     {
         Race::insert([
             [
-                'id'                    => 1,
+                'id'                    => Str::uuid(),
                 'name'                  => 'Triathlon Dar Bouazza',
                 'description'           => 'Triathlon Dar Bouazza',
                 'images'                => \App\Helpers::addMediaFromUrlToCollection(new Race(), 'https://static.lematin.ma/files/lematin/images/articles/2017/09/Triathlon-.jpg', 'local_files')->file_name,
@@ -26,7 +27,7 @@ class RaceSeeder extends Seeder
                 'slug'                  => 'triatlhon-dar-bouazza-casablanca',
                 'race_location_id'      => 1,
                 'category_id'           => 1,
-                'start_registration'    => date('Y-m-d', strtotime('+1 day')),  
+                'start_registration'    => date('Y-m-d', strtotime('+1 day')),
                 'end_registration'      => date('Y-m-d', strtotime('+30 day')),
                 'registration_deadline' => date('Y-m-d', strtotime('+30 day')),
                 'number_of_days'        => 3,

@@ -11,13 +11,12 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('race_registrations', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description');
             $table->string('images')->nullable();
             $table->json('options');
-            $table->foreignId('registration_id')->constrained('registrations');
+            $table->foreignUuid('registration_id')->constrained('registrations');
             $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
         });

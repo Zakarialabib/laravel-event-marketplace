@@ -18,13 +18,7 @@
                         </div>
                         <div class="sm:w-full lg:w-1/2 px-3 ">
                             <x-label for="slug" :value="__('Product Slug')" required />
-                            <x-input id="slug" class="block mt-1 w-full" type="text" name="slug"
-                                wire:model="product.slug" required />
-                            <x-input-error :messages="$errors->get('product.slug')" for="product.slug" class="mt-2" />
-                        </div>
-                        <div class="sm:w-full lg:w-1/2 px-3 ">
-                            <x-label for="slug" :value="__('Product slug')"  />
-                            <x-input id="slug" class="block mt-1 w-full" type="text" name="slug"
+                            <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" required
                                 wire:model="product.slug" required />
                             <x-input-error :messages="$errors->get('product.slug')" for="product.slug" class="mt-2" />
                         </div>
@@ -109,26 +103,23 @@
                                     @foreach ($options as $index => $option)
                                         <div class="flex flex-row w-full items-center space-x-4">
                                             <select wire:model.lazy="options.{{ $index }}.type"
-                                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                                                 <option value="">{{ __('Choose an option') }}</option>
-                                                <option value="color" {{ $option['type'] == 'color' ? 'selected' : '' }}>
-                                                    {{ __('Color') }}
-                                                </option>
-                                                <option value="size" {{ $option['type'] == 'size' ? 'selected' : '' }}>{{ __('Size') }}
-                                                </option>
+                                                <option value="color" @if (isset($option['color']) && $option['color'] === 'color') selected @endif>{{ __('Color') }}</option>
+                                                <option value="size" @if (isset($option['size']) && $option['size'] === 'size') selected @endif>{{ __('Size') }}</option>
                                             </select>
-                                            @if ($option['type'] === 'color')
+                                            @if (isset($option['color']))
                                                 <input type="color" wire:model.lazy="options.{{ $index }}.value">
                                             @else
                                                 <input type="text" wire:model.lazy="options.{{ $index }}.value">
                                             @endif
-                                            <x-button danger type="button" wire:click="removeOption({{ $index }})">{{ __('Remove') }}
-                                            </x-button>
+                                            <x-button danger type="button" wire:click="removeOption({{ $index }})">{{ __('Remove') }}</x-button>
                                         </div>
                                     @endforeach
                                     <x-button primary type="button" wire:click="addOption">{{ __('Add Option') }}</x-button>
                                 </div>
                             </div>
+                            
 
                             <div class="w-1/2 sm:w-full px-2">
                                 <x-label for="meta_title" :value="__('Meta Title')" />

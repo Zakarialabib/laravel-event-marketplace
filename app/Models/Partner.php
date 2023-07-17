@@ -39,7 +39,7 @@ class Partner extends Model implements HasMedia
     protected $casts = [
         'images'            => 'json',
         'social_media_urls' => 'json',
-        'status' => Status::class,
+        'status'            => Status::class,
     ];
 
     /**

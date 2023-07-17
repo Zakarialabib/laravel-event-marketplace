@@ -37,7 +37,7 @@ class BlogCategory extends Model
     {
         return $query->where('status', Status::ACTIVE);
     }
-    
+
     public function blogs()
     {
         return $this->hasMany(Blog::class);

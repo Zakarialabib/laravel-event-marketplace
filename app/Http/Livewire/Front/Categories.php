@@ -71,6 +71,7 @@ class Categories extends Component
         switch ($type) {
             case 'category':
                 $this->category_name = null;
+
                 break;
         }
         $this->resetPage();

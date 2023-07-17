@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Front;
 use Livewire\Component;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use Livewire\WithPagination;
 use App\Models\Section;
 use App\Enums\PageType;
 
@@ -34,7 +33,7 @@ class BlogSHow extends Component
     {
         return Section::active()->where('page', PageType::BLOG)->get();
     }
-    
+
     public function render()
     {
         return view('livewire.front.blog-show')->extends('layouts.app');

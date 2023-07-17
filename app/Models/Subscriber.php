@@ -6,12 +6,15 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\Status;
+use App\Traits\HasUuid;
 
 class Subscriber extends Model
 {
     use HasAdvancedFilter;
-
+    use HasUuid;
+    use SoftDeletes;
 
     public const ATTRIBUTES = [
         'id',
@@ -27,11 +30,10 @@ class Subscriber extends Model
         'name',
         'tag',
         'status',
-        'email'
+        'email',
     ];
 
     protected $casts = [
-        'status'            => Status::class,
+        'status' => Status::class,
     ];
-
 }

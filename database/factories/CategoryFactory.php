@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,10 +21,10 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'           => $this->faker->randomElement(['Triatlón', 'Ciclismo', 'Running', 'Natación', 'Trail', 'Outdoor']),
-            'description'    => $this->faker->sentence,
-            'slug'             => Str::slug($this->faker->randomElement(['Triatlón', 'Ciclismo', 'Running', 'Natación', 'Trail', 'Outdoor'])).'-'.Str::random(5),
-            'type'             => $this->faker->word,
+            'name'        => $this->faker->randomElement(['Triatlón', 'Ciclismo', 'Running', 'Natación', 'Trail', 'Outdoor']),
+            'description' => $this->faker->sentence,
+            'slug'        => Str::slug($this->faker->randomElement(['Triatlón', 'Ciclismo', 'Running', 'Natación', 'Trail', 'Outdoor'])).'-'.Str::random(5),
+            'type'        => $this->faker->word,
             'status'      => true,
         ];
     }

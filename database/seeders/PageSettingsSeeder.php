@@ -7,7 +7,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Pagesetting;
 
-class PagesettingsSeeder extends Seeder
+class PageSettingsSeeder extends Seeder
 {
     /** Run the database seeds. */
     public function run(): void

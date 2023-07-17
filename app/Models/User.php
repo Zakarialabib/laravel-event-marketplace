@@ -23,8 +23,6 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
     use HasAdvancedFilter;
-    
-    protected $primaryKey = 'uuid';
 
     public const ATTRIBUTES = [
         'id',
@@ -41,7 +39,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'uuid',
         'name',
         'email',
         'status',
@@ -74,9 +71,9 @@ class User extends Authenticatable
         return $this->hasMany(Race::class);
     }
 
-    public function payments()
+    public function participations()
     {
-        return $this->hasManyThrough(Payment::class, Race::class);
+        return $this->hasManyThrough(Race::class, Registration::class, 'participant_id', 'id', 'id', 'race_id');
     }
 
     public function isAdmin()

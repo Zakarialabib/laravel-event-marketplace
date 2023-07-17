@@ -25,11 +25,11 @@ class Create extends Component
     public $blogcategory;
 
     protected $rules = [
-        'blogcategory.title'       => 'required|string|max:255',
-        'blogcategory.description' => 'nullable',
-        'blogcategory.meta_title'  => 'nullable|max:100',
-        'blogcategory.meta_description'   => 'nullable|max:200',
-        'blogcategory.language_id' => 'required|integer',
+        'blogcategory.title'            => 'required|string|max:255',
+        'blogcategory.description'      => 'nullable',
+        'blogcategory.meta_title'       => 'nullable|max:100',
+        'blogcategory.meta_description' => 'nullable|max:200',
+        'blogcategory.language_id'      => 'required|integer',
     ];
 
     public function render(): View|Factory

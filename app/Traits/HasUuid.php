@@ -13,8 +13,8 @@ trait HasUuid
     public static function bootHasUuid(): void
     {
         static::creating(function (Model $model): void {
-            if (Schema::hasColumn($model->getTable(), 'uuid')) {
-                $model->uuid = Str::uuid()->toString();
+            if (Schema::hasColumn($model->getTable(), 'id')) {
+                $model->id = Str::uuid()->toString();
             }
         });
     }
@@ -31,6 +31,6 @@ trait HasUuid
 
     public function getRouteKeyName()
     {
-        return 'uuid';
+        return 'id';
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasUuid;
 use App\Traits\HasGlobalDate;
+use App\Support\HasAdvancedFilter;
 
 class Registration extends Model
 {
@@ -16,6 +17,18 @@ class Registration extends Model
     use HasUuid;
     use SoftDeletes;
     use HasGlobalDate;
+    use HasAdvancedFilter;
+
+    public const ATTRIBUTES = [
+        'id',
+        'participant_id',
+        'race_id',
+        'registration_date',
+        'status',
+    ];
+
+   public $orderable = self::ATTRIBUTES;
+   public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'participant_id',
@@ -26,7 +39,6 @@ class Registration extends Model
         'date',
         'additional_informations',
         'additional_services',
-        'uuid',
     ];
 
     public function participant()
@@ -44,15 +56,20 @@ class Registration extends Model
         return $this->hasOne(Result::class);
     }
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
+
     // Scope to filter registrations by participant
     public function scopeByParticipant($query, $participantId)
     {
         return $query->where('participant_id', $participantId);
     }
 
-    // Scope to filter registrations by status
-    public function scopeByStatus($query, $status)
-    {
-        return $query->where('status', $status);
-    }
 }

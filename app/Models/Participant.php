@@ -39,6 +39,7 @@ class Participant extends Model
         'health_information',
         'status',
         'race_location_id',
+        'user_id',
     ];
 
     protected $casts = [
@@ -50,11 +51,6 @@ class Participant extends Model
         return $this->belongsTo(RaceLocation::class);
     }
 
-    public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
-
     public function results()
     {
         return $this->hasMany(Result::class);
@@ -63,6 +59,11 @@ class Participant extends Model
     public function scopeActive($query)
     {
         return $query->where('status', true);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     // Custom Attribute

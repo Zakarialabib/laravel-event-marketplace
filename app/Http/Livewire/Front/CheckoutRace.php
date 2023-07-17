@@ -5,15 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Front;
 
 use App\Mail\CheckoutMail;
-use App\Mail\CustomerRegistrationMail;
 use App\Models\Order;
-use App\Models\OrderProduct;
-use App\Models\Shipping;
-use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -59,21 +54,20 @@ class CheckoutRace extends Component
 
     public function checkout()
     {
-
         if (Cart::instance('races')->count() === 0) {
             $this->alert('error', __('Your cart is empty'));
         }
 
         $order = Order::create([
-            'reference'        => Order::generateReference(),            
-            'payment_method'   => $this->payment_method,
-            'payment_status'   => PaymentStatus::PENDING,
-            'type'              => OrderType::RACE,
-            'date'              => now(),
-            'amount'            => $this->cartTotal,
-            'user_id'          => auth()->user()->id,
+            'reference'      => Order::generateReference(),
+            'payment_method' => $this->payment_method,
+            'payment_status' => PaymentStatus::PENDING,
+            'type'           => OrderType::RACE,
+            'date'           => now(),
+            'amount'         => $this->cartTotal,
+            'user_id'        => auth()->user()->id,
             // 'race_id'          => $
-            'status'     => OrderStatus::PENDING,
+            'status' => OrderStatus::PENDING,
         ]);
 
         Mail::to($order->user->email)->send(new CheckoutMail($order, $user));

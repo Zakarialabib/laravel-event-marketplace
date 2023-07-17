@@ -30,6 +30,7 @@ use App\Http\Livewire\Admin\Email\Index as EmailIndex;
 use App\Http\Livewire\Admin\Menu\Index as MenuIndex;
 use App\Http\Livewire\Admin\Backup\Index as BackupIndex;
 use App\Http\Livewire\Admin\Shipping\Index as ShippingIndex;
+use App\Http\Livewire\Admin\Registration\Index as RegistrationIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/subcategories', [CategoryController::class, 'subcategories'])->name('subcategories');
     Route::get('/brands', [BrandController::class, 'index'])->name('brands');
     Route::get('/products', [ProductController::class, 'index'])->name('products');
+    Route::get('/registrations', RegistrationIndex::class)->name('registrations');
     Route::get('/races', RaceIndex::class)->name('races');
     Route::get('/race/{name}', RaceUpdate::class)->name('race.update');
     Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');

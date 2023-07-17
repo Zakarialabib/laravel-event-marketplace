@@ -6,7 +6,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Gloudemans\Shoppingcart\CanBeBought;
-use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use App\Enums\RaceStatus;
@@ -14,6 +13,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasGlobalDate;
+use App\Traits\HasUuid;
 
 class Race extends Model implements HasMedia
 {
@@ -21,6 +21,7 @@ class Race extends Model implements HasMedia
     use HasFactory;
     use HasAdvancedFilter;
     use SoftDeletes;
+    use HasUuid;
     use CanBeBought;
     use HasGlobalDate;
 
@@ -61,14 +62,14 @@ class Race extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'options'               => 'json',
-        'features'              => 'json',
-        'social_media'          => 'json',
-        'sponsors'              => 'json',
-        'calendar'              => 'json',
-        'course'                => 'json',
-        'satuts'                => RaceStatus::class,
-        'date'                => 'date',
+        'options'      => 'json',
+        'features'     => 'json',
+        'social_media' => 'json',
+        'sponsors'     => 'json',
+        'calendar'     => 'json',
+        'course'       => 'json',
+        'satuts'       => RaceStatus::class,
+        'date'         => 'date',
     ];
 
     public function location()
@@ -94,11 +95,6 @@ class Race extends Model implements HasMedia
     public function sponsors()
     {
         return $this->belongsToMany(Sponsor::class);
-    }
-
-    public function medias()
-    {
-        return $this->hasMany(Media::class);
     }
 
     public function partners()
@@ -132,7 +128,15 @@ class Race extends Model implements HasMedia
             ->whereMonth('date', date('m'));
     }
 
-   
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
+    public function getNumberOfParticipantsAttribute()
+    {
+        return $this->registrations()->count();
+    }
 
     public function registerMediaCollections(): void
     {

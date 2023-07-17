@@ -59,9 +59,9 @@ class Edit extends Component
         $this->shipping->save();
 
         $this->alert('success', __('shipping updated successfully'));
-        
+
         $this->emit('refreshIndex');
-        
+
         $this->editModal = false;
     }
 }

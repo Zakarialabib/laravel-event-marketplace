@@ -28,7 +28,7 @@ class Blogs extends Component
     {
         return BlogCategory::select('id', 'title')->get();
     }
-    
+
     public function getFeaturedBlogsProperty()
     {
         return Blog::active()->where('featured', true)->get();

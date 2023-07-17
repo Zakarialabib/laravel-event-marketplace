@@ -39,13 +39,12 @@ class NewslettersForm extends Component
     public function subscribe()
     {
         $validatedData = $this->validate();
-        
+
         try {
-            
             $subscriber = Subscriber::create([
-                'email' => $validatedData['email'],
-                'name' => $this->extractNameFromEmail($validatedData['email']),
-                'tag' => 'subscriber',
+                'email'  => $validatedData['email'],
+                'name'   => $this->extractNameFromEmail($validatedData['email']),
+                'tag'    => 'subscriber',
                 'status' => 'active',
             ]);
 
@@ -58,7 +57,7 @@ class NewslettersForm extends Component
 
             Mail::to($user_email)->send(new SubscribedMail($subscriber));
         } catch (Throwable $th) {
-            $this->alert('error', __('Error') . $th->getMessage());
+            $this->alert('error', __('Error').$th->getMessage());
         }
     }
 
@@ -68,6 +67,7 @@ class NewslettersForm extends Component
         $username = $parts[0];
         $nameParts = explode('.', $username);
         $name = implode(' ', $nameParts);
+
         return ucwords($name);
     }
 

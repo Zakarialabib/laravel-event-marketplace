@@ -68,9 +68,9 @@ class Index extends Component
     public function getSectionsProperty(): Collection
     {
         return Section::active()
-                    ->where('page', PageType::HOME)
-                    ->limit(4)
-                    ->get();
+            ->where('page', PageType::HOME)
+            ->limit(4)
+            ->get();
     }
 
     public function render()

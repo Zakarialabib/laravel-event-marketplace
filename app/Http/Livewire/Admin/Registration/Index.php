@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Registration;
 
-use App\Http\Livewire\WithSorting;
+use App\Models\Race;
 use App\Models\Registration;
+use App\Http\Livewire\WithSorting;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -17,27 +18,17 @@ class Index extends Component
     use WithSorting;
 
     public int $perPage;
-
     public array $orderable;
-
     public string $search = '';
-
     public array $selected = [];
-
     public array $paginationOptions;
-
-    public array $listsForFields = [];
+    public $activeTab;
+    public $selectedRace;
 
     protected $queryString = [
-        'search' => [
-            'except' => '',
-        ],
-        'sortBy' => [
-            'except' => 'id',
-        ],
-        'sortDirection' => [
-            'except' => 'desc',
-        ],
+        'search' => ['except' => ''],
+        'sortBy' => ['except' => 'id'],
+        'sortDirection' => ['except' => 'desc'],
     ];
 
     public function getSelectedCountProperty()
@@ -60,6 +51,7 @@ class Index extends Component
         $this->selected = [];
     }
 
+   
     public function mount()
     {
         $this->sortBy = 'id';
@@ -67,18 +59,57 @@ class Index extends Component
         $this->perPage = 25;
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Registration())->orderable;
+        $this->activeTab = $this->activeTab ?? 'all';
+    }
+
+    public function showAllRegistrations()
+    {
+        $this->selectedRace = null;
+        $this->showTab = false;
+        $this->activeTab = 'all';
+    }
+
+    public function showRaceRegistrations($raceId)
+    {
+        $this->selectedRace = Race::findOrFail($raceId);
+        $this->showTab = false;
+        $this->activeTab = 'race';
+    }
+
+    public function showRaceParticipants($raceId)
+    {
+        $this->selectedRace = Race::findOrFail($raceId);
+        $this->showTab = true;
+        $this->activeTab = 'participant';
+    }
+
+    public function closeTab()
+    {
+        $this->showTab = false;
+        $this->activeTab = 'race';
     }
 
     public function render(): View|Factory
     {
         $query = Registration::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
-        $registrations = $query->paginate($this->perPage);
+        if ($this->activeTab === 'all') {
+            $registrations = $query->paginate($this->perPage);
+        } elseif ($this->activeTab === 'race') {
+            $registrations = $query->where('race_id', $this->selectedRace->id)
+                ->paginate($this->perPage);
+        } else {
+            $registrations = collect();
+        }
 
-        return view('livewire.admin.registration.index', compact('registrations'));
+        $racesWithRegistrations = Race::has('registrations')->get();
+
+        return view('livewire.admin.registration.index', compact('registrations', 'racesWithRegistrations'))
+            ->extends('layouts.dashboard');
     }
+
 }

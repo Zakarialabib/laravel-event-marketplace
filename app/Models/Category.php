@@ -14,7 +14,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Category extends Model implements HasMedia
 {
-
     use InteractsWithMedia;
     use HasFactory;
     use HasAdvancedFilter;

@@ -5,15 +5,9 @@
             <div class="w-full lg:w-1/2 px-4">
                 <form wire:submit.prevent="checkout">
                     <div class="flex my-5 items-center">
-                        <div class="w-full px-2">
-                            <label class="font-bold font-heading text-gray-600"
-                                for="">{{ __('E-mail address') }}</label>
-                            <input wire:model="email"
-                                class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
-                                type="email">
-                            <x-input-error :messages="$errors->get('email')" for="email" class="mt-2" />
-                        </div>
+                        <h2 class="text-4xl font-bold font-heading">{{ __('Billing details') }}</h2>
                     </div>
+                    
                 </form>
             </div>
             <div class="w-full lg:w-1/2 px-4">

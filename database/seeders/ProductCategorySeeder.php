@@ -23,7 +23,7 @@ class ProductCategorySeeder extends Seeder
                 'description' => 'textile',
                 'slug'        => 'textile',
                 'type'        => 'product',
-                'images'       => 'https://via.placeholder.com/500x500.png?text=textile',
+                'images'      => 'https://via.placeholder.com/500x500.png?text=textile',
                 'status'      => true,
             ],
             [
@@ -32,7 +32,7 @@ class ProductCategorySeeder extends Seeder
                 'description' => 'Eyewar',
                 'slug'        => 'Eyewar',
                 'type'        => 'product',
-                'images'       => 'https://via.placeholder.com/500x500.png?text=Eyewar',
+                'images'      => 'https://via.placeholder.com/500x500.png?text=Eyewar',
                 'status'      => true,
             ],
             [
@@ -41,7 +41,7 @@ class ProductCategorySeeder extends Seeder
                 'description' => 'accessories',
                 'slug'        => 'accessories',
                 'type'        => 'product',
-                'images'       => 'https://via.placeholder.com/500x500.png?text=accessories',
+                'images'      => 'https://via.placeholder.com/500x500.png?text=accessories',
                 'status'      => true,
             ],
             [
@@ -50,7 +50,7 @@ class ProductCategorySeeder extends Seeder
                 'description' => 'nutririon',
                 'slug'        => 'nutririon',
                 'type'        => 'product',
-                'images'       => 'https://via.placeholder.com/500x500.png?text=nutririon',
+                'images'      => 'https://via.placeholder.com/500x500.png?text=nutririon',
                 'status'      => true,
             ],
         ]);

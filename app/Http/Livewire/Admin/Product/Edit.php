@@ -128,7 +128,7 @@ class Edit extends Component
 
         $this->description = $this->product->description;
 
-        $this->options = json_decode($this->product->options) ?? [];
+        $this->options = $this->product->options ?? [];
 
         $this->editModal = true;
     }

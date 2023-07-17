@@ -60,7 +60,7 @@ class Edit extends Component
 
         $this->page = Page::findOrFail($page);
 
-        $this->image = $this->page->image ?? "";
+        $this->image = $this->page->image ?? '';
 
         $this->description = $this->page->description;
 
@@ -80,7 +80,7 @@ class Edit extends Component
         $this->page->save();
 
         $this->alert('success', __('Page updated successfully.'));
-        
+
         $this->emit('refreshIndex');
 
         $this->editModal = false;

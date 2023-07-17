@@ -21,26 +21,26 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name'           => $this->faker->word,
-            'description'    => $this->faker->sentence,
-            'price' => $this->faker->randomFloat(2, 10, 100),
-            'discount_price' => $this->faker->randomFloat(2, 10, 100),
+            'name'             => $this->faker->word,
+            'description'      => $this->faker->sentence,
+            'price'            => $this->faker->randomFloat(2, 10, 100),
+            'discount_price'   => $this->faker->randomFloat(2, 10, 100),
             'code'             => Str::random(5),
             'category_id'      => 1,
             'slug'             => Str::slug($this->faker->word).'-'.Str::random(5),
             'meta_title'       => $this->faker->word,
             'meta_description' => Str::limit($this->faker->sentence, 165),
-            'options' => [
+            'options'          => [
                 [
-                    'type' => 'color',
+                    'type'  => 'color',
                     'value' => $this->faker->randomElement(['#000000', '#ffffff', '#ff0000', '#00ff00', '#0000ff']),
                 ],
                 [
-                    'type' => 'size',
+                    'type'  => 'size',
                     'value' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
                 ],
             ],
-        
+
             'status' => 1,
         ];
     }

@@ -41,13 +41,13 @@ class Blog extends Model implements HasMedia
         'language_id',
     ];
 
-      /**
+    /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
     protected $casts = [
-        'status'            => Status::class,
+        'status' => Status::class,
     ];
 
     /**

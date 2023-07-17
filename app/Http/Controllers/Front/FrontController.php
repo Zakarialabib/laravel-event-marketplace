@@ -92,11 +92,6 @@ class FrontController extends Controller
         return view('front.dynamic-page', compact('page'));
     }
 
-    public function myaccount()
-    {
-        return view('front.user-account');
-    }
-
     public function generateSitemaps()
     {
         try {

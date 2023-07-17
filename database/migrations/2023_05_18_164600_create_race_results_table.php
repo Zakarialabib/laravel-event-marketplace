@@ -12,9 +12,9 @@ return new class () extends Migration {
     {
         Schema::create('race_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('race_id')->constrained('races');
-            $table->foreignId('winner_id')->nullable()->constrained('participants');
-            $table->foreignId('runner_up_id')->nullable()->constrained('participants');
+            $table->foreignUuid('race_id')->constrained('races');
+            $table->foreignUuid('winner_id')->nullable()->constrained('participants');
+            $table->foreignUuid('runner_up_id')->nullable()->constrained('participants');
             $table->integer('place');
             $table->string('time');
             $table->timestamp('date')->nullable();

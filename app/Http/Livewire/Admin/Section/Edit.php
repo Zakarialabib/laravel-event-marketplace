@@ -13,7 +13,6 @@ use App\Models\Section;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use App\Models\Language;
-use App\Http\Livewire\Quill;
 
 class Edit extends Component
 {
@@ -38,7 +37,7 @@ class Edit extends Component
         'section.title'       => ['nullable', 'string', 'max:255'],
         'section.subtitle'    => ['nullable', 'string', 'max:255'],
         'section.bg_color'    => ['nullable', 'string', 'max:255'],
-        'description' => ['nullable'],
+        'description'         => ['nullable'],
     ];
 
     public function updatedDescription($value)
@@ -64,24 +63,24 @@ class Edit extends Component
     public function update()
     {
         $this->validate();
-        
+
         // try {
-            
-            if ($this->image) {
-                $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
-                $this->image->storeAs('sections', $imageName);
-                $this->section->image = $imageName;
-            }
 
-            $this->section->description = $this->description;
+        if ($this->image) {
+            $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
+            $this->image->storeAs('sections', $imageName);
+            $this->section->image = $imageName;
+        }
 
-            $this->section->save();
+        $this->section->description = $this->description;
 
-            $this->alert('success', __('Section updated successfully!'));
+        $this->section->save();
 
-            $this->emit('refreshIndex');
+        $this->alert('success', __('Section updated successfully!'));
 
-            $this->editModal = false;
+        $this->emit('refreshIndex');
+
+        $this->editModal = false;
         // } catch (Throwable $th) {
         //     $this->alert('warning', __('Section was not updated!'));
         // }

@@ -11,10 +11,11 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('registrations', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
-            $table->foreignId('participant_id')->constrained('participants');
-            $table->foreignId('race_id')->constrained('races');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('participant_id')->constrained('participants');
+            $table->foreignUuid('race_id')->constrained('races');
+            // $table->foreignId('order_id')->constrained('orders');
+            // $table->foreignId('payment_id')->constrained('payments');
             $table->timestamp('registration_date')->nullable();
             $table->string('status');
             $table->timestamp('date')->nullable();

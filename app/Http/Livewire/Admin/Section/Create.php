@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Http\Livewire\Quill;
 
 class Create extends Component
 {
@@ -39,7 +38,7 @@ class Create extends Component
         'section.featured_title' => ['nullable', 'string', 'max:255'],
         'section.subtitle'       => ['nullable', 'string', 'max:255'],
         'section.label'          => ['nullable', 'string', 'max:255'],
-        'description'    => ['nullable'],
+        'description'            => ['nullable'],
         'section.bg_color'       => ['nullable'],
         'section.position'       => ['nullable'],
         'section.link'           => ['nullable'],
@@ -58,7 +57,7 @@ class Create extends Component
 
         $this->section = new Section();
 
-        $this->description = "";
+        $this->description = '';
 
         $this->createSection = true;
     }
@@ -84,7 +83,7 @@ class Create extends Component
         }
 
         $this->section->description = $this->description;
-        
+
         $this->section->save();
 
         $this->emit('refreshIndex');
