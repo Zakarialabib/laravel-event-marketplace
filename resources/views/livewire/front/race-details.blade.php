@@ -115,10 +115,10 @@
 
         <div class="w-full flex flex-wrap items-center h-full py-6">
             <div class="xl:w-1/4 md:w-full px-4">
-                <p class="text-black text-sm md:text-base lg:text-lg lg:text-center mt-4">
+                <p class="text-black text-sm text-left md:text-base lg:text-lg lg:text-center mt-4">
                     {{ __('Registration deadline') }}
                 </p>
-                <p class="text-black text-sm md:text-base lg:text-lg mt-4">
+                <p class="text-black text-sm text-left md:text-base lg:text-lg lg:text-center mt-4">
                     {{ Helpers::format_date($race->registration_deadline) }}
                 </p>
             </div>
@@ -163,58 +163,47 @@
                                 {{ __('Details') }}
                             </p>
                             <div class="px-10 pb-6">
-                                @php
-                                    $categoryName = strtolower($race->category->name);
-                                @endphp
-
-                                @if ($race->course)
-                                    <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 ">
-                                        @foreach ($race->course as $key => $course)
-                                            @if ($categoryName == $key || $categoryName == 'triathlon')
-                                                <div class="w-full">
-                                                    <button
-                                                        class="w-full py-5 px-8 sm:py-2 sm:px-5 text-center font-bold text-green-800 uppercase border-b-2 border-green-400 focus:outline-none cursor-pointer"
-                                                        type="button" @click="tabs = '{{ $key }}'"
-                                                        :class="{
-                                                            'border-green-800': tabs === '{{ $key }}',
-                                                            'text-green-100': tabs === '{{ $key }}',
-                                                            'bg-green-700': tabs === '{{ $key }}',
-                                                            'hover:bg-green-600': tabs !== '{{ $key }}',
-                                                            'hover:text-green-100': tabs !== '{{ $key }}',
-                                                            'hover:border-green-600': tabs !== '{{ $key }}',
-                                                        }">
-                                                        <h4 class="inline-block"
-                                                            :class="{
-                                                                'text-green-100': tabs === '{{ $key }}',
-                                                                'border-green-800': tabs === '{{ $key }}',
-                                                            }">
-                                                            {{ $course['name'] }}
-                                                        </h4>
-                                                    </button>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <div class="grid grid-cols-1 justify-center py-6 px-4">
-                                        @foreach ($race->course as $key => $course)
-                                            <div x-show="tabs === '{{ $key }}'">
-                                                <div role="{{ $key }}" id="tab-panel-{{ $loop->index }}"
-                                                    class="w-full mb-4">
-                                                    <div class="flex flex-col text-center justify-center py-10">
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            {{ $course['content'] }}
-                                                        </p>
-
-                                                        <div class="flex justify-center">
-                                                            <x-button secondary type="button">{{ __('download') }}
-                                                            </x-button>
-                                                        </div>
+                                <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
+                                    @foreach ($race->course as $index => $course)
+                                        <div class="w-full">
+                                            <button
+                                                class="w-full py-5 px-8 sm:py-2 sm:px-5 text-center font-bold text-green-800 uppercase border-b-2 border-green-400 focus:outline-none cursor-pointer"
+                                                type="button" @click="tabs = '{{ $index }}'"
+                                                :class="{
+                                                    'border-green-800 text-green-100 bg-green-700': tabs ===
+                                                        '{{ $index }}',
+                                                    'hover:bg-green-600 hover:text-green-100 hover:border-green-600': tabs !==
+                                                        '{{ $index }}',
+                                                }">
+                                                <h4 class="inline-block"
+                                                    :class="{
+                                                        'text-green-100': tabs === '{{ $index }}',
+                                                        'border-green-800': tabs === '{{ $index }}',
+                                                    }">
+                                                    {{ $course['name'] }}
+                                                </h4>
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="grid grid-cols-1 justify-center">
+                                    @foreach ($race->course as $index => $course)
+                                        <div x-show="tabs === '{{ $index }}'">
+                                            <div role="{{ $index }}" id="tab-panel-{{ $loop->index }}"
+                                                class="w-full mb-4 border border-green-400">
+                                                <div class="flex flex-col text-center justify-center py-10">
+                                                    <p class="leading-6 text-base md:text-lg py-10">
+                                                        {{ $course['content'] }}
+                                                    </p>
+                                                    <div class="flex justify-center">
+                                                        <x-button secondary type="button">{{ __('download') }}
+                                                        </x-button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    </div>
-                                @endif
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         @else
                             <p class="block text-base md:text-lg text-gray-400">{{ __('No race details available') }}.
@@ -353,13 +342,12 @@
                 <a @click="prevSlide" class="mr-4 lg:mr-8 xl:mr-24 cursor-pointer">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <div class="flex mx-auto w-56 lg:w-96 h-px bg-gray-100" style="height: 2px;">
+                <div class="flex mx-auto w-56 lg:w-96 bg-gray-100" style="height: 2px;">
                     @foreach (Helpers::getActiveFaqs() as $index => $slider)
                         <div class="w-14 h-1 bg-gray-300 cursor-pointer transition-colors hover:bg-red-500 bg-opacity-50"
                             :class="{ 'bg-red-500': slideIndex === {{ $index }} }"
                             @click="goToSlide({{ $index }})"></div>
                     @endforeach
-                    <a class="w-2/3 bg-white" href="#"></a>
                 </div>
                 <a @click="nextSlide" class="ml-4 lg:ml-8 xl:ml-24 cursor-pointer">
                     <i class="fas fa-arrow-right"></i>

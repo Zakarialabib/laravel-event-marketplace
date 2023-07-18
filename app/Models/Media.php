@@ -8,36 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use App\Enums\Status;
 
-class Media extends Model
+use Illuminate\Support\Str;
+use Spatie\MediaLibrary\Models\Media as BaseMedia;
+
+class Media extends BaseMedia
 {
     use HasAdvancedFilter;
 
-    protected $fillable = [
-        'race_id',
-        'type',
-        'src',
-        'url',
-        'description',
-        'status',
-    ];
+    public $incrementing = false;
 
-    public const ATTRIBUTES = [
-        'id',
-        'race_id',
-        'type',
-        'status',
-    ];
-
-    public $orderable = self::ATTRIBUTES;
-    public $filterable = self::ATTRIBUTES;
-
-    protected $casts = [
-        'status' => Status::class,
-    ];
-
-    // Define the relationship with the Race model
-    public function race()
+    protected static function boot()
     {
-        return $this->belongsTo(Race::class);
+        parent::boot();
+
+        static::creating(function (Model $model) {
+            if (is_null($model->getOriginal('id'))) {
+                $model->id = Str::uuid()->toString();
+            }
+        });
     }
+
 }

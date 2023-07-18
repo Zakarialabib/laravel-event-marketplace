@@ -152,9 +152,6 @@ class Edit extends Component
         switch ($this->race->category->name) {
             case 'triathlon':
                 $categoryName = 'Triathlon';
-                // Add specific course types for Triathlon
-                $this->addTriathlonCourses();
-
                 break;
             case 'running':
                 $categoryName = 'Running';
@@ -170,18 +167,6 @@ class Edit extends Component
                 break;
             default:
                 break;
-        }
-    }
-
-    private function addTriathlonCourses()
-    {
-        $courseTypes = ['Swim', 'Bike', 'Run'];
-
-        foreach ($courseTypes as $courseType) {
-            $this->courses[] = [
-                'name'    => $courseType.' '.'Course Name',
-                'content' => '',
-            ];
         }
     }
 
@@ -255,7 +240,7 @@ class Edit extends Component
     {
         $this->validate();
 
-        if (empty($this->images)) {
+        if (!empty($this->images)) {
             foreach ($this->images as $image) {
                 $this->race->addMedia($image)->toMediaCollection('local_files');
             }

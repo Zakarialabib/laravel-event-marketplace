@@ -12,26 +12,7 @@
 
             <div x-data="{ isMenuOpen: false }">
                 <ul class="hidden md:flex gap-x-7 xl:gap-x-10 text-sm font-bold">
-                    @foreach (\App\Helpers::getActiveCategories() as $category)
-                        <li>
-                            <a href="{{ route('front.categories') }}?type={{ $category->name }}"
-                                class="relative inline-flex items-center {{ request()->query('type') == $category->name ? 'text-green-400 underline' : '' }} hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 hover:underline focus:underline uppercase">
-                                {{ $category->name }}
-                            </a>
-                        </li>
-                    @endforeach
-                    <li>
-                        <a href="{{ route('front.catalog') }}"
-                            class="relative inline-flex items-center {{ request()->routeIs('front.catalog') ? 'text-green-400 underline' : '' }} hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 hover:underline focus:underline uppercase">
-                            {{ __('Store') }}
-                        </a>
-                    </li>
-                    {{-- <button type="button"
-                            class="font-heading font-medium uppercase hover:text-green-400 hover:underline"
-                            x-on:click="isMenuOpen = !isMenuOpen" @mouseenter="isMenuOpen = true" @click.away="isMenuOpen = false">
-                            {{ __('Store') }} 
-                            <small class="inline-block align-middle text-gray-100">&#9660;</small>
-                        </button> --}}
+                  <x-theme.menu-list placement="header" />
                 </ul>
 
                 <div x-show="isMenuOpen" x-transition:enter="transition ease-out duration-300 transform origin-top"

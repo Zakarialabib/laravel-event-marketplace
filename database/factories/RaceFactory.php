@@ -23,7 +23,6 @@ class RaceFactory extends Factory
     public function definition()
     {
         return [
-            'id'                    => Str::uuid(),
             'name'             => $this->faker->word,
             'date'             => $this->faker->date,
             'description'      => $this->faker->sentence,

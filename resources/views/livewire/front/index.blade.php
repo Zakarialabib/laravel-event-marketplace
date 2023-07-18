@@ -14,7 +14,7 @@
             </h3>
             <div class="flex flex-wrap items-center mt-4 space-y-4">
                 @forelse ($this->races as $race)
-                    <div class="relative lg:w-1/2 sm:w-full px-4">
+                    <div class="relative w-full px-4">
                         <x-race-card :race="$race" view="list" />
                     </div>
                 @empty

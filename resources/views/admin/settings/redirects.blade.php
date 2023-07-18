@@ -3,9 +3,9 @@
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
-                <h2 class="mb-1 text-2xl font-bold">
+                <h4 class="mb-1 text-2xl font-bold">
                     {{ __('Redirects') }}
-                </h2>
+                </h4>
                 <div class="flex items-center">
                     <a class="flex items-center text-sm text-gray-500" href="{{ route('admin.dashboard') }}">
                         <span class="inline-block mr-2">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="float-right">
-                <x-button primary href="{{route('generate-sitemaps')}}" >
+                <x-button primary href="{{ route('generate-sitemaps') }}">
                     {{ __('Regenerate sitemaps') }}
                 </x-button>
             </div>

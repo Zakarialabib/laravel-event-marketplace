@@ -10,6 +10,7 @@ use App\Models\Currency;
 use App\Models\Page;
 use App\Models\Settings;
 use App\Models\RaceLocation;
+use App\Models\Menu;
 use App\Models\Subcategory;
 use App\Models\Pagesetting;
 use App\Models\Faq;
@@ -92,6 +93,11 @@ class Helpers
             ->inRandomOrder()
             ->take(5)
             ->get();
+    }
+
+    public static function getMenusByPlacement(string $placement)
+    {
+        return Menu::active()->where('placement', $placement)->get();
     }
 
     public static function categoryName($category_id)

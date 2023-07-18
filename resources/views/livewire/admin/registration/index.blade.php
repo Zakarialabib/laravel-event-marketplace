@@ -2,9 +2,9 @@
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
-                <h2 class="mb-1 text-2xl font-bold">
+                <h4 class="mb-1 text-2xl font-bold">
                     {{ __('Registration') }}
-                </h2>
+                </h4>
                 <div class="flex items-center">
                     <a class="flex items-center text-sm text-gray-500" href="{{ route('admin.dashboard') }}">
                         <span class="inline-block mr-2">
@@ -110,6 +110,9 @@
                             {{ __('Race') }}
                         </x-table.th>
                         <x-table.th>
+                            {{ __('Registration date') }}
+                        </x-table.th>
+                        <x-table.th>
                             {{ __('Participant') }}
                         </x-table.th>
                         <x-table.th>
@@ -129,6 +132,9 @@
                                     {{ $registration->race->name }}
                                 </x-table.td>
                                 <x-table.td>
+                                    {{ $registration->registration_date }}
+                                </x-table.td>
+                                <x-table.td>
                                     {{ $registration->participant->name }} - {{ $registration->participant->email }} -
                                     {{ $registration->participant->phone_number }}
                                 </x-table.td>
@@ -143,7 +149,7 @@
                                 <x-table.td>
                                     <button wire:click="showTab('{{ $registration->race->id }}')"
                                         class="text-blue-500">
-                                        {{ __('Show Participants') }}
+                                        {{ __('Show Participant') }}
                                     </button>
                                 </x-table.td>
                             </x-table.tr>

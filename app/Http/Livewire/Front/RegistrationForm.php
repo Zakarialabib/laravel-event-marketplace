@@ -154,19 +154,19 @@ class RegistrationForm extends Component
                     function ($participant, $next) {
 
                         if ($this->newsletters) {
-                            $existingSubscriber = Subscriber::where('email', $this->participant->email)->first();
+                            $existingSubscriber = Subscriber::where('email', $participant->email)->first();
 
                             if ( ! $existingSubscriber) {
                                 Subscriber::create([
                                     'email'  => $participant->email,
-                                    'name'   => $this->participant->name,
+                                    'name'   => $participant->name,
                                     'tag'    => 'participant', // 'participant' or 'subscriber
                                     'status' => Status::ACTIVE,
                                 ]);
                             }
                         }
 
-                        return $next($participant, $user);
+                        return $next($participant);
                     },
                 ])
                 ->then(function ($participant) {

@@ -11,8 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid')->unique();
+            $table->uuid('id')->unique();
             $table->foreignUuid('participant_id')->constrained('participants');
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('race_id')->constrained('races');
