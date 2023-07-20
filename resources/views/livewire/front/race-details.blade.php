@@ -21,9 +21,10 @@
                 <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
                     <h3
                         class="uppercase mb-4 text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-bold text-white cursor-pointer">
-                        {{ $race->name }} {{ \Carbon\Carbon::parse($race->date)->format('F,d,Y') }}
+                        {{ $race->name }}
                     </h3>
-                    <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
+
+                    <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-2 inline-block">
                         <li
                             class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-white pr-4">
                             <a href="{{ route('front.index') }}">{{ __('Home') }}</a>
@@ -44,19 +45,43 @@
                             </a>
                         </li>
                     </ul>
-                    @if ($race->social_media)
-                        <div class="flex flex-wrap items-center py-6 w-full ">
-                            <div class="w-full px-4 flex flex-wrap text-white justify-center space-x-2 mb-4 ">
+
+                    <div
+                        class="py-6 px-4 bg-white bg-opacity-10 gap-[1.88rem] flex text-2xl items-center justify-between text-white">
+                        <div style="word-break: break-word;">
+                            <h3 class="text-white text-xl font-bold leading-8 mb-3 uppercase">Date</h3>
+
+                            <p><strong class="font-bold">
+                                    {{ \Carbon\Carbon::parse($race->date)->format('l j F Y') }}
+                                </strong></p>
+                        </div>
+                        <div style="word-break: break-word;">
+                            <h3 class="text-white text-xl font-bold leading-8 mb-3 uppercase">Lieu</h3>
+                            <p>
+                                {{ $race?->location->name }}
+                            </p>
+                        </div>
+                        @if ($race->social_media)
+                            <div style="word-break: break-word;">
+                                <h3 class="text-white text-xl font-bold leading-8 mb-3 uppercase">Réseaux Sociaux</h3>
                                 <x-theme.social-media-icons :socialMedia="$race->social_media" />
                             </div>
+                        @endif
+                        <div style="word-break: break-word;">
+                            <h3 class="text-white text-xl font-bold leading-8 mb-3 uppercase">Contact</h3>
+                            <p>
+                                <a href="#" class="cursor-pointer underline">email</a><br>
+                                Tél. 06.38.041.19.19
+                            </p>
                         </div>
-                    @endif
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
     <section class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '' }">
-        <div class="w-full h-auto max-w-screen-xl mx-auto pb-5">
+        <div class="md:hidden sm:block w-full h-auto max-w-screen-xl mx-auto pb-5">
             <div
                 class="overflow-y-auto flex sm:justify-start lg:justify-center text-sm relative bg-gray-100 border-b-2 border-green-600">
                 <button
@@ -87,27 +112,6 @@
                         'text-white': activeTab === 'tab2',
                         'hover:text-green-400': activeTab === 'tab2',
                     }">
-                    {{ __('Calendar') }}
-
-                </button>
-                <button
-                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    type="button" @click="activeTab = 'tab3'"
-                    :class="{
-                        'bg-green-700': activeTab === 'tab3',
-                        'text-white': activeTab === 'tab3',
-                        'hover:text-green-400': activeTab === 'tab3',
-                    }">
-                    {{ __('Sponsors') }}
-                </button>
-                <button
-                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    type="button" @click="activeTab = 'tab4'"
-                    :class="{
-                        'bg-green-700': activeTab === 'tab4',
-                        'text-white': activeTab === 'tab4',
-                        'hover:text-green-400': activeTab === 'tab4',
-                    }">
                     {{ __('Regitration') }}
                 </button>
             </div>
@@ -115,6 +119,56 @@
 
         <div class="w-full flex flex-wrap items-center h-full py-6">
             <div class="xl:w-1/4 md:w-full px-4">
+                <div class="text-gray-700 break-words ">
+                    <div class="my-6 ">
+                        <div class="flex flex-col justify-start overflow-x-hidden ">
+                            <button type="button" @click="activeTab = 'tab0'"
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
+                                :class="{
+                                    'bg-green-700': activeTab === 'tab0',
+                                    'text-white': activeTab === 'tab0',
+                                    'hover:text-green-400': activeTab === 'tab0',
+                                }">>
+                                {{ __('Overview') }}
+                            </button>
+                            <button
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
+                                type="button" @click="activeTab = 'tab3'"
+                                :class="{
+                                    'bg-green-700': activeTab === 'tab3',
+                                    'text-white': activeTab === 'tab3',
+                                    'hover:text-green-400': activeTab === 'tab3',
+                                }">
+                                {{ __('Regitration') }}
+                            </button>
+                            <button
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5"
+                                type="button" @click="activeTab = 'tab1'"
+                                :class="{
+                                    'bg-green-700': activeTab === 'tab1',
+                                    'text-white': activeTab === 'tab1',
+                                    'hover:text-green-400': activeTab === 'tab1',
+                                }">
+                                {{ __('Course') }}
+                            </button>
+
+                            <a href=""
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5">
+                                Results
+                            </a>
+                            <a href="#"
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5">
+                                Partners
+                            </a>
+
+                            <a href="#"
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5">
+                                Shop
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <p class="text-black text-sm text-left md:text-base lg:text-lg lg:text-center mt-4">
                     {{ __('Registration deadline') }}
                 </p>
@@ -127,7 +181,7 @@
                 <div x-show="activeTab === 'tab0'" class="w-full text-center mb-5">
                     <h3
                         class="w-full text-center mb-6 pt-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold uppercase text-gray-800">
-                        {{ __('Overview') }}
+                        {{ __('Details') }}
                     </h3>
                     <div class="grid grid-cols-1 gap-4 pb-6">
                         <p class="mb-7 text-base md:text-lg text-gray-400 font-medium">{!! $race->description !!}</p>
@@ -154,6 +208,47 @@
                             <span class="text-sm md:text-base font-medium text-gray-500">{{ __('Price') }}:</span>
                             <span class="text-base md:text-lg">{{ Helpers::format_currency($race->price) }}</span>
                         </div>
+                    </div>
+                    <div class="w-full text-center mb-5">
+                        @if ($race->calendar)
+                            <p
+                                class="w-full text-center mb-6 py-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold uppercase text-gray-800">
+                                {{ __('Details') }}
+                            </p>
+                            <div class="pb-6 px-6 mx-2 overflow-x-auto scrollbar__inverted">
+                                <table class="table-auto w-full border-collapse text-center border bg-white shadow-md">
+                                    <thead>
+                                        <tr class="bg-red-500 text-white">
+                                            <th class="text-left py-2 px-3">{{ __('Date') }}</th>
+                                            <th class="w-1/4 py-2 px-3">{{ __('Start Time') }}</th>
+                                            <th class="w-1/4 py-2 px-3">{{ __('End Time') }}</th>
+                                            <th class="w-1/2 py-2 px-3">{{ __('Activity') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($race->calendar as $data)
+                                            <tr class="border-b bg-gray-100">
+                                                <td class="text-left py-2 px-3 font-bold">{{ $data['date'] }}</td>
+                                                <td class="py-2 px-3"></td>
+                                                <td class="py-2 px-3"></td>
+                                                <td class="py-2 px-3"></td>
+                                            </tr>
+                                            @foreach ($data['events'] as $event)
+                                                <tr class="border-b">
+                                                    <td class="py-2 px-3"></td>
+                                                    <td class="py-2 px-3">{{ $event['start_time'] }}</td>
+                                                    <td class="py-2 px-3">{{ $event['end_time'] }}</td>
+                                                    <td class="py-2 px-3">{{ $event['activity'] }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            <p class="block text-base md:text-lg text-gray-400">{{ __('No calendar available') }}.</p>
+                        @endif
+
                     </div>
                 </div>
                 <div x-show="activeTab === 'tab1'">
@@ -213,85 +308,53 @@
                 </div>
                 <div x-show="activeTab === 'tab2'">
                     <div class="w-full text-center mb-5">
-                        @if ($race->calendar)
-                            <p
-                                class="w-full text-center mb-6 py-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold uppercase text-gray-800">
-                                {{ __('Calendar') }}
-                            </p>
-                            <div class="pb-6 px-6 mx-2 overflow-x-auto scrollbar__inverted">
-                                <table class="table-auto w-full border-collapse text-center border bg-white shadow-md">
-                                    <thead>
-                                        <tr class="bg-red-500 text-white">
-                                            <th class="text-left py-2 px-3">{{ __('Date') }}</th>
-                                            <th class="w-1/4 py-2 px-3">{{ __('Start Time') }}</th>
-                                            <th class="w-1/4 py-2 px-3">{{ __('End Time') }}</th>
-                                            <th class="w-1/2 py-2 px-3">{{ __('Activity') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($race->calendar as $data)
-                                            <tr class="border-b bg-gray-100">
-                                                <td class="text-left py-2 px-3 font-bold">{{ $data['date'] }}</td>
-                                                <td class="py-2 px-3"></td>
-                                                <td class="py-2 px-3"></td>
-                                                <td class="py-2 px-3"></td>
-                                            </tr>
-                                            @foreach ($data['events'] as $event)
-                                                <tr class="border-b">
-                                                    <td class="py-2 px-3"></td>
-                                                    <td class="py-2 px-3">{{ $event['start_time'] }}</td>
-                                                    <td class="py-2 px-3">{{ $event['end_time'] }}</td>
-                                                    <td class="py-2 px-3">{{ $event['activity'] }}</td>
-                                                </tr>
-                                            @endforeach
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        @else
-                            <p class="block text-base md:text-lg text-gray-400">{{ __('No calendar available') }}.</p>
-                        @endif
-
-                    </div>
-                </div>
-                <div x-show="activeTab === 'tab3'">
-                    <div class="w-full text-center mb-5">
-                        @if ($race->sponsors)
-                            <p
-                                class="w-full text-center mb-6 py-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold uppercase text-gray-800">
-                                {{ __('Sponsors') }}
-                            </p>
-                            <div
-                                class="grid sm:grid-cols-3 md:grid-cols-4 lg:w-grid-cols-5 xl:grid-cols-6  gap-4  justify-center py-6 px-4">
-
-                                @foreach ($race->sponsors as $index => $sponsor)
-                                    <div class="py-5 bg-gray-100 text-black w-full px-4">
-                                        <a href="{{ $sponsor['link'] }}" class="mx-auto h-auto rounded-xl">
-                                            <p class="text-center text-base ">
-                                                {{ $sponsor['name'] }}
-                                            </p>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <p class="block text-base md:text-lg text-gray-400">{{ __('No sponsors available') }}.</p>
-                        @endif
-                    </div>
-                </div>
-                <div x-show="activeTab === 'tab4'">
-                    <div class="w-full text-center mb-5">
                         @php
                             $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
                         @endphp
 
                         @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
-                            <p class="block text-base md:text-lg text-gray-400">{{ __('Registration is over') }}.</p>
+                            <div
+                                class="bg-zinc-200 text-neutral-700 break-words pl-8 pr-5  border border-zinc-300 border-solid rounded-">
+                                <div class="clear-both float-left my-3.5 ">
+                                    <h3 class="text-neutral-700 text-4xl font-semibold mb-5 ">
+                                        {{ __('Registration Coming Soon') }}
+                                    </h3>
+                                    <p class=" text-center">
+                                        {{ $race->name }} {{ __('registration is now closed') }}
+                                    </p>
+                                </div>
+                                
+                            </div>
                         @else
                             @livewire('front.registration-form', ['race' => $race])
                         @endif
                     </div>
                 </div>
+            </div>
+            <div class="w-full bg-gray-50">
+                @if ($race->sponsors)
+                    <div class="text-gray-500 text-sm px-3.5">
+                        <p
+                            class="w-full text-center mb-6 py-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold uppercase text-gray-800">
+                            {{ __('Sponsors') }}
+                        </p>
+                        <div class="w-full flex-wrap mx-auto px-10">
+                            @foreach ($race->sponsors as $index => $sponsor)
+                                <div class="w-1/4 basis-full float-left">
+                                    <a href="{{ $sponsor['link'] }}" class="text-center">
+                                        <img src="$sponsor->getFirstMediaUrl('local_files')"
+                                            alt="{{ $sponsor['name'] }}" class="inline-block h-24 align-middle w-20">
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @else
+                    <div class="text-gray-500 text-sm font-medium py-28">
+                        <p class="block text-base md:text-lg text-gray-400">{{ __('No sponsors available') }}.</p>
+                    </div>
+                @endif
+
             </div>
         </div>
     </section>

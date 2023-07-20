@@ -8,14 +8,14 @@
             <x-theme.slider :sliders="$this->sliders" />
         </section>
         <section class="lg:px-10 sm:px-6 lg:py-16 md:py-14">
-            <h3
-                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tighter font-heading text-black cursor-pointer pb-10 text-center">
+            <h3 
+                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
                 {{ __('Upcoming Races') }}
             </h3>
             <div class="flex flex-wrap items-center mt-4 space-y-4">
                 @forelse ($this->races as $race)
                     <div class="relative w-full px-4">
-                        <x-race-card :race="$race" view="list" />
+                        <x-race-card :race="$race" view="wide" />
                     </div>
                 @empty
                     <div class="w-full bg-gray-50 py-10 mb-10 rounded-lg px-4 md:-mx-4 shadow-2xl">
@@ -29,32 +29,39 @@
 
         <section class="h-auto bg-gray-50 text-black md:px-4 lg:px-10 py-4 md:py-6 lg:py-10">
             <h5
-                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tighter font-heading cursor-pointer py-10 text-center">
+                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
                 {{ __('Races Locations') }}
             </h5>
             <hr>
             <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-6 mt-4 px-5">
                 @foreach ($this->raceLocations as $raceLocation)
-                    <figure
-                        class="p-4 md:p-6 mb-8 md:mb-0 shadow-2xl rounded-5xl bg-white transition duration-300 ease-in-out delay-200 transform  md:hover:translate-x-0 md:hover:-translate-y-4">
-                        <div class="glightbox group relative block h-full overflow-hidden text-center">
-                            <img class="aspect-video w-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
-                                src="{{ $raceLocation->getFirstMediaUrl('local_files') }}" />
-                            <h3
-                                class="py-4 font-bold leading-tight text-primary dark:text-white lg:text-lg lg:leading-6">
-                                {{ $raceLocation->name }}
-                            </h3>
-
-                            <p class="text-sm leading-tight tracking-tighter text-center py-6">
-                                {!! $raceLocation->description !!}
-                            </p>
-                        </div>
-                    </figure>
+                    <div class="float-left mx-3">
+                        <figure class="text-gray-700 flex break-words">
+                            <div
+                                class="items-center clear-both flex flex-col float-left justify-start my-3.5 pb-8 text-center">
+                                <div class="float-left mb-3 w-full">
+                                    <img src="{{ $raceLocation->getFirstMediaUrl('local_files') }}"
+                                        class="h-96 w-full transition-all duration-300">
+                                    <ul
+                                        class="flex flex-col bg-red-600 text-white cursor-pointer py-5 px-8 gap-y-2 text-center">
+                                        <li class="text-lg font-bold">
+                                            {{ $raceLocation->name }}
+                                        </li>
+                                        <li class="text-md tracking-tighter">
+                                            {!! $raceLocation->description !!}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
                 @endforeach
             </div>
         </section>
-        <section class="w-ful bg-green-50 py-12 px-8 lg:ml-auto bg-opacity-80">
-            <h3 class="font-heading text-3xl xl:text-6xl leading-tighter pb-6 text-center">{{ __('Sponsors') }}</h3>
+        <section class="w-full bg-green-50 py-12 lg:ml-auto bg-opacity-80">
+            <h3 class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
+                {{ __('Sponsors') }}
+            </h3>
             <div class="flex flex-wrap items-center justify-center -mx-2 -mb-12 gap-x-6">
                 @foreach ($this->sponsors as $sponsor)
                     <div class="w-1/4 sm:w-1/2 md:w-1/3 lg:w-1/6 px-2 mb-12">

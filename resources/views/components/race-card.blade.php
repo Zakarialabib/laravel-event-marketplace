@@ -44,13 +44,15 @@
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
                             <i class="fas fa-users"></i>
                         </span>
-                        <span class="text-base md:text-lg capitalize">{{ $race->number_of_participants }} / {{ $race->number_of_racers }}</span>
+                        <span class="text-base md:text-lg capitalize">{{ $race->number_of_participants }} /
+                            {{ $race->number_of_racers }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
                             <i class="fas fa-money-bill-wave"></i>
                         </span>
-                        <span class="text-base md:text-lg capitalize">{{ Helpers::format_currency($race->price) }}</span>
+                        <span
+                            class="text-base md:text-lg capitalize">{{ Helpers::format_currency($race->price) }}</span>
                     </p>
 
                     @if ($race->course)
@@ -71,7 +73,7 @@
                             {{ __('See more') }}
                         </a>
                         @php
-                        $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
+                            $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
                         @endphp
 
                         @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
@@ -136,7 +138,8 @@
                 </li>
             </ul>
             @if ($race->course)
-                <ul class="flex gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
+                <ul
+                    class="flex gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
                     @foreach ($race->course as $key => $course)
                         <li class="text-base inline-flex md:text-lg">
                             <span
@@ -159,6 +162,77 @@
                     </a>
                 </li>
             </ul>
+        </div>
+    </div>
+@elseif($view == 'wide')
+    <div class="w-full clear-both text-gray-700 float-left break-words bg-gray-50 rounded-lg border-1 border-gray-100 transform shadow-2xl">
+        <div class="bg-white flex">
+            <div class="relative">
+                <a href="{{ route('front.raceDetails', $race->slug) }}">
+                    <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
+                        class="bottom-0 h-96 md:h-64 left-0 object-cover top-0 w-full">
+                </a>
+                <div
+                    class="absolute top-0 left-0 pt-6 pb-4 px-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl opacity-90">
+                    <p class="font-medium leading-leading-tight">
+                        {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
+                    <p class="font-extrabold text-2xl leading-tight">
+                        {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
+                    <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
+                </div>
+            </div>
+            <div class="w-full flex flex-wrap">
+                <div class="w-full items-center flex flex-wrap justify-between my-20 px-12">
+                    <div class="flex flex-col">
+                        <p class="text-gray-500 text-sm font-bold mb-3">
+                            {{ $race->location->name }}
+                        </p>
+                        <a href="{{ route('front.raceDetails', $race->slug) }}" class="text-neutral-700 text-4xl font-semibold mb-3">
+                            {{ $race->name }}
+                        </A>
+
+                        <p class="text-green-600 text-sm font-bold mb-3 uppercase">
+                            {{ $race->category->name }}
+                        </p>
+                    </div>
+                    <div class="scroll-smooth">
+                        <a href="{{ route('front.raceDetails', $race->slug) }}"
+                            class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-3 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase items-center justify-center px-8 z-[1]">
+                            {{ __('Race Details') }}
+                        </a>
+                        @php
+                            $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
+                        @endphp
+
+                        @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
+                            <p class="text-gray-500 text-xs font-bold mt-3 text-center">
+                                {{ __('Registration closed') }}
+                            </p>
+                        @else
+                            <p class="text-gray-500 text-xs font-bold mt-3 text-center">
+                                {{ __('Registration open') }}
+                            </p>
+                        @endif
+                    </div>
+                </div>
+
+                @if ($race->course)
+                    <div class="w-full px-12 pb-6 self-end flex flex-wrap">
+                        @foreach ($race->course as $key => $course)
+                            <div
+                                class="items-center flex flex-grow py-3.5 px-3
+                                 border border-gray-100 border-solid">
+                                <p class="items-start text-neutral-700 flex flex-col text-xs justify-center">
+                                    {{ $course['name'] }}
+                                </p>
+                                <p class="text-lg font-bold uppercase">
+                                    {{ $course['name'] }}
+                                </p>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endif
