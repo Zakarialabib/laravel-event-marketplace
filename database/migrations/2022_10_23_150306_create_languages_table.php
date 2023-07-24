@@ -17,7 +17,7 @@ return new class () extends Migration {
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->string('rtl')->default('0');
             $table->string('status')->default('1');
             $table->string('is_default')->default('0');
