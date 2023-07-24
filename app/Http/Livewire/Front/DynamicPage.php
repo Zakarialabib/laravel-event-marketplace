@@ -11,6 +11,7 @@ use App\Models\Section;
 class DynamicPage extends Component
 {
     public $page;
+    public $description;
 
     public function getSectionsProperty()
     {
@@ -20,6 +21,7 @@ class DynamicPage extends Component
     public function mount($slug)
     {
         $this->page = Page::where('slug', $slug)->first() ?? abort(404);
+        $this->description = $this->page->description;
     }
 
     public function render()

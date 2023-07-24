@@ -142,14 +142,51 @@
                                         <ul class="flex items-center gap-4">
                                             @foreach ($race->course as $key => $course)
                                                 <li class="text-sans inline-flex md:text-lg">
-                                                    <span
-                                                        class="text-lg uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
+                                                    <button
+                                                        class="text-lg uppercase px-4 py-2 tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white focus:outline-none"
+                                                        @click="showDetails('{{ $key }}')"
+                                                        :class="{
+                                                            'bg-green-800': activeTab === '{{ $key }}',
+                                                            'hover:bg-green-700': activeTab !== '{{ $key }}',
+                                                        }">
                                                         {{ $course['name'] }}
-                                                    </span>
+                                                    </button>
                                                 </li>
                                             @endforeach
                                         </ul>
+                                        <div class="mt-8">
+                                            @foreach ($race->course as $key => $course)
+                                                <div x-show="activeTab === '{{ $key }}'" class="pb-6">
+                                                    <h3 class="text-xl font-bold uppercase text-green-800">
+                                                        {{ $course['name'] }}</h3>
+                                                    <p class="text-base md:text-lg leading-relaxed py-4">
+                                                        @if ($race->category->name === 'Running')
+                                                            {{__('Distance')}}: {{ $race->distance }} km
+                                                        @elseif ($race->category->name === 'Trail Running')
+                                                            {{__('Distance')}}: {{ $race->distance }} km<br>
+                                                            {{__('Elevation Gain')}}: {{ $race->elevation_gain }} m<br>
+                                                            {{__('Number of Days')}}: {{ $race->number_of_days }}
+                                                        @elseif ($race->category->name === 'Triathlon')
+                                                            {{__('Swimming')}}: {{ $course['swim']['distance'] }} km
+                                                            ({{ $course['swim']['nature'] }})<br>
+                                                            {{__('Cycling')}}: {{ $course['bike']['distance'] }} km
+                                                            ({{ $course['bike']['type'] }})<br>
+                                                            {{__('Running')}}: {{ $course['run']['distance'] }} km
+                                                            ({{ $course['run']['type'] }})
+                                                        @endif
+                                                    </p>
+                                                    <div class="flex justify-center">
+                                                        <x-button secondary type="button">{{ __('Download') }}
+                                                        </x-button>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <p class="block text-base md:text-lg text-gray-400">
+                                            {{ __('No race details available') }}.</p>
                                     @endif
+
                                 </div>
                                 <div class="w-1/2 xl:w-1/3 lg::w-2/12 md:w-1/3 mx-auto">
                                     <i class="fas fa-calendar-alt mr-2"></i>
@@ -176,8 +213,8 @@
                 x-transition:enter-end="opacity-100 transform translate-y-0">
                 <div class="flex items-center justify-center text-center">
                     <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                            stroke-width="4" fill="none"></circle>
+                        <circle class="opacity-25" cx="12" cy="12" r="10"
+                            stroke="currentColor" stroke-width="4" fill="none"></circle>
                         <path class="opacity-75" fill="currentColor"
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647zM20 12a8 8 0 01-8 8v4c4.627 0 10-5.373 10-12h-4zm-2-5.291A7.962 7.962 0 0120 12h4c0-3.042-1.135-5.824-3-7.938l-3 2.647z">
                         </path>

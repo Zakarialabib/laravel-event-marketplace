@@ -165,74 +165,97 @@
         </div>
     </div>
 @elseif($view == 'wide')
-    <div class="w-full clear-both text-gray-700 float-left break-words bg-gray-50 rounded-lg border-1 border-gray-100 transform shadow-2xl">
-        <div class="bg-white flex">
-            <div class="relative">
-                <a href="{{ route('front.raceDetails', $race->slug) }}">
-                    <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
-                        class="bottom-0 h-96 md:h-64 left-0 object-cover top-0 w-full">
-                </a>
-                <div
-                    class="absolute top-0 left-0 pt-6 pb-4 px-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl opacity-90">
-                    <p class="font-medium leading-leading-tight">
-                        {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
-                    <p class="font-extrabold text-2xl leading-tight">
-                        {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
-                    <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
+    <div
+        class="flex flex-wrap items-center w-full clear-both text-gray-700 float-left break-words bg-gray-50 rounded-lg border-1 border-gray-100 transform shadow-2xl">
+        <!-- Add the race photo here -->
+        <a href="{{ route('front.raceDetails', $race->slug) }}"
+            class="w-full lg:w-1/2 flex items-center md:items-start relative h-full transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
+            style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;height:27rem">
+            <div class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
+                <p class="font-medium leading-leading-tight">
+                    {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
+                <p class="font-extrabold text-2xl leading-tight">
+                    {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
+                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
+            </div>
+        </a>
+
+        <div class="w-full lg:w-1/2 relative">
+            <div class="w-full items-center flex-col justify-between my-20 px-12">
+                <div class="flex flex-col">
+                    <p class="text-gray-500 text-sm font-bold mb-3">
+                        {{ $race->location->name }}
+                    </p>
+                    <a href="{{ route('front.raceDetails', $race->slug) }}"
+                        class="text-neutral-700 text-4xl font-semibold mb-3">
+                        {{ $race->name }}
+                    </A>
+
+                    <p class="text-green-600 text-sm font-bold mb-3 uppercase">
+                        {{ $race->category->name }}
+                    </p>
+                </div>
+                <div class="scroll-smooth">
+                    <a href="{{ route('front.raceDetails', $race->slug) }}"
+                        class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-3 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase items-center justify-center px-8 z-[1]">
+                        {{ __('Race Details') }}
+                    </a>
+                    @php
+                        $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
+                    @endphp
+
+                    @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
+                        <p class="text-gray-500 text-xs font-bold mt-3 text-center">
+                            {{ __('Registration closed') }}
+                        </p>
+                    @else
+                        <p class="text-gray-500 text-xs font-bold mt-3 text-center">
+                            {{ __('Registration open') }}
+                        </p>
+                    @endif
                 </div>
             </div>
-            <div class="w-full flex flex-wrap">
-                <div class="w-full items-center flex flex-wrap justify-between my-20 px-12">
-                    <div class="flex flex-col">
-                        <p class="text-gray-500 text-sm font-bold mb-3">
-                            {{ $race->location->name }}
-                        </p>
-                        <a href="{{ route('front.raceDetails', $race->slug) }}" class="text-neutral-700 text-4xl font-semibold mb-3">
-                            {{ $race->name }}
-                        </A>
 
-                        <p class="text-green-600 text-sm font-bold mb-3 uppercase">
-                            {{ $race->category->name }}
+            @if ($race->course)
+                @php
+                    $course = json_decode($race->course, true);
+                @endphp
+                @if ($race->category->name === 'Running')
+                    <!-- Display running distance -->
+                    <div class="w-full px-12 pb-6 self-end">
+                        <p class="text-lg font-bold uppercase">
+                            Distance: {{ $course['distance'] }} km
                         </p>
                     </div>
-                    <div class="scroll-smooth">
-                        <a href="{{ route('front.raceDetails', $race->slug) }}"
-                            class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-3 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase items-center justify-center px-8 z-[1]">
-                            {{ __('Race Details') }}
-                        </a>
-                        @php
-                            $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
-                        @endphp
-
-                        @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
-                            <p class="text-gray-500 text-xs font-bold mt-3 text-center">
-                                {{ __('Registration closed') }}
-                            </p>
-                        @else
-                            <p class="text-gray-500 text-xs font-bold mt-3 text-center">
-                                {{ __('Registration open') }}
-                            </p>
-                        @endif
+                @elseif ($race->category->name === 'Trail Running')
+                    <!-- Display trail details (distance, elevation gain, number of days) -->
+                    <div class="w-full px-12 pb-6 self-end">
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Distance') }}: {{ $course['distance'] }} km
+                        </p>
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Elevation Gain') }}: {{ $race->elevation_gain }} m
+                        </p>
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Number of Days') }}: {{ $race->number_of_days }}
+                        </p>
                     </div>
-                </div>
-
-                @if ($race->course)
-                    <div class="w-full px-12 pb-6 self-end flex flex-wrap">
-                        @foreach ($race->course as $key => $course)
-                            <div
-                                class="items-center flex flex-grow py-3.5 px-3
-                                 border border-gray-100 border-solid">
-                                <p class="items-start text-neutral-700 flex flex-col text-xs justify-center">
-                                    {{ $course['name'] }}
-                                </p>
-                                <p class="text-lg font-bold uppercase">
-                                    {{ $course['name'] }}
-                                </p>
-                            </div>
-                        @endforeach
+                @elseif ($race->category->name === 'Triathlon')
+                    <!-- Display triathlon details (swimming, cycling, running) -->
+                    <div class="w-full px-12 pb-6 self-end">
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Swimming') }}: {{ $course['swim']['distance'] }} km
+                            ({{ $course['swim']['nature'] }})
+                        </p>
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Cycling') }}: {{ $course['bike']['distance'] }} km ({{ $course['bike']['type'] }})
+                        </p>
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Running') }}: {{ $course['run']['distance'] }} km ({{ $course['run']['type'] }})
+                        </p>
                     </div>
                 @endif
-            </div>
+            @endif
         </div>
     </div>
 @endif

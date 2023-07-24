@@ -27,56 +27,36 @@
             </div>
         </section>
 
-        <section class="h-auto bg-gray-50 text-black md:px-4 lg:px-10 py-4 md:py-6 lg:py-10">
-            <h5
-                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
-                {{ __('Races Locations') }}
-            </h5>
-            <hr>
-            <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-6 mt-4 px-5">
-                @foreach ($this->raceLocations as $raceLocation)
-                    <div class="float-left mx-3">
-                        <figure class="text-gray-700 flex break-words">
-                            <div
-                                class="items-center clear-both flex flex-col float-left justify-start my-3.5 pb-8 text-center">
-                                <div class="float-left mb-3 w-full">
-                                    <img src="{{ $raceLocation->getFirstMediaUrl('local_files') }}"
-                                        class="h-96 w-full transition-all duration-300">
-                                    <ul
-                                        class="flex flex-col bg-red-600 text-white cursor-pointer py-5 px-8 gap-y-2 text-center">
-                                        <li class="text-lg font-bold">
-                                            {{ $raceLocation->name }}
-                                        </li>
-                                        <li class="text-md tracking-tighter">
-                                            {!! $raceLocation->description !!}
-                                        </li>
-                                    </ul>
+        @if (count(Helpers::getActiveFeaturedBlogs()) > 0)
+            <div class="relative py-6 mx-auto px-6 bg-gray-100 ">
+                <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
+                    {{('Ressources')}}
+                </h2>
+                <div class="flex flex-wrap justify-center gap-4 py-6">
+                    @foreach (Helpers::getActiveFeaturedBlogs() as $blog)
+                        <div class="w-full xl:w-1/4 px-4 bg-white py-6">
+                            <div class="flex flex-wrap items-center">
+                                <a href="{{ route('front.blogPage', $blog->slug) }}" class="w-full">
+                                    <img alt="{{ $blog->title }}" src="{{ $blog->getFirstMediaUrl('blog') }}"
+                                        class="shadow-lg rounded max-w-full h-auto align-middle border-none" />
+                                </a>
+                                <div class="w-full px-4 mx-auto text-center mt-4">
+                                    <h3 class="text-3xl mb-2 font-semibold leading-normal">
+                                        {{ $blog->title }}
+                                    </h3>
+                                    <p class="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
+                                        {!! $blog->description !!}
+                                    </p>
+                                    <a href="{{ route('front.blogPage', $blog->slug) }}"
+                                        class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-2 text-sm front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">{{ __('Read More') }}</a>
                                 </div>
                             </div>
-                        </figure>
-                    </div>
-                @endforeach
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </section>
-        <section class="w-full bg-green-50 py-12 lg:ml-auto bg-opacity-80">
-            <h3 class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
-                {{ __('Sponsors') }}
-            </h3>
-            <div class="flex flex-wrap items-center justify-center -mx-2 -mb-12 gap-x-6">
-                @foreach ($this->sponsors as $sponsor)
-                    <div class="w-1/4 sm:w-1/2 md:w-1/3 lg:w-1/6 px-2 mb-12">
-                        <img class="mx-auto w-56 h-auto my-4 filter grayscale transition duration-300 hover:grayscale-0"
-                            src="{{ $sponsor->getFirstMediaUrl('local_files') }}" alt="{{ $sponsor->name }}">
-                        <p
-                            class="text-center text-sm px-4 mb-4 absolute bottom-0 left-0 w-full text-white text-opacity-0 group-hover:text-opacity-100 transition-opacity duration-300 cursor-pointer">
-                            {{ $sponsor->name }}
-                        </p>
-                    </div>
-                @endforeach
-            </div>
-        </section>
+        @endif
 
-        @livewire('front.resources')
 
         @if (count($this->featuredProducts) > 0)
             <section class="py-10 mx-auto px-4 text-center text-black">

@@ -52,6 +52,7 @@ class Create extends Component
         'race.price'                 => ['required', 'numeric', 'max:2147483647'],
         'race.race_location_id'      => ['required', 'integer'],
         'race.category_id'           => ['required', 'integer'],
+        'race.elevation_gain'           => ['nullable', 'string'],
         'race.number_of_days'        => ['required', 'numeric', 'max:2147483647'],
         'race.start_registration'    => ['required', 'date'],
         'race.end_registration'      => ['required', 'date'],
@@ -120,15 +121,17 @@ class Create extends Component
             $this->race->images = $imageName;
         }
 
-        // $this->race->social_media[] = $this->social_media;
-
-        // $this->race->sponsors[] = $this->sponsors;
-
-        // $this->race->courses[] = $this->courses;
-
-        // $this->race->features[] = $this->features;
+        $this->race->description = $this->description;
 
         $this->race->options = $this->options;
+
+        $this->race->social_media = $this->social_media;
+
+        $this->race->sponsors = $this->sponsors;
+
+        $this->race->course = $this->courses;
+
+        $this->race->features = $this->features;
 
         $this->race->calendar = $this->calendar;
 
@@ -139,6 +142,22 @@ class Create extends Component
         $this->emit('refreshIndex');
 
         $this->createModal = false;
+    }
+
+    public function addCourse()
+    {
+        $this->courses[] = [
+            'name' => '',
+            'distance' => 0,
+            'type' => '',
+            'content' => '',
+        ];
+    }
+
+    public function removeCourse($index)
+    {
+        unset($this->courses[$index]);
+        $this->courses = array_values($this->courses);
     }
 
     public function addRaceDate()

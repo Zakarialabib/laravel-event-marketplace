@@ -19,6 +19,7 @@ return new class () extends Migration {
             $table->foreignId('race_location_id')->constrained('race_locations');
             $table->foreignId('category_id')->constrained('categories');
             $table->integer('number_of_days')->nullable();
+            $table->string('elevation_gain')->nullable();
             $table->integer('number_of_racers');
             $table->decimal('price', 8, 2);
             $table->decimal('discount_price', 8, 2)->nullable();

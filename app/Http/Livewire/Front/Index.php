@@ -25,22 +25,6 @@ class Index extends Component
             ->get();
     }
 
-    public function getRaceLocationsProperty(): Collection
-    {
-        return RaceLocation::active()
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
-    }
-
-    public function getSponsorsProperty(): Collection
-    {
-        return Sponsor::active()
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
-    }
-
     public function getPartnersProperty(): Collection
     {
         return Partner::active()->select('name', 'id')->get();

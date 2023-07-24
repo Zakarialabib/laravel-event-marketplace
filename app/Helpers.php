@@ -86,6 +86,14 @@ class Helpers
             ->get();
     }
 
+    public function getActiveFeaturedBlogs()
+    {
+        return Blog::active()->where('featured', true)
+        ->inRandomOrder()
+        ->take(5)
+        ->get();
+    }
+
     public static function getActiveBlogs()
     {
         return Blog::active()

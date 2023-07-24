@@ -49,6 +49,7 @@ class Race extends Model implements HasMedia
         'end_registration',
         'registration_deadline',
         'number_of_days',
+        'elevation_gain',
         'number_of_racers',
         'price',
         'images',

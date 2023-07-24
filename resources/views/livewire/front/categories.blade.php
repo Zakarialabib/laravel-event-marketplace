@@ -121,7 +121,6 @@
             </div>
         </section>
         <section class="flex flex-wrap px-6 bg-gray-100">
-            <!-- Mobile sidebar -->
             <div x-show="showSidebar" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
                 x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0"
@@ -262,8 +261,8 @@
             <div class="xl:w-3/4 md:w-full py-6" x-data="{ loading: false }" wire:loading.class.delay="opacity-50">
                 <div class="mb-10 flex flex-wrap px-2 space-y-4" id="race-container">
                     @forelse ($races as $race)
-                        <div class="xl:w-1/2 md:w-full px-4">
-                            <x-race-card :race="$race" view="grid" />
+                        <div class="md:w-full px-4">
+                            <x-race-card :race="$race" view="list" />
                         </div>
                     @empty
                         <div class="w-full bg-gray-50 py-10 mb-10 px-4 shadow-xl">

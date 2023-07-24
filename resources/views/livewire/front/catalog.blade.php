@@ -130,7 +130,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-wrap px-6 bg-green-50 bg-opacity-80">
+        <div class="flex flex-wrap px-6 py-10 bg-gray-100 bg-opacity-80">
             <!-- Mobile sidebar -->
             <div x-show="showSidebar" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"

@@ -72,6 +72,12 @@
                         wire:model.lazy="race.number_of_days" required />
                     <x-input-error :messages="$errors->get('number_of_days')" for="number_of_days" class="mt-2" />
                 </div>
+                <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                    <x-label for="elevation_gain" :value="__('Elevation gain')" required />
+                    <x-input id="elevation_gain" class="block mt-1 w-full" type="text" name="elevation_gain"
+                        wire:model="race.elevation_gain" required />
+                    <x-input-error :messages="$errors->get('elevation_gain')" for="elevation_gain" class="mt-2" />
+                </div>
                 <div class="px-3 mb-2">
                     <x-label for="number_of_racers" :value="__('Number of Racers')" required />
                     <x-input id="number_of_racers" class="block mt-1 w-full" type="number" name="number_of_racers"

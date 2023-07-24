@@ -48,6 +48,7 @@ class Edit extends Component
         'race.price'                 => ['required', 'numeric', 'max:2147483647'],
         'race.race_location_id'      => ['required', 'integer'],
         'race.category_id'           => ['required', 'integer'],
+        'race.elevation_gain'           => ['nullable', 'string'],
         'race.number_of_days'        => ['required', 'numeric', 'max:2147483647'],
         'race.registration_deadline' => ['required', 'date'],
         'race.start_registration'    => ['required', 'date'],
@@ -147,27 +148,12 @@ class Edit extends Component
 
     public function addCourse()
     {
-        $categoryName = '';
-
-        switch ($this->race->category->name) {
-            case 'triathlon':
-                $categoryName = 'Triathlon';
-                break;
-            case 'running':
-                $categoryName = 'Running';
-
-                break;
-            case 'swimming':
-                $categoryName = 'Swimming';
-
-                break;
-            case 'cycling':
-                $categoryName = 'Cycling';
-
-                break;
-            default:
-                break;
-        }
+        $this->courses[] = [
+            'name' => '',
+            'distance' => 0,
+            'type' => '',
+            'content' => '',
+        ];
     }
 
     public function removeCourse($index)

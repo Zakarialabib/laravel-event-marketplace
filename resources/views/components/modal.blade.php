@@ -3,11 +3,8 @@
 <div x-data="{
     show: @entangle($attributes->wire('model')),
     focusables() {
-        // All focusable element types...
         let selector = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
-
         return [...$el.querySelectorAll(selector)]
-            // All non-disabled elements...
             .filter(el => !el.hasAttribute('disabled'))
     },
     firstFocusable() { return this.focusables()[0] },
