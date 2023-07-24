@@ -42,7 +42,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Blog',
                 'type' => 'link',
                 'label' => 'Blog',
-                'url' => 'blog',
+                'url' => 'resources',
                 'placement' => 'header',
                 'parent_id' => null,    
                 'new_window' => false,
