@@ -10,7 +10,7 @@ use App\Models\BlogCategory;
 use App\Models\Section;
 use App\Enums\PageType;
 
-class BlogSHow extends Component
+class BlogShow extends Component
 {
     public $blog;
 
