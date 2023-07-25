@@ -89,50 +89,114 @@
             <div class="col-span-full">
                 <!-- Health-Related Checkboxes -->
                 <label class="font-bold font-heading text-gray-600">{{ __('Health Related Information') }}</label>
-                <div class="flex flex-wrap gap-4">
-                    <div class="">
-                        <label for="hasMedicalHistory">{{ __('Has Medical History') }}</label>
-                        <input wire:model.defer="race.hasMedicalHistory" type="checkbox" name="medicalHistory"
-                            x-on:click="$set('race.showMedicalHistoryInput', $event.target.checked)">
-                        <span class="ml-2">{{ __('Yes') }}</span>
+
+                <div class="w-full flex flex-col py-6 justify-between gap-4" x-data="{ showhealthInfo: false, showMedicalHistory: false, showTakingMedications: false, showMedicationAllergies: false, showSensitivities: false }">
+                    <div class="relative flex flex-wrap gap-6 items-center">
+                        <div
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                                type="checkbox" id="showMedicalHistory"
+                                x-on:click="showMedicalHistory = !showMedicalHistory" />
+                            <label for="showMedicalHistory"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
+                            </label>
+                        </div>
+                        <p class="font-bold font-heading text-gray-800">
+                            {{ __('has Medical History') }}
+                        </p>
+
+                        <div x-show="showMedicalHistory" x-transition:enter="transition ease-out duration-200"
+                            class="w-full" x-transition:leave="transition ease-in duration-150" x-cloak>
+                            <x-input wire:model.defer="race.hasMedicalHistory" type="text" id="hasMedicalHistory"
+                                class="w-full block" name="hasMedicalHistory" />
+                        </div>
                     </div>
-                    <div class="hidden" x-show="race.showMedicalHistoryInput">
-                        <x-label for="medicalHistoryDetails" :value="__('Medical History Details')" />
-                        <x-input wire:model.defer="race.medicalHistoryDetails" type="text"
-                            id="medicalHistoryDetails" name="medicalHistoryDetails" />
-                        <x-input-error :messages="$errors->get('race.medicalHistoryDetails')" for="race.medicalHistoryDetails" class="mt-2" />
+
+                    <div class="relative flex flex-wrap gap-6 items-center">
+                        <div
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                                type="checkbox" id="showTakingMedications"
+                                x-on:click="showTakingMedications = !showTakingMedications" />
+                            <label for="showTakingMedications"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                        </div>
+                        <p class="font-bold font-heading text-gray-800">
+                            {{ __('is Taking Medications') }}
+                        </p>
+                        <div x-show="showTakingMedications" x-transition:enter="transition ease-out duration-200"
+                            x-transition:leave="transition ease-in duration-150" class="w-full" class="bg-white py-5"
+                            x-cloak>
+                            <x-input wire:model.defer="race.isTakingMedications" type="text" class="w-full block"
+                                id="isTakingMedications" name="isTakingMedications" />
+                        </div>
+                    </div>
+
+                    <div class="relative flex flex-wrap gap-6 items-center">
+                        <div
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                                type="checkbox" id="showMedicationAllergies"
+                                x-on:click="showMedicationAllergies = !showMedicationAllergies" />
+                            <label for="showMedicationAllergies"
+                                class="toggle-label block overflow-hidden font-bold font-heading text-gray-800 h-6 rounded-full bg-gray-300 cursor-pointer">
+                            </label>
+                        </div>
+                        <p class="font-bold font-heading text-gray-800">
+                            {{ __('has Medication Allergies') }}
+                        </p>
+                        <div x-show="showMedicationAllergies" x-transition:enter="transition ease-out duration-200"
+                            class="w-full" x-transition:leave="transition ease-in duration-150" x-cloak>
+                            <x-input wire:model.defer="race.hasMedicationAllergies" type="text"
+                                class="w-full block" id="hasMedicationAllergies" name="hasMedicationAllergies" />
+                        </div>
+                    </div>
+
+                    <div class="relative flex flex-wrap gap-6 items-center">
+                        <div
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                                type="checkbox" id="showSensitivities"
+                                x-on:click="showSensitivities = !showSensitivities" />
+                            <label for="showSensitivities"
+                                class="toggle-label block overflow-hidden font-bold font-heading text-gray-800 h-6 rounded-full bg-gray-300 cursor-pointer">
+                            </label>
+                        </div>
+                        <p class="font-bold font-heading text-gray-800">
+                            {{ __('has Sensitivities') }}
+                        </p>
+                        <div x-show="showSensitivities" x-transition:enter="transition ease-out duration-200"
+                            x-transition:leave="transition ease-in duration-150" x-cloak class="w-full">
+                            <x-input wire:model.defer="race.hasSensitivities" type="text" id="hasSensitivities"
+                                class="w-full block" name="hasSensitivities" />
+                        </div>
+                    </div>
+                    <div class="relative flex flex-wrap gap-6 items-center">
+                        <div
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                                type="checkbox" id="showhealthInfo" x-on:click="showhealthInfo = !showhealthInfo" />
+                            <label for="showhealthInfo"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
+                            </label>
+                        </div>
+                        <p class="font-bold font-heading text-gray-800">
+                            {{ __('Health Informations') }}
+                        </p>
+                        <div x-show="showhealthInfo" x-transition:enter="transition ease-out duration-200"
+                            class="w-full" x-transition:leave="transition ease-in duration-150" x-cloak>
+                            <textarea wire:model.defer="race.healthInformation" name="healthInformation" id="healthInformation" rows="5"
+                                class="w-full border border-gray-200 rounded-md"></textarea>
+                            <x-input-error :messages="$errors->get('race.healthInformation')" for="race.healthInformation" class="mt-2" />
+                        </div>
                     </div>
                 </div>
 
-                <div class="w-full flex flex-wrap py-6 justify-between gap-4">
-                    <fieldset class="col-span-full">
-                        <legend class="font-bold font-heading text-gray-600">{{ __('Health Informations') }}
-                        </legend>
-                        <textarea wire:model.defer="race.healthInformation" name="" id="" rows="5"
-                            class="w-full border border-gray-200 rounded-md"></textarea>
-                        <x-input-error :messages="$errors->get('race.healthInformation')" for="race.healthInformation" class="mt-2" />
-                    </fieldset>
-                    <div class="">
-                        <label for=""
-                            class="font-bold font-heading text-gray-600">{{ __('has Medical History') }}</label>
-                        <input wire:model.defer="race.hasMedicalHistory" type="checkbox" />
-                    </div>
-                    <div class="">
-                        <label for=""
-                            class="font-bold font-heading text-gray-600">{{ __('is Taking Medications') }}</label>
-                        <input wire:model.defer="race.isTakingMedications" type="checkbox" />
-                    </div>
-                    <div class="">
-                        <label for=""
-                            class="font-bold font-heading text-gray-600">{{ __('has Medication Allergies') }}</label>
-                        <input wire:model.defer="race.hasMedicationAllergies" type="checkbox" />
-                    </div>
-                    <div class="">
-                        <label for=""
-                            class="font-bold font-heading text-gray-600">{{ __('has Sensitivities') }}</label>
-                        <input wire:model.defer="race.hasSensitivities" type="checkbox" />
-                    </div>
-                </div>
                 <!-- Additional services section -->
                 @if ($additionalServices)
                     <div class="w-full">
@@ -145,7 +209,7 @@
                 <div
                     class="w-full grid grid-cols-2 sm:grid sm:grid-cols-1 py-2 gap-2 justify-between sm:justify-center">
 
-                    <div class="flex items-center text-left py-2 mb-2">
+                    <div class="flex items-center text-center gap-4 py-2 mb-2">
                         <x-label for="newsletters" :value="__('Register into promotional email')" />
                         <x-input.checkbox wire:model.defer="newsletters" type="checkbox" />
                     </div>

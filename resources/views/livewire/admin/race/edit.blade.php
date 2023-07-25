@@ -101,9 +101,15 @@
                 <div class="col-span-full px-2">
                     <div class="space-y-4 flex flex-col items-center justify-center my-4">
                         @foreach ($courses as $index => $course)
-                            <div class="flex flex-row w-full items-center space-x-4">
+                            <div class="flex flex-row w-full items-center space-x-4" wire:key="course-{{ $index }}">
                                 <input type="text" wire:model.lazy="courses.{{ $index }}.name"
-                                    placeholder="{{__('Course name')}}" id="course_name" name="course_name"
+                                    placeholder="{{__('Course name')}}" id="course_name{{$index}}" name="course_name"
+                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                <input type="text" wire:model.lazy="courses.{{ $index }}.type"
+                                    placeholder="{{__('Course type')}}" id="course_type{{$index}}" name="course_type"
+                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                <input type="text" wire:model.lazy="courses.{{ $index }}.distance"
+                                    placeholder="{{__('Course distance')}}" id="distance{{$index}}" name="course_distance"
                                     class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                                 <textarea wire:model.lazy="courses.{{ $index }}.content" placeholder="{{__('Course Content')}}"
                                     class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"></textarea>

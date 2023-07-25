@@ -139,7 +139,7 @@
             </ul>
             @if ($race->course)
                 <ul
-                    class="flex gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
+                    class="flex flex-wrap gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
                     @foreach ($race->course as $key => $course)
                         <li class="text-base inline-flex md:text-lg">
                             <span
@@ -181,20 +181,27 @@
         </a>
 
         <div class="w-full lg:w-1/2 relative">
-            <div class="w-full items-center flex-col justify-between my-20 px-12">
-                <div class="flex flex-col">
-                    <p class="text-gray-500 text-sm font-bold mb-3">
+            <div class="w-full items-center flex-col justify-between my-10 px-12">
+                <ul class="flex flex-col">
+                    <li class="text-gray-500 text-sm font-bold mb-3">
                         {{ $race->location->name }}
-                    </p>
-                    <a href="{{ route('front.raceDetails', $race->slug) }}"
+                    </li>
+                    <li href="{{ route('front.raceDetails', $race->slug) }}"
                         class="text-neutral-700 text-4xl font-semibold mb-3">
                         {{ $race->name }}
-                    </A>
+                    </li>
 
-                    <p class="text-green-600 text-sm font-bold mb-3 uppercase">
+                    <li class="text-green-600 text-sm font-bold mb-3 uppercase">
                         {{ $race->category->name }}
-                    </p>
-                </div>
+                    </li>
+                    <li class="flex items-center my-4 ">
+                        <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                        <span class="text-base md:text-lg capitalize">{{ $race->number_of_days }}
+                            {{ __('days') }}</span>
+                    </li>
+                </ul>
                 <div class="scroll-smooth">
                     <a href="{{ route('front.raceDetails', $race->slug) }}"
                         class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-3 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase items-center justify-center px-8 z-[1]">
@@ -217,32 +224,26 @@
             </div>
 
             @if ($race->course)
-                @php
-                    $course = json_decode($race->course, true);
-                @endphp
-                @if ($race->category->name === 'Running')
-                    <!-- Display running distance -->
-                    <div class="w-full px-12 pb-6 self-end">
-                        <p class="text-lg font-bold uppercase">
-                            Distance: {{ $course['distance'] }} km
-                        </p>
-                    </div>
-                @elseif ($race->category->name === 'Trail Running')
-                    <!-- Display trail details (distance, elevation gain, number of days) -->
-                    <div class="w-full px-12 pb-6 self-end">
-                        <p class="text-lg font-bold uppercase">
-                            {{ __('Distance') }}: {{ $course['distance'] }} km
-                        </p>
+                <div class="w-full px-12 pb-6 self-end">
+                    <ul
+                        class="flex flex-wrap gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
+                        @foreach ($race->course as $key => $course)
+                            <li class="text-base inline-flex md:text-lg">
+                                <p
+                                    class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
+                                    {{ $course['name'] }} - {{ $course['distance'] }} km - {{ $course['type'] }}
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                    @if ($race->category->name === 'Trail Running')
                         <p class="text-lg font-bold uppercase">
                             {{ __('Elevation Gain') }}: {{ $race->elevation_gain }} m
                         </p>
-                        <p class="text-lg font-bold uppercase">
-                            {{ __('Number of Days') }}: {{ $race->number_of_days }}
-                        </p>
-                    </div>
-                @elseif ($race->category->name === 'Triathlon')
-                    <!-- Display triathlon details (swimming, cycling, running) -->
-                    <div class="w-full px-12 pb-6 self-end">
+                    @endif
+                </div>
+                {{-- 
+                    @elseif ($race->category->name === 'Triathlon')
                         <p class="text-lg font-bold uppercase">
                             {{ __('Swimming') }}: {{ $course['swim']['distance'] }} km
                             ({{ $course['swim']['nature'] }})
@@ -255,6 +256,21 @@
                         </p>
                     </div>
                 @endif
+                    @foreach ($race->course as $key => $course)
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Name') }}: {{ $course['name'] }}
+                        </p>
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Type') }}: {{ $course['type'] }}
+                        </p>
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Content') }}: {{ $course['content'] }}
+                        </p>
+                        <p class="text-lg font-bold uppercase">
+                            {{ __('Distance') }}: 
+                        </p>
+                    @endforeach
+                      --}}
             @endif
         </div>
     </div>

@@ -44,19 +44,19 @@ class RaceSeeder extends Seeder
                     ['name' => 'XYZ Corporation', 'image' => 'https://example.com/images/xyz.png', 'link' => 'https://www.xyz.com'],
                 ]),
                 'course' => json_encode([
-                    'swim' => [
+                    'name' => [
                         'name' => 'Swim',
                         'distance' => 1.5, // Swimming distance in km
                         'nature' => 'Ocean', // Nature of the swimming course
                         'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                     ],
-                    'bike' => [
+                    'name' => [
                         'name' => 'Bike',
                         'distance' => 40, // Cycling distance in km
                         'type' => 'Roulant', // Type of cycling course
                         'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                     ],
-                    'run' => [
+                    'name' => [
                         'name' => 'Run',
                         'distance' => 10, // Running distance in km
                         'type' => 'Valloné', // Type of running course

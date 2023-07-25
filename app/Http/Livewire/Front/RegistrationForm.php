@@ -37,6 +37,11 @@ class RegistrationForm extends Component
     public $existingSubmission;
     public $newsletters = false;
 
+    public $showMedicalHistory = false;
+    public $showTakingMedications = false;
+    public $showMedicationAllergies = false;
+    public $showSensitivities = false;
+
     protected $rules = [
         'race.numberOfParticipants'        => 'required|integer',
         'race.email'                       => 'required|email:rfc,dns,spoof,filter|unique:participants,email',

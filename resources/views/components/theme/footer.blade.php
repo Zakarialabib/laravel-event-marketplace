@@ -1,8 +1,8 @@
-<footer class="w-full mt-auto divide-y-2 bg-white border-black border-t-2">
+<footer class="w-full mt-auto divide-y-2 bg-green-50 border-black border-t-2">
     <div class="px-6">
-        <div class="grid gap-y-10 gap-x-4 py-14 sm:grid-cols-3 lg:grid-cols-5 lg:py-[100px]">
+        <div class="grid gap-y-8 gap-x-4 py-14 sm:grid-cols-3 lg:grid-cols-5 lg:py-16">
             <div class="relative">
-                <img src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy" alt="{{ Helpers::settings('site_name') }}" class="h-7">
+                <img src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy" alt="{{ Helpers::settings('site_name') }}" class="h-24 mix-blend-darken">
                 <ul class="mt-12 flex items-center gap-8">
                     <li>
                         <a href="{{ Helpers::settings('social_facebook') }}">

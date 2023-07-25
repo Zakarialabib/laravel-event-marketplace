@@ -28,7 +28,7 @@
         </section>
 
         @if (count(Helpers::getActiveFeaturedBlogs()) > 0)
-            <div class="relative py-6 mx-auto px-6 bg-gray-100 ">
+            <div class="relative py-6 mx-auto px-6 bg-green-50 ">
                 <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
                     {{('Ressources')}}
                 </h2>

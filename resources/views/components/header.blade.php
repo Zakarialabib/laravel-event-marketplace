@@ -31,7 +31,7 @@
                         <div>
                             <a href="{{ route('front.index') }}" class="text-sky-500 cursor-pointer">
                                 <img src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy"
-                                    class="h-16 align-middle w-40" alt="{{ Helpers::settings('site_title') }}">
+                                    class="h-16 align-middle w-auto" alt="{{ Helpers::settings('site_title') }}">
                             </a>
                         </div>
                         <div class="flex flex-grow justify-center">

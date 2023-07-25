@@ -9,6 +9,7 @@ use App\Models\ProductCategory;
 use App\Models\Currency;
 use App\Models\Page;
 use App\Models\Settings;
+use App\Models\Blog;
 use App\Models\RaceLocation;
 use App\Models\Menu;
 use App\Models\Subcategory;
@@ -86,7 +87,7 @@ class Helpers
             ->get();
     }
 
-    public function getActiveFeaturedBlogs()
+    public static function getActiveFeaturedBlogs()
     {
         return Blog::active()->where('featured', true)
         ->inRandomOrder()

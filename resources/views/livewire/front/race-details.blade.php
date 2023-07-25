@@ -72,49 +72,49 @@
             </div>
         </div>
     </section>
-    <section class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '' }">
+    <section class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '0' }">
         <div class="md:hidden sm:block w-full h-auto max-w-screen-xl mx-auto pb-5">
             <div
                 class="overflow-y-auto flex sm:justify-start lg:justify-center text-sm relative bg-gray-100 border-b-2 border-green-600">
-                <button
+                <a href="#tab0"
                     class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    type="button" @click="activeTab = 'tab0'"
+                    @click="activeTab = 'tab0'"
                     :class="{
                         'bg-green-700': activeTab === 'tab0',
                         'text-white': activeTab === 'tab0',
                         'hover:text-green-400': activeTab === 'tab0',
                     }">
                     {{ __('Overview') }}
-                </button>
-                <button
+                </a>
+                <a href="#tab1"
                     class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    type="button" @click="activeTab = 'tab1'"
+                    @click="activeTab = 'tab1'"
                     :class="{
                         'bg-green-700': activeTab === 'tab1',
                         'text-white': activeTab === 'tab1',
                         'hover:text-green-400': activeTab === 'tab1',
                     }">
                     {{ __('Details') }}
-                </button>
-                <button
+                </a>
+                <a href="#tab2"
                     class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    type="button" @click="activeTab = 'tab2'"
+                    @click="activeTab = 'tab2'"
                     :class="{
                         'bg-green-700': activeTab === 'tab2',
                         'text-white': activeTab === 'tab2',
                         'hover:text-green-400': activeTab === 'tab2',
                     }">
                     {{ __('Regitration') }}
-                </button>
+                </a>
             </div>
         </div>
 
-        <div class="w-full flex flex-wrap h-full py-6">
+        <div class="w-full flex flex-wrap h-full mt-2 pb-4 mx-2">
             <div class="xl:w-1/4 md:w-full px-4">
                 <div class="text-gray-700 break-words ">
                     <div class="my-6 ">
                         <div class="flex flex-col justify-start overflow-x-hidden ">
-                            <button type="button" @click="activeTab = 'tab0'"
+                            <a href="#tab0" @click="activeTab = 'tab0'"
                                 class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
                                 :class="{
                                     'bg-green-700': activeTab === 'tab0',
@@ -122,27 +122,27 @@
                                     'hover:text-green-400': activeTab === 'tab0',
                                 }">>
                                 {{ __('Overview') }}
-                            </button>
-                            <button
+                            </a>
+                            <a href="#tab1"
                                 class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5"
-                                type="button" @click="activeTab = 'tab1'"
+                                @click="activeTab = 'tab1'"
                                 :class="{
                                     'bg-green-700': activeTab === 'tab1',
                                     'text-white': activeTab === 'tab1',
                                     'hover:text-green-400': activeTab === 'tab1',
                                 }">
                                 {{ __('Course') }}
-                            </button>
-                            <button
+                            </a>
+                            <a href="#tab2"
                                 class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
-                                type="button" @click="activeTab = 'tab2'"
+                                @click="activeTab = 'tab2'"
                                 :class="{
                                     'bg-green-700': activeTab === 'tab2',
                                     'text-white': activeTab === 'tab2',
                                     'hover:text-green-400': activeTab === 'tab2',
                                 }">
                                 {{ __('Regitration') }}
-                            </button>
+                            </a>
 
                             <a href="#sponsors"
                                 class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5">
@@ -168,15 +168,14 @@
                 </p>
             </div>
             <div class="xl:w-3/4 md:w-full">
-                <!-- Tab content -->
-                <div x-show="activeTab === 'tab0'" class="w-full text-center mb-5">
+                <div x-show="activeTab === 'tab0'" id="tab0" class="w-full text-center mb-5 border px-4">
                     <h3
                         class="w-full text-center mb-6 pt-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold tracking-tight uppercase text-gray-800">
                         {{ __('Details') }}
                     </h3>
 
                     <div
-                        class="relative flex flex-col p-8 border shadow-sm rounded-2xl border-skin-base bg-skin-card/50 backdrop-blur-sm">
+                        class="relative flex flex-col p-8 shadow-sm rounded-2xl border-skin-base bg-skin-card/50 backdrop-blur-sm">
                         <p class="mb-7 text-base md:text-lg text-gray-400 font-medium">{!! $race->description !!}</p>
 
                         <div class="mb-4">
@@ -254,7 +253,7 @@
 
 
                 </div>
-                <div x-show="activeTab === 'tab1'">
+                <div x-show="activeTab === 'tab1'" id="tab1" class="w-full text-center mb-5 border px-4">
                     <div class="w-full text-center mb-5">
                         @if ($race->course)
                             <p class="w-full text-center py-10 mb-6 text-5xl font-bold uppercase text-gray-800">
@@ -289,39 +288,29 @@
                                         <div x-show="tabs === '{{ $index }}'">
                                             <div role="{{ $index }}" id="tab-panel-{{ $loop->index }}"
                                                 class="w-full mb-4 border border-green-400">
-                                                <div class="flex flex-col text-center justify-center py-10">
-                                                    @if ($race->category->name === 'Running')
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            Distance: {{ $race->distance }} km
-                                                        </p>
-                                                    @elseif ($race->category->name === 'Trail Running')
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            Distance: {{ $race->distance }} km
-                                                        </p>
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            Elevation Gain: {{ $race->elevation_gain }} m
-                                                        </p>
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            Number of Days: {{ $race->number_of_days }}
-                                                        </p>
-                                                    @elseif ($race->category->name === 'Triathlon')
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            Swimming: {{ $course['swim']['distance'] }} km
-                                                            ({{ $course['swim']['nature'] }})
-                                                        </p>
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            Cycling: {{ $course['bike']['distance'] }} km
-                                                            ({{ $course['bike']['type'] }})
-                                                        </p>
-                                                        <p class="leading-6 text-base md:text-lg py-10">
-                                                            Running: {{ $course['run']['distance'] }} km
-                                                            ({{ $course['run']['type'] }})
-                                                        </p>
+                                                <ul class="flex flex-col text-center justify-center py-10">
+                                                    <li class="leading-6 text-base md:text-lg">
+                                                        Type: ({{ $course['type'] }})
+                                                    </li>
+                                                    <li class="leading-6 text-base md:text-lg">
+                                                        Distance: {{ $course['distance'] }} km
+                                                    </li>
+                                                    @if ($race->category->name === 'Trail Running')
+                                                        <li class="leading-6 text-base md:text-lg">
+                                                            Elevation Gain: {{ $course['elevation_gain'] }} m
+                                                        </li>
                                                     @endif
-                                                    <div class="flex justify-center">
-                                                        <x-button secondary type="button">{{ __('download') }}
-                                                        </x-button>
-                                                    </div>
+                                                    <li class="leading-6 text-base md:text-lg">
+                                                        Number of Days: {{ $race->number_of_days }}
+                                                    </li>
+                                                    <li class="leading-6 px-6 py-4 text-base md:text-lg">
+                                                        <p>
+                                                            {{ $course['content'] }}
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <div class="flex justify-center py-4">
+                                                    <x-button secondary type="button">{{ __('download') }}</x-button>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,7 +324,7 @@
 
                     </div>
                 </div>
-                <div x-show="activeTab === 'tab2'">
+                <div x-show="activeTab === 'tab2'" id="tab2" class="w-full text-center mb-5 border px-4">
                     <div class="w-full text-center mb-5">
                         @php
                             $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
@@ -369,11 +358,11 @@
                             {{ __('Sponsors') }}
                         </p>
                         <div class="w-full flex-wrap mx-auto px-10">
-                            @foreach ($race->sponsors as $index => $sponsor)
+                            @foreach ($race->sponsors as $sponsor)
                                 <div class="w-1/4 basis-full float-left">
                                     <a href="{{ $sponsor['link'] }}" class="text-center">
-                                        <img src="$sponsor->getFirstMediaUrl('local_files')"
-                                            alt="{{ $sponsor['name'] }}" class="inline-block h-24 align-middle w-20">
+                                        <img src="" alt="{{ $sponsor['name'] }}"
+                                            class="inline-block h-24 align-middle w-20">
                                     </a>
                                 </div>
                             @endforeach
