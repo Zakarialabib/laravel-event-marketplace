@@ -10,7 +10,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ParticipantInfos extends Component
 {
-    
     use LivewireAlert;
     public $participant;
 

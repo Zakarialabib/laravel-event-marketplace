@@ -40,15 +40,15 @@ class SubscribeForm extends Component
     public function save()
     {
         $this->validate([
-            'name'    => 'required',
-            'phone'   => 'required',
+            'name'  => 'required',
+            'phone' => 'required',
             'email' => 'required',
         ]);
 
         $order = OrderForms::create([
             'name'    => $this->name,
             'phone'   => $this->phone,
-            'email' => $this->email,
+            'email'   => $this->email,
             'type'    => OrderForms::RACE_FORM,
             'status'  => OrderForms::STATUS_PENDING,
             'subject' => __('New request for ').$this->product->name,

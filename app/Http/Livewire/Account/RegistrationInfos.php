@@ -9,14 +9,12 @@ use App\Models\Registration;
 
 class RegistrationInfos extends Component
 {
-
     public $registrations;
 
     public function mount($participant)
     {
-        $this->registrations = Registration::where('participant_id' , $participant->id)->get();
+        $this->registrations = Registration::where('participant_id', $participant->id)->get();
     }
-
 
     public function render()
     {

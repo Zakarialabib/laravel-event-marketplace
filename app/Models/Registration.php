@@ -27,8 +27,8 @@ class Registration extends Model
         'status',
     ];
 
-   public $orderable = self::ATTRIBUTES;
-   public $filterable = self::ATTRIBUTES;
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'participant_id',
@@ -71,5 +71,4 @@ class Registration extends Model
     {
         return $query->where('participant_id', $participantId);
     }
-
 }

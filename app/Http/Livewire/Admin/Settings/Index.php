@@ -207,7 +207,6 @@ class Index extends Component
         if ($name !== null) {
             Storage::delete('logo/'.$name);
         }
-        
 
         return Storage::disk('local_files')->put('logo', $filename, 'public');
     }

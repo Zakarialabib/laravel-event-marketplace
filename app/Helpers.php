@@ -90,9 +90,9 @@ class Helpers
     public static function getActiveFeaturedBlogs()
     {
         return Blog::active()->where('featured', true)
-        ->inRandomOrder()
-        ->take(5)
-        ->get();
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
     }
 
     public static function getActiveBlogs()

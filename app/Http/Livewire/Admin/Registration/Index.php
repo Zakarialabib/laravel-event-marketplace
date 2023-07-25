@@ -26,8 +26,8 @@ class Index extends Component
     public $selectedRace;
 
     protected $queryString = [
-        'search' => ['except' => ''],
-        'sortBy' => ['except' => 'id'],
+        'search'        => ['except' => ''],
+        'sortBy'        => ['except' => 'id'],
         'sortDirection' => ['except' => 'desc'],
     ];
 
@@ -51,7 +51,6 @@ class Index extends Component
         $this->selected = [];
     }
 
-   
     public function mount()
     {
         $this->sortBy = 'id';
@@ -59,7 +58,7 @@ class Index extends Component
         $this->perPage = 25;
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Registration())->orderable;
-        $this->activeTab = $this->activeTab ?? 'all';
+        $this->activeTab ??= 'all';
     }
 
     public function showAllRegistrations()
@@ -92,8 +91,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = Registration::advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -111,5 +110,4 @@ class Index extends Component
         return view('livewire.admin.registration.index', compact('registrations', 'racesWithRegistrations'))
             ->extends('layouts.dashboard');
     }
-
 }

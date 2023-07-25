@@ -6,7 +6,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
-use App\Enums\Status;
 
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\Models\Media as BaseMedia;
@@ -27,5 +26,4 @@ class Media extends BaseMedia
             }
         });
     }
-
 }

@@ -45,22 +45,22 @@ class RaceSeeder extends Seeder
                 ]),
                 'course' => json_encode([
                     'name' => [
-                        'name' => 'Swim',
+                        'name'     => 'Swim',
                         'distance' => 1.5, // Swimming distance in km
-                        'nature' => 'Ocean', // Nature of the swimming course
-                        'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
+                        'nature'   => 'Ocean', // Nature of the swimming course
+                        'content'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                     ],
                     'name' => [
-                        'name' => 'Bike',
+                        'name'     => 'Bike',
                         'distance' => 40, // Cycling distance in km
-                        'type' => 'Roulant', // Type of cycling course
-                        'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
+                        'type'     => 'Roulant', // Type of cycling course
+                        'content'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                     ],
                     'name' => [
-                        'name' => 'Run',
+                        'name'     => 'Run',
                         'distance' => 10, // Running distance in km
-                        'type' => 'Valloné', // Type of running course
-                        'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
+                        'type'     => 'Valloné', // Type of running course
+                        'content'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                     ],
                 ]),
                 'features' => json_encode([
@@ -124,6 +124,5 @@ class RaceSeeder extends Seeder
             ],
             // Add more races if needed...
         ]);
-        
     }
 }

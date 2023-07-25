@@ -49,7 +49,7 @@ class OrderForms extends Model
     public const HOME_FORM = 1;
 
     public const PRODUCT_FORM = 2;
-    
+
     public const SUBSCRIBE_FORM = 2;
 
     public $table = 'orderforms';

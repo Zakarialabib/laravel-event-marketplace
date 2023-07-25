@@ -48,7 +48,7 @@ class Edit extends Component
         'race.price'                 => ['required', 'numeric', 'max:2147483647'],
         'race.race_location_id'      => ['required', 'integer'],
         'race.category_id'           => ['required', 'integer'],
-        'race.elevation_gain'           => ['nullable', 'string'],
+        'race.elevation_gain'        => ['nullable', 'string'],
         'race.number_of_days'        => ['required', 'numeric', 'max:2147483647'],
         'race.registration_deadline' => ['required', 'date'],
         'race.start_registration'    => ['required', 'date'],
@@ -149,10 +149,10 @@ class Edit extends Component
     public function addCourse()
     {
         $this->courses[] = [
-            'name' => '',
+            'name'     => '',
             'distance' => 0,
-            'type' => '',
-            'content' => '',
+            'type'     => '',
+            'content'  => '',
         ];
     }
 
@@ -226,7 +226,7 @@ class Edit extends Component
     {
         $this->validate();
 
-        if (!empty($this->images)) {
+        if ( ! empty($this->images)) {
             foreach ($this->images as $image) {
                 $this->race->addMedia($image)->toMediaCollection('local_files');
             }

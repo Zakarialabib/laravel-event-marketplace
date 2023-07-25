@@ -93,9 +93,7 @@ class RegistrationForm extends Component
             $participant = Pipeline::send($this->race)
                 ->through([
                     function ($race, $next) {
-
                         if ( ! Auth::check()) {
-
                             $random = Str::random(10);
                             $password = bcrypt($random);
 
@@ -108,7 +106,6 @@ class RegistrationForm extends Component
                             $user->save();
 
                             $user->assignRole(Role::findByName('client'));
-
                         } else {
                             $user = Auth::user();
                         }
@@ -157,7 +154,6 @@ class RegistrationForm extends Component
             $user = Pipeline::send($participant)
                 ->through([
                     function ($participant, $next) {
-
                         if ($this->newsletters) {
                             $existingSubscriber = Subscriber::where('email', $participant->email)->first();
 

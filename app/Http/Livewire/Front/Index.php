@@ -7,8 +7,6 @@ namespace App\Http\Livewire\Front;
 use App\Models\FeaturedBanner;
 use App\Models\Product;
 use App\Models\Race;
-use App\Models\RaceLocation;
-use App\Models\Sponsor;
 use App\Models\Section;
 use App\Models\Slider;
 use Illuminate\Support\Collection;
