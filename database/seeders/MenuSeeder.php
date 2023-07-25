@@ -32,7 +32,7 @@ class MenuSeeder extends Seeder
                 'name' => 'About',
                 'type' => 'link',
                 'label' => 'About',
-                'url' => 'about',
+                'url' => 'a-propos',
                 'placement' => 'header',
                 'parent_id' => null,
                 'new_window' => false,
