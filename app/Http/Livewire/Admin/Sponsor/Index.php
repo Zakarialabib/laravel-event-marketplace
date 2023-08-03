@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Sponsor;
 
 use App\Http\Livewire\WithSorting;
-use App\Imports\PartnersImport;
 use App\Models\Sponsor;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,7 +13,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -27,7 +25,7 @@ class Index extends Component
 
     public $listeners = [
         'refreshIndex' => '$refresh',
-        'showModal', 
+        'showModal',
         'delete',
     ];
 
@@ -153,5 +151,4 @@ class Index extends Component
 
         $this->alert('success', __('Sponsor deleted successfully.'));
     }
-
 }

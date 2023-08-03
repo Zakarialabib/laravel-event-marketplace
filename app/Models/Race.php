@@ -12,7 +12,6 @@ use App\Enums\RaceStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\HasGlobalDate;
 use App\Traits\HasUuid;
 
 class Race extends Model implements HasMedia
