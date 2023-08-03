@@ -184,7 +184,7 @@
                         <h3 class="text-xl font-bold font-heading">{{ __('Filters') }}</h3>
                         <select
                             class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
-                            id="sortBy" wire:model.lazy="sorting">
+                            id="sortBy" wire:model="sorting">
                             <option disabled>{{ __('Choose filters') }}</option>
                             @foreach ($sortingOptions as $value => $label)
                                 <option value="{{ $value }}">{{ $label }}</option>
@@ -199,7 +199,7 @@
                                 class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                                 <input type="checkbox" name="status" id="status"
                                     class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-                                    wire:model.lazy="status">
+                                    wire:model="status">
                                 <label for="status"
                                     class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                             </div>

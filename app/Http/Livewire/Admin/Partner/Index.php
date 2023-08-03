@@ -25,15 +25,13 @@ class Index extends Component
 
     public $listeners = [
         'refreshIndex' => '$refresh',
-        'showModal', 'importModal',
+        'showModal',
         'delete',
     ];
 
     public $deleteModal = false;
 
     public $showModal = false;
-
-    public $importModal = false;
 
     public int $perPage;
 
@@ -159,10 +157,5 @@ class Index extends Component
         $this->alert('success', __('Partner deleted successfully.'));
     }
 
-    public function importModal()
-    {
-        // abort_if(Gate::denies('partner_create'), 403);
-
-        $this->importModal = true;
-    }
+   
 }

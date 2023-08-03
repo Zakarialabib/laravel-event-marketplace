@@ -60,8 +60,8 @@ class Create extends Component
         'race.number_of_racers'      => ['required', 'numeric', 'max:2147483647'],
         'description'                => ['nullable'],
 
-        // 'race.meta_title'       => ['nullable', 'string', 'max:255'],
-        // 'race.meta_description' => ['nullable', 'string', 'max:255'],
+         'race.meta_title'       => ['nullable', 'string', 'max:255'],
+         'race.meta_description' => ['nullable', 'string', 'max:255'],
 
         'social_media.*.name'  => ['nullable', 'string'],
         'social_media.*.value' => ['nullable', 'string'],
@@ -91,17 +91,8 @@ class Create extends Component
         $this->description = $value;
     }
 
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
     public function createModal()
     {
-        $this->resetErrorBag();
-
-        $this->resetValidation();
-
         $this->race = new Race();
 
         $this->createModal = true;
@@ -148,7 +139,7 @@ class Create extends Component
     {
         $this->courses[] = [
             'name'     => '',
-            'distance' => 0,
+            'distance' => '',
             'type'     => '',
             'content'  => '',
         ];

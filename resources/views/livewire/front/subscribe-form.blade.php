@@ -25,19 +25,19 @@
 
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('FullName') }}</label>
-                <input wire:model.lazy="name"
+                <input wire:model="name"
                     class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
                     type="text">
             </div>
             <div class="w-full md:w-1/2 pr-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Phone') }}</label>
-                <input wire:model.lazy="phone"
+                <input wire:model="phone"
                     class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
-                    type="number">
+                    type="text">
             </div>
             <div class="w-full">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Email') }}</label>
-                <input wire:model.lazy="email" 
+                <input wire:model="email" 
                     class="block w-full mt-4 py-2 px-4 bg-white border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md"
                     type="email">
             </div>

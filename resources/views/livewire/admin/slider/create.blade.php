@@ -15,14 +15,14 @@
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="title" :value="__('Title')" />
                         <x-input id="title" class="block mt-1 w-full" type="text" name="title"
-                            wire:model.lazy="slider.title" />
+                            wire:model="slider.title" />
                         <x-input-error :messages="$errors->get('slider.title')" for="slider.title" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="language_id" :value="__('Language')" required />
                         <select
                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="language_id" name="language_id" wire:model.lazy="slider.language_id">
+                            id="language_id" name="language_id" wire:model="slider.language_id">
                             @foreach ($this->languages as $language)
                                 <option value="{{ $language->id }}">{{ $language->name }}</option>
                             @endforeach
@@ -32,41 +32,41 @@
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="subtitle" :value="__('Subtitle')" />
                         <x-input id="subtitle" class="block mt-1 w-full" type="text" name="subtitle"
-                            wire:model.lazy="slider.subtitle" />
+                            wire:model="slider.subtitle" />
                         <x-input-error :messages="$errors->get('slider.subtitle')" for="slider.subtitle" class="mt-2" />
                     </div>
                    
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="bg_color" :value="__('Background Color')" />
                         <x-input id="bg_color" class="block mt-1 w-full" type="color" name="bg_color"
-                            wire:model.lazy="slider.bg_color" />
+                            wire:model="slider.bg_color" />
                         <x-input-error :messages="$errors->get('slider.bg_color')" for="slider.bg_color" class="mt-2" />
                     </div>
 
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="link" :value="__('Link')" />
                         <x-input id="link" class="block mt-1 w-full" type="text" name="link"
-                            wire:model.lazy="slider.link" />
+                            wire:model="slider.link" />
                         <x-input-error :messages="$errors->get('slider.link')" for="slider.link" class="mt-2" />
                     </div>
                    
                     {{-- <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="label" :value="__('Label')" />
                         <x-input id="label" class="block mt-1 w-full" type="text" name="label"
-                            wire:model.lazy="slider.label" />
+                            wire:model="slider.label" />
                         <x-input-error :messages="$errors->get('slider.label')" for="slider.link" class="mt-2" />
                     </div> --}}
                     
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="video" :value="__('Embeded Video')" />
                         <x-input id="embeded_video" class="block mt-1 w-full" type="text" name="embeded_video"
-                            wire:model.lazy="slider.embeded_video" />
+                            wire:model="slider.embeded_video" />
                         <x-input-error :messages="$errors->get('slider.embeded_video')" for="slider.link" class="mt-2" />
                     </div>
 
                     <div class="w-full px-2">
                         <x-label for="description" :value="__('Description')" />
-                        <x-trix name="sliderDescription" wire:model.lazy="description" id="sliderDescription" />
+                        <x-trix name="sliderDescription" wire:model="description" id="sliderDescription" />
                         <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
                    

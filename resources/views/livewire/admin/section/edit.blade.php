@@ -38,46 +38,46 @@
 
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="title" :value="__('Title')" />
-                        <x-input type="text" name="title" wire:model.lazy="section.title" />
+                        <x-input type="text" name="title" wire:model="section.title" />
                         <x-input-error :messages="$errors->get('section.title')" for="section.title" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="featured_title" :value="__('Featured title')" />
-                        <x-input type="text" name="featured_title" wire:model.lazy="section.featured_title"
+                        <x-input type="text" name="featured_title" wire:model="section.featured_title"
                             placeholder="{{ __('featured_title') }}" value="{{ old('featured_title') }}" />
                         <x-input-error :messages="$errors->get('section.featured_title')" for="section.featured_title" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="subtitle" :value="__('Subtitle')" />
-                        <x-input type="text" name="subtitle" wire:model.lazy="section.subtitle"
+                        <x-input type="text" name="subtitle" wire:model="section.subtitle"
                             placeholder="{{ __('Subtitle') }}" value="{{ old('subtitle') }}" />
                         <x-input-error :messages="$errors->get('section.subtitle')" for="section.subtitle" class="mt-2" />
                     </div>
                    
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="bg_color" :value="__('Background color')" />
-                        <input wire:model.lazy="section.bg_color" id="bg_color" type="color">
+                        <input wire:model="section.bg_color" id="bg_color" type="color">
                         <x-input-error :messages="$errors->get('section.bg_color')" for="section.bg_color" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="label" :value="__('Label')" />
-                        <x-input wire:model.lazy="section.label" id="label" type="text" />
+                        <x-input wire:model="section.label" id="label" type="text" />
                         <x-input-error :messages="$errors->get('section.label')" for="section.label" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="link" :value="__('Link')" />
-                        <x-input wire:model.lazy="section.link" id="link" type="url" />
+                        <x-input wire:model="section.link" id="link" type="url" />
                         <x-input-error :messages="$errors->get('section.link')" for="section.link" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="position" :value="__('Position')" />
-                        <x-input wire:model.lazy="section.position" id="position" type="number" />
+                        <x-input wire:model="section.position" id="position" type="number" />
                         <x-input-error :messages="$errors->get('section.position')" for="section.position" class="mt-2" />
                     </div>
 
                     <div class="w-full px-2">
                         <x-label for="description" :value="__('Description')" />
-                        <x-trix name="description" wire:model.lazy="description" />
+                        <x-trix name="description" wire:model="description" />
                         <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
                     <div class="w-full px-2">

@@ -27,15 +27,13 @@ class Index extends Component
 
     public $listeners = [
         'refreshIndex' => '$refresh',
-        'showModal', 'importModal',
+        'showModal', 
         'delete',
     ];
 
     public $deleteModal = false;
 
     public $showModal = false;
-
-    public $importModal = false;
 
     public int $perPage;
 
@@ -156,23 +154,4 @@ class Index extends Component
         $this->alert('success', __('Sponsor deleted successfully.'));
     }
 
-    public function importModal()
-    {
-        // abort_if(Gate::denies('sponsor_create'), 403);
-
-        $this->importModal = true;
-    }
-
-    public function import()
-    {
-        // abort_if(Gate::denies('sponsor_create'), 403);
-
-        $this->validate([
-            'file' => 'required|mimes:xlsx',
-        ]);
-
-        Excel::import(new PartnersImport(), $this->file);
-
-        $this->alert('success', __('Sponsor imported successfully.'));
-    }
 }

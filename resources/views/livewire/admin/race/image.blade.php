@@ -24,8 +24,8 @@
 
                     <div class="w-full px-4 my-2">
                         <x-label for="image" :value="__('Race Image')" />
-                        <x-media-upload title="{{ __('Race Image') }}" name="images" wire:model="images" :file="$images"
-                            multiple types="PNG / JPEG / WEBP" fileTypes="image/*" />
+                        <x-media-upload title="{{ __('Race Image') }}" name="images" wire:model="images"
+                            :file="$images" multiple types="PNG / JPEG / WEBP" fileTypes="image/*" />
                     </div>
 
                     <div class="w-full px-4 my-4">

@@ -8,7 +8,7 @@
             <div class="w-full md:w-1/2 px-2">
                 <label class="font-bold font-heading text-gray-600"
                     for="">{{ __('Email') }}</label>
-                <input wire:model.lazy="user.email" type="text"
+                <input wire:model="user.email" type="text"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
                 <x-input-error :messages="$errors->get('email')" for="email" class="mt-2" />
             </div>
@@ -18,7 +18,7 @@
                     for="">{{ __('Password') }}</label>
                 <div class="relative">
                     <input placeholder="" :type="show ? 'password' : 'text'" name="password" required
-                        wire:model.lazy="user.password"
+                        wire:model="user.password"
                         class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
 

@@ -25,7 +25,7 @@
             <div class="basis-full px-3.5">
                 <div class="bg-white h-18 rounded-xl px-10 relative z-[1] drop-shadow-xl">
                     <div style="background-image: url(&quot;https://themebeyond.com/html/webeyond/eartfarm/img/bg/header_bg.jpg&quot;); background-size: cover;"
-                        class="bottom-0 h-18 left-0 opacity-[0.39] rounded-xl absolute top-0 w-[75.63rem] z-[-1]">
+                        class="bottom-0 h-18 left-0 opacity-[0.39] rounded-xl absolute top-0 w-full z-[-1]">
                     </div>
                     <div class="items-center flex flex-wrap justify-start">
                         <div>

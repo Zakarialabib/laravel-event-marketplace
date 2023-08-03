@@ -36,9 +36,8 @@
                 </div>
             </div>
             <div class="float-right">
-
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" wire:click="$emit('createModal')">
+                <x-button primary type="button" wire:click="$dispqtch('createModal')">
                     {{ __('Create Race') }}
                 </x-button>
             </div>
@@ -76,7 +75,7 @@
                 @endif
             </div>
             <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
-                <input type="text" wire:model.debounce.300ms="search"
+                <input type="text" wire:model="search"
                     class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                     placeholder="{{ __('Search') }}" />
             </div>
@@ -110,30 +109,27 @@
                 @forelse($races as $race)
                     <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $race->id }}">
                         <x-table.td>
-                            <input type="checkbox" wire:model="selected" 
-                                id="selected{{ $race->id }}"
+                            <input type="checkbox" wire:model="selected" id="selected{{ $race->id }}"
                                 wire:loading.attr="disabled">
                         </x-table.td>
                         <x-table.td>
                             @if ($race->hasMedia('local_files'))
-                                <button type="button" wire:click="$emit('imageModal', {{ $race->id }})"
-                                    wire:loading.attr="disabled">
                                     <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
                                         class="w-10 h-10 rounded-full object-cover">
-                                </button>
                             @else
-                                <p>{{__('No race image available')}}.</p>
+                                <p>{{ __('No race image available') }}.</p>
                             @endif
                         </x-table.td>
                         <x-table.td>
                             {{ $race->date }}
                         </x-table.td>
                         <x-table.td>
-                            <button type="button" wire:click="$emit('showModal',{{ $race->id }})"
+                            <button type="button" wire:click="$dispatch('showModal',{{ $race->id }})"
                                 wire:loading.attr="disabled">
                                 {{ Str::limit($race->name, 55) }}
                             </button>
-                            <a class="ml-2 text-blue-500" href="{{ route('front.raceDetails', $race->slug) }}" target="_blank">
+                            <a class="ml-2 text-blue-500" href="{{ route('front.raceDetails', $race->slug) }}"
+                                target="_blank">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <br>
@@ -147,7 +143,6 @@
                         </x-table.td>
 
                         <x-table.td>
-                            <livewire:toggle-button :model="$race" field="status" key="{{ $race->id }}" />
                         </x-table.td>
 
                         <x-table.td>
@@ -160,7 +155,7 @@
                                     </button>
                                 </x-slot>
                                 <x-slot name="content">
-                                    {{-- <x-dropdown-link wire:click="$emit('highlightModal',{{ $race->id }})"
+                                    {{-- <x-dropdown-link wire:click="$dispqtch('highlightModal',{{ $race->id }})"
                                             wire:loading.attr="disabled">
                                             <i class="fas fa-eye"></i>
                                             {{ __('Highlighted') }}
@@ -170,7 +165,7 @@
                                             <i class="fas fa-clone"></i>
                                             {{ __('Clone') }}
                                         </x-dropdown-link> --}}
-                                    <x-dropdown-link wire:click="$emit('showModal',{{ $race->id }})"
+                                    <x-dropdown-link wire:click="$dispqtch('showModal',{{ $race->id }})"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-eye"></i>
                                         {{ __('View') }}
@@ -180,7 +175,7 @@
                                         <i class="fas fa-edit"></i>
                                         {{ __('Edit') }}
                                     </x-dropdown-link>
-                                    <x-dropdown-link wire:click="$emit('deleteModal', {{ $race->id }})"
+                                    <x-dropdown-link wire:click="$dispqtch('deleteModal', {{ $race->id }})"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-trash-alt"></i>
                                         {{ __('Delete') }}
@@ -204,14 +199,8 @@
         </p>
 
         <!-- Show Modal -->
-        @livewire('admin.race.show', ['race' => $race])
-        <!-- End Show Modal -->
+      
 
-        <!-- Image Modal -->
-        @livewire('admin.race.image', ['race' => $race])
-        <!-- End Image Modal -->
-
-        @livewire('admin.race.create')
     </x-card>
 
     @push('scripts')
@@ -228,7 +217,7 @@
                         confirmButtonText: __("Yes, delete it!")
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.livewire.emit('delete', raceId)
+                            window.livewire.dispqtch('delete', raceId)
                         }
                     })
                 })

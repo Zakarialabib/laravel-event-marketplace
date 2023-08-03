@@ -26,7 +26,7 @@
                     <div
                         class="py-2 sm:px-3 flex flex-col justify-center gap-y-4 items-center font-heading font-medium">
                         <span>{{ __('Location') }}</span>
-                        <select name="location_id" id="location_id" wire:model.lazy="raceLocation_id"
+                        <select name="location_id" id="location_id" wire:model="raceLocation_id"
                             class="bg-transparent border border-gray-200 hover:border-gray-300 rounded-4xl">
                             <option value=""></option>
                             @foreach (Helpers::getActiveRaceLocations() as $location)
@@ -39,7 +39,7 @@
                     <div
                         class="py-2 sm:px-3 flex flex-col justify-center gap-y-4 items-center font-heading font-medium">
                         <span>{{ __('Race Type') }}</span>
-                        <select name="category_id" id="category_id" wire:model.lazy="category_id"
+                        <select name="category_id" id="category_id" wire:model="category_id"
                             class="bg-transparent border border-gray-200 hover:border-gray-300 rounded-4xl">
                             <option value=""></option>
                             @foreach (Helpers::getActiveCategories() as $category)
@@ -52,7 +52,7 @@
                     <div
                         class="py-2 sm:px-3 flex flex-col justify-center gap-y-4 items-center font-heading font-medium">
                         <span>{{ __('Sorting') }}</span>
-                        <select id="sortBy" wire:model.lazy="sorting"
+                        <select id="sortBy" wire:model="sorting"
                             class="bg-transparent border border-gray-200 hover:border-gray-300 rounded-4xl">
                             <option value=""></option>
                             @foreach ($sortingOptions as $value => $label)

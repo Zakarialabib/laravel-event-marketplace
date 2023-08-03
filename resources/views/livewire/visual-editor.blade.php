@@ -31,7 +31,7 @@
                         <div>
                             <label for="numberOfColumns" class="block font-medium mb-2">Number of columns:</label>
                             <select id="numberOfColumns" name="numberOfColumns"
-                                wire:model.lazy="headerLayout.numberOfColumns"
+                                wire:model="headerLayout.numberOfColumns"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -40,7 +40,7 @@
                         </div>
                         <div>
                             <label for="logoPosition" class="block font-medium mb-2">Logo Position:</label>
-                            <select id="logoPosition" name="logoPosition" wire:model.lazy="headerLayout.logoPosition"
+                            <select id="logoPosition" name="logoPosition" wire:model="headerLayout.logoPosition"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="left">Left</option>
                                 <option value="center">Center</option>
@@ -49,19 +49,19 @@
                         </div>
                         <div>
                             <label for="headerHeight" class="block font-medium mb-2">Header Height:</label>
-                            <input type="number" id="headerHeight" wire:model.lazy="headerLayout.headerHeight"
+                            <input type="number" id="headerHeight" wire:model="headerLayout.headerHeight"
                                 min="10" max="250"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
                         <div>
                             <label for="logoSize" class="block font-medium mb-2">Logo Size:</label>
-                            <input type="number" id="logoSize" wire:model.lazy="headerLayout.logoSize" min="10"
+                            <input type="number" id="logoSize" wire:model="headerLayout.logoSize" min="10"
                                 max="100"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
                         <div>
                             <label for="bg-color" class="block font-medium mb-2">Header background color:</label>
-                            <input type="color" id="bg-color" wire:model.lazy="headerLayout.bg-color" min="10"
+                            <input type="color" id="bg-color" wire:model="headerLayout.bg-color" min="10"
                                 max="100"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="my-4">
                         <label for="logoUrl" class="block font-medium mb-2">Logo Upload:</label>
-                        <input type="file" id="logoUrl" wire:model.lazy="headerLayout.logoUrl"
+                        <input type="file" id="logoUrl" wire:model="headerLayout.logoUrl"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
                     <div class="my-4">
@@ -77,9 +77,9 @@
                         <div class="flex flex-row space-x-2 items-center">
                             <label class="inline-flex items-center">
                                 <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600"
-                                    wire:model.lazy="headerLayout.hasSearchIcon">
+                                    wire:model="headerLayout.hasSearchIcon">
                             </label>
-                            <input type="text" id="searchIcon" name="searchIcon" wire:model.lazy="searchIcon"
+                            <input type="text" id="searchIcon" name="searchIcon" wire:model="searchIcon"
                                 placeholder="Search Icon"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
@@ -102,7 +102,7 @@
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                     <label for="numberOfColumns" class="block font-medium mb-2">Number of columns:</label>
-                    <select id="numberOfColumns" name="numberOfColumns" wire:model.lazy="headerLayout.numberOfColumns"
+                    <select id="numberOfColumns" name="numberOfColumns" wire:model="headerLayout.numberOfColumns"
                         class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -112,21 +112,21 @@
                 <div>
                     
                                         <label for="logoPosition" class="block font-medium mb-2">Logo Position:</label>
-                                        <select id="logoPosition" name="logoPosition" wire:model.lazy="footerLayout.logoPosition"
+                                        <select id="logoPosition" name="logoPosition" wire:model="footerLayout.logoPosition"
                                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                             <option value="left">Left</option>
                                             <option value="center">Center</option>
                                             <option value="right">Right</option>
                                         </select>
                     <label for="footerHeight" class="block font-medium mb-2">Footer Height:</label>
-                    <input type="number" id="footerHeight" wire:model.lazy="footerLayout.footerHeight" min="10"
+                    <input type="number" id="footerHeight" wire:model="footerLayout.footerHeight" min="10"
                         max="250"
                         class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
                     <div>
                     <label for="backToTop" class="block font-medium mb-2">Back to Top:</label>
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600"id="backToTop"
-                        wire:model.lazy="footerLayout.backToTop">
+                        wire:model="footerLayout.backToTop">
 
                 </div>
                 <div class="w-full flex justify-center">
@@ -148,7 +148,7 @@
 
                             <label class="block font-medium">Menu Name:</label>
                             <x-input type="text" id="menuItemLabel{{ $index }}" class="my-2"
-                                wire:model.lazy="menuItems.{{ $index }}.menuName" />
+                                wire:model="menuItems.{{ $index }}.menuName" />
                             <div x-data="{ order: [] }" x-init="() => {
                                 order = JSON.parse('{{ json_encode(array_keys($menu['items'])) }}');
                                 let sortable = Sortable.create($refs.menuItemsContainer, {
@@ -186,7 +186,7 @@
                                                         class="block font-medium mb-2">Label:</label>
                                                     <input type="text"
                                                         id="menuItemLabel{{ $index }}-{{ $itemIndex }}"
-                                                        wire:model.lazy="menuItems.{{ $index }}.items.{{ $itemIndex }}.label"
+                                                        wire:model="menuItems.{{ $index }}.items.{{ $itemIndex }}.label"
                                                         class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                                 </div>
                                                 <div>
@@ -194,7 +194,7 @@
                                                         class="block font-medium mb-2">URL:</label>
                                                     <input type="text"
                                                         id="menuItemUrl{{ $index }}-{{ $itemIndex }}"
-                                                        wire:model.lazy="menuItems.{{ $index }}.items.{{ $itemIndex }}.url"
+                                                        wire:model="menuItems.{{ $index }}.items.{{ $itemIndex }}.url"
                                                         class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                                 </div>
                                             </div>
@@ -334,41 +334,41 @@
                     @foreach ($cardContent as $index => $item)
                         <label for="cardImage" class="block font-medium mb-2">Image Upload:</label>
                         <input type="file" id="cardImage"
-                            wire:model.lazy="cardContent.{{ $index }}.cardImage"
+                            wire:model="cardContent.{{ $index }}.cardImage"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         <label for="cardTitle" class="block font-medium mb-2">Title:</label>
                         <input type="text" id="cardTitle"
-                            wire:model.lazy="cardContent.{{ $index }}.cardTitle"
+                            wire:model="cardContent.{{ $index }}.cardTitle"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         <label for="cardText" class="block font-medium mb-2">Text:</label>
-                        <textarea id="cardText" wire:model.lazy="cardContent.{{ $index }}.cardText"
+                        <textarea id="cardText" wire:model="cardContent.{{ $index }}.cardText"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
 
                         <label for="cardButtonText" class="block font-medium mb-2">Button Text:</label>
                         <input type="text" id="cardButtonText"
-                            wire:model.lazy="cardContent.{{ $index }}.cardButtonText"
+                            wire:model="cardContent.{{ $index }}.cardButtonText"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         <label for="cardButtonLink" class="block font-medium mb-2">Button Link:</label>
                         <input type="text" id="cardButtonLink"
-                            wire:model.lazy="cardContent.{{ $index }}.cardButtonLink"
+                            wire:model="cardContent.{{ $index }}.cardButtonLink"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         <label for="cardBgColor" class="block font-medium mb-2">Background Color:</label>
                         <input type="color" id="cardBgColor"
-                            wire:model.lazy="cardContent.{{ $index }}.cardBgColor"
+                            wire:model="cardContent.{{ $index }}.cardBgColor"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         <label for="cardTextColor" class="block font-medium mb-2">Text Color:</label>
                         <input type="color" id="cardTextColor"
-                            wire:model.lazy="cardContent.{{ $index }}.cardTextColor"
+                            wire:model="cardContent.{{ $index }}.cardTextColor"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         <label for="cardSize" class="block font-medium mb-2">Size:</label>
                         <input type="text" id="cardSize"
-                            wire:model.lazy="cardContent.{{ $index }}.cardSize"
+                            wire:model="cardContent.{{ $index }}.cardSize"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <x-button danger type="button" wire:click="removeCardContent({{ $index }})"><i
                                 class="fas fa-trash-alt"></i></x-button>
@@ -396,7 +396,7 @@
                                 wire:model="components.tabItems.{{ $index }}.title"
                                 wire:key="tab-item-title-{{ $index }}" />
                             <label for="content" class="block font-medium mb-2">{{ __('Content') }}:</label>
-                            <textarea id="content" wire:model.lazy="components.tabItems.{{ $index }}.content"
+                            <textarea id="content" wire:model="components.tabItems.{{ $index }}.content"
                                 wire:key="tab-item-content-{{ $index }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                             <x-button type="button" class="text-center"
@@ -446,7 +446,7 @@
                     </button>
                 </div>
                 <div x-show="isTextContent" class="flex flex-col space-y-2 py-4">
-                    <textarea id="text" wire:model.lazy="text"
+                    <textarea id="text" wire:model="text"
                         class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                 </div>
             </div>
@@ -465,10 +465,10 @@
                         @foreach ($components['accordionItems'] as $index => $item)
                             <label for="title" class="block font-medium mb-2">{{ __('Title') }}:</label>
                             <x-input type="text" id="title"
-                                wire:model.lazy="components.accordionItems.{{ $index }}.title"
+                                wire:model="components.accordionItems.{{ $index }}.title"
                                 wire:key="accordion-item-title-{{ $index }}" />
                             <label for="content" class="block font-medium mb-2">{{ __('Content') }}:</label>
-                            <textarea id="content" wire:model.lazy="components.accordionItems.{{ $index }}.content"
+                            <textarea id="content" wire:model="components.accordionItems.{{ $index }}.content"
                                 wire:key="accordion-item-content-{{ $index }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                             <x-button type="button" class="text-center"

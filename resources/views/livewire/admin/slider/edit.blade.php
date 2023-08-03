@@ -50,7 +50,7 @@
                     {{-- <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="label" :value="__('Label')" />
                         <x-input id="label" class="block mt-1 w-full" type="text" name="label"
-                            wire:model.lazy="slider.label" />
+                            wire:model="slider.label" />
                         <x-input-error :messages="$errors->get('slider.label')" for="slider.link" class="mt-2" />
                     </div> --}}
 
@@ -63,7 +63,7 @@
 
                     <div class="w-full px-2">
                         <x-label for="description" :value="__('Description')" />
-                        <x-trix name="description" wire:model.lazy="description" id="description" />
+                        <x-trix name="description" wire:model="description" id="description" />
                         <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
                     <div class="w-full py-2 px-3">

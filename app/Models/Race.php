@@ -23,7 +23,6 @@ class Race extends Model implements HasMedia
     use SoftDeletes;
     use HasUuid;
     use CanBeBought;
-    use HasGlobalDate;
 
     public const ATTRIBUTES = [
         'id',

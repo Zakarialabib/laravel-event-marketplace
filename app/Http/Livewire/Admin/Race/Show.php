@@ -22,7 +22,7 @@ class Show extends Component
     {
         abort_if(Gate::denies('race_show'), 403);
 
-        $this->race = Race::findOrFail($id);
+        $this->race = Race::where('id', $id)->first();
 
         $this->showModal = true;
     }

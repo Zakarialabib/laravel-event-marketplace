@@ -57,8 +57,8 @@ class Edit extends Component
         'description'                => ['nullable'],
         'images'                     => ['nullable'],
 
-        // 'race.meta_title'       => ['nullable', 'string', 'max:255'],
-        // 'race.meta_description' => ['nullable', 'string', 'max:255'],
+         'race.meta_title'       => ['nullable', 'string', 'max:255'],
+         'race.meta_description' => ['nullable', 'string', 'max:255'],
 
         'social_media.*.name'  => ['nullable'],
         'social_media.*.value' => ['nullable'],
@@ -150,7 +150,7 @@ class Edit extends Component
     {
         $this->courses[] = [
             'name'     => '',
-            'distance' => 0,
+            'distance' =>  '',
             'type'     => '',
             'content'  => '',
         ];

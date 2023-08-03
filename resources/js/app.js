@@ -28,9 +28,6 @@ import intersect from "@alpinejs/intersect";
 import Sortable from 'sortablejs';
 window.Sortable = Sortable;
 
-import 'trix/dist/trix.css';
-import 'trix';
-
 Alpine.plugin(focus);
 Alpine.plugin(intersect);
 

@@ -149,32 +149,6 @@
             <!-- Edit Modal -->
             @livewire('admin.category.edit', ['category' => $category])
 
-            <!-- Import Modal -->
-            <x-modal wire:model="importModal">
-                <x-slot name="title">
-                    {{ __('Import Category') }}
-                </x-slot>
-
-                <x-slot name="content">
-                    <form wire:submit.prevent="import">
-                        <div class="space-y-4">
-                            <div class="mt-4">
-                                <x-label for="import" :value="__('Import')" />
-                                <x-input id="import" class="block mt-1 w-full" type="file" name="import"
-                                    wire:model.defer="import" />
-                                <x-input-error :messages="$errors->get('import')" for="import" class="mt-2" />
-                            </div>
-
-                            <div class="w-full px-3">
-                                <x-button primary type="button" wire:loading.attr="disabled">
-                                    {{ __('Import') }}
-                                </x-button>
-                            </div>
-                        </div>
-                    </form>
-                </x-slot>
-            </x-modal>
-
         </div>
     </x-card>
 </div>

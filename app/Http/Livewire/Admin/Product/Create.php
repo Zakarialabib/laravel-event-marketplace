@@ -36,7 +36,7 @@ class Create extends Component
 
     public $uploadLink;
 
-    public $description = null;
+    public $description = '';
 
     public $width = 1000;
 
@@ -63,11 +63,6 @@ class Create extends Component
     public function updatedDescription($value)
     {
         $this->description = $value;
-    }
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
     }
 
     // public function updatedProductSubcategories()

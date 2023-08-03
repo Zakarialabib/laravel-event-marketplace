@@ -40,7 +40,7 @@
                             </button>
                             <select
                                 class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
-                                id="sortBy" wire:model.lazy="sorting">
+                                id="sortBy" wire:model="sorting">
                                 <option disabled>{{ __('Choose filters') }}</option>
                                 @foreach ($sortingOptions as $value => $label)
                                     <option value="{{ $value }}">{{ $label }}</option>
