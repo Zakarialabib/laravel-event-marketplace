@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Front;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -107,6 +106,4 @@ class BrandPage extends Component
     {
         return Category::active()->get();
     }
-
-   
 }

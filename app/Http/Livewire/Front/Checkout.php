@@ -56,19 +56,18 @@ class Checkout extends Component
         $order = null;
 
         foreach ($cartItems as $item) {
-
             $order = Order::create([
-                'reference'        => Order::generateReference(),
-                'payment_method'   => $this->payment_method,
-                'payment_status'   => PaymentStatus::PENDING,
-                'amount'            => Cart::instance('shopping')->total() + Shipping::find($this->shipping_id)->cost,
-                'date'           => now(),
-                'user_id'          => Auth::user()->id,
-                'product_id'       => $item->id,
+                'reference'       => Order::generateReference(),
+                'payment_method'  => $this->payment_method,
+                'payment_status'  => PaymentStatus::PENDING,
+                'amount'          => Cart::instance('shopping')->total() + Shipping::find($this->shipping_id)->cost,
+                'date'            => now(),
+                'user_id'         => Auth::user()->id,
+                'product_id'      => $item->id,
                 'shipping_status' => OrderStatus::PENDING,
                 'shipping_id'     => $this->shipping_id,
-                'type'           => OrderType::PRODUCT,
-                'status'         => OrderStatus::PENDING,
+                'type'            => OrderType::PRODUCT,
+                'status'          => OrderStatus::PENDING,
             ]);
 
             // Mail::to($order->user->email)->send(new CheckoutMail($order, $order->user));
@@ -77,6 +76,7 @@ class Checkout extends Component
         if ($order) {
             Cart::instance('shopping')->destroy();
             $this->alert('success', __('Order placed successfully!'));
+
             return redirect()->route('front.thankyou', $order->id);
         }
 
@@ -116,7 +116,6 @@ class Checkout extends Component
         );
     }
 
-
     public function getCartItemsProperty()
     {
         return Cart::instance('shopping')->content();
@@ -125,20 +124,19 @@ class Checkout extends Component
     public function updateCartTotal()
     {
         $shipping_cost = $this->shipping ? $this->shipping->cost : 0;
-    
+
         $this->cartTotal = $this->subTotal + $shipping_cost;
     }
-    
+
     public function updatedShippingId($value)
     {
         $this->shipping = $value ? Shipping::find($value) : null;
         $this->updateCartTotal();
     }
-    
 
     public function getShippingsProperty()
     {
-        return Shipping::select('id', 'title','cost')->get();
+        return Shipping::select('id', 'title', 'cost')->get();
     }
 
     public function mount()
@@ -146,7 +144,7 @@ class Checkout extends Component
         $subtotal = Cart::instance('shopping')->subtotal();
 
         $this->subTotal = str_replace(',', '', $subtotal);
-    }    
+    }
 
     public function render()
     {

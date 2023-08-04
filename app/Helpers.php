@@ -13,7 +13,6 @@ use App\Models\Settings;
 use App\Models\Blog;
 use App\Models\RaceLocation;
 use App\Models\Menu;
-use App\Models\Subcategory;
 use App\Models\Pagesetting;
 use App\Models\Faq;
 use Illuminate\Support\Facades\Cache;

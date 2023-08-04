@@ -56,7 +56,7 @@ class RegistrationForm extends Component
         'race.zipCode'                     => 'nullable|string',
         'race.emergencyContactName'        => 'nullable|string',
         'race.emergencyContactPhoneNumber' => 'nullable|numeric|min:6',
-        'race.healthInformation'            => 'required',
+        'race.healthInformation'           => 'required',
         'race.hasMedicalHistory'           => 'nullable|boolean',
         'race.isTakingMedications'         => 'nullable|boolean',
         'race.hasMedicationAllergies'      => 'nullable|boolean',
@@ -143,8 +143,8 @@ class RegistrationForm extends Component
 
                         // Mail::to($participant->email)->send(new RegistrationConfirmation($user));
                         // Cart::instance('races')->add($this->race->id)->associate('App\Models\Race');
-                        Cart::instance('races')->add($race->id, $race->name, '1' , $race->price)->associate('App\Models\Race');
-                        
+                        Cart::instance('races')->add($race->id, $race->name, '1', $race->price)->associate('App\Models\Race');
+
                         return $next($participant);
                     },
                 ])

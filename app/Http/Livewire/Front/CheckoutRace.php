@@ -18,6 +18,7 @@ use Livewire\Component;
 use App\Enums\PaymentStatus;
 use App\Enums\OrderType;
 use App\Enums\OrderStatus;
+
 class CheckoutRace extends Component
 {
     use LivewireAlert;
@@ -55,18 +56,18 @@ class CheckoutRace extends Component
     {
         return Participant::where('user_id', Auth::user()->id)->first();
     }
+
     public function checkout()
     {
         if (Cart::instance('races')->count() === 0) {
             $this->alert('error', __('Your cart is empty'));
         }
-    
+
         $cartItems = Cart::instance('races')->content();
-    
-        $order = null; 
-    
+
+        $order = null;
+
         foreach ($cartItems as $item) {
-    
             $order = Order::create([
                 'reference'      => Order::generateReference(),
                 'payment_method' => $this->payment_method,
@@ -78,26 +79,25 @@ class CheckoutRace extends Component
                 'race_id'        => $item->id,
                 'status'         => OrderStatus::PENDING,
             ]);
-    
+
             $registration = Registration::where('participant_id', Auth::user()->id)
                 ->where('race_id', $item->id)
                 ->first();
-    
+
             if ($registration) {
                 $registration->update(['order_id' => $order->id]);
             }
-    
+
             // Mail::to($order->user->email)->send(new CheckoutMail($order, $order->user));
         }
-    
+
         Cart::instance('races')->destroy();
-    
+
         $this->alert('success', __('Order placed successfully!'));
-    
+
         return redirect()->route('front.thankyou', $order->id);
     }
-    
-    
+
     public function removeFromCart($rowId)
     {
         $this->raceId = $rowId;
@@ -114,6 +114,7 @@ class CheckoutRace extends Component
             ]
         );
     }
+
     public function mount()
     {
         $subtotal = Cart::instance('races')->subtotal();
@@ -121,8 +122,8 @@ class CheckoutRace extends Component
         $this->subTotal = str_replace(',', '', $subtotal);
 
         $this->cartTotal = $this->subTotal;
-    }    
-    
+    }
+
     public function render(): View|Factory
     {
         return view('livewire.front.checkout-race')->extends('layouts.app');

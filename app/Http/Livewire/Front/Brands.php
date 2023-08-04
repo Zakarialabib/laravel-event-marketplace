@@ -8,7 +8,6 @@ use App\Http\Livewire\WithSorting;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -154,6 +153,4 @@ class Brands extends Component
     {
         return Category::active()->with('subcategories')->get();
     }
-
-   
 }

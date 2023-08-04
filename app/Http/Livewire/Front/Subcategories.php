@@ -6,7 +6,6 @@ namespace App\Http\Livewire\Front;
 
 use App\Http\Livewire\WithSorting;
 use App\Models\Product;
-use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -67,8 +66,6 @@ class Subcategories extends Component
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Product())->orderable;
     }
-
-   
 
     public function render(): View|Factory
     {

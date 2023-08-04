@@ -211,14 +211,13 @@ class Edit extends Component
 
         $this->description = $this->race->description;
 
-        
         $this->calendar = json_decode($this->race->calendar, true) ?? [];
         $this->social_media = json_decode($this->race->social_media, true) ?? [];
         $this->features = json_decode($this->race->features, true) ?? [];
         $this->courses = json_decode($this->race->course, true) ?? [];
         $this->sponsors = json_decode($this->race->sponsors, true) ?? [];
         $this->options = $this->race->options ?? [];
-        
+
         $this->images = $this->race->getMedia('local_files');
     }
 

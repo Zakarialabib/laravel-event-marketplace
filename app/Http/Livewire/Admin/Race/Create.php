@@ -104,7 +104,6 @@ class Create extends Component
         $this->createModal = true;
     }
 
-    
     public function addSocialMedia()
     {
         $this->social_media[] = [
@@ -118,7 +117,6 @@ class Create extends Component
         unset($this->social_media[$index]);
         $this->social_media = array_values($this->social_media);
     }
-
 
     public function addSponsor()
     {
@@ -135,7 +133,6 @@ class Create extends Component
         $this->sponsors = array_values($this->sponsors);
     }
 
-    
     public function addFeature()
     {
         $this->features[] = '';
@@ -146,7 +143,6 @@ class Create extends Component
         unset($this->features[$index]);
         $this->features = array_values($this->features);
     }
-
 
     public function create()
     {

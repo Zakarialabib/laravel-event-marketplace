@@ -19,7 +19,7 @@ class ThankYou extends Component
     {
         $this->order = Order::findOrFail($id);
     }
-   
+
     public function render(): View|Factory
     {
         return view('livewire.front.thank-you')->extends('layouts.app');
