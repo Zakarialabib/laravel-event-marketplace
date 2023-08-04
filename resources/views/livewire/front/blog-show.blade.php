@@ -20,7 +20,7 @@
         <meta itemprop="wordCount" content="{{ str_word_count(strip_tags($blog->description)) }}">
     @endsection
     <section class="relative pt-16 bg-white">
-        <div class="items-center w-full mx-auto md:px-12 lg:px-24 max-w-7xl text-gray-900">
+        <div class="items-center w-full  max-w-7xl mx-auto text-gray-900">
             <article itemscope itemtype="http://schema.org/Article" class="max-w-prose mx-auto py-8">
 
                 <img src="{{ asset('images/blog' . $blog->image) }}" alt="{{ $blog->title }}"
@@ -46,7 +46,6 @@
 
         @if (count($this->featured_blogs) > 0)
             <div class="relative py-6 mx-auto px-6 bg-green-50 ">
-                {{--  Featured Articles --}}
                 <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
                     {{ 'Featured Articles' }}
                 </h2>

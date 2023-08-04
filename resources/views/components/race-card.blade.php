@@ -231,7 +231,7 @@
                             <li class="text-base inline-flex md:text-lg">
                                 <p
                                     class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
-                                    {{ $key }}  {{ $course->name }}  - {{ $course->distance }} km - {{ $course->type }}
+                                    {{ $course->name }}  - {{ $course->distance }} km - {{ $course->type }}
                                 </p>
                             </li>
                         @endforeach

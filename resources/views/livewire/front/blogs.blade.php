@@ -2,7 +2,7 @@
     @section('title', __('Resources'))
 
     <section class="relative pt-16 bg-white">
-        <div class="items-center w-full mx-auto md:px-12 lg:px-24 max-w-7xl">
+        <div class="items-center w-full  max-w-7xl mx-auto">
             <h1
                 class="text-5xl md:text-6xl lg:text-7xl px-10 text-center leading-tight text-green-600 font-bold tracking-tighter mt-20 cursor-pointer">
                 <span class="hover:underline transition duration-200 ease-in-out uppercase">{{ __('Resources') }}</span>
@@ -27,15 +27,16 @@
 
                 <div class="grid grid-cols-1 gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3 items-center">
                     @forelse ($blogs as $blog)
-                        <div
-                            class="border-4 border-green-600 text-green-900 hover:bg-green-900 hover:text-green-200 transition duration-300 max-w-sm rounded overflow-hidden shadow-lg py-10 px-8">
-                            <a href="{{ route('front.blogPage', $blog->slug) }}">
-                                <h4 class="text-lg mb-3 font-semibold">{{ $blog->title }}</h4>
-                            </a>
-                            <p class="mb-2 text-sm text-gray-600">{!! $blog->content !!}</p>
+                        <a href="{{ route('front.blogPage', $blog->slug) }}">
+                            <div
+                                class="text-center border-4 border-green-600 text-green-400 hover:bg-green-400 hover:text-green-800 transition duration-300 max-w-sm rounded overflow-hidden shadow-lg py-10 px-8">
+                                <h2 class="text-center uppercase mb-3 font-semibold">{{ $blog->title }}</h2>
+                                <p class="mb-2 text-sm text-gray-600">{!! $blog->content !!}</p>
 
-                            <img src="{{ $blog->getFirstMediaUrl('blog') }}" class="w-100" alt="{{ $blog->title }}">
-                        </div>
+                                <img src="{{ $blog->getFirstMediaUrl('blog') }}" class="w-100"
+                                    alt="{{ $blog->title }}">
+                            </div>
+                        </a>
                     @empty
                         <div class="text-center">
                             <p>{{ __('No entries found.') }}</p>
@@ -51,9 +52,8 @@
 
         @if (count($this->featured_blogs) > 0)
             <div class="relative py-6 mx-auto px-6 bg-green-50 ">
-                {{--  Featured Articles --}}
                 <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
-                    {{('Featured Articles')}}
+                    {{ 'Featured Articles' }}
                 </h2>
                 <div class="flex flex-wrap justify-center gap-4 py-6">
                     @foreach ($this->featured_blogs as $blog)

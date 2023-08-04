@@ -4,10 +4,9 @@
 
     <form wire:submit.prevent="register">
 
-       
-        <div class="flex flex-wrap space-y-2 mx-2">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <!-- Name -->
-            <div class="lg:w-1/2 sm:w-full px-2">
+            <div>
                 <x-input-label for="name" :value="__('Name')" required />
 
                 <x-text-input id="name" wire:model="name" class="block mt-1 w-full" type="text"
@@ -17,7 +16,7 @@
             </div>
 
             <!-- Email Address -->
-            <div class="lg:w-1/2 sm:w-full px-2">
+            <div>
                 <x-input-label for="email" :value="__('Email')" required />
 
                 <x-text-input id="email" wire:model="email" class="block mt-1 w-full" type="email"
@@ -27,7 +26,7 @@
             </div>
             
             <!-- Phone -->
-            <div class="lg:w-1/2 sm:w-full px-2">
+            <div>
                 <x-input-label for="phone" :value="__('Phone')" required />
 
                 <x-text-input id="phone" wire:model="phone" class="block mt-1 w-full" type="number"
@@ -37,7 +36,7 @@
             </div>
             
             <!-- Country -->
-            <div class="lg:w-1/2 sm:w-full px-2">
+            <div>
                 <x-label for="country" :value="__('Country')" required />
 
                 <x-input id="country" class="block mt-1 w-full" wire:model="country" type="text" name="country" :value="old('country')"
@@ -45,7 +44,7 @@
             </div>
 
             <!-- City -->
-            <div class="lg:w-1/2 sm:w-full px-2">
+            <div>
                 <x-label for="city" :value="__('City')" required />
 
                 <x-input id="city" class="block mt-1 w-full" wire:model="city" type="text" name="city" :value="old('city')"
@@ -53,7 +52,7 @@
             </div>
 
             <!-- Password -->
-            <div class="lg:w-1/2 sm:w-full px-2">
+            <div>
                 <x-input-label for="password" :value="__('Password')" required />
 
                 <x-text-input id="password" wire:model="password" class="block mt-1 w-full" type="password"
@@ -63,7 +62,7 @@
             </div>
 
             <!-- Confirm Password -->
-            <div class="lg:w-1/2 sm:w-full px-2">
+            <div>
                 <x-input-label for="password_confirmation" :value="__('Confirm Password')" required />
 
                 <x-text-input id="password_confirmation" wire:model="passwordConfirmation"

@@ -62,23 +62,19 @@
                             <img src="{{ $slider->getFirstMediaUrl('local_files') }}" alt="{{ $slider->name }}"
                                 class="w-10 h-10 rounded-full object-cover">
                         @else
-                            <p>{{__('No slider image available')}}.</p>
+                            <p>{{ __('No slider image available') }}.</p>
                         @endif
                     </x-table.td>
                     <x-table.td>
                         {{ $slider->title }}
                     </x-table.td>
                     <x-table.td>
-                        {{-- StatusInactive - StatusActive --}}
-                        @if (\App\Models\Slider::StatusInactive)
-                            <x-badge danger>
-                                {{ __('Inactive') }}
-                            </x-badge>
-                        @elseif(\App\Models\Slider::StatusActive)
-                            <x-badge info>
-                                {{ __('Active') }}
-                            </x-badge>
-                        @endif
+                        {{-- <x-badge danger>
+                            {{ __('Inactive') }}
+                        </x-badge>
+                        <x-badge info>
+                            {{ __('Active') }}
+                        </x-badge> --}}
                     </x-table.td>
                     <x-table.td>
                         @if ($slider['featured'] == false)
@@ -123,8 +119,8 @@
 
 
     <livewire:admin.slider.create />
-   
-   
+
+
     @push('scripts')
         <script>
             document.addEventListener('livewire:load', function() {

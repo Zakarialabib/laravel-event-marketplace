@@ -14,31 +14,31 @@
                 <div class="relative">
                     <input type="text" wire:model="contact.name" id="name" name="name"
                         placeholder="{{ __('Full Name') }}" value="{{ old('name') }}"
-                        class="@error('name') is-invalid @enderror w-full bg-gray-100 dark:bg-white bg-opacity-50 rounded border border-zinc-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-sm outline-none text-gray-700 py-1 px-3 leading-3 transition-colors duration-200 ease-in-out">
-                    <x-input-error for="name" />
+                        class="@error('contact.name') is-invalid @enderror w-full bg-gray-100 dark:bg-white bg-opacity-50 rounded border border-zinc-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-sm outline-none text-gray-700 py-1 px-3 leading-3 transition-colors duration-200 ease-in-out">
+                    <x-input-error :messages="$errors->get('contact.name')" for="contact.name" class="mt-2" />
                 </div>
             </div>
             <div class="p-2 w-full">
                 <div class="relative">
                     <input type="email" wire:model="contact.email" id="email" name="email"
                         placeholder="{{ __('Enter your email') }}" value="{{ old('email') }}"
-                        class="@error('email') is-invalid @enderror w-full bg-gray-100 dark:bg-white bg-opacity-50 rounded border border-zinc-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-sm outline-none text-gray-700 py-1 px-3 leading-3 transition-colors duration-200 ease-in-out">
-                    <x-input-error for="email" />
+                        class="@error('contact.email') is-invalid @enderror w-full bg-gray-100 dark:bg-white bg-opacity-50 rounded border border-zinc-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-sm outline-none text-gray-700 py-1 px-3 leading-3 transition-colors duration-200 ease-in-out">
+                    <x-input-error :messages="$errors->get('contact.email')" for="contact.email" class="mt-2" />
                 </div>
             </div>
             <div class="p-2 w-full">
                 <div class="relative">
-                    <input type="text" wire:model="contact.phone_number" id="phone_number" name="phone_number"
+                    <input type="tel" wire:model="contact.phone_number" id="phone_number" name="phone_number"
                         placeholder="{{ __('Enter your Phone Number') }}" value="{{ old('phone_number') }}"
                         class="@error('phone_number') is-invalid @enderror w-full bg-gray-100 dark:bg-white bg-opacity-50 rounded border border-zinc-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-sm outline-none text-gray-700 py-1 px-3 leading-3 transition-colors duration-200 ease-in-out">
-                    <x-input-error for="phone_number" />
+                    <x-input-error :messages="$errors->get('contact.phone_number')" for="contact.phone_number" class="mt-2" />
                 </div>
             </div>
             <div class="p-2 w-full h-full">
                 <div class="relative">
                     <textarea id="message" wire:model="contact.message" name="message" placeholder="Message" value="{{ old('message') }}"
                         class="w-full h-48 bg-gray-100 dark:bg-white bg-opacity-50 rounded border border-zinc-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-sm outline-none text-gray-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out"></textarea>
-                    <x-input-error for="message" />
+                    <x-input-error :messages="$errors->get('contact.message')" for="contact.message" class="mt-2" />
                 </div>
             </div>
             <div class="p-2 w-full">

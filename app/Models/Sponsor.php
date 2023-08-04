@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-
+use App\Enums\Status;
 class Sponsor extends Model implements HasMedia
 {
     use InteractsWithMedia;
@@ -33,6 +33,9 @@ class Sponsor extends Model implements HasMedia
         'logo_image_url',
         'social_media_url',
         'status',
+    ];
+    protected $casts = [
+        'satuts' => Status::class,
     ];
 
     public function scopeActive($query)

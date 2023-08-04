@@ -9,16 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use App\Enums\Status;
 class Slider extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
     use HasAdvancedFilter;
-
-    public const StatusInactive = 0;
-
-    public const StatusActive = 1;
 
     public $table = 'sliders';
 
@@ -33,6 +29,10 @@ class Slider extends Model implements HasMedia
         'title', 'subtitle', 'description', 'embeded_video', 'image',
         'text_color', 'slider_settings',
         'featured', 'link', 'language_id', 'bg_color', 'status',
+    ];
+
+    protected $casts = [
+        'satuts' => Status::class,
     ];
 
     /**

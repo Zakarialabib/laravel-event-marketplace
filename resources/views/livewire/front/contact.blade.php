@@ -2,17 +2,12 @@
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-1/2 xl:w-6/12 px-4">
             <div class="max-w-[570px] mb-12 lg:mb-0">
-                <h2
-                    class="text-black mb-6 uppercase font-bold text-[32px] sm:text-[40px] lg:text-[36px] xl:text-[40px]">
+                <h2 class="text-black mb-6 uppercase font-bold text-[32px] sm:text-[40px] lg:text-[36px] xl:text-[40px]">
                     {{ __('GET IN TOUCH WITH US') }}
-                    <span
-                        class="block mb-4 text-base text-black font-semibold">
-                        {{ __('Contact Us') }}
-                    </span>
                 </h2>
 
                 <p class="text-base text-black leading-relaxed mb-9">
-                    {{ __('For any sales inquery, repair, garantie, feel free to ask') }}
+                    {{ __('For any sales inquery, feel free to ask') }}
                 </p>
 
                 <div class="flex mb-8 max-w-[370px] w-full">

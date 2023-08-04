@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SmptController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\Language\Index as LanguageIndex;
 use App\Http\Livewire\Admin\Language\EditTranslation;
 use App\Http\Livewire\Admin\Race\Index as RaceIndex;
@@ -48,7 +49,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     // change lang
     Route::get('/lang/{lang}', [DashboardController::class, 'changeLanguage'])->name('changelanguage');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
     Route::get('/categories', CategoriesIndex::class)->name('categories');
     Route::get('/product-categories', ProductCategoryIndex::class)->name('product-categories');

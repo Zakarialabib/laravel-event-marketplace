@@ -5,7 +5,7 @@
     <!-- Validation Errors -->
     <x-validation-errors class="mb-4" :errors="$errors" />
 
-    <form wire:submit.prevent="authenticate">
+    <form wire:submit.prevent="authenticate" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
         <!-- Email Address -->
         <div>
@@ -18,7 +18,7 @@
         </div>
 
         <!-- Password -->
-        <div class="mt-4 relative" x-data="{ show: true }">
+        <div class="relative" x-data="{ show: true }">
             <x-input-label for="password" :value="__('Password')" />
 
             <div class="relative">
@@ -49,7 +49,7 @@
         </div>
         <!-- Remember Me -->
 
-        <div class="flex items-center justify-between mt-4">
+        <div class="col-span-full flex items-center justify-between">
 
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
@@ -61,7 +61,7 @@
             </a>
         </div>
 
-        <div class="flex items-center justify-between mt-4">
+        <div class="col-span-full flex items-center justify-between">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" wire:model="remember_me"
                     class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
