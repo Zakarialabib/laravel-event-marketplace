@@ -9,29 +9,44 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Address;
+use App\Helpers;
 
 class CheckoutMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
 
-    public $order;
+       /**
+     * Create a new message instance.
+     */
+    public function __construct(
+        public Order $order,
+        public User $user,
+    ) {}
 
-    public $user;
-
-    public function __construct(Order $order, User $user)
+    /** Get the message content definition. */
+    public function content(): Content
     {
-        $this->order = $order;
-        $this->user = $user;
-    }
-
-    public function build()
-    {
-        return $this->view('emails.checkout')
-            ->subject('Order Confirmation ', $this->user->first_name)
-            ->with([
+        return new Content(
+            markdown: 'emails.checkout',
+            with: [
+                'url'      => route('front.myaccount'),
                 'order' => $this->order,
                 'user'  => $this->user,
-            ]);
+            ],
+        );
+    }
+    
+    /** Get the message envelope. */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
+            subject: $this->order->reference.' Order reference - '.Helpers::settings('site_title'),
+
+        );
     }
 }

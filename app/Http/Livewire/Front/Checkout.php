@@ -14,6 +14,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Illuminate\Support\Facades\Mail;
 
 class Checkout extends Component
 {
@@ -70,7 +71,7 @@ class Checkout extends Component
                 'status'          => OrderStatus::PENDING,
             ]);
 
-            // Mail::to($order->user->email)->send(new CheckoutMail($order, $order->user));
+            Mail::to($order->user->email)->later(now()->addMinutes(10), new CheckoutMail($order, $order->user));
         }
 
         if ($order) {

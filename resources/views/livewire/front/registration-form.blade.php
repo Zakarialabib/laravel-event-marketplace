@@ -33,7 +33,7 @@
                 </div>
                 <div>
                     <x-label required for="phoneNumber" :value="__('Phone number')" />
-                    <x-input wire:model="race.phoneNumber" required type="number" id="phoneNumber"
+                    <x-input wire:model="race.phoneNumber" required type="tel" id="phoneNumber"
                         name="phoneNumber" autocomplete="phoneNumber" />
                     <x-input-error :messages="$errors->get('race.phoneNumber')" for="race.phoneNumber" class="mt-2" />
                 </div>
@@ -76,7 +76,7 @@
                 <div>
                     <x-label for="emergencyContactPhoneNumber" :value="__('Emergency contact phone number')" />
                     <x-input wire:model="race.emergencyContactPhoneNumber" name="emergencyContactPhoneNumber"
-                        type="number" />
+                        type="tel" />
                     <x-input-error :messages="$errors->get('race.emergencyContactPhoneNumber')" for="race.emergencyContactPhoneNumber" class="mt-2" />
                 </div>
                 <div class="col-span-full">
@@ -215,7 +215,12 @@
                     </div>
                     <button type="submit" wire:loading.attr="disabled"
                         class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-green-600 hover:bg-green-200 transition cursor-pointer">
-                        {{ __('Registration') }}
+                        <span>
+                            <div wire:loading wire:target="submit">
+                                <x-loading />
+                            </div>
+                            <span>{{ __('Registration') }}</span>
+                        </span>
                     </button>
                     <small>{{ __('We will send details about your registration your email with account access') }}</small>
                 </div>

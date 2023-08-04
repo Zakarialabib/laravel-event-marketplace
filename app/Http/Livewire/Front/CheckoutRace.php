@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
+use App\Enums\OrderStatus;
+use App\Enums\OrderType;
 use App\Mail\CheckoutMail;
 use App\Models\Order;
 use App\Models\Participant;
@@ -16,8 +18,6 @@ use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use App\Enums\PaymentStatus;
-use App\Enums\OrderType;
-use App\Enums\OrderStatus;
 
 class CheckoutRace extends Component
 {
@@ -87,8 +87,8 @@ class CheckoutRace extends Component
             if ($registration) {
                 $registration->update(['order_id' => $order->id]);
             }
-
-            // Mail::to($order->user->email)->send(new CheckoutMail($order, $order->user));
+    
+            Mail::to($order->user->email)->later(now()->addMinutes(10), new CheckoutMail($order, $order->user));
         }
 
         Cart::instance('races')->destroy();

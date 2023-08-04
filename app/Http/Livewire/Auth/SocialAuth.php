@@ -6,7 +6,7 @@ namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
 use App\Models\Role;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;

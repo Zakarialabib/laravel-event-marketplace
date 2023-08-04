@@ -5,33 +5,32 @@ declare(strict_types=1);
 namespace App\Mail;
 
 use App\Helpers;
-use App\Models\Participant;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+use App\Models\Contact;
+use Illuminate\Mail\Mailables\Address;
 
-class RegistrationConfirmation extends Mailable
+class ContactFormMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
 
-    /** Create a new message instance. */
-    public function __construct(
-        protected Participant $participant,
+     /** Create a new message instance. */
+     public function __construct(
+        protected Contact $contact,
     ) {
-
     }
 
     /** Get the message content definition. */
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.registration-confirmation',
+            markdown: 'emails.contact-form',
             with: [
-                'participant' => $this->participant,
-                'url' => route('front.myaccount'),
+                'contact'     => $this->contact,   
             ],
         );
     }
@@ -40,7 +39,10 @@ class RegistrationConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->participant->name.' Registration Confirmation - '.Helpers::settings('site_title'),
+            from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
+            subject: 'New Contact from '.$this->contact->name.' - '.Helpers::settings('site_title'),
+
         );
     }
+
 }

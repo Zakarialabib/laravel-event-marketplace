@@ -44,8 +44,8 @@
                                 @if (Auth::check())
                                     <x-dropdown align="right" width="56">
                                         <x-slot name="trigger">
-                                            <div class="flex items-center text-green-800 px-4 cursor-pointer">
-                                                <i class="fa fa-caret-down ml-2"></i> {{ Auth::user()->name }}
+                                            <div class="flex items-center gap-4 text-green-800 px-4 cursor-pointer">
+                                                <i class="fa fa-caret-down"></i> {{ Auth::user()->name }}
                                             </div>
                                         </x-slot>
 

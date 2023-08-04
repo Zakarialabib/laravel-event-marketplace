@@ -14,12 +14,16 @@
                         </p>
                     @endif
                     @if ($order->service)
-                        <p><strong>{{ __('Service') }}:</strong> <a href="#">{{ $order->service->name }}</a>
+                        <p><strong>{{ __('Service') }}:</strong> 
+                            <a href="#">{{ $order->service->name }}</a>
                         </p>
                     @endif
                     @if ($order->product)
-                        <p><strong>{{ __('Product') }}:</strong> <a
-                                href="{{ route('front.product',  $order->product->slug) }}">{{ $order->product->name }}</a>
+                        <p>
+                            <strong>{{ __('Product') }}:</strong> 
+                            <a href="{{ route('front.product', $order->product->slug) }}">
+                                {{ $order->product->name }}
+                            </a>
                         </p>
                     @endif
                     <p><strong>{{ __('Order Amount') }}:</strong> {{ $order->amount }}</p>

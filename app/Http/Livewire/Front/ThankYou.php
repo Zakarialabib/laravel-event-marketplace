@@ -11,7 +11,6 @@ use Livewire\Component;
 
 class ThankYou extends Component
 {
-    //  show order details on thank you page
 
     public $order;
 

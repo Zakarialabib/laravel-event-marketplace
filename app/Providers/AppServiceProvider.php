@@ -15,6 +15,12 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Contact;
+use App\Models\Subscriber;
+use App\Models\Registration;
+use App\Observers\ContactObserver;
+use App\Observers\SubscriberObserver;
+use App\Observers\RegistrationObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,7 +55,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Settings::observe(SettingsObserver::class);
-
+        Contact::observe(ContactObserver::class);
+        Subscriber::observe(SubscriberObserver::class);
+        Registration::observe(RegistrationObserver::class);
         // Model::shouldBeStrict(! $this->app->isProduction());
     }
 

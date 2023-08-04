@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Mail\SubscribedMail;
+use App\Enums\Status;
+use App\Mail\SubscribeMail;
 use App\Models\Subscriber;
-use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Mail;
@@ -28,7 +28,7 @@ class NewslettersForm extends Component
 
     public function render(): View|Factory
     {
-        return view('livewire.front.newsletters');
+        return view('livewire.front.newsletters-form');
     }
 
     public function updated($propertyName): void
@@ -40,25 +40,20 @@ class NewslettersForm extends Component
     {
         $validatedData = $this->validate();
 
-        try {
+
             $subscriber = Subscriber::create([
                 'email'  => $validatedData['email'],
                 'name'   => $this->extractNameFromEmail($validatedData['email']),
                 'tag'    => 'subscriber',
-                'status' => 'active',
+                'status' => Status::ACTIVE,
             ]);
 
             $this->alert('success', __('You are subscribed to our newsletters.'));
+            
+            Mail::to($validatedData['email'])->send(new SubscribeMail($subscriber));
+            
+            $this->reset('email');
 
-            $this->resetInputFields();
-
-            $user = User::find(1);
-            $user_email = $user->email;
-
-            Mail::to($user_email)->send(new SubscribedMail($subscriber));
-        } catch (Throwable $th) {
-            $this->alert('error', __('Error').$th->getMessage());
-        }
     }
 
     private function extractNameFromEmail(string $email): string
@@ -71,8 +66,4 @@ class NewslettersForm extends Component
         return ucwords($name);
     }
 
-    private function resetInputFields()
-    {
-        $this->email = '';
-    }
 }
