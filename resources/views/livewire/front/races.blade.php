@@ -7,7 +7,7 @@
                 class="uppercase mb-4 text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-bold text-white cursor-pointer">
                 {{ __('Races') }}
             </h3>
-            <div class="text-center z-10 bottom-5 start-0 end-0 mx-3">
+            <div class="text-center z-10 my-2 mx-3">
                 <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
                     <li
                         class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-green-200">
@@ -22,7 +22,7 @@
                     </li>
                 </ul>
                 <div
-                    class="flex flex-wrap items-center py-5 text-white w-full sm:w-auto justify-center my-2 overflow-x-scroll">
+                    class="flex flex-wrap items-center py-5 text-white w-full sm:w-auto justify-center my-2">
                     <div
                         class="py-2 sm:px-3 flex flex-col justify-center gap-y-4 items-center font-heading font-medium">
                         <span>{{ __('Location') }}</span>
@@ -73,136 +73,10 @@
     </section>
 
     <section class="w-full" x-data="{ loading: false }">
-        <div class="sm:flex sm:flex-wrap">
+        <div class="flex flex-wrap items-center my-10 space-y-4">
             @foreach ($races as $race)
-                <div class="md:px-6 w-full px-10 py-6 drop-shadow-xl bg-gray-100">
-                    <div class="xl:flex xl:items-center p-10 xl:pb-12 xl:px-14 xl:pt-16 bg-white rounded-3xl">
-                        <div class="mb-8 xl:mb-0 xl:w-4/12 xl:pr-6">
-                            <a href="{{ route('front.raceDetails', $race->slug) }}"
-                                class="w-full flex items-center md:items-start relative h-full transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
-                                style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;height:27rem">
-                            </a>
-                        </div>
-                        <div class="xl:w-8/12 xl:block md:flex items-center">
-                            <div class="xl:flex xl:justify-between xl:items-start mb-4 xl:mb-20 xl:w-full md:w-1/2">
-                                <div class="xl:pr-3 mb-6 xl:mb-0 xl:w-8/12">
-                                    <a href="{{ route('front.raceDetails', $race->slug) }}">
-                                        <p class="mb-4 text-xl leading-8 font-heading font-medium hover:underline">
-                                            {{ $race->name }}
-                                        </p>
-                                        <p class="text-darkBlueGray-400 py-4">
-                                            {!! $race->description !!}
-                                        </p>
-                                        <p class="flex items-center">
-                                            <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                {{ __('Registration Deadline') }} :
-                                            </span>
-                                            <span
-                                                class="text-base md:text-lg capitalize">{{ Helpers::format_date($race->registration_deadline) }}</span>
-                                        </p>
-                                        <p class="flex items-center">
-                                            <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                {{ __('Location') }} :
-                                            </span>
-                                            <span
-                                                class="text-base md:text-lg capitalize">{{ $race->location->name }}</span>
-                                        </p>
-                                        <p class="flex items-center">
-                                            <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                {{ __('Type') }} :
-                                            </span>
-                                            <span
-                                                class="text-base md:text-lg capitalize">{{ $race->category->name }}</span>
-                                        </p>
-                                        <p class="flex items-center">
-                                            <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                {{ __('Number of days') }} :
-                                            </span>
-                                            <span class="text-base md:text-lg capitalize">{{ $race->number_of_days }}
-                                                {{ __('days') }}</span>
-                                        </p>
-                                        <p class="flex items-center">
-                                            <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                                                {{ __('Number of racers') }} :
-                                            </span>
-                                            <span
-                                                class="text-base md:text-lg capitalize">{{ $race->number_of_racers }}</span>
-                                        </p>
-                                    </a>
-                                </div>
-                                <p
-                                    class="flex items-center xl:justify-end xl:pl-3 xl:w-4/12 text-xl text-blue-500 font-heading font-medium tracking-tighter">
-                                    <span>{{ Helpers::format_currency($race->price) }}</span>
-                                </p>
-                            </div>
-                            <div
-                                class="flex xl:flex-row text-center items-center md:flex-col xl:w-full md:w-1/2 md:my-auto">
-                                <div class="w-1/2 xl:w-1/3 lg:w-6/12 md:w-1/3 mx-auto mb-4">
-                                    @if ($race->course)
-                                        <ul class="flex items-center gap-4">
-                                            @foreach ($race->course as $key => $course)
-                                                <li class="text-sans inline-flex md:text-lg">
-                                                    <button
-                                                        class="text-lg uppercase px-4 py-2 tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white focus:outline-none"
-                                                        @click="showDetails('{{ $key }}')"
-                                                        :class="{
-                                                            'bg-green-800': activeTab === '{{ $key }}',
-                                                            'hover:bg-green-700': activeTab !== '{{ $key }}',
-                                                        }">
-                                                        {{ $course['name'] }}
-                                                    </button>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                        <div class="mt-8">
-                                            @foreach ($race->course as $key => $course)
-                                                <div x-show="activeTab === '{{ $key }}'" class="pb-6">
-                                                    <h3 class="text-xl font-bold uppercase text-green-800">
-                                                        {{ $course['name'] }}</h3>
-                                                    <p class="text-base md:text-lg leading-relaxed py-4">
-                                                        @if ($race->category->name === 'Running')
-                                                            {{__('Distance')}}: {{ $race->distance }} km
-                                                        @elseif ($race->category->name === 'Trail Running')
-                                                            {{__('Distance')}}: {{ $race->distance }} km<br>
-                                                            {{__('Elevation Gain')}}: {{ $race->elevation_gain }} m<br>
-                                                            {{__('Number of Days')}}: {{ $race->number_of_days }}
-                                                        @elseif ($race->category->name === 'Triathlon')
-                                                            {{__('Swimming')}}: {{ $course['swim']['distance'] }} km
-                                                            ({{ $course['swim']['nature'] }})<br>
-                                                            {{__('Cycling')}}: {{ $course['bike']['distance'] }} km
-                                                            ({{ $course['bike']['type'] }})<br>
-                                                            {{__('Running')}}: {{ $course['run']['distance'] }} km
-                                                            ({{ $course['run']['type'] }})
-                                                        @endif
-                                                    </p>
-                                                    <div class="flex justify-center">
-                                                        <x-button secondary type="button">{{ __('Download') }}
-                                                        </x-button>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @else
-                                        <p class="block text-base md:text-lg text-gray-400">
-                                            {{ __('No race details available') }}.</p>
-                                    @endif
-
-                                </div>
-                                <div class="w-1/2 xl:w-1/3 lg::w-2/12 md:w-1/3 mx-auto">
-                                    <i class="fas fa-calendar-alt mr-2"></i>
-                                    {{ \Carbon\Carbon::parse($race->date)->format('F/d/Y') }}
-                                </div>
-                                <div class="mt-6 xl:mt-0 w-full xl:w-1/3 lg::w-4/12 md:w-1/3 mx-auto">
-                                    <div class="lg:mx-auto xl:mr-0 lg:max-w-max">
-                                        <a class="block py-4 px-10 w-full text-lg leading-5 text-white font-medium tracking-tighter font-heading text-center bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"
-                                            href="{{ route('front.raceDetails', $race->slug) }}">
-                                            {{ __('Read More') }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="relative w-full px-4">
+                    <x-race-card :race="$race" view="wide" />
                 </div>
             @endforeach
         </div>

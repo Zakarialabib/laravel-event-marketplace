@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
+use App\Enums\OrderStatus;
+use App\Enums\OrderType;
 use App\Helpers;
 use App\Models\OrderForms;
 use Illuminate\Contracts\View\Factory;
@@ -55,8 +57,8 @@ class OrderForm extends Component
             'name'    => $this->name,
             'phone'   => $this->phone,
             'address' => $this->address,
-            'type'    => OrderForms::PRODUCT_FORM,
-            'status'  => OrderForms::STATUS_PENDING,
+            'type'    => OrderType::PRODUCT,
+            'status'  => OrderStatus::PENDING,
             'subject' => __('New request for ').$this->product->name,
             'message' => $this->name.__(' has sent a request for ').$this->product->name,
         ]);

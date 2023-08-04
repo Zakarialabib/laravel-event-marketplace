@@ -2,7 +2,7 @@
     <div class="space-y-4 flex flex-col items-center justify-center my-4">
         @foreach ($options as $index => $option)
             <div class="flex flex-row w-full items-center space-x-4"
-                wire:key="option-field-{{ $option['id'] }}">
+                wire:key="option-field-{{ $index }}">
                 <select wire:model="options.{{ $index }}.type"
                     class="block w-full bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                     <option value="">{{ __('Choose an option') }}</option>

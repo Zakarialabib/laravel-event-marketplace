@@ -14,61 +14,59 @@
     @section('title', $race->name)
 
     <section style="background-image: url({{ $race->getFirstMediaUrl('local_files') }})"
-        class="relative table w-full py-64 bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
+        class="relative table w-full pt-36 pb-16 h-[400px] bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
         <div class="absolute inset-0 bg-black opacity-60"></div>
-        <div class="px-4">
-            <div class="grid grid-cols-1 text-center mt-10">
-                <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
-                    <h3
-                        class="uppercase mb-4 text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-bold text-white cursor-pointer">
-                        {{ $race->name }}
-                    </h3>
+        <div class="grid grid-cols-1 text-center mt-10 bottom-0 px-4">
+            <div class="text-center z-10 my-2">
+                <h3
+                    class="uppercase mb-4 text-2xl lg:text-5xl md:text-3xl sm:text-xl md:leading-normal leading-normal font-bold text-white cursor-pointer">
+                    {{ $race->name }}
+                </h3>
 
-                    <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-2 inline-block">
-                        <li
-                            class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-white pr-4">
-                            <a href="{{ route('front.index') }}">{{ __('Home') }}</a>
-                            <span class="px-2 text-white"> > </span>
-                        </li>
-                        <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white"
-                            aria-current="page">
-                            <a href="{{ URL::Current() }}">
-                                {{ $race->category->name }}
-                            </a>
-                            <span class="px-2 text-white"> > </span>
-                        </li>
+                <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-2 inline-block">
+                    <li
+                        class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-white pr-4">
+                        <a href="{{ route('front.index') }}">{{ __('Home') }}</a>
+                        <span class="px-2 text-white"> > </span>
+                    </li>
+                    <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white"
+                        aria-current="page">
+                        <a href="{{ URL::Current() }}">
+                            {{ $race->category->name }}
+                        </a>
+                        <span class="px-2 text-white"> > </span>
+                    </li>
 
-                        <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white"
-                            aria-current="page">
-                            <a href="{{ URL::Current() }}">
-                                {{ $race->name }}
-                            </a>
-                        </li>
-                    </ul>
+                    <li class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white"
+                        aria-current="page">
+                        <a href="{{ URL::Current() }}">
+                            {{ $race->name }}
+                        </a>
+                    </li>
+                </ul>
 
-                    <div class="px-4 mt-4 gap-[1.88rem] flex text-2xl items-center justify-between text-white">
-                        <div style="word-break: break-word;">
-                            <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Date</h3>
+                <div class="px-4 mt-4 gap-[1.88rem] flex text-2xl items-center justify-between text-white">
+                    <div style="word-break: break-word;">
+                        <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Date</h3>
 
-                            <p><strong class="font-bold">
-                                    {{ \Carbon\Carbon::parse($race->date)->format('l j F Y') }}
-                                </strong></p>
-                        </div>
-                        <div style="word-break: break-word;">
-                            <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Lieu</h3>
-                            <p>
-                                {{ $race?->location->name }}
-                            </p>
-                        </div>
-                        @if ($race->social_media)
-                            <div style="word-break: break-word;">
-                                <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Réseaux Sociaux</h3>
-                                <x-theme.social-media-icons :socialMedia="$race->social_media" />
-                            </div>
-                        @endif
+                        <p><strong class="font-bold">
+                                {{ \Carbon\Carbon::parse($race->date)->format('l j F Y') }}
+                            </strong></p>
                     </div>
-
+                    <div style="word-break: break-word;">
+                        <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Lieu</h3>
+                        <p>
+                            {{ $race?->location->name }}
+                        </p>
+                    </div>
+                    @if ($race->social_media)
+                        <div style="word-break: break-word;">
+                            <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Réseaux Sociaux</h3>
+                            <x-theme.social-media-icons :socialMedia="$race->social_media" />
+                        </div>
+                    @endif
                 </div>
+
             </div>
         </div>
     </section>
@@ -220,19 +218,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($race->calendar as $data)
+                                            @foreach (json_decode($race->calendar) as $data)
                                                 <tr class="border-b bg-gray-100">
-                                                    <td class="text-left py-2 px-3 font-bold">{{ $data['date'] }}</td>
+                                                    <td class="text-left py-2 px-3 font-bold">{{ $data->date }}</td>
                                                     <td class="py-2 px-3"></td>
                                                     <td class="py-2 px-3"></td>
                                                     <td class="py-2 px-3"></td>
                                                 </tr>
-                                                @foreach ($data['events'] as $event)
+                                                @foreach ($data->events as $event)
                                                     <tr class="border-b">
                                                         <td class="py-2 px-3"></td>
-                                                        <td class="py-2 px-3">{{ $event['start_time'] }}</td>
-                                                        <td class="py-2 px-3">{{ $event['end_time'] }}</td>
-                                                        <td class="py-2 px-3">{{ $event['activity'] }}</td>
+                                                        <td class="py-2 px-3">{{ $event->start_time }}</td>
+                                                        <td class="py-2 px-3">{{ $event->end_time }}</td>
+                                                        <td class="py-2 px-3">{{ $event->activity }}</td>
                                                     </tr>
                                                 @endforeach
                                             @endforeach
@@ -261,7 +259,7 @@
                             </p>
                             <div class="px-10 pb-6">
                                 <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
-                                    @foreach ($race->course as $index => $course)
+                                    @foreach (json_decode($race->course) as $index => $course)
                                         <div class="w-full">
                                             <button
                                                 class="w-full py-5 px-8 sm:py-2 sm:px-5 text-center font-bold text-green-800 uppercase border-b-2 border-green-400 focus:outline-none cursor-pointer"
@@ -277,27 +275,27 @@
                                                         'text-green-100': tabs === '{{ $index }}',
                                                         'border-green-800': tabs === '{{ $index }}',
                                                     }">
-                                                    {{ $course['name'] }}
+                                                    {{ $course->name }}
                                                 </h4>
                                             </button>
                                         </div>
                                     @endforeach
                                 </div>
                                 <div class="grid grid-cols-1 justify-center">
-                                    @foreach ($race->course as $index => $course)
+                                    @foreach (json_decode($race->course) as $index => $course)
                                         <div x-show="tabs === '{{ $index }}'">
                                             <div role="{{ $index }}" id="tab-panel-{{ $loop->index }}"
                                                 class="w-full mb-4 border border-green-400">
                                                 <ul class="flex flex-col text-center justify-center py-10">
                                                     <li class="leading-6 text-base md:text-lg">
-                                                        Type: ({{ $course['type'] }})
+                                                        Type: ({{ $course->type }})
                                                     </li>
                                                     <li class="leading-6 text-base md:text-lg">
-                                                        Distance: {{ $course['distance'] }} km
+                                                        Distance: {{ $course->distance }} km
                                                     </li>
                                                     @if ($race->category->name === 'Trail Running')
                                                         <li class="leading-6 text-base md:text-lg">
-                                                            Elevation Gain: {{ $course['elevation_gain'] }} m
+                                                            Elevation Gain: {{ $course->elevation_gain }} m
                                                         </li>
                                                     @endif
                                                     <li class="leading-6 text-base md:text-lg">
@@ -305,7 +303,7 @@
                                                     </li>
                                                     <li class="leading-6 px-6 py-4 text-base md:text-lg">
                                                         <p>
-                                                            {{ $course['content'] }}
+                                                            {{ $course->content }}
                                                         </p>
                                                     </li>
                                                 </ul>
@@ -358,10 +356,10 @@
                             {{ __('Sponsors') }}
                         </p>
                         <div class="w-full flex-wrap mx-auto px-10">
-                            @foreach ($race->sponsors as $sponsor)
+                            @foreach (json_decode($race->sponsors) as $sponsor)
                                 <div class="w-1/4 basis-full float-left">
-                                    <a href="{{ $sponsor['link'] }}" class="text-center">
-                                        <img src="" alt="{{ $sponsor['name'] }}"
+                                    <a href="{{ $sponsor->link }}" class="text-center">
+                                        <img src="" alt="{{ $sponsor->name }}"
                                             class="inline-block h-24 align-middle w-20">
                                     </a>
                                 </div>

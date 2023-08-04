@@ -155,8 +155,5 @@ class Brands extends Component
         return Category::active()->with('subcategories')->get();
     }
 
-    public function getSubcategoriesProperty()
-    {
-        return Subcategory::active()->get();
-    }
+   
 }

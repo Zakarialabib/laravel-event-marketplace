@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    
+
 
     <x-table>
         <x-slot name="thead">
@@ -58,11 +58,8 @@
                                 class="attribute text-white" data-toggle="modal" data-target="#attribute"> <i
                                     class="fas fa-edit"></i>{{ __('Create') }}</a>
                             @if ($category->attributes()->count() > 0)
-                                <a href="{{ route('admin-attr-manage', $category->id), '?type=category' }}"
-                                    class="edit">
-                                    <i class="fas fa-edit"></i>
-                                    {{ __('Manage') }}
-                                </a>
+                                <i class="fas fa-edit"></i>
+                                {{ __('Manage') }}
                             @endif
                         </div>
                     </x-table.td>
@@ -80,8 +77,9 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link data-href="{{ route('admin-cat-edit', $category->id) }}" class="edit"
-                                    data-toggle="modal" data-target="#modal1"> <i class="fas fa-edit"></i>
+                                <x-dropdown-link data-href="{{ route('admin-cat-edit', $category->id) }}"
+                                    class="edit" data-toggle="modal" data-target="#modal1"> <i
+                                        class="fas fa-edit"></i>
                                     {{ __('Edit') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link href="javascript:;"

@@ -36,7 +36,7 @@
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app.97a20c35.css"
+      "assets/app.caf8f090.css"
     ],
     "assets": [
       "assets/fa-brands-400.74833209.woff2",
@@ -50,12 +50,12 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app.edf430ac.css",
+    "file": "assets/app.e9785420.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.css": {
-    "file": "assets/app.97a20c35.css",
+    "file": "assets/app.caf8f090.css",
     "src": "resources/js/app.css"
   }
 }

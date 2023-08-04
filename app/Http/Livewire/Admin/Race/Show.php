@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Admin\Race;
 use App\Models\Race;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
-
 class Show extends Component
 {
     public $race;
@@ -21,8 +20,8 @@ class Show extends Component
     public function showModal($id)
     {
         abort_if(Gate::denies('race_show'), 403);
-
-        $this->race = Race::where('id', $id)->first();
+        
+        $this->race = Race::findOrFail($id);
 
         $this->showModal = true;
     }

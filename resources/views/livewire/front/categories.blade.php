@@ -8,7 +8,7 @@
     @endsection
 
     <section x-data="{ showSidebar: false }">
-        <section class="relative table w-full bg-green-700 pt-16 pb-24">
+        <section class="relative table w-full bg-green-700 py-16">
             <div class="px-4">
                 <div class="grid grid-cols-1 text-center mt-10">
                     <h3
@@ -19,7 +19,7 @@
                             {{ __('Categories') }}
                         @endif
                     </h3>
-                    <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
+                    <div class="text-center z-10 my-2">
                         <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
                             <li
                                 class="inline breadcrumb-item uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-green-200 pr-4">
@@ -32,10 +32,12 @@
                                     <a href="{{ URL::Current() }}">
                                         {{ $category_name }}
                                     </a>
+                                @else
+                                    {{ __('Categories') }}
                                 @endif
                             </li>
                         </ul>
-                        <div class="w-full sm:w-auto flex justify-center my-2 overflow-x-scroll">
+                        <div class="w-full sm:w-auto flex justify-center my-2">
                             <button type="button" @click="showSidebar = true"
                                 class="flex lg:hidden items-center justify-center w-12 h-12 duration-500 ease-in-out text-white hover:text-green-200">
                                 <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round"

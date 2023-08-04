@@ -40,12 +40,7 @@ class Options extends Component
 
     public function mount()
     {
-        $this->options = [
-            [
-                'type'  => '',
-                'value' => '',
-            ],
-        ];
+        $this->options = [];
     }
 
     public function render(): View

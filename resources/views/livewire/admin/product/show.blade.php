@@ -8,7 +8,7 @@
             <div class="px-4 mx-auto mb-4">
                 <div class="w-full mb-3">
                     <div class="flex justify-center px-3">
-                        <img src="{{ asset('images/products/' . $product?->image) }}" alt="{{ $product?->name }}"
+                        <img src="" alt="{{ $product?->name }}"
                             class="w-32 h-32 rounded-full">
                     </div>
                 </div>

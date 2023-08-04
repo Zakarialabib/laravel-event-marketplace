@@ -15,13 +15,13 @@ class ThankYou extends Component
 
     public $order;
 
-    public function mount($order)
+    public function mount($id)
     {
-        $this->order = Order::findOrFail($order->id);
+        $this->order = Order::findOrFail($id);
     }
-
+   
     public function render(): View|Factory
     {
-        return view('livewire.front.thank-you');
+        return view('livewire.front.thank-you')->extends('layouts.app');
     }
 }

@@ -57,7 +57,7 @@
 
                     @if ($race->course)
                         <ul class="flex items-center gap-4">
-                            @foreach ($race->course as $key => $course)
+                            @foreach (json_decode($race->course) as $key => $course)
                                 <li class="text-base inline-flex md:text-lg">
                                     <span
                                         class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
@@ -140,7 +140,7 @@
             @if ($race->course)
                 <ul
                     class="flex flex-wrap gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
-                    @foreach ($race->course as $key => $course)
+                    @foreach (json_decode($race->course) as $key => $course)
                         <li class="text-base inline-flex md:text-lg">
                             <span
                                 class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
@@ -227,11 +227,11 @@
                 <div class="w-full px-12 pb-6 self-end">
                     <ul
                         class="flex flex-wrap gap-4 w-full pb-4 justify-center text-center border-b border-gray-100 dark:border-gray-800 ">
-                        @foreach ($race->course as $key => $course)
+                        @foreach (json_decode($race->course) as $key => $course)
                             <li class="text-base inline-flex md:text-lg">
                                 <p
                                     class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
-                                    {{ $course['name'] }} - {{ $course['distance'] }} km - {{ $course['type'] }}
+                                    {{ $key }}  {{ $course->name }}  - {{ $course->distance }} km - {{ $course->type }}
                                 </p>
                             </li>
                         @endforeach
@@ -256,7 +256,7 @@
                         </p>
                     </div>
                 @endif
-                    @foreach ($race->course as $key => $course)
+                    @foreach (json_decode($race->course) as $key => $course)
                         <p class="text-lg font-bold uppercase">
                             {{ __('Name') }}: {{ $course['name'] }}
                         </p>

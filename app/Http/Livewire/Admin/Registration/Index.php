@@ -23,6 +23,7 @@ class Index extends Component
     public array $selected = [];
     public array $paginationOptions;
     public $activeTab;
+    public $showTab;
     public $selectedRace;
 
     protected $queryString = [

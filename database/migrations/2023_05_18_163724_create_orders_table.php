@@ -23,6 +23,7 @@ return new class () extends Migration {
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('race_id')->nullable()->constrained('races');
             $table->foreignId('product_id')->nullable()->constrained('products');
+            $table->foreignId('shipping_id')->nullable()->constrained('shippings');
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ namespace App;
 use App\Models\Category;
 use App\Models\ProductCategory;
 use App\Models\Currency;
+use App\Models\Brand;
 use App\Models\Page;
 use App\Models\Settings;
 use App\Models\Blog;
@@ -114,11 +115,6 @@ class Helpers
         return Category::find($category_id)->name ?? null;
     }
 
-    public static function subcategoryName($subcategory_id)
-    {
-        return Subcategory::find($subcategory_id)->name;
-    }
-
     public static function brandName($brand_id)
     {
         return Brand::find($brand_id)->name;
@@ -220,29 +216,6 @@ class Helpers
             'name' => $category,
             'slug' => $slug,
         ])->id;
-    }
-
-    /**
-     * @param mixed $subcategory
-     * @param mixed $category
-     *
-     * @return mixed
-     */
-    public static function createSubcategories($subcategories, $category)
-    {
-        $subcategoryIds = [];
-
-        foreach (explode(',', $subcategories) as $subcategory) {
-            $subcategoryModel = Subcategory::create([
-                'name'        => trim($subcategory),
-                'slug'        => Str::slug($subcategory, '-'),
-                'category_id' => Category::where('name', $category)->first()->id,
-                'language'    => '3',
-            ]);
-            $subcategoryIds[] = $subcategoryModel->id;
-        }
-
-        return $subcategoryIds;
     }
 
     /**

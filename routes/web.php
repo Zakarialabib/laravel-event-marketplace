@@ -16,6 +16,7 @@ use App\Http\Livewire\Front\BlogShow;
 use App\Http\Livewire\Front\DynamicPage;
 use App\Http\Livewire\Front\RaceDetails;
 use App\Http\Controllers\UploadController;
+use App\Http\Livewire\Front\ThankYou;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,7 @@ Route::get('/approval', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/confirmation-inscription', CheckoutRace::class)->name('front.checkout-race');
+    Route::get('/thankyou/{id}', ThankYou::class)->name('front.thankyou');
 
     Route::get('/mon-compte', AccountIndex::class)->name('front.myaccount');
 });

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Email;
 
-use App\Models\Emailsetting;
+use App\Models\EmailTemplate;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -53,7 +53,7 @@ class Create extends Component
     {
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->email_setting = new Emailsetting();
+        $this->email_setting = new EmailTemplate();
         $this->description = '';
         $this->message = '';
         $this->createModal = true;

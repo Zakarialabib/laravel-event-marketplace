@@ -9,7 +9,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Product;
-use App\Models\Subcategory;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -24,35 +23,14 @@ class FrontController extends Controller
         return view('front.product', compact('product'));
     }
 
-    public function categoryPage($slug)
-    {
-        $category = Category::where('slug', $slug)->first() ?? abort(404);
-
-        return view('front.category-page', compact('category'));
-    }
-
     public function subcategories()
     {
         return view('front.subcategories');
     }
 
-    public function SubcategoryPage($slug)
-    {
-        $subcategory = Subcategory::where('slug', $slug)->first() ?? abort(404);
-
-        return view('front.subcategory-page', compact('subcategory'));
-    }
-
     public function brands()
     {
         return view('front.brands');
-    }
-
-    public function brandPage($slug)
-    {
-        $brand = Brand::where('slug', $slug)->first() ?? abort(404);
-
-        return view('front.brand-page', compact('brand'));
     }
 
     public function contact()

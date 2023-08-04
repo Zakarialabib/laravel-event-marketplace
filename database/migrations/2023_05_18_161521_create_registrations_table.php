@@ -14,8 +14,6 @@ return new class () extends Migration {
             $table->uuid('id')->primary();
             $table->foreignUuid('participant_id')->constrained('participants');
             $table->foreignUuid('race_id')->constrained('races');
-            // $table->foreignId('order_id')->constrained('orders');
-            // $table->foreignId('payment_id')->constrained('payments');
             $table->string('registration_number')->unique();
             $table->timestamp('registration_date')->nullable();
             $table->string('status');

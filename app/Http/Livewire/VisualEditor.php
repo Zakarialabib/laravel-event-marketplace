@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -16,6 +17,7 @@ class VisualEditor extends Component
 
     public $menuItems = [];
     public $cardContent = [];
+    public $textContent = [];
     public $listItems = [];
     public $headerSettings = [];
     public $footerSettings = [];

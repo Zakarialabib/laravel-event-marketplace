@@ -6,14 +6,13 @@ namespace App\Http\Livewire\Admin\Language;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use File;
-use App;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\App;
 
 class Create extends Component
 {
     use LivewireAlert;
 
-    /** @var string[] */
     public $listeners = ['createLanguage'];
 
     public array $languages = [];
@@ -21,7 +20,6 @@ class Create extends Component
     public $language;
     public $name;
     public $code;
-
     public $createLanguage = false;
 
     protected $rules = [

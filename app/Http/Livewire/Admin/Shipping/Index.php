@@ -27,8 +27,6 @@ class Index extends Component
 
     public $shipping;
 
-    public $refreshIndex;
-
     public array $orderable;
 
     public string $search = '';

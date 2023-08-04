@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Mail\ContactForm as MailContactForm;
+use App\Mail\MailContactForm;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
@@ -55,7 +55,7 @@ class ContactForm extends Component
 
         $user = User::find(1);
         $user_email = $user->email;
-        Mail::to($user_email)->send(new MailContactForm($contact));
+        Mail::to($user_email)->send(new MailContactForm($this->contact));
     }
 
     /**

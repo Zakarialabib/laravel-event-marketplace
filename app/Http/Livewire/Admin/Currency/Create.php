@@ -31,8 +31,7 @@ class Create extends Component
         $this->currency = $currency;
     }
 
-    /** @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory */
-    public function render(): View|Factory
+    public function render()
     {
         abort_if(Gate::denies('currency_create'), 403);
 

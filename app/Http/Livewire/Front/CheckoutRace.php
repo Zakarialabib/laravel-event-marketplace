@@ -6,33 +6,32 @@ namespace App\Http\Livewire\Front;
 
 use App\Mail\CheckoutMail;
 use App\Models\Order;
+use App\Models\Participant;
+use App\Models\Registration;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-
+use App\Enums\PaymentStatus;
+use App\Enums\OrderType;
+use App\Enums\OrderStatus;
 class CheckoutRace extends Component
 {
     use LivewireAlert;
-
     public $listeners = [
         'checkout'            => 'checkout',
         'checkoutCartUpdated' => '$refresh',
         'confirmed',
     ];
-
     public $removeFromCart;
-
-    public $payment_method = 'cash';
-
+    public $payment_method = 'card';
     public $total;
-
     public $status;
-
     public $cartTotal;
-
+    public $subTotal;
     public $raceId;
 
     public function confirmed()
@@ -52,33 +51,53 @@ class CheckoutRace extends Component
         return Cart::instance('races')->subtotal();
     }
 
+    public function getParticipantProperty()
+    {
+        return Participant::where('user_id', Auth::user()->id)->first();
+    }
     public function checkout()
     {
         if (Cart::instance('races')->count() === 0) {
             $this->alert('error', __('Your cart is empty'));
         }
-
-        $order = Order::create([
-            'reference'      => Order::generateReference(),
-            'payment_method' => $this->payment_method,
-            'payment_status' => PaymentStatus::PENDING,
-            'type'           => OrderType::RACE,
-            'date'           => now(),
-            'amount'         => $this->cartTotal,
-            'user_id'        => auth()->user()->id,
-            // 'race_id'          => $
-            'status' => OrderStatus::PENDING,
-        ]);
-
-        Mail::to($order->user->email)->send(new CheckoutMail($order, $user));
-
+    
+        $cartItems = Cart::instance('races')->content();
+    
+        $order = null; 
+    
+        foreach ($cartItems as $item) {
+    
+            $order = Order::create([
+                'reference'      => Order::generateReference(),
+                'payment_method' => $this->payment_method,
+                'payment_status' => PaymentStatus::PENDING,
+                'type'           => OrderType::REGISTRATION,
+                'date'           => now(),
+                'amount'         => $this->cartTotal,
+                'user_id'        => Auth::user()->id,
+                'race_id'        => $item->id,
+                'status'         => OrderStatus::PENDING,
+            ]);
+    
+            $registration = Registration::where('participant_id', Auth::user()->id)
+                ->where('race_id', $item->id)
+                ->first();
+    
+            if ($registration) {
+                $registration->update(['order_id' => $order->id]);
+            }
+    
+            // Mail::to($order->user->email)->send(new CheckoutMail($order, $order->user));
+        }
+    
         Cart::instance('races')->destroy();
-
+    
         $this->alert('success', __('Order placed successfully!'));
-
-        return redirect()->route('front.thankyou', ['order' => $order->id]);
+    
+        return redirect()->route('front.thankyou', $order->id);
     }
-
+    
+    
     public function removeFromCart($rowId)
     {
         $this->raceId = $rowId;
@@ -95,12 +114,15 @@ class CheckoutRace extends Component
             ]
         );
     }
-
-    public function getCartTotalProperty()
+    public function mount()
     {
-        return Cart::instance('races')->total();
-    }
+        $subtotal = Cart::instance('races')->subtotal();
 
+        $this->subTotal = str_replace(',', '', $subtotal);
+
+        $this->cartTotal = $this->subTotal;
+    }    
+    
     public function render(): View|Factory
     {
         return view('livewire.front.checkout-race')->extends('layouts.app');

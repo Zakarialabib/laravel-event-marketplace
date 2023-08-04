@@ -11,21 +11,19 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
     use WithPagination;
     use WithSorting;
-    use WithFileUploads;
     use LivewireAlert;
 
     public $race;
 
     public $listeners = [
         'refreshIndex' => '$refresh',
-        'delete', 'exportAll',
+        'delete',
     ];
 
     public int $perPage;

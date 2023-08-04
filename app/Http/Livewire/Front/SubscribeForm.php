@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
+use App\Enums\OrderType;
+use App\Enums\Status;
 use App\Helpers;
 use App\Models\OrderForms;
 use Illuminate\Contracts\View\Factory;
@@ -49,8 +51,8 @@ class SubscribeForm extends Component
             'name'    => $this->name,
             'phone'   => $this->phone,
             'email'   => $this->email,
-            'type'    => OrderForms::RACE_FORM,
-            'status'  => OrderForms::STATUS_PENDING,
+            'type'    => OrderType::REGISTRATION,
+            'status'  => Status::ACTIVE,
             'subject' => __('New request for ').$this->product->name,
             'message' => $this->name.__(' has sent a request for ').$this->product->name,
         ]);

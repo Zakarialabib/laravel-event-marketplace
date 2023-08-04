@@ -28,8 +28,8 @@ class Catalog extends Component
 
     public $selectedCategory = null;
 
-    public $minPrice;
-    public $maxPrice;
+    public $minPrice = 0;
+    public $maxPrice = 0;
 
     protected $queryString = [
         // 'category_id' => ['except' => '', 'as' => 'c'],
@@ -78,8 +78,8 @@ class Catalog extends Component
             'date-asc'   => __('Date, new to old'),
             'date-desc'  => __('Date, old to new'),
         ];
-        $this->minPrice = Product::active()->min('price');
-        $this->maxPrice = Product::active()->max('price');
+        $this->minPrice = Product::active()->min('price') ?? 0;
+        $this->maxPrice = Product::active()->max('price') ?? 0;
     }
 
     public function render()

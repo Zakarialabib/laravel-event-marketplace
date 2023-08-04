@@ -18,6 +18,7 @@ trait HasGlobalDate
 
     public function setDateAttribute($value)
     {
-        $this->attributes['date'] = Carbon::createFromFormat('Y-m-d', $value);
+        $this->attributes['date'] = Carbon::parse($value)->format('Y-m-d');
     }
+    
 }

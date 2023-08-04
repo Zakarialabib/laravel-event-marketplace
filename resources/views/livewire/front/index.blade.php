@@ -4,7 +4,7 @@
     <x-topheader />
 
     <div class="relative mx-auto">
-        <section class="w-full mx-auto bg-gray-900 h-screen relative">
+        <section class="w-full mx-auto bg-gray-900 h-auto relative">
             <x-theme.slider :sliders="$this->sliders" />
         </section>
         <section class="lg:px-10 sm:px-6 lg:py-16 md:py-14">

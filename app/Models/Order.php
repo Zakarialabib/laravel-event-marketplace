@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Traits\HasGlobalDate;
+use App\Traits\HasUuid;
 
 class Order extends Model
 {
     use HasFactory;
     use HasGlobalDate;
-
+    use HasUuid;
     public const ATTRIBUTES = [
         'id',
         'user_id',
@@ -26,6 +27,7 @@ class Order extends Model
         'status',
         'payment_status',
         'shipping_status',
+        'shipping_id',
         'type',
         'date',
     ];
@@ -34,12 +36,14 @@ class Order extends Model
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
+        'id',
         'user_id',
         'race_id',
         'service_id',
         'product_id',
         'amount',
         'payment_method',
+        'reference',
         'status',
         'payment_status',
         'shipping_status',

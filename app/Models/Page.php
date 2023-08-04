@@ -34,13 +34,6 @@ class Page extends Model implements HasMedia
         'satuts' => Status::class,
     ];
 
-    /**
-     * Scope a query to only include active products.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     *
-     * @return void
-     */
     public function scopeActive($query)
     {
         return $query->where('status', Status::ACTIVE);

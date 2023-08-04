@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Front;
 
 use App\Models\FeaturedBanner;
 use App\Models\Product;
+use App\Models\Partner;
 use App\Models\Race;
 use App\Models\Section;
 use App\Models\Slider;

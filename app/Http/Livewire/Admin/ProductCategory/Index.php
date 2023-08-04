@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\ProductCategory;
 
 use App\Http\Livewire\WithSorting;
-use App\Imports\CategoriesImport;
 use App\Models\ProductCategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,7 +13,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -119,29 +117,5 @@ class Index extends Component
         $category->delete();
 
         $this->alert('success', __('ProductCategory deleted successfully.'));
-    }
-
-    public function importModal()
-    {
-        abort_if(Gate::denies('category_access'), 403);
-
-        $this->importModal = true;
-    }
-
-    public function import()
-    {
-        abort_if(Gate::denies('category_access'), 403);
-
-        $this->validate([
-            'file' => 'required|mimes:xlsx,xls,csv,txt',
-        ]);
-
-        $file = $this->file('file');
-
-        Excel::import(new CategoriesImport(), $file);
-
-        $this->alert('success', __('Categories imported successfully.'));
-
-        $this->importModal = false;
     }
 }

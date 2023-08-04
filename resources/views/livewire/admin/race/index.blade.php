@@ -1,4 +1,6 @@
 <div>
+    @section('title', __('Races'))
+
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
@@ -37,7 +39,7 @@
             </div>
             <div class="float-right">
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" wire:click="$dispqtch('createModal')">
+                <x-button primary type="button" wire:click="$emit('createModal')">
                     {{ __('Create Race') }}
                 </x-button>
             </div>
@@ -45,117 +47,118 @@
     </section>
 
     <x-card>
-        <div class="flex flex-wrap justify-center">
-            <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap items-center gap-2 my-2">
-                <select wire:model="perPage" name="perPage"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
-                    @foreach ($paginationOptions as $value)
-                        <option value="{{ $value }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-                @if ($this->selected)
-                    <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
-                        <i class="fas fa-trash"></i>
-                    </x-button>
-                    <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
-                        {{ __('EXCEL') }}
-                    </x-button>
-                    <x-button warning type="button" wire:click="exportSelected" wire:loading.attr="disabled">
-                        {{ __('PDF') }}
-                    </x-button>
-                @endif
+        <div>
+            <div class="flex flex-wrap justify-center">
+                <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap items-center gap-2 my-2">
+                    <select wire:model="perPage" name="perPage"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
+                        @foreach ($paginationOptions as $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                    @if ($this->selected)
+                        <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
+                            <i class="fas fa-trash"></i>
+                        </x-button>
+                        <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
+                            {{ __('EXCEL') }}
+                        </x-button>
+                        <x-button warning type="button" wire:click="exportSelected" wire:loading.attr="disabled">
+                            {{ __('PDF') }}
+                        </x-button>
+                    @endif
 
-                @if ($this->selectedCount)
-                    <p class="text-sm leading-5">
-                        <span class="font-medium">
-                            {{ $this->selectedCount }}
-                        </span>
-                        {{ __('Entries selected') }}
-                    </p>
-                @endif
+                    @if ($this->selectedCount)
+                        <p class="text-sm leading-5">
+                            <span class="font-medium">
+                                {{ $this->selectedCount }}
+                            </span>
+                            {{ __('Entries selected') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
+                    <input type="text" wire:model.debounce.300ms="search"
+                        class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                        placeholder="{{ __('Search') }}" />
+                </div>
             </div>
-            <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
-                <input type="text" wire:model="search"
-                    class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                    placeholder="{{ __('Search') }}" />
-            </div>
-        </div>
 
-        <x-table>
-            <x-slot name="thead">
-                <x-table.th>
-                    <input type="checkbox" wire:click="selectAll" />
-                </x-table.th>
-                <x-table.th>
-                    {{ __('Image') }}
-                </x-table.th>
-                <x-table.th>
-                    {{ __('Date') }}
-                </x-table.th>
-                <x-table.th sortable wire:click="sortBy('name')" :direction="$sorts['name'] ?? null">
-                    {{ __('Name') }}
-                </x-table.th>
-                <x-table.th sortable wire:click="sortBy('price')" :direction="$sorts['price'] ?? null">
-                    {{ __('Price') }} / {{ __('Old Price') }}
-                </x-table.th>
-                <x-table.th sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">
-                    {{ __('Status') }}
-                </x-table.th>
-                <x-table.th>
-                    {{ __('Actions') }}
-                </x-table.th>
-            </x-slot>
-            <x-table.tbody>
-                @forelse($races as $race)
-                    <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $race->id }}">
-                        <x-table.td>
-                            <input type="checkbox" wire:model="selected" id="selected{{ $race->id }}"
-                                wire:loading.attr="disabled">
-                        </x-table.td>
-                        <x-table.td>
-                            @if ($race->hasMedia('local_files'))
+            <x-table>
+                <x-slot name="thead">
+                    <x-table.th>
+                        <input type="checkbox" wire:click="selectAll" />
+                    </x-table.th>
+                    <x-table.th>
+                        {{ __('Image') }}
+                    </x-table.th>
+                    <x-table.th>
+                        {{ __('Date') }}
+                    </x-table.th>
+                    <x-table.th sortable wire:click="sortBy('name')" :direction="$sorts['name'] ?? null">
+                        {{ __('Name') }}
+                    </x-table.th>
+                    <x-table.th sortable wire:click="sortBy('price')" :direction="$sorts['price'] ?? null">
+                        {{ __('Price') }} / {{ __('Old Price') }}
+                    </x-table.th>
+                    <x-table.th sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">
+                        {{ __('Status') }}
+                    </x-table.th>
+                    <x-table.th>
+                        {{ __('Actions') }}
+                    </x-table.th>
+                </x-slot>
+                <x-table.tbody>
+                    @forelse($races as $race)
+                        <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $race->id }}">
+                            <x-table.td>
+                                <input type="checkbox" wire:model="selected" id="selected{{ $race->id }}"
+                                    wire:loading.attr="disabled">
+                            </x-table.td>
+                            <x-table.td>
+                                @if ($race->hasMedia('local_files'))
                                     <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
                                         class="w-10 h-10 rounded-full object-cover">
-                            @else
-                                <p>{{ __('No race image available') }}.</p>
-                            @endif
-                        </x-table.td>
-                        <x-table.td>
-                            {{ $race->date }}
-                        </x-table.td>
-                        <x-table.td>
-                            <button type="button" wire:click="$dispatch('showModal',{{ $race->id }})"
-                                wire:loading.attr="disabled">
-                                {{ Str::limit($race->name, 55) }}
-                            </button>
-                            <a class="ml-2 text-blue-500" href="{{ route('front.raceDetails', $race->slug) }}"
-                                target="_blank">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <br>
-                            <small>
-                                {{ $race->category->name }} - {{ $race->location->name }}
-                            </small>
-                        </x-table.td>
+                                @else
+                                    <p>{{ __('No race image available') }}.</p>
+                                @endif
+                            </x-table.td>
+                            <x-table.td>
+                                {{ $race->date }}
+                            </x-table.td>
+                            <x-table.td>
+                                <button type="button" wire:click="$emit('showModal', {{$race->id}})">
+                                    {{ Str::limit($race->name, 55) }}
+                                </button>
+                                <a class="ml-2 text-blue-500" href="{{ route('front.raceDetails', $race->slug) }}"
+                                    target="_blank">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <br>
+                                <small>
+                                    {{ $race->category->name }} - {{ $race->location->name }}
+                                </small>
+                            </x-table.td>
 
-                        <x-table.td>
-                            {{ Helpers::format_currency($race->price) }}
-                        </x-table.td>
+                            <x-table.td>
+                                {{ Helpers::format_currency($race->price) }}
+                            </x-table.td>
 
-                        <x-table.td>
-                        </x-table.td>
+                            <x-table.td>
+                                <livewire:toggle-button :model="$race" field="status" key="{{ $race->id }}" />
+                            </x-table.td>
 
-                        <x-table.td>
-                            <x-dropdown
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
-                                <x-slot name="trigger">
-                                    <button type="button"
-                                        class="px-4 text-base font-semibold text-gray-500 hover:text-sky-800">
-                                        <i class="fas fa-angle-double-down"></i>
-                                    </button>
-                                </x-slot>
-                                <x-slot name="content">
-                                    {{-- <x-dropdown-link wire:click="$dispqtch('highlightModal',{{ $race->id }})"
+                            <x-table.td>
+                                <x-dropdown
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
+                                    <x-slot name="trigger">
+                                        <button type="button"
+                                            class="px-4 text-base font-semibold text-gray-500 hover:text-sky-800">
+                                            <i class="fas fa-angle-double-down"></i>
+                                        </button>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        {{-- <x-dropdown-link wire:click="$emit('highlightModal',{{ $race->id }})"
                                             wire:loading.attr="disabled">
                                             <i class="fas fa-eye"></i>
                                             {{ __('Highlighted') }}
@@ -165,43 +168,50 @@
                                             <i class="fas fa-clone"></i>
                                             {{ __('Clone') }}
                                         </x-dropdown-link> --}}
-                                    <x-dropdown-link wire:click="$dispqtch('showModal',{{ $race->id }})"
-                                        wire:loading.attr="disabled">
-                                        <i class="fas fa-eye"></i>
-                                        {{ __('View') }}
-                                    </x-dropdown-link>
-                                    <x-dropdown-link href="{{ route('admin.race.update', $race->name) }}"
-                                        wire:loading.attr="disabled">
-                                        <i class="fas fa-edit"></i>
-                                        {{ __('Edit') }}
-                                    </x-dropdown-link>
-                                    <x-dropdown-link wire:click="$dispqtch('deleteModal', {{ $race->id }})"
-                                        wire:loading.attr="disabled">
-                                        <i class="fas fa-trash-alt"></i>
-                                        {{ __('Delete') }}
-                                    </x-dropdown-link>
-                                </x-slot>
-                            </x-dropdown>
-                        </x-table.td>
-                    </x-table.tr>
-                @empty
-                    <x-table.tr>
-                        <x-table.td colspan="10" class="text-center">
-                            {{ __('No entries found.') }}
-                        </x-table.td>
-                    </x-table.tr>
-                @endforelse
-            </x-table.tbody>
-        </x-table>
+                                        <x-dropdown-link wire:click="$emit('showModal','{{$race->id}}')"
+                                            wire:loading.attr="disabled">
+                                            <i class="fas fa-eye"></i>
+                                            {{ __('View') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link href="{{ route('admin.race.update', $race->name) }}"
+                                            wire:loading.attr="disabled">
+                                            <i class="fas fa-edit"></i>
+                                            {{ __('Edit') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link wire:click="$emit('deleteModal','{{ $race->id }}')"
+                                            wire:loading.attr="disabled">
+                                            <i class="fas fa-trash-alt"></i>
+                                            {{ __('Delete') }}
+                                        </x-dropdown-link>
+                                    </x-slot>
+                                </x-dropdown>
+                            </x-table.td>
+                        </x-table.tr>
+                    @empty
+                        <x-table.tr>
+                            <x-table.td colspan="10" class="text-center">
+                                {{ __('No entries found.') }}
+                            </x-table.td>
+                        </x-table.tr>
+                    @endforelse
+                </x-table.tbody>
+            </x-table>
 
-        <p class="card-body pt-3">
-            {{ $races->links() }}
-        </p>
-
-        <!-- Show Modal -->
-      
-
+            <p class="card-body pt-3">
+                {{ $races->links() }}
+            </p>
+            
+            
+        </div>
     </x-card>
+    @livewire('admin.race.create')
+    <!-- Show Modal -->
+    @livewire('admin.race.show', ['race' => $race])
+    <!-- End Show Modal -->
+
+    <!-- Image Modal -->
+    {{-- @livewire('admin.race.image', ['race' => $race] , key($race->id)) --}}
+    <!-- End Image Modal -->
 
     @push('scripts')
         <script>
@@ -217,7 +227,7 @@
                         confirmButtonText: __("Yes, delete it!")
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.livewire.dispqtch('delete', raceId)
+                            window.livewire.emit('delete', raceId)
                         }
                     })
                 })

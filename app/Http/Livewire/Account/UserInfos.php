@@ -12,6 +12,7 @@ class UserInfos extends Component
     use LivewireAlert;
 
     public $user;
+    public $email;
 
     protected function rules()
     {

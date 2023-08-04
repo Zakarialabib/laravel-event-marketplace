@@ -68,10 +68,7 @@ class Subcategories extends Component
         $this->orderable = (new Product())->orderable;
     }
 
-    public function getSubcategoriesProperty()
-    {
-        return Subcategory::active()->get();
-    }
+   
 
     public function render(): View|Factory
     {

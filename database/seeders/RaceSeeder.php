@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Helpers;
 use App\Models\Race;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -17,12 +18,10 @@ class RaceSeeder extends Seeder
      */
     public function run()
     {
-        Race::insert([
-            [
+        $race = Race::create([
                 'id'                    => Str::uuid(),
                 'name'                  => 'Triathlon Dar Bouazza',
                 'description'           => 'Le Triathlon Dar Bouazza est un événement sportif qui se déroule à Dar Bouazza, Casablanca, Maroc. Il s\'agit d\'un triathlon de distance olympique (1,5 km de natation, 40 km de vélo et 10 km de course à pied) qui se déroule sur 3 jours.',
-                'images'                => \App\Helpers::addMediaFromUrlToCollection(new Race(), 'https://static.lematin.ma/files/lematin/images/articles/2017/09/Triathlon-.jpg', 'local_files')->file_name,
                 'date'                  => '2023-10-10',
                 'slug'                  => 'triathlon-dar-bouazza-casablanca',
                 'race_location_id'      => 1,
@@ -44,19 +43,19 @@ class RaceSeeder extends Seeder
                     ['name' => 'XYZ Corporation', 'image' => 'https://example.com/images/xyz.png', 'link' => 'https://www.xyz.com'],
                 ]),
                 'course' => json_encode([
-                    'name' => [
+                    [
                         'name'     => 'Swim',
                         'distance' => 1.5, // Swimming distance in km
                         'nature'   => 'Ocean', // Nature of the swimming course
                         'content'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                     ],
-                    'name' => [
+                    [
                         'name'     => 'Bike',
                         'distance' => 40, // Cycling distance in km
                         'type'     => 'Roulant', // Type of cycling course
                         'content'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                     ],
-                    'name' => [
+                    [
                         'name'     => 'Run',
                         'distance' => 10, // Running distance in km
                         'type'     => 'Valloné', // Type of running course
@@ -121,8 +120,8 @@ class RaceSeeder extends Seeder
                     ],
                 ]),
                 'status' => true,
-            ],
-            // Add more races if needed...
         ]);
+
+        Helpers::addMediaFromUrlToCollection($race, 'https://static.lematin.ma/files/lematin/images/articles/2017/09/Triathlon-.jpg', 'local_files');
     }
 }

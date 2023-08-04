@@ -108,8 +108,5 @@ class BrandPage extends Component
         return Category::active()->get();
     }
 
-    public function getSubcategoriesProperty()
-    {
-        return Subcategory::active()->get();
-    }
+   
 }

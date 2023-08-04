@@ -20,7 +20,7 @@ class Create extends Component
     use WithFileUploads;
 
     public $listeners = [
-        'createModal',
+        'createModal' => 'OpenModal',
     ];
 
     public $createModal = false;
@@ -41,11 +41,11 @@ class Create extends Component
 
     public $calendar = [];
 
-    public $description;
+    public $description = '';
 
     public array $listsForFields = [];
 
-    protected $rules = [
+    public array $rules = [
 
         'race.name'                  => ['required', 'string', 'max:255'],
         'race.date'                  => ['required', 'date', 'max:255'],
@@ -91,12 +91,62 @@ class Create extends Component
         $this->description = $value;
     }
 
-    public function createModal()
+    public function OpenModal()
     {
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
         $this->race = new Race();
+
+        $this->description = 'write your description here';
 
         $this->createModal = true;
     }
+
+    
+    public function addSocialMedia()
+    {
+        $this->social_media[] = [
+            'name'  => '',
+            'value' => '',
+        ];
+    }
+
+    public function removeSocialMedia($index)
+    {
+        unset($this->social_media[$index]);
+        $this->social_media = array_values($this->social_media);
+    }
+
+
+    public function addSponsor()
+    {
+        $this->sponsors[] = [
+            'name'  => '',
+            'image' => '',
+            'link'  => '',
+        ];
+    }
+
+    public function removeSponsor($index)
+    {
+        unset($this->sponsors[$index]);
+        $this->sponsors = array_values($this->sponsors);
+    }
+
+    
+    public function addFeature()
+    {
+        $this->features[] = '';
+    }
+
+    public function removeFeature($index)
+    {
+        unset($this->features[$index]);
+        $this->features = array_values($this->features);
+    }
+
 
     public function create()
     {

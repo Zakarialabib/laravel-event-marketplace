@@ -69,7 +69,7 @@
                                 <x-table.th>
                                     {{ __('Description') }}
                                 </x-table.th>
-                                <x-table.td>
+                                <x-table.td class="whitespace-pre-line">
                                     {!! $race?->description !!}
                                 </x-table.td>
                             </x-table.tr>

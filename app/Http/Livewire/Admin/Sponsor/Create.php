@@ -22,6 +22,7 @@ class Create extends Component
 
     public $sponsor;
 
+    /** @var mixed */
     public $image;
 
     public $image_url = null;

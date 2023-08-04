@@ -26,6 +26,7 @@ class Settings extends Component
     public $topBrands;
 
     public $status;
+    public $menuItems;
 
     public $featured_banner_id;
     public $page_id;
@@ -174,7 +175,7 @@ class Settings extends Component
 
     public function updatePagesettings($id)
     {
-        $this->settings = Pagesettings::where('page_id', $id)->first();
+        $this->settings = Pagesetting::where('page_id', $id)->first();
 
         $this->validate([
             'header'             => 'nullable|string',

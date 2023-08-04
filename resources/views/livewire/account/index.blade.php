@@ -1,7 +1,7 @@
 <div>
     @section('title', __('My Account'))
 
-    <section class="py-5 px-4 bg-gray-100">
+    <section class="py-24 px-4 bg-gray-100 h-auto my-auto flex items-center">
         <div class="table w-full py-5">
             <div class="mt-12 flex" x-data="{ activeTab: 'account' }">
                 <div class="w-1/4">

@@ -1,7 +1,7 @@
 <div>
     <div class="flex flex-wrap justify-center">
         <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap items-center gap-2 my-2">
-            <select wire:model="perPage" name="perPage"
+            <select wire:model.defer="perPage" name="perPage"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                 @foreach ($paginationOptions as $value)
                     <option value="{{ $value }}">{{ $value }}</option>
