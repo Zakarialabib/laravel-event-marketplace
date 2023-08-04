@@ -19,7 +19,7 @@
 
             <div>
                 <x-label required for="phone_number" :value="__('Phone number')" />
-                <x-input wire:model.defer="participant.phone_number" required type="number"
+                <x-input wire:model.defer="participant.phone_number" required type="tel"
                     id="phone_number" name="phone_number" autocomplete="phone_number" />
                 <x-input-error :messages="$errors->get('participant.phone_number')" for="participant.phone_number" class="mt-2" />
             </div>
