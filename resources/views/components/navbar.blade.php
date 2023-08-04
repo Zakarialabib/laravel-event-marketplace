@@ -13,6 +13,9 @@
     </div>
 
     <div class="flex items-center gap-3">
+        
+        @livewire('notification')
+
         <x-button secondary target="__blank" href="{{ route('front.index')}}" class="mr-2">
             <i class="fa fa-eye w-4 h-4"></i>
         </x-button>
@@ -21,6 +24,7 @@
                 <i class="fa fa-expand w-4 h-4"></i>
             </x-button>
         </div>
+
 
         <x-language-dropdown />
 
