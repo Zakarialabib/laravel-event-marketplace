@@ -156,6 +156,4 @@ class Index extends Component
 
         $this->alert('success', __('Partner deleted successfully.'));
     }
-
-   
 }
