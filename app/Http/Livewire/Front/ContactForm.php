@@ -54,14 +54,10 @@ class ContactForm extends Component
             $query->where('name', 'admin');
         })->first();
 
-        if ($admin) {  
+        if ($admin) {
             Mail::to($admin->email)->later(now()->addMinutes(10), new ContactFormMail($this->contact));
         }
 
-        
-
         $this->reset('name', 'email', 'phone_number', 'message');
     }
-
-   
 }

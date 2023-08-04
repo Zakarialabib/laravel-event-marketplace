@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Observers;
 
 use App\Models\Registration;
@@ -8,9 +10,7 @@ use App\Notifications\RegistrationNotification;
 
 class RegistrationObserver
 {
-    /**
-     * Handle the Registration "created" event.
-     */
+    /** Handle the Registration "created" event. */
     public function created(Registration $registration): void
     {
         $admin = User::whereHas('roles', function ($query) {
@@ -22,35 +22,27 @@ class RegistrationObserver
         }
     }
 
-    /**
-     * Handle the Registration "updated" event.
-     */
+    /** Handle the Registration "updated" event. */
     public function updated(Registration $registration): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Registration "deleted" event.
-     */
+    /** Handle the Registration "deleted" event. */
     public function deleted(Registration $registration): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Registration "restored" event.
-     */
+    /** Handle the Registration "restored" event. */
     public function restored(Registration $registration): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Registration "force deleted" event.
-     */
+    /** Handle the Registration "force deleted" event. */
     public function forceDeleted(Registration $registration): void
     {
-        //
+
     }
 }

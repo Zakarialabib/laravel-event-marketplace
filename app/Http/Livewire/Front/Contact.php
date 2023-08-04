@@ -10,10 +10,8 @@ use Livewire\Component;
 
 class Contact extends Component
 {
-   
     public function render(): View|Factory
     {
         return view('livewire.front.contact');
     }
-
 }

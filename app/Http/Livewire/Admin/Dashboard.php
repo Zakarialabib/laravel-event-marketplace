@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
@@ -32,7 +34,7 @@ class Dashboard extends Component
         $participantsCount = Participant::whereBetween('created_at', [$this->startDate, $this->endDate])->count();
         $subscribersCount = Subscriber::whereBetween('created_at', [$this->startDate, $this->endDate])->count();
         $contactsCount = Contact::whereBetween('created_at', [$this->startDate, $this->endDate])->count();
-        
+
         $registrationsCount = Registration::whereBetween('created_at', [$this->startDate, $this->endDate])->count();
 
         $ordersCount = Order::with('race')

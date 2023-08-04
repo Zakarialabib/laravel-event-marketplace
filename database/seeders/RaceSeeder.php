@@ -46,7 +46,7 @@ class RaceSeeder extends Seeder
                 [
                     'name'     => 'Swim',
                     'distance' => 1.5, // Swimming distance in km
-                    'type'   => 'Ocean', // Nature of the swimming course
+                    'type'     => 'Ocean', // Nature of the swimming course
                     'content'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Sed vitae nisl eget nisl aliquam ultricies. Sed vitae nisl eget nisl aliquam ultricies.', // Description of the swimming course
                 ],
                 [

@@ -11,7 +11,6 @@ use Livewire\Component;
 
 class ThankYou extends Component
 {
-
     public $order;
 
     public function mount($id)

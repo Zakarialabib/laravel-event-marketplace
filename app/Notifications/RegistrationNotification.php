@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class RegistrationNotification extends Notification
 {
     use Queueable;
-   /**
+
+    /**
      * Get the notification's delivery channels.
      *
      * @return array<int, string>
@@ -41,8 +42,8 @@ class RegistrationNotification extends Notification
         return [
             'message' => __('New registration by :participant for the race ":race" on :date', [
                 'participant' => $participantName,
-                'race' => $raceName,
-                'date' => $raceDate,
+                'race'        => $raceName,
+                'date'        => $raceDate,
             ]),
         ];
     }

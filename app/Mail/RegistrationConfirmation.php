@@ -21,7 +21,6 @@ class RegistrationConfirmation extends Mailable
     public function __construct(
         protected Participant $participant,
     ) {
-
     }
 
     /** Get the message content definition. */
@@ -31,7 +30,7 @@ class RegistrationConfirmation extends Mailable
             markdown: 'emails.registration-confirmation',
             with: [
                 'participant' => $this->participant,
-                'url' => route('front.myaccount'),
+                'url'         => route('front.myaccount'),
             ],
         );
     }

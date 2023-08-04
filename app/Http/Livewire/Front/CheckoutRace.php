@@ -87,7 +87,7 @@ class CheckoutRace extends Component
             if ($registration) {
                 $registration->update(['order_id' => $order->id]);
             }
-    
+
             Mail::to($order->user->email)->later(now()->addMinutes(10), new CheckoutMail($order, $order->user));
         }
 

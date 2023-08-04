@@ -142,7 +142,7 @@ class RegistrationForm extends Component
                         $this->registration->save();
 
                         Mail::to($participant->email)->later(now()->addMinutes(10), new RegistrationConfirmation($participant));
-                        
+
                         // Cart::instance('races')->add($this->race->id)->associate('App\Models\Race');
                         Cart::instance('races')->add($race->id, $race->name, '1', $race->price)->associate('App\Models\Race');
 

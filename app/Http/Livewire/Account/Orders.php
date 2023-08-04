@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Account;
 
 use App\Models\Order;
@@ -9,7 +11,6 @@ use Livewire\Component;
 
 class Orders extends Component
 {
-
     public $orders;
 
     public function mount()

@@ -10,6 +10,7 @@ use App\Support\HasAdvancedFilter;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Enums\Status;
+
 class Sponsor extends Model implements HasMedia
 {
     use InteractsWithMedia;

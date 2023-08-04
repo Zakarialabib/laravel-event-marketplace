@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Observers;
 
 use App\Models\Subscriber;
 use App\Notifications\SubscribeNotification;
 use App\Models\User;
+
 class SubscriberObserver
 {
-    /**
-     * Handle the Subscriber "created" event.
-     */
+    /** Handle the Subscriber "created" event. */
     public function created(Subscriber $subscriber): void
     {
         $admin = User::whereHas('roles', function ($query) {
@@ -21,35 +22,27 @@ class SubscriberObserver
         }
     }
 
-    /**
-     * Handle the Subscriber "updated" event.
-     */
+    /** Handle the Subscriber "updated" event. */
     public function updated(Subscriber $subscriber): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Subscriber "deleted" event.
-     */
+    /** Handle the Subscriber "deleted" event. */
     public function deleted(Subscriber $subscriber): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Subscriber "restored" event.
-     */
+    /** Handle the Subscriber "restored" event. */
     public function restored(Subscriber $subscriber): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Subscriber "force deleted" event.
-     */
+    /** Handle the Subscriber "force deleted" event. */
     public function forceDeleted(Subscriber $subscriber): void
     {
-        //
+
     }
 }

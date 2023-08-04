@@ -12,7 +12,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Throwable;
 
 class NewslettersForm extends Component
 {
@@ -40,20 +39,18 @@ class NewslettersForm extends Component
     {
         $validatedData = $this->validate();
 
+        $subscriber = Subscriber::create([
+            'email'  => $validatedData['email'],
+            'name'   => $this->extractNameFromEmail($validatedData['email']),
+            'tag'    => 'subscriber',
+            'status' => Status::ACTIVE,
+        ]);
 
-            $subscriber = Subscriber::create([
-                'email'  => $validatedData['email'],
-                'name'   => $this->extractNameFromEmail($validatedData['email']),
-                'tag'    => 'subscriber',
-                'status' => Status::ACTIVE,
-            ]);
+        $this->alert('success', __('You are subscribed to our newsletters.'));
 
-            $this->alert('success', __('You are subscribed to our newsletters.'));
-            
-            Mail::to($validatedData['email'])->send(new SubscribeMail($subscriber));
-            
-            $this->reset('email');
+        Mail::to($validatedData['email'])->send(new SubscribeMail($subscriber));
 
+        $this->reset('email');
     }
 
     private function extractNameFromEmail(string $email): string
@@ -65,5 +62,4 @@ class NewslettersForm extends Component
 
         return ucwords($name);
     }
-
 }

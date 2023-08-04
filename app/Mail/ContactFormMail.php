@@ -18,8 +18,8 @@ class ContactFormMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-     /** Create a new message instance. */
-     public function __construct(
+    /** Create a new message instance. */
+    public function __construct(
         protected Contact $contact,
     ) {
     }
@@ -30,7 +30,7 @@ class ContactFormMail extends Mailable
         return new Content(
             markdown: 'emails.contact-form',
             with: [
-                'contact'     => $this->contact,   
+                'contact' => $this->contact,
             ],
         );
     }
@@ -41,8 +41,6 @@ class ContactFormMail extends Mailable
         return new Envelope(
             from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
             subject: 'New Contact from '.$this->contact->name.' - '.Helpers::settings('site_title'),
-
         );
     }
-
 }

@@ -19,13 +19,12 @@ class CheckoutMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-       /**
-     * Create a new message instance.
-     */
+    /** Create a new message instance. */
     public function __construct(
         public Order $order,
         public User $user,
-    ) {}
+    ) {
+    }
 
     /** Get the message content definition. */
     public function content(): Content
@@ -33,20 +32,19 @@ class CheckoutMail extends Mailable
         return new Content(
             markdown: 'emails.checkout',
             with: [
-                'url'      => route('front.myaccount'),
+                'url'   => route('front.myaccount'),
                 'order' => $this->order,
                 'user'  => $this->user,
             ],
         );
     }
-    
+
     /** Get the message envelope. */
     public function envelope(): Envelope
     {
         return new Envelope(
             from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
             subject: $this->order->reference.' Order reference - '.Helpers::settings('site_title'),
-
         );
     }
 }
