@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\Status;
 use App\Traits\HasGlobalDate;
 use App\Support\HasAdvancedFilter;
+
 class Participant extends Model
 {
     use HasFactory;

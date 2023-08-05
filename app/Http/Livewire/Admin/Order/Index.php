@@ -57,7 +57,6 @@ class Index extends Component
         $this->orderable = (new Order())->orderable;
     }
 
-
     public function render(): View|Factory
     {
         $query = Order::advancedFilter([
@@ -66,7 +65,6 @@ class Index extends Component
             'order_direction' => $this->sortDirection,
         ]);
 
-       
         $orders = $query->paginate($this->perPage);
 
         return view('livewire.admin.order.index', compact('orders'))
