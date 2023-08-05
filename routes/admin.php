@@ -32,6 +32,10 @@ use App\Http\Livewire\Admin\Menu\Index as MenuIndex;
 use App\Http\Livewire\Admin\Backup\Index as BackupIndex;
 use App\Http\Livewire\Admin\Shipping\Index as ShippingIndex;
 use App\Http\Livewire\Admin\Registration\Index as RegistrationIndex;
+use App\Http\Livewire\Admin\Participant\Index as ParticipantIndex;
+use App\Http\Livewire\Admin\Participant\Show as ParticipantShow;
+use App\Http\Livewire\Admin\Order\Index as OrderIndex;
+use App\Http\Livewire\Admin\Order\Show as OrderShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +62,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/brands', [BrandController::class, 'index'])->name('brands');
     Route::get('/products', [ProductController::class, 'index'])->name('products');
     Route::get('/registrations', RegistrationIndex::class)->name('registrations');
+    Route::get('/participants', ParticipantIndex::class)->name('participants');
+    Route::get('/participant/{id}', ParticipantShow::class)->name('participant.show');
+    Route::get('/orders', OrderIndex::class)->name('orders');
+    Route::get('/order/{id}', OrderShow::class)->name('order.show');
     Route::get('/races', RaceIndex::class)->name('races');
     Route::get('/race/{name}', RaceUpdate::class)->name('race.update');
     Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');

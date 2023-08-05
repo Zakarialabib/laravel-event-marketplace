@@ -10,12 +10,15 @@ use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Traits\HasGlobalDate;
 use App\Traits\HasUuid;
+use App\Support\HasAdvancedFilter;
 
 class Order extends Model
 {
     use HasFactory;
     use HasGlobalDate;
     use HasUuid;
+    use HasAdvancedFilter;
+
     public const ATTRIBUTES = [
         'id',
         'user_id',

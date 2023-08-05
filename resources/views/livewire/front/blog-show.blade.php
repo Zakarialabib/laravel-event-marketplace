@@ -29,7 +29,7 @@
                     <div class="flex items-center">
                         <div class="ml-2">
                             <p class="text-sm font-semibold text-gray-700">{{ $blog->category?->title }}</p>
-                            <p class="text-xs text-gray-600">{{ $blog->created_at }}</p>
+                            <p class="text-xs text-gray-600">{{ Helpers::format_date($blog->created_at) }}</p>
                         </div>
                     </div>
                 </div>

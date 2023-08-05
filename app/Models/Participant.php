@@ -10,13 +10,25 @@ use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\Status;
 use App\Traits\HasGlobalDate;
-
+use App\Support\HasAdvancedFilter;
 class Participant extends Model
 {
     use HasFactory;
     use HasUuid;
     use SoftDeletes;
     use HasGlobalDate;
+    use HasAdvancedFilter;
+
+    public const ATTRIBUTES = [
+        'id',
+        'name',
+        'phone_number',
+        'email',
+        'status',
+    ];
+
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'name',

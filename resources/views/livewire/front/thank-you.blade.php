@@ -7,7 +7,7 @@
             <div class="flex">
                 <div class="w-1/2 pr-4 border-r">
                     <h3 class="text-left text-lg font-semibold mb-2">{{ __('Order Details') }}</h3>
-                    <p><strong>{{ __('Order Reference') }}:</strong> {{ $order->reference }}</p>
+                    <p><strong>{{ __('Reference') }}:</strong> {{ $order->reference }}</p>
                     @if ($order->race)
                         <p><strong>{{ __('Race') }}:</strong> <a
                                 href="{{ route('front.raceDetails', $order->race->slug) }}">{{ $order->race->name }}</a>
@@ -26,11 +26,11 @@
                             </a>
                         </p>
                     @endif
-                    <p><strong>{{ __('Order Amount') }}:</strong> {{ $order->amount }}</p>
+                    <p><strong>{{ __('Order Amount') }}:</strong> {{ Helpers::format_currency($order->amount) }}</p>
                     <p><strong>{{ __('Payment Method') }}:</strong> {{ $order->payment_method }}</p>
                     <p><strong>{{ __('Order Status') }}:</strong> {{ $order->status }}</p>
                     <p><strong>{{ __('Payment Status') }}:</strong> {{ $order->payment_status }}</p>
-                    <p><strong>{{ __('Order Date') }}:</strong> {{ $order->created_at }}</p>
+                    <p><strong>{{ __('Order Date') }}:</strong> {{ Helpers::format_date($order->created_at) }}</p>
                 </div>
                 <div class="w-1/2 pl-4">
                     <h3 class="text-left text-lg font-semibold mb-2">{{ __('Registration Account') }}</h3>

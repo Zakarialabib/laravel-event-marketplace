@@ -5,7 +5,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         @foreach ($this->orders as $order)
             <div class="px-4 shadow-lg border bg-white">
-                <p><strong>{{ __('Order Reference') }}:</strong> {{ $order->reference }}</p>
+                <p><strong>{{ __('Reference') }}:</strong> {{ $order->reference }}</p>
                 @if ($order->race)
                     <p><strong>{{ __('Race') }}:</strong> <a
                             href="{{ route('front.raceDetails', $order->race->slug) }}">{{ $order->race->name }}</a>
@@ -24,11 +24,11 @@
                         </a>
                     </p>
                 @endif
-                <p><strong>{{ __('Order Amount') }}:</strong> {{ $order->amount }}</p>
+                <p><strong>{{ __('Order Amount') }}:</strong> {{ Helpers::format_currency($order->amount) }}</p>
                 <p><strong>{{ __('Payment Method') }}:</strong> {{ $order->payment_method }}</p>
                 <p><strong>{{ __('Order Status') }}:</strong> {{ $order->status }}</p>
                 <p><strong>{{ __('Payment Status') }}:</strong> {{ $order->payment_status }}</p>
-                <p><strong>{{ __('Order Date') }}:</strong> {{ $order->created_at }}</p>
+                <p><strong>{{ __('Order Date') }}:</strong> {{ Helpers::format_date($order->created_at) }}</p>
             </div>
         @endforeach
     </div>

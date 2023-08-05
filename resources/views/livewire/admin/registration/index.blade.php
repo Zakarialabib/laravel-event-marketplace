@@ -44,15 +44,13 @@
         <div x-data="{ activeTab: '{{ $activeTab }}' }" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
             <ul class="flex mb-4">
                 <li class="mr-1">
-                    <button @click="activeTab = 'all'"
-                        :class="{ 'bg-blue-500 text-white': activeTab === 'all' }"
+                    <button @click="activeTab = 'all'" :class="{ 'bg-blue-500 text-white': activeTab === 'all' }"
                         class="px-4 py-2 rounded-l-md">
                         {{ __('All Registrations') }}
                     </button>
                 </li>
                 <li class="mr-1">
-                    <button @click="activeTab = 'race'"
-                        :class="{ 'bg-blue-500 text-white': activeTab === 'race' }"
+                    <button @click="activeTab = 'race'" :class="{ 'bg-blue-500 text-white': activeTab === 'race' }"
                         class="px-4 py-2">
                         {{ __('Registrations by Race') }}
                     </button>
@@ -135,8 +133,11 @@
                                     {{ $registration->registration_date }}
                                 </x-table.td>
                                 <x-table.td>
-                                    {{ $registration->participant->name }} - {{ $registration->participant->email }} -
-                                    {{ $registration->participant->phone_number }}
+                                    <a href="{{ route('admin.participant.show', $registration->participant->id) }}">
+                                        {{ $registration->participant->name }} <br>
+                                        {{ $registration->participant->email }} <br>
+                                        {{ $registration->participant->phone_number }}
+                                    </a>
                                 </x-table.td>
                                 <x-table.td>
                                     @if ($registration->status == 0)
@@ -147,10 +148,10 @@
                                     @endif
                                 </x-table.td>
                                 <x-table.td>
-                                    <button wire:click="showTab('{{ $registration->race->id }}')"
-                                        class="text-blue-500">
-                                        {{ __('Show Participant') }}
-                                    </button>
+                                    <x-button info
+                                        href="{{ route('admin.participant.show', $registration->participant->id) }}">
+                                        <i class="fas fa-eye"></i>
+                                    </x-button>
                                 </x-table.td>
                             </x-table.tr>
                         @empty
@@ -201,7 +202,7 @@
                                             class="text-blue-500">
                                             {{ __('Show Registrations') }}
                                         </button>
-                                    
+
                                         <button wire:click="showRaceParticipants('{{ $race->id }}')"
                                             class="text-blue-500">
                                             {{ __('Show Participants') }}
@@ -209,7 +210,7 @@
                                     </x-table.td>
                                 </x-table.tr>
                             @endforeach
-                        </x-table.tbody>
+                            </x-table.tbody>
                     </ul>
                 </div>
             </div>

@@ -41,6 +41,10 @@ class Dashboard extends Component
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->count();
 
+        $recentOrders = Order::select('created_at', 'amount', 'reference','id')->orderBy('created_at', 'desc')->take(10)->get(); 
+
+        $recentRegistrations = Registration::with('participant')->select('participant_id', 'created_at','id')->orderBy('created_at', 'desc')->take(10)->get();
+
         $openRaces = Race::where('start_registration', '<', Carbon::now())
             ->count();
 
@@ -50,6 +54,8 @@ class Dashboard extends Component
         return view('livewire.admin.dashboard', compact(
             'productsCount',
             'racesCount',
+            'recentOrders',
+            'recentRegistrations',
             'registrationsCount',
             'participantsCount',
             'subscribersCount',

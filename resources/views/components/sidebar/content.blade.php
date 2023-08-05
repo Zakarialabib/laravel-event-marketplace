@@ -47,6 +47,9 @@
         @can('order_access')
             <x-sidebar.sublink title="{{ __('Order Forms') }}" href="{{ route('admin.orderforms') }}" :active="request()->routeIs('admin.orderforms')" />
         @endcan
+        <x-sidebar.sublink title="{{ __('Orders') }}" href="{{ route('admin.orders') }}"
+            :active="request()->routeIs('admin.orders')" />
+            
         <x-sidebar.sublink title="{{ __('Registrations') }}" href="{{ route('admin.registrations') }}"
             :active="request()->routeIs('admin.registrations')" />
     </x-sidebar.dropdown>
@@ -74,6 +77,8 @@
         </x-slot>
         {{-- @can('user_access') --}}
         <x-sidebar.sublink title="{{ __('Users') }}" href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users')" />
+        <x-sidebar.sublink title="{{ __('Participants') }}" href="{{ route('admin.participants') }}"
+            :active="request()->routeIs('admin.participants')" />
         {{-- @endcan
             @can('role_access')  --}}
         <x-sidebar.sublink title="{{ __('Roles') }}" href="{{ route('admin.roles') }}" :active="request()->routeIs('admin.roles')" />
