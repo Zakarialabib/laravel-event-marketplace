@@ -36,6 +36,7 @@ use App\Http\Livewire\Admin\Participant\Index as ParticipantIndex;
 use App\Http\Livewire\Admin\Participant\Show as ParticipantShow;
 use App\Http\Livewire\Admin\Order\Index as OrderIndex;
 use App\Http\Livewire\Admin\Order\Show as OrderShow;
+use App\Http\Livewire\Admin\Service\Index as ServiceIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/races', RaceIndex::class)->name('races');
     Route::get('/race/{name}', RaceUpdate::class)->name('race.update');
     Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');
+    Route::get('/services', ServiceIndex::class)->name('services');
 
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
 

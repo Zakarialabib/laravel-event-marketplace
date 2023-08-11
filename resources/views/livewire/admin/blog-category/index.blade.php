@@ -40,7 +40,6 @@
             <x-table.th>#</x-table.th>
             <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
                 {{ __('Title') }}
-                @include('components.table.sort', ['field' => 'title'])
             </x-table.th>
             <x-table.th>
                 {{ __('Status') }}

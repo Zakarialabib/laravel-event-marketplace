@@ -41,14 +41,15 @@ class Race extends Model implements HasMedia
         'date',
         'race_location_id',
         'category_id',
-        'docs_link',
-        'google_calendar',
         'start_registration',
         'end_registration',
         'registration_deadline',
         'number_of_days',
         'elevation_gain',
+        'content',
         'number_of_racers',
+        'first_year',
+        'last_year_url',
         'price',
         'images',
         'social_media',
@@ -151,4 +152,9 @@ class Race extends Model implements HasMedia
             ->performOnCollections('local_files')
             ->format('webp');
     }
+
+    // Race History
+    // Is this the first year for your race? *
+    // Yes No
+    // URL For Last Year’s Event
 }

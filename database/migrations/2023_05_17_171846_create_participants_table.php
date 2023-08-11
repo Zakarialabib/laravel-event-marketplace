@@ -24,12 +24,11 @@ return new class () extends Migration {
             $table->string('emergency_contact_name');
             $table->string('emergency_contact_phone_number');
             $table->longText('health_informations')->nullable();
-            $table->boolean('medical_history')->default(false);
-            $table->boolean('taking_medications')->default(false);
-            $table->boolean('medication_allergies')->default(false);
-            $table->boolean('sensitivities')->default(false);
-            $table->boolean('status')->default(true);
-            $table->foreignId('race_location_id')->constrained('race_locations')->onDelete('cascade');
+            $table->string('medical_history')->nullable();
+            $table->string('taking_medications')->nullable();
+            $table->string('medication_allergies')->nullable();
+            $table->string('sensitivities')->nullable();
+            $table->string('status')->nullable();
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->softDeletes();
             $table->timestamps();

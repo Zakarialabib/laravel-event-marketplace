@@ -125,7 +125,7 @@
                 <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                     <x-label for="name" :value="__('Name')" />
                     <x-input id="name" class="block mt-1 w-full" disabled type="text"
-                        wire:model.defer="user.first_name" />
+                        wire:model.defer="user.name" />
                 </div>
 
                 <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">

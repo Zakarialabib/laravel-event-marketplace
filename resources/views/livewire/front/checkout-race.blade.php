@@ -4,6 +4,9 @@
         <h2 class="my-6 text-center text-5xl font-bold font-heading">{{ __('Order Confirmation') }}</h2>
         <div class="flex flex-wrap">
             <div class="w-full lg:w-1/2 px-4">
+
+                @livewire('account.user-infos', ['user' => $user])
+
                 <div class="flex my-5 items-center">
                     <h2 class="text-4xl font-bold font-heading">{{ __('Participant Details') }}</h2>
                 </div>
@@ -128,10 +131,12 @@
                         <h2 class="text-4xl font-bold font-heading">{{ __('Summary') }}</h2>
                     </div>
 
-                    <div class="mb-2 flex flex-wrap -mx-4 items-center">
-                        @foreach ($this->cartItems as $item)
+                    <!-- Races Cart Items -->
+                    <div class="mb-2 flex flex-wrap items-center">
+                        <h3 class="text-2xl font-bold font-heading mb-4">{{ __('Races') }}</h3>
+                        @foreach ($this->registrationCartItems as $item)
                             <div class="flex flex-wrap w-full mb-10">
-                                <div class="w-full md:w-1/3 mb-6 md:mb-0 px-4">
+                                <div class="w-full md:w-1/3 mb-6 md:mb-0">
                                     <div class="flex h-32 items-center justify-center bg-gray-100">
                                         @if (!empty($item->model->image))
                                             <a href="{{ route('front.raceDetails', $item->model->slug) }}"
@@ -173,8 +178,37 @@
                     </div>
 
                     <div class="border-t border-gray-200 mb-2"></div>
+                    <!-- Services Cart Items -->
+                    <div class="mb-2 flex flex-wrap items-center">
+                        <h3 class="text-2xl font-bold font-heading mb-4">{{ __('Services') }}</h3>
+                        @foreach ($this->servicesCartItems as $item)
+                            <div class="flex flex-wrap w-full mb-10">
+                                <div class="w-full md:w-2/3 px-4">
+                                    <div>
+                                        @if (!empty($item->name))
+                                            <h3 class="mb-3 text-left">
+                                                {{ $item->name }}
+                                            </h3>
+                                        @endif
+                                        <div class="flex flex-wrap items-center justify-between">
+                                            <div
+                                                class="inline-flex items-center px-4 font-semibold font-heading text-gray-500 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
+                                                <div class="flex items-center space-x-2">
+                                                    @if (!empty($item->price))
+                                                        <p class="text-lg text-green-500 font-bold font-heading">
+                                                            {{ Helpers::format_currency($item->price) }}
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
 
-                    <div class="mb-2">
+                    <div class="my-5">
                         <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
                             for="payment_method">{{ __('Payment Method') }}</label>
                         <select wire:model="payment_method"
@@ -187,26 +221,40 @@
                             <span class="error text-red-600">{{ $message }}</span>
                         @enderror
                     </div>
-                    
+
+                    <div class="border-t border-gray-200 mb-2"></div>
+
+                    <!-- Subtotals and Total -->
                     <div class="mb-2">
-                        <div class="mb-5">
+                        <div class="flex flex-col gap-4 mb-5">
+                            <!-- Races Subtotal -->
                             <div class="py-3 px-10 bg-blue-50 rounded-full">
                                 <div class="flex justify-between">
-                                    <span class="font-medium">{{ __('Subtotal') }}</span>
+                                    <span class="font-medium">{{ __('Races Subtotal') }}</span>
                                     <span class="font-bold font-heading">
-                                        {{ Helpers::format_currency($this->subTotal) }}
+                                        {{ Helpers::format_currency($this->registration_subtotal) }}
                                     </span>
                                 </div>
                             </div>
-                            <div class="py-3 px-10 rounded-full">
+
+                            <!-- Services Subtotal -->
+                            <div class="py-3 px-10 bg-blue-50 rounded-full">
+                                <div class="flex justify-between">
+                                    <span class="font-medium">{{ __('Services Subtotal') }}</span>
+                                    <span class="font-bold font-heading">
+                                        {{ Helpers::format_currency($this->services_subtotal) }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="py-3 px-10 bg-blue-200 rounded-full">
                                 <div class="flex justify-between">
                                     <span
                                         class="text-base md:text-xl font-bold font-heading">{{ __('Total') }}</span>
-                                    @if (!empty($this->cartTotal))
-                                        <span class="font-bold font-heading">
-                                            {{ Helpers::format_currency($this->cartTotal) }}
-                                        </span>
-                                    @endif
+                                    <span class="font-bold font-heading">
+                                        {{ Helpers::format_currency($this->registration_subtotal + $this->services_subtotal) }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -217,6 +265,26 @@
                         type="button" wire:click="checkout">
                         {{ __('Confirm Order') }}
                     </button>
+                </div>
+            </div>
+        </div>
+        <div class="px-3">
+            <div class="flex flex-row gap-4 justify-between px-6 py-4 mt-4 bg-white rounded-3 shadow-sm">
+                <div class="inline-flex">
+                    <i class="fas fa-headset text-xl"></i>
+                    <div class="ps-3">
+                        <h6 class="text-base mb-1">Service client</h6>
+                        <p class="mb-0 text-sm text-muted">Support client amical pour nos clients</p>
+                    </div>
+                </div>
+                <div class="inline-flex">
+                    <i class="fas fa-lock text-xl"></i>
+                    <div class="ps-3">
+                        <h6 class="text-base mb-1">Paiement en ligne sécurisé avec CMI</h6>
+                        <p class="mb-0 text-sm text-muted">Nous possédons un certificat SSL / Secure et utilisons
+                            la
+                            passerelle CMI pour une grande sécurité</p>
+                    </div>
                 </div>
             </div>
         </div>

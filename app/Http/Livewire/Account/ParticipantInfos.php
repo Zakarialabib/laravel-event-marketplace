@@ -33,10 +33,10 @@ class ParticipantInfos extends Component
             'participant.emergency_contact_phone_number' => 'required|min:6',
             'participant.address'                        => 'required',
             'participant.health_informations'            => 'nullable',
-            'participant.medical_history'                => 'nullable|boolean',
-            'participant.taking_medications'             => 'nullable|boolean',
-            'participant.medication_allergies'           => 'nullable|boolean',
-            'participant.sensitivities'                  => 'nullable|boolean',
+            'participant.medical_history'                => 'nullable',
+            'participant.taking_medications'             => 'nullable',
+            'participant.medication_allergies'           => 'nullable',
+            'participant.sensitivities'                  => 'nullable',
         ];
     }
 

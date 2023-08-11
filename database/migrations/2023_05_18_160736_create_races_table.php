@@ -16,19 +16,20 @@ return new class () extends Migration {
             $table->string('slug');
             $table->date('date');
             $table->longText('description')->nullable();
+            $table->json('content')->nullable();
             $table->foreignId('race_location_id')->constrained('race_locations');
             $table->foreignId('category_id')->constrained('categories');
             $table->integer('number_of_days')->nullable();
             $table->string('elevation_gain')->nullable();
             $table->integer('number_of_racers');
+            $table->string('first_year')->nullable();
+            $table->string('last_year_url')->nullable();
+
             $table->decimal('price', 8, 2);
             $table->decimal('discount_price', 8, 2)->nullable();
             $table->dateTime('start_registration');
             $table->dateTime('end_registration');
             $table->dateTime('registration_deadline')->nullable();
-            $table->boolean('google_calendar')->default(false);
-            $table->string('docs_link')->nullable();
-            $table->string('google_calendar_id')->nullable();
             $table->string('images')->nullable();
             $table->json('social_media')->nullable();
             $table->json('sponsors')->nullable();

@@ -61,7 +61,7 @@
                         <div class="lg:w-1/2 sm:w-full px-2">
                             <x-label for="page" :value="__('Page')" />
                             <select wire:model="selectedTemplate.page"
-                                class="p-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
+                                class="p-3 leading-5 bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
                                 name="page">
                                 <option value="" selected>{{ __('Select a Page') }}</option>
                                 @foreach (\App\Enums\PageType::values() as $value => $name)

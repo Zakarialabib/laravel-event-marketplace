@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Livewire\Front\Index as FrontIndex;
 use App\Http\Livewire\Front\Categories as CategoryIndex;
 use App\Http\Livewire\Front\Catalog as CatalogIndex;
-use App\Http\Livewire\Front\Races as RacesIndex;
+use App\Http\Livewire\Front\Races as RaceIndex;
 use App\Http\Livewire\Front\Checkout as CheckoutIndex;
 use App\Http\Livewire\Front\CheckoutRace;
 use App\Http\Livewire\Front\Blogs as BlogIndex;
@@ -38,7 +39,7 @@ Route::get('/', FrontIndex::class)->name('front.index');
 Route::get('/catalog', CatalogIndex::class)->name('front.catalog');
 Route::get('/categories', CategoryIndex::class)->name('front.categories');
 
-Route::get('/races',  RacesIndex::class)->name('front.races');
+Route::get('/races',  RaceIndex::class)->name('front.races');
 Route::get('/racedetails/{slug}', RaceDetails::class)->name('front.raceDetails');
 
 Route::get('/catalog/{slug}', [FrontController::class, 'productShow'])->name('front.product');
@@ -64,6 +65,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/uploads', [UploadController::class, 'upload'])->name('upload');
+
+//notez que vous pouvez utiliser le chemin que vous voulez, mais vous devez utiliser la méthode de rappel (callback) implémentée dans la trait CmiGateway
+Route::get('/cmi/pay/{id}', [CheckoutController::class, 'initiateCmiPayment'])->name('cmi.pay');
+Route::post('/cmi/callback', [CheckoutController::class, 'callback'])->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
+// dans la trait CmiGateway, cette méthode est vide pour que vous puissiez implémenter votre propre processus après un paiement réussi
+Route::post('/cmi/okUrl', [CheckoutController::class, 'okUrl'])->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
+// la fail url redirigera l'utilisateur vers shopUrl avec une erreur pour que l'utilisateur puisse essayer de payer à nouveau
+Route::post('/cmi/failUrl', [CheckoutController::class, 'failUrl'])->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
 
 // Route::fallback(function (Request $request) {
 //     return app()->make(ErrorController::class)->notFound($request);

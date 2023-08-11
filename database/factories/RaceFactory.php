@@ -36,6 +36,8 @@ class RaceFactory extends Factory
             'elevation_gain'        => $this->faker->randomNumber(3),
             'number_of_days'        => $this->faker->randomNumber(1),
             'number_of_racers'      => $this->faker->randomNumber(3),
+            'first_year'            => true,
+            'last_year_url'         => null,
             'price'                 => $this->faker->randomFloat(2, 10, 100),
             'images'                => null,
             'social_media'          => null,

@@ -1,11 +1,12 @@
-@section('title', __('Popups List'))
-<x-dashboard-layout>
+<div>
+    @section('title', __('Service'))
+
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
-                <h2 class="mb-1 text-2xl font-bold">
-                    {{ __('Popups') }}
-                </h2>
+                <h4 class="mb-1 text-2xl font-bold">
+                    {{ __('Service') }}
+                </h4>
                 <div class="flex items-center">
                     <a class="flex items-center text-sm text-gray-500" href="{{ route('admin.dashboard') }}">
                         <span class="inline-block mr-2">
@@ -24,7 +25,7 @@
                                 d="M1.23242 9.3689C1.06762 9.36887 0.906542 9.31997 0.769534 9.2284C0.632526 9.13683 0.525742 9.0067 0.462684 8.85445C0.399625 8.7022 0.383124 8.53467 0.415263 8.37304C0.447403 8.21141 0.526741 8.06294 0.643249 7.9464L3.58916 5L0.643224 2.05364C0.486959 1.89737 0.399171 1.68543 0.39917 1.46444C0.399169 1.24345 0.486957 1.03151 0.64322 0.875249C0.799483 0.718985 1.01142 0.631196 1.23241 0.631195C1.4534 0.631194 1.66534 0.718982 1.82161 0.875245L5.35676 4.41084C5.43416 4.48819 5.49556 4.58005 5.53745 4.68114C5.57934 4.78224 5.6009 4.8906 5.6009 5.00003C5.6009 5.10946 5.57934 5.21782 5.53745 5.31891C5.49556 5.42001 5.43416 5.51186 5.35676 5.58922L1.82161 9.12478C1.74432 9.20229 1.65249 9.26375 1.55137 9.30564C1.45026 9.34754 1.34186 9.36903 1.23242 9.3689Z"
                                 fill="currentColor"></path>
                         </svg></span>
-                    <a class="flex items-center text-sm" href="{{ URL::current() }}">
+                    <a class="flex items-center text-sm" href="{{ URL::Current() }}">
                         <span class="inline-block mr-2">
                             <svg class="h-4 w-4 text-indigo-500" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -32,13 +33,12 @@
                                     d="M4.99992 10.8333H1.66659C1.44557 10.8333 1.23361 10.9211 1.07733 11.0774C0.921049 11.2337 0.833252 11.4457 0.833252 11.6667V18.3333C0.833252 18.5544 0.921049 18.7663 1.07733 18.9226C1.23361 19.0789 1.44557 19.1667 1.66659 19.1667H4.99992C5.22093 19.1667 5.43289 19.0789 5.58917 18.9226C5.74545 18.7663 5.83325 18.5544 5.83325 18.3333V11.6667C5.83325 11.4457 5.74545 11.2337 5.58917 11.0774C5.43289 10.9211 5.22093 10.8333 4.99992 10.8333ZM4.16658 17.5H2.49992V12.5H4.16658V17.5ZM18.3333 7.50001H14.9999C14.7789 7.50001 14.5669 7.5878 14.4107 7.74408C14.2544 7.90036 14.1666 8.11233 14.1666 8.33334V18.3333C14.1666 18.5544 14.2544 18.7663 14.4107 18.9226C14.5669 19.0789 14.7789 19.1667 14.9999 19.1667H18.3333C18.5543 19.1667 18.7662 19.0789 18.9225 18.9226C19.0788 18.7663 19.1666 18.5544 19.1666 18.3333V8.33334C19.1666 8.11233 19.0788 7.90036 18.9225 7.74408C18.7662 7.5878 18.5543 7.50001 18.3333 7.50001ZM17.4999 17.5H15.8333V9.16667H17.4999V17.5ZM11.6666 0.83334H8.33325C8.11224 0.83334 7.90028 0.921137 7.744 1.07742C7.58772 1.2337 7.49992 1.44566 7.49992 1.66667V18.3333C7.49992 18.5544 7.58772 18.7663 7.744 18.9226C7.90028 19.0789 8.11224 19.1667 8.33325 19.1667H11.6666C11.8876 19.1667 12.0996 19.0789 12.2558 18.9226C12.4121 18.7663 12.4999 18.5544 12.4999 18.3333V1.66667C12.4999 1.44566 12.4121 1.2337 12.2558 1.07742C12.0996 0.921137 11.8876 0.83334 11.6666 0.83334ZM10.8333 17.5H9.16658V2.50001H10.8333V17.5Z"
                                     fill="currentColor"></path>
                             </svg></span>
-                        <span>{{ __('Popups') }}</span>
+                        <span>{{ __('Service') }}</span>
                     </a>
                 </div>
             </div>
             <div class="float-right">
-                <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('popupModal')">
+                <x-button primary type="button" wire:click="$emit('createModal')">
                     {{ __('Create') }}
                 </x-button>
             </div>
@@ -46,8 +46,106 @@
     </section>
 
     <x-card>
-        <div>
-            @livewire('admin.settings.popup-settings')
+
+        <div class="flex flex-wrap justify-center">
+            <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap my-md-0 my-2">
+                <select wire:model="perPage"
+                    class="w-20 border border-gray-300 rounded-md shadow-sm py-2 px-4 bg-white text-sm leading-5 font-medium text-gray-700 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out">
+                    @foreach ($paginationOptions as $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+                @if ($this->selected)
+                    <x-button danger type="button" wire:click="deleteSelected" class="ml-3">
+                        <i class="fas fa-trash-alt"></i>
+                    </x-button>
+                @endif
+                @if ($this->selectedCount)
+                    <p class="text-sm leading-5">
+                        <span class="font-medium">
+                            {{ $this->selectedCount }}
+                        </span>
+                        {{ __('Entries selected') }}
+                    </p>
+                @endif
+            </div>
+            <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
+                <div class="flex items-center mr-3 pl-4">
+                    <input wire:model="search" type="text"
+                        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10"
+                        placeholder="{{ __('Search...') }}" />
+                </div>
+            </div>
         </div>
-    </x-card>
-</x-dashboard-layout>
+
+        <x-table>
+            <x-slot name="thead">
+                <x-table.th class="pr-0 w-8">
+                    <input wire:model="selectPage" type="checkbox" />
+                </x-table.th>
+                <x-table.th>
+                    {{ __('Name') }}
+                </x-table.th>
+                <x-table.th>
+                    {{ __('Price') }}
+                </x-table.th>
+                <x-table.th>
+                    {{ __('Status') }}
+                </x-table.th>
+                <x-table.th>
+                    {{ __('Actions') }}
+                </x-table.th>
+                </tr>
+            </x-slot>
+            <x-table.tbody>
+                @forelse($services as $service)
+                    <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $service->id }}">
+                        <x-table.td>
+                            <input type="checkbox" value="{{ $service->id }}" wire:model="selected">
+                        </x-table.td>
+                        <x-table.td>
+                            {{ $service->name }}
+                        </x-table.td>
+                        <x-table.td>
+                            {{ $service->price }}
+                        </x-table.td>
+                        <x-table.td>
+                            <livewire:toggle-button :model="$service" field="status" key="{{ $service->id }}" />
+                        </x-table.td>
+                        <x-table.td>
+                            <div class="flex justify-start space-x-2">
+                                <x-button primary type="button" wire:click="$emit('editModal', {{ $service->id }})"
+                                    wire:loading.attr="disabled">
+                                    <i class="fas fa-edit"></i>
+                                </x-button>
+                                <x-button danger type="button" wire:click="$emit('deleteModal', {{ $service->id }})"
+                                    wire:loading.attr="disabled">
+                                    <i class="fas fa-trash-alt"></i>
+                                </x-button>
+                            </div>
+                        </x-table.td>
+                    </x-table.tr>
+                @empty
+                    <x-table.tr>
+                        <x-table.td colspan="10" class="text-center">
+                            {{ __('No entries found.') }}
+                        </x-table.td>
+                    </x-table.tr>
+                @endforelse
+            </x-table.tbody>
+        </x-table>
+
+        <div class="p-4">
+            <div class="pt-3">
+                {{ $services->links() }}
+            </div>
+        </div>
+
+        <!-- Create Modal -->
+        @livewire('admin.service.create')
+
+        <!-- Edit Modal -->
+        @livewire('admin.service.edit', ['service' => $service])
+
+       </x-card>
+</div>

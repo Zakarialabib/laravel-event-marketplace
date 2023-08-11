@@ -34,6 +34,8 @@ class Registration extends Model
         'participant_id',
         'race_id',
         'order_id',
+        'team_id',
+        'registration_number',
         'registration_date',
         'status',
         'date',

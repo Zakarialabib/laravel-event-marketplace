@@ -4,10 +4,10 @@
         <h2 class="my-6 text-center text-5xl font-bold font-heading">{{ __('Checkout') }}</h2>
         <div class="flex flex-wrap">
             @guest
-            <div class="w-full lg:w-1/2 -py-10">
-                <h3 class="text-xl -mb-10 font-semibold text-gray-700">
-                    {{__('to continue checkout please login or register')}}
-                </h3>
+                <div class="w-full lg:w-1/2 -py-10">
+                    <h3 class="text-xl -mb-10 font-semibold text-gray-700">
+                        {{ __('to continue checkout please login or register') }}
+                    </h3>
                     @livewire('auth.index')
                 </div>
             @endguest
@@ -154,6 +154,48 @@
                             {{ __('Confirm Order') }}
                         </button>
                     @endauth
+                </div>
+            </div>
+
+        </div>
+        <div class="px-3">
+            <div class="flex flex-row gap-4 justify-between px-6 py-4 mt-4 bg-white rounded-3 shadow-sm">
+                <!-- First Section -->
+                <div class="inline-flex">
+                    <!-- Font Awesome icon for delivery -->
+                    <i class="fas fa-shipping-fast text-xl"></i>
+                    <div class="ps-3">
+                        <h6 class="fs-base mb-1">Livraison rapide et gratuite à casablanca</h6>
+                        <p class="mb-0 fs-ms text-muted">Livraison gratuite si vous habitez à casablanca</p>
+                    </div>
+                </div>
+                <!-- Second Section -->
+                <div class="inline-flex">
+                    <!-- Font Awesome icon for money-back guarantee -->
+                    <i class="fas fa-money-check-alt text-xl"></i>
+                    <div class="ps-3">
+                        <h6 class="text-base mb-1">Garantie de remboursement</h6>
+                        <p class="mb-0 text-sm text-muted">Nous retournons l'argent dans les 30 jours</p>
+                    </div>
+                </div>
+                <!-- Third Section -->
+                <div class="inline-flex">
+                    <!-- Font Awesome icon for customer service -->
+                    <i class="fas fa-headset text-xl"></i>
+                    <div class="ps-3">
+                        <h6 class="text-base mb-1">Service client</h6>
+                        <p class="mb-0 text-sm text-muted">Support client amical pour nos clients</p>
+                    </div>
+                </div>
+                <!-- Fourth Section -->
+                <div class="inline-flex">
+                    <!-- Font Awesome icon for secure payment -->
+                    <i class="fas fa-lock text-xl"></i>
+                    <div class="ps-3">
+                        <h6 class="text-base mb-1">Paiement en ligne sécurisé avec CMI</h6>
+                        <p class="mb-0 text-sm text-muted">Nous possédons un certificat SSL / Secure et utilisons la
+                            passerelle CMI pour une grande sécurité</p>
+                    </div>
                 </div>
             </div>
         </div>

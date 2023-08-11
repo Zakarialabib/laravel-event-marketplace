@@ -58,10 +58,10 @@
                     @if ($race->course)
                         <ul class="flex items-center gap-4">
                             @foreach (json_decode($race->course) as $key => $course)
-                                <li class="text-base inline-flex md:text-lg">
+                                <li class="text-base inline-flex md:text-lg" wire:key="{{ $key }}">
                                     <span
                                         class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
-                                        {{ $course['name'] }}
+                                        {{ $course->name }}
                                     </span>
                                 </li>
                             @endforeach
@@ -167,7 +167,6 @@
 @elseif($view == 'wide')
     <div
         class="flex flex-wrap items-center w-full clear-both text-gray-700 float-left break-words bg-gray-50 rounded-lg border-1 border-gray-100 transform shadow-2xl">
-        <!-- Add the race photo here -->
         <a href="{{ route('front.raceDetails', $race->slug) }}"
             class="w-full lg:w-1/2 flex items-center md:items-start relative h-full transition-all duration-300 group-hover:scale-110 group-hover:opacity-75"
             style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;height:27rem">
@@ -187,7 +186,7 @@
                         {{ $race->location->name }}
                     </li>
                     <li href="{{ route('front.raceDetails', $race->slug) }}"
-                        class="text-neutral-700 text-4xl font-semibold mb-3">
+                        class="text-neutral-700 text-4xl font-semibold mb-3 cursor-pointer">
                         {{ $race->name }}
                     </li>
 

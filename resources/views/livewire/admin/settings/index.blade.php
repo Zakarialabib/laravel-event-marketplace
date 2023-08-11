@@ -247,6 +247,3 @@
         </div>
     </form>
 </div>
-
-
-{{-- <x-laravelpopups-popupsettings /> --}}

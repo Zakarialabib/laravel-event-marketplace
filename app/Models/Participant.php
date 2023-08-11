@@ -32,6 +32,7 @@ class Participant extends Model
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
+        'id',
         'name',
         'email',
         'phone_number',
@@ -45,13 +46,11 @@ class Participant extends Model
         'emergency_contact_name',
         'emergency_contact_phone_number',
         'health_informations',
-        'has_medical_history',
-        'is_taking_medications',
-        'has_medication_allergies',
-        'has_sensitivities',
-        'health_information',
+        'medical_history',
+        'taking_medications',
+        'medication_allergies',
+        'sensitivities',
         'status',
-        'race_location_id',
         'user_id',
     ];
 

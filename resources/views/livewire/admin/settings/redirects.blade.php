@@ -22,7 +22,7 @@
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <div class="my-2 my-md-0">
                 <input type="text" wire:model.debounce.300ms="search"
-                    class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    class="p-3 leading-5 bg-white text-gray-500 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                     placeholder="{{ __('Search') }}" />
             </div>
         </div>
@@ -117,13 +117,13 @@
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="old_url" :value="__('Old url')" />
                         <input type="text" name="old_url" wire:model="redirect.old_url" disabled
-                            class="p-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 ">
+                            class="p-3 leading-5 bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 ">
                         <x-input-error :messages="$errors->get('redirect.old_url')" for="redirect.old_url" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="new_url" :value="__('New url')" />
                         <input type="text" name="new_url" wire:model="redirect.new_url"
-                            class="p-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
+                            class="p-3 leading-5 bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
                             placeholder="{{ __('New url') }}" value="{{ old('new_url') }}">
                         <x-input-error :messages="$errors->get('redirect.new_url')" for="redirect.new_url" class="mt-2" />
                     </div>

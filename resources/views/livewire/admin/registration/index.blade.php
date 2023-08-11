@@ -1,9 +1,11 @@
 <div>
+    @section('title', __('Registrations'))
+
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
                 <h4 class="mb-1 text-2xl font-bold">
-                    {{ __('Registration') }}
+                    {{ __('Registrations') }}
                 </h4>
                 <div class="flex items-center">
                     <a class="flex items-center text-sm text-gray-500" href="{{ route('admin.dashboard') }}">
@@ -41,7 +43,7 @@
     </section>
 
     <x-card>
-        <div x-data="{ activeTab: '{{ $activeTab }}' }" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
+        <div x-data="{ activeTab: '{{ $activeTab }}' }">
             <ul class="flex mb-4">
                 <li class="mr-1">
                     <button @click="activeTab = 'all'" :class="{ 'bg-blue-500 text-white': activeTab === 'all' }"
@@ -50,16 +52,9 @@
                     </button>
                 </li>
                 <li class="mr-1">
-                    <button @click="activeTab = 'race'" :class="{ 'bg-blue-500 text-white': activeTab === 'race' }"
+                    <button @click="activeTab = 'showRegistration'" :class="{ 'bg-blue-500 text-white': activeTab === 'showRegistration' }"
                         class="px-4 py-2">
-                        {{ __('Registrations by Race') }}
-                    </button>
-                </li>
-                <li class="mr-1">
-                    <button @click="activeTab = 'participant'"
-                        :class="{ 'bg-blue-500 text-white': activeTab === 'participant' }"
-                        class="px-4 py-2 rounded-r-md">
-                        {{ __('Participants by Race') }}
+                        {{ __('show Registration') }}
                     </button>
                 </li>
             </ul>
@@ -95,7 +90,7 @@
                     <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
                         <div class="my-2 my-md-0">
                             <input type="text" wire:model.debounce.300ms="search"
-                                class="p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                                class="p-3 leading-5 bg-white text-gray-500 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                                 placeholder="{{ __('Search') }}" />
                         </div>
                     </div>
@@ -152,6 +147,10 @@
                                         href="{{ route('admin.participant.show', $registration->participant->id) }}">
                                         <i class="fas fa-eye"></i>
                                     </x-button>
+                                    <x-button secondary type="button"
+                                        wire:click="showRegistration({{ $registration->id }})">
+                                        <i class="fas fa-eye"></i>
+                                    </x-button>
                                 </x-table.td>
                             </x-table.tr>
                         @empty
@@ -166,82 +165,55 @@
 
                 <div class="card-body">
                     <div class="pt-3">
-                        {{-- {{ $registrations->links() }} --}}
+                        {{ $registrations->links() }}
                     </div>
                 </div>
             </div>
-            <div x-show="activeTab === 'race'" x-transition:enter="transition ease-out duration-300"
+
+            
+            <div x-show="activeTab === 'showRegistration'" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform translate-x-2"
                 x-transition:enter-end="opacity-100 transform translate-x-0"
                 x-transition:leave="transition ease-in duration-300"
                 x-transition:leave-start="opacity-100 transform translate-x-0"
                 x-transition:leave-end="opacity-0 transform translate-x-2">
-                <h2 class="text-xl font-bold mb-4">{{ __('Registrations Within Race') }}</h2>
+                <h2 class="text-xl font-bold mb-4">{{ __('Show Registration') }}</h2>
                 <div>
                     <ul>
                         <x-table>
                             <x-slot name="thead">
-                                <x-table.th>#</x-table.th>
                                 <x-table.th>
-                                    {{ __('Name') }}
+                                    {{ __('Reference') }}
                                 </x-table.th>
                                 <x-table.th>
-                                    {{ __('Count') }}
+                                    {{ __('Date') }}
+                                </x-table.th>
+                                <x-table.th>
+                                    {{ __('Date') }}
+                                </x-table.th>
+                                <x-table.th>
+                                    {{ __('Participant infos') }}
                                 </x-table.th>
                                 <x-table.th>
                                     {{ __('Actions') }}
                                 </x-table.th>
                             </x-slot>
-                            @foreach ($racesWithRegistrations as $race)
+                            <x-table.tbody>
                                 <x-table.tr>
-                                    <x-table.td>{{ $loop->iteration }}</x-table.td>
-                                    <x-table.td>{{ $race->name }}</x-table.td>
-                                    <x-table.td>{{ $race->registrations_count }}</x-table.td>
+                                    <x-table.td>{{ $registration?->registration_number }}</x-table.td>
+                                    <x-table.td>{{ $registration?->registration_date }}</x-table.td>
+                                    <x-table.td>{{ $registration?->participant->name }}</x-table.td>
+                                    <x-table.td>{{ $registration?->status }}</x-table.td>
                                     <x-table.td>
-                                        <button wire:click="showRaceRegistrations('{{ $race->id }}')"
-                                            class="text-blue-500">
-                                            {{ __('Show Registrations') }}
-                                        </button>
-
-                                        <button wire:click="showRaceParticipants('{{ $race->id }}')"
-                                            class="text-blue-500">
-                                            {{ __('Show Participants') }}
-                                        </button>
+                                        {{-- status --}}
                                     </x-table.td>
                                 </x-table.tr>
-                            @endforeach
+
                             </x-table.tbody>
+                        </x-table>
                     </ul>
                 </div>
             </div>
-            <div x-show="activeTab === 'participants'" x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 transform translate-x-2"
-                x-transition:enter-end="opacity-100 transform translate-x-0"
-                x-transition:leave="transition ease-in duration-300"
-                x-transition:leave-start="opacity-100 transform translate-x-0"
-                x-transition:leave-end="opacity-0 transform translate-x-2">
-                <h2 class="text-xl font-bold mb-4">{{ __('Participants Within Race') }}</h2>
-                <div>
-                    <ul>
-                        @foreach ($racesWithRegistrations as $race)
-                            <li>
-                                <button wire:click="showParticipantsWithinRace('{{ $race->id }}')"
-                                    class="text-blue-500">
-                                    {{ $race->name }}
-                                </button>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            {{-- <div x-show="activeTab === 'show'" x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 transform translate-x-2"
-                x-transition:enter-end="opacity-100 transform translate-x-0"
-                x-transition:leave="transition ease-in duration-300"
-                x-transition:leave-start="opacity-100 transform translate-x-0"
-                x-transition:leave-end="opacity-0 transform translate-x-2">
-                <h2 class="text-xl font-bold mb-4">{{ __('Participants in') }} {{ $selectedRace?->name }}</h2>
-            </div> --}}
         </div>
     </x-card>
 </div>

@@ -36,8 +36,8 @@ class UserInfos extends Component
     {
         $this->email = $this->user->email;
 
-        if ($this->password !== '') {
-            $this->user->password = bcrypt($this->password);
+        if ($this->user->password !== '') {
+            $this->user->password = bcrypt($this->user->password);
         }
 
         $this->user->update();

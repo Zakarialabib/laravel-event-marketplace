@@ -39,7 +39,7 @@
                                 </svg>
                             </button>
                             <select
-                                class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
+                                class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
                                 id="sortBy" wire:model="sorting">
                                 <option disabled>{{ __('Choose filters') }}</option>
                                 @foreach ($sortingOptions as $value => $label)
@@ -47,7 +47,7 @@
                                 @endforeach
                             </select>
                             <select
-                                class="px-5 py-3 mr-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
+                                class="px-5 py-3 mr-3 leading-5 bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
                                 id="perPage" wire:model="perPage">
                                 <option value="20" selected>20 {{ __('Items') }}</option>
                                 <option value="50">50 {{ __('Items') }}</option>

@@ -30,4 +30,13 @@ class Service extends Model
         'price',
         'status',
     ];
+
+    protected $casts = [
+        'status' => Status::class,
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
 }

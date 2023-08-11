@@ -7,18 +7,18 @@
         <div class="flex justify-center flex-wrap gap-y-2" x-data="{ show: false }">
             <div class="w-full md:w-1/2 px-2">
                 <label class="font-bold font-heading text-gray-600"
-                    for="">{{ __('Email') }}</label>
-                <input wire:model="user.email" type="text"
+                    for="email">{{ __('Email') }}</label>
+                <input wire:model.defer="user.email" type="text" disabled name="email"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
                 <x-input-error :messages="$errors->get('email')" for="email" class="mt-2" />
             </div>
 
             <div class="w-full md:w-1/2 px-2">
                 <label class="font-bold font-heading text-gray-600"
-                    for="">{{ __('Password') }}</label>
+                    for="password">{{ __('Password') }}</label>
                 <div class="relative">
                     <input placeholder="" :type="show ? 'password' : 'text'" name="password" required
-                        wire:model="user.password"
+                        wire:model.defer="user.password"
                         class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
 

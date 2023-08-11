@@ -4,79 +4,141 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
-use Illuminate\Support\Facades\Mail;
-use App\Models\Registration;
-use App\Models\User;
-use App\Models\Participant;
-use App\Models\Subscriber;
-use Spatie\Permission\Models\Role;
-use App\Mail\RegistrationConfirmation;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\TeamInvitationMail;
+use App\Models\{Participant, Registration, Service, Subscriber, User};
 use App\Enums\Status;
-use Throwable;
-use Illuminate\Support\Facades\Pipeline;
+use App\Mail\RegistrationConfirmation;
+use App\Models\Team;
+use App\Models\TeamMember;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\{Auth, DB, Mail, Cache};
 use Illuminate\Support\Str;
+use Livewire\Component;
+use Throwable;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Jobs\EmailSubscriptionJob;
 
 class RegistrationForm extends Component
 {
     use LivewireAlert;
 
     public $race;
-
-    public $registration;
-
+    public $user;
     public $participant;
-
+    public $registration;
+    public $services;
+    public $selectedServices = [];
+    public $timeRemaining = 900; // 15 minutes in seconds
     public $additionalServices = false;
-
     public $existingSubmission;
     public $newsletters = false;
-
-    public $showMedicalHistory = false;
-    public $showTakingMedications = false;
-    public $showMedicationAllergies = false;
-    public $showSensitivities = false;
-
-    protected $rules = [
-        'race.numberOfParticipants'        => 'required|integer',
-        'race.email'                       => 'required|email:rfc,dns,spoof,filter|unique:participants,email',
-        'race.firstName'                   => 'required|string',
-        'race.lastName'                    => 'required|string',
-        'race.gender'                      => 'required|string',
-        'race.dateOfBirth'                 => 'required|date|before:today',
-        'race.phoneNumber'                 => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6|unique:participants,phone_number',
-        'race.country'                     => 'required|string|min:3|max:50',
-        'race.address'                     => 'required|string',
-        'race.city'                        => 'required|string|min:3|max:50',
-        'race.zipCode'                     => 'nullable|string',
-        'race.emergencyContactName'        => 'nullable|string',
-        'race.emergencyContactPhoneNumber' => 'nullable|numeric|min:6',
-        'race.healthInformation'           => 'required',
-        'race.hasMedicalHistory'           => 'nullable|boolean',
-        'race.isTakingMedications'         => 'nullable|boolean',
-        'race.hasMedicationAllergies'      => 'nullable|boolean',
-        'race.hasSensitivities'            => 'nullable|boolean',
+    public $team;
+    public $isTeamRegistration = false;
+    public $newTeamName; // If creating a new team
+    public $team_name;
+    public $invitationEmails = [''];
+    public $rules = [
+        'participant.email'                          => 'required|email:rfc,dns,spoof,filter|unique:participants,email',
+        'participant.name'                           => 'required|string',
+        'participant.gender'                         => 'required|string',
+        'participant.birth_date'                     => 'required|date|before:today',
+        'participant.phone_number'                   => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6|unique:participants,phone_number',
+        'participant.country'                        => 'required|string|min:3|max:50',
+        'participant.address'                        => 'required|string',
+        'participant.city'                           => 'required|string|min:3|max:50',
+        'participant.zip_code'                       => 'nullable|string',
+        'participant.emergency_contact_name'         => 'nullable|string',
+        'participant.emergency_contact_phone_number' => 'nullable|numeric|min:6',
+        'participant.health_informations'            => 'required',
+        'participant.medical_history'                => 'nullable',
+        'participant.status'                         => 'nullable',
+        'participant.taking_medications'             => 'nullable',
+        'participant.medication_allergies'           => 'nullable',
+        'participant.sensitivities'                  => 'nullable',
+        'participant.newTeamName'                    => 'required_without:team_name|string|unique:teams,team_name',
+        'participant.team_name'                      => 'required_without:newTeamName|string|exists:teams,team_name',
+        'isTeamRegistration'                         => 'boolean',
+        'invitationEmails.*'                         => 'email:rfc,dns,spoof,filter|distinct',
     ];
 
     public function mount($race)
     {
         $this->race = $race;
-        $this->registration = new Registration();
-        $this->race->country = 'Maroc';
+        $this->services = Service::all();
 
-        $this->participant = Registration::where('participant_id', Auth::id())->first();
-
-        $this->existingSubmission = $this->participant ? $this->participant->registration : null;
+        if (Auth::check()) {
+            $this->user = Auth::user();
+            $this->participant = Participant::firstOrCreate(['user_id' => $this->user->id]);
+        } else {
+            $this->participant = new Participant();
+        }
     }
 
-    public function render(): View|Factory
+    public function render(): View
     {
         return view('livewire.front.registration-form');
+    }
+
+    public function hydrate()
+    {
+        // Decrease the time remaining every second.
+        $this->timeRemaining--;
+
+        // If time expires
+        if ($this->timeRemaining <= 0) {
+            session()->flash('error', 'Your registration time has expired.');
+
+            return redirect()->back();
+        }
+    }
+
+    public function dehydrate()
+    {
+        Cache::put('registration_time_remaining', $this->timeRemaining, 900);
+    }
+
+    public function joinTeam()
+    {
+        $this->team = Team::where('team_name', $this->team_name)->first();
+
+        if ( ! $this->team) {
+            $this->team = Team::create([
+                'team_name' => $this->newTeamName,
+                'leader_id' => Auth::id(),
+            ]);
+        }
+
+        // Check if the user is already a member of another team for the same race.
+        $existingMembership = TeamMember::where('participant_id', $this->participant->id)
+            ->first();
+
+        if ($existingMembership) {
+            $this->alert('error', 'User is already a member of a team for this race.');
+        }
+
+        // Add user to the team.
+        TeamMember::create([
+            'team_id'           => $this->team->id,
+            'participant_id'    => $this->participant->id,
+            'invitation_emails' => $this->invitationEmails,
+        ]);
+
+        // sendTeamInvitations other members via email (if any are provided).
+        foreach ($this->invitationEmails as $email) {
+            Mail::to($email)->later(now()->addMinutes(10), new TeamInvitationMail($this->team, $this->participant));
+        }
+    }
+
+    public function addMoreEmailFields()
+    {
+        $this->invitationEmails[] = '';
+    }
+
+    public function removeEmailField($index)
+    {
+        unset($this->invitationEmails[$index]);
+        $this->invitationEmails = array_values($this->invitationEmails); // Re-index the array
     }
 
     public function register()
@@ -87,99 +149,68 @@ class RegistrationForm extends Component
             return;
         }
 
+        DB::beginTransaction();
+
         try {
             $this->validate();
 
-            $participant = Pipeline::send($this->race)
-                ->through([
-                    function ($race, $next) {
-                        if ( ! Auth::check()) {
-                            $random = Str::random(10);
-                            $password = bcrypt($random);
+            if ( ! $this->user) {
+                $password = bcrypt(Str::random(10));
 
-                            $user = new User();
+                $this->user = User::create([
+                    'name'     => $this->participant['name'],
+                    'email'    => $this->participant['email'],
+                    'password' => $password,
+                ]);
 
-                            $user->name = $race->firstName.' '.$race->lastName;
-                            $user->email = $race->email;
-                            $user->password = $password;
+                $this->user->assignRole('client');
+                Auth::login($this->user, true);
+            }
 
-                            $user->save();
+            $this->participant->user_id = $this->user->id;
+            $this->participant->save();
 
-                            $user->assignRole(Role::findByName('client'));
-                        } else {
-                            $user = Auth::user();
-                        }
+            if ($this->isTeamRegistration) {
+                $this->joinTeam();
+            }
 
-                        Auth::login($user, true);
+            $this->registration = new Registration();
 
-                        $participantData = [
-                            'name'                           => $race->firstName.' '.$race->lastName,
-                            'email'                          => $race->email,
-                            'phone_number'                   => $race->phoneNumber,
-                            'gender'                         => $race->gender,
-                            'country'                        => $race->country,
-                            'birth_date'                     => $race->dateOfBirth,
-                            'address'                        => $race->address,
-                            'city'                           => $race->city,
-                            'zip_code'                       => $race->zipCode,
-                            'emergency_contact_name'         => $race->emergencyContactName,
-                            'emergency_contact_phone_number' => $race->emergencyContactPhoneNumber,
-                            'health_informations'            => $race->helthInformation,
-                            'medical_history'                => $race->hasMedicalHistory,
-                            'taking_medications'             => $race->isTakingMedications,
-                            'medication_allergies'           => $race->hasMedicationAllergies,
-                            'sensitivities'                  => $race->hasSensitivities,
-                            'race_location_id'               => $race->race_location_id,
-                            'user_id'                        => $user->id,
-                        ];
+            $this->registration->fill([
+                'registration_number' => Str::uuid(),
+                'participant_id'      => $this->participant['id'],
+                'race_id'             => $this->race->id,
+                'registration_date'   => now(),
+                'status'              => Status::ACTIVE,
+            ])->save();
 
-                        $participant = Participant::create($participantData);
-                        $this->registration->registration_number = Str::uuid();
-                        $this->registration->participant_id = $participant->id;
-                        $this->registration->race_id = $this->race->id;
-                        $this->registration->registration_date = date('Y-m-d H:i:s');
-                        $this->registration->status = Status::ACTIVE;
-                        $this->registration->save();
+            Mail::to($this->participant['email'])
+                ->later(now()->addMinutes(10), new RegistrationConfirmation($this->participant));
 
-                        Mail::to($participant->email)->later(now()->addMinutes(10), new RegistrationConfirmation($participant));
+            // Add Race to Cart
+            Cart::instance('races')
+                ->add($this->race->id, $this->race->name, 1, $this->race->price)
+                ->associate('App\Models\Race');
 
-                        // Cart::instance('races')->add($this->race->id)->associate('App\Models\Race');
-                        Cart::instance('races')->add($race->id, $race->name, '1', $race->price)->associate('App\Models\Race');
+            foreach ($this->selectedServices as $serviceId) {
+                $service = Service::find($serviceId);
+                Cart::instance('services')
+                    ->add($service->id, $service->name, 1, $service->price)
+                    ->associate('App\Models\Service');
+            }
 
-                        return $next($participant);
-                    },
-                ])
-                ->then(function ($participant) {
-                    return $participant;
-                });
+            if ($this->newsletters) {
+                EmailSubscriptionJob::dispatch($this->participant['email'], $this->participant['name']);
+            }
 
-            $user = Pipeline::send($participant)
-                ->through([
-                    function ($participant, $next) {
-                        if ($this->newsletters) {
-                            $existingSubscriber = Subscriber::where('email', $participant->email)->first();
-
-                            if ( ! $existingSubscriber) {
-                                Subscriber::create([
-                                    'email'  => $participant->email,
-                                    'name'   => $participant->name,
-                                    'tag'    => 'participant', // 'participant' or 'subscriber
-                                    'status' => Status::ACTIVE,
-                                ]);
-                            }
-                        }
-
-                        return $next($participant);
-                    },
-                ])
-                ->then(function ($participant) {
-                    return $participant;
-                });
+            DB::commit();
 
             $this->alert('success', __('Your order has been sent successfully!'));
 
             return redirect()->route('front.checkout-race');
         } catch (Throwable $th) {
+            DB::rollBack();
+
             throw $th;
         }
     }

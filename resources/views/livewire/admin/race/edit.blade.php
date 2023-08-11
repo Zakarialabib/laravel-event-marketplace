@@ -87,6 +87,18 @@
                     <x-input-error :messages="$errors->get('race.number_of_racers')" for="number_of_racers" class="mt-2" />
                 </div>
 
+                <x-checkbox-input label="{{ __('Is this the first year for your race?') }}" model="{{ $race->first_year }}">
+                    <x-input wire:model="race.first_year" type="text" id="first_year"
+                        class="w-full block" name="first_year" />
+                </x-checkbox-input>
+
+                <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                    <x-label for="first_year" :value="__('Last year url')" required />
+                    <x-input id="last_year_url" class="block mt-1 w-full" type="text"
+                        name="last_year_url" wire:model="race.last_year_url" required />
+                    <x-input-error :messages="$errors->get('race.last_year_url')" for="last_year_url" class="mt-2" />
+                </div>
+
                 <div class="px-3 mb-2">
                     <x-label for="category_id" :value="__('Category')" required />
                     <select

@@ -20,7 +20,7 @@
     x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100"
     x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
     x-transition:leave-end="transform opacity-0 scale-95">
-    <div class="text-zinc-500 text-sm font-medium px-9">
+    <div class="text-gray-500 text-sm font-medium px-9">
         <div class="flex flex-wrap items-center -ml-3.5 -mr-3.5">
             <div class="basis-full px-3.5">
                 <div class="bg-white h-18 rounded-xl px-10 relative z-[1] drop-shadow-xl">
@@ -31,7 +31,8 @@
                         <div>
                             <a href="{{ route('front.index') }}" class="text-sky-500 cursor-pointer">
                                 <img src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy"
-                                    class="h-16 align-middle w-auto" alt="{{ Helpers::settings('site_title') }}">
+                                    class="h-16 align-middle w-auto" alt="{{ Helpers::settings('site_title') }}"
+                                    onerror="this.onerror=null;this.src='{{ asset('images/logo/logo.png') }}';">
                             </a>
                         </div>
                         <div class="flex flex-grow justify-center">

@@ -14,7 +14,7 @@
     @section('title', $race->name)
 
     <section style="background-image: url({{ $race->getFirstMediaUrl('local_files') }})"
-        class="relative table w-full pt-36 pb-16 h-[400px] bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
+        class="relative w-full pt-36 pb-16 h-[400px] bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
         <div class="absolute inset-0 bg-black opacity-60"></div>
         <div class="grid grid-cols-1 text-center mt-10 bottom-0 px-4">
             <div class="text-center z-10 my-2">
@@ -118,11 +118,11 @@
                                     'bg-green-700': activeTab === 'tab0',
                                     'text-white': activeTab === 'tab0',
                                     'hover:text-green-400': activeTab === 'tab0',
-                                }">>
+                                }">
                                 {{ __('Overview') }}
                             </a>
                             <a href="#tab1"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5"
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
                                 @click="activeTab = 'tab1'"
                                 :class="{
                                     'bg-green-700': activeTab === 'tab1',
@@ -143,15 +143,15 @@
                             </a>
 
                             <a href="#sponsors"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5">
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
                                 {{ __('Sponsors') }}
                             </a>
                             <a href=""
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5">
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
                                 Results
                             </a>
                             <a href="{{ route('front.catalog') }}" target="_blank"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-zinc-200 border-solid p-5">
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
                                 {{ __('Shop') }}
                             </a>
                         </div>
@@ -330,7 +330,7 @@
 
                         @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
                             <div
-                                class="bg-zinc-200 text-neutral-700 break-words pl-8 pr-5  border border-zinc-300 border-solid rounded-">
+                                class="bg-gray-200 text-neutral-700 break-words pl-8 pr-5  border border-gray-300 border-solid rounded-">
                                 <div class="clear-both float-left my-3.5 ">
                                     <h3 class="text-neutral-700 text-4xl font-semibold mb-5 ">
                                         {{ __('Registration Coming Soon') }}

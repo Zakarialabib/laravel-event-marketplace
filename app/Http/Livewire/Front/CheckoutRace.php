@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Enums\OrderStatus;
-use App\Enums\OrderType;
-use App\Mail\CheckoutMail;
-use App\Models\Order;
-use App\Models\Participant;
-use App\Models\Registration;
+use App\Enums\{OrderStatus, OrderType, PaymentStatus};
+use App\Models\{Order, Participant, Registration};
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use App\Enums\PaymentStatus;
+use App\Traits\CmiGateway;
 
 class CheckoutRace extends Component
 {
     use LivewireAlert;
+    use CmiGateway;
     public $listeners = [
         'checkout'            => 'checkout',
         'checkoutCartUpdated' => '$refresh',
@@ -29,11 +27,45 @@ class CheckoutRace extends Component
     ];
     public $removeFromCart;
     public $payment_method = 'card';
-    public $total;
     public $status;
-    public $cartTotal;
-    public $subTotal;
+    public $registration_subtotal;
+    public $services_subtotal;
+    public $registrationCartTotal;
+    public $servicesCartTotal;
     public $raceId;
+    public $registration;
+    public $user;
+    public $timeRemaining = 900; // 15 minutes in seconds
+
+    public function mount()
+    {
+        $this->calculateCartTotals();
+        $this->user = Auth::user();
+    }
+
+    public function hydrate()
+    {
+        // Decrease the time remaining every second.
+        $this->timeRemaining--;
+
+        // If time expires
+        if ($this->timeRemaining <= 0) {
+            $this->alert('error', 'Your registration time has expired.');
+
+            return redirect()->back();
+        }
+    }
+
+    public function dehydrate()
+    {
+        Cache::put('registration_time_remaining', $this->timeRemaining, 900);
+    }
+
+    public function calculateCartTotals()
+    {
+        $this->registration_subtotal = (float) str_replace(',', '', Cart::instance('races')->subtotal());
+        $this->services_subtotal = (float) str_replace(',', '', Cart::instance('services')->subtotal());
+    }
 
     public function confirmed()
     {
@@ -42,14 +74,19 @@ class CheckoutRace extends Component
         $this->emit('checkoutCartUpdated');
     }
 
-    public function getCartItemsProperty()
+    public function getCartTotalProperty()
+    {
+        return $this->registration_subtotal + $this->services_subtotal;
+    }
+
+    public function getRegistrationCartItemsProperty()
     {
         return Cart::instance('races')->content();
     }
 
-    public function getSubTotalProperty()
+    public function getServicesCartItemsProperty()
     {
-        return Cart::instance('races')->subtotal();
+        return Cart::instance('services')->content();
     }
 
     public function getParticipantProperty()
@@ -59,43 +96,57 @@ class CheckoutRace extends Component
 
     public function checkout()
     {
+        $this->validate();
+
         if (Cart::instance('races')->count() === 0) {
             $this->alert('error', __('Your cart is empty'));
+
+            return;
         }
 
-        $cartItems = Cart::instance('races')->content();
+        if ($this->payment_method === 'card') {
+            $this->processCardPayment();
+        } else {
+            $this->alert('success', __('Payment method not yet implemented'));
+        }
+    }
 
-        $order = null;
+    protected function processCardPayment()
+    {
+        DB::transaction(function () {
+            $cartItems = Cart::instance('races')->content();
+            $order = null;
 
-        foreach ($cartItems as $item) {
-            $order = Order::create([
-                'reference'      => Order::generateReference(),
-                'payment_method' => $this->payment_method,
-                'payment_status' => PaymentStatus::PENDING,
-                'type'           => OrderType::REGISTRATION,
-                'date'           => now(),
-                'amount'         => $this->cartTotal,
-                'user_id'        => Auth::user()->id,
-                'race_id'        => $item->id,
-                'status'         => OrderStatus::PENDING,
-            ]);
+            foreach ($cartItems as $item) {
+                $order = Order::create([
+                    'reference'      => Order::generateReference(),
+                    'payment_method' => $this->payment_method,
+                    'payment_status' => PaymentStatus::PENDING,
+                    'type'           => OrderType::REGISTRATION,
+                    'date'           => now(),
+                    'amount'         => $this->cartTotal,
+                    'user_id'        => Auth::user()->id,
+                    'race_id'        => $item->id,
+                    'status'         => OrderStatus::PENDING,
+                ]);
 
-            $registration = Registration::where('participant_id', Auth::user()->id)
-                ->where('race_id', $item->id)
-                ->first();
-
-            if ($registration) {
-                $registration->update(['order_id' => $order->id]);
+                $this->linkOrderToRegistration($order, $item->id);
             }
 
-            Mail::to($order->user->email)->later(now()->addMinutes(10), new CheckoutMail($order, $order->user));
+            $this->redirect(route('cmi.pay', $order->id));
+        });
+    }
+
+    protected function linkOrderToRegistration($order, $raceId)
+    {
+        $this->registration = Registration::where('participant_id', Auth::user()->id)
+            ->where('race_id', $raceId)
+            ->first();
+
+        if ($this->registration) {
+            $this->registration->order_id = $order->id;
+            $this->registration->save();
         }
-
-        Cart::instance('races')->destroy();
-
-        $this->alert('success', __('Order placed successfully!'));
-
-        return redirect()->route('front.thankyou', $order->id);
     }
 
     public function removeFromCart($rowId)
@@ -113,15 +164,6 @@ class CheckoutRace extends Component
                 'cancelButtonText'  => 'cancel',
             ]
         );
-    }
-
-    public function mount()
-    {
-        $subtotal = Cart::instance('races')->subtotal();
-
-        $this->subTotal = str_replace(',', '', $subtotal);
-
-        $this->cartTotal = $this->subTotal;
     }
 
     public function render(): View|Factory

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Registration;
 
-use App\Models\Race;
 use App\Models\Registration;
 use App\Http\Livewire\WithSorting;
 use Illuminate\Contracts\View\Factory;
@@ -23,8 +22,7 @@ class Index extends Component
     public array $selected = [];
     public array $paginationOptions;
     public $activeTab;
-    public $showTab;
-    public $selectedRace;
+    public $registration;
 
     protected $queryString = [
         'search'        => ['except' => ''],
@@ -62,31 +60,10 @@ class Index extends Component
         $this->activeTab ??= 'all';
     }
 
-    public function showAllRegistrations()
+    public function showRegistration(Registration $registration)
     {
-        $this->selectedRace = null;
-        $this->showTab = false;
-        $this->activeTab = 'all';
-    }
-
-    public function showRaceRegistrations($raceId)
-    {
-        $this->selectedRace = Race::findOrFail($raceId);
-        $this->showTab = false;
-        $this->activeTab = 'race';
-    }
-
-    public function showRaceParticipants($raceId)
-    {
-        $this->selectedRace = Race::findOrFail($raceId);
-        $this->showTab = true;
-        $this->activeTab = 'participant';
-    }
-
-    public function closeTab()
-    {
-        $this->showTab = false;
-        $this->activeTab = 'race';
+        $this->registration = $registration;
+        $this->activeTab = 'showRegistration';
     }
 
     public function render(): View|Factory
@@ -97,18 +74,9 @@ class Index extends Component
             'order_direction' => $this->sortDirection,
         ]);
 
-        if ($this->activeTab === 'all') {
-            $registrations = $query->paginate($this->perPage);
-        } elseif ($this->activeTab === 'race') {
-            $registrations = $query->where('race_id', $this->selectedRace->id)
-                ->paginate($this->perPage);
-        } else {
-            $registrations = collect();
-        }
+        $registrations = $query->paginate($this->perPage);
 
-        $racesWithRegistrations = Race::has('registrations')->get();
-
-        return view('livewire.admin.registration.index', compact('registrations', 'racesWithRegistrations'))
+        return view('livewire.admin.registration.index', compact('registrations'))
             ->extends('layouts.dashboard');
     }
 }

@@ -58,7 +58,10 @@ class Create extends Component
         'race.end_registration'      => ['required', 'date'],
         'race.registration_deadline' => ['required', 'date'],
         'race.number_of_racers'      => ['required', 'numeric', 'max:2147483647'],
-        'description'                => ['nullable'],
+        'race.first_year'            => ['nullable'],
+        'race.last_year_url'         => ['nullable', 'string', 'max:255'],
+
+        'description' => ['nullable'],
 
         'race.meta_title'       => ['nullable', 'string', 'max:255'],
         'race.meta_description' => ['nullable', 'string', 'max:255'],

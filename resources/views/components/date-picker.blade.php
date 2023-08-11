@@ -9,7 +9,8 @@
         @endif
 
         <input type="text"
-            class="p-3 leading-5 bg-white text-gray-700  rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+            placeholder="{{ $attributes['picker'] === 'date' ? 'YYYY-MM-DD' : ($attributes['picker'] === 'time' ? 'HH:MM:SS' : 'YYYY-MM-DD HH:MM:SS') }}"
+            class="py-2 leading-5 bg-white text-gray-700  rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
             {{ $attributes }} data-input>
     </div>
 </div>

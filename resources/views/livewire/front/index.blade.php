@@ -8,7 +8,7 @@
             <x-theme.slider :sliders="$this->sliders" />
         </section>
         <section class="lg:px-10 sm:px-6 lg:py-16 md:py-14">
-            <h3 
+            <h3
                 class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
                 {{ __('Upcoming Races') }}
             </h3>
@@ -30,28 +30,11 @@
         @if (count(Helpers::getActiveFeaturedBlogs()) > 0)
             <div class="relative py-6 mx-auto px-6 bg-green-50 ">
                 <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
-                    {{('Ressources')}}
+                    {{ 'Ressources' }}
                 </h2>
-                <div class="flex flex-wrap justify-center gap-4 py-6">
+                <div class="grid xl:grid-cols-3 sm:grid-cols-1 gap-4 overflow-hidden justify-center py-6">
                     @foreach (Helpers::getActiveFeaturedBlogs() as $blog)
-                        <div class="w-full xl:w-1/4 px-4 bg-white py-6">
-                            <div class="flex flex-wrap items-center">
-                                <a href="{{ route('front.blogPage', $blog->slug) }}" class="w-full">
-                                    <img alt="{{ $blog->title }}" src="{{ $blog->getFirstMediaUrl('blog') }}"
-                                        class="shadow-lg rounded max-w-full h-auto align-middle border-none" />
-                                </a>
-                                <div class="w-full px-4 mx-auto text-center mt-4">
-                                    <h3 class="text-3xl mb-2 font-semibold leading-normal">
-                                        {{ $blog->title }}
-                                    </h3>
-                                    <p class="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
-                                        {!! $blog->description !!}
-                                    </p>
-                                    <a href="{{ route('front.blogPage', $blog->slug) }}"
-                                        class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-2 text-sm front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase">{{ __('Read More') }}</a>
-                                </div>
-                            </div>
-                        </div>
+                        <x-blog-card :blog="$blog" />
                     @endforeach
                 </div>
             </div>

@@ -52,6 +52,17 @@
                                 name="number_of_racers" wire:model="race.number_of_racers" required />
                             <x-input-error :messages="$errors->get('race.number_of_racers')" for="number_of_racers" class="mt-2" />
                         </div>
+                        <x-checkbox-input label="{{ __('Is this the first year for your race?') }}" model="{{ $race->first_year }}">
+                            <x-input wire:model="race.first_year" type="text" id="first_year"
+                                class="w-full block" name="first_year" />
+                        </x-checkbox-input>
+
+                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                            <x-label for="first_year" :value="__('Last year url')" required />
+                            <x-input id="last_year_url" class="block mt-1 w-full" type="text"
+                                name="last_year_url" wire:model="race.last_year_url" required />
+                            <x-input-error :messages="$errors->get('race.last_year_url')" for="last_year_url" class="mt-2" />
+                        </div>
                     </div>
 
                     <div class="flex flex-wrap -mx-2 mb-3">
@@ -100,9 +111,8 @@
 
                         <div class="w-full px-3 mb-6 lg:mb-0">
                             <x-label for="description" :value="__('Description')" />
-                            <x-trix name="description" wire:model="description"
-                            class="mt-1" />
-        
+                            <x-trix name="description" wire:model="description" class="mt-1" />
+
                         </div>
 
                         <div class="w-full px-4 my-2">
@@ -342,10 +352,20 @@
                         </div>
                     </div>
 
-                    <div class="w-full px-4 my-6">
-                        <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">
-                            {{ __('Create') }}
-                        </x-button>
+                    <div class="flex flex-col w-full px-4 my-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="status" type="checkbox"
+                                    class="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out"
+                                    wire:model="race.status">
+                                <x-label for="status" class="ml-2 block text-sm leading-5 text-gray-900">
+                                    {{ __('Create as Inactive') }}
+                                </x-label>
+                            </div>
+                            <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">
+                                {{ __('Create') }}
+                            </x-button>
+                        </div>
                     </div>
                 </form>
             </div>

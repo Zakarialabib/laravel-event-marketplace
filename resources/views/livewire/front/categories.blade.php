@@ -185,7 +185,7 @@
                     <div class="flex space-y-2 flex-col items-center justify-center mb-8">
                         <h3 class="text-xl font-bold font-heading">{{ __('Filters') }}</h3>
                         <select
-                            class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
+                            class="px-5 py-3 mr-2 leading-5 bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-500"
                             id="sortBy" wire:model="sorting">
                             <option disabled>{{ __('Choose filters') }}</option>
                             @foreach ($sortingOptions as $value => $label)

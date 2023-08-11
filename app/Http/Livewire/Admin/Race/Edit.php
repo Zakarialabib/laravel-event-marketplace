@@ -54,6 +54,8 @@ class Edit extends Component
         'race.start_registration'    => ['required', 'date'],
         'race.end_registration'      => ['required', 'date'],
         'race.number_of_racers'      => ['required', 'numeric', 'max:2147483647'],
+        'race.first_year'            => ['nullable'],
+        'race.last_year_url'         => ['nullable', 'string', 'max:255'],
         'description'                => ['nullable'],
         'images'                     => ['nullable'],
 
