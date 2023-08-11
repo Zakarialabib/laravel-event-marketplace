@@ -13,7 +13,7 @@ class SettingController extends Controller
     {
         return view('admin.settings.index', compact('setting'));
     }
-    
+
     public function redirects()
     {
         return view('admin.settings.redirects');
