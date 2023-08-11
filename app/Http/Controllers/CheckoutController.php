@@ -33,7 +33,7 @@ class CheckoutController extends Controller
         $registration = Registration::all();
         // ->first();
 
-        dd($registration);
+        // dd($registration);
 
         if ( ! $registration) {
             throw new Exception('Registration not found for the given user and race.');

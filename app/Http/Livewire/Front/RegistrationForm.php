@@ -37,6 +37,7 @@ class RegistrationForm extends Component
     public $isTeamRegistration = false;
     public $newTeamName; // If creating a new team
     public $team_name;
+    public $resultTeam = '';
     public $invitationEmails = [''];
     public $rules = [
         'participant.email'                          => 'required|email:rfc,dns,spoof,filter|unique:participants,email',
@@ -56,10 +57,6 @@ class RegistrationForm extends Component
         'participant.taking_medications'             => 'nullable',
         'participant.medication_allergies'           => 'nullable',
         'participant.sensitivities'                  => 'nullable',
-        'participant.newTeamName'                    => 'required_without:team_name|string|unique:teams,team_name',
-        'participant.team_name'                      => 'required_without:newTeamName|string|exists:teams,team_name',
-        'isTeamRegistration'                         => 'boolean',
-        'invitationEmails.*'                         => 'email:rfc,dns,spoof,filter|distinct',
     ];
 
     public function mount($race)
@@ -98,6 +95,22 @@ class RegistrationForm extends Component
         Cache::put('registration_time_remaining', $this->timeRemaining, 900);
     }
 
+    public function getTeamsProperty()
+    {
+        return Team::select('team_name','id')->get();
+    }
+
+    public function updatedTeamName()
+    {
+        if (strlen($this->team_name) > 3) {
+            $this->resultTeam = Team::where('team_name', 'like', '%'.$this->team_name.'%')
+                ->limit(5)
+                ->get();
+        } else {
+            $this->resultTeam = [];
+        }
+    }
+
     public function joinTeam()
     {
         $this->team = Team::where('team_name', $this->team_name)->first();
@@ -122,18 +135,28 @@ class RegistrationForm extends Component
             'team_id'           => $this->team->id,
             'participant_id'    => $this->participant->id,
             'invitation_emails' => $this->invitationEmails,
+            'status'            => Status::PENDING,
         ]);
 
-        // sendTeamInvitations other members via email (if any are provided).
         foreach ($this->invitationEmails as $email) {
             Mail::to($email)->later(now()->addMinutes(10), new TeamInvitationMail($this->team, $this->participant));
         }
+    }
+
+    public function selectTeam($team)
+    {
+        $this->team = $team;
     }
 
     public function addMoreEmailFields()
     {
         $this->invitationEmails[] = '';
     }
+
+    public function updatedIsTeamRegistration($value) 
+{
+    $this->isTeamRegistration = $value;
+}
 
     public function removeEmailField($index)
     {

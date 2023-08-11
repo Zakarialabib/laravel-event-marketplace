@@ -96,8 +96,6 @@ class CheckoutRace extends Component
 
     public function checkout()
     {
-        $this->validate();
-
         if (Cart::instance('races')->count() === 0) {
             $this->alert('error', __('Your cart is empty'));
 

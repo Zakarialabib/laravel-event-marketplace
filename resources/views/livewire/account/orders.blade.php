@@ -2,9 +2,9 @@
     <h2 class="text-2xl font-bold font-heading text-gray-700 mb-4">
         {{ __('Orders') }}
     </h2>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         @foreach ($this->orders as $order)
-            <div class="px-4 shadow-lg border bg-white">
+            <div class="px-4 py-10 shadow-lg border bg-white">
                 <p><strong>{{ __('Reference') }}:</strong> {{ $order->reference }}</p>
                 @if ($order->race)
                     <p><strong>{{ __('Race') }}:</strong> <a

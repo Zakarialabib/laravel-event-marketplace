@@ -13,7 +13,7 @@ return new class () extends Migration {
         Schema::create('team_members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->constrained('teams');
-            $table->foreignId('participant_id')->constrained('participants');
+            $table->foreignUuid('participant_id')->constrained('participants');
             $table->unique(['team_id', 'participant_id']);
             $table->json('invitation_emails')->nullable();
             $table->boolean('is_accepted')->default(false);

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Exports;
+namespace App\Traits;
 
-trait ForModelsTrait
+trait ForModels
 {
     /** @param mixed $selectedModels */
     public function forModels($selectedModels)

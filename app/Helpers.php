@@ -259,17 +259,28 @@ class Helpers
         if ($value instanceof DateTimeInterface) {
             return $value->format('Y-m-d');
         }
-
-        $date = Carbon::createFromFormat('Y-m-d', substr($value, 0, 10));
-
-        if ($date === false) {
-            // Handle invalid date format
+    
+        // Check if value is non-empty and is a string
+        if (empty($value) || !is_string($value)) {
             return null;
         }
-
+    
+        // Ensure that the value is at least 10 characters long to avoid warnings with substr
+        if (strlen($value) < 10) {
+            return null;
+        }
+    
+        $dateString = substr($value, 0, 10);
+    
+        try {
+            $date = Carbon::createFromFormat('Y-m-d', $dateString);
+        } catch (\Exception $e) {
+            return null; // Return null if date creation fails
+        }
+    
         return $date->format('Y-m-d');
     }
-
+    
     public static function handleUpload($image, $width, $height, $productName)
     {
         $imageName = Str::slug($productName).'-'.Str::random(5).'.'.$image->extension();

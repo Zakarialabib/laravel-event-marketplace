@@ -37,6 +37,9 @@
                 </div>
             </div>
             <div class="float-right">
+                <x-button type="button" primary wire:click="downloadAll" wire:loading.attr="disabled">
+                    {{ __('downloadAll') }}
+                </x-button>
             </div>
         </div>
     </section>
@@ -56,6 +59,9 @@
                 @if ($this->selected)
                     <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
                         <i class="fas fa-trash"></i>
+                    </x-button>
+                    <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
+                        {{ __('Download selected') }}
                     </x-button>
                 @endif
                 @if ($this->selectedCount)

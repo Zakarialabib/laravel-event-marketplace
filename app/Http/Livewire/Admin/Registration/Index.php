@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Registration;
 
+use App\Exports\RegistrationExport;
 use App\Models\Registration;
 use App\Http\Livewire\WithSorting;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
-
 class Index extends Component
 {
     use WithPagination;
@@ -50,6 +50,16 @@ class Index extends Component
         $this->selected = [];
     }
 
+    public function downloadSelected()
+    {
+        return (new RegistrationExport($this->selected))->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
+    }
+    
+    public function downloadAll()
+    {
+        return (new RegistrationExport())->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
+    }
+    
     public function mount()
     {
         $this->sortBy = 'id';

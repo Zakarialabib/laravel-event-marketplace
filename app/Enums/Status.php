@@ -10,9 +10,9 @@ enum Status: string
 
     case ACTIVE = '1';
 
-    // case COMPLETED = '2';
+    case PENDING = '2';
 
-    // case CANCELED = '5';
+    case REFUSED = '3';
 
     public static function values(): array
     {

@@ -3,7 +3,7 @@
     <section class="py-5 mx-auto pt-16 px-10 bg-gray-100">
         <h2 class="my-6 text-center text-5xl font-bold font-heading">{{ __('Order Confirmation') }}</h2>
         <div class="flex flex-wrap">
-            <div class="w-full lg:w-1/2 px-4">
+            <div class="w-full lg:w-1/2 px-4 pt-5 bg-white">
 
                 @livewire('account.user-infos', ['user' => $user])
 
@@ -126,7 +126,7 @@
             </div>
 
             <div class="w-full lg:w-1/2 px-4">
-                <div class="py-16 px-6 md:px-14 bg-white">
+                <div class="pb-10 pt-5 px-6 md:px-14 bg-white">
                     <div class="flex mb-5 items-center">
                         <h2 class="text-4xl font-bold font-heading">{{ __('Summary') }}</h2>
                     </div>
@@ -135,18 +135,15 @@
                     <div class="mb-2 flex flex-wrap items-center">
                         <h3 class="text-2xl font-bold font-heading mb-4">{{ __('Races') }}</h3>
                         @foreach ($this->registrationCartItems as $item)
-                            <div class="flex flex-wrap w-full mb-10">
+                            <div class="flex flex-wrap w-full mb-10 items-center">
                                 <div class="w-full md:w-1/3 mb-6 md:mb-0">
                                     <div class="flex h-32 items-center justify-center bg-gray-100">
-                                        @if (!empty($item->model->image))
-                                            <a href="{{ route('front.raceDetails', $item->model->slug) }}"
-                                                target="_blank">
-
-                                                <img class="h-full object-contain"
-                                                    src="{{ $race->model->getFirstMediaUrl('local_files') }}"
-                                                    alt="{{ $item->name }}">
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('front.raceDetails', $item->model->slug) }}"
+                                            target="_blank" class="h-full">
+                                            <img class="h-full object-cover"
+                                                src="{{ $item->model->getFirstMediaUrl('local_files') }}"
+                                                alt="{{ $item->name }}">
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-2/3 px-4">
@@ -181,9 +178,9 @@
                     <!-- Services Cart Items -->
                     <div class="mb-2 flex flex-wrap items-center">
                         <h3 class="text-2xl font-bold font-heading mb-4">{{ __('Services') }}</h3>
-                        @foreach ($this->servicesCartItems as $item)
-                            <div class="flex flex-wrap w-full mb-10">
-                                <div class="w-full md:w-2/3 px-4">
+                        <div class="flex flex-wrap w-full mb-10">
+                            @foreach ($this->servicesCartItems as $item)
+                                <div class="w-full md:w-1/2 px-4">
                                     <div>
                                         @if (!empty($item->name))
                                             <h3 class="mb-3 text-left">
@@ -204,9 +201,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
+
+                    <div class="border-t border-gray-200 mb-2"></div>
 
                     <div class="my-5">
                         <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
@@ -230,7 +229,7 @@
                             <!-- Races Subtotal -->
                             <div class="py-3 px-10 bg-blue-50 rounded-full">
                                 <div class="flex justify-between">
-                                    <span class="font-medium">{{ __('Races Subtotal') }}</span>
+                                    <span class="font-medium">{{ __('Registration Subtotal') }}</span>
                                     <span class="font-bold font-heading">
                                         {{ Helpers::format_currency($this->registration_subtotal) }}
                                     </span>

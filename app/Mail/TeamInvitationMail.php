@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Mail;
 
+use App\Helpers;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class TeamInvitationMail extends Mailable
 {
@@ -28,7 +30,8 @@ class TeamInvitationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'You are invited to Team'.'-'.$this->team->team_name,
+            from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
+            subject: 'You are invited to Team'.'-'.$this->team->team_name.'-'. Helpers::settings('site_title'),
         );
     }
 
@@ -36,17 +39,12 @@ class TeamInvitationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'emails.team-invitation',
+            with: [
+                'subscriber' => $this->team,
+                'participant' => $this->participant,
+            ],
         );
     }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
+  
 }

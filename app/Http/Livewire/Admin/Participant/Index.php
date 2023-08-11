@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Participant;
 
+use App\Exports\ParticipantExport;
 use App\Models\Participant;
 use App\Http\Livewire\WithSorting;
 use Illuminate\Contracts\View\Factory;
@@ -46,6 +47,16 @@ class Index extends Component
     public function resetSelected()
     {
         $this->selected = [];
+    }
+
+    public function downloadSelected()
+    {
+        return (new ParticipantExport($this->selected))->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
+    }
+
+    public function downloadAll()
+    {
+        return (new ParticipantExport())->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
     public function mount()

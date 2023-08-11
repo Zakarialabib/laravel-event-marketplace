@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             RaceSeeder::class,
             FaqSeeder::class,
             MenuSeeder::class,
+            ServiceSeeder::class,
 
             // PagesettingsSeeder::class,
         ]);

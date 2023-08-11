@@ -38,6 +38,9 @@
                 </div>
             </div>
             <div class="float-right">
+                <x-button type="button" primary wire:click="downloadAll" wire:loading.attr="disabled">
+                    {{ __('downloadAll') }}
+                </x-button>
             </div>
         </div>
     </section>
@@ -46,14 +49,14 @@
         <div x-data="{ activeTab: '{{ $activeTab }}' }">
             <ul class="flex mb-4">
                 <li class="mr-1">
-                    <button @click="activeTab = 'all'" :class="{ 'bg-blue-500 text-white': activeTab === 'all' }"
-                        class="px-4 py-2 rounded-l-md">
+                    <button x-on:click="activeTab = 'all'"
+                        x-on:class="{ 'bg-blue-500 text-white': activeTab === 'all' }" class="px-4 py-2 rounded-l-md">
                         {{ __('All Registrations') }}
                     </button>
                 </li>
-                <li class="mr-1">
-                    <button @click="activeTab = 'showRegistration'" :class="{ 'bg-blue-500 text-white': activeTab === 'showRegistration' }"
-                        class="px-4 py-2">
+                <li class="mr-1" x-show="activeTab === 'showRegistration'">
+                    <button x-on:click="activeTab = 'showRegistration'"
+                        x-on:class="{ 'bg-blue-500 text-white': activeTab === 'showRegistration' }" class="px-4 py-2">
                         {{ __('show Registration') }}
                     </button>
                 </li>
@@ -74,6 +77,11 @@
                                 </span>
                                 {{ __('Entries selected') }}
                             </p>
+                        @endif
+                        @if ($this->selected)
+                            <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
+                                {{ __('download Selected') }}
+                            </x-button>
                         @endif
                         <div class="my-2 my-md-0">
                             <p class="leading-5 text-black mb-1 text-sm ">
@@ -145,11 +153,12 @@
                                 <x-table.td>
                                     <x-button info
                                         href="{{ route('admin.participant.show', $registration->participant->id) }}">
-                                        <i class="fas fa-eye"></i>
+                                        {{ __('Show Participant') }}
                                     </x-button>
                                     <x-button secondary type="button"
-                                        wire:click="showRegistration({{ $registration->id }})">
-                                        <i class="fas fa-eye"></i>
+                                        wire:click="showRegistration({{ $registration->id }})"
+                                        x-on:click="activeTab = 'showRegistration'">
+                                        {{ __('Show Registration') }}
                                     </x-button>
                                 </x-table.td>
                             </x-table.tr>
@@ -170,48 +179,57 @@
                 </div>
             </div>
 
-            
+
             <div x-show="activeTab === 'showRegistration'" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform translate-x-2"
                 x-transition:enter-end="opacity-100 transform translate-x-0"
                 x-transition:leave="transition ease-in duration-300"
                 x-transition:leave-start="opacity-100 transform translate-x-0"
                 x-transition:leave-end="opacity-0 transform translate-x-2">
-                <h2 class="text-xl font-bold mb-4">{{ __('Show Registration') }}</h2>
-                <div>
-                    <ul>
-                        <x-table>
-                            <x-slot name="thead">
-                                <x-table.th>
-                                    {{ __('Reference') }}
-                                </x-table.th>
-                                <x-table.th>
-                                    {{ __('Date') }}
-                                </x-table.th>
-                                <x-table.th>
-                                    {{ __('Date') }}
-                                </x-table.th>
-                                <x-table.th>
-                                    {{ __('Participant infos') }}
-                                </x-table.th>
-                                <x-table.th>
-                                    {{ __('Actions') }}
-                                </x-table.th>
-                            </x-slot>
-                            <x-table.tbody>
-                                <x-table.tr>
-                                    <x-table.td>{{ $registration?->registration_number }}</x-table.td>
-                                    <x-table.td>{{ $registration?->registration_date }}</x-table.td>
-                                    <x-table.td>{{ $registration?->participant->name }}</x-table.td>
-                                    <x-table.td>{{ $registration?->status }}</x-table.td>
-                                    <x-table.td>
-                                        {{-- status --}}
-                                    </x-table.td>
-                                </x-table.tr>
+                <h2 class="text-2xl font-bold font-heading text-gray-700 mb-4">
+                    {{ __('Registration Information') }}
+                </h2>
 
-                            </x-table.tbody>
-                        </x-table>
-                    </ul>
+                <div class="flex flex-wrap transition-all duration-500 relative">
+                    <div class="flex-shrink-0 px-4 lg:px-1 w-full lg:w-1/2">
+                        <div class="relative py-9 px-16 h-full bg-white rounded-3xl">
+                            <h3 class="font-heading mb-4 text-3xl md:text-4xl font-bold leading-tighter">
+                                {{ $registration->race->name }}
+                                <small>{{ Helpers::format_date($registration->registration_date) }}</small>
+                            </h3>
+                            <ul class="py-10 mt-6 border-t border-gray-200">
+                                <li>
+                                    <span class="font-bold">{{ __('Race name') }}:</span>
+                                    <span>{{ $registration->race->name }}</span>
+                                </li>
+
+                                <li>
+                                    <span class="font-bold">{{ __('Participant name') }}:</span>
+                                    <span>{{ $registration->participant->name }}</span>
+                                </li>
+
+                                <li>
+                                    <span class="font-bold">{{ __('Status') }}:</span>
+                                    <span>{{ $registration->status }}</span>
+                                </li>
+
+                                <li>
+                                    <span class="font-bold">{{ __('Date') }}:</span>
+                                    <span>{{ Helpers::format_date($registration->date) }}</span>
+                                </li>
+
+                                <li>
+                                    <span class="font-bold">{{ __('Additional Informations') }}:</span>
+                                    <span>{{ $registration->additional_informations }}</span>
+                                </li>
+
+                                <li>
+                                    <span class="font-bold">{{ __('Additional Services') }}:</span>
+                                    <span>{{ $registration->additional_services }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
