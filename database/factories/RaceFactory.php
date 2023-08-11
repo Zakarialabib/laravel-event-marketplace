@@ -38,7 +38,7 @@ class RaceFactory extends Factory
             'number_of_racers'      => $this->faker->randomNumber(3),
             'first_year'            => true,
             'last_year_url'         => null,
-            'price'                  => $this->faker->randomElement([700, 1400, 2500]),
+            'price'                 => $this->faker->randomElement([700, 1400, 2500]),
             'images'                => null,
             'social_media'          => null,
             'sponsors'              => null,
