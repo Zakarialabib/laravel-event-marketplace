@@ -23,11 +23,11 @@ class RaceFactory extends Factory
     public function definition()
     {
         return [
-            'name'             => $this->faker->word,
-            'date'             => $this->faker->date,
-            'description'      => $this->faker->sentence,
-            'race_location_id' => 1,
-            'category_id'      => 1,
+            'name'                  => $this->faker->word,
+            'date'                  => $this->faker->date,
+            'description'           => $this->faker->sentence,
+            'race_location_id'      => 1,
+            'category_id'           => 1,
             'slug'                  => Str::slug($this->faker->word),
             'start_registration'    => date('Y-m-d', strtotime('+1 day')),
             'end_registration'      => date('Y-m-d', strtotime('+30 day')),

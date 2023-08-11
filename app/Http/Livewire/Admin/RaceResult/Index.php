@@ -80,8 +80,8 @@ class Index extends Component
             $filename = time().'-race-result.'.$this->file->getClientOriginalExtension();
             $this->file->storeAs('race-results', $filename);
 
-            Excel::import(new RaceResultsImport,$filename);
-            
+            Excel::import(new RaceResultsImport(), $filename);
+
             $this->alert('success', __('Race Results imported successfully!'));
         } else {
             $this->alert('error', __('File is a '.$this->file->extension().' file.!! Please upload a valid xls/csv file..!!'));

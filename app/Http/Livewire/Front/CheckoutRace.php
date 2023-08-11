@@ -149,7 +149,6 @@ class CheckoutRace extends Component
         }
 
         Mail::to($order->user->email)->later(now()->addMinutes(10), new CheckoutMail($order, $order->user));
-
     }
 
     public function removeFromCart($rowId)
