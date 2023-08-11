@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Front;
 
 use App\Models\RaceResult;
 use Livewire\Component;
 use App\Http\Livewire\WithSorting;
 use Livewire\WithPagination;
-
 
 class RaceResults extends Component
 {
@@ -52,12 +53,12 @@ class RaceResults extends Component
     public function render()
     {
         $query = RaceResult::where('race_id', $this->race->id)
-        ->with('participant')
-        ->advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
-            'order_direction' => $this->sortDirection,
-        ]);
+            ->with('participant')
+            ->advancedFilter([
+                's'               => $this->search ?: null,
+                'order_column'    => $this->sortBy,
+                'order_direction' => $this->sortDirection,
+            ]);
 
         $results = $query->paginate($this->perPage);
 
