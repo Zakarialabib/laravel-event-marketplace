@@ -42,7 +42,7 @@
                 <x-button primary type="button" wire:click="$emit('createModal')">
                     {{ __('Create Race') }}
                 </x-button>
-                
+
             </div>
         </div>
     </section>

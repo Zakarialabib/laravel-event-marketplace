@@ -40,7 +40,7 @@
     <meta name="robots" content="all,follow">
 
     <link rel="icon" href="{{ asset('images/' . Helpers::settings('site_favicon')) }}" type="image/x-icon">
-    
+
     @include('partials.front.css')
 </head>
 
@@ -65,7 +65,7 @@
 
     <x-theme.footer />
 
-   @include('partials.front.js')
+    @include('partials.front.js')
 </body>
 
 </html>

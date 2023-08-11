@@ -15,7 +15,6 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SmptController;
 use App\Http\Controllers\Admin\UsersController;
@@ -73,30 +72,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');
     Route::get('/services', ServiceIndex::class)->name('services');
     Route::get('/race-results', RaceResultIndex::class)->name('race-results');
-
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
-
     Route::get('/users', [UsersController::class, 'index'])->name('users');
-
     Route::get('/sections', [SectionController::class, 'index'])->name('sections');
-    Route::get('/section/create', [SectionController::class, 'create'])->name('section.create');
-    Route::get('/section/edit/{id}', [SectionController::class, 'edit'])->name('section.edit');
-
     Route::get('/featuredBanners', [FeaturedBannerController::class, 'index'])->name('featuredBanners');
     Route::get('/pages', [PageController::class, 'index'])->name('pages');
     Route::get('/order-forms', [PageController::class, 'orderForms'])->name('orderforms');
     Route::get('/page/settings', [PageController::class, 'settings'])->name('page.settings');
-
     Route::get('/sliders', [SliderController::class, 'index'])->name('sliders');
-
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
     Route::get('/blog/category', [BlogCategoryController::class, 'index'])->name('blogcategories');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 
-    Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name('setting.subscriptions');
-
-    Route::get('/popupsettings', [SettingController::class, 'popupsettings'])->name('setting.popupsettings');
     Route::get('/redirects', [SettingController::class, 'redirects'])->name('setting.redirects');
 
     Route::get('/report', [ReportController::class, 'index'])->name('report');

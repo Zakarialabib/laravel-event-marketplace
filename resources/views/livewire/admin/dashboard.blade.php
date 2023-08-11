@@ -1,10 +1,10 @@
 <div>
     @section('title', __('Dashboard'))
     <div class="px-10 py-6 bg-white border-b border-gray-200">
-        <h1 class="text-3xl font-semibold mb-6">{{__('Dashboard')}}</h1>
+        <h1 class="text-3xl font-semibold mb-6">{{ __('Dashboard') }}</h1>
 
         <div class="mb-6 flex justify-center gap-4 items-center w-full">
-            <label class="font-semibold">{{__('Date Range')}}:</label>
+            <label class="font-semibold">{{ __('Date Range') }}:</label>
             <input type="date" wire:model="startDate" class="border rounded px-2 py-1">
             <span class="mx-2">to</span>
             <input type="date" wire:model="endDate" class="border rounded px-2 py-1">
@@ -14,7 +14,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.products') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.products') }}">
                         {{ __('Products') }}
                     </a>
                 </h2>
@@ -26,7 +27,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.races') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.races') }}">
                         {{ __('Races') }}
                     </a>
                 </h2>
@@ -37,7 +39,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.registrations') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.registrations') }}">
                         {{ __('Registration') }}
                     </a>
                 </h2>
@@ -48,7 +51,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.participants') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.participants') }}">
                         {{ __('Participants') }}
                     </a>
                 </h2>
@@ -59,7 +63,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.products') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.products') }}">
                         {{ __('Subscribers') }}
                     </a>
                 </h2>
@@ -70,7 +75,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.orders') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.orders') }}">
                         {{ __('Orders') }}
                     </a>
                 </h2>
@@ -80,7 +86,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.products') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.products') }}">
                         {{ __('Contacts') }}
                     </a>
                 </h2>
@@ -92,7 +99,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.products') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.products') }}">
                         {{ __('Open Races') }}
                     </a>
                 </h2>
@@ -104,7 +112,8 @@
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
-                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400" href="{{ route('admin.products') }}">
+                    <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
+                        href="{{ route('admin.products') }}">
                         {{ __('Closed Races') }}
                     </a>
                 </h2>

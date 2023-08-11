@@ -25,37 +25,36 @@
                         x-transition:leave-start="opacity-100 transform scale-100"
                         x-transition:leave-end="opacity-0 transform scale-90"
                         class="py-10 mt-6 border-t border-gray-200">
-
-                        <li>
+                        
+                        <li class="mb-4">
                             <span class="font-bold">{{ __('Race name') }}:</span>
                             <span>{{ $registration->race->name }}</span>
                         </li>
 
-                        <li>
+                        <li class="mb-4">
                             <span class="font-bold">{{ __('Participant name') }}:</span>
                             <span>{{ $registration->participant->name }}</span>
                         </li>
 
-                        <li>
+                        <li class="mb-4">
                             <span class="font-bold">{{ __('Status') }}:</span>
                             <span>{{ $registration->status }}</span>
                         </li>
 
-                        <li>
+                        <li class="mb-4">
                             <span class="font-bold">{{ __('Date') }}:</span>
                             <span>{{ Helpers::format_date($registration->date) }}</span>
                         </li>
 
-                        <li>
+                        <li class="mb-4">
                             <span class="font-bold">{{ __('Additional Informations') }}:</span>
                             <span>{{ $registration->additional_informations }}</span>
                         </li>
 
-                        <li>
+                        <li class="mb-4">
                             <span class="font-bold">{{ __('Additional Services') }}:</span>
                             <span>{{ $registration->additional_services }}</span>
                         </li>
-
                     </ul>
                 </div>
             </div>

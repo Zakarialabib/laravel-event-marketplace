@@ -44,37 +44,68 @@
     <div class="w-full py-10 mx-4 mt-12 flex bg-white">
         <div class="w-full">
             <div class="relative py-9 px-16 h-full bg-white rounded-3xl">
-                <p><strong>{{ __('Reference') }}:</strong> {{ $order->reference }}
-                </p>
+                <div class="mb-4">
+                    <p class="font-bold">{{ __('Reference') }}:</p>
+                    <p>{{ $order->reference }}</p>
+                </div>
                 @if ($order->race)
-                    <p><strong>{{ __('Race') }}:</strong> <a
-                            href="{{ route('front.raceDetails', $order->race->slug) }}">{{ $order->race->name }}</a>
-                    </p>
+                    <div class="mb-4">
+                        <p class="font-bold">{{ __('Race') }}:</p>
+                        <p><a href="{{ route('front.raceDetails', $order->race->slug) }}">{{ $order->race->name }}</a>
+                        </p>
+                    </div>
                 @endif
                 @if ($order->service)
-                    <p><strong>{{ __('Service') }}:</strong>
-                        <a href="#">{{ $order->service->name }}</a>
-                    </p>
+                    <div class="mb-4">
+                        <p class="font-bold">{{ __('Service') }}:</p>
+                        <p><a href="#">{{ $order->service->name }}</a></p>
+                    </div>
                 @endif
                 @if ($order->product)
-                    <p>
-                        <strong>{{ __('Product') }}:</strong>
-                        <a href="{{ route('front.product', $order->product->slug) }}">
-                            {{ $order->product->name }}
-                        </a>
-                    </p>
+                    <div class="mb-4">
+                        <p class="font-bold">{{ __('Product') }}:</p>
+                        <p><a
+                                href="{{ route('front.product', $order->product->slug) }}">{{ $order->product->name }}</a>
+                        </p>
+                    </div>
                 @endif
-                <p><strong>{{ __('Order Amount') }}:</strong> {{ Helpers::format_currency($order->amount) }}</p>
-                <p><strong>{{ __('Payment Method') }}:</strong>
-                    {{ $order->payment_method }}
-                </p>
-                <p><strong>{{ __('Order Status') }}:</strong> {{ $order->status }}</p>
-                <p><strong>{{ __('Shipping Status') }}:</strong> {{ $order->shipping_status }}</p>
-                <p><strong>{{ __('Payment Status') }}:</strong>
-                    {{ $order->payment_status }}
-                </p>
-                <p><strong>{{ __('Order Date') }}:</strong> {{ Helpers::format_date($order->date) }}</p>
-
+                <div class="mb-4">
+                    <p class="font-bold">{{ __('Order Amount') }}:</p>
+                    <p>{{ Helpers::format_currency($order->amount) }}</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-bold">{{ __('Payment Method') }}:</p>
+                    <p>{{ $order->payment_method }}</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-bold">{{ __('Order Status') }}:</p>
+                    <p>{{ $order->status }}</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-bold">{{ __('Shipping Status') }}:</p>
+                    <p>{{ $order->shipping_status }}</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-bold">{{ __('Payment Status') }}:</p>
+                    <p>{{ $order->payment_status }}</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-bold">{{ __('Order Date') }}:</p>
+                    <p>{{ Helpers::format_date($order->date) }}</p>
+                </div>
+                <p>{{ $order->status }}</p>
+            </div>
+            <div class="mb-4">
+                <p class="font-bold">{{ __('Shipping Status') }}:</p>
+                <p>{{ $order->shipping_status }}</p>
+            </div>
+            <div class="mb-4">
+                <p class="font-bold">{{ __('Payment Status') }}:</p>
+                <p>{{ $order->payment_status }}</p>
+            </div>
+            <div class="mb-4">
+                <p class="font-bold">{{ __('Order Date') }}:</p>
+                <p>{{ Helpers::format_date($order->date) }}</p>
             </div>
         </div>
     </div>
