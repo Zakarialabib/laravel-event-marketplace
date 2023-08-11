@@ -30,6 +30,8 @@ class RaceSeeder extends Seeder
             'end_registration'      => date('Y-m-d', strtotime('+30 day')),
             'registration_deadline' => date('Y-m-d', strtotime('+30 day')),
             'number_of_racers'      => 100,
+            'first_year'            => true,
+            'last_year_url'         => null,
             'elevation_gain'        => 100,
             'number_of_days'        => 3,
             'price'                 => 1000,

@@ -16,6 +16,13 @@
                         wire:model="service.name" />
                     <x-input-error :messages="$errors->get('service.name')" for="service.name" class="mt-2" />
                 </div>
+                
+                <div class="w-full">
+                    <x-label for="price" :value="__('Price')" />
+                    <x-input id="price" class="block mt-1 w-full" type="text" name="price"
+                        wire:model="service.price" />
+                    <x-input-error :messages="$errors->get('service.price')" for="service.price" class="mt-2" />
+                </div>
 
                 <div class="w-full">
                     <x-label for="description" :value="__('Description')" />
@@ -25,11 +32,6 @@
                     <x-input-error :messages="$errors->get('service.description')" for="service.description" class="mt-2" />
                 </div>
 
-                <div class="w-full my-2">
-                    <x-label for="image" :value="__('Image')" />
-                    <x-media-upload title="{{ __('Image') }}" name="images" wire:model="images" :file="$images"
-                        single types="PNG / JPEG / WEBP" fileTypes="image/*" />
-                </div>
 
                 <div class="w-full">
                     <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">

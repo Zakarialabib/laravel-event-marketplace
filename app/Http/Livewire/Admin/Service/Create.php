@@ -7,15 +7,12 @@ namespace App\Http\Livewire\Admin\Service;
 use App\Models\Service;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class Create extends Component
 {
     use LivewireAlert;
-    use WithFileUploads;
 
     public $listeners = ['createModal'];
 
@@ -23,11 +20,10 @@ class Create extends Component
 
     public $service;
 
-    public $image;
-
     public array $rules = [
         'service.name'        => 'required|min:3|max:255',
-        'service.description' => 'required|min:3',
+        'service.description' => 'nullable',
+        'service.price' => 'required|min:3',
     ];
 
     public function render(): View|Factory
@@ -49,12 +45,6 @@ class Create extends Component
     public function create()
     {
         $this->validate();
-
-        if ($this->image) {
-            $imageName = Str::slug($this->service->name).'-'.Str::random(3).'.'.$this->image->extension();
-            $this->image->storeAs('service', $imageName);
-            $this->service->image = $imageName;
-        }
 
         $this->service->save();
 

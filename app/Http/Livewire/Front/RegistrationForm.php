@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Throwable;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Jobs\EmailSubscriptionJob;
+use App\Jobs\EmailSubscribtionJob;
 
 class RegistrationForm extends Component
 {
@@ -38,6 +38,7 @@ class RegistrationForm extends Component
     public $newTeamName; // If creating a new team
     public $team_name;
     public $resultTeam = '';
+    public $existingRegistration;
     public $invitationEmails = [''];
     public $rules = [
         'participant.email'                          => 'required|email:rfc,dns,spoof,filter|unique:participants,email',
@@ -66,10 +67,16 @@ class RegistrationForm extends Component
 
         if (Auth::check()) {
             $this->user = Auth::user();
-            $this->participant = Participant::firstOrCreate(['user_id' => $this->user->id]);
+            $this->participant = Participant::where('user_id', $this->user->id)->first();
+            // Check if participant is already registered for this race
+            $this->existingRegistration = Registration::where('participant_id', $this->participant['id'])
+            ->where('race_id', $this->race->id)
+            ->first();
         } else {
             $this->participant = new Participant();
         }
+
+
     }
 
     public function render(): View
@@ -103,7 +110,7 @@ class RegistrationForm extends Component
     public function updatedTeamName()
     {
         if (strlen($this->team_name) > 3) {
-            $this->resultTeam = Team::where('team_name', 'like', '%'.$this->team_name.'%')
+            $this->resultTeam = Team::where('team_name', 'like', '%' . $this->team_name . '%')
                 ->limit(5)
                 ->get();
         } else {
@@ -115,7 +122,7 @@ class RegistrationForm extends Component
     {
         $this->team = Team::where('team_name', $this->team_name)->first();
 
-        if ( ! $this->team) {
+        if (!$this->team) {
             $this->team = Team::create([
                 'team_name' => $this->newTeamName,
                 'leader_id' => Auth::id(),
@@ -166,18 +173,18 @@ class RegistrationForm extends Component
 
     public function register()
     {
-        if ($this->existingSubmission) {
-            $this->alert('error', __('You already have a submission'));
-
+       
+        if ($this->existingRegistration) {
+            $this->alert('error', __('You have already registered for this race. Check your account for details.'));
             return;
         }
-
+        
         DB::beginTransaction();
 
         try {
             $this->validate();
 
-            if ( ! $this->user) {
+            if (!$this->user) {
                 $password = bcrypt(Str::random(10));
 
                 $this->user = User::create([
@@ -223,7 +230,7 @@ class RegistrationForm extends Component
             }
 
             if ($this->newsletters) {
-                EmailSubscriptionJob::dispatch($this->participant['email'], $this->participant['name']);
+                EmailSubscribtionJob::dispatch($this->participant['email'], $this->participant['name']);
             }
 
             DB::commit();

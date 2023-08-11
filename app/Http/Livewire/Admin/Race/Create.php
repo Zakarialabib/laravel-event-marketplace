@@ -104,6 +104,8 @@ class Create extends Component
 
         $this->description = 'write your description here';
 
+        $this->race->first_year = true;
+
         $this->createModal = true;
     }
 

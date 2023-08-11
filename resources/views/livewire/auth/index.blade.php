@@ -1,6 +1,7 @@
 <div>
-    <section x-data="{ isTab: 'login' }" class="py-24 px-10 bg-gray-100 h-auto my-auto flex justify=cemter items-center">
-        <div class="max-w-full w-full px-!6">
+    @section('title', __('Login & Register'))
+    <section x-data="{ isTab: 'login' }" class="py-24 px-10 bg-gray-100 h-auto my-auto flex justify-Pcemter items-center">
+        <div class="max-w-full w-full px-10">
             <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-50 border-0">
                 <div class="px-6 py-6">
                     <div class="w-full flex justify-between border-collapse px-4 mb-3">

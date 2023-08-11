@@ -24,7 +24,7 @@
 
     </x-sidebar.dropdown>
 
-    <x-sidebar.dropdown title="{{ __('Races') }}" :active="request()->routeIs(['admin.races', 'admin.racelocations', 'admin.categories'])">
+    <x-sidebar.dropdown title="{{ __('Races') }}" :active="request()->routeIs(['admin.races', 'admin.racelocations', 'admin.categories', 'admin.services'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
                 <i class="fas fa-boxes w-5 h-5"></i>
@@ -35,6 +35,7 @@
         <x-sidebar.sublink title="{{ __('All Races') }}" href="{{ route('admin.races') }}" :active="request()->routeIs('admin.races')" />
         <x-sidebar.sublink title="{{ __('Locations') }}" href="{{ route('admin.racelocations') }}"
             :active="request()->routeIs('admin.racelocations')" />
+        <x-sidebar.sublink title="{{ __('Services') }}" href="{{ route('admin.services') }}" :active="request()->routeIs('admin.services')" />
 
     </x-sidebar.dropdown>
 
@@ -45,13 +46,17 @@
             </span>
         </x-slot>
         @can('order_access')
-            <x-sidebar.sublink title="{{ __('Order Forms') }}" href="{{ route('admin.orderforms') }}" :active="request()->routeIs('admin.orderforms')" />
+            <x-sidebar.sublink title="{{ __('Order Forms') }}" href="{{ route('admin.orderforms') }}"
+                :active="request()->routeIs('admin.orderforms')" />
         @endcan
-        <x-sidebar.sublink title="{{ __('Orders') }}" href="{{ route('admin.orders') }}"
-            :active="request()->routeIs('admin.orders')" />
-            
+        <x-sidebar.sublink title="{{ __('Orders') }}" href="{{ route('admin.orders') }}" :active="request()->routeIs('admin.orders')" />
+
         <x-sidebar.sublink title="{{ __('Registrations') }}" href="{{ route('admin.registrations') }}"
             :active="request()->routeIs('admin.registrations')" />
+
+        <x-sidebar.sublink title="{{ __('Race Results') }}" href="{{ route('admin.race-results') }}"
+            :active="request()->routeIs('admin.race-results')" />
+
     </x-sidebar.dropdown>
 
     <x-sidebar.dropdown title="{{ 'Blog' }}" :active="request()->routeIs(['admin.blogs', 'admin.blogcategories'])">
@@ -111,11 +116,7 @@
             :active="request()->routeIs('admin.featuredBanners')" />
     </x-sidebar.dropdown>
 
-    <x-sidebar.dropdown title="{{ __('Settings') }}" :active="request()->routeIs([
-        'admin.settings',
-        'admin.language',
-        'admin.setting.redirects',
-    ])">
+    <x-sidebar.dropdown title="{{ __('Settings') }}" :active="request()->routeIs(['admin.settings', 'admin.language', 'admin.setting.redirects'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
                 <i class="fas fa-cog w-5 h-5"></i>

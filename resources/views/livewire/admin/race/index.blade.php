@@ -42,6 +42,7 @@
                 <x-button primary type="button" wire:click="$emit('createModal')">
                     {{ __('Create Race') }}
                 </x-button>
+                
             </div>
         </div>
     </section>
@@ -171,6 +172,11 @@
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-eye"></i>
                                         {{ __('View') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link wire:click="publishResults('{{ $race->id }}')"
+                                        wire:loading.attr="disabled">
+                                        <i class="fas fa-eye"></i>
+                                        {{ __('Publish results') }}
                                     </x-dropdown-link>
                                     <x-dropdown-link href="{{ route('admin.race.update', $race->name) }}"
                                         wire:loading.attr="disabled">

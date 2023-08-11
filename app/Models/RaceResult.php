@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
@@ -17,8 +18,10 @@ class RaceResult extends Model
 
     public const ATTRIBUTES = [
         'id',
-        'title',
-        'category_id',
+        'race_id',
+        'participant_id',
+        'registration_id',
+        'place',
     ];
 
     public $orderable = self::ATTRIBUTES;
@@ -26,30 +29,23 @@ class RaceResult extends Model
 
     protected $fillable = [
         'race_id',
-        'winner_id',
-        'runner_up_id',
+        'participant_id',
+        'registration_id',
         'place',
         'time',
         'date',
         'status',
     ];
 
+    protected $cast = [
+        'status' => Status::class,
+    ];
+
+
     // Define the relationship with the Race model
     public function race()
     {
         return $this->belongsTo(Race::class);
-    }
-
-    // Define the relationship with the Participant model for winner
-    public function winner()
-    {
-        return $this->belongsTo(Participant::class, 'winner_id');
-    }
-
-    // Define the relationship with the Participant model for runner-up
-    public function runnerUp()
-    {
-        return $this->belongsTo(Participant::class, 'runner_up_id');
     }
 
     public function registration()

@@ -13,11 +13,11 @@ return new class () extends Migration {
         Schema::create('race_results', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('race_id')->constrained('races');
-            $table->foreignUuid('winner_id')->nullable()->constrained('participants');
-            $table->foreignUuid('runner_up_id')->nullable()->constrained('participants');
-            $table->integer('place');
-            $table->string('time');
-            $table->timestamp('date')->nullable();
+            $table->foreignUuid('participant_id')->nullable()->constrained('participants');
+            $table->foreignUuid('registration_id')->nullable()->constrained('registrations');
+            $table->integer('place')->nullable();
+            $table->string('time')->nullable();
+            $table->dateTime('date')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

@@ -52,7 +52,7 @@
                                 name="number_of_racers" wire:model="race.number_of_racers" required />
                             <x-input-error :messages="$errors->get('race.number_of_racers')" for="number_of_racers" class="mt-2" />
                         </div>
-                        <x-checkbox-input label="{{ __('Is this the first year for your race?') }}" model="{{ $race->first_year }}">
+                        <x-checkbox-input label="{{ __('Is this the first year for your race?') }}" model="first_year">
                             <x-input wire:model="race.first_year" type="text" id="first_year"
                                 class="w-full block" name="first_year" />
                         </x-checkbox-input>

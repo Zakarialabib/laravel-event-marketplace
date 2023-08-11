@@ -148,7 +148,7 @@
                             </a>
                             <a href=""
                                 class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
-                                Results
+                                {{ __('Results') }}
                             </a>
                             <a href="{{ route('front.catalog') }}" target="_blank"
                                 class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
@@ -251,101 +251,142 @@
 
 
                 </div>
-                <div x-show="activeTab === 'tab1'" id="tab1" class="w-full text-center mb-5 border px-4">
-                    <div class="w-full text-center mb-5">
-                        @if ($race->course)
-                            <p class="w-full text-center py-10 mb-6 text-5xl font-bold uppercase text-gray-800">
-                                {{ __('Details') }}
-                            </p>
-                            <div class="px-10 pb-6">
-                                <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
-                                    @foreach (json_decode($race->course) as $index => $course)
-                                        <div class="w-full">
-                                            <button
-                                                class="w-full py-5 px-8 sm:py-2 sm:px-5 text-center font-bold text-green-800 uppercase border-b-2 border-green-400 focus:outline-none cursor-pointer"
-                                                type="button" @click="tabs = '{{ $index }}'"
+                <div x-show="activeTab === 'tab1'" id="tab1"
+                    class="border border-green-200 p-6 rounded-md mt-5 shadow-sm">
+                    @if ($race->course)
+                        <p class="w-full text-center mb-6 pt-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold tracking-tight uppercase text-gray-800">
+                            {{ __('Course Schedule') }}
+                        </p>
+                        <div class="px-10 pb-6">
+                            <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
+                                @foreach (json_decode($race->course) as $index => $course)
+                                    <div class="w-full">
+                                        <button
+                                            class="w-full py-5 px-8 sm:py-2 sm:px-5 text-center font-bold text-green-800 uppercase border-b-2 border-green-400 focus:outline-none cursor-pointer"
+                                            type="button" @click="tabs = '{{ $index }}'"
+                                            :class="{
+                                                'border-green-800 text-green-100 bg-green-700': tabs ===
+                                                    '{{ $index }}',
+                                                'hover:bg-green-600 hover:text-green-100 hover:border-green-600': tabs !==
+                                                    '{{ $index }}',
+                                            }">
+                                            <h4 class="inline-block"
                                                 :class="{
-                                                    'border-green-800 text-green-100 bg-green-700': tabs ===
-                                                        '{{ $index }}',
-                                                    'hover:bg-green-600 hover:text-green-100 hover:border-green-600': tabs !==
-                                                        '{{ $index }}',
+                                                    'text-green-100': tabs === '{{ $index }}',
+                                                    'border-green-800': tabs === '{{ $index }}',
                                                 }">
-                                                <h4 class="inline-block"
-                                                    :class="{
-                                                        'text-green-100': tabs === '{{ $index }}',
-                                                        'border-green-800': tabs === '{{ $index }}',
-                                                    }">
-                                                    {{ $course->name }}
-                                                </h4>
-                                            </button>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="grid grid-cols-1 justify-center">
-                                    @foreach (json_decode($race->course) as $index => $course)
-                                        <div x-show="tabs === '{{ $index }}'">
-                                            <div role="{{ $index }}" id="tab-panel-{{ $loop->index }}"
-                                                class="w-full mb-4 border border-green-400">
-                                                <ul class="flex flex-col text-center justify-center py-10">
+                                                {{ $course->name }}
+                                            </h4>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="grid grid-cols-1 justify-center">
+                                @foreach (json_decode($race->course) as $index => $course)
+                                    <div x-show="tabs === '{{ $index }}'">
+                                        <div role="{{ $index }}" id="tab-panel-{{ $loop->index }}"
+                                            class="w-full mb-4 border border-green-400">
+                                            <ul class="flex flex-col text-center justify-center py-10">
+                                                <li class="leading-6 text-base md:text-lg">
+                                                    Type: ({{ $course->type }})
+                                                </li>
+                                                <li class="leading-6 text-base md:text-lg">
+                                                    Distance: {{ $course->distance }} km
+                                                </li>
+                                                @if ($race->category->name === 'Trail Running')
                                                     <li class="leading-6 text-base md:text-lg">
-                                                        Type: ({{ $course->type }})
+                                                        Elevation Gain: {{ $course->elevation_gain }} m
                                                     </li>
-                                                    <li class="leading-6 text-base md:text-lg">
-                                                        Distance: {{ $course->distance }} km
-                                                    </li>
-                                                    @if ($race->category->name === 'Trail Running')
-                                                        <li class="leading-6 text-base md:text-lg">
-                                                            Elevation Gain: {{ $course->elevation_gain }} m
-                                                        </li>
-                                                    @endif
-                                                    <li class="leading-6 text-base md:text-lg">
-                                                        Number of Days: {{ $race->number_of_days }}
-                                                    </li>
-                                                    <li class="leading-6 px-6 py-4 text-base md:text-lg">
-                                                        <p>
-                                                            {{ $course->content }}
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="flex justify-center py-4">
-                                                    <x-button secondary type="button">{{ __('download') }}</x-button>
-                                                </div>
+                                                @endif
+                                                <li class="leading-6 text-base md:text-lg">
+                                                    Number of Days: {{ $race->number_of_days }}
+                                                </li>
+                                                <li class="leading-6 px-6 py-4 text-base md:text-lg">
+                                                    <p>
+                                                        {{ $course->content }}
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                            <div class="flex justify-center py-4">
+                                                <x-button secondary type="button">{{ __('download') }}</x-button>
                                             </div>
                                         </div>
-                                    @endforeach
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
-                        @else
-                            <p class="block text-base md:text-lg text-gray-400">{{ __('No race details available') }}.
-                            </p>
-                        @endif
-
-                    </div>
+                        </div>
+                    @else
+                        <p class="block text-base md:text-lg text-gray-400">{{ __('No race details available') }}.
+                        </p>
+                    @endif
                 </div>
-                <div x-show="activeTab === 'tab2'" id="tab2" class="w-full text-center mb-5 border px-4">
-                    <div class="w-full text-center mb-5">
+                @if ($existingRegistration)
+                    <div x-show="activeTab === 'tab2'" id="tab2"
+                        class="flex items-center w-full text-center mb-5">
                         @php
                             $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
                         @endphp
 
                         @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
                             <div
-                                class="bg-gray-200 text-neutral-700 break-words pl-8 pr-5  border border-gray-300 border-solid rounded-">
+                                class="bg-gray-200 text-neutral-700 break-words pl-8 pr-5 border border-gray-300 border-solid rounded-">
                                 <div class="clear-both float-left my-3.5 ">
                                     <h3 class="text-neutral-700 text-4xl font-semibold mb-5 ">
                                         {{ __('Registration Coming Soon') }}
                                     </h3>
-                                    <p class=" text-center">
+                                    <p class="text-center">
                                         {{ $race->name }} {{ __('registration is now closed') }}
                                     </p>
                                 </div>
-
                             </div>
                         @else
-                            @livewire('front.registration-form', ['race' => $race])
+                            <div class="bg-green-50 border border-green-200 p-6 rounded-md mt-5 shadow-sm">
+                                <h3 class="text-blue-700 text-2xl font-semibold mb-4">
+                                    {{ __('Already Registered') }}
+                                </h3>
+                                <p class="text-blue-600 mb-4">
+                                    You have already registered for the {{ $race->name }} race. For details or to
+                                    manage your registration, please check your account.
+                                </p>
+                                <p>
+
+                                </p>
+                                <ul
+                                    class="flex flex-col items-center gap-6 justify-center py-10 mt-6 border-t border-gray-200">
+
+                                    <li>
+                                        <span class="font-bold">{{ __('Race name') }}:</span>
+                                        <span>{{ $existingRegistration->race->name }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="font-bold">{{ __('Participant name') }}:</span>
+                                        <span>{{ $existingRegistration->participant->name }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="font-bold">{{ __('Status') }}:</span>
+                                        <span>{{ $existingRegistration->status }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="font-bold">{{ __('Date') }}:</span>
+                                        <span>{{ Helpers::format_date($existingRegistration->date) }}</span>
+                                    </li>
+
+                                </ul>
+                                <a href="{{ route('front.myaccount') }}"
+                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                    {{ __('View My Account') }}
+                                </a>
+                            </div>
                         @endif
                     </div>
-                </div>
+                @else
+                    <div x-show="activeTab === 'tab2'" id="tab2" class="w-full text-center mb-5 border px-4">
+                        @livewire('front.registration-form', ['race' => $race])
+                    </div>
+                @endif
             </div>
             <hr class="w-full border-gray-300 mt-3">
             <div class="w-full bg-gray-50" id="sponsors">

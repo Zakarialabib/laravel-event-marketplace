@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Race;
 
 use App\Http\Livewire\WithSorting;
+use App\Jobs\PublishResults;
 use App\Models\Race;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -77,6 +78,12 @@ class Index extends Component
         } else {
             $this->selected = Race::pluck('id')->toArray();
         }
+    }
+
+    public function publishResults($id)
+    {
+        PublishResults::dispatch($id);
+        $this->alert('success', 'Race results are being generated.');
     }
 
     public function mount()

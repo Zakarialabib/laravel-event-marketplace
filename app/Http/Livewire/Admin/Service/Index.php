@@ -32,8 +32,6 @@ class Index extends Component
 
     public int $perPage;
 
-    public $importModal;
-
     public array $orderable;
 
     public string $search = '';

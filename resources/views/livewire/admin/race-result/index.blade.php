@@ -1,11 +1,11 @@
 <div>
-    @section('title', __('Service'))
+    @section('title', __('Race Results'))
 
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
                 <h4 class="mb-1 text-2xl font-bold">
-                    {{ __('Service') }}
+                    {{ __('Race Results') }}
                 </h4>
                 <div class="flex items-center">
                     <a class="flex items-center text-sm text-gray-500" href="{{ route('admin.dashboard') }}">
@@ -33,33 +33,21 @@
                                     d="M4.99992 10.8333H1.66659C1.44557 10.8333 1.23361 10.9211 1.07733 11.0774C0.921049 11.2337 0.833252 11.4457 0.833252 11.6667V18.3333C0.833252 18.5544 0.921049 18.7663 1.07733 18.9226C1.23361 19.0789 1.44557 19.1667 1.66659 19.1667H4.99992C5.22093 19.1667 5.43289 19.0789 5.58917 18.9226C5.74545 18.7663 5.83325 18.5544 5.83325 18.3333V11.6667C5.83325 11.4457 5.74545 11.2337 5.58917 11.0774C5.43289 10.9211 5.22093 10.8333 4.99992 10.8333ZM4.16658 17.5H2.49992V12.5H4.16658V17.5ZM18.3333 7.50001H14.9999C14.7789 7.50001 14.5669 7.5878 14.4107 7.74408C14.2544 7.90036 14.1666 8.11233 14.1666 8.33334V18.3333C14.1666 18.5544 14.2544 18.7663 14.4107 18.9226C14.5669 19.0789 14.7789 19.1667 14.9999 19.1667H18.3333C18.5543 19.1667 18.7662 19.0789 18.9225 18.9226C19.0788 18.7663 19.1666 18.5544 19.1666 18.3333V8.33334C19.1666 8.11233 19.0788 7.90036 18.9225 7.74408C18.7662 7.5878 18.5543 7.50001 18.3333 7.50001ZM17.4999 17.5H15.8333V9.16667H17.4999V17.5ZM11.6666 0.83334H8.33325C8.11224 0.83334 7.90028 0.921137 7.744 1.07742C7.58772 1.2337 7.49992 1.44566 7.49992 1.66667V18.3333C7.49992 18.5544 7.58772 18.7663 7.744 18.9226C7.90028 19.0789 8.11224 19.1667 8.33325 19.1667H11.6666C11.8876 19.1667 12.0996 19.0789 12.2558 18.9226C12.4121 18.7663 12.4999 18.5544 12.4999 18.3333V1.66667C12.4999 1.44566 12.4121 1.2337 12.2558 1.07742C12.0996 0.921137 11.8876 0.83334 11.6666 0.83334ZM10.8333 17.5H9.16658V2.50001H10.8333V17.5Z"
                                     fill="currentColor"></path>
                             </svg></span>
-                        <span>{{ __('Service') }}</span>
+                        <span>{{ __('Race Result') }}</span>
                     </a>
                 </div>
             </div>
             <div class="float-right">
-                <x-button primary type="button" wire:click="$emit('createModal')">
-                    {{ __('Create') }}
+                <x-button type="button" primary wire:click="downloadAll" wire:loading.attr="disabled">
+                    {{ __('downloadAll') }}
                 </x-button>
             </div>
         </div>
     </section>
 
     <x-card>
-
         <div class="flex flex-wrap justify-center">
-            <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap my-md-0 my-2">
-                <select wire:model="perPage"
-                    class="w-20 border border-gray-300 rounded-md shadow-sm py-2 px-4 bg-white text-sm leading-5 font-medium text-gray-700 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out">
-                    @foreach ($paginationOptions as $value)
-                        <option value="{{ $value }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-                @if ($this->selected)
-                    <x-button danger type="button" wire:click="deleteSelected" class="ml-3">
-                        <i class="fas fa-trash-alt"></i>
-                    </x-button>
-                @endif
+            <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
                 @if ($this->selectedCount)
                     <p class="text-sm leading-5">
                         <span class="font-medium">
@@ -68,26 +56,43 @@
                         {{ __('Entries selected') }}
                     </p>
                 @endif
+                @if ($this->selected)
+                    <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
+                        {{ __('download Selected') }}
+                    </x-button>
+                @endif
+                <div class="my-2 my-md-0">
+                    <p class="leading-5 text-black mb-1 text-sm ">
+                        {{ __('Show items per page') }}
+                    </p>
+                    <select wire:model="perPage" name="perPage"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
+                        @foreach ($paginationOptions as $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
-                <div class="flex items-center mr-3 pl-4">
-                    <input wire:model="search" type="text"
-                        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10"
-                        placeholder="{{ __('Search...') }}" />
+                <div class="my-2 my-md-0">
+                    <input type="text" wire:model.debounce.300ms="search"
+                        class="p-3 leading-5 bg-white text-gray-500 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                        placeholder="{{ __('Search') }}" />
                 </div>
             </div>
         </div>
 
         <x-table>
             <x-slot name="thead">
-                <x-table.th class="pr-0 w-8">
-                    <input wire:model="selectPage" type="checkbox" />
+                <x-table.th>#</x-table.th>
+                <x-table.th>
+                    {{ __('Race infos') }}
                 </x-table.th>
                 <x-table.th>
-                    {{ __('Name') }}
+                    {{ __('Participant infos') }}
                 </x-table.th>
                 <x-table.th>
-                    {{ __('Price') }}
+                    {{ __('Registration date') }}
                 </x-table.th>
                 <x-table.th>
                     {{ __('Status') }}
@@ -95,34 +100,38 @@
                 <x-table.th>
                     {{ __('Actions') }}
                 </x-table.th>
-                </tr>
             </x-slot>
             <x-table.tbody>
-                @forelse($services as $service)
-                    <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $service->id }}">
+                @forelse ($race_results as $race_result)
+                    <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $race_result->id }}">
                         <x-table.td>
-                            <input type="checkbox" value="{{ $service->id }}" wire:model="selected">
+                            <input type="checkbox" value="{{ $race_result->id }}" wire:model="selected">
                         </x-table.td>
                         <x-table.td>
-                            {{ $service->name }}
+                            {{ $race_result->race->name }}
                         </x-table.td>
                         <x-table.td>
-                            {{ Helpers::format_currency($service->price) }}
+                            <a href="{{ route('admin.participant.show', $race_result->participant->id) }}">
+                                {{ $race_result->participant->name }} <br>
+                                {{ $race_result->participant->email }} <br>
+                                {{ $race_result->participant->phone_number }}
+                            </a>
                         </x-table.td>
                         <x-table.td>
-                            <livewire:toggle-button :model="$service" field="status" key="{{ $service->id }}" />
+                            {{ $race_result->registration->registration_date }}
                         </x-table.td>
                         <x-table.td>
-                            <div class="flex justify-start space-x-2">
-                                <x-button primary type="button" wire:click="$emit('editModal', {{ $service->id }})"
-                                    wire:loading.attr="disabled">
-                                    <i class="fas fa-edit"></i>
-                                </x-button>
-                                <x-button danger type="button" wire:click="$emit('deleteModal', {{ $service->id }})"
-                                    wire:loading.attr="disabled">
-                                    <i class="fas fa-trash-alt"></i>
-                                </x-button>
-                            </div>
+                            @if ($race_result->status == 0)
+                                <livewire:toggle-button :model="$race_result" field="status"
+                                    key="{{ $race_result->id }}" />
+                            @else
+                                <span class="text-green-500">{{ __('Approved') }}</span>
+                            @endif
+                        </x-table.td>
+                        <x-table.td>
+                            <x-button info href="{{ route('admin.participant.show', $race_result->participant->id) }}">
+                                {{ __('Show Participant') }}
+                            </x-button>
                         </x-table.td>
                     </x-table.tr>
                 @empty
@@ -135,17 +144,10 @@
             </x-table.tbody>
         </x-table>
 
-        <div class="p-4">
+        <div class="card-body">
             <div class="pt-3">
-                {{ $services->links() }}
+                {{ $race_results->links() }}
             </div>
         </div>
-
-        <!-- Create Modal -->
-        @livewire('admin.service.create')
-
-        <!-- Edit Modal -->
-        @livewire('admin.service.edit', ['service' => $service])
-
-       </x-card>
+    </x-card>
 </div>

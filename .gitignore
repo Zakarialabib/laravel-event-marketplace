@@ -5,6 +5,7 @@ yarn-error.log
 yarn.lock
 /public/storage/*
 /public/images/*
+/public/build                                                                       
 storage/*.key
 .env
 Homestead.yaml
