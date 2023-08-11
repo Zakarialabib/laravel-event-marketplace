@@ -124,7 +124,7 @@
                             @endif
                         </x-table.td>
                         <x-table.td>
-                            {{ $race->date }}
+                            {{ Helpers::format_date($race->date) }}
                         </x-table.td>
                         <x-table.td>
                             <button type="button" wire:click="$emit('showModal', {{ $race->id }})">

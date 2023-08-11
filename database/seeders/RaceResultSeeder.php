@@ -15,19 +15,11 @@ class RaceResultSeeder extends Seeder
         RaceResult::insert([
             [
                 'id'           => 1,
-                'race_id'      => 1,
-                'participant_id'    => 1,
+                'race_id'      => '58946b4f-164a-4ed3-aafc-90f976271d4a',
+                'participant_id'    => 'c728eccb-efe2-4185-9571-60734ffd2ed2',
+                'registration_id'    => '0688b672-7c4d-4662-ba91-fbe3dc138b49',
                 'place'        => 1,
                 'time'         => '2:35:40',
-                'date'         => '2023-10-10',
-                'status'       => true,
-            ],
-            [
-                'id'           => 2,
-                'race_id'      => 2,
-                'participant_id'    => 2,
-                'place'        => 2,
-                'time'         => '2:35:45',
                 'date'         => '2023-10-10',
                 'status'       => true,
             ],

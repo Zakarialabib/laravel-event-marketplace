@@ -146,8 +146,14 @@
                                 class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
                                 {{ __('Sponsors') }}
                             </a>
-                            <a href=""
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
+                            <a href="#tab3"
+                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
+                                @click="activeTab = 'tab3'"
+                                :class="{
+                                    'bg-green-700': activeTab === 'tab3',
+                                    'text-white': activeTab === 'tab3',
+                                    'hover:text-green-400': activeTab === 'tab3',
+                                }">
                                 {{ __('Results') }}
                             </a>
                             <a href="{{ route('front.catalog') }}" target="_blank"
@@ -254,7 +260,8 @@
                 <div x-show="activeTab === 'tab1'" id="tab1"
                     class="border border-green-200 p-6 rounded-md mt-5 shadow-sm">
                     @if ($race->course)
-                        <p class="w-full text-center mb-6 pt-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold tracking-tight uppercase text-gray-800">
+                        <p
+                            class="w-full text-center mb-6 pt-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold tracking-tight uppercase text-gray-800">
                             {{ __('Course Schedule') }}
                         </p>
                         <div class="px-10 pb-6">
@@ -387,6 +394,10 @@
                         @livewire('front.registration-form', ['race' => $race])
                     </div>
                 @endif
+                <div x-show="activeTab === 'tab3'" id="tab3" class="w-full text-center mb-5 border px-4">
+                 
+                    @livewire('front.race-results', ['race' => $race])
+                </div>
             </div>
             <hr class="w-full border-gray-300 mt-3">
             <div class="w-full bg-gray-50" id="sponsors">

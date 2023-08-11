@@ -22,6 +22,8 @@ class RaceResult extends Model
         'participant_id',
         'registration_id',
         'place',
+        'time',
+        'date',
     ];
 
     public $orderable = self::ATTRIBUTES;
