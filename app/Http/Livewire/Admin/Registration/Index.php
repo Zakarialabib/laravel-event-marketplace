@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
+
 class Index extends Component
 {
     use WithPagination;
@@ -54,12 +55,12 @@ class Index extends Component
     {
         return (new RegistrationExport($this->selected))->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
     }
-    
+
     public function downloadAll()
     {
         return (new RegistrationExport())->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
     }
-    
+
     public function mount()
     {
         $this->sortBy = 'id';

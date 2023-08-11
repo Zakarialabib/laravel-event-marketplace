@@ -31,7 +31,7 @@ class TeamInvitationMail extends Mailable
     {
         return new Envelope(
             from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
-            subject: 'You are invited to Team'.'-'.$this->team->team_name.'-'. Helpers::settings('site_title'),
+            subject: 'You are invited to Team'.'-'.$this->team->team_name.'-'.Helpers::settings('site_title'),
         );
     }
 
@@ -41,10 +41,9 @@ class TeamInvitationMail extends Mailable
         return new Content(
             markdown: 'emails.team-invitation',
             with: [
-                'subscriber' => $this->team,
+                'subscriber'  => $this->team,
                 'participant' => $this->participant,
             ],
         );
     }
-  
 }

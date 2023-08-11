@@ -19,21 +19,21 @@ class ServiceSeeder extends Seeder
         Service::insert([
             [
                 'id'          => 1,
-                'name'       => 'Photo shooting',
+                'name'        => 'Photo shooting',
                 'description' => 'Service Details',
                 'price'       => 200,
                 'status'      => 1,
             ],
             [
                 'id'          => 2,
-                'name'       => 'Service title',
+                'name'        => 'Service title',
                 'description' => 'Service Details',
                 'price'       => 500,
                 'status'      => 1,
             ],
             [
                 'id'          => 3,
-                'name'       => 'Service title',
+                'name'        => 'Service title',
                 'description' => 'Service Details',
                 'price'       => 100,
                 'status'      => 1,

@@ -23,6 +23,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Carbon\Carbon;
 use DateTimeInterface;
+use Exception;
 
 class Helpers
 {
@@ -259,28 +260,28 @@ class Helpers
         if ($value instanceof DateTimeInterface) {
             return $value->format('Y-m-d');
         }
-    
+
         // Check if value is non-empty and is a string
-        if (empty($value) || !is_string($value)) {
+        if (empty($value) || ! is_string($value)) {
             return null;
         }
-    
+
         // Ensure that the value is at least 10 characters long to avoid warnings with substr
         if (strlen($value) < 10) {
             return null;
         }
-    
+
         $dateString = substr($value, 0, 10);
-    
+
         try {
             $date = Carbon::createFromFormat('Y-m-d', $dateString);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return null; // Return null if date creation fails
         }
-    
+
         return $date->format('Y-m-d');
     }
-    
+
     public static function handleUpload($image, $width, $height, $productName)
     {
         $imageName = Str::slug($productName).'-'.Str::random(5).'.'.$image->extension();

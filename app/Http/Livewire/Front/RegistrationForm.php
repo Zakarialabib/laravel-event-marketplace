@@ -97,7 +97,7 @@ class RegistrationForm extends Component
 
     public function getTeamsProperty()
     {
-        return Team::select('team_name','id')->get();
+        return Team::select('team_name', 'id')->get();
     }
 
     public function updatedTeamName()
@@ -153,10 +153,10 @@ class RegistrationForm extends Component
         $this->invitationEmails[] = '';
     }
 
-    public function updatedIsTeamRegistration($value) 
-{
-    $this->isTeamRegistration = $value;
-}
+    public function updatedIsTeamRegistration($value)
+    {
+        $this->isTeamRegistration = $value;
+    }
 
     public function removeEmailField($index)
     {
