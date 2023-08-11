@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Service;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-
 class Edit extends Component
 {
     use LivewireAlert;
@@ -26,7 +25,7 @@ class Edit extends Component
     public array $rules = [
         'service.name'        => 'required|min:3|max:255',
         'service.description' => 'nullable',
-        'service.price' => 'required|min:3',
+        'service.price'       => 'required|min:3',
     ];
 
     public function editModal($service)
@@ -48,7 +47,6 @@ class Edit extends Component
 
         $this->validate();
 
-    
         $this->service->save();
 
         $this->editModal = false;

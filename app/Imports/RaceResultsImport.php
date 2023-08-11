@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace App\Imports;
 
-use App\Models\Product;
-use App\Helpers;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use App\Models\RaceResult;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow; // use this if your excel sheet has headings
@@ -31,19 +27,19 @@ class RaceResultsImport implements ToModel, WithHeadingRow
         if ($raceResult) {
             // Update if found
             $raceResult->update([
-                'time' => $time,
+                'time'  => $time,
                 'place' => $place,
-                'date' => $date,
+                'date'  => $date,
                 // ... add other fields as needed
             ]);
         } else {
             // Create if not found
             RaceResult::create([
-                'race_id' => $raceId,
+                'race_id'        => $raceId,
                 'participant_id' => $participantId,
-                'time' => $time,
-                'place' => $place,
-                'date' => $date,
+                'time'           => $time,
+                'place'          => $place,
+                'date'           => $date,
                 // ... add other fields as needed
             ]);
         }
@@ -51,4 +47,3 @@ class RaceResultsImport implements ToModel, WithHeadingRow
         return null; // As we're directly handling the update/create process
     }
 }
-

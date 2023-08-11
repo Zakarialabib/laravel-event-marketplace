@@ -41,7 +41,6 @@ class RaceResult extends Model
         'status' => Status::class,
     ];
 
-
     // Define the relationship with the Race model
     public function race()
     {

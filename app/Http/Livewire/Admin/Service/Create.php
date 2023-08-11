@@ -23,7 +23,7 @@ class Create extends Component
     public array $rules = [
         'service.name'        => 'required|min:3|max:255',
         'service.description' => 'nullable',
-        'service.price' => 'required|min:3',
+        'service.price'       => 'required|min:3',
     ];
 
     public function render(): View|Factory
