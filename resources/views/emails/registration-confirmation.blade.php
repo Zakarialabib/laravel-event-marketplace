@@ -6,7 +6,7 @@
 
 - {{ __('Name') }}: {{ $participant->name }}
 - {{ __('Email') }}: {{ $participant->email }}
-- {{ __('Phone Number') }}: {{ $participant->phone_number }}
+- {{ __('Phone number') }}: {{ $participant->phone_number }}
 
 {{ __('Please keep this information secure and change your password after logging in.') }}
 

@@ -25,7 +25,7 @@
             <x-table>
                 <x-slot name="thead">
                     <x-table.th>
-                        {{ __('Participant Name') }}
+                        {{ __('Participant name') }}
                         @include('components.table.sort', ['field' => 'participant_id'])
                     </x-table.th>
                     <x-table.th>

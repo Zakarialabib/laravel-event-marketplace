@@ -30,8 +30,7 @@ class CheckoutController extends Controller
 
         // dd($this->order->id);
 
-        $registration = Registration::all();
-        // ->first();
+        $registration = Registration::findOrFail($this->order->registration_id);
 
         // dd($registration);
 

@@ -80,12 +80,12 @@
                         </li>
                         <li>
                             <p>
-                                {{ __('Phone Number') }}: {{ $participant->phone_number }}
+                                {{ __('Phone number') }}: {{ $participant->phone_number }}
                             </p>
                         </li>
                         <li>
                             <p>
-                                {{ __('Birth Date') }}: {{ $participant->birth_date }}
+                                {{ __('Birth date') }}: {{ $participant->birth_date }}
                             </p>
                         </li>
                         <li>
@@ -105,7 +105,7 @@
                         </li>
                         <li>
                             <p>
-                                {{ __('ZIP Code') }}: {{ $participant->zip_code }}
+                                {{ __('Zip code') }}: {{ $participant->zip_code }}
                             </p>
                         </li>
                         <li>
@@ -115,13 +115,13 @@
                         </li>
                         <li>
                             <p>
-                                {{ __('Emergency Contact Name') }}:
+                                {{ __('Emergency contact name') }}:
                                 {{ $participant->emergency_contact_name }}
                             </p>
                         </li>
                         <li>
                             <p>
-                                {{ __('Emergency Contact Phone Number') }}:
+                                {{ __('Emergency contact phone number') }}:
                                 {{ $participant->emergency_contact_phone_number }}
                             </p>
                         </li>

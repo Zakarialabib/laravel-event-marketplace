@@ -24,7 +24,7 @@
 - **{{ __('Order Date') }}:** {{ $order->created_at }}
 
 @component('mail::button', ['url' => route('front.myaccount'), 'color' => 'blue'])
-Go to My Account
+{{__('Go to My Account')}}
 @endcomponent
 
 @endcomponent

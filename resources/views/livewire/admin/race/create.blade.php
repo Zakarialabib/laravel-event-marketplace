@@ -11,7 +11,7 @@
                 <form wire:submit.prevent="create">
                     <div class="flex flex-wrap -mx-2 mb-3">
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                            <x-label for="name" :value="__('Race Name')" required autofocus />
+                            <x-label for="name" :value="__('Race name')" required autofocus />
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name"
                                 wire:model="race.name" required autofocus />
                             <x-input-error :messages="$errors->get('race.name')" for="name" class="mt-2" />
@@ -343,7 +343,7 @@
                                 </div>
 
                                 <div class="w-full px-2">
-                                    <x-label for="meta_description" :value="__('Meta Description')" />
+                                    <x-label for="meta_description" :value="__('Meta description')" />
                                     <x-input id="meta_description" class="block mt-1 w-full" type="text"
                                         name="meta_description" wire:model="race.meta_description" />
                                     <x-input-error :messages="$errors->get('race.meta_description')" for="meta_description" class="mt-2" />

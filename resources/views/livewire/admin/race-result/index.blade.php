@@ -39,7 +39,10 @@
             </div>
             <div class="float-right">
                 <x-button type="button" primary wire:click="downloadAll" wire:loading.attr="disabled">
-                    {{ __('downloadAll') }}
+                    {{ __('Download results') }}
+                </x-button>
+                <x-button type="button" primary wire:click="importModal" wire:loading.attr="disabled">
+                    {{ __('Import results') }}
                 </x-button>
             </div>
         </div>
@@ -58,7 +61,7 @@
                 @endif
                 @if ($this->selected)
                     <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
-                        {{ __('download Selected') }}
+                        {{ __('Download selected') }}
                     </x-button>
                 @endif
                 <div class="my-2 my-md-0">
@@ -95,6 +98,9 @@
                     {{ __('Registration date') }}
                 </x-table.th>
                 <x-table.th>
+                    {{ __('Place') }} / {{ __('Time') }} / {{ __('Date ') }}
+                </x-table.th>
+                <x-table.th>
                     {{ __('Status') }}
                 </x-table.th>
                 <x-table.th>
@@ -118,7 +124,10 @@
                             </a>
                         </x-table.td>
                         <x-table.td>
-                            {{ $race_result->registration->registration_date }}
+                            {{ Helpers::format_date($race_result->registration->registration_date) }}
+                        </x-table.td>
+                        <x-table.td>
+                            {{ $race_result->place }} / {{ $race_result->time }} / {{ $race_result->date }}
                         </x-table.td>
                         <x-table.td>
                             @if ($race_result->status == 0)
@@ -150,4 +159,77 @@
             </div>
         </div>
     </x-card>
+
+    <div>
+        <x-modal wire:model="importModal">
+            <x-slot name="title">
+                {{ __('Import and Update results') }}
+            </x-slot>
+
+            <x-slot name="content">
+                <div class="w-full py-2">
+                    <x-table-responsive>
+                        <x-table.tr>
+                            <x-table.th>{{ __('Participant Id') }}</x-table.th>
+                            <x-table.td>
+                                <x-badge danger>
+                                    {{ __('Required') }}
+                                </x-badge>
+                            </x-table.td>
+                        </x-table.tr>
+                        <x-table.tr>
+                            <x-table.th>{{ __('Race Id') }}</x-table.th>
+                            <x-table.td>
+                                <x-badge danger>
+                                    {{ __('Required') }}
+                                </x-badge>
+                            </x-table.td>
+                        </x-table.tr>
+                        <x-table.tr>
+                            <x-table.th>{{ __('Place') }}</x-table.th>
+                            <x-table.td>
+                                <x-badge danger>
+                                    {{ __('Required') }}
+                                </x-badge>
+                            </x-table.td>
+                        </x-table.tr>
+                        <x-table.tr>
+                            <x-table.th>{{ __('Time') }}</x-table.th>
+                            <x-table.td>
+                                <x-badge danger>
+                                    {{ __('Required') }}
+                                </x-badge>
+                            </x-table.td>
+                        </x-table.tr>
+                        <x-table.tr>
+                            <x-table.th>{{ __('Date') }}</x-table.th>
+                            <x-table.td>
+                                <x-badge danger>
+                                    {{ __('Required') }}
+                                </x-badge>
+                            </x-table.td>
+                        </x-table.tr>
+                    </x-table-responsive>
+                    <form wire:submit.prevent="importResults">
+                        <div class="w-full px-3 my-2">
+                            <x-label for="import_file" :value="__('Import')" />
+                            <x-input id="file" class="block mt-1 w-full" type="file" name="file"
+                                wire:model.defer="file" />
+                            <x-input-error :messages="$errors->get('file')" for="file" class="mt-2" />
+                        </div>
+
+                        <div class="w-full px-3">
+                            <x-button primary type="submit" class="block" wire:loading.attr="disabled">
+                                {{ __('Import') }}
+                            </x-button>
+                            <span wire:loading.delay wire:target="importResults">
+                                {{ __('Loading...') }}
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </x-slot>
+        </x-modal>
+    </div>
+
 </div>

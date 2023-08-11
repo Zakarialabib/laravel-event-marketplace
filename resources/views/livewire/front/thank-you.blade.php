@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4 py-24">
         <div class="bg-white shadow rounded-lg p-6">
             <div class="flex my-4 items-center">
-                <h2 class="text-4xl font-bold font-heading">{{ __('Thank you for your order!') }}</h2>
+                <h2 class="text-4xl font-bold font-heading">{{ __('Thank you for your order') }}</h2>
             </div>
             <div class="flex">
                 <div class="w-1/2 pr-4 border-r">

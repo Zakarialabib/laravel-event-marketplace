@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\RaceResult;
 
 use App\Exports\RaceResultsExport;
+use App\Imports\RaceResultsImport;
 use App\Models\RaceResult;
 use App\Http\Livewire\WithSorting;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -22,8 +24,8 @@ class Index extends Component
     public string $search = '';
     public array $selected = [];
     public array $paginationOptions;
-    public $activeTab;
-    public $racer_result;
+    public $importModal;
+    public $file;
 
     protected $queryString = [
         'search'        => ['except' => ''],
@@ -61,6 +63,35 @@ class Index extends Component
         return (new RaceResultsExport())->download('race_results.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
+    public function importModal()
+    {
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->importModal = true;
+    }
+
+    public function importResults()
+    {
+        // abort_if(Gate::denies('race_result_access'), 403);
+
+        if ($this->file->extension() === 'xlsx' || $this->file->extension() === 'xls') {
+            $filename = time().'-race-result.'.$this->file->getClientOriginalExtension();
+            $this->file->storeAs('race-results', $filename);
+
+            Excel::import(new RaceResultsImport,$filename);
+            
+            $this->alert('success', __('Race Results imported successfully!'));
+        } else {
+            $this->alert('error', __('File is a '.$this->file->extension().' file.!! Please upload a valid xls/csv file..!!'));
+        }
+
+        $this->emit('refreshIndex');
+
+        $this->importModal = false;
+    }
+
     public function mount()
     {
         $this->sortBy = 'id';
@@ -68,7 +99,6 @@ class Index extends Component
         $this->perPage = 25;
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new RaceResult())->orderable;
-        $this->activeTab ??= 'all';
     }
 
     public function render(): View|Factory

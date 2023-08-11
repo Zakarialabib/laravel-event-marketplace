@@ -40,7 +40,7 @@
                     </div>
                     <div class="w-full">
                         <h4 class="font-bold text-black text-xl mb-1">
-                            {{ __('Phone Number') }}</h4>
+                            {{ __('Phone number') }}</h4>
                         <p class="text-base text-body-color ">
                             <a href="tel:{{ Helpers::settings('company_phone') }}">{{ Helpers::settings('company_phone') }}
                             </a>

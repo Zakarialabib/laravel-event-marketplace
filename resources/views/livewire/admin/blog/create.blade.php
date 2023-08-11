@@ -55,7 +55,7 @@
                         <x-input-error :messages="$errors->get('blog.meta_title')" for="blog.meta_title" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
-                        <x-label for="meta_description" :value="__('Meta Description')" />
+                        <x-label for="meta_description" :value="__('Meta description')" />
                         <x-input id="meta_description" class="block mt-1 w-full" type="text" name="meta_description"
                             wire:model="blog.meta_description" />
                         <x-input-error :messages="$errors->get('blog.meta_description')" for="blog.meta_description" class="mt-2" />

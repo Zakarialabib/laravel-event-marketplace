@@ -51,13 +51,13 @@
                 <li class="mr-1">
                     <button x-on:click="activeTab = 'all'"
                         x-on:class="{ 'bg-blue-500 text-white': activeTab === 'all' }" class="px-4 py-2 rounded-l-md">
-                        {{ __('All Registrations') }}
+                        {{ __('All registrations') }}
                     </button>
                 </li>
                 <li class="mr-1" x-show="activeTab === 'showRegistration'">
                     <button x-on:click="activeTab = 'showRegistration'"
                         x-on:class="{ 'bg-blue-500 text-white': activeTab === 'showRegistration' }" class="px-4 py-2">
-                        {{ __('show Registration') }}
+                        {{ __('Show registration') }}
                     </button>
                 </li>
             </ul>
@@ -80,7 +80,7 @@
                         @endif
                         @if ($this->selected)
                             <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
-                                {{ __('download Selected') }}
+                                {{ __('Download selected') }}
                             </x-button>
                         @endif
                         <div class="my-2 my-md-0">
@@ -158,7 +158,7 @@
                                     <x-button secondary type="button"
                                         wire:click="showRegistration({{ $registration->id }})"
                                         x-on:click="activeTab = 'showRegistration'">
-                                        {{ __('Show Registration') }}
+                                        {{ __('Show registration') }}
                                     </x-button>
                                 </x-table.td>
                             </x-table.tr>

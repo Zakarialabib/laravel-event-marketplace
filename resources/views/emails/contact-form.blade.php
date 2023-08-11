@@ -5,7 +5,7 @@
 
 - **{{__('Name')}}:** {{ $contact->name }}
 - **{{__('Email')}}:** {{ $contact->email }}
-- **{{__('Phone Number')}}:** {{ $contact->phone_number }}
+- **{{__('Phone number')}}:** {{ $contact->phone_number }}
 
 **{{__('Message')}}:**
 <p>

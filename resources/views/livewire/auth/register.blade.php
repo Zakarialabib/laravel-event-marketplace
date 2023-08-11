@@ -61,9 +61,8 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
-            <!-- Confirm Password -->
             <div>
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" required />
+                <x-input-label for="password_confirmation" :value="__('Confirm password')" required />
 
                 <x-text-input id="password_confirmation" wire:model="passwordConfirmation"
                     class="block mt-1 w-full" type="password" name="password_confirmation" required />

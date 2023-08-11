@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Front;
 
 use App\Enums\{OrderStatus, OrderType, PaymentStatus};
+use App\Mail\CheckoutMail;
 use App\Models\{Order, Participant, Registration};
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\Factory;
@@ -12,6 +13,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use App\Traits\CmiGateway;
@@ -145,6 +147,9 @@ class CheckoutRace extends Component
             $this->registration->order_id = $order->id;
             $this->registration->save();
         }
+
+        Mail::to($order->user->email)->later(now()->addMinutes(10), new CheckoutMail($order, $order->user));
+
     }
 
     public function removeFromCart($rowId)

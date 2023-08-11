@@ -28,7 +28,6 @@ class RaceFactory extends Factory
             'description'      => $this->faker->sentence,
             'race_location_id' => 1,
             'category_id'      => 1,
-            // 'images' => \App\Helpers::addMediaFromUrlToCollection(new Race(), $this->faker->imageUrl(), 'races')->file_name,
             'slug'                  => Str::slug($this->faker->word),
             'start_registration'    => date('Y-m-d', strtotime('+1 day')),
             'end_registration'      => date('Y-m-d', strtotime('+30 day')),

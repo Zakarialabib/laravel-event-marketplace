@@ -109,7 +109,7 @@
                             </div>
 
                             <div class="lg:w-1/3 sm:w-1/2 px-2">
-                                <x-label for="meta_description" :value="__('Meta Description')" />
+                                <x-label for="meta_description" :value="__('Meta description')" />
                                 <x-input id="meta_description" class="block mt-1 w-full" type="number"
                                     name="meta_description" wire:model="product.meta_description" />
                                 <x-input-error :messages="$errors->get('meta_description')" for="meta_description" class="mt-2" />

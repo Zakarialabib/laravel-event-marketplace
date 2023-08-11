@@ -45,7 +45,7 @@
         <form wire:submit.prevent="update">
             <div class="grid grid-cols-2 gap-4 mb-3">
                 <div class="px-3 mb-2">
-                    <x-label for="name" :value="__('Race Name')" required autofocus />
+                    <x-label for="name" :value="__('Race name')" required autofocus />
                     <x-input id="name" class="block mt-1 w-full" type="text" name="name"
                         wire:model="race.name" required autofocus />
                     <x-input-error :messages="$errors->get('race.name')" for="name" class="mt-2" />
@@ -81,7 +81,7 @@
                     <x-input-error :messages="$errors->get('race.elevation_gain')" for="elevation_gain" class="mt-2" />
                 </div>
                 <div class="px-3 mb-2">
-                    <x-label for="number_of_racers" :value="__('Number of Racers')" required />
+                    <x-label for="number_of_racers" :value="__('Number of racers')" required />
                     <x-input id="number_of_racers" class="block mt-1 w-full" type="number" name="number_of_racers"
                         wire:model="race.number_of_racers" required />
                     <x-input-error :messages="$errors->get('race.number_of_racers')" for="number_of_racers" class="mt-2" />
@@ -355,7 +355,7 @@
                             </div>
 
                             <div class="px-2">
-                                <x-label for="meta_description" :value="__('Meta Description')" />
+                                <x-label for="meta_description" :value="__('Meta description')" />
                                 <x-input id="meta_description" class="block mt-1 w-full" type="number"
                                     name="meta_description" wire:model="race.meta_description" />
                                 <x-input-error :messages="$errors->get('race.meta_description')" for="meta_description" class="mt-2" />

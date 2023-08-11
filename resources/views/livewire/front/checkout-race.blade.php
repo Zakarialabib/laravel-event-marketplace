@@ -34,7 +34,7 @@
                         <div class="bg-white px-4 py-2 text-center" x-show="openSection === 1">
                             <p>{{ __('Name') }}: {{ $this->participant->name }}</p>
                             <p>{{ __('Email') }}: {{ $this->participant->email }}</p>
-                            <p>{{ __('Phone Number') }}: {{ $this->participant->phone_number }}</p>
+                            <p>{{ __('Phone number') }}: {{ $this->participant->phone_number }}</p>
                             <p>{{ __('Birth Date') }}: {{ $this->participant->birth_date }}</p>
                             <p>{{ __('Gender') }}: {{ $this->participant->gender }}</p>
                         </div>
@@ -62,7 +62,7 @@
                         <div class="bg-white px-4 py-2 text-center" x-show="openSection === 2">
                             <p>{{ __('Country') }}: {{ $this->participant->country }}</p>
                             <p>{{ __('City') }}: {{ $this->participant->city }}</p>
-                            <p>{{ __('ZIP Code') }}: {{ $this->participant->zip_code }}</p>
+                            <p>{{ __('Zip code') }}: {{ $this->participant->zip_code }}</p>
                             <p>{{ __('Address') }}: {{ $this->participant->address }}</p>
                         </div>
                     </div>
@@ -87,9 +87,9 @@
                             </svg>
                         </button>
                         <div class="bg-white px-4 py-2 text-center" x-show="openSection === 3">
-                            <p>{{ __('Emergency Contact Name') }}:
+                            <p>{{ __('Emergency contact name') }}:
                                 {{ $this->participant->emergency_contact_name }}</p>
-                            <p>{{ __('Emergency Contact Phone Number') }}:
+                            <p>{{ __('Emergency contact phone number') }}:
                                 {{ $this->participant->emergency_contact_phone_number }}</p>
                         </div>
                     </div>

@@ -196,13 +196,13 @@
 
                         <div class="mb-4">
                             <span
-                                class="text-sm md:text-base font-medium text-gray-500">{{ __('Number of Days') }}:</span>
+                                class="text-sm md:text-base font-medium text-gray-500">{{ __('Elevation gain') }}:</span>
                             <span class="text-base md:text-lg">{{ $race->elevation_gain }}</span>
                         </div>
 
                         <div class="mb-4">
                             <span
-                                class="text-sm md:text-base font-medium text-gray-500">{{ __('Number of Racers') }}:</span>
+                                class="text-sm md:text-base font-medium text-gray-500">{{ __('Number of racers') }}:</span>
                             <span class="text-base md:text-lg">{{ $race->number_of_racers }}</span>
                         </div>
 
@@ -295,18 +295,18 @@
                                             class="w-full mb-4 border border-green-400">
                                             <ul class="flex flex-col text-center justify-center py-10">
                                                 <li class="leading-6 text-base md:text-lg">
-                                                    Type: ({{ $course->type }})
+                                                    {{ __('Type') }}: ({{ $course->type }})
                                                 </li>
                                                 <li class="leading-6 text-base md:text-lg">
-                                                    Distance: {{ $course->distance }} km
+                                                    {{ __('Distance') }}: {{ $course->distance }} km
                                                 </li>
                                                 @if ($race->category->name === 'Trail Running')
                                                     <li class="leading-6 text-base md:text-lg">
-                                                        Elevation Gain: {{ $course->elevation_gain }} m
+                                                        {{ __('Elevation Gain') }}: {{ $course->elevation_gain }} m
                                                     </li>
                                                 @endif
                                                 <li class="leading-6 text-base md:text-lg">
-                                                    Number of Days: {{ $race->number_of_days }}
+                                                    {{ __('Number of Days') }}: {{ $race->number_of_days }}
                                                 </li>
                                                 <li class="leading-6 px-6 py-4 text-base md:text-lg">
                                                     <p>
@@ -315,7 +315,7 @@
                                                 </li>
                                             </ul>
                                             <div class="flex justify-center py-4">
-                                                <x-button secondary type="button">{{ __('download') }}</x-button>
+                                                <x-button secondary type="button">{{ __('Download') }}</x-button>
                                             </div>
                                         </div>
                                     </div>
@@ -349,11 +349,11 @@
                         @else
                             <div class="bg-green-50 border border-green-200 p-6 rounded-md mt-5 shadow-sm">
                                 <h3 class="text-blue-700 text-2xl font-semibold mb-4">
-                                    {{ __('Already Registered') }}
+                                    {{ __('Already registered') }}
                                 </h3>
                                 <p class="text-blue-600 mb-4">
-                                    You have already registered for the {{ $race->name }} race. For details or to
-                                    manage your registration, please check your account.
+                                    {{ __('You have already registered for the') }} {{ $race->name }}. <br>
+                                    {{ __('For details or to manage your registration, please check your account.') }}
                                 </p>
                                 <p>
 
@@ -395,7 +395,7 @@
                     </div>
                 @endif
                 <div x-show="activeTab === 'tab3'" id="tab3" class="w-full text-center mb-5 border px-4">
-                 
+
                     @livewire('front.race-results', ['race' => $race])
                 </div>
             </div>

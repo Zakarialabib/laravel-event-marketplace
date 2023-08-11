@@ -13,7 +13,7 @@
             <div class="p-2 w-full">
                 <div class="relative">
                     <input type="text" wire:model="contact.name" id="name" name="name"
-                        placeholder="{{ __('Full Name') }}" value="{{ old('name') }}"
+                        placeholder="{{ __('Full name') }}" value="{{ old('name') }}"
                         class="@error('contact.name') is-invalid @enderror w-full bg-gray-100 dark:bg-white bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-sm outline-none text-gray-700 py-1 px-3 leading-3 transition-colors duration-200 ease-in-out">
                     <x-input-error :messages="$errors->get('contact.name')" for="contact.name" class="mt-2" />
                 </div>

@@ -47,7 +47,7 @@
                         <x-label for="featured_title" :value="__('Featured title')" />
                         <input type="text" name="featured_title" wire:model="section.featured_title"
                             class="p-3 leading-5 bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
-                            placeholder="{{ __('featured_title') }}" value="{{ old('featured_title') }}">
+                            placeholder="{{ __('Featured title') }}" value="{{ old('featured_title') }}">
                         <x-input-error :messages="$errors->get('section.featured_title')" for="section.featured_title" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">

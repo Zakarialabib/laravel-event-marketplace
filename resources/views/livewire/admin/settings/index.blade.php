@@ -225,7 +225,7 @@
                     <x-input-error for="seo_meta_title" :messages="$errors->first('seo_meta_title')" />
                 </div>
                 <div class="mb-4 px-2">
-                    <x-label for="seo_meta_description" :value="__('Seo Meta Description')" />
+                    <x-label for="seo_meta_description" :value="__('Seo Meta description')" />
                     <x-input wire:model="seo_meta_description" type="text" id="seo_meta_description"
                         name="seo_meta_description" />
                     <x-input-error for="seo_meta_description" :messages="$errors->first('seo_meta_description')" />

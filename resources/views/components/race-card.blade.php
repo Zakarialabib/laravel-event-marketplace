@@ -204,7 +204,7 @@
                 <div class="scroll-smooth">
                     <a href="{{ route('front.raceDetails', $race->slug) }}"
                         class="bottom-0 block text-center cursor-pointer border-2 border-green-600 py-3 text-lg front-bold text-green-600 transition ease-in-out duration-300 hover:bg-green-800 hover:text-green-100 focus:bg-green-800 font-semibold uppercase items-center justify-center px-8 z-[1]">
-                        {{ __('Race Details') }}
+                        {{ __('Race details') }}
                     </a>
                     @php
                         $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
@@ -237,7 +237,7 @@
                     </ul>
                     @if ($race->category->name === 'Trail Running')
                         <p class="text-lg font-bold uppercase">
-                            {{ __('Elevation Gain') }}: {{ $race->elevation_gain }} m
+                            {{ __('Elevation gain') }}: {{ $race->elevation_gain }} m
                         </p>
                     @endif
                 </div>

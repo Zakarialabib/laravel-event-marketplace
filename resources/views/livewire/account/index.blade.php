@@ -1,5 +1,5 @@
 <div>
-    @section('title', __('My Account'))
+    @section('title', __('My account'))
 
     <section class="py-24 px-4 bg-gray-100 h-auto my-auto flex items-center">
         <div class="w-full py-10 mx-4 mt-12 flex bg-white" x-data="{ activeTab: 'account' }">
