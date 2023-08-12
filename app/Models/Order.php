@@ -57,10 +57,10 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'status' => OrderStatus::class,
-        'payment_status' => PaymentStatus::class,
+        'status'          => OrderStatus::class,
+        'payment_status'  => PaymentStatus::class,
         'shipping_status' => ShippingStatus::class,
-        'type'   => OrderType::class,
+        'type'            => OrderType::class,
     ];
 
     public static function generateReference()

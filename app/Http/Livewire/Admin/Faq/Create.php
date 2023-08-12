@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Admin\Faq;
 use App\Models\Faq;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 

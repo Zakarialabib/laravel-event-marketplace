@@ -22,7 +22,7 @@ class Register extends Component
     public $phone;
     public $city;
     public $country;
-    
+
     public function mount()
     {
         $this->city = 'Casablanca';

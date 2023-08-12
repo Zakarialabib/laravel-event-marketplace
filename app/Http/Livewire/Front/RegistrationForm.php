@@ -83,7 +83,6 @@ class RegistrationForm extends Component
         }
     }
 
-
     public function render(): View
     {
         return view('livewire.front.registration-form');
@@ -115,7 +114,7 @@ class RegistrationForm extends Component
     public function updatedTeamName()
     {
         if (strlen($this->team_name) > 3) {
-            $this->resultTeam = Team::where('team_name', 'like', '%' . $this->team_name . '%')
+            $this->resultTeam = Team::where('team_name', 'like', '%'.$this->team_name.'%')
                 ->limit(5)
                 ->get();
         } else {
@@ -127,7 +126,7 @@ class RegistrationForm extends Component
     {
         $this->team = Team::where('team_name', $this->team_name)->first();
 
-        if (!$this->team) {
+        if ( ! $this->team) {
             $this->team = Team::create([
                 'team_name' => $this->newTeamName,
                 'leader_id' => Auth::id(),
@@ -189,7 +188,7 @@ class RegistrationForm extends Component
         try {
             $this->validate();
 
-            if (!$this->user) {
+            if ( ! $this->user) {
                 $password = bcrypt(Str::random(10));
 
                 $this->user = User::create([

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Enums;
+
 use Illuminate\Support\Str;
 
 enum OrderStatus: string
@@ -46,7 +47,7 @@ enum OrderStatus: string
 
         return null;
     }
-    
+
     // loop through the values:
 
     // @foreach(App\Enums\PaymentStatus::values() as $key=>$value)

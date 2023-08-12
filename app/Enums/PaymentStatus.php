@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Enums;
+
 use Illuminate\Support\Str;
 
 enum PaymentStatus: string
@@ -22,7 +23,6 @@ enum PaymentStatus: string
         return array_column(self::cases(), 'name', 'value');
     }
 
-    
     public function getName(): string
     {
         return __(Str::studly($this->name));
@@ -43,7 +43,6 @@ enum PaymentStatus: string
 
         return null;
     }
-    
 
     // loop through the values:
 

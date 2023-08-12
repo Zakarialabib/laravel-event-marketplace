@@ -45,7 +45,7 @@ class Registration extends Model
     ];
 
     protected $casts = [
-        'status'            => Status::class,
+        'status' => Status::class,
     ];
 
     public function participant()

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Enums;
+
 use Illuminate\Support\Str;
 
 enum Status: string
@@ -41,5 +42,3 @@ enum Status: string
         return null;
     }
 }
-
-

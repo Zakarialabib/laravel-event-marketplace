@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Enums;
+
 use Illuminate\Support\Str;
 
 enum ShippingStatus: string
@@ -39,5 +40,5 @@ enum ShippingStatus: string
         }
 
         return null;
-    }  
+    }
 }

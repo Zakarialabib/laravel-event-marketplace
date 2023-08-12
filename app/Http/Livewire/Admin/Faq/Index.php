@@ -18,7 +18,7 @@ class Index extends Component
     use WithPagination;
     use WithSorting;
     use LivewireAlert;
-    
+
     public $faq;
 
     public $listeners = [

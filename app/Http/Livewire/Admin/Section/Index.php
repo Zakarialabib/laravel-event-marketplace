@@ -133,7 +133,7 @@ class Index extends Component
             'link'        => $section_details->link,
             'image'       => $section_details->image,
             'description' => $section_details->description,
-            'status'   => Status::INACTIVE,
+            'status'      => Status::INACTIVE,
         ]);
         $this->alert('success', __('Section Cloned successfully!'));
     }
