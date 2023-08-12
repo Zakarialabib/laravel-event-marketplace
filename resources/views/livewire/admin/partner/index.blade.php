@@ -14,7 +14,7 @@
             </div>
             @if ($this->selected)
                 <x-button danger type="button" wire:click="deleteSelected" class="mx-3">
-                    <i class="fas fa-trash-alt"></i>
+                    <i class="fa fa-trash-alt"></i>
                 </x-button>
             @endif
             @if ($this->selectedCount)
@@ -78,11 +78,11 @@
                         <div class="flex justify-start space-x-2">
                             <x-button primary type="button" wire:click="$emit('editModal', {{ $partner->id }})"
                                 wire:loading.attr="disabled">
-                                <i class="fas fa-edit"></i>
+                                <i class="fa fa-edit"></i>
                             </x-button>
                             <x-button danger type="button" wire:click="deleteModal({{ $partner->id }})"
                                 wire:loading.attr="disabled">
-                                <i class="fas fa-trash-alt"></i>
+                                <i class="fa fa-trash-alt"></i>
                             </x-button>
                         </div>
                     </x-table.td>

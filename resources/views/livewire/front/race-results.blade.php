@@ -54,7 +54,7 @@
                                 {{ $result->place }}
                             </x-table.td>
                             <x-table.td>
-                                {{ $result->date }}
+                                {{ Helpers::format_date($result->date) }}
                             </x-table.td>
                         </x-table.tr>
                     @endforeach

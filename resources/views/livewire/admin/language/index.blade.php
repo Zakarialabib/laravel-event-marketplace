@@ -94,11 +94,11 @@
                             </x-button>
 
                             <x-button success type="button" wire:click="$emit('editLanguage', {{ $language->id }}) ">
-                                <i class="fas fa-edit"></i>
+                                <i class="fa fa-edit"></i>
                             </x-button>
 
                             <x-button danger type="button" wire:click="$emit('deleteModal', {{ $language->id }})">
-                                <i class="fas fa-trash"></i>
+                                <i class="fa fa-trash"></i>
                             </x-button>
                         </x-table.td>
                     </x-table.tr>

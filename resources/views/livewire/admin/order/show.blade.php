@@ -79,29 +79,29 @@
                 </div>
                 <div class="mb-4">
                     <p class="font-bold">{{ __('Order Status') }}:</p>
-                    <p>{{ $order->status }}</p>
+                    <p>{{ $order->status->getName() }}</p>
                 </div>
                 <div class="mb-4">
                     <p class="font-bold">{{ __('Shipping Status') }}:</p>
-                    <p>{{ $order->shipping_status }}</p>
+                    <p>{{ $order->shipping_status->getName() }}</p>
                 </div>
                 <div class="mb-4">
                     <p class="font-bold">{{ __('Payment Status') }}:</p>
-                    <p>{{ $order->payment_status }}</p>
+                    <p>{{ $order->payment_status->getName() }}</p>
                 </div>
                 <div class="mb-4">
                     <p class="font-bold">{{ __('Order Date') }}:</p>
                     <p>{{ Helpers::format_date($order->date) }}</p>
                 </div>
-                <p>{{ $order->status }}</p>
+                <p>{{ $order->status->getName() }}</p>
             </div>
             <div class="mb-4">
                 <p class="font-bold">{{ __('Shipping Status') }}:</p>
-                <p>{{ $order->shipping_status }}</p>
+                <p>{{ $order->shipping_status->getName() }}</p>
             </div>
             <div class="mb-4">
                 <p class="font-bold">{{ __('Payment Status') }}:</p>
-                <p>{{ $order->payment_status }}</p>
+                <p>{{ $order->payment_status->getName() }}</p>
             </div>
             <div class="mb-4">
                 <p class="font-bold">{{ __('Order Date') }}:</p>

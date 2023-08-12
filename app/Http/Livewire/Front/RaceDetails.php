@@ -22,7 +22,7 @@ class RaceDetails extends Component
         if (Auth::check()) {
             $user_id = Auth::user()->id;
             $participant = Participant::where('user_id', $user_id)->first();
-            $this->existingRegistration = Registration::where('participant_id', $participant->id)
+            $this->existingRegistration = Registration::where('participant_id', $participant?->id)
                 ->where('race_id', $this->race->id)
                 ->first();
         }

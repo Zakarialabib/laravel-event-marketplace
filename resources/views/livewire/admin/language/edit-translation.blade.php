@@ -68,7 +68,7 @@
                         <x-table.td>
                             {{-- <x-button type="button" danger
                         wire:click="deleteTranslation({{ $key }})">
-                        <i class="fas fa-trash"></i>
+                        <i class="fa fa-trash"></i>
                     </x-button> --}}
                         </x-table.td>
                     </x-table.tr>

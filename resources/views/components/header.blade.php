@@ -161,7 +161,7 @@
                     <li class="mb-2 hover:underline hover:text-green-500">
                         <button @click="isCategory = !isCategory" type="button">
                             {{ __('Categories') }}
-                            <i class="fas fa-angle-down pl-5"></i>
+                            <i class="fa fa-angle-down pl-5"></i>
                         </button>
                     </li>
                     <ul x-show="isCategory" class="py-2 space-y-4 font-semibold font-heading">
@@ -182,7 +182,7 @@
                     <li class="mb-2 hover:underline hover:text-green-500">
                         <button @click="isProduct = !isProduct" type="button">
                             {{ __('Products') }}
-                            <i class="fas fa-angle-down pl-5"></i>
+                            <i class="fa fa-angle-down pl-5"></i>
                         </button>
                     </li>
                     <ul x-show="isProduct" class="py-2 space-y-4 font-semibold font-heading">

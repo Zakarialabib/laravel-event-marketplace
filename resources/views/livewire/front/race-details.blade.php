@@ -226,7 +226,7 @@
                                         <tbody>
                                             @foreach (json_decode($race->calendar) as $data)
                                                 <tr class="border-b bg-gray-100">
-                                                    <td class="text-left py-2 px-3 font-bold">{{ $data->date }}</td>
+                                                    <td class="text-left py-2 px-3 font-bold">{{ Helpers::format_date($data->date) }}</td>
                                                     <td class="py-2 px-3"></td>
                                                     <td class="py-2 px-3"></td>
                                                     <td class="py-2 px-3"></td>
@@ -333,7 +333,7 @@
                         @php
                             $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
                         @endphp
-
+{{--  --}}
                         @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
                             <div
                                 class="bg-gray-200 text-neutral-700 break-words pl-8 pr-5 border border-gray-300 border-solid rounded-">
@@ -347,7 +347,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="bg-green-50 border border-green-200 p-6 rounded-md mt-5 shadow-sm">
+                            <div class="w-full bg-green-50 border border-green-200 p-6 rounded-md mt-5 shadow-sm">
                                 <h3 class="text-blue-700 text-2xl font-semibold mb-4">
                                     {{ __('Already registered') }}
                                 </h3>
@@ -373,7 +373,7 @@
 
                                     <li>
                                         <span class="font-bold">{{ __('Status') }}:</span>
-                                        <span>{{ $existingRegistration->status }}</span>
+                                        <span>{{ $existingRegistration->status->getName() }}</span>
                                     </li>
 
                                     <li>
@@ -452,7 +452,7 @@
                                 {{ $faq->title }}</h3>
                             <a @click="expandFaq = {{ $index }}"
                                 class="absolute -bottom-6 right-10 w-12 h-12 bg-green-500 rounded-full cursor-pointer flex items-center justify-center">
-                                <i class="fas fa-arrow-down text-white"></i>
+                                <i class="fa fa-arrow-down text-white"></i>
                             </a>
                             <div x-show="expandFaq === {{ $index }}"
                                 x-transition:enter="transition ease-out duration-300"
@@ -471,7 +471,7 @@
 
             <div class="mt-10 flex items-center mx-auto w-full md:w-1/2 xl:w-full max-w-max">
                 <a @click="prevSlide" class="mr-4 lg:mr-8 xl:mr-24 cursor-pointer">
-                    <i class="fas fa-arrow-left"></i>
+                    <i class="fa fa-arrow-left"></i>
                 </a>
                 <div class="flex mx-auto w-56 lg:w-96 bg-gray-100" style="height: 2px;">
                     @foreach (Helpers::getActiveFaqs() as $index => $slider)
@@ -481,7 +481,7 @@
                     @endforeach
                 </div>
                 <a @click="nextSlide" class="ml-4 lg:ml-8 xl:ml-24 cursor-pointer">
-                    <i class="fas fa-arrow-right"></i>
+                    <i class="fa fa-arrow-right"></i>
                 </a>
             </div>
         </div>

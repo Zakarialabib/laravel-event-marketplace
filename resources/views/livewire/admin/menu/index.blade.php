@@ -137,7 +137,7 @@
                             </button>
                             <button type="button" class="text-red-500 px-2"
                                 wire:click="delete({{ $menu['id'] }})" danger><i
-                                    class="fas fa-trash-alt"></i></button>
+                                    class="fa fa-trash-alt"></i></button>
                         </div>
 
                         <div x-show="isMenuOpen"

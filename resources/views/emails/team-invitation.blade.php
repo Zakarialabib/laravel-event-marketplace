@@ -7,6 +7,4 @@
 {{ __('If you did not expect to receive an invitation to this team, you can ignore this email.') }}
 
 {{ __('Regards') }},<br>
-{{ config('app.name') }}
-
 @endcomponent

@@ -101,7 +101,7 @@
                                         <button
                                             class="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white focus:outline-none"
                                             wire:click="clearFilter('category', '{{ $category->name }}')">
-                                            <i class="fas fa-times"></i>
+                                            <i class="fa fa-times"></i>
                                         </button>
                                     </div>
                                 @endif

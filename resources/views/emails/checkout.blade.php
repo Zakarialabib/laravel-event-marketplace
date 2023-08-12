@@ -19,8 +19,8 @@
 
 - **{{ __('Order Amount') }}:** {{ $order->amount }}
 - **{{ __('Payment Method') }}:** {{ $order->payment_method }}
-- **{{ __('Order Status') }}:** {{ $order->status }}
-- **{{ __('Payment Status') }}:** {{ $order->payment_status }}
+- **{{ __('Order Status') }}:** {{ $order->status->getName() }}
+- **{{ __('Payment Status') }}:** {{ $order->payment_status->getName() }}
 - **{{ __('Order Date') }}:** {{ $order->created_at }}
 
 @component('mail::button', ['url' => route('front.myaccount'), 'color' => 'blue'])

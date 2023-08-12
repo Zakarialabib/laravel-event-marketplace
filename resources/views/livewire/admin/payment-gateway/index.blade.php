@@ -74,18 +74,18 @@
                             <x-slot name="trigger">
                                 <button type="button"
                                     class="px-4 text-base font-semibold text-gray-500 hover:text-sky-800">
-                                    <i class="fas fa-angle-double-down"></i>
+                                    <i class="fa fa-angle-double-down"></i>
                                 </button>
                             </x-slot>
                             <x-slot name="content">
                                 <x-dropdown-link data-href="{{ route('admin-payment-edit', $paymentgateway->id) }}" class="edit"
-                                    data-toggle="modal" data-target="#modal1"> <i class="fas fa-edit"></i>
+                                    data-toggle="modal" data-target="#modal1"> <i class="fa fa-edit"></i>
                                     {{ __('Edit') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link href="javascript:;"
                                     data-href="{{ route('admin-payment-delete', $paymentgateway->id) }}" data-toggle="modal"
                                     data-target="#confirm-delete" class="delete"><i
-                                        class="fas fa-trash-alt"></i>{{ __('Delete') }}
+                                        class="fa fa-trash-alt"></i>{{ __('Delete') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

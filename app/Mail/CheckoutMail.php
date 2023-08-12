@@ -44,7 +44,7 @@ class CheckoutMail extends Mailable
     {
         return new Envelope(
             from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
-            subject: $this->order->reference.' Order reference - '.Helpers::settings('site_title'),
+            subject: $this->order->reference.__(' Order reference').' - '.Helpers::settings('site_title'),
         );
     }
 }

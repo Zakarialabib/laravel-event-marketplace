@@ -163,7 +163,7 @@
                 <!-- First Section -->
                 <div class="inline-flex">
                     <!-- Font Awesome icon for delivery -->
-                    <i class="fas fa-shipping-fast text-xl"></i>
+                    <i class="fa fa-shipping-fast text-xl"></i>
                     <div class="ps-3">
                         <h6 class="fs-base mb-1">Livraison rapide et gratuite à casablanca</h6>
                         <p class="mb-0 fs-ms text-muted">Livraison gratuite si vous habitez à casablanca</p>
@@ -172,7 +172,7 @@
                 <!-- Second Section -->
                 <div class="inline-flex">
                     <!-- Font Awesome icon for money-back guarantee -->
-                    <i class="fas fa-money-check-alt text-xl"></i>
+                    <i class="fa fa-money-check-alt text-xl"></i>
                     <div class="ps-3">
                         <h6 class="text-base mb-1">Garantie de remboursement</h6>
                         <p class="mb-0 text-sm text-muted">Nous retournons l'argent dans les 30 jours</p>
@@ -181,7 +181,7 @@
                 <!-- Third Section -->
                 <div class="inline-flex">
                     <!-- Font Awesome icon for customer service -->
-                    <i class="fas fa-headset text-xl"></i>
+                    <i class="fa fa-headset text-xl"></i>
                     <div class="ps-3">
                         <h6 class="text-base mb-1">Service client</h6>
                         <p class="mb-0 text-sm text-muted">Support client amical pour nos clients</p>
@@ -190,7 +190,7 @@
                 <!-- Fourth Section -->
                 <div class="inline-flex">
                     <!-- Font Awesome icon for secure payment -->
-                    <i class="fas fa-lock text-xl"></i>
+                    <i class="fa fa-lock text-xl"></i>
                     <div class="ps-3">
                         <h6 class="text-base mb-1">Paiement en ligne sécurisé avec CMI</h6>
                         <p class="mb-0 text-sm text-muted">Nous possédons un certificat SSL / Secure et utilisons la

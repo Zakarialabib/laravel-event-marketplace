@@ -13,6 +13,6 @@
     @endif
 
     @if($tooltip)
-    <i class="fas fa-info-circle text-red-400 ml-1" data-toggle="tooltip" data-placement="top" title="{{ $tooltip }}"></i>
+    <i class="fa fa-info-circle text-red-400 ml-1" data-toggle="tooltip" data-placement="top" title="{{ $tooltip }}"></i>
     @endif
 </label>

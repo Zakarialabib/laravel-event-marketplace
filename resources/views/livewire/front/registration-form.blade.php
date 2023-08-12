@@ -17,7 +17,7 @@
         @endif
 
         <div x-data="{
-            step: 0,
+            step: 1,
             registrationType: 'individual',
             nextStep() { this.step++ },
             previousStep() { if (this.step > 1) this.step-- }
@@ -26,17 +26,17 @@
             <!-- Progress Bar -->
             <div class="mb-4 px-6">
                 <div class="h-2 rounded bg-gray-200">
-                    <div class="h-2 bg-blue-500" x-bind:style="`width: ${(step / 5) * 100}%`"></div>
+                    <div class="h-2 bg-blue-500" x-bind:style="`width: ${(step / 3) * 100}%`"></div>
                 </div>
             </div>
 
             <!-- Current Step Indicator -->
             <div class="mb-4 px-6 text-lg font-bold">
-                Step: <span x-text="step"></span>/5
+                {{ __('Step') }}: <span x-text="step"></span>/3
             </div>
 
-            <div class="inline-block relative w-64">
-                <label for="isTeamRegistration" class="flex items-center cursor-pointer">
+            <div class="inline-block relative justify-center w-full">
+                <label for="isTeamRegistration" class="flex justify-center items-center cursor-pointer">
                     <div
                         class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                         <input
@@ -46,7 +46,7 @@
                         <label for="isTeamRegistration"
                             class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                     </div>
-                    <div class="ml-3 text-gray-700 font-medium">
+                    <div class="ml-3 text-gray-700 font-medium text-md">
                         {{ __('Register as a team') }}
                     </div>
                 </label>
@@ -55,8 +55,7 @@
             <x-validation-errors class="mb-4" :errors="$errors" />
 
             <div x-show="registrationType === 'team'">
-                <!-- Step 2: Confirm New Team -->
-                <div x-show="step === 0" class="mb-4 px-6">
+                <div class="mb-4 px-6">
                     <label class="block mb-2 font-bold font-heading text-gray-700">Search for team Name</label>
                     <input type="text" wire:model="team_name" placeholder="search team name"
                         class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200">
@@ -70,59 +69,50 @@
                             @endforeach
                         </ul>
                     @endif
-                    <x-button secondary x-on:click="nextStep()" type="button" class="mt-2">
-                        {{ __('Continue to create New Team') }}
-                    </x-button>
                 </div>
+                @if (empty($resultTeam))
+                    <div class="mb-4 px-6">
+                        <label for="newTeamName" class="block mb-2 font-bold font-heading text-gray-700">
+                            Create a New Team
+                        </label>
+                        <input type="text" wire:model="newTeamName" id="newTeamName"
+                            placeholder="Enter new team name"
+                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200">
+                    </div>
+                    <div class="mb-4 px-6">
+                        <label class="block mb-2 font-bold font-heading text-gray-700">Invite Team Members by
+                            Email</label>
 
-                <div x-show="step === 1" class="mb-4 px-6">
-                    <label for="newTeamName" class="block mb-2 font-bold font-heading text-gray-700">Create a New
-                        Team</label>
-                    <input type="text" wire:model="newTeamName" id="newTeamName"
-                        placeholder="Enter new team name"
-                        class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200">
-                    <x-button primary x-on:click="nextStep()" type="button" class="mt-2">
-                        {{ __('Confirm New Team') }}
-                    </x-button>
-                </div>
-
-                <!-- Step 3: Invite Team Members by Email -->
-                <div x-show="step === 2" class="mb-4 px-6">
-                    <label class="block mb-2 font-bold font-heading text-gray-700">Invite Team Members by Email</label>
-
-                    @foreach ($invitationEmails as $index => $email)
-                        <div class="mb-2 flex justify-center">
-                            @if ($index === 0)
-                                <button wire:click="addMoreEmailFields" type="button"
-                                    class="px-4 py-2 text-white bg-green-500 hover:bg-green-600 rounded-r-md focus:outline-none">
-                                    + Add More
-                                </button>
-                            @endif
-                        </div>
-                        <div class="mb-2 relative rounded-md shadow-sm">
-                            <input wire:model="invitationEmails.{{ $index }}" type="email"
-                                placeholder="Enter email address"
-                                class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <div class="absolute inset-y-0 right-0 flex items-center">
-                                <button wire:click="removeEmailField({{ $index }})" type="button"
-                                    class="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-r-md focus:outline-none">
-                                    Remove
-                                </button>
+                        @foreach ($invitationEmails as $index => $email)
+                            <div class="mb-2 flex justify-center">
+                                @if ($index === 0)
+                                    <button wire:click="addMoreEmailFields" type="button"
+                                        class="px-4 py-2 text-white bg-green-500 hover:bg-green-600 rounded-r-md focus:outline-none">
+                                        + Add More
+                                    </button>
+                                @endif
                             </div>
-                        </div>
-                    @endforeach
-
-                    <x-button primary x-on:click="nextStep()" type="button" class="mt-2">
-                        {{ __('save and continue') }}
-                    </x-button>
-                </div>
+                            <div class="mb-2 relative rounded-md shadow-sm">
+                                <input wire:model="invitationEmails.{{ $index }}" type="email"
+                                    placeholder="Enter email address"
+                                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                <div class="absolute inset-y-0 right-0 flex items-center">
+                                    <button wire:click="removeEmailField({{ $index }})" type="button"
+                                        class="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-r-md focus:outline-none">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
-            <div x-show="registrationType === 'individual' || registrationType === 'team'">
-                <div class="grid xl:md:grid-cols-2 sm:grid-cols-1 gap-4 items-center" x-show="step === 0 || step === 3">
-                    <label class="col-span-full block mb-2 font-bold font-heading text-gray-700">Fill your personal
-                        informations</label>
-
+            <div x-show="registrationType === 'individual' || registrationType === 'team'" class="w-full">
+                <div class="grid xl:md:grid-cols-2 sm:grid-cols-1 gap-4 items-center" x-show="step === 1">
+                    <label class="col-span-full block mb-2 font-bold font-heading text-gray-700">
+                        {{ __('Participant Information') }}
+                    </label>
                     <div>
                         <x-label required for="email" :value="__('Email')" />
                         <x-input wire:model="participant.email" required id="email" name="email" type="email"
@@ -196,18 +186,17 @@
                             name="address" />
                         <x-input-error :messages="$errors->get('participant.address')" for="participant.address" class="mt-2" />
                     </div>
-                    <div class="w-full flex justify-between mt-4">
-                        <x-button secondary x-on:click="previousStep()" type="button"
-                            x-show="registrationType === 'team'">
+                    <div class="col-span-full flex justify-between mt-4">
+                        <x-button secondary x-on:click="previousStep()" type="button">
                             {{ __('Go Back') }}
                         </x-button>
-                        <x-button primary x-on:click="nextStep()" type="button" class="mt-2">
-                            {{ __('save and continue') }}
+                        <x-button primary x-on:click="nextStep()" type="button">
+                            {{ __('continue') }}
                         </x-button>
                     </div>
                 </div>
 
-                <div class="w-full" x-show="step === 4">
+                <div class="w-full" x-show="step === 2">
                     <label
                         class="block mb-2 font-bold font-heading text-gray-700">{{ __('Health Related Information') }}</label>
 
@@ -240,18 +229,21 @@
                     </x-checkbox-input>
                     <div class="flex justify-between mt-4">
                         <x-button secondary x-on:click="previousStep()" type="button">
-                            Go Back
+                            {{ __('Go Back') }}
                         </x-button>
-                        <x-button primary x-on:click="nextStep()" type="button" class="mt-2">
-                            {{ __('save and continue') }}
+                        <x-button primary x-on:click="nextStep()" type="button">
+                            {{ __('continue') }}
                         </x-button>
                     </div>
                 </div>
 
-                <div x-show="step === 5" class="w-full">
-                    <ul>
+                <div x-show="step === 3" class="w-full py-10">
+                    <label
+                    class="block my-2 font-bold font-heading text-gray-700">{{ __('Additional Services') }}</label>
+
+                    <ul class="space-y-2">
                         @foreach ($services as $service)
-                            <li>
+                            <li class="flex items-center">
                                 <label for="service-{{ $service->id }}" class="flex items-center">
                                     <input type="checkbox" wire:model="selectedServices" name="services[]"
                                         id="service-{{ $service->id }}" value="{{ $service->id }}"
@@ -262,38 +254,38 @@
                         @endforeach
                     </ul>
 
-                    <div
-                        class="w-full py-2 gap-2 justify-between sm:justify-center">
+                    <div class="w-full py-2">
                         <div class="flex items-center text-center gap-4 py-2 mb-2">
                             <x-label for="newsletters" :value="__('Register into promotional email')" />
                             <x-input.checkbox wire:model="newsletters" type="checkbox" />
                         </div>
 
-                        <x-button secondary x-on:click="previousStep()" type="button">
-                            Go Back
-                        </x-button>
+                        <div class="flex justify-between my-4">
+                            <x-button secondary x-on:click="previousStep()" type="button">
+                                {{ __('Go Back') }}
+                            </x-button>
 
-                        @if (Auth::check())
-                            <button type="button" wire:loading.attr="disabled" wire:click="register"
-                                class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-blue-600 hover:bg-blue-200 transition cursor-pointer">
-                                <span>
-                                    <div wire:loading wire:target="register">
-                                        <x-loading />
-                                    </div>
-                                    <span>{{ __('Update') }}</span>
-                                </span>
-                            </button>
-                        @else
-                            <button type="button" wire:loading.attr="disabled" wire:click="register"
-                                class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-green-600 hover:bg-green-200 transition cursor-pointer">
-                                <span>
-                                    <div wire:loading wire:target="register">
-                                        <x-loading />
-                                    </div>
-                                    <span>{{ __('Registration') }}</span>
-                                </span>
-                            </button>
-                        @endif
+                            @if (Auth::check())
+                                <x-button type="button" wire:loading.attr="disabled" wire:click="register" primary>
+                                    <span>
+                                        <div wire:loading wire:target="register">
+                                            <x-loading />
+                                        </div>
+                                        <span>{{ __('Update') }}</span>
+                                    </span>
+                                </x-button>
+                            @else
+                                <button type="button" wire:loading.attr="disabled" wire:click="register"
+                                    class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-green-600 hover:bg-green-200 transition cursor-pointer">
+                                    <span>
+                                        <div wire:loading wire:target="register">
+                                            <x-loading />
+                                        </div>
+                                        <span>{{ __('Registration') }}</span>
+                                    </span>
+                                </button>
+                            @endif
+                        </div>
 
                         <small>{{ __('We will send details about your registration your email with account access') }}</small>
                     </div>

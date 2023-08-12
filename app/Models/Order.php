@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\ShippingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
+use App\Enums\PaymentStatus;
 use App\Traits\HasGlobalDate;
 use App\Traits\HasUuid;
 use App\Support\HasAdvancedFilter;
@@ -56,6 +58,8 @@ class Order extends Model
 
     protected $casts = [
         'status' => OrderStatus::class,
+        'payment_status' => PaymentStatus::class,
+        'shipping_status' => ShippingStatus::class,
         'type'   => OrderType::class,
     ];
 

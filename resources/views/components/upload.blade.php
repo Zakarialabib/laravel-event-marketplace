@@ -20,7 +20,7 @@
     id="file-drop"
     type="button"
 >
-    <i x-bind:class="{'text-gray-900': dropFiles, 'text-gray-600': !dropFiles}" class="fas fa-cloud-upload-alt mx-auto h-12 w-12"/>
+    <i x-bind:class="{'text-gray-900': dropFiles, 'text-gray-600': !dropFiles}" class="fa fa-cloud-upload-alt mx-auto h-12 w-12"/>
     <p x-bind:class="{'text-gray-900': dropFiles, 'text-gray-600': !dropFiles}" class="mt-2 block text-sm font-medium">
         {{__('Drop your file here, or')}} <span class="text-gray-900 font-semibold">{{__('Browse')}}</span>.
     </p>

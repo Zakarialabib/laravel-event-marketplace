@@ -130,12 +130,7 @@
                             {{ $race_result->place }} / {{ $race_result->time }} / {{ $race_result->date }}
                         </x-table.td>
                         <x-table.td>
-                            @if ($race_result->status == 0)
-                                <livewire:toggle-button :model="$race_result" field="status"
-                                    key="{{ $race_result->id }}" />
-                            @else
-                                <span class="text-green-500">{{ __('Approved') }}</span>
-                            @endif
+                            <livewire:toggle-button :model="$race_result" field="status" key="{{ $race_result->id }}" />
                         </x-table.td>
                         <x-table.td>
                             <x-button info href="{{ route('admin.participant.show', $race_result->participant->id) }}">

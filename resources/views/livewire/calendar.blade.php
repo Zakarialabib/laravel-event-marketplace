@@ -4,14 +4,14 @@
             <div class="flex justify-between mb-4">
                 <button @click="month--; $wire.previousMonth()" <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    <i class="fas fa-chevron-left"></i>
+                    <i class="fa fa-chevron-left"></i>
                 </button>
                 <span class="text-lg font-medium">
                     {{ $calendar[0]['date']->format('F Y') }}
                 </span>
                 <button @click="month++; $wire.nextMonth()" <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    <i class="fas fa-chevron-right"></i>
+                    <i class="fa fa-chevron-right"></i>
                 </button>
             </div>
         </div>

@@ -76,11 +76,11 @@
                         <div class="inline-flex">
                             <x-button info type="button" wire:click="editModal({{ $redirect->id }})"
                                 wire:loading.attr="disabled">
-                                <i class="fas fa-edit"></i>
+                                <i class="fa fa-edit"></i>
                             </x-button>
                             <x-button danger type="button" wire:click="$emit('deleteModal', {{ $redirect->id }})"
                                 wire:loading.attr="disabled">
-                                <i class="fas fa-trash-alt"></i>
+                                <i class="fa fa-trash-alt"></i>
                             </x-button>
                         </div>
                     </x-table.td>

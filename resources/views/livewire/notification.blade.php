@@ -2,7 +2,7 @@
     <div x-data="{ openNotification: false }">
         <button @click="openNotification = !openNotification" type="button"
             class="relative group px-6">
-            <i class="fas fa-bell text-gray-600"></i>
+            <i class="fa fa-bell text-gray-600"></i>
             <span class="absolute top-0 right-2 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full px-2 py-1">
                 {{ count($notifications) }}
             </span>

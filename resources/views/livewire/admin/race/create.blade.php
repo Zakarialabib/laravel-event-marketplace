@@ -17,6 +17,37 @@
                             <x-input-error :messages="$errors->get('race.name')" for="name" class="mt-2" />
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                            <x-label for="category_id" :value="__('Category')" required />
+                            <select
+                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                                id="category_id" name="category_id" wire:model="race.category_id">
+                                <option value="">{{ __('Select Category') }}</option>
+                                @foreach ($this->categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                                <x-input-error :messages="$errors->get('race.category_id')" for="race.category_id" class="mt-2" />
+                            </select>
+                        </div>
+                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                            <x-label for="race_location_id" :value="__('Locations')" />
+                            <select id="race_location_id" name="race_location_id"
+                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                                wire:model="race.race_location_id">
+                                <option value="" disabled>{{ __('Select Location') }}</option>
+                                @foreach ($this->raceLocations as $racelocation)
+                                    <option value="{{ $racelocation->id }}">{{ $racelocation->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <x-input-error :messages="$errors->get('race.race_location_id')" for="race_location_id" class="mt-2" />
+                        </div>
+                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                            <x-label for="price" :value="__('Price')" required />
+                            <x-input id="price" class="block mt-1 w-full" type="number" name="price"
+                                wire:model="race.price" required />
+                            <x-input-error :messages="$errors->get('price')" for="price" class="mt-2" />
+                        </div>
+                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="start_registration" :value="__('Registration starts at')" required />
                             <x-date-picker id="start_registration" picker="date" name="start_registration"
                                 wire:model="race.start_registration" />
@@ -39,6 +70,12 @@
                             <x-input id="number_of_days" class="block mt-1 w-full" type="number" name="number_of_days"
                                 wire:model="race.number_of_days" required />
                             <x-input-error :messages="$errors->get('race.number_of_days')" for="number_of_days" class="mt-2" />
+                        </div>
+                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                            <x-label for="date" :value="__('Date')" required />
+                            <x-date-picker id="race-date" picker="date" name="race-date" required
+                                wire:model="race.date" />
+                            <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
                         </div>
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="elevation_gain" :value="__('Elevation gain')" required />
@@ -66,49 +103,6 @@
                     </div>
 
                     <div class="flex flex-wrap -mx-2 mb-3">
-                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                            <x-label for="category_id" :value="__('Category')" required />
-                            <select
-                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                                id="category_id" name="category_id" wire:model="race.category_id">
-                                <option value="">{{ __('Select Category') }}</option>
-                                @foreach ($this->categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                                <x-input-error :messages="$errors->get('race.category_id')" for="race.category_id" class="mt-2" />
-                            </select>
-                        </div>
-
-                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                            <x-label for="race_location_id" :value="__('Locations')" />
-                            <select id="race_location_id" name="race_location_id"
-                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                                wire:model="race.race_location_id">
-                                <option value="" disabled>{{ __('Select Location') }}</option>
-                                @foreach ($this->raceLocations as $racelocation)
-                                    <option value="{{ $racelocation->id }}">{{ $racelocation->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('race.race_location_id')" for="race_location_id" class="mt-2" />
-                        </div>
-
-                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                            <x-label for="price" :value="__('Price')" required />
-                            <x-input id="price" class="block mt-1 w-full" type="number" name="price"
-                                wire:model="race.price" required />
-                            <x-input-error :messages="$errors->get('price')" for="price" class="mt-2" />
-
-                        </div>
-
-                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                            <x-label for="date" :value="__('Date')" required />
-                            <x-date-picker id="race-date" picker="date" name="race-date" required
-                                wire:model="race.date" />
-                            <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
-                        </div>
-
-
                         <div class="w-full px-3 mb-6 lg:mb-0">
                             <x-label for="description" :value="__('Description')" />
                             <x-trix name="description" wire:model="description" class="mt-1" />
@@ -354,14 +348,14 @@
 
                     <div class="flex flex-col w-full px-4 my-6">
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center">
+                            {{-- <div class="flex items-center">
                                 <input id="status" type="checkbox"
                                     class="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out"
                                     wire:model="race.status">
                                 <x-label for="status" class="ml-2 block text-sm leading-5 text-gray-900">
                                     {{ __('Create as Inactive') }}
                                 </x-label>
-                            </div>
+                            </div> --}}
                             <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">
                                 {{ __('Create') }}
                             </x-button>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Section;
 
+use App\Enums\Status;
 use App\Http\Livewire\WithSorting;
 use App\Models\Section;
 use Illuminate\Contracts\View\Factory;
@@ -132,7 +133,7 @@ class Index extends Component
             'link'        => $section_details->link,
             'image'       => $section_details->image,
             'description' => $section_details->description,
-            'status'      => 0,
+            'status'   => Status::INACTIVE,
         ]);
         $this->alert('success', __('Section Cloned successfully!'));
     }

@@ -56,9 +56,9 @@
                             <a href="javascript;;"
                                 data-href="'{{ route('admin-attr-createForCategory', $category->id) }}"
                                 class="attribute text-white" data-toggle="modal" data-target="#attribute"> <i
-                                    class="fas fa-edit"></i>{{ __('Create') }}</a>
+                                    class="fa fa-edit"></i>{{ __('Create') }}</a>
                             @if ($category->attributes()->count() > 0)
-                                <i class="fas fa-edit"></i>
+                                <i class="fa fa-edit"></i>
                                 {{ __('Manage') }}
                             @endif
                         </div>
@@ -73,19 +73,19 @@
                             <x-slot name="trigger">
                                 <button type="button"
                                     class="px-4 text-base font-semibold text-gray-500 hover:text-sky-800">
-                                    <i class="fas fa-angle-double-down"></i>
+                                    <i class="fa fa-angle-double-down"></i>
                                 </button>
                             </x-slot>
                             <x-slot name="content">
                                 <x-dropdown-link data-href="{{ route('admin-cat-edit', $category->id) }}"
                                     class="edit" data-toggle="modal" data-target="#modal1"> <i
-                                        class="fas fa-edit"></i>
+                                        class="fa fa-edit"></i>
                                     {{ __('Edit') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link href="javascript:;"
                                     data-href="{{ route('admin-cat-delete', $category->id) }}" data-toggle="modal"
                                     data-target="#confirm-delete" class="delete"><i
-                                        class="fas fa-trash-alt"></i>{{ __('Delete') }}
+                                        class="fa fa-trash-alt"></i>{{ __('Delete') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

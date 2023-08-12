@@ -53,10 +53,10 @@
 
             <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <p class="text-center text-black hover:text-green-800 font-bold text-md mt-2"><span
-                        itemprop="price">{{ $product->price }}</span>DH
+                        itemprop="price">{{ Helpers::format_currency($product->price) }}</span>
 
                     @if ($product->discount_price && $product->discount != 0)
-                        <del class="ml-4 text-black">{{ $product->discount_price }} DH </del>
+                        <del class="ml-4 text-black">{{ Helpers::format_currency($product->discount_price) }} DH </del>
                     @endif
                 </p>
 

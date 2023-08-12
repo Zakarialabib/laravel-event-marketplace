@@ -270,14 +270,14 @@
         <div class="px-3">
             <div class="flex flex-row gap-4 justify-between px-6 py-4 mt-4 bg-white rounded-3 shadow-sm">
                 <div class="inline-flex">
-                    <i class="fas fa-headset text-xl"></i>
+                    <i class="fa fa-headset text-xl"></i>
                     <div class="ps-3">
                         <h6 class="text-base mb-1">Service client</h6>
                         <p class="mb-0 text-sm text-muted">Support client amical pour nos clients</p>
                     </div>
                 </div>
                 <div class="inline-flex">
-                    <i class="fas fa-lock text-xl"></i>
+                    <i class="fa fa-lock text-xl"></i>
                     <div class="ps-3">
                         <h6 class="text-base mb-1">Paiement en ligne sécurisé avec CMI</h6>
                         <p class="mb-0 text-sm text-muted">Nous possédons un certificat SSL / Secure et utilisons

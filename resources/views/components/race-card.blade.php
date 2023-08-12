@@ -23,33 +23,33 @@
                 <div class="flex flex-wrap py-4 gap-8 justify-center items-center">
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fa fa-map-marker-alt"></i>
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->location->name }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            <i class="fas fa-tags"></i>
+                            <i class="fa fa-tags"></i>
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->category->name }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            <i class="fas fa-calendar-alt"></i>
+                            <i class="fa fa-calendar-alt"></i>
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->number_of_days }}
                             {{ __('days') }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            <i class="fas fa-users"></i>
+                            <i class="fa fa-users"></i>
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->number_of_participants }} /
                             {{ $race->number_of_racers }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            <i class="fas fa-money-bill-wave"></i>
+                            <i class="fa fa-money-bill-wave"></i>
                         </span>
                         <span
                             class="text-base md:text-lg capitalize">{{ Helpers::format_currency($race->price) }}</span>
@@ -113,26 +113,26 @@
                 class="w-full py-6 border-t border-gray-100 dark:border-gray-800 grid grid-cols-2 gap-4 justify-center items-center list-none">
                 <li class="flex items-center me-4">
                     <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fa fa-map-marker-alt"></i>
                     </span>
                     <span class="text-base md:text-lg capitalize">{{ $race->location->name }}</span>
                 </li>
                 <li class="flex items-center me-4">
                     <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                        <i class="fas fa-tags"></i>
+                        <i class="fa fa-tags"></i>
                     </span>
                     <span class="text-base md:text-lg capitalize">{{ $race->category->name }}</span>
                 </li>
                 <li class="flex items-center me-4">
                     <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fa fa-calendar-alt"></i>
                     </span>
                     <span class="text-base md:text-lg capitalize">{{ $race->number_of_days }}
                         {{ __('days') }}</span>
                 </li>
                 <li class="flex items-center me-4">
                     <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                        <i class="fas fa-users"></i>
+                        <i class="fa fa-users"></i>
                     </span>
                     <span class="text-base md:text-lg capitalize">{{ $race->number_of_racers }}</span>
                 </li>
@@ -195,7 +195,7 @@
                     </li>
                     <li class="flex items-center my-4 ">
                         <span class="text-sm md:text-base font-medium text-gray-500 mr-2">
-                            <i class="fas fa-calendar-alt"></i>
+                            <i class="fa fa-calendar-alt"></i>
                         </span>
                         <span class="text-base md:text-lg capitalize">{{ $race->number_of_days }}
                             {{ __('days') }}</span>

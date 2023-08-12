@@ -51,6 +51,42 @@
                     <x-input-error :messages="$errors->get('race.name')" for="name" class="mt-2" />
                 </div>
                 <div class="px-3 mb-2">
+                    <x-label for="category_id" :value="__('Category')" required />
+                    <select
+                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                        id="category_id" name="category_id" wire:model="race.category_id">
+                        <option value="" disabled>{{ __('Select Category') }}</option>
+                        @foreach ($this->categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                        <x-input-error :messages="$errors->get('race.category_id')" for="race.category_id" class="mt-2" />
+                    </select>
+                </div>
+                <div class="px-3 mb-2">
+                    <x-label for="race_location_id" :value="__('Locations')" />
+                    <select id="race_location_id" name="race_location_id"
+                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                        wire:model="race.race_location_id">
+                        <option value="" disabled>{{ __('Select Location') }}</option>
+                        @foreach ($this->raceLocations as $racelocation)
+                            <option value="{{ $racelocation->id }}">{{ $racelocation->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('race.race_location_id')" for="race_location_id" class="mt-2" />
+                </div>
+                <div class="px-3 mb-2">
+                    <x-label for="price" :value="__('Price')" required />
+                    <x-input id="price" class="block mt-1 w-full" type="number" name="price"
+                        wire:model="race.price" required />
+                    <x-input-error :messages="$errors->get('price')" for="price" class="mt-2" />
+                </div>
+                <div class="px-3 mb-2">
+                    <x-label for="date" :value="__('Date')" required />
+                    <x-date-picker id="date_id" picker="date" required name="date_id" wire:model="race.date" />
+                    <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
+                </div>
+                <div class="px-3 mb-2">
                     <x-label for="start_registration" :value="__('Registration starts at')" required />
                     <x-date-picker id="start_registration_id" picker="date" required name="start_registration_id"
                         wire:model="race.start_registration" />
@@ -87,29 +123,19 @@
                     <x-input-error :messages="$errors->get('race.number_of_racers')" for="number_of_racers" class="mt-2" />
                 </div>
 
-                <x-checkbox-input label="{{ __('Is this the first year for your race?') }}" model="{{ $race->first_year }}">
-                    <x-input wire:model="race.first_year" type="text" id="first_year"
-                        class="w-full block" name="first_year" />
-                </x-checkbox-input>
-
-                <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                    <x-label for="first_year" :value="__('Last year url')" required />
-                    <x-input id="last_year_url" class="block mt-1 w-full" type="text"
-                        name="last_year_url" wire:model="race.last_year_url" required />
-                    <x-input-error :messages="$errors->get('race.last_year_url')" for="last_year_url" class="mt-2" />
+                <div class="px-3 mb-2">
+                    <x-checkbox-input label="{{ __('Is this the first year for your race?') }}"
+                        model="{{ $race->first_year }}">
+                        <x-input wire:model="race.first_year" type="text" id="first_year" class="w-full block"
+                            name="first_year" />
+                    </x-checkbox-input>
                 </div>
 
                 <div class="px-3 mb-2">
-                    <x-label for="category_id" :value="__('Category')" required />
-                    <select
-                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                        id="category_id" name="category_id" wire:model="race.category_id">
-                        <option value="" disabled>{{ __('Select Category') }}</option>
-                        @foreach ($this->categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                        <x-input-error :messages="$errors->get('race.category_id')" for="race.category_id" class="mt-2" />
-                    </select>
+                    <x-label for="first_year" :value="__('Last year url')" required />
+                    <x-input id="last_year_url" class="block mt-1 w-full" type="text" name="last_year_url"
+                        wire:model="race.last_year_url" required />
+                    <x-input-error :messages="$errors->get('race.last_year_url')" for="last_year_url" class="mt-2" />
                 </div>
 
                 <div class="col-span-full px-2">
@@ -117,56 +143,43 @@
                         @foreach ($courses as $index => $course)
                             <div class="flex flex-row w-full items-center space-x-4"
                                 wire:key="course-{{ $index }}">
-                                <input type="text" wire:model="courses.{{ $index }}.name"
-                                    placeholder="{{ __('Course name') }}" id="course_name{{ $index }}"
-                                    name="course_name"
-                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                <input type="text" wire:model="courses.{{ $index }}.type"
-                                    placeholder="{{ __('Course type') }}" id="course_type{{ $index }}"
-                                    name="course_type"
-                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                <input type="text" wire:model="courses.{{ $index }}.distance"
-                                    placeholder="{{ __('Course distance') }}" id="distance{{ $index }}"
-                                    name="course_distance"
-                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                <textarea wire:model="courses.{{ $index }}.content" placeholder="{{ __('Course Content') }}"
-                                    class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"></textarea>
-                                <x-button danger type="button" wire:click="removeCourse({{ $index }})">
-                                    <i class="fa fa-trash"></i>
-                                </x-button>
+                                <div class="w-1/3">
+                                    <x-label for="course_name{{ $index }}" :value="__('Course name')" />
+                                    <input type="text" wire:model="courses.{{ $index }}.name"
+                                        placeholder="{{ __('Course name') }}" id="course_name{{ $index }}"
+                                        name="course_name"
+                                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                </div>
+                                <div class="w-1/3">
+                                    <x-label for="course_type{{ $index }}" :value="__('Course type')" />
+                                    <input type="text" wire:model="courses.{{ $index }}.type"
+                                        placeholder="{{ __('Course type') }}" id="course_type{{ $index }}"
+                                        name="course_type"
+                                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                </div>
+                                <div class="w-1/3">
+                                    <x-label for="distance{{ $index }}" :value="__('Course distance')" />
+                                    <input type="text" wire:model="courses.{{ $index }}.distance"
+                                        placeholder="{{ __('Course distance') }}" id="distance{{ $index }}"
+                                        name="course_distance"
+                                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                </div>
+                                <div class="w-full">
+                                    <x-label for="course_content{{ $index }}" :value="__('Course content')" />
+                                    <textarea wire:model="courses.{{ $index }}.content" placeholder="{{ __('Course Content') }}"
+                                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"></textarea>
+                                </div>
+                                <div class="w-1/4">
+                                    <x-button danger type="button" wire:click="removeCourse({{ $index }})">
+                                        <i class="fa fa-trash"></i>
+                                    </x-button>
+                                </div>
                             </div>
                         @endforeach
-                        <x-button primary type="button" wire:click="addCourse">{{ __('Add Course') }}
-                        </x-button>
+                        <div class="w-full flex justify-center">
+                            <x-button primary type="button" wire:click="addCourse">{{ __('Add Course') }}</x-button>
+                        </div>
                     </div>
-                </div>
-
-                <div class="px-3 mb-2">
-                    <x-label for="race_location_id" :value="__('Locations')" />
-                    <select id="race_location_id" name="race_location_id"
-                        class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                        wire:model="race.race_location_id">
-                        <option value="" disabled>{{ __('Select Location') }}</option>
-                        @foreach ($this->raceLocations as $racelocation)
-                            <option value="{{ $racelocation->id }}">{{ $racelocation->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <x-input-error :messages="$errors->get('race.race_location_id')" for="race_location_id" class="mt-2" />
-                </div>
-
-                <div class="px-3 mb-2">
-                    <x-label for="price" :value="__('Price')" required />
-                    <x-input id="price" class="block mt-1 w-full" type="number" name="price"
-                        wire:model="race.price" required />
-                    <x-input-error :messages="$errors->get('price')" for="price" class="mt-2" />
-
-                </div>
-
-                <div class="px-3 mb-2">
-                    <x-label for="date" :value="__('Date')" required />
-                    <x-date-picker id="date_id" picker="date" required name="date_id" wire:model="race.date" />
-                    <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
                 </div>
             </div>
 
@@ -181,189 +194,188 @@
                 @livewire('multiple-uploads')
             </div>
 
-                <div x-data="{ tab: 'socialMedia' }" class="flex h-auto bg-gray-100">
-                    <div class="w-1/4 bg-white shadow-lg">
-                        <div class="flex flex-col space-y-2 p-4">
-                            <button :class="{ 'bg-blue-500 text-white': tab === 'socialMedia' }"
-                                @click="tab = 'socialMedia'"
-                                class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none"
-                                type="button">{{ __('Social Media') }}
-                            </button>
-                            <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'sponsors' }"
-                                @click="tab = 'sponsors'"
-                                class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
-                                {{ __('Sponsors') }}
-                            </button>
-                            <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'features' }"
-                                @click="tab = 'features'"
-                                class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
-                                {{ __('Features') }}
-                            </button>
-                            <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'calendar' }"
-                                @click="tab = 'calendar'"
-                                class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
-                                {{ __('Calendar') }}
-                            </button>
-                            <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'options' }"
-                                @click="tab = 'options'"
-                                class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
-                                {{ __('Options') }}
-                            </button>
-                            <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'meta' }"
-                                @click="tab = 'meta'"
-                                class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
-                                {{ __('Meta') }}
-                            </button>
-                            <!-- Add other tabs as necessary -->
-                        </div>
+            <div x-data="{ tab: 'socialMedia' }" class="flex h-auto bg-gray-100">
+                <div class="w-1/4 bg-white shadow-lg">
+                    <div class="flex flex-col space-y-2 p-4">
+                        <button :class="{ 'bg-blue-500 text-white': tab === 'socialMedia' }"
+                            @click="tab = 'socialMedia'"
+                            class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none"
+                            type="button">{{ __('Social Media') }}
+                        </button>
+                        <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'sponsors' }"
+                            @click="tab = 'sponsors'"
+                            class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
+                            {{ __('Sponsors') }}
+                        </button>
+                        <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'features' }"
+                            @click="tab = 'features'"
+                            class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
+                            {{ __('Features') }}
+                        </button>
+                        <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'calendar' }"
+                            @click="tab = 'calendar'"
+                            class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
+                            {{ __('Calendar') }}
+                        </button>
+                        <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'options' }"
+                            @click="tab = 'options'"
+                            class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none" type="button">
+                            {{ __('Options') }}
+                        </button>
+                        <button type="button" :class="{ 'bg-blue-500 text-white': tab === 'meta' }"
+                            @click="tab = 'meta'" class="py-2 px-4 text-gray-800 w-full rounded-lg focus:outline-none"
+                            type="button">
+                            {{ __('Meta') }}
+                        </button>
+                        <!-- Add other tabs as necessary -->
                     </div>
-                    <div class="w-3/4 space-y-4">
-                        <div x-show="tab === 'socialMedia'">
+                </div>
+                <div class="w-3/4 space-y-4">
+                    <div x-show="tab === 'socialMedia'">
 
-                            <div class="w-full px-2">
-                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
-                                    @foreach ($social_media as $index => $media)
-                                        <div class="flex flex-row w-full items-center space-x-4">
-                                            <x-input type="text" placeholder="Social Media Name"
-                                                name="social_media_name"
-                                                wire:model="social_media.{{ $index }}.name" />
-                                            <x-input type="text" placeholder="Social Media Link"
-                                                name="social_media_link"
-                                                wire:model="social_media.{{ $index }}.value" />
-                                            <x-button danger type="button"
-                                                wire:click="removeSocialMedia({{ $index }})">
-                                                <i class="fa fa-trash"></i>
-                                            </x-button>
-                                        </div>
-                                    @endforeach
-                                    <x-button primary type="button" wire:click="addSocialMedia">
-                                        {{ __('Add Social Media') }}</x-button>
-                                </div>
-                            </div>
-                        </div>
-                        <div x-show="tab === 'sponsors'">
-
-                            <div class="w-full px-2">
-                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
-                                    @foreach ($sponsors as $index => $sponsor)
-                                        <div class="flex flex-row w-full items-center space-x-4">
-                                            <input type="text" wire:model="sponsors.{{ $index }}.name"
-                                                placeholder="Sponsor Name"
-                                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                            <input type="text" wire:model="sponsors.{{ $index }}.image"
-                                                placeholder="Sponsor Image"
-                                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                            <input type="text" wire:model="sponsors.{{ $index }}.link"
-                                                placeholder="Sponsor Link"
-                                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                            <x-button danger type="button"
-                                                wire:click="removeSponsor({{ $index }})">
-                                                <i class="fa fa-trash"></i>
-                                            </x-button>
-                                        </div>
-                                    @endforeach
-                                    <x-button primary type="button" wire:click="addSponsor">{{ __('Add Sponsor') }}
-                                    </x-button>
-                                </div>
-                            </div>
-                        </div>
-                        <div x-show="tab === 'features'">
-
-                            <div class="w-full px-2">
-                                <div class="space-y-4 flex flex-col items-center justify-center my-4">
-                                    @foreach ($features as $index => $feature)
-                                        <div class="flex flex-row w-full items-center space-x-4">
-                                            <input type="text" wire:model="features.{{ $index }}"
-                                                placeholder="Feature Name"
-                                                class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                                            <x-button danger type="button"
-                                                wire:click="removeFeature({{ $index }})">
-                                                <i class="fa fa-trash"></i>
-                                            </x-button>
-                                        </div>
-                                    @endforeach
-                                    <x-button primary type="button" wire:click="addFeature">
-                                        {{ __('Add Feature') }}
-                                    </x-button>
-                                </div>
-                            </div>
-                        </div>
-                        <div x-show="tab === 'calendar'">
-
-                            <div class="w-full px-2">
-                                @foreach ($calendar as $index => $day)
-                                    <div>
-                                        <div class="flex flex-wrap space-x-2 py-4 justify-center">
-                                            <input type="text" wire:model="calendar.{{ $index }}.date"
-                                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
-                                                placeholder="Date (dd/mm)">
-                                            <x-button type="button" danger
-                                                wire:click="removeRaceDate('{{ $index }}')">
-                                                <i class="fa fa-trash"></i>
-                                            </x-button>
-                                        </div>
-                                        <div clas="w-full flex flex-wrap justify-center space-x-2">
-                                            @foreach ($day['events'] as $eventIndex => $event)
-                                                <div class="w-full space-y-2">
-                                                    <input type="text"
-                                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                                                        wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.start_time"
-                                                        placeholder="Start Time">
-                                                    <input type="text"
-                                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                                                        wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.end_time"
-                                                        placeholder="End Time">
-                                                    <input type="text"
-                                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                                                        wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.activity"
-                                                        placeholder="Activity">
-                                                    <x-button type="button" danger
-                                                        wire:click="removeRaceEvent('{{ $index }}', {{ $eventIndex }})">
-                                                        <i class="fa fa-trash"></i>
-                                                    </x-button>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="flex justify-center py-4">
-                                            <x-button secondary type="button" class="text-center"
-                                                wire:click="addRaceEvent('{{ $index }}')"> Add Date +
-                                            </x-button>
-                                        </div>
+                        <div class="w-full px-2">
+                            <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                @foreach ($social_media as $index => $media)
+                                    <div class="flex flex-row w-full items-center space-x-4">
+                                        <x-input type="text" placeholder="Social Media Name"
+                                            name="social_media_name"
+                                            wire:model="social_media.{{ $index }}.name" />
+                                        <x-input type="text" placeholder="Social Media Link"
+                                            name="social_media_link"
+                                            wire:model="social_media.{{ $index }}.value" />
+                                        <x-button danger type="button"
+                                            wire:click="removeSocialMedia({{ $index }})">
+                                            <i class="fa fa-trash"></i>
+                                        </x-button>
                                     </div>
                                 @endforeach
+                                <x-button primary type="button" wire:click="addSocialMedia">
+                                    {{ __('Add Social Media') }}</x-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="tab === 'sponsors'">
 
-                                <div class="flex justify-center mb-4">
-                                    <button
-                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                                        type="button" wire:click="addRaceDate">{{ __('Add Race Date') }}</button>
+                        <div class="w-full px-2">
+                            <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                @foreach ($sponsors as $index => $sponsor)
+                                    <div class="flex flex-row w-full items-center space-x-4">
+                                        <input type="text" wire:model="sponsors.{{ $index }}.name"
+                                            placeholder="Sponsor Name"
+                                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                        <input type="text" wire:model="sponsors.{{ $index }}.image"
+                                            placeholder="Sponsor Image"
+                                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                        <input type="text" wire:model="sponsors.{{ $index }}.link"
+                                            placeholder="Sponsor Link"
+                                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                        <x-button danger type="button"
+                                            wire:click="removeSponsor({{ $index }})">
+                                            <i class="fa fa-trash"></i>
+                                        </x-button>
+                                    </div>
+                                @endforeach
+                                <x-button primary type="button" wire:click="addSponsor">{{ __('Add Sponsor') }}
+                                </x-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="tab === 'features'">
+
+                        <div class="w-full px-2">
+                            <div class="space-y-4 flex flex-col items-center justify-center my-4">
+                                @foreach ($features as $index => $feature)
+                                    <div class="flex flex-row w-full items-center space-x-4">
+                                        <input type="text" wire:model="features.{{ $index }}"
+                                            placeholder="Feature Name"
+                                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                                        <x-button danger type="button"
+                                            wire:click="removeFeature({{ $index }})">
+                                            <i class="fa fa-trash"></i>
+                                        </x-button>
+                                    </div>
+                                @endforeach
+                                <x-button primary type="button" wire:click="addFeature">
+                                    {{ __('Add Feature') }}
+                                </x-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="tab === 'calendar'">
+
+                        <div class="w-full px-2">
+                            @foreach ($calendar as $index => $day)
+                                <div>
+                                    <div class="flex flex-wrap space-x-2 py-4 justify-center">
+                                        <input type="text" wire:model="calendar.{{ $index }}.date"
+                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Date (dd/mm)">
+                                        <x-button type="button" danger
+                                            wire:click="removeRaceDate('{{ $index }}')">
+                                            <i class="fa fa-trash"></i>
+                                        </x-button>
+                                    </div>
+                                    <div clas="w-full flex flex-wrap justify-center space-x-2">
+                                        @foreach ($day['events'] as $eventIndex => $event)
+                                            <div class="flex flex-row w-full items-center space-x-4">
+                                                <input type="text"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.start_time"
+                                                    placeholder="Start Time">
+                                                <input type="text"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.end_time"
+                                                    placeholder="End Time">
+                                                <input type="text"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.activity"
+                                                    placeholder="Activity">
+                                                <x-button type="button" danger
+                                                    wire:click="removeRaceEvent('{{ $index }}', {{ $eventIndex }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </x-button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="flex justify-center py-4">
+                                        <x-button secondary type="button" class="text-center"
+                                            wire:click="addRaceEvent('{{ $index }}')"> Add Date +
+                                        </x-button>
+                                    </div>
                                 </div>
+                            @endforeach
+
+                            <div class="flex justify-center mb-4">
+                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                    type="button" wire:click="addRaceDate">{{ __('Add Race Date') }}</button>
                             </div>
                         </div>
-                        <div x-show="tab === 'options'">
+                    </div>
+                    <div x-show="tab === 'options'">
 
-                            <div class="w-full px-2">
-                                <livewire:admin.race.options />
-                            </div>
+                        <div class="w-full px-2">
+                            <livewire:admin.race.options />
                         </div>
-                        <div x-show="tab === 'meta'">
+                    </div>
+                    <div x-show="tab === 'meta'">
 
-                            <div class="px-2">
-                                <x-label for="meta_title" :value="__('Meta Title')" />
-                                <x-input id="meta_title" class="block mt-1 w-full" type="number" name="meta_title"
-                                    wire:model="race.meta_title" />
-                                <x-input-error :messages="$errors->get('race.meta_title')" for="meta_title" class="mt-2" />
-                            </div>
+                        <div class="px-2">
+                            <x-label for="meta_title" :value="__('Meta Title')" />
+                            <x-input id="meta_title" class="block mt-1 w-full" type="text" name="meta_title"
+                                wire:model="race.meta_title" />
+                            <x-input-error :messages="$errors->get('race.meta_title')" for="meta_title" class="mt-2" />
+                        </div>
 
-                            <div class="px-2">
-                                <x-label for="meta_description" :value="__('Meta description')" />
-                                <x-input id="meta_description" class="block mt-1 w-full" type="number"
-                                    name="meta_description" wire:model="race.meta_description" />
-                                <x-input-error :messages="$errors->get('race.meta_description')" for="meta_description" class="mt-2" />
-                            </div>
+                        <div class="px-2">
+                            <x-label for="meta_description" :value="__('Meta description')" />
+                            <x-input id="meta_description" class="block mt-1 w-full" type="text"
+                                name="meta_description" wire:model="race.meta_description" />
+                            <x-input-error :messages="$errors->get('race.meta_description')" for="meta_description" class="mt-2" />
                         </div>
                     </div>
                 </div>
-    
+            </div>
+
 
             <div class="w-full px-4 my-6">
                 <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">

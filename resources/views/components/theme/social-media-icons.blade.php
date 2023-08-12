@@ -22,7 +22,7 @@
             @elseif ($socialMedia->name === 'WhatsApp')
                 <i class="fab fa-whatsapp-square mr-3"></i>
             @else
-                <i class="fas fa-globe mr-3"></i>
+                <i class="fa fa-globe mr-3"></i>
             @endif
             <span class="mr-3">{{ $socialMedia->name }}</span>
         </a>

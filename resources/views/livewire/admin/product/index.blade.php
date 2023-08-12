@@ -9,11 +9,11 @@
             </select>
             @if ($this->selected)
                 <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
-                    <i class="fas fa-trash"></i>
+                    <i class="fa fa-trash"></i>
                 </x-button>
 
                 <x-button primary type="button" wire:click="promoAllProducts" wire:loading.attr="disabled">
-                    <i class="fas fa-percent"></i>
+                    <i class="fa fa-percent"></i>
                 </x-button>
                 <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
                     {{ __('EXCEL') }}
@@ -85,7 +85,7 @@
                         </button>
                         <a class="ml-2 text-blue-500" href="{{ route('front.product', $product->slug) }}"
                             target="_blank">
-                            <i class="fas fa-eye"></i>
+                            <i class="fa fa-eye"></i>
                         </a>
                     </x-table.td>
 
@@ -106,32 +106,32 @@
                             <x-slot name="trigger">
                                 <button type="button"
                                     class="px-4 text-base font-semibold text-gray-500 hover:text-sky-800">
-                                    <i class="fas fa-angle-double-down"></i>
+                                    <i class="fa fa-angle-double-down"></i>
                                 </button>
                             </x-slot>
                             <x-slot name="content">
                                 <x-dropdown-link wire:click="$emit('highlightModal',{{ $product->id }})"
                                     wire:loading.attr="disabled">
-                                    <i class="fas fa-eye"></i>
+                                    <i class="fa fa-eye"></i>
                                     {{ __('Highlighted') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link wire:click="clone({{ $product->id }})" wire:loading.attr="disabled">
-                                    <i class="fas fa-clone"></i>
+                                    <i class="fa fa-clone"></i>
                                     {{ __('Clone') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link wire:click="$emit('showModal',{{ $product->id }})"
                                     wire:loading.attr="disabled">
-                                    <i class="fas fa-eye"></i>
+                                    <i class="fa fa-eye"></i>
                                     {{ __('View') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link wire:click="$emit('editModal', {{ $product->id }})"
                                     wire:loading.attr="disabled">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fa fa-edit"></i>
                                     {{ __('Edit') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link wire:click="$emit('deleteModal', {{ $product->id }})"
                                     wire:loading.attr="disabled">
-                                    <i class="fas fa-trash-alt"></i>
+                                    <i class="fa fa-trash-alt"></i>
                                     {{ __('Delete') }}
                                 </x-dropdown-link>
                             </x-slot>

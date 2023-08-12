@@ -3,31 +3,41 @@
 declare(strict_types=1);
 
 namespace App\Enums;
+use Illuminate\Support\Str;
 
 enum ShippingStatus: string
 {
-    public const  PENDING = '0';
-    public const  PREPARING = '1';
-    public const SUBMITTED = '2';
-    public const  SHIPPING = '3';
-    public const  DELIVERED = '4';
-    public const  CANCELLED = '5';
-    public const  FAILED = '6';
+    case  PENDING = '0';
+    case  PREPARING = '1';
+    case SUBMITTED = '2';
+    case  SHIPPING = '3';
+    case  DELIVERED = '4';
+    case  CANCELLED = '5';
+    case  FAILED = '6';
 
-    /**
-     * Return a human-readable description of this payment method.
-     * @return string
-     */
-    public function getDescription(): string
+    public static function values(): array
     {
-        return match ($this) {
-            ShippingStatus::PENDING   => 'Shipping is pending needs review',
-            ShippingStatus::PREPARING => 'Shipping is getting prepared',
-            ShippingStatus::SUBMITTED => 'Shipping is submitted',
-            ShippingStatus::SHIPPING  => 'Shipping is on route',
-            ShippingStatus::DELIVERED => 'Shipping is delivered',
-            ShippingStatus::CANCELLED => 'Shipping is canceled',
-            ShippingStatus::FAILED    => 'Shipping failed',
-        };
+        return array_column(self::cases(), 'name', 'value');
     }
+
+    public function getName(): string
+    {
+        return __(Str::studly($this->name));
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public static function getLabel($value): ?string
+    {
+        foreach (self::cases() as $case) {
+            if ($case->getValue() === $value) {
+                return $case->getName();
+            }
+        }
+
+        return null;
+    }  
 }

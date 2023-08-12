@@ -56,7 +56,7 @@
 
                                 <div class="mt-5">
                                     <x-button type="submit" wire:click.prevent='uploadLogo()' primary>
-                                        <i class="fas fa-upload"></i>
+                                        <i class="fa fa-upload"></i>
                                         {{ __('Import') }}
                                     </x-button>
                                 </div>
@@ -86,7 +86,7 @@
 
                                 <div class="mt-5">
                                     <x-button type="submit" wire:click.prevent='uploadFavicon()' primary>
-                                        <i class="fas fa-upload"></i>
+                                        <i class="fa fa-upload"></i>
                                         {{ __('Import') }}
                                     </x-button>
                                 </div>
@@ -115,7 +115,7 @@
 
                                 <div class="mt-5">
                                     <x-button type="submit" wire:click.prevent='uploadbreadCrumb()' primary>
-                                        <i class="fas fa-upload"></i>
+                                        <i class="fa fa-upload"></i>
                                         {{ __('Import') }}
                                     </x-button>
                                 </div>

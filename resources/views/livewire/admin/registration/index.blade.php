@@ -143,12 +143,8 @@
                                     </a>
                                 </x-table.td>
                                 <x-table.td>
-                                    @if ($registration->status == 0)
-                                        <livewire:toggle-button :model="$registration" field="status"
-                                            key="{{ $registration->id }}" />
-                                    @else
-                                        <span class="text-green-500">{{ __('Approved') }}</span>
-                                    @endif
+                                    <livewire:toggle-button :model="$registration" field="status"
+                                        key="{{ $registration->id }}" />
                                 </x-table.td>
                                 <x-table.td>
                                     <x-button info
@@ -210,7 +206,7 @@
 
                                 <li>
                                     <span class="font-bold">{{ __('Status') }}:</span>
-                                    <span>{{ $registration->status }}</span>
+                                    <span>{{ $registration->status->getName() }}</span>
                                 </li>
 
                                 <li>

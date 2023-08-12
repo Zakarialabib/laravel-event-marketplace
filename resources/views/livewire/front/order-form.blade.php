@@ -4,9 +4,9 @@
             <h5 class="text-gray-500 font-bold text-center text-md font-heading uppercase py-2">
                 <button type="button" class="text-blue-500 hover:text-blue-300 transition cursor-pointer"
                     x-on:click="isOpen = !isOpen">
-                    <i class="fas fa-chevron-down"></i>
+                    <i class="fa fa-chevron-down"></i>
                     {{ __('Order Now') }}
-                    <i class="fas fa-chevron-down"></i>
+                    <i class="fa fa-chevron-down"></i>
                 </button>
             </h5>
         </div>

@@ -153,7 +153,7 @@
             $(function() {
                 $(".btn-area").append('<div class="col-sm-4 table-contents">' +
                     '<a class="add-btn" data-href="{{ route('admin-review-create') }}" id="add-data" data-toggle="modal" data-target="#modal1">' +
-                    '<i class="fas fa-plus"></i> {{ __('Add New Review') }}' +
+                    '<i class="fa fa-plus"></i> {{ __('Add New Review') }}' +
                     '</a>' +
                     '</div>');
             });

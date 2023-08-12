@@ -24,7 +24,7 @@
                 <div class="col-lg-4 table-contents">
                     <a class="add-btn text-white" data-href="{{ route('admin-currency-create') }}" 
 						id="add-data" data-toggle="modal" data-target="#modal1">
-                        <i class="fas fa-plus"></i> <span class="remove-mobile">{{ __('Add New') }}<span>
+                        <i class="fa fa-plus"></i> <span class="remove-mobile">{{ __('Add New') }}<span>
                     </a>
                 </div>
             </div>

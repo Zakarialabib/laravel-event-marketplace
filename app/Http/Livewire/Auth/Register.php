@@ -20,9 +20,9 @@ class Register extends Component
     public $password = '';
     public $passwordConfirmation = '';
     public $phone;
-    public $city; // Set the default city to 'Casablanca'
-    public $country; // Set
-
+    public $city;
+    public $country;
+    
     public function mount()
     {
         $this->city = 'Casablanca';

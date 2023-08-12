@@ -48,7 +48,7 @@ class Create extends Component
     public array $rules = [
 
         'race.name'                  => ['required', 'string', 'max:255'],
-        'race.date'                  => ['required', 'date', 'max:255'],
+        'race.date'                  => ['required', 'date'],
         'race.price'                 => ['required', 'numeric', 'max:2147483647'],
         'race.race_location_id'      => ['required', 'integer'],
         'race.category_id'           => ['required', 'integer'],

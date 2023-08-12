@@ -7,6 +7,7 @@ namespace App\Http\Livewire\Front;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Enums\PaymentStatus;
+use App\Enums\ShippingStatus;
 use App\Mail\CheckoutMail;
 use App\Models\Order;
 use App\Models\Registration;
@@ -134,7 +135,7 @@ class Checkout extends Component
                     'date'            => now(),
                     'user_id'         => Auth::user()->id,
                     'product_id'      => $item->id,
-                    'shipping_status' => OrderStatus::PENDING,
+                    'shipping_status' => ShippingStatus::PENDING,
                     'shipping_id'     => $this->shipping_id,
                     'type'            => OrderType::PRODUCT,
                     'status'          => OrderStatus::PENDING,

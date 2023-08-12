@@ -28,8 +28,8 @@
                     @endif
                     <p><strong>{{ __('Order Amount') }}:</strong> {{ Helpers::format_currency($order->amount) }}</p>
                     <p><strong>{{ __('Payment Method') }}:</strong> {{ $order->payment_method }}</p>
-                    <p><strong>{{ __('Order Status') }}:</strong> {{ $order->status }}</p>
-                    <p><strong>{{ __('Payment Status') }}:</strong> {{ $order->payment_status }}</p>
+                    <p><strong>{{ __('Order Status') }}:</strong> {{ $order->status->getName() }}</p>
+                    <p><strong>{{ __('Payment Status') }}:</strong> {{ $order->payment_status->getName() }}</p>
                     <p><strong>{{ __('Order Date') }}:</strong> {{ Helpers::format_date($order->created_at) }}</p>
                 </div>
                 <div class="w-1/2 pl-4">

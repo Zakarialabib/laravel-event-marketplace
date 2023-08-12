@@ -58,7 +58,7 @@
                 </select>
                 @if ($this->selected)
                     <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
-                        <i class="fas fa-trash"></i>
+                        <i class="fa fa-trash"></i>
                     </x-button>
                     <x-button success type="button" wire:click="downloadSelected" wire:loading.attr="disabled">
                         {{ __('EXCEL') }}
@@ -132,7 +132,7 @@
                             </button>
                             <a class="ml-2 text-blue-500" href="{{ route('front.raceDetails', $race->slug) }}"
                                 target="_blank">
-                                <i class="fas fa-eye"></i>
+                                <i class="fa fa-eye"></i>
                             </a>
                             <br>
                             <small>
@@ -154,38 +154,38 @@
                                 <x-slot name="trigger">
                                     <button type="button"
                                         class="px-4 text-base font-semibold text-gray-500 hover:text-sky-800">
-                                        <i class="fas fa-angle-double-down"></i>
+                                        <i class="fa fa-angle-double-down"></i>
                                     </button>
                                 </x-slot>
                                 <x-slot name="content">
                                     {{-- <x-dropdown-link wire:click="$emit('highlightModal',{{ $race->id }})"
                                             wire:loading.attr="disabled">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fa fa-eye"></i>
                                             {{ __('Highlighted') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link wire:click="clone({{ $race->id }})"
                                             wire:loading.attr="disabled">
-                                            <i class="fas fa-clone"></i>
+                                            <i class="fa fa-clone"></i>
                                             {{ __('Clone') }}
                                         </x-dropdown-link> --}}
                                     <x-dropdown-link wire:click="$emit('showModal','{{ $race->id }}')"
                                         wire:loading.attr="disabled">
-                                        <i class="fas fa-eye"></i>
+                                        <i class="fa fa-eye"></i>
                                         {{ __('View') }}
                                     </x-dropdown-link>
                                     <x-dropdown-link wire:click="publishResults('{{ $race->id }}')"
                                         wire:loading.attr="disabled">
-                                        <i class="fas fa-eye"></i>
+                                        <i class="fa fa-eye"></i>
                                         {{ __('Publish results') }}
                                     </x-dropdown-link>
                                     <x-dropdown-link href="{{ route('admin.race.update', $race->name) }}"
                                         wire:loading.attr="disabled">
-                                        <i class="fas fa-edit"></i>
+                                        <i class="fa fa-edit"></i>
                                         {{ __('Edit') }}
                                     </x-dropdown-link>
                                     <x-dropdown-link wire:click="$emit('deleteModal','{{ $race->id }}')"
                                         wire:loading.attr="disabled">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fa fa-trash-alt"></i>
                                         {{ __('Delete') }}
                                     </x-dropdown-link>
                                 </x-slot>

@@ -55,7 +55,7 @@
                 </div>
                 @if ($this->selected)
                     <x-button danger type="button" wire:click="deleteSelected" wire:loading.attr="disabled">
-                        <i class="fas fa-trash"></i>
+                        <i class="fa fa-trash"></i>
                     </x-button>
                 @endif
                 @if ($this->selectedCount)
@@ -139,11 +139,11 @@
                         <x-table.td>
                             <x-button href="{{ route('admin.order.show', $order->id) }}" wire:loading.attr="disabled"
                                 info>
-                                <i class="fas fa-edit"></i>
+                                <i class="fa fa-edit"></i>
                             </x-button>
                             {{-- <x-button type="button" wire:click="delete({{ $order->id }})" danger
                                 wire:loading.attr="disabled">
-                                <i class="fas fa-trash"></i>
+                                <i class="fa fa-trash"></i>
                             </x-button> --}}
                         </x-table.td>
                     </x-table.tr>

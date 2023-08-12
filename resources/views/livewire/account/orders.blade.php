@@ -35,7 +35,7 @@
                     @endif
                     <div class="flex justify-between items-center mb-4">
                         <p class="text-gray-700 font-bold">{{ __('Order Amount') }}:</p>
-                        <p class="text-gray-600">{{ format_currency($order->amount) }}</p>
+                        <p class="text-gray-600">{{ Helpers::format_currency($order->amount) }}</p>
                     </div>
                     <div class="flex justify-between items-center mb-4">
                         <p class="text-gray-700 font-bold">{{ __('Payment Method') }}:</p>
@@ -43,15 +43,15 @@
                     </div>
                     <div class="flex justify-between items-center mb-4">
                         <p class="text-gray-700 font-bold">{{ __('Order Status') }}:</p>
-                        <p class="text-gray-600">{{ $order->status }}</p>
+                        <p class="text-gray-600">{{ $order->status->getName() }}</p>
                     </div>
                     <div class="flex justify-between items-center mb-4">
                         <p class="text-gray-700 font-bold">{{ __('Payment Status') }}:</p>
-                        <p class="text-gray-600">{{ $order->payment_status }}</p>
+                        <p class="text-gray-600">{{ $order->payment_status->getName() }}</p>
                     </div>
                     <div class="flex justify-between items-center">
                         <p class="text-gray-700 font-bold">{{ __('Order Date') }}:</p>
-                        <p class="text-gray-600">{{ format_date($order->created_at) }}</p>
+                        <p class="text-gray-600">{{ Helpers::format_date($order->created_at) }}</p>
                     </div>
                 </div>
             @endforeach

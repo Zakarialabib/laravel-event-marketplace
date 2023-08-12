@@ -53,7 +53,7 @@
                                     {{ __('Date') }}
                                 </x-table.th>
                                 <x-table.td>
-                                    {{ $race?->date }}
+                                    {{ Helpers::format_date($race?->date) }}
                                 </x-table.td>
                             </x-table.tr>
                             <x-table.tr>

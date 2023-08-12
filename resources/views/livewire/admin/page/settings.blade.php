@@ -62,7 +62,7 @@
                         <x-table.tr>
                             <x-table.td>
                                 <x-button success type="button" x-on:click="isOpen = !isOpen">
-                                    <i class="fas fa-cog"></i>
+                                    <i class="fa fa-cog"></i>
                                 </x-button>
                             </x-table.td>
                             <x-table.td>
@@ -76,7 +76,7 @@
                                     <x-button danger type="button"
                                         wire:click="$emit('deleteModal', {{ $pagesetting->id }})"
                                         wire:loading.attr="disabled">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fa fa-trash-alt"></i>
                                     </x-button>
                                 </div>
                             </x-table.td>

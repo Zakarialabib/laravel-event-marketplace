@@ -178,7 +178,7 @@
                                                 </button>
                                                 <button type="button" class="text-red-500 px-2"
                                                     wire:click="removeMenuItem({{ $index }}, {{ $itemIndex }})"
-                                                    danger><i class="fas fa-trash-alt"></i></button>
+                                                    danger><i class="fa fa-trash-alt"></i></button>
                                             </div>
                                             <div class="flex flex-col" x-show="isMenuOpen{{ $itemIndex }}">
                                                 <div class="mb-2">
@@ -209,7 +209,7 @@
                             </div>
                             <div class="my-2 text-center">
                                 <x-button type="button" wire:click="removeMenu({{ $index }})" danger>
-                                    <i class="fas fa-trash-alt">
+                                    <i class="fa fa-trash-alt">
                                 </x-button>
                             </div>
                         </div>
@@ -289,7 +289,7 @@
                     </div>
 
                     <x-button type="button" wire:click="saveBreadcrumbs" warning>
-                        <i class="fas fa-plus"></i>
+                        <i class="fa fa-plus"></i>
                     </x-button>
                 </div>
             </div>
@@ -371,7 +371,7 @@
                             wire:model="cardContent.{{ $index }}.cardSize"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <x-button danger type="button" wire:click="removeCardContent({{ $index }})"><i
-                                class="fas fa-trash-alt"></i></x-button>
+                                class="fa fa-trash-alt"></i></x-button>
                     @endforeach
                     <div class="w-full flex justify-center">
                         <x-button type="button" wire:click="saveCardContent" primary>{{ __('Save') }}
@@ -401,7 +401,7 @@
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                             <x-button type="button" class="text-center"
                                 wire:click="removeTabItem ({{ $index }})" danger><i
-                                    class="fas fa-trash-alt"></i></x-button>
+                                    class="fa fa-trash-alt"></i></x-button>
                         @endforeach
                     </div>
                     <div class="w-full flex justify-center">
@@ -426,7 +426,7 @@
                                 wire:model="components.listItems.{{ $index }}.itemText"
                                 wire:key="accordion-item-title-{{ $index }}" />
                             <x-button type="button" wire:click="removeListItem({{ $index }})" danger><i
-                                    class="fas fa-trash-alt"></i></x-button>
+                                    class="fa fa-trash-alt"></i></x-button>
                         @endforeach
                     </div>
                     <div class="w-full flex justify-center">
@@ -473,7 +473,7 @@
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                             <x-button type="button" class="text-center"
                                 wire:click="removeAccordionItem({{ $index }})" danger><i
-                                    class="fas fa-trash-alt"></i></x-button>
+                                    class="fa fa-trash-alt"></i></x-button>
                         @endforeach
                     </div>
                     <div class="w-full flex justify-center">

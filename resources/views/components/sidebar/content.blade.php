@@ -12,7 +12,7 @@
 
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-boxes w-5 h-5"></i>
+                <i class="fa fa-boxes w-5 h-5"></i>
             </span>
         </x-slot>
         {{-- @can('category_access') --}}
@@ -27,7 +27,7 @@
     <x-sidebar.dropdown title="{{ __('Races') }}" :active="request()->routeIs(['admin.races', 'admin.racelocations', 'admin.categories', 'admin.services'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-boxes w-5 h-5"></i>
+                <i class="fa fa-boxes w-5 h-5"></i>
             </span>
         </x-slot>
         <x-sidebar.sublink title="{{ __('Categories') }}" href="{{ route('admin.categories') }}" :active="request()->routeIs('admin.categories')" />
@@ -36,13 +36,14 @@
         <x-sidebar.sublink title="{{ __('Locations') }}" href="{{ route('admin.racelocations') }}"
             :active="request()->routeIs('admin.racelocations')" />
         <x-sidebar.sublink title="{{ __('Services') }}" href="{{ route('admin.services') }}" :active="request()->routeIs('admin.services')" />
+        <x-sidebar.sublink title="{{ __('Faqs') }}" href="{{ route('admin.faqs') }}" :active="request()->routeIs('admin.faqs')" />
 
     </x-sidebar.dropdown>
 
     <x-sidebar.dropdown title="{{ __('Orders') }}" :active="request()->routeIs(['admin.orderforms'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-shopping-cart w-5 h-5"></i>
+                <i class="fa fa-shopping-cart w-5 h-5"></i>
             </span>
         </x-slot>
         @can('order_access')
@@ -62,7 +63,7 @@
     <x-sidebar.dropdown title="{{ 'Blog' }}" :active="request()->routeIs(['admin.blogs', 'admin.blogcategories'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-blog w-5 h-5"></i>
+                <i class="fa fa-blog w-5 h-5"></i>
             </span>
         </x-slot>
         @can('blog_access')
@@ -77,7 +78,7 @@
     <x-sidebar.dropdown title="{{ __('People') }}" :active="request()->routeIs(['admin.users', 'admin.roles', 'admin.permissions'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-users w-5 h-5"></i>
+                <i class="fa fa-users w-5 h-5"></i>
             </span>
         </x-slot>
         {{-- @can('user_access') --}}
@@ -104,7 +105,7 @@
     ])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-file-alt w-5 h-5"></i>
+                <i class="fa fa-file-alt w-5 h-5"></i>
             </span>
         </x-slot>
         <x-sidebar.sublink title="{{ __('Pages') }}" href="{{ route('admin.pages') }}" :active="request()->routeIs('admin.pages')" />
@@ -119,7 +120,7 @@
     <x-sidebar.dropdown title="{{ __('Settings') }}" :active="request()->routeIs(['admin.settings', 'admin.language', 'admin.setting.redirects'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-cog w-5 h-5"></i>
+                <i class="fa fa-cog w-5 h-5"></i>
             </span>
         </x-slot>
         {{-- @can('setting_access') --}}
@@ -140,7 +141,7 @@
         href="#">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fas fa-sign-out-alt w-5 h-5" aria-hidden="true"></i>
+                <i class="fa fa-sign-out-alt w-5 h-5" aria-hidden="true"></i>
             </span>
         </x-slot>
     </x-sidebar.link>

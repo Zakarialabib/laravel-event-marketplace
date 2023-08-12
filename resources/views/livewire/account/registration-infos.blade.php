@@ -15,7 +15,7 @@
                     </h3>
                     <a @click="expadedRegistration = {{ $registration->Id }}"
                         class="absolute -bottom-6 right-10 w-12 h-12 bg-green-500 rounded-full cursor-pointer flex items-center justify-center">
-                        <i class="fas fa-arrow-down text-white"></i>
+                        <i class="fa fa-arrow-down text-white"></i>
                     </a>
                     <ul x-show="expadedRegistration === {{ $registration->Id }}"
                         x-transition:enter="transition ease-out duration-300"
@@ -38,7 +38,7 @@
 
                         <li class="mb-4">
                             <span class="font-bold">{{ __('Status') }}:</span>
-                            <span>{{ $registration->status }}</span>
+                            <span>{{ $registration->status->getName() }}</span>
                         </li>
 
                         <li class="mb-4">

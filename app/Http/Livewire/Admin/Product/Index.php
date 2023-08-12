@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Product;
 
+use App\Enums\Status;
 use App\Exports\ProductExport;
 use App\Http\Livewire\WithSorting;
 use App\Models\Product;
@@ -186,7 +187,7 @@ class Index extends Component
             //  'subcategories'    => $product_details->subcategories,
             'image'    => $product_details->image,
             'brand_id' => $product_details->brand_id,
-            'status'   => 0,
+            'status'   => Status::INACTIVE,
         ]);
 
         $this->alert('success', __('Product Cloned successfully!'));

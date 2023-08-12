@@ -3,7 +3,7 @@
         @click="langSwitcher = !langSwitcher">
         <img src="{{ Helpers::flagImageUrl(\Illuminate\Support\Facades\App::getLocale()) }}" class="px-2">
         @if (count($languages) > 1)
-            <i class="fas fa-caret-down text-black"></i>
+            <i class="fa fa-caret-down text-black"></i>
         @endif
     </a>
     <div x-show="langSwitcher" @click.away="langSwitcher = false"

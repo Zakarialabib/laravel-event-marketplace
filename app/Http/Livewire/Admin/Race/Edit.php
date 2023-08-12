@@ -44,7 +44,7 @@ class Edit extends Component
     protected $rules = [
 
         'race.name'                  => ['required', 'string', 'max:255'],
-        'race.date'                  => ['required', 'date', 'max:255'],
+        'race.date'                  => ['required', 'date'],
         'race.price'                 => ['required', 'numeric', 'max:2147483647'],
         'race.race_location_id'      => ['required', 'integer'],
         'race.category_id'           => ['required', 'integer'],
@@ -227,7 +227,7 @@ class Edit extends Component
     {
         $this->validate();
 
-        if ( ! empty($this->images)) {
+        if ($this->images) {
             foreach ($this->images as $image) {
                 $this->race->addMedia($image)->toMediaCollection('local_files');
             }

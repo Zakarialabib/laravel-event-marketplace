@@ -52,7 +52,7 @@
                                     </x-button>
                                     <x-button danger wire:click="delete('{{ $backup }}')" type="button"
                                         wire:loading.attr="disabled">
-                                        <i class="fas fa-trash"></i>
+                                        <i class="fa fa-trash"></i>
                                     </x-button>
                                 </div>
                             </x-table.td>
