@@ -15,9 +15,15 @@
     </div>
 </div>
 
+
+@once
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+@endonce
+
 @push('scripts')
     <script>
-        document.addEventListener("livewire:load", () => {
+        document.addEventListener('livewire:load', () => {
             function update(value) {
                 let el = document.getElementById('clear-{{ $attributes['id'] }}')
 

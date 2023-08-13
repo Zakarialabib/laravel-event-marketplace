@@ -101,7 +101,7 @@
 
     <div class="py-5 dark:border-t-2 dark:border-white/5 dark:bg-none">
         <div class="px-6">
-            <div class="flex flex-col items-center justify-between text-center font-bold dark:text-white md:flex-row">
+            <div class="flex flex-col items-center justify-between text-center font-bold dark:text-white md:flex-row gap-4">
                 <div>
                     Copyright© <span class="curr-year">
                         {{ date('Y') }}

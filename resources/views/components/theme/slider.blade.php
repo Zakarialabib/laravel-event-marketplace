@@ -74,7 +74,7 @@
                     </picture>
                     <div class="absolute bottom-0 w-full h-1/2 z-0 bg-gradient-to-t from-black to-transparent"></div>
                     <div
-                        class="flex flex-col max-w-[1400px] items-center mx-auto my-auto text-center relative z-10 px-24 sm:px-18 lg:px-24">
+                        class="flex flex-col max-w-[1400px] items-center mx-auto my-auto text-center relative z-10 py-20 px-24 sm:py-24 sm:px-18 lg:px-24">
                         <div class="my-4 font-bold text-xl text-white leading-[0.95] lg:text-5xl">
                             {{ $slider->title }}
                         </div>

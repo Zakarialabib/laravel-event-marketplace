@@ -14,7 +14,7 @@
     @section('title', $race->name)
 
     <section style="background-image: url({{ $race->getFirstMediaUrl('local_files') }})"
-        class="relative w-full pt-36 pb-16 h-[400px] bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
+        class="relative w-full pt-36 pb-10 h-auto bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
         <div class="absolute inset-0 bg-black opacity-60"></div>
         <div class="grid grid-cols-1 text-center mt-10 bottom-0 px-4">
             <div class="text-center z-10 my-2">
@@ -45,7 +45,7 @@
                     </li>
                 </ul>
 
-                <div class="px-4 mt-4 gap-[1.88rem] flex text-2xl items-center justify-between text-white">
+                <div class="px-4 mt-4 gap-6 flex flex-wrap items-center justify-center text-white">
                     <div style="word-break: break-word;">
                         <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Date</h3>
 
@@ -71,107 +71,69 @@
         </div>
     </section>
     <section class="flex flex-wrap" x-data="{ showRegistrationForm: false, activeTab: 'tab0', tabs: '0' }">
-        <div class="md:hidden sm:block w-full h-auto max-w-screen-xl mx-auto pb-5">
-            <div
-                class="overflow-y-auto flex sm:justify-start lg:justify-center text-sm relative bg-gray-100 border-b-2 border-green-600">
-                <a href="#tab0"
-                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    @click="activeTab = 'tab0'"
-                    :class="{
-                        'bg-green-700': activeTab === 'tab0',
-                        'text-white': activeTab === 'tab0',
-                        'hover:text-green-400': activeTab === 'tab0',
-                    }">
-                    {{ __('Overview') }}
-                </a>
-                <a href="#tab1"
-                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    @click="activeTab = 'tab1'"
-                    :class="{
-                        'bg-green-700': activeTab === 'tab1',
-                        'text-white': activeTab === 'tab1',
-                        'hover:text-green-400': activeTab === 'tab1',
-                    }">
-                    {{ __('Details') }}
-                </a>
-                <a href="#tab2"
-                    class="py-3 px-4 md:px-8 text-center font-bold text-green-600 uppercase hover:border-green-500 focus:outline-none focus:border-green-500 cursor-pointer"
-                    @click="activeTab = 'tab2'"
-                    :class="{
-                        'bg-green-700': activeTab === 'tab2',
-                        'text-white': activeTab === 'tab2',
-                        'hover:text-green-400': activeTab === 'tab2',
-                    }">
-                    {{ __('Regitration') }}
-                </a>
-            </div>
-        </div>
-
         <div class="w-full flex flex-wrap h-full mt-2 pb-4 mx-2">
-            <div class="xl:w-1/4 md:w-full px-4">
-                <div class="text-gray-700 break-words ">
-                    <div class="my-6 ">
-                        <div class="flex flex-col justify-start overflow-x-hidden ">
-                            <a href="#tab0" @click="activeTab = 'tab0'"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
-                                :class="{
-                                    'bg-green-700': activeTab === 'tab0',
-                                    'text-white': activeTab === 'tab0',
-                                    'hover:text-green-400': activeTab === 'tab0',
-                                }">
-                                {{ __('Overview') }}
-                            </a>
-                            <a href="#tab1"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
-                                @click="activeTab = 'tab1'"
-                                :class="{
-                                    'bg-green-700': activeTab === 'tab1',
-                                    'text-white': activeTab === 'tab1',
-                                    'hover:text-green-400': activeTab === 'tab1',
-                                }">
-                                {{ __('Course') }}
-                            </a>
-                            <a href="#tab2"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
-                                @click="activeTab = 'tab2'"
-                                :class="{
-                                    'bg-green-700': activeTab === 'tab2',
-                                    'text-white': activeTab === 'tab2',
-                                    'hover:text-green-400': activeTab === 'tab2',
-                                }">
-                                {{ __('Regitration') }}
-                            </a>
+            <div class="w-full xl:w-1/4 lg:w-1/4 sm:w-full px-4 mt-2">
+                <div class="text-gray-700 break-words my-6 overflow-x-hidden">
+                    <div class="grid grid-cols-2 xl:grid-cols-1 lg:grid-cols-1 gap-4">
+                        <a href="#tab0" @click="activeTab = 'tab0'"
+                            class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
+                            :class="{
+                                'bg-green-700': activeTab === 'tab0',
+                                'text-white': activeTab === 'tab0',
+                                'hover:text-green-400': activeTab === 'tab0',
+                            }">
+                            {{ __('Overview') }}
+                        </a>
+                        <a href="#tab1"
+                            class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
+                            @click="activeTab = 'tab1'"
+                            :class="{
+                                'bg-green-700': activeTab === 'tab1',
+                                'text-white': activeTab === 'tab1',
+                                'hover:text-green-400': activeTab === 'tab1',
+                            }">
+                            {{ __('Course') }}
+                        </a>
+                        <a href="#tab2"
+                            class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
+                            @click="activeTab = 'tab2'"
+                            :class="{
+                                'bg-green-700': activeTab === 'tab2',
+                                'text-white': activeTab === 'tab2',
+                                'hover:text-green-400': activeTab === 'tab2',
+                            }">
+                            {{ __('Regitration') }}
+                        </a>
 
-                            <a href="#sponsors"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
-                                {{ __('Sponsors') }}
-                            </a>
-                            <a href="#tab3"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-z·inc-200 border-solid p-5"
-                                @click="activeTab = 'tab3'"
-                                :class="{
-                                    'bg-green-700': activeTab === 'tab3',
-                                    'text-white': activeTab === 'tab3',
-                                    'hover:text-green-400': activeTab === 'tab3',
-                                }">
-                                {{ __('Results') }}
-                            </a>
-                            <a href="{{ route('front.catalog') }}" target="_blank"
-                                class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
-                                {{ __('Shop') }}
-                            </a>
-                        </div>
+                        <a href="#sponsors"
+                            class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
+                            {{ __('Sponsors') }}
+                        </a>
+                        <a href="#tab3"
+                            class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
+                            @click="activeTab = 'tab3'"
+                            :class="{
+                                'bg-green-700': activeTab === 'tab3',
+                                'text-white': activeTab === 'tab3',
+                                'hover:text-green-400': activeTab === 'tab3',
+                            }">
+                            {{ __('Results') }}
+                        </a>
+                        <a href="{{ route('front.catalog') }}" target="_blank"
+                            class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
+                            {{ __('Shop') }}
+                        </a>
                     </div>
                 </div>
 
-                <p class="text-black text-sm text-left md:text-base lg:text-lg lg:text-center mt-4">
+                <p class="text-black text-lg text-center mt-4">
                     {{ __('Registration deadline') }}
                 </p>
-                <p class="text-black text-sm text-left md:text-base lg:text-lg lg:text-center mt-4">
+                <p class="text-black text-lg text-center mt-4">
                     {{ Helpers::format_date($race->registration_deadline) }}
                 </p>
             </div>
-            <div class="xl:w-3/4 md:w-full">
+            <div class="w-full xl:w-3/4 lg:w-3/4 sm:w-full mt-2">
                 <div x-show="activeTab === 'tab0'" id="tab0" class="w-full text-center mb-5 border px-4">
                     <h3
                         class="w-full text-center mb-6 pt-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold tracking-tight uppercase text-gray-800">
@@ -212,31 +174,36 @@
                         </div>
                         <div class="w-full text-center my-4">
                             @if ($race->calendar)
-                                <div class="pb-6 px-6 mx-2 overflow-x-auto scrollbar__inverted">
+                                <div class="pb-6 px-6 sm:px-0 overflow-x-auto scrollbar__inverted">
                                     <table
-                                        class="table-auto w-full border-collapse text-center border bg-white shadow-md">
+                                        class="table-auto w-full border-collapse text-center border bg-white shadow-md text-xs sm:text-sm md:text-base">
                                         <thead>
                                             <tr class="bg-red-500 text-white">
-                                                <th class="text-left py-2 px-3">{{ __('Date') }}</th>
-                                                <th class="w-1/4 py-2 px-3">{{ __('Start Time') }}</th>
-                                                <th class="w-1/4 py-2 px-3">{{ __('End Time') }}</th>
-                                                <th class="w-1/2 py-2 px-3">{{ __('Activity') }}</th>
+                                                <th class="text-left py-1 sm:py-2 px-1 sm:px-3">{{ __('Date') }}
+                                                </th>
+                                                <th class="w-1/4 py-1 sm:py-2 px-1 sm:px-3">{{ __('Start Time') }}</th>
+                                                <th class="w-1/4 py-1 sm:py-2 px-1 sm:px-3">{{ __('End Time') }}</th>
+                                                <th class="w-1/2 py-1 sm:py-2 px-1 sm:px-3">{{ __('Activity') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (json_decode($race->calendar) as $data)
                                                 <tr class="border-b bg-gray-100">
-                                                    <td class="text-left py-2 px-3 font-bold">{{ Helpers::format_date($data->date) }}</td>
-                                                    <td class="py-2 px-3"></td>
-                                                    <td class="py-2 px-3"></td>
-                                                    <td class="py-2 px-3"></td>
+                                                    <td class="text-left py-1 sm:py-2 px-1 sm:px-3 font-bold">
+                                                        {{ $data->date }}<x/td>
+                                                    <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
+                                                    <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
+                                                    <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
                                                 </tr>
                                                 @foreach ($data->events as $event)
                                                     <tr class="border-b">
-                                                        <td class="py-2 px-3"></td>
-                                                        <td class="py-2 px-3">{{ $event->start_time }}</td>
-                                                        <td class="py-2 px-3">{{ $event->end_time }}</td>
-                                                        <td class="py-2 px-3">{{ $event->activity }}</td>
+                                                        <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
+                                                        <td class="py-1 sm:py-2 px-1 sm:px-3">{{ $event->start_time }}
+                                                        </td>
+                                                        <td class="py-1 sm:py-2 px-1 sm:px-3">{{ $event->end_time }}
+                                                        </td>
+                                                        <td class="py-1 sm:py-2 px-1 sm:px-3">{{ $event->activity }}
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             @endforeach
@@ -333,7 +300,6 @@
                         @php
                             $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
                         @endphp
-{{--  --}}
                         @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
                             <div
                                 class="bg-gray-200 text-neutral-700 break-words pl-8 pr-5 border border-gray-300 border-solid rounded-">
@@ -412,7 +378,7 @@
                                 <div class="w-1/4 basis-full float-left">
                                     <a href="{{ $sponsor->link }}" class="text-center">
                                         <img src="" alt="{{ $sponsor->name }}"
-                                            class="inline-block h-24 align-middle w-20">
+                                            class="inline-block h-auto align-middle w-20">
                                     </a>
                                 </div>
                             @endforeach
