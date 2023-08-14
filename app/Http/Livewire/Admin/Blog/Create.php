@@ -26,7 +26,7 @@ class Create extends Component
 
     public $description;
 
-    public $listeners = ['createBlog' , 'editorjs-save:myEditor' => 'saveEditorState'];
+    public $listeners = ['createBlog', 'editorjs-save:myEditor' => 'saveEditorState'];
 
     protected $rules = [
         'blog.title'            => 'required|min:3|max:255',
@@ -35,12 +35,12 @@ class Create extends Component
         'blog.meta_title'       => 'nullable|max:100',
         'blog.meta_description' => 'nullable|max:200',
     ];
+
     public function saveEditorState($editorJsonData)
     {
         $this->description = $editorJsonData;
     }
 
-    
     public function onImagesUpdated($image): void
     {
         $this->images = $image;
@@ -72,7 +72,6 @@ class Create extends Component
 
         $this->blog->language_id = 1;
 
-      
         if ($this->images) {
             $imageName = Str::slug($this->blog->name).'.'.$this->blog->extension();
 
@@ -80,7 +79,6 @@ class Create extends Component
 
             $this->blog->images = $imageName;
         }
-
 
         $this->blog->description = $this->description;
 
@@ -97,5 +95,4 @@ class Create extends Component
     {
         return BlogCategory::select('title', 'id')->get();
     }
-
 }
