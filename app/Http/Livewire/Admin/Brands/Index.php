@@ -15,7 +15,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
@@ -59,7 +58,7 @@ class Index extends Component
             'except' => 'desc',
         ],
     ];
-    
+
     public function getSelectedCountProperty()
     {
         return count($this->selected);
@@ -143,19 +142,18 @@ class Index extends Component
         $this->alert('success', __('Brand deleted successfully.'));
     }
 
-    
     public function deleteSelected(): void
     {
         abort_if(Gate::denies('brand_delete'), 403);
-        
+
         // Delete the brands
         Brand::whereIn('id', $this->selected)->delete();
-    
+
         $this->resetSelected();
-    
+
         $this->alert('success', __('Selected brands and their device models deleted successfully.'));
     }
-    
+
     public function importModal(): void
     {
         // abort_if(Gate::denies('brand_create'), 403);

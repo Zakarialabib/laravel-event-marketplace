@@ -17,7 +17,7 @@ class Brand extends Model implements HasMedia
     use HasAdvancedFilter;
 
     public const ATTRIBUTES = [
-        'id', 'name', 'slug', 'status'
+        'id', 'name', 'slug', 'status',
     ];
 
     public $orderable = self::ATTRIBUTES;
@@ -42,7 +42,6 @@ class Brand extends Model implements HasMedia
         return $this->hasMany(Product::class);
     }
 
-    
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('local_files');
