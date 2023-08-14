@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             'discount_price'   => $this->faker->randomFloat(2, 10, 100),
             'code'             => Str::random(5),
             'category_id'      => 1,
-            'brand_id'      => 1,
+            'brand_id'         => 1,
             'slug'             => Str::slug($this->faker->word).'-'.Str::random(5),
             'meta_title'       => $this->faker->word,
             'meta_description' => Str::limit($this->faker->sentence, 165),

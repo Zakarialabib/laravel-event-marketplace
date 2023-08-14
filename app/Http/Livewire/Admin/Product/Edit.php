@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Product;
 
-use App\Helpers;
 use App\Models\Brand;
 use App\Models\ProductCategory;
 use App\Models\Product;
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Str;
 
 class Edit extends Component
 {
@@ -52,10 +50,10 @@ class Edit extends Component
         'product.category_id'      => ['required', 'integer'],
         // 'product.subcategories'    => ['nullable', 'array', 'min:1'],
         // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
-        'options'         => ['nullable', 'array'],
-        'options.*.type'  => ['string', 'max:255'],
-        'options.*.value' => ['string', 'max:255'],
-        'product.brand_id'         => ['nullable', 'integer'],
+        'options'               => ['nullable', 'array'],
+        'options.*.type'        => ['string', 'max:255'],
+        'options.*.value'       => ['string', 'max:255'],
+        'product.brand_id'      => ['nullable', 'integer'],
         'product.embeded_video' => ['nullable'],
     ];
 
@@ -134,7 +132,7 @@ class Edit extends Component
                 $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
             }
         }
-         
+
         $this->product->description = $this->description;
         $this->product->options = $this->options;
 

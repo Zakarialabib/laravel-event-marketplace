@@ -59,7 +59,7 @@ class Index extends Component
     {
         return $this->partner?->image;
     }
-    
+
     public function getSelectedCountProperty()
     {
         return count($this->selected);
