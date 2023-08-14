@@ -45,7 +45,7 @@
                     </li>
                 </ul>
 
-                <div class="px-4 mt-4 gap-6 flex flex-wrap items-center justify-center text-white">
+                <div class="px-4 mt-4 flex flex-wrap gap-8 items-center justify-center text-white">
                     <div style="word-break: break-word;">
                         <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Date</h3>
 
@@ -94,9 +94,8 @@
                             }">
                             {{ __('Course') }}
                         </a>
-                        <a href="#tab2"
+                        <a href="#tab2" @click="activeTab = 'tab2'"
                             class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
-                            @click="activeTab = 'tab2'"
                             :class="{
                                 'bg-green-700': activeTab === 'tab2',
                                 'text-white': activeTab === 'tab2',
@@ -190,7 +189,7 @@
                                             @foreach (json_decode($race->calendar) as $data)
                                                 <tr class="border-b bg-gray-100">
                                                     <td class="text-left py-1 sm:py-2 px-1 sm:px-3 font-bold">
-                                                        {{ $data->date }}<x/td>
+                                                        {{ $data->date }}<x /td>
                                                     <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
                                                     <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
                                                     <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
@@ -321,9 +320,7 @@
                                     {{ __('You have already registered for the') }} {{ $race->name }}. <br>
                                     {{ __('For details or to manage your registration, please check your account.') }}
                                 </p>
-                                <p>
 
-                                </p>
                                 <ul
                                     class="flex flex-col items-center gap-6 justify-center py-10 mt-6 border-t border-gray-200">
 
@@ -357,16 +354,44 @@
                     </div>
                 @else
                     <div x-show="activeTab === 'tab2'" id="tab2" class="w-full text-center mb-5 border px-4">
-                        @livewire('front.registration-form', ['race' => $race])
+                        @php
+                            $registrationDeadline = \Carbon\Carbon::parse($race->registration_deadline);
+                        @endphp
+                        <div
+                            class="relative flex flex-col p-8 shadow-sm rounded-2xl border-skin-base bg-skin-card/50 backdrop-blur-sm">
+
+                            @if ($registrationDeadline->isBefore(\Carbon\Carbon::now()))
+                                <h3 class="text-neutral-700 text-4xl font-semibold mb-5 ">
+                                    {{ __('Registration closed') }}
+                                </h3>
+                                <div class="bg-green-50 border border-green-200 p-6 rounded-md shadow-sm">
+                                    <p class="text-center text-green-700">
+                                        {{ __('Results we be available soon') }}.
+                                    </p>
+                                </div>
+                            @else
+                                <h3 class="text-neutral-700 text-4xl font-semibold mb-5 ">
+                                    {{ __('Registration open') }}
+                                </h3>
+                                <p class="py-5">
+                                    <x-button primary href="{{ route('front.registrationForm', $race->id) }}">
+                                        {{ __('Continue to registration') }}
+                                    </x-button>
+                                </p>
+                            @endif
+                        </div>
                     </div>
                 @endif
                 <div x-show="activeTab === 'tab3'" id="tab3" class="w-full text-center mb-5 border px-4">
-
-                    @livewire('front.race-results', ['race' => $race])
+                    @if ($race->category->name === 'Triathlon')
+                        @livewire('front.triathlon-results', ['race' => $race])
+                    @else
+                        @livewire('front.race-results', ['race' => $race])
+                    @endif
                 </div>
             </div>
             <hr class="w-full border-gray-300 mt-3">
-            <div class="w-full bg-gray-50" id="sponsors">
+            <div class="w-full bg-gray-50 py-10" id="sponsors">
                 @if ($race->sponsors)
                     <div class="text-gray-500 text-sm px-3.5">
                         <p

@@ -22,6 +22,11 @@ class RaceResult extends Model
         'participant_id',
         'registration_id',
         'place',
+        'swimming',
+        'transition1',
+        'cycling',
+        'transition2',
+        'running',
         'time',
         'date',
     ];
@@ -34,6 +39,11 @@ class RaceResult extends Model
         'participant_id',
         'registration_id',
         'place',
+        'swimming',
+        'transition1',
+        'cycling',
+        'transition2',
+        'running',
         'time',
         'date',
         'status',
@@ -65,9 +75,28 @@ class RaceResult extends Model
         return $query->where('race_id', $raceId);
     }
 
-    // Scope to filter race results by place
     public function scopeByPlace($query, $place)
     {
         return $query->where('place', $place);
     }
+
+    // Scope to filter race results by gender
+    public function scopeByGender($query, $gender)
+    {
+        return $query->whereHas('participant', function ($q) use ($gender) {
+            $q->where('gender', $gender);
+        });
+    }
+
+    // // Inside the RaceResult model
+    // public function scopeCalculateGenderRank($query, $result, $field)
+    // {
+    //     // Assuming 'gender' is the gender field for participants
+    //     return $query->whereHas('participant', function ($q) use ($result) {
+    //         $q->where('gender', $result->participant->gender);
+    //     })
+    //         ->orderBy($field)
+    //         ->pluck('id')
+    //         ->search($result->id) + 1;
+    // }
 }

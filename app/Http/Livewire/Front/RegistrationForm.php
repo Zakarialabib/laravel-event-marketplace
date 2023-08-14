@@ -8,8 +8,7 @@ use App\Mail\TeamInvitationMail;
 use App\Models\{Participant, Registration, Service, Subscriber, User};
 use App\Enums\Status;
 use App\Mail\RegistrationConfirmation;
-use App\Models\Team;
-use App\Models\TeamMember;
+use App\Models\Race;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\{Auth, DB, Mail, Cache};
@@ -22,7 +21,6 @@ use App\Jobs\EmailSubscribtionJob;
 class RegistrationForm extends Component
 {
     use LivewireAlert;
-
     public $race;
     public $user;
     public $participant;
@@ -35,11 +33,9 @@ class RegistrationForm extends Component
     public $newsletters = false;
     public $team;
     public $isTeamRegistration = false;
-    public $newTeamName; // If creating a new team
-    public $team_name;
-    public $resultTeam = '';
+    public $name;
+
     public $existingRegistration;
-    public $invitationEmails = [''];
     public $rules = [
         'participant.email'                          => 'required|email:rfc,dns,spoof,filter|unique:participants,email',
         'participant.name'                           => 'required|string',
@@ -60,10 +56,12 @@ class RegistrationForm extends Component
         'participant.sensitivities'                  => 'nullable',
     ];
 
-    public function mount($race)
+    public function mount($id)
     {
-        $this->race = $race;
+        $this->race = Race::where('id', $id)->firstOrFail();
         $this->services = Service::all();
+        
+        $this->timeRemaining = Cache::get('registration_time_remaining', 900);
 
         if (Auth::check()) {
             $this->user = Auth::user();
@@ -85,7 +83,7 @@ class RegistrationForm extends Component
 
     public function render(): View
     {
-        return view('livewire.front.registration-form');
+        return view('livewire.front.registration-form')->extends('layouts.app');
     }
 
     public function hydrate()
@@ -106,73 +104,9 @@ class RegistrationForm extends Component
         Cache::put('registration_time_remaining', $this->timeRemaining, 900);
     }
 
-    public function getTeamsProperty()
-    {
-        return Team::select('team_name', 'id')->get();
-    }
-
-    public function updatedTeamName()
-    {
-        if (strlen($this->team_name) > 3) {
-            $this->resultTeam = Team::where('team_name', 'like', '%'.$this->team_name.'%')
-                ->limit(5)
-                ->get();
-        } else {
-            $this->resultTeam = [];
-        }
-    }
-
-    public function joinTeam()
-    {
-        $this->team = Team::where('team_name', $this->team_name)->first();
-
-        if ( ! $this->team) {
-            $this->team = Team::create([
-                'team_name' => $this->newTeamName,
-                'leader_id' => Auth::id(),
-            ]);
-        }
-
-        // Check if the user is already a member of another team for the same race.
-        $existingMembership = TeamMember::where('participant_id', $this->participant->id)
-            ->first();
-
-        if ($existingMembership) {
-            $this->alert('error', 'User is already a member of a team for this race.');
-        }
-
-        // Add user to the team.
-        TeamMember::create([
-            'team_id'           => $this->team->id,
-            'participant_id'    => $this->participant->id,
-            'invitation_emails' => $this->invitationEmails,
-            'status'            => Status::PENDING,
-        ]);
-
-        foreach ($this->invitationEmails as $email) {
-            Mail::to($email)->later(now()->addMinutes(10), new TeamInvitationMail($this->team, $this->participant));
-        }
-    }
-
-    public function selectTeam($team)
-    {
-        $this->team = $team;
-    }
-
-    public function addMoreEmailFields()
-    {
-        $this->invitationEmails[] = '';
-    }
-
     public function updatedIsTeamRegistration($value)
     {
-        $this->isTeamRegistration = $value;
-    }
-
-    public function removeEmailField($index)
-    {
-        unset($this->invitationEmails[$index]);
-        $this->invitationEmails = array_values($this->invitationEmails); // Re-index the array
+        $this->isTeamRegistration = $value;        
     }
 
     public function register()
@@ -203,10 +137,6 @@ class RegistrationForm extends Component
 
             $this->participant->user_id = $this->user->id;
             $this->participant->save();
-
-            if ($this->isTeamRegistration) {
-                $this->joinTeam();
-            }
 
             $this->registration = new Registration();
 

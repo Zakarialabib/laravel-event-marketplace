@@ -16,6 +16,11 @@ return new class () extends Migration {
             $table->foreignUuid('participant_id')->nullable()->constrained('participants');
             $table->foreignUuid('registration_id')->nullable()->constrained('registrations');
             $table->integer('place')->nullable();
+            $table->time('swimming')->nullable();
+            $table->time('transition1')->nullable();
+            $table->time('cycling')->nullable();
+            $table->time('transition2')->nullable();
+            $table->time('running')->nullable();
             $table->string('time')->nullable();
             $table->dateTime('date')->nullable();
             $table->boolean('status')->default(true);

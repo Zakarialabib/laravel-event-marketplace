@@ -12,7 +12,8 @@ return new class () extends Migration {
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('team_name');
+            $table->string('name');
+            $table->string('password')->nullable();
             $table->foreignUuid('leader_id')->constrained('participants');
             $table->timestamps();
         });
