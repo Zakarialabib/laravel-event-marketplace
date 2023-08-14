@@ -8,9 +8,7 @@ use App\Models\Brand;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -34,7 +32,7 @@ class Create extends Component
         'brand.name'        => ['required', 'string', 'max:255'],
         'brand.description' => ['nullable', 'string'],
     ];
-    
+
     public function onImagesUpdated($image): void
     {
         $this->images = $image;
@@ -64,7 +62,6 @@ class Create extends Component
 
         $this->brand->slug = Str::slug($this->brand->name);
 
-       
         if ($this->images) {
             $imageName = Str::slug($this->brand->name).'.'.$this->brand->extension();
 

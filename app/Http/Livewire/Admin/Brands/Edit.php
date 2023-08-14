@@ -8,7 +8,6 @@ use App\Models\Brand;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Livewire\Component;
 
 class Edit extends Component
@@ -28,7 +27,6 @@ class Edit extends Component
         'brand.slug'        => ['required', 'string'],
         'brand.description' => ['nullable', 'string'],
     ];
-
 
     public function editModal($brand): void
     {
