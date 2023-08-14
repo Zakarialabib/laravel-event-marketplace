@@ -13,6 +13,7 @@ use App\Http\Livewire\Front\Checkout as CheckoutIndex;
 use App\Http\Livewire\Front\CheckoutRace;
 use App\Http\Livewire\Front\Blogs as BlogIndex;
 use App\Http\Livewire\Account\Index as AccountIndex;
+use App\Http\Livewire\Front\RegistrationForm;
 use App\Http\Livewire\Front\BlogShow;
 use App\Http\Livewire\Front\DynamicPage;
 use App\Http\Livewire\Front\RaceDetails;
@@ -51,6 +52,7 @@ Route::get('/page/{slug}', DynamicPage::class)->name('front.dynamicPage');
 Route::get('/generate-sitemap', [FrontController::class, 'generateSitemaps'])->name('generate-sitemaps');
 Route::get('/redirect/{url}', [FrontController::class, 'redirect'])->name('redirect');
 
+Route::get('/registration/{id}', RegistrationForm::class)->name('front.registrationForm');
 Route::get('/confirmation-shopping', CheckoutIndex::class)->name('front.checkout');
 
 Route::get('/approval', function () {

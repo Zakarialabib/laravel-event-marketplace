@@ -146,7 +146,7 @@ class Brands extends Component
 
     public function getBrandsProperty()
     {
-        return Brand::select('id', 'name', 'image', 'featured_image')->active()->get();
+        return Brand::select('id', 'name', 'image')->active()->get();
     }
 
     public function getCategoriesProperty()

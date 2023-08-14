@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             PermissionsSeeder::class,
             SponsorSeeder::class,
             CategorySeeder::class,
+            BrandSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
             RaceLocationSeeder::class,
@@ -37,8 +38,7 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             MenuSeeder::class,
             ServiceSeeder::class,
-
-            // PagesettingsSeeder::class,
+            RaceRegistrationSeeder::class,
         ]);
 
         \App\Models\Race::factory(10)->create();

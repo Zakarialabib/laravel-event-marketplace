@@ -10,8 +10,6 @@
     <div class="w-full px-4 mx-auto" x-data="{ showSidebar: false }">
 
         <div class="relative bg-white overflow-hidden mb-5">
-            <img class="absolute right-0 top-0 md:w-1/2 sm:w-full h-full object-cover"
-                src="{{ asset('images/brands/' . $brand->featured_image) }}" alt="{{ $brand->name }}" loading="lazy">
             <div class="relative max-w-xl pl-6 lg:pl-20 py-10 bg-white bg-opactity-75">
                 <span
                     class="px-3 py-1 border border-blue-500 rounded-full text-xs text-blue-500 font-bold font-heading uppercase">

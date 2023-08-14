@@ -44,11 +44,11 @@
                                 {{ \App\Helpers::brandName($brand_id) }}
                                 <button type="button" wire:click="clearFilter('brand')" class="text-red-500">X</button>
                             @endif
-                            @if (isset($subcategory_id))
+                            {{-- @if (isset($subcategory_id))
                                 {{ \App\Helpers::subcategoryName($subcategory_id) }}
                                 <button type="button" wire:click="clearFilter('subcategory')"
                                     class="text-red-500">X</button>
-                            @endif
+                            @endif --}}
                         </p>
                     </li>
                 </ul>
