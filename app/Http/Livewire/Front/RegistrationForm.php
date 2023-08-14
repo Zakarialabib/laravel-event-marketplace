@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Mail\TeamInvitationMail;
 use App\Models\{Participant, Registration, Service, Subscriber, User};
 use App\Enums\Status;
 use App\Mail\RegistrationConfirmation;
@@ -60,7 +59,7 @@ class RegistrationForm extends Component
     {
         $this->race = Race::where('id', $id)->firstOrFail();
         $this->services = Service::all();
-        
+
         $this->timeRemaining = Cache::get('registration_time_remaining', 900);
 
         if (Auth::check()) {
@@ -106,7 +105,7 @@ class RegistrationForm extends Component
 
     public function updatedIsTeamRegistration($value)
     {
-        $this->isTeamRegistration = $value;        
+        $this->isTeamRegistration = $value;
     }
 
     public function register()
