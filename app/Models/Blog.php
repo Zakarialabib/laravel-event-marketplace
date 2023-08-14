@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -14,6 +15,7 @@ class Blog extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use HasAdvancedFilter;
+    use HasFactory;
 
     public const ATTRIBUTES = [
         'id',

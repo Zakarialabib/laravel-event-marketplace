@@ -6,7 +6,6 @@ namespace App\Http\Livewire\Admin\Blog;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -21,13 +20,18 @@ class Edit extends Component
 
     public $editModal = false;
 
-    public $image;
+    public $images;
 
     public $blog;
 
     public $description;
 
-    public $listeners = ['editModal'];
+    public $listeners = [
+        'editModal',  
+        'editorjs-save:myEditor1' => 'saveEditorState',
+        'imagesUpdated' => 'onImagesUpdated',
+    ];
+    
 
     protected $rules = [
         'blog.title'            => 'required|min:3|max:255',
@@ -38,12 +42,15 @@ class Edit extends Component
         'blog.meta_title'       => 'nullable|max:100',
         'blog.meta_description' => 'nullable|max:200',
     ];
-
-    public function updatedDescription($value)
+    public function saveEditorState($editorJsonData)
     {
-        $this->description = $value;
+        $this->description = $editorJsonData;
     }
-
+    
+    public function onImagesUpdated($image): void
+    {
+        $this->images = $image;
+    }
     public function render(): View|Factory
     {
         // abort_if(Gate::denies('blog_create'), 403);
@@ -61,6 +68,8 @@ class Edit extends Component
 
         $this->blog = Blog::where('id', $id)->firstOrFail();
 
+        $this->description = $this->blog->description;
+
         $this->editModal = true;
     }
 
@@ -68,10 +77,12 @@ class Edit extends Component
     {
         $this->validate();
 
-        if ($this->image) {
-            $imageName = Str::slug($this->blog->title).'.'.$this->image->extension();
-            $this->image->storeAs('blogs', $imageName);
-            $this->blog->image = $imageName;
+        if ($this->images) {
+            $imageName = Str::slug($this->blog->name).'.'.$this->blog->extension();
+
+            $this->blog->addMedia($this->images)->toMediaCollection('local_files');
+
+            $this->blog->images = $imageName;
         }
 
         $this->blog->description = $this->description;
@@ -80,7 +91,7 @@ class Edit extends Component
 
         $this->emit('refreshIndex');
 
-        $this->alert('success', __('Blog updated successfully.'));
+        $this->alert('success', __('Resource updated successfully.'));
 
         $this->editModal = false;
     }
@@ -88,10 +99,5 @@ class Edit extends Component
     public function getCategoriesProperty()
     {
         return BlogCategory::select('title', 'id')->get();
-    }
-
-    public function getLanguagesProperty()
-    {
-        return Language::select('name', 'id')->get();
     }
 }

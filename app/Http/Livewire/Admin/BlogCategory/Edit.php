@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\BlogCategory;
 
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -28,7 +27,6 @@ class Edit extends Component
         'blogcategory.description'      => 'nullable',
         'blogcategory.meta_title'       => 'nullable|max:100',
         'blogcategory.meta_description' => 'nullable|max:200',
-        'blogcategory.language_id'      => 'required|integer',
     ];
 
     public function editModal($blogcategory)
@@ -48,6 +46,8 @@ class Edit extends Component
     {
         $this->validate();
 
+        $this->blogcategory->language_id = 1;
+        
         $this->blogcategory->save();
 
         $this->alert('success', __('BlogCategory updated successfully'));
@@ -55,11 +55,6 @@ class Edit extends Component
         $this->editModal = false;
 
         $this->emit('refreshIndex');
-    }
-
-    public function getLanguagesProperty()
-    {
-        return Language::select('name', 'id')->get();
     }
 
     public function render(): View

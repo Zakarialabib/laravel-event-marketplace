@@ -6,7 +6,6 @@ namespace App\Http\Livewire\Admin\Blog;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -21,26 +20,30 @@ class Create extends Component
 
     public $createBlog = false;
 
-    public $image;
+    public $images;
 
     public $blog;
 
     public $description;
 
-    public $listeners = ['createBlog'];
+    public $listeners = ['createBlog' , 'editorjs-save:myEditor' => 'saveEditorState'];
 
     protected $rules = [
         'blog.title'            => 'required|min:3|max:255',
         'blog.category_id'      => 'required|integer',
         'description'           => 'required|min:3',
-        'blog.language_id'      => 'nullable|integer',
         'blog.meta_title'       => 'nullable|max:100',
         'blog.meta_description' => 'nullable|max:200',
     ];
-
-    public function updatedDescription($value)
+    public function saveEditorState($editorJsonData)
     {
-        $this->description = $value;
+        $this->description = $editorJsonData;
+    }
+
+    
+    public function onImagesUpdated($image): void
+    {
+        $this->images = $image;
     }
 
     public function render(): View|Factory
@@ -67,11 +70,17 @@ class Create extends Component
 
         $this->blog->slug = Str::slug($this->blog->title);
 
-        if ($this->image) {
-            $imageName = Str::slug($this->blog->title).'.'.$this->image->extension();
-            $this->image->storeAs('blogs', $imageName);
-            $this->blog->image = $imageName;
+        $this->blog->language_id = 1;
+
+      
+        if ($this->images) {
+            $imageName = Str::slug($this->blog->name).'.'.$this->blog->extension();
+
+            $this->blog->addMedia($this->images)->toMediaCollection('local_files');
+
+            $this->blog->images = $imageName;
         }
+
 
         $this->blog->description = $this->description;
 
@@ -79,7 +88,7 @@ class Create extends Component
 
         $this->emit('refreshIndex');
 
-        $this->alert('success', __('Blog created successfully.'));
+        $this->alert('success', __('Resource created successfully.'));
 
         $this->createBlog = false;
     }
@@ -89,8 +98,4 @@ class Create extends Component
         return BlogCategory::select('title', 'id')->get();
     }
 
-    public function getLanguagesProperty()
-    {
-        return Language::select('name', 'id')->get();
-    }
 }

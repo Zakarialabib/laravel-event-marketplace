@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\BlogCategory;
 
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -29,7 +28,6 @@ class Create extends Component
         'blogcategory.description'      => 'nullable',
         'blogcategory.meta_title'       => 'nullable|max:100',
         'blogcategory.meta_description' => 'nullable|max:200',
-        'blogcategory.language_id'      => 'required|integer',
     ];
 
     public function render(): View|Factory
@@ -53,7 +51,9 @@ class Create extends Component
     public function create()
     {
         $this->validate();
-
+        
+        $this->blogcategory->language_id = 1;
+        
         $this->blogcategory->save();
 
         $this->alert('success', __('BlogCategory created successfully.'));
@@ -61,10 +61,5 @@ class Create extends Component
         $this->createBlogCategory = false;
 
         $this->emit('refreshIndex');
-    }
-
-    public function getLanguagesProperty()
-    {
-        return Language::select('name', 'id')->get();
     }
 }

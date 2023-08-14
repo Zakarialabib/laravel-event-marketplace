@@ -29,23 +29,17 @@
                         </select>
                         <x-input-error :messages="$errors->get('blog.category_id')" for="blog.category_id" class="mt-2" />
                     </div>
-                    <div class="xl:w-1/2 md:w-full px-2">
-                        <x-label for="language_id" :value="__('Language')" required />
-                        <select
-                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            required
-                            id="language_id" name="language_id" wire:model="blog.language_id">
-                            <option value="">{{ __('Select Language') }}</option>
-                            @foreach ($this->languages as $language)
-                                <option value="{{ $language->id }}">{{ $language->name }}</option>
-                            @endforeach
-                        </select>
-                        <x-input-error :messages="$errors->get('blog.language_id')" for="blog.language_id" class="mt-2" />
-                    </div>
+                  
 
                     <div class="w-full px-3 mb-4">
                         <x-label for="description" :value="__('Description')" required />
-                        <x-trix name="description" wire:model="description" />
+                        @livewire('editorjs', [
+                            'editorId' => 'myEditor',
+                            'value' => $description,
+                            'readOnly' => false,
+                            'class' => 'border w-full h-auto',
+                            'placeholder' => 'Lorem ipsum dolor sit amet',
+                        ])
                     </div>
 
                     <div class="xl:w-1/2 md:w-full px-2">
@@ -63,7 +57,7 @@
 
                     <div class="w-full py-2 px-3">
                         <x-label for="image" :value="__('Image')" />
-                        <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
+                        <x-fileupload wire:model="images" :file="$images" accept="image/jpg,image/jpeg,image/png" />
                         <x-input-error :messages="$errors->get('image')" for="image" class="mt-2" />
                     </div>
 

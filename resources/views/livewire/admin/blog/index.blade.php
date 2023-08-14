@@ -64,7 +64,9 @@
                         <img src="{{ $photo }}" alt="Image">
                     </x-table.td>
                     <x-table.td>
+                       <a href="{{ route('front.blogPage', $blog->slug) }}" target="__blank" class="text-blue-500 hover:underline cursor-pointer">
                         {{ $blog->title }}
+                       </a>
                     </x-table.td>
                     <x-table.td>
                         <livewire:toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />

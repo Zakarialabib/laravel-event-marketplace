@@ -85,7 +85,7 @@ class Index extends Component
 
         Blog::findOrFail($this->blog)->delete();
 
-        $this->alert('success', __('Blog deleted successfully.'));
+        $this->alert('success', __('Resource deleted successfully.'));
     }
 
     public function deleteSelected()
