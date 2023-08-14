@@ -25,7 +25,7 @@ class AddToCart extends Component
 
     public $listeners = [
         'AddToCart',
-        
+
     ];
 
     public function mount(Product $product)

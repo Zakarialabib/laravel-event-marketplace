@@ -55,7 +55,7 @@ class ProductShow extends Component
             'name'    => $product->name,
             'qty'     => $this->quantity,
             'price'   => $product->price,
-            'weight'  => 0, 
+            'weight'  => 0,
             'options' => [
                 'size'  => $this->selectedSize,
                 'color' => $this->selectedColor,
