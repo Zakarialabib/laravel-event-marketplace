@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "029ac37ead0b1859097d5a226495adca",
+    "content-hash": "95501cd57ba4d8099731395209784098",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3173,6 +3173,69 @@
                 "source": "https://github.com/MarkBaker/PHPMatrix/tree/3.0.1"
             },
             "time": "2022-12-02T22:17:43+00:00"
+        },
+        {
+            "name": "maxeckel/livewire-editorjs",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxeckel/livewire-editorjs.git",
+                "reference": "f33fdd6a0f76d6911380eb97343b5604660641a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxeckel/livewire-editorjs/zipball/f33fdd6a0f76d6911380eb97343b5604660641a7",
+                "reference": "f33fdd6a0f76d6911380eb97343b5604660641a7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "livewire/livewire": "^2.3",
+                "php": "^7.3|^8.0|^8.1|8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^9.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Maxeckel\\LivewireEditorjs\\LivewireEditorjsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireEditorjs": "Maxeckel\\LivewireEditorjs\\LivewireEditorjsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Maxeckel\\LivewireEditorjs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Max Eckel",
+                    "email": "contact@max-eckel.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This Package aims for an easy integration of Editor.JS with Laravel Livewire",
+            "homepage": "https://github.com/maxeckel/livewire-editorjs",
+            "keywords": [
+                "livewire-editorjs",
+                "maxeckel"
+            ],
+            "support": {
+                "issues": "https://github.com/maxeckel/livewire-editorjs/issues",
+                "source": "https://github.com/maxeckel/livewire-editorjs/tree/v1.5.0"
+            },
+            "time": "2023-04-07T15:12:34+00:00"
         },
         {
             "name": "monolog/monolog",

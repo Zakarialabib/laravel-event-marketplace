@@ -30,16 +30,9 @@
                     </div>
 
                     <div class="w-full px-2">
-                        <x-label for="image" :value="__('Brand Logo')" />
-                        <x-media-upload title="{{ __('Brand Logo') }}" name="image" wire:model="image" :file="$image"
+                        <x-label for="image" :value="__('Partner Logo')" />
+                        <x-media-upload title="{{ __('Partner Logo') }}" name="image" wire:model="image" :file="$image"
                             single types="PNG / JPEG / WEBP" fileTypes="image/*" />
-                    </div>
-
-                    <div class="w-full px-2">
-                        <x-label for="featured_image" :value="__('Featured image')" />
-                        <x-media-upload title="{{ __('Featured Image') }}" name="featured_image"
-                            wire:model="featured_image" :file="$featured_image" single types="PNG / JPEG / WEBP"
-                            fileTypes="image/*" />
                     </div>
 
                     <div class="w-full px-3">

@@ -112,7 +112,7 @@
                         <div class="w-full px-4 my-2">
                             <x-label for="image" :value="__('Race Image')" />
                             <x-media-upload title="{{ __('Race Image') }}" name="image" wire:model="image"
-                                :file="$image" single types="PNG / JPEG / WEBP" fileTypes="image/*" />
+                                :file="$images" single types="PNG / JPEG / WEBP" fileTypes="image/*" />
                         </div>
                     </div>
 

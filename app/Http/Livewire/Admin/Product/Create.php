@@ -22,25 +22,18 @@ class Create extends Component
 
     public $listeners = [
         'createProduct',
+        'imagesUpdated' => 'onImagesUpdated',
     ];
 
     public $createProduct = false;
 
     public $product;
 
-    public $image;
-
-    public $gallery = [];
+    public $images;
 
     public $options = [];
 
-    public $uploadLink;
-
     public $description = '';
-
-    public $width = 1000;
-
-    public $height = 1000;
 
     public array $listsForFields = [];
 
@@ -56,7 +49,7 @@ class Create extends Component
         // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
         'options.*.type'  => ['required', 'string', 'in:color,size'],
         'options.*.value' => ['required_if:options.*.type,color', 'string'],
-        // 'product.brand_id'         => ['nullable', 'integer'],
+        'product.brand_id'         => ['nullable', 'integer'],
         'product.embeded_video' => ['nullable'],
     ];
 
@@ -69,10 +62,9 @@ class Create extends Component
     // {
     //     $this->product->subcategories()->sync($this->product->subcategories);
     // }
-
-    public function getImagePreviewProperty()
+    public function onImagesUpdated($images): void
     {
-        return $this->product->image;
+        $this->images = $images;
     }
 
     public function render(): View|Factory
@@ -99,21 +91,10 @@ class Create extends Component
 
         $this->product->slug = Str::slug($this->product->name);
 
-        if ($this->image) {
-            $imageName = Helpers::handleUpload($this->image, $this->width, $this->height, $this->product->name);
-
-            $this->product->image = $imageName;
-        }
-
-        if ($this->gallery) {
-            $gallery = [];
-
-            foreach ($this->gallery as $image) {
-                $imageName = Str::slug($this->product->name).'.'.$image->extension();
-                $image->storeAs('products', $imageName);
-                $gallery[] = $imageName;
+        if ($this->images) {
+            foreach ($this->images as $image) {
+                $this->product->addMedia($image->getRealPath())->toMediaCollection('local_files');
             }
-            $this->product->gallery = json_encode($gallery);
         }
 
         // $this->product->subcategories = $this->subcategories;
@@ -134,10 +115,10 @@ class Create extends Component
         return ProductCategory::select('name', 'id')->get();
     }
 
-    // public function getBrandsProperty()
-    // {
-    //     return Brand::select('name', 'id')->get();
-    // }
+    public function getBrandsProperty()
+    {
+        return Brand::select('name', 'id')->get();
+    }
 
     // public function getSubcategoriesProperty()
     // {

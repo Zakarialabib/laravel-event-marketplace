@@ -31,17 +31,10 @@
                     </div>
 
                     <div class="w-full py-2 px-3">
-                        <x-label for="Brand Logo" :value="__('Brand Logo')" />
-                        <x-media-upload title="{{ __('Brand Logo') }}" name="image" wire:model="image"
+                        <x-label for="Brand Logo" :value="__('Partner Logo')" />
+                        <x-media-upload title="{{ __('Partner Logo') }}" name="image" wire:model="image"
                                 :file="$image" :preview="$this->imagepreview" single types="PNG / JPEG / WEBP"
                                 fileTypes="image/*" />
-                    </div>
-
-                    <div class="w-full py-2 px-3">
-                        <x-label for="Brand Logo" :value="__('Featured image')" />
-                        <x-media-upload title="{{ __('Featured Image') }}" name="featured_image"
-                             :file="$featured_image" :preview="$this->featuredimagepreview" single types="PNG / JPEG / WEBP"
-                            fileTypes="image/*" />
                     </div>
 
                     <div class="w-full px-3">

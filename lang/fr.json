@@ -869,7 +869,7 @@
     "You Have a new order.": "Vous avez une nouvelle commande.",
     "You have already registered for the": "You have already registered for the",
     "You have already registered for this race. Check your account for details.": "Vous êtes déjà inscrit à cette course. Vérifiez votre compte pour plus de détails.",
-    "You have been invited to join the team :team_name": "Vous avez été invité à rejoindre l'équipe :team_name",
+    "You have been invited to join the team :name": "Vous avez été invité à rejoindre l'équipe :name",
     "You may lose your registration spot if your browser session is idle for more than 15 minutes. ": "Vous pourriez perdre votre place d'inscription si votre session de navigateur est inactive pendant plus de 15 minutes. ",
     "You won't be able to revert this!": "Vous ne pourrez pas revenir en arrière !",
     "You're logged in!": "Vous êtes connecté !",

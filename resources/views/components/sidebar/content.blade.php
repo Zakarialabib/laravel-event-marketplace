@@ -8,7 +8,7 @@
         </x-slot>
     </x-sidebar.link>
 
-    <x-sidebar.dropdown title="{{ __('Products') }}" :active="request()->routeIs(['admin.products', 'admin.product-categories'])">
+    <x-sidebar.dropdown title="{{ __('Products') }}" :active="request()->routeIs(['admin.products', 'admin.product-categories', 'admin.brands'])">
 
         <x-slot name="icon">
             <span class="inline-block mr-3">
@@ -18,6 +18,7 @@
         {{-- @can('category_access') --}}
         <x-sidebar.sublink title="{{ __('Categories') }}" href="{{ route('admin.product-categories') }}"
             :active="request()->routeIs('admin.product-categories')" />
+        <x-sidebar.sublink title="{{ __('Brands') }}" href="{{ route('admin.brands') }}" :active="request()->routeIs('admin.brands')" />
         {{-- @endcan --}}
 
         <x-sidebar.sublink title="{{ __('All Products') }}" href="{{ route('admin.products') }}" :active="request()->routeIs('admin.products')" />
@@ -60,20 +61,6 @@
 
     </x-sidebar.dropdown>
 
-    <x-sidebar.dropdown title="{{ 'Blog' }}" :active="request()->routeIs(['admin.blogs', 'admin.blogcategories'])">
-        <x-slot name="icon">
-            <span class="inline-block mr-3">
-                <i class="fa fa-blog w-5 h-5"></i>
-            </span>
-        </x-slot>
-        @can('blog_access')
-            <x-sidebar.sublink title="{{ __('All Blog') }}" href="{{ route('admin.blogs') }}" :active="request()->routeIs('admin.blogs')" />
-            <x-sidebar.sublink title="{{ __('Blog Categories') }}" href="{{ route('admin.blogcategories') }}"
-                :active="request()->routeIs('admin.blogcategories')" />
-        @endcan
-    </x-sidebar.dropdown>
-    {{-- Settings --}}
-
     {{-- @can('user_access') --}}
     <x-sidebar.dropdown title="{{ __('People') }}" :active="request()->routeIs(['admin.users', 'admin.roles', 'admin.permissions'])">
         <x-slot name="icon">
@@ -102,6 +89,8 @@
         'admin.sections',
         'admin.sliders',
         'admin.featuredBanners',
+        'admin.blogs',
+        'admin.blogcategories',
     ])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
@@ -111,10 +100,14 @@
         <x-sidebar.sublink title="{{ __('Pages') }}" href="{{ route('admin.pages') }}" :active="request()->routeIs('admin.pages')" />
         <x-sidebar.sublink title="{{ __('Page Settings') }}" href="{{ route('admin.page.settings') }}"
             :active="request()->routeIs('admin.page.settings')" />
+        <x-sidebar.sublink title="{{ __('All Resources') }}" href="{{ route('admin.blogs') }}" :active="request()->routeIs('admin.blogs')" />
+        <x-sidebar.sublink title="{{ __('Resource Categories') }}" href="{{ route('admin.blogcategories') }}"
+            :active="request()->routeIs('admin.blogcategories')" />
         <x-sidebar.sublink title="{{ __('Sections') }}" href="{{ route('admin.sections') }}" :active="request()->routeIs('admin.sections')" />
         <x-sidebar.sublink title="{{ __('Sliders') }}" href="{{ route('admin.sliders') }}" :active="request()->routeIs('admin.sliders')" />
         <x-sidebar.sublink title="{{ __('Featured Banners') }}" href="{{ route('admin.featuredBanners') }}"
             :active="request()->routeIs('admin.featuredBanners')" />
+
     </x-sidebar.dropdown>
 
     <x-sidebar.dropdown title="{{ __('Settings') }}" :active="request()->routeIs(['admin.settings', 'admin.language', 'admin.setting.redirects'])">

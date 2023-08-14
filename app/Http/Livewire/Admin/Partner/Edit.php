@@ -21,8 +21,6 @@ class Edit extends Component
 
     public $image;
 
-    public $featured_image;
-
     public $listeners = [
         'editModal',
     ];
@@ -36,11 +34,6 @@ class Edit extends Component
     public function getImagePreviewProperty()
     {
         return $this->partner?->image;
-    }
-
-    public function getFeaturedImagePreviewProperty()
-    {
-        return $this->partner?->featured_image;
     }
 
     public function editModal($partner)

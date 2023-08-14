@@ -68,7 +68,7 @@
 
                         </div>
 
-                        {{-- <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
+                        <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="brand_id" :value="__('Brand')" />
                             <select
                                 class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
@@ -79,7 +79,7 @@
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('product.brand_id')" for="brand_id" class="mt-2" />
-                        </div> --}}
+                        </div>
                         
                         <div class="w-full px-3 mb-6 lg:mb-0">
                             <x-label for="description" :value="__('Description')" />
@@ -89,7 +89,7 @@
                         <div class="w-full px-4 my-2">
                             <x-label for="image" :value="__('Product Image')" />
                             <x-media-upload title="{{ __('Product Image') }}" name="image" wire:model="image"
-                                :file="$image" single types="PNG / JPEG / WEBP" fileTypes="image/*" />
+                                :file="$images" single types="PNG / JPEG / WEBP" fileTypes="image/*" />
                         </div>
 
                     </div>

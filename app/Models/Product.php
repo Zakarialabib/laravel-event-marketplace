@@ -35,6 +35,7 @@ class Product extends Model implements HasMedia
         'images',
         'description',
         'category_id',
+        'brand_id',
         'price',
         'discount_price',
         'slug',
@@ -47,19 +48,26 @@ class Product extends Model implements HasMedia
         'status'  => Status::class,
     ];
 
-    // Define the relationship with the ProductCategory model
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
     }
+   
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 
-    // Scope to filter products by category
     public function scopeByCategory($query, $categoryId)
     {
         return $query->where('category_id', $categoryId);
     }
+  
+    public function scopeByBrand($query, $brandId)
+    {
+        return $query->where('brand_id', $brandId);
+    }
 
-    // Scope to filter products by category
     public function scopeActive($query)
     {
         return $query->where('status', true);

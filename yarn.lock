@@ -24,6 +24,21 @@
   resolved "https://registry.npmjs.org/@alpinejs/intersect/-/intersect-3.12.2.tgz"
   integrity sha512-4xkmvfyh8EdCPxQdTtb4nb9rhnlpaF+7lc4EhBrqAw8yMnNSVKBC5mBfUONCRsd2jrgQgK8CT6bdciEThyNhzQ==
 
+"@codexteam/icons@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/@codexteam/icons/-/icons-0.0.4.tgz"
+  integrity sha512-V8N/TY2TGyas4wLrPIFq7bcow68b3gu8DfDt1+rrHPtXxcexadKauRJL6eQgfG7Z0LCrN4boLRawR4S9gjIh/Q==
+
+"@codexteam/icons@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/@codexteam/icons/-/icons-0.0.5.tgz"
+  integrity sha512-s6H2KXhLz2rgbMZSkRm8dsMJvyUNZsEjxobBEg9ztdrb1B2H3pEzY6iTwI4XUPJWJ3c3qRKwV4TrO3J5jUdoQA==
+
+"@codexteam/icons@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.npmjs.org/@codexteam/icons/-/icons-0.0.6.tgz"
+  integrity sha512-L7Q5PET8PjKcBT5wp7VR+FCjwCi5PUp7rd/XjsgQ0CI5FJz0DphyHGRILMuDUdCW2MQT9NHbVr4QP31vwAkS/A==
+
 "@defstudio/vite-livewire-plugin@^0.2.6":
   version "0.2.6"
   resolved "https://registry.npmjs.org/@defstudio/vite-livewire-plugin/-/vite-livewire-plugin-0.2.6.tgz"
@@ -31,6 +46,60 @@
   dependencies:
     minimatch "^5.1.0"
     vite-plugin-full-reload "^1.0.0"
+
+"@editorjs/code@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.npmjs.org/@editorjs/code/-/code-2.8.0.tgz"
+  integrity sha512-qlv1OqSEPKnLv/ZQgNFmVgqsMbGDkh/qgTEnbVWsS+yujo1nlwgVkqCB8tOkQGVsrpmAYLiWRlA413nKxxCN5w==
+  dependencies:
+    "@codexteam/icons" "^0.0.5"
+
+"@editorjs/editorjs@^2.27.2":
+  version "2.27.2"
+  resolved "https://registry.npmjs.org/@editorjs/editorjs/-/editorjs-2.27.2.tgz"
+  integrity sha512-k4LavGJijAP0F1wATQ0fTo10xtBSny9z6yWaP3ANqqtyKr+pBMind5NQzckqYI0yPp31GObpcS/HsFGsFOGcug==
+
+"@editorjs/header@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.npmjs.org/@editorjs/header/-/header-2.7.0.tgz"
+  integrity sha512-4fGKGe2ZYblVqR/P/iw5ieG00uXInFgNMftBMqJRYcB2hUPD30kuu7Sn6eJDcLXoKUMOeqi8Z2AlUxYAmvw7zQ==
+  dependencies:
+    "@codexteam/icons" "^0.0.5"
+
+"@editorjs/image@^2.8.1":
+  version "2.8.1"
+  resolved "https://registry.npmjs.org/@editorjs/image/-/image-2.8.1.tgz"
+  integrity sha512-4WscDAoi6OO0F6L7N1mkQymADwj8hHgH/ICk5wGRPdkesUZW1TgldX8XvSmy+f5VylsEi3F/gUggaZsrYxu2sA==
+  dependencies:
+    "@codexteam/icons" "^0.0.6"
+
+"@editorjs/inline-code@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.npmjs.org/@editorjs/inline-code/-/inline-code-1.4.0.tgz"
+  integrity sha512-nJJx2eBgQyml7U8MdMdJNFY2RgZCOuvvXHEW73xsdu36ZXCd44eAo7vq1S5Jz9l8bC676SvNbRfeH/nojXK37A==
+  dependencies:
+    "@codexteam/icons" "^0.0.5"
+
+"@editorjs/list@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.npmjs.org/@editorjs/list/-/list-1.8.0.tgz"
+  integrity sha512-Vq6cjyTXBzgegYv/MtTfuDdiz59yGhDEc/yAVXr6lmvoWAFs9cJ4TLuh4/9SbrbhIptcQLDvUjMDKmRrV6v2NQ==
+  dependencies:
+    "@codexteam/icons" "^0.0.4"
+
+"@editorjs/quote@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.npmjs.org/@editorjs/quote/-/quote-2.5.0.tgz"
+  integrity sha512-24Mu8cESaj34a0kg1Enj7qiZ3yiCOsZI59+8xpfXLO/NkO7hBYWNForVcBy5yIWs/VLlEZK11FP37f/mHrKugQ==
+  dependencies:
+    "@codexteam/icons" "^0.0.5"
+
+"@editorjs/underline@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@editorjs/underline/-/underline-1.1.0.tgz"
+  integrity sha512-vQj2ROW1KreD31QHlhaPikmDJGWYzRBusN4Zyfwl9nIIQCByt4S8fZQpsrRvH4sct5mkirsHllNT00rJlqHK7Q==
+  dependencies:
+    "@codexteam/icons" "^0.0.6"
 
 "@fortawesome/fontawesome-free@^6.4.0":
   version "6.4.0"

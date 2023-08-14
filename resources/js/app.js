@@ -3,6 +3,7 @@ import '../css/app.css';
 import '../css/select.css'; 
 import '../css/theme.css'; 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
+import './editorjs' 
 
 import {livewire_hot_reload} from 'virtual:livewire-hot-reload'
 livewire_hot_reload();

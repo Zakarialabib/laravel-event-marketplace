@@ -20,14 +20,15 @@ class Create extends Component
     use WithFileUploads;
 
     public $listeners = [
-        'createModal' => 'OpenModal',
+        'createModal',
+        'imagesUpdated' => 'onImagesUpdated',
     ];
 
     public $createModal = false;
 
     public $race;
 
-    public $image;
+    public $images;
 
     public $options = [];
 
@@ -94,7 +95,7 @@ class Create extends Component
         $this->description = $value;
     }
 
-    public function OpenModal()
+    public function createModal()
     {
         $this->resetErrorBag();
 
@@ -102,7 +103,7 @@ class Create extends Component
 
         $this->race = new Race();
 
-        $this->description = 'write your description here';
+        $this->description = '';
 
         $this->race->first_year = true;
 
@@ -155,12 +156,10 @@ class Create extends Component
 
         $this->race->slug = Str::slug($this->race->name);
 
-        if ($this->image) {
-            $imageName = Str::slug($this->race->name).'.'.$this->image->extension();
-
-            $this->race->addMedia($this->image)->toMediaCollection('local_files');
-
-            $this->race->images = $imageName;
+        if ($this->images) {
+            foreach ($this->images as $image) {
+                $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
+            }
         }
 
         $this->race->description = $this->description;

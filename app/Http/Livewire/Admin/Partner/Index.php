@@ -59,12 +59,7 @@ class Index extends Component
     {
         return $this->partner?->image;
     }
-
-    public function getFeaturedImagePreviewProperty()
-    {
-        return $this->partner?->featured_image;
-    }
-
+    
     public function getSelectedCountProperty()
     {
         return count($this->selected);

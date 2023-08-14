@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Product;
 
 use App\Helpers;
-// use App\Models\Brand;
+use App\Models\Brand;
 use App\Models\ProductCategory;
 use App\Models\Product;
 // use App\Models\Subcategory;
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 
 class Edit extends Component
 {
@@ -25,17 +26,9 @@ class Edit extends Component
 
     public $editModal = false;
 
-    public $image;
-
     public $images;
 
     public $category_id;
-
-    public $gallery = [];
-
-    public $width = 1000;
-
-    public $height = 1000;
 
     public $description;
 
@@ -62,7 +55,7 @@ class Edit extends Component
         'options'         => ['nullable', 'array'],
         'options.*.type'  => ['string', 'max:255'],
         'options.*.value' => ['string', 'max:255'],
-        // 'product.brand_id'         => ['nullable', 'integer'],
+        'product.brand_id'         => ['nullable', 'integer'],
         'product.embeded_video' => ['nullable'],
     ];
 
@@ -76,11 +69,6 @@ class Edit extends Component
         $this->description = $value;
     }
 
-    public function getImagePreviewProperty()
-    {
-        return $this->product?->image;
-    }
-
     public function getCategoriesProperty()
     {
         return ProductCategory::select('id', 'name')
@@ -89,7 +77,7 @@ class Edit extends Component
 
     public function getBrandsProperty()
     {
-        // return Brand::select('name', 'id')->get();
+        return Brand::select('name', 'id')->get();
     }
 
     // public function getSubcategoriesProperty()
@@ -130,6 +118,8 @@ class Edit extends Component
 
         $this->options = $this->product->options ?? [];
 
+        $this->images = $this->product->images;
+
         $this->editModal = true;
     }
 
@@ -139,23 +129,12 @@ class Edit extends Component
 
         $this->validate();
 
-        if ($this->image) {
-            $imageName = Helpers::handleUpload($this->image, $this->width, $this->height, $this->product->name);
-
-            $this->product->image = $imageName;
-        }
-
-        if ($this->gallery) {
-            $gallery = [];
-
-            foreach ($this->gallery as $key => $value) {
-                $imageName = Helpers::handleUpload($value, $this->width, $this->height, $this->product->name);
-                $gallery[] = $imageName;
+        if ($this->images) {
+            foreach ($this->images as $image) {
+                $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
             }
-
-            $this->product->gallery = json_encode($gallery);
         }
-
+         
         $this->product->description = $this->description;
         $this->product->options = $this->options;
 

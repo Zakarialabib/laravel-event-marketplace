@@ -69,7 +69,7 @@
 
                         </div>
 
-                        {{-- <div class="sm:w-full lg:w-1/2 px-3 ">
+                        <div class="sm:w-full lg:w-1/2 px-3 ">
                             <x-label for="brand_id" :value="__('Brand')" />
                             <select
                                 class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
@@ -81,7 +81,7 @@
                                 @endforeach
                                 <x-input-error :messages="$errors->get('product.brand_id')" for="product.brand_id" class="mt-2" />
                             </select>
-                        </div> --}}
+                        </div>
 
                         <div class="w-full mb-4 px-3">
                             <x-label for="description" :value="__('Description')" />

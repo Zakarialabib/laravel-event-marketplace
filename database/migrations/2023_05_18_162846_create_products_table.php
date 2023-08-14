@@ -16,6 +16,7 @@ return new class () extends Migration {
             $table->string('code');
             $table->string('images')->nullable();
             $table->text('description');
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('product_categories');
             $table->decimal('price', 8, 2);
             $table->decimal('discount_price', 8, 2)->nullable();

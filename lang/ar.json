@@ -881,7 +881,7 @@
     "You Have a New Message.": "You Have a New Message.",
     "You Have a new order.": "You Have a new order.",
     "You have already registered for this race. Check your account for details.": "You have already registered for this race. Check your account for details.",
-    "You have been invited to join the team :team_name": "You have been invited to join the team :team_name",
+    "You have been invited to join the team :name": "You have been invited to join the team :name",
     "You may lose your registration spot if your browser session is idle for more than 15 minutes. ": "You may lose your registration spot if your browser session is idle for more than 15 minutes. ",
     "You won't be able to revert this!": "You won't be able to revert this!",
     "You're logged in!": "You're logged in!",
