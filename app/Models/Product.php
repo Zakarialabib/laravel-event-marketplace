@@ -52,7 +52,7 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsTo(ProductCategory::class);
     }
-   
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
@@ -62,7 +62,7 @@ class Product extends Model implements HasMedia
     {
         return $query->where('category_id', $categoryId);
     }
-  
+
     public function scopeByBrand($query, $brandId)
     {
         return $query->where('brand_id', $brandId);

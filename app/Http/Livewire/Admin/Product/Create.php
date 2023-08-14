@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Product;
 
-use App\Helpers;
 use App\Models\Brand;
 use App\Models\ProductCategory;
 use App\Models\Product;
@@ -47,9 +46,9 @@ class Create extends Component
         'product.category_id'      => ['required', 'integer'],
         // 'product.subcategories'    => ['required', 'array', 'min:1'],
         // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
-        'options.*.type'  => ['required', 'string', 'in:color,size'],
-        'options.*.value' => ['required_if:options.*.type,color', 'string'],
-        'product.brand_id'         => ['nullable', 'integer'],
+        'options.*.type'        => ['required', 'string', 'in:color,size'],
+        'options.*.value'       => ['required_if:options.*.type,color', 'string'],
+        'product.brand_id'      => ['nullable', 'integer'],
         'product.embeded_video' => ['nullable'],
     ];
 
