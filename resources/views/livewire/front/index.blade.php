@@ -30,7 +30,7 @@
         @if (count(Helpers::getActiveFeaturedBlogs()) > 0)
             <div class="relative py-6 mx-auto px-6 bg-green-50 ">
                 <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
-                    {{ 'Ressources' }}
+                    {{ 'Resources' }}
                 </h2>
                 <div class="grid xl:grid-cols-3 sm:grid-cols-1 gap-4 overflow-hidden justify-center py-6">
                     @foreach (Helpers::getActiveFeaturedBlogs() as $blog)

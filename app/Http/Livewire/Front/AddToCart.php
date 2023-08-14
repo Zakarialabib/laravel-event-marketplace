@@ -19,16 +19,13 @@ class AddToCart extends Component
 
     public $product_id;
 
-    public $product_name;
-
-    public $product_price;
-
-    public $product_qty;
-
+    public $selectedSize;
+    public $selectedColor;
     public $quantity = 1;
 
     public $listeners = [
         'AddToCart',
+        
     ];
 
     public function mount(Product $product)
@@ -43,7 +40,16 @@ class AddToCart extends Component
         // 'options.*.type'
         // 'options.*.value'
 
-        Cart::instance('shopping')->add($product->id, $product->name, $this->quantity, $product->price)->associate('App\Models\Product');
+        Cart::instance('shopping')->add([
+            'id'      => $product->id,
+            'name'    => $product->name,
+            'qty'     => $this->quantity,
+            'price'   => $product->price,
+            'options' => [
+                'size'  => $this->selectedSize,
+                'color' => $this->selectedColor,
+            ],
+        ])->associate('App\Models\Product');
 
         $this->emit('cartCountUpdated');
 

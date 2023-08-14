@@ -1,9 +1,5 @@
 @props(['product'])
 
-@php
-    $gallery = json_decode($product->gallery);
-@endphp
-
 <div class="relative mb-10">
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">

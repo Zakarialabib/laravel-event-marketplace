@@ -1,14 +1,11 @@
 <div>
     @section('title', __('Checkout'))
     <section class="py-5 mx-auto pt-16 px-10 bg-gray-100">
-        <h2 class="my-6 text-center text-5xl font-bold font-heading">{{ __('Checkout') }}</h2>
+        <h2 class="my-6 text-center text-5xl font-bold font-heading">{{ __('Order confirmation') }}</h2>
         <div class="flex flex-wrap">
             @guest
-                <div class="w-full lg:w-1/2 -py-10">
-                    <h3 class="text-xl -mb-10 font-semibold text-gray-700">
-                        {{ __('to continue checkout please login or register') }}
-                    </h3>
-                    @livewire('auth.index')
+                <div class="w-full lg:w-1/2 bg-white pt-10 px-6">
+                    @livewire('auth.login')
                 </div>
             @endguest
             @auth
@@ -57,11 +54,9 @@
                                 <div class="flex flex-wrap w-full mb-10">
                                     <div class="w-full md:w-1/3 mb-6 md:mb-0 px-4">
                                         <div class="flex h-32 items-center justify-center bg-gray-100">
-                                            @if (!empty($item->model->image))
-                                                <img class="h-full object-contain"
-                                                    src="{{ asset('images/products') }}/{{ $item->model->image }}"
-                                                    alt="{{ $item->name }}">
-                                            @endif
+                                            <img class="h-full object-contain"
+                                                src="{{ $item->model->getFirstMediaUrl('local_files') }}"
+                                                alt="{{ $item->name }}">
                                         </div>
                                     </div>
                                     <div class="w-full md:w-2/3 px-4">
@@ -70,6 +65,12 @@
                                                 <h3 class="mb-3 text-xl font-bold font-heading text-gray-900">
                                                     {{ $item->name }}
                                                 </h3>
+                                            @endif
+
+                                            @if (!empty($item->options))
+                                                <p>
+                                                    {{ $item->options->has('size') ? $item->options->size : '' }}
+                                                </p>
                                             @endif
                                             @if (!empty($item->price))
                                                 <p

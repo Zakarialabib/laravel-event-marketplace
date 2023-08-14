@@ -22,17 +22,17 @@
             @endif
         </div>
         <div class="px-2 pb-4 text-left">
-            @if($product->category)
-            <div
-                class="absolute top-3.5 md:top-5 3xl:top-7 ltr:left-3.5 rtl:right-3.5 ltr:md:left-5 rtl:md:right-5 ltr:3xl:left-7 rtl:3xl:right-7 flex flex-col gap-y-1 items-start">
-                <span
-                    class="bg-indigo-600 text-white text-10px md:text-xs leading-5 rounded-md inline-block px-1.5 sm:px-1.5 xl:px-2 py-0.5 sm:py-1">
-                    <p><span class="hidden sm:inline">{{ $product->category->name }}</span></p>
-                </span>
-            </div>
+            @if ($product->category)
+                <div
+                    class="absolute top-3.5 md:top-5 3xl:top-7 ltr:left-3.5 rtl:right-3.5 ltr:md:left-5 rtl:md:right-5 ltr:3xl:left-7 rtl:3xl:right-7 flex flex-col gap-y-1 items-start">
+                    <span
+                        class="bg-indigo-600 text-white text-10px md:text-xs leading-5 rounded-md inline-block px-1.5 sm:px-1.5 xl:px-2 py-0.5 sm:py-1">
+                        <p><span class="hidden sm:inline">{{ $product->category->name }}</span></p>
+                    </span>
+                </div>
             @endif
             <div class="w-full flex-none text-sm flex items-center justify-center text-gray-600 py-2">
-                @if ($product->status === true)
+                @if ($product->status === \App\Enums\Status::ACTIVE)
                     <div class="text-xs font-medium">
                         <span class="text-green-500">● {{ __('In Stock') }}</span>
                     </div>
@@ -67,7 +67,10 @@
             </div>
 
             <div class="flex justify-center">
-                <livewire:front.add-to-cart :product="$product" :key="$product->id" />
+                <a class="my-2 block bg-green-500 hover:bg-green-800 text-center text-white font-bold text-xs py-2 px-4 rounded-md uppercase cursor-pointer tracking-wider hover:shadow-lg transition ease-in duration-300"
+                    href="{{ route('front.product', $product->slug) }}">
+                    {{ __('Read more') }}
+                </a>
             </div>
         </div>
     </div>

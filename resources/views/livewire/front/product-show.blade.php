@@ -80,13 +80,14 @@
                                         {{ __('Size') }}
                                     </h4>
                                     <ul class="flex flex-wrap">
-                                        @foreach ($product->options as $option)
+                                        @foreach (json_decode($product->options, true) as $option)
                                             @if ($option['type'] === 'size')
                                                 <li
                                                     class="cursor-pointer rounded border w-11 h-11 p-2 mb-2 md:mb-3 mr-2 md:mr-3 -3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
-                                                    <span class="block w-full h-full rounded">
+                                                    <button class="block w-full h-full rounded"
+                                                        wire:click="$set('selectedSize', '{{ $option['value'] }}')">
                                                         {{ $option['value'] }}
-                                                    </span>
+                                                    </button>
                                                 </li>
                                             @endif
                                         @endforeach
@@ -98,12 +99,13 @@
                                         {{ __('Color') }}
                                     </h4>
                                     <ul class="flex flex-wrap">
-                                        @foreach ($product->options as $option)
+                                        @foreach (json_decode($product->options, true) as $option)
                                             @if ($option['type'] === 'color')
                                                 <li
                                                     class="cursor-pointer rounded border  w-9 md:w-11 h-9 md:h-11 p-1 mb-2 md:mb-3 mr-2 md:mr-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
-                                                    <span class="block w-full h-full rounded"
-                                                        style="background-color: {{ $option['value'] }};"></span>
+                                                    <button class="block w-full h-full rounded"
+                                                        wire:click="$set('selectedColor', '{{ $option['value'] }}')"
+                                                        style="background-color: {{ $option['value'] }};"></button>
                                                 </li>
                                             @endif
                                         @endforeach
@@ -138,7 +140,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    @if ($product->status === true)
+                                    @if ($product->status === \App\Enums\Status::ACTIVE)
                                         <a class="block text-center text-white font-bold font-heading py-2 px-4 rounded-md uppercase bg-green-400 hover:bg-green-200 transition cursor-pointer"
                                             wire:click="AddToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">
                                             {{ __('Add to cart') }}

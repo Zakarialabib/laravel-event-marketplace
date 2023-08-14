@@ -12,7 +12,7 @@
             <div class="absolute inset-y-0 right-0 pl-10 max-w-full flex">
                 <div class="w-screen max-w-sm">
                     <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
-                        <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
+                        <div class="flex-1 py-6 px-4 sm:px-6">
                             <div class="flex items-center justify-between">
                                 <h2 class="text-lg font-medium text-gray-900">{{ __('Cart') }}</h2>
                                 <div class="ml-3 h-7 flex items-center">
@@ -35,11 +35,9 @@
                                     <div class="flex flex-wrap mb-10">
                                         <div class="w-full md:w-1/3 mb-6 md:mb-0 px-4">
                                             <div class="flex h-32 items-center justify-center bg-gray-100">
-                                                @if (!empty($item->model->image))
-                                                    <img class="h-full object-contain"
-                                                        src="{{ asset('images/products') }}/{{ $item->model->image }}"
-                                                        alt="{{ $item->name }}">
-                                                @endif
+                                                <img class="h-full bg-center bg-no-repeat bg-cover rounded-md"
+                                                    src="{{ $item->model->getFirstMediaUrl('local_files') }}"
+                                                    alt="{{ $item->name }}">
                                             </div>
                                         </div>
                                         <div class="w-full md:w-2/3 px-4">
@@ -51,13 +49,13 @@
                                                 @endif
                                                 <div class="flex flex-wrap items-center justify-between">
                                                     <div
-                                                        class="inline-flex items-center px-4 font-semibold font-heading text-gray-500 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
-                                                        <div class="flex items-center space-x-2">
-                                                            @if (!empty($item->price))
-                                                                <p class="text-lg text-blue-500 font-bold font-heading">
-                                                                    {{ Helpers::format_currency($item->price) }}
-                                                                </p>
-                                                            @endif
+                                                        class="w-full flex flex-col justify-center gap-6 items-center py-1 font-semibold font-heading text-gray-500 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
+                                                        @if (!empty($item->price))
+                                                            <p class="text-lg text-blue-500 font-bold font-heading mb-2">
+                                                                {{ Helpers::format_currency($item->price) }}
+                                                            </p>
+                                                        @endif
+                                                        <div>
                                                             @if (!empty($item->rowId))
                                                                 <button
                                                                     wire:click="decreaseQuantity('{{ $item->rowId }}')"
