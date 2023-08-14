@@ -19,7 +19,7 @@ class Registration extends Model
     use SoftDeletes;
     use HasGlobalDate;
     use HasAdvancedFilter;
-    
+
     public const ATTRIBUTES = [
         'id',
         'participant_id',
