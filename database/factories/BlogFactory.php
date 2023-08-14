@@ -22,9 +22,9 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'       => $this->faker->sentence,
+            'title'            => $this->faker->sentence,
             'slug'             => $this->faker->slug,
-            'description' => $this->faker->paragraph,
+            'description'      => $this->faker->paragraph,
             'meta_title'       => $this->faker->sentence,
             'meta_description' => $this->faker->paragraph(1),
             'language_id'      => 1,

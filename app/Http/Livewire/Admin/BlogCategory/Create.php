@@ -51,9 +51,9 @@ class Create extends Component
     public function create()
     {
         $this->validate();
-        
+
         $this->blogcategory->language_id = 1;
-        
+
         $this->blogcategory->save();
 
         $this->alert('success', __('BlogCategory created successfully.'));

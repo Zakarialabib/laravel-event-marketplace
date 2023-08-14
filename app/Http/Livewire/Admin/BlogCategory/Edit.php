@@ -47,7 +47,7 @@ class Edit extends Component
         $this->validate();
 
         $this->blogcategory->language_id = 1;
-        
+
         $this->blogcategory->save();
 
         $this->alert('success', __('BlogCategory updated successfully'));

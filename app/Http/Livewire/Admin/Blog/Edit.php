@@ -27,11 +27,10 @@ class Edit extends Component
     public $description;
 
     public $listeners = [
-        'editModal',  
+        'editModal',
         'editorjs-save:myEditor1' => 'saveEditorState',
-        'imagesUpdated' => 'onImagesUpdated',
+        'imagesUpdated'           => 'onImagesUpdated',
     ];
-    
 
     protected $rules = [
         'blog.title'            => 'required|min:3|max:255',
@@ -42,15 +41,17 @@ class Edit extends Component
         'blog.meta_title'       => 'nullable|max:100',
         'blog.meta_description' => 'nullable|max:200',
     ];
+
     public function saveEditorState($editorJsonData)
     {
         $this->description = $editorJsonData;
     }
-    
+
     public function onImagesUpdated($image): void
     {
         $this->images = $image;
     }
+
     public function render(): View|Factory
     {
         // abort_if(Gate::denies('blog_create'), 403);
