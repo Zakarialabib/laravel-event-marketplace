@@ -22,7 +22,6 @@
     <section class="relative pt-16 bg-white">
         <div class="items-center w-full  max-w-7xl mx-auto text-gray-900">
             <article itemscope itemtype="http://schema.org/Article" class="max-w-prose mx-auto py-8">
-
                 <img src="{{ asset('images/blog' . $blog->image) }}" alt="{{ $blog->title }}"
                     class="w-full h-96 object-cover rounded-lg shadow-lg">
                 <div class="flex justify-between items-center mt-4">
@@ -37,7 +36,11 @@
                     {{ $blog->title }}
                 </h1>
                 <div itemprop="articleBody" class="mt-4 text-gray-700 text-lg leading-relaxed">
-                    {!! $blog->description !!}
+                    @livewire('editorjs', [
+                        'editorId' => 'myEditor',
+                        'value' => $blog->description,
+                        'readOnly' => true,
+                    ])
                 </div>
 
             </article>
