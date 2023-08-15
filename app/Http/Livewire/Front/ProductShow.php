@@ -31,7 +31,6 @@ class ProductShow extends Component
     public $selectedSize = '';
     public $selectedColor = '';
     public $brand_products;
-
     public $decreaseQuantity;
 
     public $increaseQuantity;

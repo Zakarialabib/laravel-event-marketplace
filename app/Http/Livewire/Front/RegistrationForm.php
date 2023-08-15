@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\{Participant, Registration, Service, Subscriber, User};
+use App\Models\{Participant, Registration, Service, User};
 use App\Enums\Status;
 use App\Mail\RegistrationConfirmation;
 use App\Models\Race;
@@ -150,7 +150,6 @@ class RegistrationForm extends Component
             Mail::to($this->participant['email'])
                 ->later(now()->addMinutes(10), new RegistrationConfirmation($this->participant));
 
-            // Add Race to Cart
             Cart::instance('races')
                 ->add($this->race->id, $this->race->name, 1, $this->race->price)
                 ->associate('App\Models\Race');

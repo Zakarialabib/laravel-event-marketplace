@@ -21,6 +21,7 @@ class Catalog extends Component
     public $paginationOptions = [25, 50, 100];
 
     public $category_id;
+    public $subcategory_id;
 
     public $sorting;
 
@@ -43,12 +44,18 @@ class Catalog extends Component
 
     public function filterType($type, $value)
     {
+        // subcategory type with subcategory_id 
         switch ($type) {
             case 'category':
                 $this->category_id = $value;
 
                 break;
+            case 'subcategory':
+                $this->subcategory_id = $value;
+
+                break;
         }
+
         $this->resetPage();
     }
 
@@ -57,6 +64,10 @@ class Catalog extends Component
         switch ($type) {
             case 'category':
                 $this->category_id = null;
+
+                break;
+            case 'subcategory':
+                $this->subcategory_id = null;
 
                 break;
         }
@@ -82,34 +93,36 @@ class Catalog extends Component
         $this->maxPrice = Product::active()->max('price') ?? 0;
     }
 
+    public function applySorting($query)
+    {
+        switch ($this->sorting) {
+            case 'name':
+                return $query->orderBy('name', 'asc');
+            case 'name-desc':
+                return $query->orderBy('name', 'desc');
+            case 'price':
+                return $query->orderBy('price', 'asc');
+            case 'price-desc':
+                return $query->orderBy('price', 'desc');
+            case 'date':
+                return $query->orderBy('created_at', 'asc');
+            case 'date-desc':
+                return $query->orderBy('created_at', 'desc');
+            default:
+                return $query;
+        }
+    }
+
     public function render()
     {
         $query = Product::active()
-            ->when($this->category_id, function ($query) {
-                return $query->where('category_id', '>=', $this->category_id);
-            })
-            ->when($this->minPrice, function ($query) {
-                return $query->where('price', '>=', $this->minPrice);
-            })
-            ->when($this->maxPrice, function ($query) {
-                return $query->where('price', '<=', $this->maxPrice);
-            });
+            ->when($this->category_id, fn ($q) => $q->where('category_id', $this->category_id))
+            ->when($this->subcategory_id, fn ($q) => $q->whereHas('subcategories', fn ($subq) => $subq->whereIn('id', $this->subcategory_id)))
+            ->when($this->minPrice, fn ($q) => $q->where('price', '>=', $this->minPrice))
+            ->when($this->maxPrice, fn ($q) => $q->where('price', '<=', $this->maxPrice))
+            ->when($this->sorting, fn ($q) => $this->applySorting($q));
 
-        if ($this->sorting === 'name') {
-            $products = $query->orderBy('name', 'asc')->paginate($this->perPage);
-        } elseif ($this->sorting === 'name-desc') {
-            $products = $query->orderBy('name', 'desc')->paginate($this->perPage);
-        } elseif ($this->sorting === 'price') {
-            $products = $query->orderBy('price', 'asc')->paginate($this->perPage);
-        } elseif ($this->sorting === 'price-desc') {
-            $products = $query->orderBy('price', 'desc')->paginate($this->perPage);
-        } elseif ($this->sorting === 'date') {
-            $products = $query->orderBy('created_at', 'asc')->paginate($this->perPage);
-        } elseif ($this->sorting === 'date-desc') {
-            $products = $query->orderBy('created_at', 'desc')->paginate($this->perPage);
-        } else {
-            $products = $query->paginate($this->perPage);
-        }
+        $products = $query->paginate($this->perPage);
 
         return view('livewire.front.catalog', compact('products'))->extends('layouts.app');
     }
