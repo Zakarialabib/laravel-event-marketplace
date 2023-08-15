@@ -9,8 +9,6 @@
     <link rel="prefetch" href="{{ request()->getSchemeAndHttpHost() }}">
     <link rel="prerender" href="{{ request()->getSchemeAndHttpHost() }}">
     {{-- <link rel="preload" href="{{ request()->getSchemeAndHttpHost() }}"> --}}
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Head Tags -->
     @if (Helpers::settings('head_tags'))
