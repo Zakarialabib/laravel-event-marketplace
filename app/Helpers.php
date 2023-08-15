@@ -60,7 +60,7 @@ class Helpers
             ->select('id', 'name')
             ->get();
     }
-   
+
     public static function getActiveSubcategories()
     {
         return Subcategory::active()
@@ -81,7 +81,7 @@ class Helpers
             ->select('id', 'name')
             ->get();
     }
-    
+
     public static function getActiveBrands()
     {
         return Brand::active()
@@ -95,7 +95,7 @@ class Helpers
             ->select('id', 'name')
             ->get();
     }
-   
+
     public static function getActiveRace()
     {
         return Race::active()

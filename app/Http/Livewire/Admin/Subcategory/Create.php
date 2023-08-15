@@ -67,5 +67,4 @@ class Create extends Component
     {
         return ProductCategory::select('name', 'id')->get();
     }
-
 }

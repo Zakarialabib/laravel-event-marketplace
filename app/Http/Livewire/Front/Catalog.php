@@ -44,7 +44,7 @@ class Catalog extends Component
 
     public function filterType($type, $value)
     {
-        // subcategory type with subcategory_id 
+        // subcategory type with subcategory_id
         switch ($type) {
             case 'category':
                 $this->category_id = $value;

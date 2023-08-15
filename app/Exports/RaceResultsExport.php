@@ -13,6 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Traits\ForModels;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+
 class RaceResultsExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, ShouldQueue
 {
     use Exportable;

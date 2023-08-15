@@ -19,7 +19,7 @@ class OrderFormObserver
 
         if ($admin) {
             $admin->notify(new OrderFormNotification($orderForm));
-        }      
+        }
     }
 
     /** Handle the OrderForms "updated" event. */

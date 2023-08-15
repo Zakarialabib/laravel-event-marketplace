@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Product;
 
-use App\Models\Brand;
-use App\Models\ProductCategory;
 use App\Models\Product;
-use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -50,11 +47,11 @@ class Edit extends Component
         'product.category_id'      => ['required', 'integer'],
         'product.subcategories'    => ['nullable', 'array', 'min:1'],
         'product.subcategories.*'  => ['integer', 'distinct:strict'],
-        'options'               => ['nullable', 'array'],
-        'options.*.type'        => ['string', 'max:255'],
-        'options.*.value'       => ['string', 'max:255'],
-        'product.brand_id'      => ['nullable', 'integer'],
-        'product.embeded_video' => ['nullable'],
+        'options'                  => ['nullable', 'array'],
+        'options.*.type'           => ['string', 'max:255'],
+        'options.*.value'          => ['string', 'max:255'],
+        'product.brand_id'         => ['nullable', 'integer'],
+        'product.embeded_video'    => ['nullable'],
     ];
 
     public function onImagesUpdated($image): void

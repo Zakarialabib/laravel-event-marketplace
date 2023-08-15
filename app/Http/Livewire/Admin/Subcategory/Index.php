@@ -38,8 +38,6 @@ class Index extends Component
 
     public array $paginationOptions;
 
-
-
     protected $queryString = [
         'search' => [
             'except' => '',

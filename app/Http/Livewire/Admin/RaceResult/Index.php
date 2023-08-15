@@ -109,11 +109,11 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = RaceResult::when($this->raceType, fn ($q) => $q->where('race_id', $this->raceType))
-        ->advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
-            'order_direction' => $this->sortDirection,
-        ]);
+            ->advancedFilter([
+                's'               => $this->search ?: null,
+                'order_column'    => $this->sortBy,
+                'order_direction' => $this->sortDirection,
+            ]);
 
         $race_results = $query->paginate($this->perPage);
 

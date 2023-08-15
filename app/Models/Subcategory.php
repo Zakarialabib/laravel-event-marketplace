@@ -46,15 +46,15 @@ class Subcategory extends Model
     use HasAdvancedFilter;
 
     public const ATTRIBUTES = [
-        'id', 'category_id', 'name', 'slug', 
+        'id', 'category_id', 'name', 'slug',
 
     ];
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
-   
+
     protected $fillable = [
-        'category_id', 'name', 'slug', 
+        'category_id', 'name', 'slug',
     ];
 
     public function scopeActive($query): void

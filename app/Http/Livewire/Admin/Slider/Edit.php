@@ -6,7 +6,6 @@ namespace App\Http\Livewire\Admin\Slider;
 
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use App\Models\Slider;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
