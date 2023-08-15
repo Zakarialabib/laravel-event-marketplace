@@ -63,25 +63,8 @@ class Index extends Component
     public $seo_meta_description;
 
     public $footer_copyright_text;
-
-    public $enableRegistrationTerms;
-
     public $site_maintenance_message;
-
-    public $site_tax;
-
-    public $site_return;
-
-    public $site_refund;
-
-    public $site_terms;
-
-    public $site_privacy;
-
-    public $site_about;
-
-    public $site_contact;
-
+    
     public function mount()
     {
         $this->company_name = Helpers::settings('company_name');
@@ -102,16 +85,9 @@ class Index extends Component
         $this->seo_meta_title = Helpers::settings('seo_meta_title');
         $this->seo_meta_description = Helpers::settings('seo_meta_description');
         $this->footer_copyright_text = Helpers::settings('footer_copyright_text');
-        $this->enableRegistrationTerms = (bool) Helpers::settings('enableRegistrationTerms');
         $this->primary_color = Helpers::settings('primary_color');
         $this->secondary_color = Helpers::settings('secondary_color');
         $this->site_maintenance_message = Helpers::settings('site_maintenance_message');
-        $this->site_return = Helpers::settings('site_return');
-        $this->site_refund = Helpers::settings('site_refund');
-        $this->site_terms = Helpers::settings('site_terms');
-        $this->site_privacy = Helpers::settings('site_privacy');
-        $this->site_about = Helpers::settings('site_about');
-        $this->site_contact = Helpers::settings('site_contact');
     }
 
     public function save()
@@ -132,16 +108,9 @@ class Index extends Component
             'seo_meta_title'           => $this->seo_meta_title,
             'seo_meta_description'     => $this->seo_meta_description,
             'footer_copyright_text'    => $this->footer_copyright_text,
-            'enableRegistrationTerms'  => $this->enableRegistrationTerms,
             'primary_color'            => $this->primary_color,
             'secondary_color'          => $this->secondary_color,
             'site_maintenance_message' => $this->site_maintenance_message,
-            'site_return'              => $this->site_return,
-            'site_refund'              => $this->site_refund,
-            'site_terms'               => $this->site_terms,
-            'site_privacy'             => $this->site_privacy,
-            'site_about'               => $this->site_about,
-            'site_contact'             => $this->site_contact,
         ];
 
         foreach ($settings as $key => $value) {

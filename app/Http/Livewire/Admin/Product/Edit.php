@@ -7,7 +7,7 @@ namespace App\Http\Livewire\Admin\Product;
 use App\Models\Brand;
 use App\Models\ProductCategory;
 use App\Models\Product;
-// use App\Models\Subcategory;
+use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -48,8 +48,8 @@ class Edit extends Component
         'product.meta_title'       => ['nullable', 'string', 'max:255'],
         'product.meta_description' => ['nullable', 'string', 'max:255'],
         'product.category_id'      => ['required', 'integer'],
-        // 'product.subcategories'    => ['nullable', 'array', 'min:1'],
-        // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
+        'product.subcategories'    => ['nullable', 'array', 'min:1'],
+        'product.subcategories.*'  => ['integer', 'distinct:strict'],
         'options'               => ['nullable', 'array'],
         'options.*.type'        => ['string', 'max:255'],
         'options.*.value'       => ['string', 'max:255'],
@@ -67,26 +67,10 @@ class Edit extends Component
         $this->description = $value;
     }
 
-    public function getCategoriesProperty()
+    public function updatedProductSubcategories()
     {
-        return ProductCategory::select('id', 'name')
-            ->get();
+        $this->product->subcategories;
     }
-
-    public function getBrandsProperty()
-    {
-        return Brand::select('name', 'id')->get();
-    }
-
-    // public function getSubcategoriesProperty()
-    // {
-    //     return Subcategory::select('name', 'id')->get();
-    // }
-
-    // public function updatedProductSubcategories()
-    // {
-    //     $this->product->subcategories;
-    // }
 
     public function addOption()
     {
@@ -114,7 +98,7 @@ class Edit extends Component
 
         $this->description = $this->product->description;
 
-        $this->options = $this->product->options ?? [];
+        $this->options = json_decode($this->product->options, true) ?? '';
 
         $this->images = $this->product->images;
 

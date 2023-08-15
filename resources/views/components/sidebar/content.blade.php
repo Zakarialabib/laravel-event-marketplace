@@ -18,6 +18,8 @@
         {{-- @can('category_access') --}}
         <x-sidebar.sublink title="{{ __('Categories') }}" href="{{ route('admin.product-categories') }}"
             :active="request()->routeIs('admin.product-categories')" />
+        <x-sidebar.sublink title="{{ __('Subcategories') }}" href="{{ route('admin.subcategories') }}"
+            :active="request()->routeIs('admin.subcategories')" />
         <x-sidebar.sublink title="{{ __('Brands') }}" href="{{ route('admin.brands') }}" :active="request()->routeIs('admin.brands')" />
         {{-- @endcan --}}
 
@@ -28,7 +30,7 @@
     <x-sidebar.dropdown title="{{ __('Races') }}" :active="request()->routeIs(['admin.races', 'admin.racelocations', 'admin.categories', 'admin.services'])">
         <x-slot name="icon">
             <span class="inline-block mr-3">
-                <i class="fa fa-boxes w-5 h-5"></i>
+                <i class="fa fa-person-biking w-5 h-5"></i>
             </span>
         </x-slot>
         <x-sidebar.sublink title="{{ __('Categories') }}" href="{{ route('admin.categories') }}" :active="request()->routeIs('admin.categories')" />
@@ -53,14 +55,22 @@
         @endcan
         <x-sidebar.sublink title="{{ __('Orders') }}" href="{{ route('admin.orders') }}" :active="request()->routeIs('admin.orders')" />
 
+
+    </x-sidebar.dropdown>
+    <x-sidebar.dropdown title="{{ __('Participation') }}" :active="request()->routeIs(['admin.registrations', 'admin.race-results'])">
+        <x-slot name="icon">
+            <span class="inline-block mr-3">
+                <i class="fa fa-square-poll-vertical w-5 h-5"></i>
+            </span>
+        </x-slot>
+
         <x-sidebar.sublink title="{{ __('Registrations') }}" href="{{ route('admin.registrations') }}"
             :active="request()->routeIs('admin.registrations')" />
 
         <x-sidebar.sublink title="{{ __('Race Results') }}" href="{{ route('admin.race-results') }}"
             :active="request()->routeIs('admin.race-results')" />
-
     </x-sidebar.dropdown>
-
+    
     {{-- @can('user_access') --}}
     <x-sidebar.dropdown title="{{ __('People') }}" :active="request()->routeIs(['admin.users', 'admin.roles', 'admin.permissions'])">
         <x-slot name="icon">

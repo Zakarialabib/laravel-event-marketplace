@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 use App\Models\Slider;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\Language;
 
 class Edit extends Component
 {
@@ -34,7 +33,6 @@ class Edit extends Component
         'slider.subtitle'      => ['nullable', 'string', 'max:255'],
         'description'          => ['nullable'],
         'slider.link'          => ['nullable', 'string'],
-        'slider.language_id'   => ['nullable', 'integer'],
         'slider.bg_color'      => ['nullable', 'string'],
         'slider.embeded_video' => ['nullable'],
         'image'                => ['nullable'],
@@ -69,6 +67,8 @@ class Edit extends Component
                 ->toMediaCollection('local_files');
         }
 
+        $this->slider->language_id = 1;
+
         $this->slider->description = $this->description;
 
         $this->slider->save();
@@ -78,11 +78,6 @@ class Edit extends Component
         $this->emit('refreshIndex');
 
         $this->editModal = false;
-    }
-
-    public function getLanguagesProperty(): Collection
-    {
-        return Language::select('name', 'id')->get();
     }
 
     public function render(): View

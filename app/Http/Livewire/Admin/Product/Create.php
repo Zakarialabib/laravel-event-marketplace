@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Brand;
+use App\Models\Subcategory;
 use App\Models\ProductCategory;
 use App\Models\Product;
 use Illuminate\Contracts\View\Factory;
@@ -44,8 +45,8 @@ class Create extends Component
         'product.meta_title'       => ['nullable', 'string', 'max:255'],
         'product.meta_description' => ['nullable', 'string', 'max:255'],
         'product.category_id'      => ['required', 'integer'],
-        // 'product.subcategories'    => ['required', 'array', 'min:1'],
-        // 'product.subcategories.*'  => ['integer', 'distinct:strict'],
+        'product.subcategories'    => ['required', 'array', 'min:1'],
+        'product.subcategories.*'  => ['integer', 'distinct:strict'],
         'options.*.type'        => ['required', 'string', 'in:color,size'],
         'options.*.value'       => ['required_if:options.*.type,color', 'string'],
         'product.brand_id'      => ['nullable', 'integer'],
@@ -57,10 +58,10 @@ class Create extends Component
         $this->description = $value;
     }
 
-    // public function updatedProductSubcategories()
-    // {
-    //     $this->product->subcategories()->sync($this->product->subcategories);
-    // }
+    public function updatedProductSubcategories()
+    {
+        $this->product->subcategories()->sync($this->product->subcategories);
+    }
     public function onImagesUpdated($images): void
     {
         $this->images = $images;
@@ -96,7 +97,7 @@ class Create extends Component
             }
         }
 
-        // $this->product->subcategories = $this->subcategories;
+        $this->product->subcategories = $this->subcategories;
         $this->product->description = $this->description;
         $this->product->options = $this->options;
 
@@ -109,18 +110,4 @@ class Create extends Component
         $this->createProduct = false;
     }
 
-    public function getCategoriesProperty()
-    {
-        return ProductCategory::select('name', 'id')->get();
-    }
-
-    public function getBrandsProperty()
-    {
-        return Brand::select('name', 'id')->get();
-    }
-
-    // public function getSubcategoriesProperty()
-    // {
-    //     return Subcategory::select('name', 'id')->get();
-    // }
 }

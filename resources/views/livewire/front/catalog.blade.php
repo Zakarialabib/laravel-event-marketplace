@@ -149,7 +149,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach (Helpers::getActiveCategories() as $category)
+                        @foreach (Helpers::getActiveProductCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('category', '{{ $category->id }}')">
                                     <span
@@ -163,6 +163,35 @@
                     </ul>
                 </div>
                 <div class="border-t border-gray-900 mt-4 py-2"></div>
+                <div class="py-4" x-data="{ openSubcategory: true }">
+                    <div class="flex justify-between mb-4">
+                        <h3 class="text-xl font-bold font-heading">{{ __('Subcategory') }}</h3>
+                        <button @click="openSubcategory = !openSubcategory">
+                            <i class="fa fa-caret-down"
+                                :class="{ 'fa-caret-up': openSubcategory, 'fa-caret-down': !openSubcategory }"
+                                aria-hidden="true">
+                            </i>
+                        </button>
+                    </div>
+                    <ul x-show="openSubcategory">
+                        @foreach (Helpers::getActiveSubCategories() as $subcategory)
+                            <li class="mb-2">
+                                <button type="button"
+                                    wire:click="filterProducts('subcategory', {{ $subcategory->id }})">
+                                    <span class="inline-block px-4 py-2 text-sm font-bold font-heading text-blue-300">
+                                        {{ $subcategory->name }} <small>
+                                        </small>
+                                    </span>
+                                </button>
+                            </li>
+                        @endforeach
+                    </ul>
+                    @if (!empty($subcategory_id))
+                        <div class="text-right">
+                            <button wire:click="clearFilter('subcategory')">{{ __('Clear') }}</button>
+                        </div>
+                    @endif
+                </div>
             </div>
 
             <div class="hidden lg:block w-1/4 px-3">
@@ -171,13 +200,45 @@
 
                     <div x-data="{ minPrice: {{ $minPrice }}, maxPrice: {{ $maxPrice }} }">
                         <div class="mb-6">
-                            <input type="range" min="{{ $minPrice }}" max="{{ $maxPrice }}" step="1" x-model="minPrice" @input="$wire.minPrice = minPrice">
-                            <input type="range" min="{{ $minPrice }}" max="{{ $maxPrice }}" step="1" x-model="maxPrice" @input="$wire.maxPrice = maxPrice">
+                            <input type="range" min="{{ $minPrice }}" max="{{ $maxPrice }}"
+                                step="1" x-model="minPrice" @input="$wire.minPrice = minPrice">
+                            <input type="range" min="{{ $minPrice }}" max="{{ $maxPrice }}"
+                                step="1" x-model="maxPrice" @input="$wire.maxPrice = maxPrice">
                         </div>
                         <div class="text-sm text-center">
-                            Price Range: <span x-text="minPrice"></span>DH - <span x-text="maxPrice"></span>DH
+                            {{ __('Price Range') }}: <span x-text="minPrice"></span>DH - <span
+                                x-text="maxPrice"></span>DH
                         </div>
                     </div>
+                </div>
+                <div class="mb-6 p-4 bg-gray-50" x-data="{ openSubcategory: true }">
+                    <div class="flex justify-between mb-8">
+                        <h3 class="text-xl font-bold font-heading">{{ __('Subcategory') }}</h3>
+                        <button @click="openSubcategory = !openSubcategory">
+                            <i class="fa fa-caret-down"
+                                :class="{ 'fa-caret-up': openSubcategory, 'fa-caret-down': !openSubcategory }"
+                                aria-hidden="true">
+                            </i>
+                        </button>
+                    </div>
+                    <ul x-show="openSubcategory">
+                        @foreach (Helpers::getActiveSubCategories() as $subcategory)
+                            <li class="mb-2">
+                                <button type="button"
+                                    wire:click="filterProducts('subcategory', {{ $subcategory->id }})">
+                                    <span class="inline-block px-4 py-2 text-sm font-bold font-heading text-blue-300">
+                                        {{ $subcategory->name }} <small>
+                                        </small>
+                                    </span>
+                                </button>
+                            </li>
+                        @endforeach
+                    </ul>
+                    @if (!empty($subcategory_id))
+                        <div class="text-right">
+                            <button wire:click="clearFilter('subcategory')">{{ __('Clear') }}</button>
+                        </div>
+                    @endif
                 </div>
             </div>
 

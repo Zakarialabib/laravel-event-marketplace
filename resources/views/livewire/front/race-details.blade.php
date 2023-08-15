@@ -122,6 +122,16 @@
                             class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5">
                             {{ __('Shop') }}
                         </a>
+                        <a href="#tab4"
+                            class="items-center border-b text-gray-500 cursor-pointer flex font-semibold  border-gray-200 border-solid p-5"
+                            @click="activeTab = 'tab4'"
+                            :class="{
+                                'bg-green-700': activeTab === 'tab4',
+                                'text-white': activeTab === 'tab4',
+                                'hover:text-green-400': activeTab === 'tab4',
+                            }">
+                            {{ __('Contact') }}
+                        </a>
                     </div>
                 </div>
 
@@ -388,6 +398,9 @@
                     @else
                         @livewire('front.race-results', ['race' => $race])
                     @endif
+                </div>
+                <div x-show="activeTab === 'tab4'" id="tab4" class="w-full text-center mb-5 border px-4">
+                    <livewire:front.order-form :item="$race" type="registration" />
                 </div>
             </div>
             <hr class="w-full border-gray-300 mt-3">

@@ -4,7 +4,7 @@
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
-                <h4 class="mb-1 text-2xl font-bold">
+                <h4 class="text-left mb-1 text-2xl font-bold">
                     {{ __('Race Results') }}
                 </h4>
                 <div class="flex items-center">
@@ -49,8 +49,8 @@
     </section>
 
     <x-card>
-        <div class="flex flex-wrap justify-center">
-            <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
+        <div class="flex flex-wrap justify-between items-center">
+            <div class="my-md-0 my-2">
                 @if ($this->selectedCount)
                     <p class="text-sm leading-5">
                         <span class="font-medium">
@@ -64,17 +64,23 @@
                         {{ __('Download selected') }}
                     </x-button>
                 @endif
-                <div class="my-2 my-md-0">
-                    <p class="leading-5 text-black mb-1 text-sm ">
-                        {{ __('Show items per page') }}
-                    </p>
-                    <select wire:model="perPage" name="perPage"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
-                        @foreach ($paginationOptions as $value)
-                            <option value="{{ $value }}">{{ $value }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            </div>
+            <div class="my-2 my-md-0">
+                <select wire:model="perPage" name="perPage"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
+                    @foreach ($paginationOptions as $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="my-2 my-md-0">
+                <select wire:model="raceType" name="raceType"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
+                    <option value="">All Races</option>
+                    @foreach (Helpers::getActiveRace() as $race)
+                        <option value="{{ $race->id }}">{{ $race->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
                 <div class="my-2 my-md-0">

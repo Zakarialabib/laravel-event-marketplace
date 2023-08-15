@@ -1,8 +1,9 @@
 <div>
+    @section('title', __('Faq'))
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
-                <h4 class="mb-1 text-2xl font-bold">
+                <h4 class="text-left mb-1 text-2xl font-bold">
                     {{ __('Faq') }}
                 </h4>
                 <div class="flex items-center">
@@ -106,7 +107,7 @@
                             <x-table.td>
                                 {{ $faq->title }}
                             </x-table.td>
-                            <x-table.td>
+                            <x-table.td class="whitespace-normal break-words overflow-hidden">
                                 {{ $faq->description }}
                             </x-table.td>
                             <x-table.td>

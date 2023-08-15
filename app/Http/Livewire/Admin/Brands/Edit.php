@@ -9,9 +9,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\WithFileUploads;
 
 class Edit extends Component
 {
+    use LivewireAlert;
+    use WithFileUploads;
+
     public $brand;
 
     public $editModal = false;

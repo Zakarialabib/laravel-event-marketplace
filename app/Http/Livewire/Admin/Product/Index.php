@@ -130,7 +130,7 @@ class Index extends Component
 
         $products = $query->paginate($this->perPage);
 
-        return view('livewire.admin.product.index', compact('products'));
+        return view('livewire.admin.product.index', compact('products'))->extends('layouts.dashboard');
     }
 
     public function delete(Product $product)
@@ -184,7 +184,7 @@ class Index extends Component
             'meta_description' => $product_details->meta_description,
             'meta_keywords'    => $product_details->meta_keywords,
             'category_id'      => $product_details->category_id,
-            //  'subcategories'    => $product_details->subcategories,
+             'subcategories'    => $product_details->subcategories,
             'image'    => $product_details->image,
             'brand_id' => $product_details->brand_id,
             'status'   => Status::INACTIVE,

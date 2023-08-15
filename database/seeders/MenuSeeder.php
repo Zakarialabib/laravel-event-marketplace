@@ -22,7 +22,7 @@ class MenuSeeder extends Seeder
                 'name'       => 'Home',
                 'type'       => 'link',
                 'label'      => 'Home',
-                'url'        => 'home',
+                'url'        => '/',
                 'placement'  => 'header',
                 'parent_id'  => null,
                 'new_window' => false,

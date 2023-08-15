@@ -26,7 +26,7 @@ class Index extends Component
     public array $paginationOptions;
     public $importModal;
     public $file;
-
+    public $raceType;
     protected $queryString = [
         'search'        => ['except' => ''],
         'sortBy'        => ['except' => 'id'],
@@ -48,6 +48,11 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function updatedRaceType()
+    {
+        $this->resetPage();
+    }
+
     public function resetSelected()
     {
         $this->selected = [];
@@ -55,12 +60,12 @@ class Index extends Component
 
     public function downloadSelected()
     {
-        return (new RaceResultsExport($this->selected))->download('race_results.xls', \Maatwebsite\Excel\Excel::XLS);
+        return (new RaceResultsExport($this->selected))->download('race_results_exports.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
     public function downloadAll()
     {
-        return (new RaceResultsExport())->download('race_results.xls', \Maatwebsite\Excel\Excel::XLS);
+        return (new RaceResultsExport())->download('race_results_exports.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
     public function importModal()
@@ -103,7 +108,8 @@ class Index extends Component
 
     public function render(): View|Factory
     {
-        $query = RaceResult::advancedFilter([
+        $query = RaceResult::when($this->raceType, fn ($q) => $q->where('race_id', $this->raceType))
+        ->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,

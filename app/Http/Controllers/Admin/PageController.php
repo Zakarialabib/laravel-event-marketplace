@@ -13,11 +13,6 @@ class PageController extends Controller
         return view('admin.page.index');
     }
 
-    public function orderForms()
-    {
-        return view('admin.orderforms.index');
-    }
-
     public function settings()
     {
         return view('admin.page.settings');

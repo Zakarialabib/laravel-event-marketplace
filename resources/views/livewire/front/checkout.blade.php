@@ -32,8 +32,8 @@
                                 <select wire:model="payment_method"
                                     class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                     required>
-                                    <option value="card">{{ __('Card') }}</option>
-                                    <!-- Add more options as needed -->
+                                    <option value="Cash">{{ __('Cash') }}</option>
+                                    <option value="cashOnDelivery">{{ __('Cash On Delivery') }}</option>
                                 </select>
                                 @error('payment_method')
                                     <span class="error text-red-600">{{ $message }}</span>

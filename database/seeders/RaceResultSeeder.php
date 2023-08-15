@@ -7,7 +7,7 @@ namespace Database\Seeders;
 use App\Models\RaceResult;
 use Illuminate\Database\Seeder;
 
-class RaceResultSeeder extends Seeder
+class RaceResultsSeeder extends Seeder
 {
     /** Run the database seeds. */
     public function run(): void

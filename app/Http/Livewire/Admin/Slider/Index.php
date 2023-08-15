@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Slider;
 
 use App\Http\Livewire\WithSorting;
-use App\Models\Language;
 use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -106,7 +105,7 @@ class Index extends Component
 
         $sliders = $query->paginate($this->perPage);
 
-        return view('livewire.admin.slider.index', compact('sliders'));
+        return view('livewire.admin.slider.index', compact('sliders'))->extends('layouts.dashboard');
     }
 
     // public function getPhotoPreviewProperty()
@@ -142,8 +141,4 @@ class Index extends Component
         $this->alert('success', __('Slider deleted successfully.'));
     }
 
-    public function getLanguagesProperty(): Collection
-    {
-        return Language::select('name', 'id')->get();
-    }
 }

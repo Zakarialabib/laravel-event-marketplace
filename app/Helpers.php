@@ -15,6 +15,8 @@ use App\Models\RaceLocation;
 use App\Models\Menu;
 use App\Models\Pagesetting;
 use App\Models\Faq;
+use App\Models\Race;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -58,6 +60,13 @@ class Helpers
             ->select('id', 'name')
             ->get();
     }
+   
+    public static function getActiveSubcategories()
+    {
+        return Subcategory::active()
+            ->select('id', 'name')
+            ->get();
+    }
 
     public static function getActiveFaqs()
     {
@@ -72,10 +81,24 @@ class Helpers
             ->select('id', 'name')
             ->get();
     }
+    
+    public static function getActiveBrands()
+    {
+        return Brand::active()
+            ->select('id', 'name')
+            ->get();
+    }
 
     public static function getActiveRaceLocations()
     {
         return RaceLocation::active()
+            ->select('id', 'name')
+            ->get();
+    }
+   
+    public static function getActiveRace()
+    {
+        return Race::active()
             ->select('id', 'name')
             ->get();
     }

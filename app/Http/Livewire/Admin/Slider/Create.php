@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Slider;
 
-use App\Models\Language;
 use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -42,7 +41,6 @@ class Create extends Component
         'slider.subtitle'      => ['nullable', 'string'],
         'description'          => ['nullable'],
         'slider.link'          => ['nullable', 'string'],
-        'slider.language_id'   => ['nullable'],
         'slider.bg_color'      => ['nullable'],
         'slider.embeded_video' => ['nullable'],
         'image'                => ['required'],
@@ -81,6 +79,7 @@ class Create extends Component
 
                 $this->slider->image = $imageName;
             }
+            $this->slider->language_id = 1;
 
             $this->slider->description = $this->description;
 
@@ -96,8 +95,4 @@ class Create extends Component
         }
     }
 
-    public function getLanguagesProperty(): Collection
-    {
-        return Language::select('name', 'id')->get();
-    }
 }

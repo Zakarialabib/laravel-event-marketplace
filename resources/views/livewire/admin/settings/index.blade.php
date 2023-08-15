@@ -174,37 +174,6 @@
                     <small class="text-red-500">{{ __('Facebook, Google Analytics or other script.') }}</small>
                 </div>
             </div>
-            {{-- <div class="w-full flex flex-row">
-                <div class="sm:w-1/2 mb-4 px-2">
-                    <x-label for="enableRegistrationTerms" :value="__('Enable Registration Terms')" />
-                    <x-checkbox name="enableRegistrationTerms" id="enableRegistrationTerms"
-                        wire:model="enableRegistrationTerms" />
-                </div>
-                <div class="sm:w-1/2 mb-4 px-2">
-                    <x-label for="site_return" :value="__('Enable Return page')" />
-                    <x-checkbox name="site_return" id="site_return" wire:model="site_return" />
-                </div>
-                <div class="sm:w-1/2 mb-4 px-2">
-                    <x-label for="site_refund" :value="__('Enable Refund  page')" />
-                    <x-checkbox name="site_refund" id="site_refund" wire:model="site_refund" />
-                </div>
-                <div class="sm:w-1/2 mb-4 px-2">
-                    <x-label for="site_terms" :value="__('Enable Terms  page')" />
-                    <x-checkbox name="site_terms" id="site_terms" wire:model="site_terms" />
-                </div>
-                <div class="sm:w-1/2 mb-4 px-2">
-                    <x-label for="site_privacy" :value="__('Enable Privacy page')" />
-                    <x-checkbox name="site_privacy" id="site_privacy" wire:model="site_privacy" />
-                </div>
-                <div class="sm:w-1/2 mb-4 px-2">
-                    <x-label for="site_about" :value="__('Enable About page')" />
-                    <x-checkbox name="site_about" id="site_about" wire:model="site_about" />
-                </div>
-                <div class="sm:w-1/2 mb-4 px-2">
-                    <x-label for="site_contact" :value="__('Enable Contact page')" />
-                    <x-checkbox name="site_contact" id="site_contact" wire:model="site_contact" />
-                </div>
-            </div> --}}
             <div class="flex flex-wrap mb-4">
                 <div class="lg:w-1/2 sm:w-full px-2">
                     <x-label for="primary_color" :value="__('Primary Color')" />

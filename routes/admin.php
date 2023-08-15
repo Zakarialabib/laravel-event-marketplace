@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BlogCategoryController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedBannerController;
-use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\SmptController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Livewire\Admin\Dashboard;
+use App\Http\Livewire\Admin\Slider\Index as SliderIndex;
+use App\Http\Livewire\Admin\OrderForm\Index as OrderFormIndex;
+use App\Http\Livewire\Admin\Product\Index as ProductIndex;
 use App\Http\Livewire\Admin\Brands\Index as BrandIndex;
+use App\Http\Livewire\Admin\Subcategory\Index as SubcategoryIndex;
 use App\Http\Livewire\Admin\Language\Index as LanguageIndex;
 use App\Http\Livewire\Admin\Language\EditTranslation;
 use App\Http\Livewire\Admin\Race\Index as RaceIndex;
@@ -60,9 +58,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/categories', CategoriesIndex::class)->name('categories');
     Route::get('/product-categories', ProductCategoryIndex::class)->name('product-categories');
 
-    Route::get('/subcategories', [CategoryController::class, 'subcategories'])->name('subcategories');
+    Route::get('/subcategories', SubcategoryIndex::class)->name('subcategories');
     Route::get('/brands', BrandIndex::class)->name('brands');
-    Route::get('/products', [ProductController::class, 'index'])->name('products');
+    Route::get('/products', ProductIndex::class)->name('products');
     Route::get('/registrations', RegistrationIndex::class)->name('registrations');
     Route::get('/participants', ParticipantIndex::class)->name('participants');
     Route::get('/participant/{id}', ParticipantShow::class)->name('participant.show');
@@ -79,9 +77,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/sections', [SectionController::class, 'index'])->name('sections');
     Route::get('/featuredBanners', [FeaturedBannerController::class, 'index'])->name('featuredBanners');
     Route::get('/pages', [PageController::class, 'index'])->name('pages');
-    Route::get('/order-forms', [PageController::class, 'orderForms'])->name('orderforms');
+    Route::get('/order-forms', OrderFormIndex::class)->name('orderforms');
     Route::get('/page/settings', [PageController::class, 'settings'])->name('page.settings');
-    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders');
+    Route::get('/sliders', SliderIndex::class)->name('sliders');
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
     Route::get('/blog/category', [BlogCategoryController::class, 'index'])->name('blogcategories');
 
@@ -89,10 +87,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
 
     Route::get('/redirects', [SettingController::class, 'redirects'])->name('setting.redirects');
 
-    Route::get('/report', [ReportController::class, 'index'])->name('report');
-
-    Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
-    Route::get('/smpt', [SmptController::class, 'index'])->name('smpt');
     Route::get('/language', LanguageIndex::class)->name('language');
     Route::get('/shipping', ShippingIndex::class)->name('setting.shipping');
     Route::get('/backup', BackupIndex::class)->name('setting.backup');

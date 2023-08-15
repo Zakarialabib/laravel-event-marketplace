@@ -45,7 +45,6 @@ Route::get('/racedetails/{slug}', RaceDetails::class)->name('front.raceDetails')
 
 Route::get('/catalog/{slug}', [FrontController::class, 'productShow'])->name('front.product');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
-Route::get('/a-propos', [FrontController::class, 'about'])->name('front.about');
 Route::get('/resources', BlogIndex::class)->name('front.blog');
 Route::get('/resource/{slug}', BlogShow::class)->name('front.blogPage');
 Route::get('/page/{slug}', DynamicPage::class)->name('front.dynamicPage');

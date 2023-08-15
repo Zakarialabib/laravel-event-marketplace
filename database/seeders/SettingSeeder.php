@@ -96,40 +96,12 @@ class SettingSeeder extends Seeder
             'value' => '',
         ],
         [
-            'key'   => 'enableRegistrationTerms',
-            'value' => '1',
-        ],
-        [
             'key'   => 'site_maintenance_message',
             'value' => 'Site is under maintenance',
         ],
         [
             'key'   => 'site_maintenance',
             'value' => false,
-        ],
-        [
-            'key'   => 'site_return',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_refund',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_terms',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_privacy',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_about',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_contact',
-            'value' => '0',
         ],
     ];
 

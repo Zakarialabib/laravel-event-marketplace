@@ -4,7 +4,7 @@
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
-                <h4 class="mb-1 text-2xl font-bold">
+                <h4 class="text-left mb-1 text-2xl font-bold">
                     {{ __('Product Categories') }}
                 </h4>
                 <div class="flex items-center">

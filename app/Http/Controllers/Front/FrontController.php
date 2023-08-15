@@ -36,11 +36,6 @@ class FrontController extends Controller
         return view('front.contact');
     }
 
-    public function about()
-    {
-        return view('front.about');
-    }
-
     public function blog()
     {
         $blogs = Blog::with('category')->get();

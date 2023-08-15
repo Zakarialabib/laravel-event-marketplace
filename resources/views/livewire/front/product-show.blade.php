@@ -45,35 +45,7 @@
                                 </h2>
 
                             </div>
-                            <div itemprop="offers" itemtype="https://schema.org/AggregateOffer" itemscope>
-                                <p class="inline-block mb-4 text-2xl font-bold font-heading">
-                                    <span>
-                                        {{ Helpers::format_currency($product->price) }}
-                                    </span>
-                                    @if ($product->discount_price && $product->discount != 0)
-                                        <span class="bg-red-500 text-white rounded-xl px-4 py-2 text-sm ml-4">
-                                            -{{ $product->discount }}%
-                                        </span>
-                                    @endif
 
-                                    <meta itemprop="lowPrice" content="{{ $product->odl_price }}">
-                                    <meta itemprop="highPrice" content="{{ $product->price }}">
-                                    <meta itemprop="price" content="{{ $product->price }}">
-                                    <meta itemprop="priceCurrency" content="MAD">
-                                    <link itemprop="availability" href="http://schema.org/InStock">
-                                    <link itemprop="itemCondition" href="http://schema.org/NewCondition">
-                                    <meta itemprop="priceValidUntil" content="2023-12-30">
-
-                                </p>
-
-                                @if ($product->discount_price && $product->discount != 0)
-                                    <p class="mb-8 text-blue-300">
-                                        <span class="font-normal text-base text-gray-400 line-through">
-                                            {{ Helpers::format_currency($product->discount_price) }}DH
-                                        </span>
-                                    </p>
-                                @endif
-                            </div>
                             @if ($product->options)
                                 <div class="mb-2">
                                     <h4 class="text-base md:text-lg text-heading font-semibold mb-2.5 capitalize">
@@ -83,7 +55,7 @@
                                         @foreach (json_decode($product->options, true) as $option)
                                             @if ($option['type'] === 'size')
                                                 <li
-                                                    class="cursor-pointer rounded border w-11 h-11 p-2 mb-2 md:mb-3 mr-2 md:mr-3 -3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
+                                                    class="cursor-pointer rounded border  w-11 h-11 p-2 mb-2 md:mb-3 mr-2 md:mr-3 -3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-gray-600 border-black">
                                                     <button class="block w-full h-full rounded"
                                                         wire:click="$set('selectedSize', '{{ $option['value'] }}')">
                                                         {{ $option['value'] }}
@@ -102,7 +74,7 @@
                                         @foreach (json_decode($product->options, true) as $option)
                                             @if ($option['type'] === 'color')
                                                 <li
-                                                    class="cursor-pointer rounded border  w-9 md:w-11 h-9 md:h-11 p-1 mb-2 md:mb-3 mr-2 md:mr-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black border-gray-100">
+                                                    class="cursor-pointer rounded border  w-9 md:w-11 h-9 md:h-11 p-1 mb-2 md:mb-3 mr-2 md:mr-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-gray-600 border-black">
                                                     <button class="block w-full h-full rounded"
                                                         wire:click="$set('selectedColor', '{{ $option['value'] }}')"
                                                         style="background-color: {{ $option['value'] }};"></button>
@@ -112,8 +84,38 @@
                                     </ul>
                                 </div>
                             @endif
-                            <div class="flex items-center mb-5 pb-5 border-b">
-                                <div class="mr-6">
+
+                            <div class="w-full flex items-center justify-center gap-6 pb-5 border-b">
+                                <div itemprop="offers" itemtype="https://schema.org/AggregateOffer" itemscope>
+                                    <p class="inline-block text-2xl font-bold font-heading">
+                                        <span>
+                                            {{ Helpers::format_currency($product->price) }}
+                                        </span>
+                                        @if ($product->discount_price && $product->discount != 0)
+                                            <span class="bg-red-500 text-white rounded-xl px-4 py-2 text-sm ml-4">
+                                                -{{ $product->discount }}%
+                                            </span>
+                                        @endif
+
+                                        <meta itemprop="lowPrice" content="{{ $product->odl_price }}">
+                                        <meta itemprop="highPrice" content="{{ $product->price }}">
+                                        <meta itemprop="price" content="{{ $product->price }}">
+                                        <meta itemprop="priceCurrency" content="MAD">
+                                        <link itemprop="availability" href="http://schema.org/InStock">
+                                        <link itemprop="itemCondition" href="http://schema.org/NewCondition">
+                                        <meta itemprop="priceValidUntil" content="2023-12-30">
+
+                                    </p>
+
+                                    @if ($product->discount_price && $product->discount != 0)
+                                        <p class="mb-8 text-blue-300">
+                                            <span class="font-normal text-base text-gray-400 line-through">
+                                                {{ Helpers::format_currency($product->discount_price) }}DH
+                                            </span>
+                                        </p>
+                                    @endif
+                                </div>
+                                <div>
                                     <div
                                         class="inline-flex items-center px-4 font-semibold font-heading text-gray-500 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
                                         <button wire:click="decreaseQuantity('{{ $product->id }}')"
@@ -153,7 +155,7 @@
                                 </div>
                             </div>
 
-                            <livewire:front.order-form :product="$product" />
+                            <livewire:front.order-form :item="$product" type="product" />
 
                             <ul class="w-full flex flex-wrap justify-between my-4 ">
                                 <li class="text-gray-500 py-1">
@@ -208,10 +210,10 @@
                         </div>
                         <div
                             class="inline-block py-6 px-10 text-left font-bold font-heading text-gray-500 uppercase border-b-2 border-gray-100 hover:border-gray-500 focus:outline-none focus:border-gray-500">
-                            {{-- <button @click="activeTab = 'brands'"
+                            <button @click="activeTab = 'brands'"
                                 :class="activeTab === 'brands' ? 'text-green-400' : ''">
                                 {{ __('Product Brand') }}
-                            </button> --}}
+                            </button>
                         </div>
                     </div>
                     <div x-show="activeTab === 'description'" class="px-5 mb-10">
@@ -228,13 +230,13 @@
                             </p>
                         </div>
                     </div>
-                    {{-- <div x-show="activeTab === 'brands'" class="px-5 mb-10">
+                    <div x-show="activeTab === 'brands'" class="px-5 mb-10">
                         <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 -mx-2 px-2">
                             @foreach ($brand_products as $product)
                                 <x-product-card :product="$product" />
                             @endforeach
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
 
