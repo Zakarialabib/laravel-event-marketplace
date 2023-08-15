@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Admin\Slider;
 use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -94,5 +93,4 @@ class Create extends Component
             $this->alert('warning', __('An error happend Slider was not created.'));
         }
     }
-
 }

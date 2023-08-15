@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Product;
 
-use App\Models\Brand;
-use App\Models\Subcategory;
-use App\Models\ProductCategory;
 use App\Models\Product;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -47,10 +44,10 @@ class Create extends Component
         'product.category_id'      => ['required', 'integer'],
         'product.subcategories'    => ['required', 'array', 'min:1'],
         'product.subcategories.*'  => ['integer', 'distinct:strict'],
-        'options.*.type'        => ['required', 'string', 'in:color,size'],
-        'options.*.value'       => ['required_if:options.*.type,color', 'string'],
-        'product.brand_id'      => ['nullable', 'integer'],
-        'product.embeded_video' => ['nullable'],
+        'options.*.type'           => ['required', 'string', 'in:color,size'],
+        'options.*.value'          => ['required_if:options.*.type,color', 'string'],
+        'product.brand_id'         => ['nullable', 'integer'],
+        'product.embeded_video'    => ['nullable'],
     ];
 
     public function updatedDescription($value)
@@ -62,6 +59,7 @@ class Create extends Component
     {
         $this->product->subcategories()->sync($this->product->subcategories);
     }
+
     public function onImagesUpdated($images): void
     {
         $this->images = $images;
@@ -109,5 +107,4 @@ class Create extends Component
 
         $this->createProduct = false;
     }
-
 }

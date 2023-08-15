@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Subcategory;
 
 use Livewire\Component;
@@ -13,7 +15,7 @@ class Edit extends Component
     use LivewireAlert;
 
     public $listeners = [
-        'editModal'
+        'editModal',
     ];
 
     public array $rules = [
@@ -51,7 +53,6 @@ class Edit extends Component
 
         $this->alert('success', __('Subcategory updated successfully'));
     }
-
 
     public function render()
     {

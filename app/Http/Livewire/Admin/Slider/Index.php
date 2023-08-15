@@ -8,7 +8,6 @@ use App\Http\Livewire\WithSorting;
 use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -140,5 +139,4 @@ class Index extends Component
 
         $this->alert('success', __('Slider deleted successfully.'));
     }
-
 }

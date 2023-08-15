@@ -64,7 +64,7 @@ class Index extends Component
 
     public $footer_copyright_text;
     public $site_maintenance_message;
-    
+
     public function mount()
     {
         $this->company_name = Helpers::settings('company_name');

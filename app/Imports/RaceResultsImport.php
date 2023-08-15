@@ -28,16 +28,15 @@ class RaceResultsImport implements ToModel, WithHeadingRow
             ->first();
 
         if ($raceResult) {
-
             $raceResult->update([
-                'time'         => $time,
-                'place'        => $place,
-                'date'         => $date,
-                'swimming'     => $swimming,
-                'transition1'  => $transition1,
-                'cycling'      => $cycling,
-                'transition2'  => $transition2,
-                'running'      => $running,
+                'time'        => $time,
+                'place'       => $place,
+                'date'        => $date,
+                'swimming'    => $swimming,
+                'transition1' => $transition1,
+                'cycling'     => $cycling,
+                'transition2' => $transition2,
+                'running'     => $running,
             ]);
         } else {
             RaceResult::create([
@@ -51,7 +50,7 @@ class RaceResultsImport implements ToModel, WithHeadingRow
                 'cycling'        => $cycling,
                 'transition2'    => $transition2,
                 'running'        => $running,
-                'status'         => true
+                'status'         => true,
             ]);
         }
 
