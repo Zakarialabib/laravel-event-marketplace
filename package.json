@@ -1,8 +1,11 @@
 {
     "private": true,
+    "name": "your-project-name",
+    "version": "1.0.10",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "release": "standard-version"
     },
     "devDependencies": {
         "@defstudio/vite-livewire-plugin": "^0.2.6",
