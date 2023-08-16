@@ -317,17 +317,17 @@
                                     </div>
                                     <div clas="w-full flex flex-wrap justify-center space-x-2">
                                         @foreach ($day['events'] as $eventIndex => $event)
-                                            <div class="flex flex-row w-full items-center space-x-4">
+                                            <div class="flex flex-row w-full justify-center space-x-4 py-2">
                                                 <input type="text"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    class="w-full block shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                                                     wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.start_time"
                                                     placeholder="Start Time">
                                                 <input type="text"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    class="w-full block shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                                                     wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.end_time"
                                                     placeholder="End Time">
                                                 <input type="text"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                                    class="w-full block shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                                                     wire:model.defer="calendar.{{ $index }}.events.{{ $eventIndex }}.activity"
                                                     placeholder="Activity">
                                                 <x-button type="button" danger

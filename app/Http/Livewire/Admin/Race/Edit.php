@@ -229,23 +229,26 @@ class Edit extends Component
 
         if ($this->images) {
             foreach ($this->images as $image) {
-                $this->race->addMedia($image)->toMediaCollection('local_files');
+                if ($image instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
+                    $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
+                }
             }
         }
+        // dd($this->images);
 
         $this->race->description = $this->description;
 
-        $this->race->options = $this->options;
+        $this->race->options = json_encode($this->options);
 
-        $this->race->social_media = $this->social_media;
+        $this->race->social_media = json_encode($this->social_media);
 
-        $this->race->sponsors = $this->sponsors;
+        $this->race->sponsors = json_encode($this->sponsors);
 
-        $this->race->course = $this->courses;
+        $this->race->course = json_encode($this->courses);
 
-        $this->race->features = $this->features;
+        $this->race->features = json_encode($this->features);
 
-        $this->race->calendar = $this->calendar;
+        $this->race->calendar = json_encode($this->calendar);
 
         $this->race->save();
 
