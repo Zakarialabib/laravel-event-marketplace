@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Race;
 
 use App\Models\Race;
@@ -11,16 +13,18 @@ class Report extends Component
 {
     use WithPagination;
 
-    public $totalRaces, $upcomingRaces, $registrations;
+    public $totalRaces;
+    public $upcomingRaces;
+    public $registrations;
     public $selected = [];
     public $selectAll = false;
 
     public $filters = [
         'statuses' => [],
         'location' => null,
-        'search' => '',
+        'search'   => '',
         'dateFrom' => null,
-        'dateTo' => null,
+        'dateTo'   => null,
     ];
 
     public function updatedFilters()
@@ -31,7 +35,7 @@ class Report extends Component
     public function updatedSelectAll($value)
     {
         if ($value) {
-            $this->selected = $this->races->pluck('id')->map(fn($id) => (string) $id)->toArray();
+            $this->selected = $this->races->pluck('id')->map(fn ($id) => (string) $id)->toArray();
         } else {
             $this->selected = [];
         }
@@ -39,7 +43,6 @@ class Report extends Component
 
     public function mount()
     {
-       
         $this->totalRaces = Race::count();
         $this->upcomingRaces = Race::where('date', '>', now())->count();
         $this->registrations = Race::withCount('orders')->get()->sum('participants_count');
@@ -47,7 +50,7 @@ class Report extends Component
 
     public function getLocationsProperty()
     {
-        return RaceLocation::query()->get();    
+        return RaceLocation::query()->get();
     }
 
     public function resetFilters()
@@ -55,13 +58,11 @@ class Report extends Component
         $this->filters = [
             'statuses' => [],
             'location' => null,
-            'search' => '',
+            'search'   => '',
             'dateFrom' => null,
-            'dateTo' => null,
+            'dateTo'   => null,
         ];
     }
-
-
 
     public function render()
     {
@@ -76,7 +77,7 @@ class Report extends Component
         }
 
         if ($this->filters['search']) {
-            $query->where('name', 'like', '%' . $this->filters['search'] . '%');
+            $query->where('name', 'like', '%'.$this->filters['search'].'%');
         }
 
         if ($this->filters['dateFrom']) {

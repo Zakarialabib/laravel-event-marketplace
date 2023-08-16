@@ -112,7 +112,6 @@ class Race extends Model implements HasMedia
         return $this->hasMany(Registration::class);
     }
 
-
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('local_files');
@@ -132,33 +131,40 @@ class Race extends Model implements HasMedia
     {
         return $this->registrations->where('status', true)->count();
     }
+
     public function getRegistrationOrdersTotalAttribute()
     {
         return $this->registrations->sum(function ($registration) {
             return $registration->order ? $registration->order->amount : 0;
         });
     }
+
     public function getTotalOrdersAttribute()
     {
         return $this->orders->count();
     }
+
     public function scopeActive($query)
     {
         return $query->where('status', true);
     }
+
     public function scopeUpcoming($query)
     {
         return $query->where('date', '>', now());
     }
+
     public function scopeThisYear($query)
     {
         return $query->whereYear('date', date('Y'));
     }
+
     public function scopeThisMonth($query)
     {
         return $query->whereYear('date', date('Y'))
             ->whereMonth('date', date('m'));
     }
+
     public function getNumberOfParticipantsAttribute()
     {
         return $this->registrations()->count();
