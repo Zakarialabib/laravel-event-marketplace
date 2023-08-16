@@ -69,8 +69,12 @@
 
         <x-sidebar.sublink title="{{ __('Race Results') }}" href="{{ route('admin.race-results') }}"
             :active="request()->routeIs('admin.race-results')" />
+
+        <x-sidebar.sublink title="{{ __('Race Reports') }}" href="{{ route('admin.race.reports') }}"
+            :active="request()->routeIs('admin.race.reports')" />
+
     </x-sidebar.dropdown>
-    
+
     {{-- @can('user_access') --}}
     <x-sidebar.dropdown title="{{ __('People') }}" :active="request()->routeIs(['admin.users', 'admin.roles', 'admin.permissions'])">
         <x-slot name="icon">

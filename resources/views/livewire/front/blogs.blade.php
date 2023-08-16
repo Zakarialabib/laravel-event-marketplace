@@ -52,7 +52,7 @@
 
         @if (count($this->featured_blogs) > 0)
             <div class="relative py-6 mx-auto px-6 bg-green-50 ">
-                <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
+                <h2 class="uppercase mb-6 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
                     {{ 'Featured Articles' }}
                 </h2>
                 <div class="flex flex-wrap justify-center gap-4 py-6">

@@ -25,6 +25,10 @@
                         class="px-4 py-2 w-full text-left text-green-800 hover:bg-green-500 hover:text-white transition-colors cursor-pointer">
                         {{ __('Orders') }}
                     </li>
+                    <li @click="activeTab = 'raceResults'" :class="{ 'bg-green-500 text-white': activeTab === 'raceResults' }"
+                        class="px-4 py-2 w-full text-left text-green-800 hover:bg-green-500 hover:text-white transition-colors cursor-pointer">
+                        {{ __('Race results') }}
+                    </li>
                     
                 </ul>
             </div>
@@ -46,6 +50,10 @@
 
                 <div x-show="activeTab === 'orders'" class="w-full">
                     @livewire('account.orders')
+                </div>
+               
+                <div x-show="activeTab === 'raceResults'" class="w-full">
+                    @livewire('account.race-results', ['participant' => $participant])
                 </div>
             </div>
         </div>

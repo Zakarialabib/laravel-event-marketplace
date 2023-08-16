@@ -29,7 +29,8 @@
 
         @if (count(Helpers::getActiveFeaturedBlogs()) > 0)
             <div class="relative py-6 mx-auto px-6 bg-green-50 ">
-                <h2 class="mb-10 font-heading text-4xl md:text-5xl xl:text-6xl leading-tight">
+                <h2
+                    class="uppercase mb-6 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
                     {{ 'Resources' }}
                 </h2>
                 <div class="grid xl:grid-cols-3 sm:grid-cols-1 gap-4 overflow-hidden justify-center py-6">
@@ -43,12 +44,12 @@
 
         @if (count($this->featuredProducts) > 0)
             <section class="py-10 mx-auto px-4 text-center text-black">
-                <h2
-                    class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold cursor-pointer pb-10 text-center">
-                    <a href="{{ route('front.catalog') }}">
+                <a href="{{ route('front.catalog') }}">
+                    <h2
+                        class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl md:leading-normal leading-normal font-bold cursor-pointer pb-10 text-center">
                         {{ __('Visit Store') }}
-                    </a>
-                </h2>
+                    </h2>
+                </a>
 
                 <p class="text-center mb-6">
                     {{ __('We have a wide range of products for you to choose from') }}

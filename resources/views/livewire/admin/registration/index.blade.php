@@ -206,7 +206,7 @@
 
                                 <li>
                                     <span class="font-bold">{{ __('Status') }}:</span>
-                                    <span>{{ $registration->status->getName() }}</span>
+                                    <span>{{ \App\Enums\Status::getLabel($registration->status) }}</span>
                                 </li>
 
                                 <li>

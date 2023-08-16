@@ -3,7 +3,7 @@
     <div class="py-10">
         <h2 class="text-2xl font-bold font-heading text-gray-700 mb-4">{{ __('Orders') }}</h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            @foreach ($orders as $order)
+            @forelse ($orders as $order)
                 <div class="px-4 py-6 shadow-lg border bg-white rounded-lg">
                     <div class="flex justify-between items-center mb-4">
                         <p class="text-gray-700 font-bold">{{ __('Reference') }}:</p>
@@ -54,7 +54,11 @@
                         <p class="text-gray-600">{{ Helpers::format_date($order->created_at) }}</p>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-full px-4 py-6 shadow-lg border bg-green-50 rounded-lg">
+                    <p class="text-gray-700 text-center font-bold">{{ __('No orders found') }}</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>

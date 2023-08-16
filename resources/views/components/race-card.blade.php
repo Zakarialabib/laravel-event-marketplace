@@ -185,9 +185,11 @@
                     <li class="text-gray-500 text-sm font-bold mb-3">
                         {{ $race->location->name }}
                     </li>
-                    <li href="{{ route('front.raceDetails', $race->slug) }}"
-                        class="text-neutral-700 text-4xl font-semibold mb-3 cursor-pointer">
-                        {{ $race->name }}
+                    <li>
+                        <a href="{{ route('front.raceDetails', $race->slug) }}"
+                            class="text-gray-700 text-bold text-4xl font-semibold mb-3 cursor-pointer">
+                            {{ $race->name }}
+                        </a>
                     </li>
 
                     <li class="text-green-600 text-sm font-bold mb-3 uppercase">
@@ -230,7 +232,7 @@
                             <li class="text-base inline-flex md:text-lg">
                                 <p
                                     class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block rounded-md bg-green-500 hover:bg-green-800 text-white">
-                                    {{ $course->name }}  - {{ $course->distance }} km - {{ $course->type }}
+                                    {{ $course->name }} - {{ $course->distance }} km - {{ $course->type }}
                                 </p>
                             </li>
                         @endforeach
