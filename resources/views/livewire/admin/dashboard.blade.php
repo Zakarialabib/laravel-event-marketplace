@@ -4,7 +4,7 @@
         <h1 class="text-3xl font-semibold mb-6">{{ __('Dashboard') }}</h1>
 
         <div class="mb-6 flex justify-center gap-4 items-center w-full">
-            <label class="font-semibold">{{ __('Date Range') }}:</label>
+            <label class="font-semibold">{{ __('Filtre by date') }}:</label>
             <input type="date" wire:model="startDate" class="border rounded px-2 py-1">
             <span class="mx-2">to</span>
             <input type="date" wire:model="endDate" class="border rounded px-2 py-1">
@@ -96,29 +96,29 @@
 
             </div>
 
+          
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
                     <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
-                        href="{{ route('admin.products') }}">
-                        {{ __('Open Races') }}
+                        href="{{ route('admin.orderforms') }}">
+                        {{ __('Order Form Products') }}
                     </a>
                 </h2>
                 <p class="text-3xl absolute right-0 px-4 py-2 rounded-lg bg-blue-400 text-white">
-                    {{ $openRaces }}
+                    {{ $orderFormProduct }}
                 </p>
             </div>
-
             <div
                 class="relative flex items-center px-4 py-2 bg-white rounded-lg shadow-md justify-between border border-blue-400">
                 <h2 class="text-lg font-semibold">
                     <a class="hover:text-blue-400 hover:underline focus:text-blue-400"
-                        href="{{ route('admin.products') }}">
-                        {{ __('Closed Races') }}
+                        href="{{ route('admin.orderforms') }}">
+                        {{ __('Order Form Registrations') }}
                     </a>
                 </h2>
                 <p class="text-3xl absolute right-0 px-4 py-2 rounded-lg bg-blue-400 text-white">
-                    {{ $closedRaces }}
+                    {{ $orderFormRegistration }}
                 </p>
             </div>
         </div>

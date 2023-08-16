@@ -102,30 +102,9 @@ class Race extends Model implements HasMedia
         return $this->hasMany(Partner::class);
     }
 
-    public function scopeActive($query)
+    public function orders()
     {
-        return $query->where('status', true);
-    }
-
-    public function getFullPriceAttribute()
-    {
-        return number_format($this->price, 2).'DH';
-    }
-
-    public function scopeUpcoming($query)
-    {
-        return $query->where('date', '>', now());
-    }
-
-    public function scopeThisYear($query)
-    {
-        return $query->whereYear('date', date('Y'));
-    }
-
-    public function scopeThisMonth($query)
-    {
-        return $query->whereYear('date', date('Y'))
-            ->whereMonth('date', date('m'));
+        return $this->hasMany(Order::class);
     }
 
     public function registrations()
@@ -133,10 +112,6 @@ class Race extends Model implements HasMedia
         return $this->hasMany(Registration::class);
     }
 
-    public function getNumberOfParticipantsAttribute()
-    {
-        return $this->registrations()->count();
-    }
 
     public function registerMediaCollections(): void
     {
@@ -153,8 +128,39 @@ class Race extends Model implements HasMedia
             ->format('webp');
     }
 
-    // Race History
-    // Is this the first year for your race? *
-    // Yes No
-    // URL For Last Year’s Event
+    public function getActiveRegistrationsCountAttribute()
+    {
+        return $this->registrations->where('status', true)->count();
+    }
+    public function getRegistrationOrdersTotalAttribute()
+    {
+        return $this->registrations->sum(function ($registration) {
+            return $registration->order ? $registration->order->amount : 0;
+        });
+    }
+    public function getTotalOrdersAttribute()
+    {
+        return $this->orders->count();
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
+    public function scopeUpcoming($query)
+    {
+        return $query->where('date', '>', now());
+    }
+    public function scopeThisYear($query)
+    {
+        return $query->whereYear('date', date('Y'));
+    }
+    public function scopeThisMonth($query)
+    {
+        return $query->whereYear('date', date('Y'))
+            ->whereMonth('date', date('m'));
+    }
+    public function getNumberOfParticipantsAttribute()
+    {
+        return $this->registrations()->count();
+    }
 }

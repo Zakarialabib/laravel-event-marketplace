@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin;
 
+use App\Enums\OrderType;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\Race;
@@ -12,7 +13,7 @@ use App\Models\Participant;
 use App\Models\Subscriber;
 use App\Models\Order;
 use App\Models\Contact;
-
+use App\Models\OrderForms;
 use Carbon\Carbon;
 
 class Dashboard extends Component
@@ -36,6 +37,8 @@ class Dashboard extends Component
         $contactsCount = Contact::whereBetween('created_at', [$this->startDate, $this->endDate])->count();
 
         $registrationsCount = Registration::whereBetween('created_at', [$this->startDate, $this->endDate])->count();
+        $orderFormProduct = OrderForms::where('type', OrderType::PRODUCT)->whereBetween('created_at', [$this->startDate, $this->endDate])->count();
+        $orderFormRegistration = OrderForms::where('type', OrderType::REGISTRATION)->whereBetween('created_at', [$this->startDate, $this->endDate])->count();
 
         $ordersCount = Order::with('race')
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
@@ -44,12 +47,6 @@ class Dashboard extends Component
         $recentOrders = Order::select('created_at', 'amount', 'reference', 'id')->orderBy('created_at', 'desc')->take(10)->get();
 
         $recentRegistrations = Registration::with('participant')->select('participant_id', 'created_at', 'id')->orderBy('created_at', 'desc')->take(10)->get();
-
-        $openRaces = Race::where('start_registration', '<', Carbon::now())
-            ->count();
-
-        $closedRaces = Race::where('end_registration', '<', Carbon::now())
-            ->count();
 
         return view('livewire.admin.dashboard', compact(
             'productsCount',
@@ -61,8 +58,8 @@ class Dashboard extends Component
             'subscribersCount',
             'ordersCount',
             'contactsCount',
-            'openRaces',
-            'closedRaces'
+            'orderFormProduct',
+            'orderFormRegistration',
         ))->extends('layouts.dashboard');
     }
 }

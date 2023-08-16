@@ -81,25 +81,21 @@ class Order extends Model
         return $this->hasMany(Notification::class, 'order_id');
     }
 
-    // Define the relationship with the User model
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Define the relationship with the Race model
     public function race()
     {
         return $this->belongsTo(Race::class);
     }
 
-    // Define the relationship with the Service model
     public function service()
     {
         return $this->belongsTo(Service::class);
     }
 
-    // Define the relationship with the Product model
     public function product()
     {
         return $this->belongsTo(Product::class);

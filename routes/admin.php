@@ -20,6 +20,7 @@ use App\Http\Livewire\Admin\Subcategory\Index as SubcategoryIndex;
 use App\Http\Livewire\Admin\Language\Index as LanguageIndex;
 use App\Http\Livewire\Admin\Language\EditTranslation;
 use App\Http\Livewire\Admin\Race\Index as RaceIndex;
+use App\Http\Livewire\Admin\Race\Report as RaceReport;
 use App\Http\Livewire\Admin\Race\Edit as RaceUpdate;
 use App\Http\Livewire\Admin\RaceLocation\Index as RaceLocationIndex;
 use App\Http\Livewire\Admin\Category\Index as CategoriesIndex;
@@ -67,6 +68,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/orders', OrderIndex::class)->name('orders');
     Route::get('/order/{id}', OrderShow::class)->name('order.show');
     Route::get('/races', RaceIndex::class)->name('races');
+    Route::get('/race/reports', RaceReport::class)->name('race.reports');
     Route::get('/race/{name}', RaceUpdate::class)->name('race.update');
     Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');
     Route::get('/services', ServiceIndex::class)->name('services');
