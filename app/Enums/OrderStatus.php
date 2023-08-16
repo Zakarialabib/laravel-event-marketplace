@@ -6,21 +6,21 @@ namespace App\Enums;
 
 use Illuminate\Support\Str;
 
-enum OrderStatus: string
+enum OrderStatus: int
 {
-    case PENDING = '0';
+    case PENDING = 0;
 
-    case PROCESSING = '1';
+    case PROCESSING = 1;
 
-    case COMPLETED = '2';
+    case COMPLETED = 2;
 
-    case SHIPPED = '3';
+    case SHIPPED = 3;
 
-    case RETURNED = '4';
+    case RETURNED = 4;
 
-    case CANCELED = '5';
+    case CANCELED = 5;
 
-    case FAILED = '6';
+    case FAILED = 6;
 
     public static function values(): array
     {
@@ -32,12 +32,12 @@ enum OrderStatus: string
         return __(Str::studly($this->name));
     }
 
-    public function getValue(): string
+    public function getValue()
     {
         return $this->value;
     }
 
-    public static function getLabel($value): ?string
+    public static function getLabel($value)
     {
         foreach (self::cases() as $case) {
             if ($case->getValue() === $value) {

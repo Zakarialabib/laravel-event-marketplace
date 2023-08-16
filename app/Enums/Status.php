@@ -6,15 +6,15 @@ namespace App\Enums;
 
 use Illuminate\Support\Str;
 
-enum Status: string
+enum Status: int
 {
-    case INACTIVE = '0';
+    case INACTIVE = 0;
 
-    case ACTIVE = '1';
+    case ACTIVE = 1;
 
-    case PENDING = '2';
+    case PENDING = 2;
 
-    case REFUSED = '3';
+    case REFUSED = 3;
 
     public static function values(): array
     {
@@ -26,12 +26,12 @@ enum Status: string
         return __(Str::studly($this->name));
     }
 
-    public function getValue(): string
+    public function getValue()
     {
         return $this->value;
     }
 
-    public static function getLabel($value): ?string
+    public static function getLabel($value)
     {
         foreach (self::cases() as $case) {
             if ($case->getValue() === $value) {
