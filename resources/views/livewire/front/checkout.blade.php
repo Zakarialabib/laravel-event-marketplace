@@ -32,7 +32,7 @@
                                 <select wire:model="payment_method"
                                     class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                     required>
-                                    <option value="Cash">{{ __('Cash') }}</option>
+                                    <option value="Card">{{ __('Card') }}</option>
                                     <option value="cashOnDelivery">{{ __('Cash On Delivery') }}</option>
                                 </select>
                                 @error('payment_method')
@@ -149,10 +149,14 @@
                         </div>
                     </div>
                     @auth
-                        <button
-                            class="block w-full py-4 bg-red-500 hover:bg-red-700 text-center text-white font-bold font-heading uppercase rounded-md transition duration-200"
-                            type="button" wire:click="checkout">
-                            {{ __('Confirm Order') }}
+                        <button type="button" wire:loading.attr="disabled" wire:click="checkout"
+                            class="block w-full py-4 bg-red-500 hover:bg-red-700 text-center text-white font-bold font-heading uppercase rounded-md transition duration-200">
+                            <span>
+                                <div wire:loading wire:target="checkout">
+                                    <x-loading />
+                                </div>
+                                <span>{{ __('Confirm Order') }}</span>
+                            </span>
                         </button>
                     @endauth
                 </div>

@@ -259,10 +259,14 @@
                         </div>
                     </div>
 
-                    <button
-                        class="block w-full py-4 bg-red-500 hover:bg-red-700 text-center text-white font-bold font-heading uppercase rounded-md transition duration-200"
-                        type="button" wire:click="checkout">
-                        {{ __('Confirm Order') }}
+                    <button type="button" wire:loading.attr="disabled" wire:click="checkout"
+                        class="block w-full py-4 bg-red-500 hover:bg-red-700 text-center text-white font-bold font-heading uppercase rounded-md transition duration-200">
+                        <span>
+                            <div wire:loading wire:target="checkout">
+                                <x-loading />
+                            </div>
+                            <span>{{ __('Confirm Order') }}</span>
+                        </span>
                     </button>
                 </div>
             </div>

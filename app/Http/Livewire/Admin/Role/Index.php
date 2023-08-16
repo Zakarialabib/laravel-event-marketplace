@@ -66,16 +66,11 @@ class Index extends Component
         $this->sortDirection = 'desc';
         $this->perPage = 100;
         $this->paginationOptions = [25, 50, 100];
-        $this->orderable = (new Role())->orderable;
     }
 
     public function render(): View|Factory
     {
-        $query = Role::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
-            'order_direction' => $this->sortDirection,
-        ]);
+        $query = Role::with(['permissions'])->orderBy($this->sortBy, $this->sortDirection);
 
         $roles = $query->paginate($this->perPage);
 
