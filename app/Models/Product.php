@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Gloudemans\Shoppingcart\CanBeBought;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -48,9 +47,9 @@ class Product extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'options' => 'json',
+        'options'       => 'json',
         'subcategories' => 'json',
-        'status'  => Status::class,
+        'status'        => Status::class,
     ];
 
     public function category(): BelongsTo

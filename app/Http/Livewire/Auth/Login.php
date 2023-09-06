@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\User;
+use Throwable;
 
 class Login extends Component
 {
@@ -48,7 +49,7 @@ class Login extends Component
 
                 return redirect()->intended($homePage);
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->addError('email', __('These credentials do not match our records'));
         }
     }

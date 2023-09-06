@@ -9,7 +9,6 @@ use Gloudemans\Shoppingcart\CanBeBought;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Image\Manipulations;
 use App\Enums\RaceStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;

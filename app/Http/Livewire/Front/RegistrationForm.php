@@ -16,7 +16,6 @@ use Livewire\Component;
 use Throwable;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Jobs\EmailSubscribtionJob;
-use Illuminate\Http\RedirectResponse;
 
 class RegistrationForm extends Component
 {

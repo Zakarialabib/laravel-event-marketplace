@@ -31,7 +31,6 @@ class SponsorFactory extends Factory
         ];
     }
 
-
     public function configure()
     {
         return $this->afterCreating(function (Sponsor $sponsor) {

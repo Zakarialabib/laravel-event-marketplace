@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Enums\Status;
@@ -62,7 +61,7 @@ class Blog extends Model implements HasMedia
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(BlogCategory::class , 'category_id');
+        return $this->belongsTo(BlogCategory::class, 'category_id');
     }
 
     public function language()

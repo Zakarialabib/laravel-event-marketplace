@@ -86,7 +86,7 @@ class TriathlonResults extends Component
     {
         $query = RaceResult::where('race_id', $this->race->id)
             ->with(['participant' => function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%'.$this->search.'%');
             }])->advancedFilter([
                 's'               => $this->search ?: null,
                 'order_column'    => $this->sortBy,

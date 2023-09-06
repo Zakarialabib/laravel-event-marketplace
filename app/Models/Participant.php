@@ -60,7 +60,6 @@ class Participant extends Model
         'status' => Status::class,
     ];
 
- 
     public function results(): HasMany
     {
         return $this->hasMany(RaceResult::class);
@@ -73,7 +72,7 @@ class Participant extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Custom Attribute

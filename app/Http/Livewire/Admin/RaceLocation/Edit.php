@@ -60,10 +60,10 @@ class Edit extends Component
 
         $this->validate();
 
-       
         if ($this->images) {
             $imageName = Str::slug($this->raceLocation->name).'.'.$this->images->extension();
-            $this->raceLocation->addMedia($this->images)->toMediaCollection('local_files');        }
+            $this->raceLocation->addMedia($this->images)->toMediaCollection('local_files');
+        }
 
         $this->raceLocation->save();
 

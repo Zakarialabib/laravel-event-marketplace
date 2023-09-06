@@ -10,6 +10,7 @@ use App\Models\Slider;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Str;
+
 class Edit extends Component
 {
     use LivewireAlert;

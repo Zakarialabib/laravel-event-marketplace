@@ -30,12 +30,12 @@ class CheckoutController extends Controller
 
         $registration = Registration::where('order_id', $this->order->id)->first();
 
-        if (!$registration) {
+        if ( ! $registration) {
             throw new Exception('Registration not found for the given user and race.');
         }
 
         $cmiClient = new Cmi();
-        $cmiClient->setOid(date('dmY') . rand(10, 1000));
+        $cmiClient->setOid(date('dmY').rand(10, 1000));
         $cmiClient->setAmount($this->order->amount);
         $cmiClient->setBillToName($registration->participant->name);
         $cmiClient->setEmail($registration->participant->email);

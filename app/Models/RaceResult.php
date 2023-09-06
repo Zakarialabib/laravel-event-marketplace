@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
 use App\Traits\HasGlobalDate;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 class RaceResult extends Model
 {
     use HasFactory;
@@ -53,16 +54,14 @@ class RaceResult extends Model
         'status' => Status::class,
     ];
 
-
-    
     public function race(): BelongsTo
     {
-        return $this->belongsTo(Race::class , 'race_id');
+        return $this->belongsTo(Race::class, 'race_id');
     }
 
     public function registration(): BelongsTo
     {
-        return $this->belongsTo(Registration::class , 'registration_id');
+        return $this->belongsTo(Registration::class, 'registration_id');
     }
 
     public function participant(): BelongsTo
