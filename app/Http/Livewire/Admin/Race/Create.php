@@ -250,7 +250,7 @@ class Create extends Component
         return RaceLocation::select('name', 'id')->get();
     }
 
-    public function render(): View|Factory
+    public function render()
     {
         return view('livewire.admin.race.create')->extends('layouts.dashboard');
     }

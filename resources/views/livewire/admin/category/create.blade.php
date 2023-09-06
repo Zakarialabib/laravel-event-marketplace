@@ -28,7 +28,7 @@
 
                 <div class="w-full my-2">
                     <x-label for="image" :value="__('Image')" />
-                    <x-media-upload title="{{ __('Image') }}" name="image" wire:model="image" :file="$image"
+                    <x-media-upload title="{{ __('Image') }}" name="image" wire:model="images" :file="$images"
                         single types="PNG / JPEG / WEBP" fileTypes="image/*" />
                 </div>
 
