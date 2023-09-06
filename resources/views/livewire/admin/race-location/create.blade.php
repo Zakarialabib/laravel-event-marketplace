@@ -14,7 +14,7 @@
                     <div class="w-full">
                         <x-label for="name" :value="__('Name')" />
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                            wire:model="raceLocation.name" />
+                            wire:model.lazy="raceLocation.name" />
                         <x-input-error :messages="$errors->get('raceLocation.name')" for="raceLocation.name" class="mt-2" />
                     </div>
                     <div class="w-full">

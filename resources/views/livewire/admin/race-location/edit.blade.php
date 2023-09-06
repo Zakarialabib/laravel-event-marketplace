@@ -12,7 +12,7 @@
                     <div class="w-full">
                         <x-label for="name" :value="__('Name')" />
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                            wire:model="raceLocation.name" />
+                            wire:model.defer="raceLocation.name" />
                         <x-input-error :messages="$errors->get('raceLocation.name')" for="raceLocation.name" class="mt-2" />
                     </div>
                     <div class="w-full">
@@ -36,11 +36,11 @@
                     <x-input-error :messages="$errors->get('raceLocation.description')" for="raceLocation.description" class="mt-2" />
                 </div>
 
-                <div class="w-full my-2">
+                {{-- <div class="w-full my-2">
                     <x-label for="image" :value="__('Image')" />
                     <x-media-upload title="{{ __('Image') }}" name="image" wire:model="images" :file="$images"
                         single types="PNG / JPEG / WEBP" fileTypes="image/*" />
-                </div>
+                </div> --}}
 
                 <div class="w-full">
                     <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">

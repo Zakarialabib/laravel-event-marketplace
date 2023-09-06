@@ -40,6 +40,11 @@ class Create extends Component
     public $description = '';
 
     public array $listsForFields = [];
+    
+    public function onImagesUpdated($images): void
+    {
+        $this->images = $images;
+    }
 
     public array $rules = [
 
@@ -171,7 +176,8 @@ class Create extends Component
 
         $this->alert('success', __('Race created successfully'));
 
-        $this->emit('refreshIndex');
+        return redirect()->route('admin.races');
+
     }
 
     public function addCourse()

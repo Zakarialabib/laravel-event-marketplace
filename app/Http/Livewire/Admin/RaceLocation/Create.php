@@ -24,11 +24,11 @@ class Create extends Component
 
     public $raceLocation;
 
-    public $image;
+    // public $image;
 
     protected $rules = [
         'raceLocation.name'        => ['required', 'max:255'],
-        'raceLocation.description' => ['required'],
+        'raceLocation.description' => ['nullable'],
         'raceLocation.category_id' => ['required', 'integer'],
     ];
 
@@ -62,11 +62,11 @@ class Create extends Component
 
         $this->raceLocation->slug = Str::slug($this->raceLocation->name);
 
-        if ($this->image) {
-            $imageName = Str::slug($this->raceLocation->name).'.'.$this->image->extension();
-            $this->raceLocation->addMedia($this->image)->toMediaCollection('local_files');
-            $this->raceLocation->images = $imageName;
-        }
+        // if ($this->image) {
+        //     $imageName = Str::slug($this->raceLocation->name).'.'.$this->image->extension();
+        //     $this->raceLocation->addMedia($this->image)->toMediaCollection('local_files');
+        //     $this->raceLocation->images = $imageName;
+        // }
 
         $this->raceLocation->save();
 

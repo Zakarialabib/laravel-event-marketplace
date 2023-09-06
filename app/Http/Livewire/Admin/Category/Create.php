@@ -23,7 +23,7 @@ class Create extends Component
 
     public $category;
 
-    public $image;
+    public $images;
 
     protected $rules = [
         'category.name'        => ['required', 'max:255'],
@@ -60,9 +60,9 @@ class Create extends Component
 
         $this->category->slug = Str::slug($this->category->name);
 
-        if ($this->image) {
-            $imageName = Str::slug($this->category->name).'.'.$this->image->extension();
-            $this->category->addMedia($this->image)->toMediaCollection('local_files');
+        if ($this->images) {
+            $imageName = Str::slug($this->category->name).'.'.$this->images->extension();
+            $this->category->addMedia($this->images)->toMediaCollection('local_files');
             $this->category->images = $imageName;
         }
 

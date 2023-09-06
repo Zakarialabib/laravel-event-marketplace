@@ -67,7 +67,7 @@
                     <select id="race_location_id" name="race_location_id"
                         class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                         wire:model="race.race_location_id">
-                        <option value="" disabled>{{ __('Select Location') }}</option>
+                        <option value="">{{ __('Select Location') }}</option>
                         @foreach ($this->raceLocations as $racelocation)
                             <option value="{{ $racelocation->id }}">{{ $racelocation->name }}
                             </option>

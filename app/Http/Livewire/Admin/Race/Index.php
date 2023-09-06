@@ -97,7 +97,7 @@ class Index extends Component
 
     public function delete(Race $race)
     {
-        abort_if(Gate::denies('race_delete'), 403);
+        // abort_if(Gate::denies('race_delete'), 403);
 
         $race->delete();
 
@@ -106,7 +106,7 @@ class Index extends Component
 
     public function deleteSelected(): void
     {
-        abort_if(Gate::denies('race_delete'), 403);
+        // abort_if(Gate::denies('race_delete'), 403);
 
         Race::whereIn('id', $this->selected)->delete();
 

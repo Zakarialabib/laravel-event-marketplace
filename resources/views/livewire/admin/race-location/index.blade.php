@@ -1,4 +1,6 @@
 <div>
+    @section('title', __('Race Locations'))
+
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
@@ -86,9 +88,9 @@
                     <x-table.th>
                         {{ __('Name') }}
                     </x-table.th>
-                    <x-table.th>
+                    {{-- <x-table.th>
                         {{ __('Image') }}
-                    </x-table.th>
+                    </x-table.th> --}}
                     <x-table.th>
                         {{ __('Category') }}
                     </x-table.th>
@@ -106,14 +108,14 @@
                             <x-table.td>
                                 <input type="checkbox" value="{{ $location->id }}" wire:model="selected">
                             </x-table.td>
-                            <x-table.td>
+                            {{-- <x-table.td>
                                 @if ($location->hasMedia('local_files'))
                                     <img src="{{ $location->getFirstMediaUrl('local_files') }}"
                                         alt="{{ $location->name }}" class="w-10 h-10 rounded-full object-cover">
                                 @else
                                     <p>{{ __('No race image available') }}.</p>
                                 @endif
-                            </x-table.td>
+                            </x-table.td> --}}
                             <x-table.td>
                                 {{ $location->name }}
                             </x-table.td>

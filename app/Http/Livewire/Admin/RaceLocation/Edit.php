@@ -22,7 +22,7 @@ class Edit extends Component
 
     public $raceLocation;
 
-    public $images;
+    // public $images;
 
     public $category_id = null;
 
@@ -32,7 +32,7 @@ class Edit extends Component
 
     protected $rules = [
         'raceLocation.name'        => ['required', 'max:255'],
-        'raceLocation.description' => ['required'],
+        'raceLocation.description' => ['nullable'],
         'raceLocation.category_id' => ['required', 'integer'],
     ];
 
@@ -50,7 +50,7 @@ class Edit extends Component
         $this->resetValidation();
 
         $this->raceLocation = RaceLocation::findOrFail($raceLocation);
-        $this->images = $this->raceLocation->images;
+        // $this->images = $this->raceLocation->images;
         $this->editModal = true;
     }
 
@@ -60,10 +60,10 @@ class Edit extends Component
 
         $this->validate();
 
-        if ($this->images) {
-            $imageName = Str::slug($this->raceLocation->name).'.'.$this->images->extension();
-            $this->raceLocation->addMedia($this->images)->toMediaCollection('local_files');
-        }
+        // if ($this->images) {
+        //     $imageName = Str::slug($this->raceLocation->name).'.'.$this->images->extension();
+        //     $this->raceLocation->addMedia($this->images)->toMediaCollection('local_files');
+        // }
 
         $this->raceLocation->save();
 
