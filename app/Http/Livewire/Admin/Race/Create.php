@@ -7,8 +7,6 @@ namespace App\Http\Livewire\Admin\Race;
 use App\Models\Category;
 use App\Models\Race;
 use App\Models\RaceLocation;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
