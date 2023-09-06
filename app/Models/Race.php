@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Gloudemans\Shoppingcart\CanBeBought;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 use App\Enums\RaceStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasUuid;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Race extends Model implements HasMedia
 {
@@ -72,24 +76,19 @@ class Race extends Model implements HasMedia
         'date'         => 'date',
     ];
 
-    public function location()
+    public function location(): BelongsTo
     {
         return $this->belongsTo(RaceLocation::class, 'race_location_id');
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function participants()
+    public function participants(): HasMany
     {
         return $this->hasMany(Participant::class);
-    }
-
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
     }
 
     public function sponsors()
@@ -117,19 +116,14 @@ class Race extends Model implements HasMedia
         $this->addMediaCollection('local_files');
     }
 
-    public function registerMediaConversions($media = null): void
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('large')
+            ->performOnCollections('local_files')
             ->width(1000)
             ->height(1000)
             ->quality(90)
-            ->performOnCollections('local_files')
             ->format('webp');
-    }
-
-    public function getActiveRegistrationsCountAttribute()
-    {
-        return $this->registrations->where('status', true)->count();
     }
 
     public function getRegistrationOrdersTotalAttribute()

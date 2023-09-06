@@ -76,28 +76,24 @@ class Order extends Model
         return date('Ymd').'-'.sprintf('%06d', $number);
     }
 
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class, 'order_id');
-    }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function race()
     {
-        return $this->belongsTo(Race::class);
+        return $this->belongsTo(Race::class, 'race_id');
     }
 
     public function service()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Service::class, 'service_id');
     }
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class , 'product_id');
     }
 }

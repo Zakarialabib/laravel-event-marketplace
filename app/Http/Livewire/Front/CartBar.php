@@ -87,8 +87,6 @@ class CartBar extends Component
     public function cartBarUpdated()
     {
         $this->cartTotal = Cart::instance('shopping')->total();
-
-        $this->cartItems = Cart::instance('shopping')->content();
     }
 
     public function getCartItemsProperty()

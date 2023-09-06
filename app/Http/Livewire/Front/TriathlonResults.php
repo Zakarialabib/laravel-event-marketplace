@@ -50,9 +50,9 @@ class TriathlonResults extends Component
         $this->orderable = (new RaceResult())->orderable;
     }
 
-    public function calculateRank($result, $field)
+    public function calculateRank($result, $field): int
     {
-        $sortedResults = $this->query->sortBy($field); // Use the corresponding field for each discipline
+        $sortedResults = $result->sortByDesc($field);
         $rank = $sortedResults->pluck('id')->search($result->id) + 1;
 
         return $rank;
@@ -60,8 +60,8 @@ class TriathlonResults extends Component
 
     public function calculateGenderRank($result, $field)
     {
-        $genderSortedResults = RaceResult::byRace($this->race->id)
-            ->byGender($result->participant->gender) // Use the corresponding field for each discipline
+        $genderSortedResults = RaceResult::where('race_id', $this->race->id)
+            ->where('gender', $result->participant->gender) // Use the corresponding field for each discipline
             ->sortBy($field)
             ->get();
 
@@ -86,7 +86,7 @@ class TriathlonResults extends Component
     {
         $query = RaceResult::where('race_id', $this->race->id)
             ->with(['participant' => function ($query) {
-                $query->where('name', 'like', '%'.$this->search.'%');
+                $query->where('name', 'like', '%' . $this->search . '%');
             }])->advancedFilter([
                 's'               => $this->search ?: null,
                 'order_column'    => $this->sortBy,

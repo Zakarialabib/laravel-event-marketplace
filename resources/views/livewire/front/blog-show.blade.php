@@ -10,7 +10,6 @@
         <meta itemprop="url" content="{{ route('front.blogPage', $blog->slug) }}">
         <meta itemprop="publisher" content="{{ config('app.name') }}">
         <meta itemprop="inLanguage" content="{{ $blog->language->name }}">
-        <meta itemprop="keywords" content="{{ $blog->meta_keywords }}">
         <meta itemprop="articleSection" content="{{ $blog->category?->title }}">
         <meta itemprop="articleBody" content="{{ $blog->description }}">
         <meta itemprop="thumbnailUrl" content="{{ asset('images/blog' . $blog->image) }}">

@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Gloudemans\Shoppingcart\CanBeBought;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Support\HasAdvancedFilter;
 use App\Enums\Status;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model implements HasMedia
 {
@@ -35,6 +38,7 @@ class Product extends Model implements HasMedia
         'images',
         'description',
         'category_id',
+        'subcategories',
         'brand_id',
         'price',
         'discount_price',
@@ -45,17 +49,18 @@ class Product extends Model implements HasMedia
 
     protected $casts = [
         'options' => 'json',
+        'subcategories' => 'json',
         'status'  => Status::class,
     ];
 
-    public function category()
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class, 'category_id');
     }
 
-    public function brand()
+    public function brand(): BelongsTo
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function scopeByCategory($query, $categoryId)
@@ -78,12 +83,12 @@ class Product extends Model implements HasMedia
         $this->addMediaCollection('local_files');
     }
 
-    public function registerMediaConversions($media = null): void
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('large')
+            ->performOnCollections('local_files')
             ->width(1000)
             ->height(1000)
-            ->performOnCollections('local_files')
             ->format('webp');
     }
 }

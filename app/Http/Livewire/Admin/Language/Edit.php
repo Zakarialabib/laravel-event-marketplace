@@ -14,7 +14,6 @@ class Edit extends Component
 {
     use LivewireAlert;
 
-    /** @var string[] */
     public $listeners = ['editLanguage'];
 
     public array $languages = [];
@@ -45,7 +44,7 @@ class Edit extends Component
 
         File::copy(App::langPath().('/en.json'), App::langPath().('/'.$this->code.'.json'));
 
-        $this->alert('success', __('Data created successfully!'));
+        $this->alert('success', __('Language created successfully!'));
 
         $this->emit('resetIndex');
 

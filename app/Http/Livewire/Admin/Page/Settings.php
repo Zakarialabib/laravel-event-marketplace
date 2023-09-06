@@ -24,7 +24,7 @@ class Settings extends Component
     public $flashDeal;
     public $bestSellers;
     public $topBrands;
-
+    public $selectedColor;
     public $status;
     public $menuItems;
 

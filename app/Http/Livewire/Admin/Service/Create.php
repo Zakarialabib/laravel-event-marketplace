@@ -50,7 +50,7 @@ class Create extends Component
 
         $this->emit('refreshIndex');
 
-        $this->alert('success', 'Service created successfully.');
+        $this->alert('success', __('Service created successfully.'));
 
         $this->createModal = false;
     }

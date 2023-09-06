@@ -6,9 +6,9 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Permission as SpatiePermission;
 
-class Permission extends Model
+class Permission extends SpatiePermission
 {
     use HasFactory;
     use HasAdvancedFilter;
@@ -37,25 +37,4 @@ class Permission extends Model
         'created_at',
         'updated_at',
     ];
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    /**
-     * Determine if the permission belongs to the role.
-     *
-     * @param  mixed  $role
-     *
-     * @return bool
-     */
-    public function inRole($role)
-    {
-        if (is_string($role)) {
-            return $this->roles->contains('name', $role);
-        }
-
-        return (bool) $role->intersect($this->roles)->count();
-    }
 }

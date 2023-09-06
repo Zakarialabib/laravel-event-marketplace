@@ -182,10 +182,8 @@ class Index extends Component
             'description'      => $product_details->description,
             'meta_title'       => $product_details->meta_title,
             'meta_description' => $product_details->meta_description,
-            'meta_keywords'    => $product_details->meta_keywords,
             'category_id'      => $product_details->category_id,
             'subcategories'    => $product_details->subcategories,
-            'image'            => $product_details->image,
             'brand_id'         => $product_details->brand_id,
             'status'           => Status::INACTIVE,
         ]);

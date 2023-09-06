@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasUuid;
 use App\Traits\HasGlobalDate;
 use App\Support\HasAdvancedFilter;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Registration extends Model
 {
@@ -48,24 +50,24 @@ class Registration extends Model
         'status' => Status::class,
     ];
 
-    public function participant()
+    public function participant(): BelongsTo
     {
-        return $this->belongsTo(Participant::class);
+        return $this->belongsTo(Participant::class, 'participant_id');
     }
 
-    public function race()
+    public function race(): BelongsTo
     {
-        return $this->belongsTo(Race::class);
+        return $this->belongsTo(Race::class, 'race_id');
     }
 
-    public function result()
+    public function result(): HasOne
     {
-        return $this->hasOne(Result::class);
+        return $this->hasOne(RaceResult::class);
     }
 
-    public function order()
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
     public function scopeActive($query)

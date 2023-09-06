@@ -22,7 +22,7 @@ class Edit extends Component
 
     public $raceLocation;
 
-    public $image;
+    public $images;
 
     public $category_id = null;
 
@@ -50,7 +50,7 @@ class Edit extends Component
         $this->resetValidation();
 
         $this->raceLocation = RaceLocation::findOrFail($raceLocation);
-        $this->image = $this->raceLocation->image;
+        $this->images = $this->raceLocation->images;
         $this->editModal = true;
     }
 
@@ -60,16 +60,10 @@ class Edit extends Component
 
         $this->validate();
 
-        // if ($this->image) {
-        //     $imageName = Str::slug($this->raceLocation->name).'-'.Str::random(3).'.'.$this->image->extension();
-        //     $this->raceLocation->addMedia($this->image)->toMediaCollection('local_files');
-        //     $this->raceLocation->images = $imageName;
-        // }
-        if ($this->image) {
-            $imageName = Str::slug($this->raceLocation->name).'-'.Str::random(3).'.'.$this->image->extension();
-            $this->raceLocation->addMedia($this->image)->toMediaCollection('local_files');
-            // }
-        }
+       
+        if ($this->images) {
+            $imageName = Str::slug($this->raceLocation->name).'.'.$this->images->extension();
+            $this->raceLocation->addMedia($this->images)->toMediaCollection('local_files');        }
 
         $this->raceLocation->save();
 

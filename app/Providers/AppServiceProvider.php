@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         return cache()->rememberForever('languages', function () {
-            return Language::all()->pluck('name', 'code')->toArray();
+            return Language::pluck('name', 'code')->toArray();
         });
     }
 

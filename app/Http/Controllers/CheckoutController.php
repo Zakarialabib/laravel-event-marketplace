@@ -28,33 +28,29 @@ class CheckoutController extends Controller
     {
         $this->order = Order::findOrFail($id);
 
-        // dd($this->order->id);
+        $registration = Registration::where('order_id', $this->order->id)->first();
 
-        $registration = Registration::findOrFail($this->order->registration_id);
-
-        // dd($registration);
-
-        if ( ! $registration) {
+        if (!$registration) {
             throw new Exception('Registration not found for the given user and race.');
         }
 
         $cmiClient = new Cmi();
-        $cmiClient->setOid(date('dmY').rand(10, 1000));
+        $cmiClient->setOid(date('dmY') . rand(10, 1000));
         $cmiClient->setAmount($this->order->amount);
-        $cmiClient->setBillToName($registration->name);
-        $cmiClient->setEmail($registration->email);
-        $cmiClient->setTel($registration->phone_number);
+        $cmiClient->setBillToName($registration->participant->name);
+        $cmiClient->setEmail($registration->participant->email);
+        $cmiClient->setTel($registration->participant->phone_number);
         $cmiClient->setCurrency('504');
         $cmiClient->setDescription('ceci est un exemple à utiliser');
         $cmiClient->setSessionTimeout(1800);
         $otherData = [
-            'billToStreet1' => $registration->address,
-            'billToCity'    => $registration->city,
-            'billToCountry' => $registration->country,
+            'billToStreet1' => $registration->participant->address,
+            'billToCity'    => $registration->participant->city,
+            'billToCountry' => $registration->participant->country,
             //etc...
         ];
 
-        dd($cmiClient);
+        // dd($cmiClient);
 
         return $this->requestPayment($cmiClient, $otherData);
     }
@@ -79,6 +75,7 @@ class CheckoutController extends Controller
         ]);
 
         $cmiClient = new Cmi();
+
         // withErrors(['payment' => __('Paiement échoué, une erreur est survenue lors de la transaction, veuillez réessayer ultérieurement.')]);
         return redirect($cmiClient->getShopUrl());
     }

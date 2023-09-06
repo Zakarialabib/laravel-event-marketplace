@@ -13,6 +13,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Enums\Status;
+use Illuminate\Http\RedirectResponse;
 
 class SocialAuth extends Component
 {
@@ -21,7 +22,7 @@ class SocialAuth extends Component
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function handleFacebookCallback()
+    public function handleFacebookCallback(): RedirectResponse
     {
         $socialUser = Socialite::driver('facebook')->user();
 

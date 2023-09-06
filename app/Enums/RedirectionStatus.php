@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum RedirectionStatus: string
+enum RedirectionStatus: int
 {
-    case MOVED_PERMANENTLY = '301';
-    case PERMANENT_REDIRECT = '308';
-    case FOUND = '302';
-    case SEE_OTHER = '303';
-    case TEMPORARY_REDIRECT = '307';
+    case MOVED_PERMANENTLY = 301;
+    case PERMANENT_REDIRECT = 308;
+    case FOUND = 302;
+    case SEE_OTHER = 303;
+    case TEMPORARY_REDIRECT = 307;
 
     public static function values(): array
     {

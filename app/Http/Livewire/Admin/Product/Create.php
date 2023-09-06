@@ -25,6 +25,7 @@ class Create extends Component
     public $createProduct = false;
 
     public $product;
+    public $subcategories;
 
     public $images;
 

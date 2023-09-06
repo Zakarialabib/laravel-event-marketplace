@@ -131,15 +131,12 @@
                             <input type="checkbox" value="{{ $product->id }}" wire:model="selected">
                         </x-table.td>
                         <x-table.td>
-                            <button type="button" wire:click="$emit('imageModal', {{ $product->id }})"
-                                wire:key="image-{{ $product->id }}">
-                                @if ($product->hasMedia('local_files'))
-                                    <img src="{{ $product->getFirstMediaUrl('local_files') }}"
-                                        alt="{{ $product->name }}" class="w-10 h-10 rounded-full object-cover">
-                                @else
-                                    <p>{{ __('No product image available.') }}</p>
-                                @endif
-                            </button>
+                            @if ($product->hasMedia('local_files'))
+                                <img src="{{ $product->getFirstMediaUrl('local_files') }}" alt="{{ $product->name }}"
+                                    class="w-10 h-10 rounded-full object-cover">
+                            @else
+                                <p>{{ __('No product image available.') }}</p>
+                            @endif
                         </x-table.td>
                         <x-table.td>
                             <button type="button" wire:click="$emit('showModal',{{ $product->id }})">
@@ -229,11 +226,7 @@
         <!-- Highlighted Modal -->
         @livewire('admin.product.highlighted', ['product' => $product])
         <!-- End Highlighted Modal -->
-
-        <!-- Image Modal -->
-        @livewire('admin.product.image', ['product' => $product])
-        <!-- End Image Modal -->
-
+        
         <livewire:admin.product.create />
 
         <x-modal wire:model="promoAllProducts">

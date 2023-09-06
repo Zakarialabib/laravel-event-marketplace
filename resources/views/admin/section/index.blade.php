@@ -1,5 +1,4 @@
 @section('title', __('Section List'))
-<x-dashboard-layout>
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">

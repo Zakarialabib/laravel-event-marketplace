@@ -61,7 +61,7 @@ class Create extends Component
         $this->category->slug = Str::slug($this->category->name);
 
         if ($this->image) {
-            $imageName = Str::slug($this->category->name).'-'.Str::random(3).'.'.$this->image->extension();
+            $imageName = Str::slug($this->category->name).'.'.$this->image->extension();
             $this->category->addMedia($this->image)->toMediaCollection('local_files');
             $this->category->images = $imageName;
         }
@@ -70,7 +70,7 @@ class Create extends Component
 
         $this->emit('refreshIndex');
 
-        $this->alert('success', 'Category created successfully.');
+        $this->alert('success', __('Category created successfully.'));
 
         $this->createModal = false;
     }

@@ -22,7 +22,7 @@ class Verify extends Component
 
         $this->emit('resent');
 
-        $this->alert('resent');
+        $this->alert('success', __('Email resent please check your inbox!'));
     }
 
     public function render()

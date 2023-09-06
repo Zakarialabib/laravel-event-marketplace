@@ -111,9 +111,6 @@ class Index extends Component
     {
         abort_if(Gate::denies('category_delete'), 403);
 
-        if ($category->products()->isNotEmpty()) {
-            $this->alert('error', __('Can\'t delete beacuse there are products associated with this category !'));
-        }
         $category->delete();
 
         $this->alert('success', __('ProductCategory deleted successfully.'));

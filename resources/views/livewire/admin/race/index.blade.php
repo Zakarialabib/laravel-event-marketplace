@@ -39,10 +39,9 @@
             </div>
             <div class="float-right">
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" wire:click="$emit('createModal')">
+                <x-button primary href="{{ route('admin.race.create') }}">
                     {{ __('Create Race') }}
                 </x-button>
-
             </div>
         </div>
     </section>
@@ -124,7 +123,7 @@
                             @endif
                         </x-table.td>
                         <x-table.td>
-                            {{ Helpers::format_date($race->date) }}
+                            {{ Helpers::format_date($race->registration_deadline) }}
                         </x-table.td>
                         <x-table.td>
                             <button type="button" wire:click="$emit('showModal', {{ $race->id }})">
@@ -206,14 +205,11 @@
             {{ $races->links() }}
         </p>
     </x-card>
-    @livewire('admin.race.create')
+
     <!-- Show Modal -->
     @livewire('admin.race.show', ['race' => $race])
     <!-- End Show Modal -->
 
-    <!-- Image Modal -->
-    {{-- @livewire('admin.race.image', ['race' => $race] , key($race->id)) --}}
-    <!-- End Image Modal -->
 
     @push('scripts')
         <script>

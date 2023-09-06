@@ -7,6 +7,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 use App\Enums\Status;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
@@ -39,7 +41,6 @@ class Category extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'images' => 'json',
         'status' => Status::class,
     ];
 
@@ -72,12 +73,12 @@ class Category extends Model implements HasMedia
         $this->addMediaCollection('local_files');
     }
 
-    public function registerMediaConversions($media = null): void
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('medium')
+            ->performOnCollections('local_files')
             ->width(500)
             ->height(500)
-            ->performOnCollections('local_files')
             ->format('webp');
     }
 }

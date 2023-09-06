@@ -50,7 +50,7 @@
                         <h3 class="text-white text-lg font-medium leading-8 mb-3 uppercase">Date</h3>
 
                         <p><strong class="font-bold">
-                                {{ \Carbon\Carbon::parse($race->date)->format('l j F Y') }}
+                                {{ \Carbon\Carbon::parse($race->registration_deadline)->format('l j F Y') }}
                             </strong></p>
                     </div>
                     <div style="word-break: break-word;">

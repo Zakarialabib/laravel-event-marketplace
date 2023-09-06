@@ -52,7 +52,7 @@ class Edit extends Component
         $this->validate();
 
         if ($this->image) {
-            $imageName = Str::slug($this->category->name).'-'.Str::random(3).'.'.$this->image->extension();
+            $imageName = Str::slug($this->category->name).'.'.$this->image->extension();
             $this->image->storeAs('categories', $imageName);
             $this->category->image = $imageName;
         }

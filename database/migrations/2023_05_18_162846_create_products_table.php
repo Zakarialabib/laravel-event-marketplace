@@ -18,6 +18,7 @@ return new class () extends Migration {
             $table->text('description');
             $table->foreignId('brand_id')->nullable()->constrained('brands')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('product_categories');
+            $table->json('subcategories')->nullable();
             $table->decimal('price', 8, 2);
             $table->decimal('discount_price', 8, 2)->nullable();
             $table->string('slug')->unique();

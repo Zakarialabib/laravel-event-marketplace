@@ -1,4 +1,4 @@
-<div>
+    <div>
     @section('title', $category_name ?? __('Categories'))
 
     @section('meta')

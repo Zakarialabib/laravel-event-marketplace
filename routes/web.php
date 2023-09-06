@@ -12,12 +12,11 @@ use App\Http\Livewire\Front\Races as RaceIndex;
 use App\Http\Livewire\Front\Checkout as CheckoutIndex;
 use App\Http\Livewire\Front\CheckoutRace;
 use App\Http\Livewire\Front\Blogs as BlogIndex;
+use App\Http\Livewire\Front\BlogShow;
 use App\Http\Livewire\Account\Index as AccountIndex;
 use App\Http\Livewire\Front\RegistrationForm;
-use App\Http\Livewire\Front\BlogShow;
 use App\Http\Livewire\Front\DynamicPage;
 use App\Http\Livewire\Front\RaceDetails;
-use App\Http\Controllers\UploadController;
 use App\Http\Livewire\Front\ThankYou;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,8 +63,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/mon-compte', AccountIndex::class)->name('front.myaccount');
 });
-
-Route::post('/uploads', [UploadController::class, 'upload'])->name('upload');
 
 Route::get('/cmi/pay/{id}', [CheckoutController::class, 'initiateCmiPayment'])->name('cmi.pay');
 Route::post('/cmi/callback', [CheckoutController::class, 'callback'])->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);

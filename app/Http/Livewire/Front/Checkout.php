@@ -131,7 +131,7 @@ class Checkout extends Component
                     'reference'       => Order::generateReference(),
                     'payment_method'  => $this->payment_method,
                     'payment_status'  => PaymentStatus::PENDING,
-                    'amount'          => Cart::instance('shopping')->total() + Shipping::find($this->shipping_id)->cost,
+                    'amount'          => Cart::instance('shopping')->total() + (float) Shipping::find($this->shipping_id)->cost,
                     'date'            => now(),
                     'user_id'         => Auth::user()->id,
                     'product_id'      => $item->id,
@@ -155,7 +155,7 @@ class Checkout extends Component
             if ($this->payment_method === 'card') {
                 $this->redirect(route('cmi.pay', $order->id));
             } elseif ($this->payment_method === 'cashOnDelivery') {
-                Cart::instance('races')->destroy();
+                Cart::instance('shopping')->destroy();
                 $this->alert('success', __('Order placed successfully!'));
 
                 return redirect()->route('front.thankyou', $order->id);

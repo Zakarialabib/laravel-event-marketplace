@@ -200,7 +200,7 @@ class Edit extends Component
 
     public function mediaDeleted(): void
     {
-        $this->images = $this->product->getMedia('local_files');
+        $this->images = $this->race->getMedia('local_files');
     }
 
     public function mount($name)

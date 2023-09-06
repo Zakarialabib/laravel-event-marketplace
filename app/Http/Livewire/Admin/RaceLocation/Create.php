@@ -63,7 +63,7 @@ class Create extends Component
         $this->raceLocation->slug = Str::slug($this->raceLocation->name);
 
         if ($this->image) {
-            $imageName = Str::slug($this->raceLocation->name).'-'.Str::random(3).'.'.$this->image->extension();
+            $imageName = Str::slug($this->raceLocation->name).'.'.$this->image->extension();
             $this->raceLocation->addMedia($this->image)->toMediaCollection('local_files');
             $this->raceLocation->images = $imageName;
         }

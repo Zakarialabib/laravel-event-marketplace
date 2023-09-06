@@ -140,7 +140,7 @@ class Index extends Component
 
         if ($breadCrumb) {
             Settings::set('site_breadCrumb_img', $breadCrumb);
-            $this->alert('success', __('breadcrumb Image updated successfully!'));
+            $this->alert('success', __('Breadcrumb Image updated successfully!'));
             $this->breadCrumbImg = '';
             $this->breadCrumbImg = $breadCrumb;
         } else {

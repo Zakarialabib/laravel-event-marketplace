@@ -151,7 +151,7 @@ class Index extends Component
 
         $this->resetSelected();
 
-        $this->alert('success', __('Selected brands and their device models deleted successfully.'));
+        $this->alert('success', __('Selected brands deleted successfully.'));
     }
 
     public function importModal(): void

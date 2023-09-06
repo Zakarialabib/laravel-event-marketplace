@@ -7,6 +7,8 @@ namespace App\Models;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Enums\Status;
@@ -53,12 +55,12 @@ class Slider extends Model implements HasMedia
         $this->addMediaCollection('local_files');
     }
 
-    public function registerMediaConversions($media = null): void
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('large')
-            ->width(1000)
-            ->height(400)
             ->performOnCollections('local_files')
+            ->width(720)
+            ->height(480)
             ->format('webp');
     }
 }

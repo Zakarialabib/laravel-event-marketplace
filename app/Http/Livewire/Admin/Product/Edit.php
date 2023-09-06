@@ -64,9 +64,9 @@ class Edit extends Component
         $this->description = $value;
     }
 
-    public function updatedProductSubcategories()
+    public function updatedProductSubcategories($value)
     {
-        $this->product->subcategories;
+        $this->product->subcategories = $value;
     }
 
     public function addOption()
@@ -94,8 +94,9 @@ class Edit extends Component
         $this->product = Product::findOrFail($id);
 
         $this->description = $this->product->description;
+        // $this->subcategories = $this->product->subcategories;
 
-        $this->options = json_decode($this->product->options, true) ?? '';
+        $this->options = json_decode($this->product->options, true) ?? [];
 
         $this->images = $this->product->images;
 
@@ -110,7 +111,7 @@ class Edit extends Component
 
         if ($this->images) {
             foreach ($this->images as $image) {
-                $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
+                $this->product->addMedia($image->getRealPath())->toMediaCollection('local_files');
             }
         }
 

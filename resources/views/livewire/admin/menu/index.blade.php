@@ -12,7 +12,7 @@
                     <div class="w-full">
                         <x-label for="name" :value="__('Name')" />
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                            wire:model="name" />
+                            wire:model.lazy="name" />
                         <x-input-error :messages="$errors->get('menu.name')" for="name" class="mt-2" />
                     </div>
                     <div class="w-full">
@@ -42,14 +42,14 @@
                     <div class="w-full">
                         <x-label for="label" :value="__('Label')" />
                         <x-input id="label" class="block mt-1 w-full" type="text" name="label"
-                            wire:model="label" />
+                            wire:model.lazy="label" />
                         <x-input-error :messages="$errors->get('menu.label')" for="label" class="mt-2" />
                     </div>
 
                     <div class="w-full">
                         <x-label for="url" :value="__('URL')" />
                         <x-input id="url" class="block mt-1 w-full" type="text" name="url"
-                            wire:model="url" />
+                            wire:model.lazy="url" />
                         <x-input-error :messages="$errors->get('menu.url')" for="url" class="mt-2" />
                     </div>
 
@@ -197,7 +197,7 @@
                                         <x-label for="url" :value="__('URL')" />
                                         <div class="relative">
                                             <x-input id="url" class="block mt-1 w-full" type="text"
-                                                name="url" wire:model="menus.{{ $index }}.url"  />
+                                                name="url" wire:model.lazy="menus.{{ $index }}.url"  />
                                             <div
                                                 class="absolute right-0 top-0 h-full w-8 flex items-center justify-center">
                                                 <button @click="isOpen = !isOpen" type="button"

@@ -1,4 +1,4 @@
-s<div>
+<div>
     @section('title', __('Shipping List'))
 
     <section class="py-3 px-4">

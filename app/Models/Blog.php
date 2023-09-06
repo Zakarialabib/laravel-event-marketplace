@@ -7,9 +7,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Enums\Status;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Blog extends Model implements HasMedia
 {
@@ -57,9 +60,9 @@ class Blog extends Model implements HasMedia
         return $query->where('status', Status::ACTIVE);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(BlogCategory::class);
+        return $this->belongsTo(BlogCategory::class , 'category_id');
     }
 
     public function language()
@@ -72,12 +75,12 @@ class Blog extends Model implements HasMedia
         $this->addMediaCollection('local_files');
     }
 
-    public function registerMediaConversions($media = null): void
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('large')
+            ->performOnCollections('local_files')
             ->width(800)
             ->height(800)
-            ->performOnCollections('local_files')
             ->format('webp');
     }
 }

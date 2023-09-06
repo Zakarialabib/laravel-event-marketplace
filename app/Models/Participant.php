@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\Status;
 use App\Traits\HasGlobalDate;
 use App\Support\HasAdvancedFilter;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Participant extends Model
 {
@@ -58,14 +60,10 @@ class Participant extends Model
         'status' => Status::class,
     ];
 
-    public function raceLocation()
+ 
+    public function results(): HasMany
     {
-        return $this->belongsTo(RaceLocation::class);
-    }
-
-    public function results()
-    {
-        return $this->hasMany(Result::class);
+        return $this->hasMany(RaceResult::class);
     }
 
     public function scopeActive($query)
@@ -73,9 +71,9 @@ class Participant extends Model
         return $query->where('status', true);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'user_id');
     }
 
     // Custom Attribute

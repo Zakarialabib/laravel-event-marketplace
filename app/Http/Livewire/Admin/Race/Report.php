@@ -15,6 +15,7 @@ class Report extends Component
 
     public $totalRaces;
     public $upcomingRaces;
+    public $races;
     public $registrations;
     public $selected = [];
     public $selectAll = false;

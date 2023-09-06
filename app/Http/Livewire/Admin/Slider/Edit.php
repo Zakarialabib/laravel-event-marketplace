@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 use App\Models\Slider;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-
+use Illuminate\Support\Str;
 class Edit extends Component
 {
     use LivewireAlert;
@@ -61,9 +61,10 @@ class Edit extends Component
     {
         $this->validate();
 
-        if (empty($this->image)) {
-            $this->slider->addMedia($this->image->getRealPath())
-                ->toMediaCollection('local_files');
+        if ($this->image) {
+            $imageName = Str::slug($this->slider->name).'.'.$this->image->extension();
+            $this->slider->addMedia($this->image)->toMediaCollection('local_files');
+            // }
         }
 
         $this->slider->language_id = 1;

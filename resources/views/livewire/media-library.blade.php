@@ -68,22 +68,6 @@
                         @endif
                     </ul>
                 </div>
-                <template x-teleport="body">
-                    <div x-show="imageGalleryOpened" x-transition:enter="transition ease-in-out duration-300"
-                        x-transition:enter-start="opacity-0" x-transition:leave="transition ease-in-in duration-300"
-                        x-transition:leave-end="opacity-0" @keydown.window.escape="imageGalleryClose"
-                        class="fixed inset-0 mx-auto bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                        <div class="relativ bg-white flex justify-center mx-auto p-6">
-                            {{-- <x-cropper :accepted-file-types="['image/jpeg', 'image/png']" 
-                                :can-reorder="false" :viewport-width="300"
-                                :viewport-height="200" :boundary-width="400" :boundary-height="300" :show-zoomer="true"
-                                :is-avatar="true" :image-crop-aspect-ratio="16 / 9" :image-preview-height="150" :image-resize-mode="'contain'"
-                                :image-resize-target-height="400" :image-resize-target-width="600" :image-format="'jpeg'" :image-quality="0.8"
-                                :id="'cropper1'" /> --}}
-
-                        </div>
-                    </div>
-                </template>
             </div>
         </div>
     </div>

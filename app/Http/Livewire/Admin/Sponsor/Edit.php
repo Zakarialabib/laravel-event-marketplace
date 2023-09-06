@@ -10,8 +10,11 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 class Edit extends Component
 {
+    use LivewireAlert;
     public $sponsor;
 
     public $editModal = false;
@@ -56,9 +59,9 @@ class Edit extends Component
             $imageName = Str::slug($this->sponsor->name).'-'.Str::random(5).'.'.$this->image->extension();
 
             // Delete the previous media file before updating
-            $this->slider->clearMediaCollection('sponsors');
+            $this->sponsor->clearMediaCollection('sponsors');
 
-            $this->slider->addMediaFromDisk($this->image->getRealPath())
+            $this->sponsor->addMediaFromDisk($this->image->getRealPath())
                 ->usingFileName($imageName)
                 ->toMediaCollection('local_files');
 

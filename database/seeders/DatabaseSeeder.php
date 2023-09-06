@@ -33,12 +33,12 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
-            RaceLocationSeeder::class,
-            RaceSeeder::class,
+            ServiceSeeder::class,
             FaqSeeder::class,
             MenuSeeder::class,
-            ServiceSeeder::class,
-            RaceRegistrationSeeder::class,
+            // RaceLocationSeeder::class,
+            // RaceSeeder::class,
+            // RaceRegistrationSeeder::class,
         ]);
 
         \App\Models\Race::factory(10)->create();

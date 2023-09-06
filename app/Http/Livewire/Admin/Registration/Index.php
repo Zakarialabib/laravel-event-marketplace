@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Admin\Registration;
 
 use App\Exports\RegistrationExport;
 use App\Models\Registration;
+use App\Models\Race;
 use App\Http\Livewire\WithSorting;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,6 +23,7 @@ class Index extends Component
     public string $search = '';
     public array $selected = [];
     public array $paginationOptions;
+    public $selectedRace = '';
     public $activeTab;
     public $registration;
 
@@ -29,6 +31,7 @@ class Index extends Component
         'search'        => ['except' => ''],
         'sortBy'        => ['except' => 'id'],
         'sortDirection' => ['except' => 'desc'],
+        'selectedRace'  => ['except' => ''],
     ];
 
     public function getSelectedCountProperty()
@@ -68,7 +71,7 @@ class Index extends Component
         $this->perPage = 25;
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Registration())->orderable;
-        $this->activeTab ??= 'all';
+        $this->activeTab = 'all';
     }
 
     public function showRegistration(Registration $registration)
@@ -77,13 +80,29 @@ class Index extends Component
         $this->activeTab = 'showRegistration';
     }
 
+    public function updatingSelectedRace()
+    {
+        $this->resetPage();
+    }
+
+    public function getRacesProperty()
+    {
+        return Race::select('name', 'id')->get();
+    }
+
     public function render(): View|Factory
     {
-        $query = Registration::advancedFilter([
+        $query = Registration::with('race')->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
+
+        if ($this->selectedRace) {
+            $query->whereHas('race', function ($subQuery) {
+                $subQuery->where('name', $this->selectedRace);
+            });
+        }
 
         $registrations = $query->paginate($this->perPage);
 

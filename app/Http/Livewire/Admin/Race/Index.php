@@ -83,7 +83,7 @@ class Index extends Component
     public function publishResults($id)
     {
         PublishResults::dispatch($id);
-        $this->alert('success', 'Race results are being generated.');
+        $this->alert('success', __('Race results are being generated.'));
     }
 
     public function mount()

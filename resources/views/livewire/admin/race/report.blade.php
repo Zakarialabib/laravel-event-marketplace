@@ -105,10 +105,10 @@
                     <input type="checkbox" wire:model="selectAll">
                 </x-table.th>
                 <x-table.th>
-                    {{ __('Name') }}
+                    {{ __('Race Name') }}
                 </x-table.th>
                 <x-table.th>
-                    {{ __('Date') }}
+                    {{ __('Race Date') }}
                 </x-table.th>
                 <x-table.th>
                     {{ __('Status') }}
@@ -128,7 +128,7 @@
                     <tr>
                         <td><input type="checkbox" value="{{ $race->id }}" wire:model="selected"></td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $race->name }}</td>
-                        <td class="py-2 px-4 border-b border-gray-200">{{ Helpers::format_date($race->date) }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ Helpers::format_date($race->created_at) }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">
                             {{ \App\Enums\RaceStatus::getLabel($race->status)}}
                         </td>

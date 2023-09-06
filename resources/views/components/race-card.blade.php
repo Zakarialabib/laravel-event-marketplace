@@ -8,10 +8,10 @@
             style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;height:27rem">
             <div class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
                 <p class="font-medium leading-leading-tight">
-                    {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
+                    {{ \Carbon\Carbon::parse($race->registration_deadline)->format('F') }}</p>
                 <p class="font-extrabold text-2xl leading-tight">
-                    {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
-                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
+                    {{ \Carbon\Carbon::parse($race->registration_deadline)->format('d') }}</p>
+                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->registration_deadline)->format('Y') }}</p>
             </div>
         </a>
         <div class="w-full lg:w-1/2 py-10 relative">
@@ -94,10 +94,10 @@
             <div
                 class="absolute top-0 left-0 pt-6 pb-4 px-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl opacity-90">
                 <p class="font-medium leading-leading-tight">
-                    {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
+                    {{ \Carbon\Carbon::parse($race->registration_deadline)->format('F') }}</p>
                 <p class="font-extrabold text-2xl leading-tight">
-                    {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
-                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
+                    {{ \Carbon\Carbon::parse($race->registration_deadline)->format('d') }}</p>
+                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->registration_deadline)->format('Y') }}</p>
             </div>
         </a>
 
@@ -172,10 +172,10 @@
             style="background-image: url({{ $race->getFirstMediaUrl('local_files') }});background-size: cover;background-position: center;height:27rem">
             <div class="absolute top-0 left-0 p-4 bg-redBrick-600 text-white text-center shadow-xl rounded-br-xl">
                 <p class="font-medium leading-leading-tight">
-                    {{ \Carbon\Carbon::parse($race->date)->format('F') }}</p>
+                    {{ \Carbon\Carbon::parse($race->registration_deadline)->format('F') }}</p>
                 <p class="font-extrabold text-2xl leading-tight">
-                    {{ \Carbon\Carbon::parse($race->date)->format('d') }}</p>
-                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->date)->format('Y') }}</p>
+                    {{ \Carbon\Carbon::parse($race->registration_deadline)->format('d') }}</p>
+                <p class="leading-tight">{{ \Carbon\Carbon::parse($race->registration_deadline)->format('Y') }}</p>
             </div>
         </a>
 

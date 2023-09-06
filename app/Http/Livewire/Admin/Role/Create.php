@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -38,7 +39,7 @@ class Create extends Component
         return view('livewire.admin.role.create');
     }
 
-    public function submit()
+    public function submit(): RedirectResponse
     {
         $this->validate();
 

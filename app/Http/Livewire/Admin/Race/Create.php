@@ -20,11 +20,8 @@ class Create extends Component
     use WithFileUploads;
 
     public $listeners = [
-        'createModal',
         'imagesUpdated' => 'onImagesUpdated',
     ];
-
-    public $createModal = false;
 
     public $race;
 
@@ -95,7 +92,7 @@ class Create extends Component
         $this->description = $value;
     }
 
-    public function createModal()
+    public function mount()
     {
         $this->resetErrorBag();
 
@@ -104,10 +101,6 @@ class Create extends Component
         $this->race = new Race();
 
         $this->description = '';
-
-        $this->race->first_year = true;
-
-        $this->createModal = true;
     }
 
     public function addSocialMedia()
@@ -178,11 +171,9 @@ class Create extends Component
 
         $this->race->save();
 
-        $this->alert('success', 'Race created successfully');
+        $this->alert('success', __('Race created successfully'));
 
         $this->emit('refreshIndex');
-
-        $this->createModal = false;
     }
 
     public function addCourse()
@@ -261,6 +252,6 @@ class Create extends Component
 
     public function render(): View|Factory
     {
-        return view('livewire.admin.race.create');
+        return view('livewire.admin.race.create')->extends('layouts.dashboard');
     }
 }

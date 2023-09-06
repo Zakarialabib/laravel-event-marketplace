@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use App\Traits\CmiGateway;
 
@@ -52,7 +53,7 @@ class CheckoutRace extends Component
 
         // If time expires
         if ($this->timeRemaining <= 0) {
-            $this->alert('error', 'Your registration time has expired.');
+            $this->alert('error', __('Your registration time has expired.'));
 
             return redirect()->back();
         }

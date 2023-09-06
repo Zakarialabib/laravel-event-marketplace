@@ -40,8 +40,7 @@ class Dashboard extends Component
         $orderFormProduct = OrderForms::where('type', OrderType::PRODUCT)->whereBetween('created_at', [$this->startDate, $this->endDate])->count();
         $orderFormRegistration = OrderForms::where('type', OrderType::REGISTRATION)->whereBetween('created_at', [$this->startDate, $this->endDate])->count();
 
-        $ordersCount = Order::with('race')
-            ->whereBetween('created_at', [$this->startDate, $this->endDate])
+        $ordersCount = Order::whereBetween('created_at', [$this->startDate, $this->endDate])
             ->count();
 
         $recentOrders = Order::select('created_at', 'amount', 'reference', 'id')->orderBy('created_at', 'desc')->take(10)->get();

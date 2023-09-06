@@ -29,8 +29,8 @@ class Locale
                 ->get()->toArray();
 
             $language_default = Language::query()
-                ->where('is_default', Language::IS_DEFAULT)
-                ->first('code');
+                ->where('is_default', true)
+                ->first();
         }
 
         $language_code = Session::get('language_code');

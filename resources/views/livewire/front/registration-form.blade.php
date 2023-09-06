@@ -101,8 +101,7 @@
                         </div>
                         <div>
                             <x-label required for="country" :value="__('Country')" />
-                            <x-input wire:model="participant.country" type="text" required id="country"
-                                name="country" />
+                            <x-country-select wire:model="participant.country" id="country" required />
                             <x-input-error :messages="$errors->get('participant.country')" for="participant.country" class="mt-2" />
                         </div>
                         <div>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Models\Team;
 use App\Models\TeamMember;
+use App\Models\Participant;
 use App\Mail\TeamInvitationMail;
 use App\Enums\Status;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -88,7 +89,6 @@ class TeamForm extends Component
             ]);
         }
 
-        // Check if the participant is already a member of another team for the same race.
         $existingMembership = TeamMember::where('participant_id', $participant->id)->first();
 
         if ($existingMembership) {
@@ -97,7 +97,6 @@ class TeamForm extends Component
             return;
         }
 
-        // Add participant to the team.
         TeamMember::create([
             'team_id'           => $this->team->id,
             'participant_id'    => $participant->id,
@@ -123,7 +122,6 @@ class TeamForm extends Component
             return;
         }
 
-        // Check if the participant is already a member of this team.
         $existingMembership = TeamMember::where('team_id', $this->team->id)
             ->where('participant_id', $participant->id)
             ->first();
@@ -134,7 +132,6 @@ class TeamForm extends Component
             return;
         }
 
-        // Add participant to the team.
         TeamMember::create([
             'team_id'        => $this->team->id,
             'participant_id' => $participant->id,
@@ -146,7 +143,6 @@ class TeamForm extends Component
 
     private function getParticipantForAuthenticatedUser()
     {
-        // Assuming you have a Participant model with a user_id field.
         return Participant::where('user_id', Auth::id())->first();
     }
 
@@ -166,10 +162,8 @@ class TeamForm extends Component
         $this->team = Team::find($teamId);
 
         if ($this->team->password) {
-            // If team has a password, ask user for it.
             $this->enterPassword = true;
         } else {
-            // Join the team directly.
             $this->joinTeam();
         }
     }

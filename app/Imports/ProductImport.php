@@ -28,11 +28,10 @@ class ProductImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
                 'code'           => Str::random(10),
                 'category_id'    => Category::where('name', $row['categorie'])->first()->id ?? Helpers::createCategory(['name' => $row['categorie']])->id ?? null,
                 'brand_id'       => Brand::where('name', $row['marque'])->first()->id ?? Helpers::createBrand(['name' => $row['marque']]),
-                'image'          => Helpers::uploadImage($row['image'], $row['nom']) ?? 'default.jpg',
+                // 'image'          => Helpers::uploadImage($row['image'], $row['nom']) ?? 'default.jpg',
                 // 'gallery' => getGalleryFromUrl($row[7]) ?? null,
                 'meta_title'       => Str::limit($row['nom'], 60),
                 'meta_description' => Str::limit($row['description'], 160),
-                'meta_keywords'    => Str::limit($row['nom'], 60),
                 'status'           => 0,
             ]);
         }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Blog;
 use App\Models\Page;
 use App\Models\Product;
 use Illuminate\Support\Facades\Artisan;
@@ -36,20 +35,6 @@ class FrontController extends Controller
         return view('front.contact');
     }
 
-    public function blog()
-    {
-        $blogs = Blog::with('category')->get();
-
-        return view('front.blog', compact('blogs'));
-    }
-
-    public function blogPage($slug)
-    {
-        $blog = Blog::where('slug', $slug)->first() ?? abort(404);
-
-        return view('front.blog-page', compact('blog'));
-    }
-
     public function redirect($url)
     {
         // return view('front.redirect', compact('url'));
@@ -72,7 +57,8 @@ class FrontController extends Controller
 
             return back();
         } catch (Throwable $th) {
-            Log::info('Sitemap generation failed!', $th->getMessage());
+            
+            Log::info('Sitemap generation failed!', [$th->getMessage()]);
 
             return back();
         }

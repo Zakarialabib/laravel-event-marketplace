@@ -7,6 +7,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Enums\Status;
@@ -52,12 +54,12 @@ class Partner extends Model implements HasMedia
         $this->addMediaCollection('local_files');
     }
 
-    public function registerMediaConversions(): void
+    public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('medium')
-            ->width(500)
-            ->height(500)
+        $this->addMediaConversion('large')
             ->performOnCollections('local_files')
+            ->width(1000)
+            ->height(1000)
             ->format('webp');
     }
 }

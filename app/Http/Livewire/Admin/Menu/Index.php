@@ -14,8 +14,6 @@ class Index extends Component
     use WithPagination;
     use LivewireAlert;
 
-    public string $perPage = '100';
-
     protected $listeners = [
         'refreshIndex' => '$refresh',
     ];
@@ -69,7 +67,7 @@ class Index extends Component
     {
         $menus = Menu::when($this->placement, function ($query) {
             $query->where('placement', $this->placement);
-        })->paginate($this->perPage);
+        })->get();
 
         return view('livewire.admin.menu.index', compact('menus'))->extends('layouts.dashboard');
     }
@@ -185,6 +183,7 @@ class Index extends Component
                 'status'     => true,
             ],
         ];
+
         // create the menus
         foreach ($this->menus as $menu) {
             Menu::create($menu);

@@ -8,5 +8,3 @@
 <x-livewire-alert::scripts />
 
 @stack('scripts')
-
-{{-- <x-core-web-vital-core-web-component /> --}}

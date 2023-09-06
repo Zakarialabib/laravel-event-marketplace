@@ -22,31 +22,33 @@ class Login extends Component
 
     protected array $rules = [
         'email'    => 'required|email',
-        'password' => 'required',
+        'password' => '',
     ];
 
     public function authenticate()
     {
-        $this->validate();
+        try {
+            $this->validate();
 
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
-            $user = User::where(['email' => $this->email])->first();
+            if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
+                $user = User::where(['email' => $this->email])->first();
 
-            auth()->login($user, $this->remember_me);
+                auth()->login($user, $this->remember_me);
 
-            switch (true) {
-                case $user->hasRole('admin'):
-                    $homePage = RouteServiceProvider::ADMIN_HOME;
+                switch (true) {
+                    case $user->hasRole('admin'):
+                        $homePage = RouteServiceProvider::ADMIN_HOME;
 
-                    break;
-                default:
-                    $homePage = RouteServiceProvider::CLIENT_HOME;
+                        break;
+                    default:
+                        $homePage = RouteServiceProvider::CLIENT_HOME;
 
-                    break;
+                        break;
+                }
+
+                return redirect()->intended($homePage);
             }
-
-            return redirect()->intended($homePage);
-        } else {
+        } catch (\Throwable $th) {
             $this->addError('email', __('These credentials do not match our records'));
         }
     }

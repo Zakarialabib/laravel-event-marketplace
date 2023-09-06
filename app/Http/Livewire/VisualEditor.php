@@ -31,6 +31,8 @@ class VisualEditor extends Component
     public $colorOptions = [];
 
     public $colors;
+    public $breadcrumbType;
+    public $breadcrumbImage;
 
     public $selectedColor;
 

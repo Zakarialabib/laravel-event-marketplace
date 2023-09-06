@@ -22,6 +22,7 @@ class SubscribeForm extends Component
     public $name;
 
     public $phone;
+    public $email;
 
     public $type;
 
@@ -53,8 +54,8 @@ class SubscribeForm extends Component
             'email'   => $this->email,
             'type'    => OrderType::REGISTRATION,
             'status'  => Status::ACTIVE,
-            'subject' => __('New request for ').$this->product->name,
-            'message' => $this->name.__(' has sent a request for ').$this->product->name,
+            'subject' => __('New request for ').$this->race->name,
+            'message' => $this->name.__(' has sent a request for ').$this->race->name,
         ]);
 
         $this->alert('success', __('Your order has been sent successfully!'));

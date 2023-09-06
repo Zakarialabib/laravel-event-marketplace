@@ -12,7 +12,6 @@ class Email extends Component
     /** @var string */
     public $email;
 
-    /** @var string|null */
     public $emailSentMessage = false;
 
     public function sendResetPasswordLink()

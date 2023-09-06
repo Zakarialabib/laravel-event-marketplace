@@ -21,7 +21,7 @@ class Edit extends Component
 
     public $category;
 
-    public $image;
+    public $images;
 
     public $listeners = [
         'editModal',
@@ -46,7 +46,7 @@ class Edit extends Component
         $this->resetValidation();
 
         $this->category = Category::findOrFail($category);
-        $this->image = $this->category->image;
+        $this->images = $this->category->images;
         $this->editModal = true;
     }
 
@@ -56,9 +56,9 @@ class Edit extends Component
 
         $this->validate();
 
-        if ($this->image) {
-            $imageName = Str::slug($this->category->name).'-'.Str::random(3).'.'.$this->image->extension();
-            $this->category->addMedia($this->image)->toMediaCollection('local_files');
+        if ($this->images) {
+            $imageName = Str::slug($this->category->name).'.'.$this->images->extension();
+            $this->category->addMedia($this->images)->toMediaCollection('local_files');
             $this->category->images = $imageName;
         }
 

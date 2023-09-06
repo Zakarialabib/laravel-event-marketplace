@@ -18,7 +18,7 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $createSponsor;
+    public $createModaal;
 
     public $sponsor;
 
@@ -27,7 +27,7 @@ class Create extends Component
 
     public $image_url = null;
 
-    public $listeners = ['createSponsor'];
+    public $listeners = ['createModaal'];
 
     protected $rules = [
         'sponsor.name'        => ['required', 'string', 'max:255'],
@@ -41,7 +41,7 @@ class Create extends Component
         return view('livewire.admin.sponsors.create');
     }
 
-    public function createSponsor()
+    public function createModaal()
     {
         $this->resetErrorBag();
 
@@ -49,7 +49,7 @@ class Create extends Component
 
         $this->sponsor = new Sponsor();
 
-        $this->createSponsor = true;
+        $this->createModaal = true;
     }
 
     public function create()
@@ -59,11 +59,9 @@ class Create extends Component
         $this->sponsor->slug = Str::slug($this->sponsor->name);
 
         if ($this->image_url) {
-            $image = file_get_contents($this->image_url);
-
             $imageName = Str::slug($this->sponsor->name);
 
-            $this->sponsor->addMediaFromDisk($image->getRealPath())
+            $this->sponsor->addMediaFromDisk($this->image_url->getRealPath())
                 ->usingFileName($imageName)
                 ->toMediaCollection('local_files');
 
@@ -74,7 +72,7 @@ class Create extends Component
             // with str slug with name date
             $imageName = Str::slug($this->sponsor->name).'.'.$this->image->extension();
 
-            $this->sponsor->addMediaFromDisk($this->image->getRealPath())
+            $this->sponsor->addMediaFromDisk($this->image)
                 ->usingFileName($imageName)
                 ->toMediaCollection('local_files');
 
@@ -87,6 +85,6 @@ class Create extends Component
 
         $this->alert('success', __('Sponsor created successfully.'));
 
-        $this->createSponsor = false;
+        $this->createModaal = false;
     }
 }

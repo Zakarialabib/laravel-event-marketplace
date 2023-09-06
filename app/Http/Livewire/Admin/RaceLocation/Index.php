@@ -108,9 +108,6 @@ class Index extends Component
     {
         abort_if(Gate::denies('raceLocation_delete'), 403);
 
-        if ($raceLocation->products()->isNotEmpty()) {
-            $this->alert('error', __('Can\'t delete beacuse there are products associated with this raceLocation !'));
-        }
         $raceLocation->delete();
 
         $this->alert('success', __('RaceLocation deleted successfully.'));

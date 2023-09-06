@@ -137,7 +137,7 @@ class Index extends Component
 
         $this->showModal = false;
 
-        $this->alert('success', 'Currency updated successfully!');
+        $this->alert('success', __('Currency updated successfully!'));
     }
 
     public function delete(Currency $currency)
@@ -146,6 +146,6 @@ class Index extends Component
 
         $currency->delete();
 
-        $this->alert('success', 'Currency deleted successfully!');
+        $this->alert('success', __('Currency deleted successfully!'));
     }
 }

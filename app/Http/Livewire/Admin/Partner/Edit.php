@@ -10,10 +10,12 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
     use WithFileUploads;
+    use LivewireAlert;
 
     public $partner;
 

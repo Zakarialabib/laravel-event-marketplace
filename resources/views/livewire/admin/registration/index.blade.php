@@ -47,16 +47,17 @@
 
     <x-card>
         <div x-data="{ activeTab: '{{ $activeTab }}' }">
-            <ul class="flex mb-4">
-                <li class="mr-1">
-                    <button x-on:click="activeTab = 'all'"
-                        x-on:class="{ 'bg-blue-500 text-white': activeTab === 'all' }" class="px-4 py-2 rounded-l-md">
+            <ul class="flex space-x-2">
+                <li>
+                    <button x-on:click="activeTab = 'all'" :class="{ 'bg-blue-500 text-white': activeTab === 'all' }"
+                        class="px-4 py-2 rounded-l-md hover:bg-blue-400 focus:outline-none">
                         {{ __('All registrations') }}
                     </button>
                 </li>
-                <li class="mr-1" x-show="activeTab === 'showRegistration'">
+                <li>
                     <button x-on:click="activeTab = 'showRegistration'"
-                        x-on:class="{ 'bg-blue-500 text-white': activeTab === 'showRegistration' }" class="px-4 py-2">
+                        :class="{ 'bg-blue-500 text-white': activeTab === 'showRegistration' }"
+                        class="px-4 py-2 rounded-r-md hover:bg-blue-400 focus:outline-none">
                         {{ __('Show registration') }}
                     </button>
                 </li>
@@ -69,7 +70,7 @@
                 x-transition:leave-start="opacity-100 transform translate-x-0"
                 x-transition:leave-end="opacity-0 transform translate-x-2">
                 <div class="flex flex-wrap justify-center">
-                    <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
+                    <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap items-center gap-4">
                         @if ($this->selectedCount)
                             <p class="text-sm leading-5">
                                 <span class="font-medium">
@@ -83,24 +84,28 @@
                                 {{ __('Download selected') }}
                             </x-button>
                         @endif
-                        <div class="my-2 my-md-0">
-                            <p class="leading-5 text-black mb-1 text-sm ">
-                                {{ __('Show items per page') }}
-                            </p>
-                            <select wire:model="perPage" name="perPage"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
-                                @foreach ($paginationOptions as $value)
-                                    <option value="{{ $value }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <select wire:model="perPage" name="perPage"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
+                            @foreach ($paginationOptions as $value)
+                                <option value="{{ $value }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+
+                        <select wire:model="selectedRace"
+                            class="w-auto mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                            <option value="">{{ __('All Races') }}</option>
+                            @foreach ($this->races as $race)
+                                <option value="{{ $race->id }}">
+                                    {{ $race->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+
                     <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
-                        <div class="my-2 my-md-0">
-                            <input type="text" wire:model.debounce.300ms="search"
-                                class="p-3 leading-5 bg-white text-gray-500 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                                placeholder="{{ __('Search') }}" />
-                        </div>
+                        <input type="text" wire:model.debounce.300ms="search"
+                            class="p-3 leading-5 bg-white text-gray-500 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                            placeholder="{{ __('Search') }}" />
                     </div>
                 </div>
 
@@ -175,7 +180,6 @@
                 </div>
             </div>
 
-
             <div x-show="activeTab === 'showRegistration'" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform translate-x-2"
                 x-transition:enter-end="opacity-100 transform translate-x-0"
@@ -228,6 +232,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </x-card>
 </div>

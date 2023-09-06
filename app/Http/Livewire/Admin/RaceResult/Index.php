@@ -13,11 +13,13 @@ use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Index extends Component
 {
     use WithPagination;
     use WithSorting;
+    use LivewireAlert;
 
     public int $perPage;
     public array $orderable;

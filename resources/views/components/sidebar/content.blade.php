@@ -84,6 +84,8 @@
         </x-slot>
         {{-- @can('user_access') --}}
         <x-sidebar.sublink title="{{ __('Users') }}" href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users')" />
+        <x-sidebar.sublink title="{{ __('Subscribers') }}" href="{{ route('admin.subscribers') }}"
+            :active="request()->routeIs('admin.subscribers')" />
         <x-sidebar.sublink title="{{ __('Participants') }}" href="{{ route('admin.participants') }}"
             :active="request()->routeIs('admin.participants')" />
         {{-- @endcan

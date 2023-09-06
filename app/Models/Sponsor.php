@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Manipulations;
 use App\Support\HasAdvancedFilter;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -49,12 +51,12 @@ class Sponsor extends Model implements HasMedia
         $this->addMediaCollection('local_files');
     }
 
-    public function registerMediaConversions($media = null): void
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('medium')
+            ->performOnCollections('local_files')
             ->width(500)
             ->height(500)
-            ->performOnCollections('local_files')
             ->format('webp');
     }
 }

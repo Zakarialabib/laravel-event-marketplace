@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use App\Enums\Status;
+use Illuminate\Http\RedirectResponse;
 
 class Register extends Component
 {
@@ -29,7 +30,7 @@ class Register extends Component
         $this->country = 'Morocco';
     }
 
-    public function register()
+    public function register(): RedirectResponse
     {
         $this->validate([
             'name'     => 'required',

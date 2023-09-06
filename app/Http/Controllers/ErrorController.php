@@ -15,15 +15,12 @@ class ErrorController extends Controller
     public function notFound(Request $request): RedirectResponse
     {
         try {
-            // Check if the unfound URL already exists in the database
             $redirect = Redirect::where('old_url', $request->url())->first();
 
             if ($redirect) {
-                // If it does, redirect to the new URL with status code
-                return redirect($redirect->new_url, $redirect->http_status_code);
+                return redirect($redirect->new_url, RedirectionStatus::TEMPORARY_REDIRECT);
             }
 
-            // If not, store the unfound URL in the database and redirect to the app URL with status code
             $redirect = Redirect::create([
                 'old_url'          => $request->url(),
                 'new_url'          => url('/'),

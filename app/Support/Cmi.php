@@ -279,7 +279,7 @@ class Cmi
     public function guardAgainstInvalidRequest()
     {
         //amount
-        if ($this->amount === null) {
+        if ($this->amount == null) {
             throw InvalidRequest::amountNotSpecified();
         }
 
@@ -288,7 +288,7 @@ class Cmi
         }
 
         //currency
-        if ($this->currency === null) {
+        if ($this->currency == null) {
             throw InvalidRequest::currencyNotSpecified();
         }
 
@@ -297,7 +297,7 @@ class Cmi
         }
 
         //oid
-        if ($this->oid === null) {
+        if ($this->oid == null) {
             throw InvalidRequest::attributeNotSpecified('identifiant de la commande (oid)');
         }
 
@@ -306,7 +306,7 @@ class Cmi
         }
 
         //email
-        if ($this->email === null) {
+        if ($this->email == null) {
             throw InvalidRequest::attributeNotSpecified('adresse électronique du client (email)');
         }
 
@@ -319,7 +319,7 @@ class Cmi
             throw InvalidRequest::attributeNotSpecified('nom du client (billToName)');
         }
 
-        if ( ! is_string($this->billToName) || $this->billToName === '') {
+        if ( ! is_string($this->billToName) || $this->billToName == '') {
             throw InvalidRequest::attributeInvalidString('nom du client (billToName)');
         }
 

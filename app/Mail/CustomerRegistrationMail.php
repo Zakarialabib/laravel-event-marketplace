@@ -27,7 +27,7 @@ class CustomerRegistrationMail extends Mailable
     public function build()
     {
         return $this->view('emails.customer-registration')
-            ->subject('Welcome to our website!', $this->user->name)
+            ->subject(__('Welcome!').' - '.$this->user->name)
             ->with([
                 'user' => $this->user,
             ]);
