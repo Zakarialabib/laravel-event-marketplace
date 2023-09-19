@@ -35,7 +35,7 @@ class Create extends Component
         return view('livewire.admin.product-category.create');
     }
 
-    public function createModal()
+    public function createModal(): void
     {
         $this->resetErrorBag();
 
@@ -46,7 +46,7 @@ class Create extends Component
         $this->createModal = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

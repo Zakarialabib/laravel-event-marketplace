@@ -20,7 +20,7 @@ class Show extends Component
 
     public $showModal = false;
 
-    public function showModal($id)
+    public function showModal($id): void
     {
         abort_if(Gate::denies('product_show'), 403);
 

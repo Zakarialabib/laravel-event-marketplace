@@ -16,7 +16,7 @@ class Media extends BaseMedia
     {
         parent::boot();
 
-        static::creating(function (Model $model) {
+        static::creating(static function (Model $model): void {
             if (is_null($model->getOriginal('id'))) {
                 $model->id = Str::uuid()->toString();
             }

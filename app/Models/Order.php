@@ -21,7 +21,7 @@ class Order extends Model
     use HasUuid;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'user_id',
         'race_id',
@@ -38,6 +38,7 @@ class Order extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -63,15 +64,11 @@ class Order extends Model
         'type'            => OrderType::class,
     ];
 
-    public static function generateReference()
+    public static function generateReference(): string
     {
         $lastOrder = self::latest()->first();
 
-        if ($lastOrder) {
-            $number = substr($lastOrder->reference, -6) + 1;
-        } else {
-            $number = 1;
-        }
+        $number = $lastOrder ? substr((string) $lastOrder->reference, -6) + 1 : 1;
 
         return date('Ymd').'-'.sprintf('%06d', $number);
     }

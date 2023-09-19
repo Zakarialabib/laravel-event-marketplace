@@ -38,19 +38,19 @@ class BrandPage extends Component
 
     public $filterProductSubcategories;
 
-    public function filterProductCategories($category_id)
+    public function filterProductCategories($category_id): void
     {
         $this->category_id = $category_id;
         $this->resetPage();
     }
 
-    public function filterProductSubcategories($subcategory_id)
+    public function filterProductSubcategories($subcategory_id): void
     {
         $this->subcategory_id = $subcategory_id;
         $this->resetPage();
     }
 
-    public function mount($brand)
+    public function mount($brand): void
     {
         $this->brand = Brand::findOrFail($brand->id);
         $this->perPage = 25;
@@ -65,7 +65,7 @@ class BrandPage extends Component
         ];
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->perPage += 25;
     }
@@ -99,7 +99,7 @@ class BrandPage extends Component
 
         $this->emit('productsLoaded', $brandproducts->count());
 
-        return view('livewire.front.brand-page', compact('brandproducts'));
+        return view('livewire.front.brand-page', ['brandproducts' => $brandproducts]);
     }
 
     public function getCategoriesProperty()

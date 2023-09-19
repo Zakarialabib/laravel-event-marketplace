@@ -11,7 +11,7 @@ class SettingController extends Controller
 {
     public function index(Settings $setting)
     {
-        return view('admin.settings.index', compact('setting'));
+        return view('admin.settings.index', ['setting' => $setting]);
     }
 
     public function redirects()

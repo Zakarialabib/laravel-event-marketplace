@@ -6,8 +6,8 @@ namespace App\Http\Livewire\Front;
 
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
-use App\Helpers;
 use App\Models\OrderForms;
+use App\Support\SettingsHelper;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use App\Mail\OrderFormMail;
@@ -18,12 +18,19 @@ class OrderForm extends Component
     use LivewireAlert;
 
     public $name;
+
     public $phone;
+
     public $address;
+
     public $type;
+
     public $status;
+
     public $subject;
+
     public $message;
+
     public $item;
 
     protected $rules = [
@@ -33,7 +40,7 @@ class OrderForm extends Component
         'message' => 'nullable',
     ];
 
-    public function mount($item, $type)
+    public function mount($item, $type): void
     {
         $this->item = $item;
         $this->type = $type;
@@ -44,7 +51,7 @@ class OrderForm extends Component
         return view('livewire.front.order-form');
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
 
@@ -62,7 +69,7 @@ class OrderForm extends Component
 
         $this->alert('success', __('Your order has been sent successfully!'));
 
-        Mail::to(Helpers::settings('company_email_address'))->send(new OrderFormMail($order));
+        Mail::to(SettingsHelper::settings('company_email_address'))->send(new OrderFormMail($order));
 
         $this->reset(['name', 'phone', 'address', 'message']);
     }

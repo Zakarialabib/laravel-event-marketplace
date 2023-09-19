@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class ProductImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
 {
-    public function collection(Collection $rows)
+    public function collection(Collection $rows): void
     {
         foreach ($rows as $row) {
             Product::create([

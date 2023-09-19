@@ -19,22 +19,21 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const ADMIN_HOME = '/admin/dashboard';
+    final public const ADMIN_HOME = '/admin/dashboard';
 
-    public const CLIENT_HOME = '/';
+    final public const CLIENT_HOME = '/';
 
     /** Define your route model bindings, pattern filters, and other route configuration. */
     public function boot(): void
     {
-        RateLimiter::for('api', function (Request $request) {
+        RateLimiter::for('api', static function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
-        $this->routes(function () {
+        $this->routes(static function (): void {
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
-
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });

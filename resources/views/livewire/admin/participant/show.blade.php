@@ -164,7 +164,7 @@
                             <div class="relative py-9 px-16 h-full bg-white rounded-3xl">
                                 <h3 class="font-heading mb-4 text-3xl md:text-4xl font-bold leading-tighter">
                                     {{ $registration->race->name }}
-                                    <small>{{ Helpers::format_date($registration->registration_date) }}</small>
+                                    <small>{{ formatDate($registration->registration_date) }}</small>
                                 </h3>
                                 <ul class="py-10 mt-6 border-t border-gray-200">
                                     <li>
@@ -184,7 +184,7 @@
 
                                     <li>
                                         <span class="font-bold">{{ __('Date') }}:</span>
-                                        <span>{{ Helpers::format_date($registration->date) }}</span>
+                                        <span>{{ formatDate($registration->date) }}</span>
                                     </li>
 
                                     <li>
@@ -231,7 +231,7 @@
                                         </a>
                                     </p>
                                 @endif
-                                <p><strong>{{ __('Order Amount') }}:</strong> {{ Helpers::format_currency($order->amount) }}</p>
+                                <p><strong>{{ __('Order Amount') }}:</strong> {{ formatCurrency($order->amount) }}</p>
                                 <p><strong>{{ __('Payment Method') }}:</strong>
                                     {{ $order->payment_method }}
                                 </p>
@@ -239,7 +239,7 @@
                                 <p><strong>{{ __('Payment Status') }}:</strong>
                                     {{ $order->payment_status->getName() }}
                                 </p>
-                                <p><strong>{{ __('Order Date') }}:</strong> {{ Helpers::format_date($order->created_at) }}</p>
+                                <p><strong>{{ __('Order Date') }}:</strong> {{ formatDate($order->created_at) }}</p>
                             </div>
                         </div>
                     @endforeach

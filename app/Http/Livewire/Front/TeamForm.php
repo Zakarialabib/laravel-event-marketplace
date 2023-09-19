@@ -19,13 +19,21 @@ class TeamForm extends Component
 {
     use LivewireAlert;
     public $team;
+
     public $openTeamModal = false;
+
     public $name;
+
     public $enterPassword = false;
+
     public $teamPassword = '';
+
     public $resultTeam = '';
+
     public $invitationEmails = [''];
+
     public $isTeamRegistration = false;
+
     protected $rules = [
         'name'     => 'required|string|min:3|max:50',
         'password' => 'nullable|string|min:3|max:50',
@@ -35,12 +43,12 @@ class TeamForm extends Component
         'openTeamModal',
     ];
 
-    public function updatedIsTeamRegistration($value)
+    public function updatedIsTeamRegistration($value): void
     {
         $this->isTeamRegistration = $value;
     }
 
-    public function attemptJoinWithPassword()
+    public function attemptJoinWithPassword(): void
     {
         if (Hash::check($this->teamPassword, $this->team->password)) {
             $this->joinTeam();
@@ -54,9 +62,9 @@ class TeamForm extends Component
         return Team::select('name', 'id')->get();
     }
 
-    public function updatedName()
+    public function updatedName(): void
     {
-        if (strlen($this->name) > 3) {
+        if (strlen((string) $this->name) > 3) {
             $this->resultTeam = Team::where('name', 'like', '%'.$this->name.'%')
                 ->limit(5)
                 ->get();
@@ -65,12 +73,12 @@ class TeamForm extends Component
         }
     }
 
-    public function openTeamModal()
+    public function openTeamModal(): void
     {
         $this->openTeamModal = true;
     }
 
-    public function createTeam()
+    public function createTeam(): void
     {
         $participant = $this->getParticipantForAuthenticatedUser();
 
@@ -112,7 +120,7 @@ class TeamForm extends Component
         $this->alert('success', 'Team created successfully and invites sent!');
     }
 
-    public function joinTeam()
+    public function joinTeam(): void
     {
         $participant = $this->getParticipantForAuthenticatedUser();
 
@@ -146,18 +154,18 @@ class TeamForm extends Component
         return Participant::where('user_id', Auth::id())->first();
     }
 
-    public function addMoreEmailFields()
+    public function addMoreEmailFields(): void
     {
         $this->invitationEmails[] = '';
     }
 
-    public function removeEmailField($index)
+    public function removeEmailField($index): void
     {
         unset($this->invitationEmails[$index]);
         $this->invitationEmails = array_values($this->invitationEmails); // Re-index the array
     }
 
-    public function selectTeam($teamId)
+    public function selectTeam($teamId): void
     {
         $this->team = Team::find($teamId);
 

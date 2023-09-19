@@ -12,10 +12,12 @@ use Livewire\Component;
 class Show extends Component
 {
     public $participant;
+
     public $orders;
+
     public $registrations;
 
-    public function mount($id)
+    public function mount($id): void
     {
         $this->participant = Participant::find($id);
         $this->orders = Order::where('user_id', $this->participant->user_id)->get();

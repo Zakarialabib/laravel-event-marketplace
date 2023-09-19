@@ -72,7 +72,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/races', RaceIndex::class)->name('races');
     Route::get('/race/reports', RaceReport::class)->name('race.reports');
     Route::get('/race/create', CreateRace::class)->name('race.create');
-    Route::get('/race/update/{name}', EditRace::class)->name('race.update');
+    Route::get('/race/{name}', EditRace::class)->name('race.update');
     Route::get('/racelocations', RaceLocationIndex::class)->name('racelocations');
     Route::get('/services', ServiceIndex::class)->name('services');
     Route::get('/faqs', FaqIndex::class)->name('faqs');

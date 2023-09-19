@@ -27,14 +27,14 @@
             </div>
         </section>
 
-        @if (count(Helpers::getActiveFeaturedBlogs()) > 0)
+        @if (count(\App\Helpers::getActiveFeaturedBlogs()) > 0)
             <div class="relative py-6 mx-auto px-6 bg-green-50 ">
                 <h2
                     class="uppercase mb-6 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
                     {{ 'Resources' }}
                 </h2>
                 <div class="grid xl:grid-cols-3 sm:grid-cols-1 gap-4 overflow-hidden justify-center py-6">
-                    @foreach (Helpers::getActiveFeaturedBlogs() as $blog)
+                    @foreach (\App\Helpers::getActiveFeaturedBlogs() as $blog)
                         <x-blog-card :blog="$blog" />
                     @endforeach
                 </div>

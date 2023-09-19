@@ -44,27 +44,27 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -83,11 +83,11 @@ class Index extends Component
 
         $emails = $query->paginate($this->perPage);
 
-        return view('livewire.admin.email.index', compact('emails'))->extends('layouts.dashboard');
+        return view('livewire.admin.email.index', ['emails' => $emails])->extends('layouts.dashboard');
     }
 
     // Blog Category  Delete
-    public function delete(EmailTemplate $email)
+    public function delete(EmailTemplate $email): void
     {
         // abort_if(Gate::denies('email_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 

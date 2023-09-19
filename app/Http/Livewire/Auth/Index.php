@@ -12,7 +12,7 @@ class Index extends Component
 
     protected $listeners = ['storeOwnerChanged' => 'hideLoginForm'];
 
-    public function hideLoginForm()
+    public function hideLoginForm(): void
     {
         $this->isStoreOwner = false;
     }

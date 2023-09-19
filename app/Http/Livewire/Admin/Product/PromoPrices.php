@@ -12,6 +12,7 @@ use Livewire\Component;
 class PromoPrices extends Component
 {
     public $percentage;
+
     public $copyPriceToOldPrice;
 
     public $promoModal = false;
@@ -20,7 +21,7 @@ class PromoPrices extends Component
         'promoModal',
     ];
 
-    public function promoModal()
+    public function promoModal(): void
     {
         $this->resetErrorBag();
 
@@ -29,7 +30,7 @@ class PromoPrices extends Component
         $this->promoModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $products = Product::active()->get();
 
@@ -37,7 +38,7 @@ class PromoPrices extends Component
             if ($this->copyPriceToOldPrice) {
                 $product->discount_price = $product->price;
             } else {
-                $product->price = $product->price * (1 + $this->percentage / 100);
+                $product->price *= 1 + $this->percentage / 100;
             }
 
             $product->save();

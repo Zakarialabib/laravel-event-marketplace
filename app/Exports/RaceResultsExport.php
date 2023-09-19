@@ -57,10 +57,7 @@ class RaceResultsExport implements FromQuery, WithHeadings, WithMapping, ShouldA
         ];
     }
 
-    /**
-     * @param RaceResult $raceResult
-     * @return array
-     */
+    /** @param RaceResult $raceResult */
     public function map($raceResult): array
     {
         return [

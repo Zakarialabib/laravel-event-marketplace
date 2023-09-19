@@ -1,6 +1,6 @@
 @props(['placement'])
 
-@foreach (Helpers::getMenusByPlacement($placement) as $menu)
+@foreach (\App\Helpers::getMenusByPlacement($placement) as $menu)
     <li>
         <a href="{{ url($menu->url) }}"
             class="text-gray-800 cursor-pointer text-[0.94rem] leading-5 font-semibold px-6 uppercase z-[1] {{ request()->routeIs($menu->url) ? 'text-green-400 underline' : '' }} hover:text-green-400 gap-x-2 leading-10 after:absolute after:bottom-[10px] after:left-0 after:bg-white after:transition-transform after:w-full after:origin-left after:scale-x-100 hover:underline focus:underline uppercase">

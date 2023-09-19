@@ -12,24 +12,26 @@ class Trix extends Component
 {
     use WithFileUploads;
 
-    public const EVENT_VALUE_UPDATED = 'trix_value_updated';
+    final public const EVENT_VALUE_UPDATED = 'trix_value_updated';
 
     public $value;
+
     public $trixId;
+
     public $photos = [];
 
-    public function mount($value = '')
+    public function mount($value = ''): void
     {
         $this->value = $value;
         $this->trixId = 'trix-'.uniqid();
     }
 
-    public function updatedValue($value)
+    public function updatedValue($value): void
     {
         $this->emit(self::EVENT_VALUE_UPDATED, $this->value);
     }
 
-    public function completeUpload(string $uploadedUrl, string $trixUploadCompletedEvent)
+    public function completeUpload(string $uploadedUrl, string $trixUploadCompletedEvent): void
     {
         foreach ($this->photos as $photo) {
             if ($photo->getFilename() == $uploadedUrl) {

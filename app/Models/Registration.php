@@ -22,7 +22,7 @@ class Registration extends Model
     use HasGlobalDate;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'participant_id',
         'race_id',
@@ -31,6 +31,7 @@ class Registration extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

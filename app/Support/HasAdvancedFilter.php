@@ -41,24 +41,24 @@ trait HasAdvancedFilter
         return (new FilterQueryBuilder())->apply($query, $data);
     }
 
-    protected function orderableColumns()
+    protected function orderableColumns(): string
     {
         return implode(',', $this->orderable);
     }
 
-    protected function whiteListColumns()
+    protected function whiteListColumns(): string
     {
         return implode(',', $this->filterable);
     }
 
-    protected function allowedOperators()
+    protected function allowedOperators(): string
     {
         return implode(',', [
             'contains',
         ]);
     }
 
-    protected function processGlobalSearch($data)
+    protected function processGlobalSearch(array $data)
     {
         if (isset($data['f']) || ! isset($data['s'])) {
             return $data;
@@ -66,7 +66,7 @@ trait HasAdvancedFilter
 
         $data['filter_match'] = 'or';
 
-        $data['f'] = array_map(function ($column) use ($data) {
+        $data['f'] = array_map(static function ($column) use ($data): array {
             return [
                 'column'   => $column,
                 'operator' => 'contains',

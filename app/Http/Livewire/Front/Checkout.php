@@ -35,29 +35,36 @@ class Checkout extends Component
     public $increaseQuantity;
 
     public $removeFromCart;
+
     public $cartTotal;
+
     public $shipping;
+
     public $payment_method = 'cash';
+
     public $shipping_id;
+
     public $productId;
+
     public $subTotal;
+
     public $registration;
 
-    public function mount()
+    public function mount(): void
     {
         $subtotal = Cart::instance('shopping')->subtotal();
 
-        $this->subTotal = str_replace(',', '', $subtotal);
+        $this->subTotal = str_replace(',', '', (string) $subtotal);
     }
 
-    public function confirmed()
+    public function confirmed(): void
     {
         Cart::instance('shopping')->remove($this->productId);
         $this->emit('cartCountUpdated');
         $this->emit('checkoutCartUpdated');
     }
 
-    public function decreaseQuantity($rowId)
+    public function decreaseQuantity($rowId): void
     {
         $cartItem = Cart::instance('shopping')->get($rowId);
         $qty = $cartItem->qty - 1;
@@ -65,7 +72,7 @@ class Checkout extends Component
         $this->emit('checkoutCartUpdated');
     }
 
-    public function increaseQuantity($rowId)
+    public function increaseQuantity($rowId): void
     {
         $cartItem = Cart::instance('shopping')->get($rowId);
         $qty = $cartItem->qty + 1;
@@ -73,7 +80,7 @@ class Checkout extends Component
         $this->emit('checkoutCartUpdated');
     }
 
-    public function removeFromCart($rowId)
+    public function removeFromCart($rowId): void
     {
         $this->productId = $rowId;
 
@@ -95,14 +102,14 @@ class Checkout extends Component
         return Cart::instance('shopping')->content();
     }
 
-    public function updateCartTotal()
+    public function updateCartTotal(): void
     {
         $shipping_cost = $this->shipping ? $this->shipping->cost : 0;
 
         $this->cartTotal = $this->subTotal + $shipping_cost;
     }
 
-    public function updatedShippingId($value)
+    public function updatedShippingId($value): void
     {
         $this->shipping = $value ? Shipping::find($value) : null;
         $this->updateCartTotal();

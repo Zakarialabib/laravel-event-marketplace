@@ -25,14 +25,14 @@ class Import extends Component
 
     public $file;
 
-    public $importModal = null;
+    public $importModal;
 
     public function render(): View|Factory
     {
         return view('livewire.admin.product.import');
     }
 
-    public function importModal()
+    public function importModal(): void
     {
         abort_if(Gate::denies('product_access'), 403);
 
@@ -43,7 +43,7 @@ class Import extends Component
         $this->importModal = true;
     }
 
-    public function importUpdates()
+    public function importUpdates(): void
     {
         abort_if(Gate::denies('product_access'), 403);
 
@@ -63,7 +63,7 @@ class Import extends Component
         $this->importModal = false;
     }
 
-    public function import()
+    public function import(): void
     {
         abort_if(Gate::denies('product_access'), 403);
 

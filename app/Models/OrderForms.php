@@ -14,7 +14,7 @@ class OrderForms extends Model
 
     public $table = 'orderforms';
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'email',

@@ -13,9 +13,10 @@ use App\Models\Race;
 class RaceDetails extends Component
 {
     public $race;
+
     public $existingRegistration;
 
-    public function mount($slug)
+    public function mount($slug): void
     {
         $this->race = Race::where('slug', $slug)->firstOrFail();
 

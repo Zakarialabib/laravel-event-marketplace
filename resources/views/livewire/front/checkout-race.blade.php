@@ -162,7 +162,7 @@
                                                 <div class="flex items-center space-x-2">
                                                     @if (!empty($item->price))
                                                         <p class="text-lg text-green-500 font-bold font-heading">
-                                                            {{ Helpers::format_currency($item->price) }}
+                                                            {{ formatCurrency($item->price) }}
                                                         </p>
                                                     @endif
                                                 </div>
@@ -193,7 +193,7 @@
                                                 <div class="flex items-center space-x-2">
                                                     @if (!empty($item->price))
                                                         <p class="text-lg text-green-500 font-bold font-heading">
-                                                            {{ Helpers::format_currency($item->price) }}
+                                                            {{ formatCurrency($item->price) }}
                                                         </p>
                                                     @endif
                                                 </div>
@@ -231,7 +231,7 @@
                                 <div class="flex justify-between">
                                     <span class="font-medium">{{ __('Registration Subtotal') }}</span>
                                     <span class="font-bold font-heading">
-                                        {{ Helpers::format_currency($this->registration_subtotal) }}
+                                        {{ formatCurrency($this->registration_subtotal) }}
                                     </span>
                                 </div>
                             </div>
@@ -241,7 +241,7 @@
                                 <div class="flex justify-between">
                                     <span class="font-medium">{{ __('Services Subtotal') }}</span>
                                     <span class="font-bold font-heading">
-                                        {{ Helpers::format_currency($this->services_subtotal) }}
+                                        {{ formatCurrency($this->services_subtotal) }}
                                     </span>
                                 </div>
                             </div>
@@ -252,7 +252,7 @@
                                     <span
                                         class="text-base md:text-xl font-bold font-heading">{{ __('Total') }}</span>
                                     <span class="font-bold font-heading">
-                                        {{ Helpers::format_currency($this->registration_subtotal + $this->services_subtotal) }}
+                                        {{ formatCurrency($this->registration_subtotal + $this->services_subtotal) }}
                                     </span>
                                 </div>
                             </div>

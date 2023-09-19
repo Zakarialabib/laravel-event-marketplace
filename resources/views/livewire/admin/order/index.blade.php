@@ -111,7 +111,7 @@
                             {{ $order->user->name }}
                         </x-table.td>
                         <x-table.td>
-                            {{ Helpers::format_currency($order->amount) }}
+                            {{ formatCurrency($order->amount) }}
                         </x-table.td>
                         <x-table.td>
                             @if ($order->race)

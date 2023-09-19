@@ -12,10 +12,12 @@ use Livewire\Component;
 class Index extends Component
 {
     public $user;
+
     public $registrations;
+
     public $participant;
 
-    public function mount()
+    public function mount(): void
     {
         $this->user = User::find(Auth::user()->id);
 

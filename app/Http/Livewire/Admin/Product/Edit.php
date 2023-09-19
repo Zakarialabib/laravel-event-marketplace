@@ -59,17 +59,17 @@ class Edit extends Component
         $this->images = $image;
     }
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
 
-    public function updatedProductSubcategories($value)
+    public function updatedProductSubcategories($value): void
     {
         $this->product->subcategories = $value;
     }
 
-    public function addOption()
+    public function addOption(): void
     {
         $this->options[] = [
             'type'  => '',
@@ -77,13 +77,13 @@ class Edit extends Component
         ];
     }
 
-    public function removeOption($index)
+    public function removeOption($index): void
     {
         unset($this->options[$index]);
         $this->options = array_values($this->options);
     }
 
-    public function editModal($id)
+    public function editModal($id): void
     {
         abort_if(Gate::denies('product_update'), 403);
 
@@ -96,14 +96,14 @@ class Edit extends Component
         $this->description = $this->product->description;
         // $this->subcategories = $this->product->subcategories;
 
-        $this->options = json_decode($this->product->options, true) ?? [];
+        $this->options = json_decode((string) $this->product->options, true) ?? [];
 
         $this->images = $this->product->images;
 
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         abort_if(Gate::denies('product_update'), 403);
 

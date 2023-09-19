@@ -19,12 +19,19 @@ class Index extends Component
     use WithSorting;
 
     public int $perPage;
+
     public array $orderable;
+
     public string $search = '';
+
     public array $selected = [];
+
     public array $paginationOptions;
+
     public $selectedRace = '';
+
     public $activeTab;
+
     public $registration;
 
     protected $queryString = [
@@ -34,22 +41,22 @@ class Index extends Component
         'selectedRace'  => ['except' => ''],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
@@ -64,7 +71,7 @@ class Index extends Component
         return (new RegistrationExport())->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -74,13 +81,13 @@ class Index extends Component
         $this->activeTab = 'all';
     }
 
-    public function showRegistration(Registration $registration)
+    public function showRegistration(Registration $registration): void
     {
         $this->registration = $registration;
         $this->activeTab = 'showRegistration';
     }
 
-    public function updatingSelectedRace()
+    public function updatingSelectedRace(): void
     {
         $this->resetPage();
     }
@@ -99,14 +106,14 @@ class Index extends Component
         ]);
 
         if ($this->selectedRace) {
-            $query->whereHas('race', function ($subQuery) {
+            $query->whereHas('race', function ($subQuery): void {
                 $subQuery->where('name', $this->selectedRace);
             });
         }
 
         $registrations = $query->paginate($this->perPage);
 
-        return view('livewire.admin.registration.index', compact('registrations'))
+        return view('livewire.admin.registration.index', ['registrations' => $registrations])
             ->extends('layouts.dashboard');
     }
 }

@@ -51,27 +51,27 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function selectAll()
+    public function selectAll(): void
     {
         if (count(array_intersect($this->selected, Race::pluck('id')->toArray())) === count(Race::pluck('id')->toArray())) {
             $this->selected = [];
@@ -80,13 +80,13 @@ class Index extends Component
         }
     }
 
-    public function publishResults($id)
+    public function publishResults($id): void
     {
         PublishResults::dispatch($id);
         $this->alert('success', __('Race results are being generated.'));
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -95,7 +95,7 @@ class Index extends Component
         $this->orderable = (new Race())->orderable;
     }
 
-    public function delete(Race $race)
+    public function delete(Race $race): void
     {
         // abort_if(Gate::denies('race_delete'), 403);
 
@@ -123,6 +123,6 @@ class Index extends Component
 
         $races = $query->paginate($this->perPage);
 
-        return view('livewire.admin.race.index', compact('races'))->extends('layouts.dashboard');
+        return view('livewire.admin.race.index', ['races' => $races])->extends('layouts.dashboard');
     }
 }

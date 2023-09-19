@@ -39,19 +39,19 @@ class CartBar extends Component
 
     public $shipping_id;
 
-    public function confirmed()
+    public function confirmed(): void
     {
         Cart::instance('shopping')->remove($this->productId);
         $this->emit('cartCountUpdated');
         $this->emit('cartBarUpdated');
     }
 
-    public function showCart()
+    public function showCart(): void
     {
         $this->showCart = true;
     }
 
-    public function decreaseQuantity($rowId)
+    public function decreaseQuantity($rowId): void
     {
         $cartItem = Cart::instance('shopping')->get($rowId);
         $qty = $cartItem->qty - 1;
@@ -59,7 +59,7 @@ class CartBar extends Component
         $this->emit('cartBarUpdated');
     }
 
-    public function increaseQuantity($rowId)
+    public function increaseQuantity($rowId): void
     {
         $cartItem = Cart::instance('shopping')->get($rowId);
         $qty = $cartItem->qty + 1;
@@ -67,7 +67,7 @@ class CartBar extends Component
         $this->emit('cartBarUpdated');
     }
 
-    public function removeFromCart($rowId)
+    public function removeFromCart($rowId): void
     {
         $this->productId = $rowId;
 
@@ -84,7 +84,7 @@ class CartBar extends Component
         );
     }
 
-    public function cartBarUpdated()
+    public function cartBarUpdated(): void
     {
         $this->cartTotal = Cart::instance('shopping')->total();
     }

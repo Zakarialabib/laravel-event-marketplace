@@ -51,27 +51,27 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -90,10 +90,10 @@ class Index extends Component
 
         $raceLocations = $query->paginate($this->perPage);
 
-        return view('livewire.admin.race-location.index', compact('raceLocations'))->extends('layouts.dashboard');
+        return view('livewire.admin.race-location.index', ['raceLocations' => $raceLocations])->extends('layouts.dashboard');
     }
 
-    public function deleteSelected()
+    public function deleteSelected(): void
     {
         abort_if(Gate::denies('raceLocation_delete'), 403);
 
@@ -104,7 +104,7 @@ class Index extends Component
         $this->resetSelected();
     }
 
-    public function delete(RaceLocation $raceLocation)
+    public function delete(RaceLocation $raceLocation): void
     {
         abort_if(Gate::denies('raceLocation_delete'), 403);
 

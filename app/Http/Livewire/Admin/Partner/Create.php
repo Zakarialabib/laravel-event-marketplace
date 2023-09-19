@@ -24,7 +24,7 @@ class Create extends Component
 
     public $image;
 
-    public $image_url = null;
+    public $image_url;
 
     public $listeners = ['createModal'];
 
@@ -40,7 +40,7 @@ class Create extends Component
         return view('livewire.admin.partner.create');
     }
 
-    public function createModal()
+    public function createModal(): void
     {
         $this->resetErrorBag();
 
@@ -51,7 +51,7 @@ class Create extends Component
         $this->createModal = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

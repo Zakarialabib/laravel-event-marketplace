@@ -18,13 +18,14 @@ class Sponsor extends Model implements HasMedia
     use HasFactory;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'status',
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -36,6 +37,7 @@ class Sponsor extends Model implements HasMedia
         'social_media_url',
         'status',
     ];
+
     protected $casts = [
         'satuts' => Status::class,
     ];

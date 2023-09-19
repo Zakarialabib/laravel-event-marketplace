@@ -18,13 +18,14 @@ class Partner extends Model implements HasMedia
     use HasFactory;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'status',
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

@@ -31,7 +31,7 @@ class Edit extends Component
         'editModal',
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
@@ -52,7 +52,7 @@ class Edit extends Component
         return view('livewire.admin.page.edit');
     }
 
-    public function editModal($page)
+    public function editModal($page): void
     {
         $this->resetErrorBag();
 
@@ -67,7 +67,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

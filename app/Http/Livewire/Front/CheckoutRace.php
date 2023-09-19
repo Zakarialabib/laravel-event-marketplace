@@ -27,19 +27,30 @@ class CheckoutRace extends Component
         'checkoutCartUpdated' => '$refresh',
         'confirmed',
     ];
+
     public $removeFromCart;
+
     public $payment_method = 'card';
+
     public $status;
+
     public $registration_subtotal;
+
     public $services_subtotal;
+
     public $registrationCartTotal;
+
     public $servicesCartTotal;
+
     public $raceId;
+
     public $registration;
+
     public $user;
+
     public $timeRemaining = 900; // 15 minutes in seconds
 
-    public function mount()
+    public function mount(): void
     {
         $this->calculateCartTotals();
         $this->user = Auth::user();
@@ -48,7 +59,7 @@ class CheckoutRace extends Component
     public function hydrate()
     {
         // Decrease the time remaining every second.
-        $this->timeRemaining--;
+        --$this->timeRemaining;
 
         // If time expires
         if ($this->timeRemaining <= 0) {
@@ -58,25 +69,25 @@ class CheckoutRace extends Component
         }
     }
 
-    public function dehydrate()
+    public function dehydrate(): void
     {
         Cache::put('registration_time_remaining', $this->timeRemaining, 900);
     }
 
-    public function calculateCartTotals()
+    public function calculateCartTotals(): void
     {
-        $this->registration_subtotal = (float) str_replace(',', '', Cart::instance('races')->subtotal());
-        $this->services_subtotal = (float) str_replace(',', '', Cart::instance('services')->subtotal());
+        $this->registration_subtotal = (float) str_replace(',', '', (string) Cart::instance('races')->subtotal());
+        $this->services_subtotal = (float) str_replace(',', '', (string) Cart::instance('services')->subtotal());
     }
 
-    public function confirmed()
+    public function confirmed(): void
     {
         Cart::instance('races')->remove($this->raceId);
         $this->emit('cartCountUpdated');
         $this->emit('checkoutCartUpdated');
     }
 
-    public function getCartTotalProperty()
+    public function getCartTotalProperty(): float|int|array
     {
         return $this->registration_subtotal + $this->services_subtotal;
     }
@@ -96,7 +107,7 @@ class CheckoutRace extends Component
         return Participant::where('user_id', Auth::user()->id)->first();
     }
 
-    public function checkout()
+    public function checkout(): void
     {
         if (Cart::instance('races')->count() === 0) {
             $this->alert('error', __('Your cart is empty'));
@@ -113,7 +124,7 @@ class CheckoutRace extends Component
 
     protected function processCardPayment()
     {
-        DB::transaction(function () {
+        DB::transaction(function (): void {
             $cartItems = Cart::instance('races')->content();
             $order = null;
 
@@ -151,7 +162,7 @@ class CheckoutRace extends Component
         Mail::to($order->user->email)->later(now()->addMinutes(10), new CheckoutMail($order, $order->user));
     }
 
-    public function removeFromCart($rowId)
+    public function removeFromCart($rowId): void
     {
         $this->raceId = $rowId;
 

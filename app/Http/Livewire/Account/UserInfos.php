@@ -12,9 +12,10 @@ class UserInfos extends Component
     use LivewireAlert;
 
     public $user;
+
     public $email;
 
-    protected function rules()
+    protected function rules(): array
     {
         return [
             'user.email'    => 'required|email|unique:users,email,'.$this->user->id,
@@ -22,7 +23,7 @@ class UserInfos extends Component
         ];
     }
 
-    public function mount($user)
+    public function mount($user): void
     {
         $this->user = $user;
     }
@@ -32,7 +33,7 @@ class UserInfos extends Component
         return view('livewire.account.user-infos');
     }
 
-    public function save()
+    public function save(): void
     {
         $this->email = $this->user->email;
 

@@ -31,7 +31,7 @@
                                     class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                                     id="category_id" name="category_id" wire:model="product.category_id">
                                     <option value="">{{ __('Select Category') }}</option>
-                                    @foreach (Helpers::getActiveProductCategories() as $category)
+                                    @foreach (\App\Helpers::getActiveProductCategories() as $category)
                                         <option value="{{ $category->id }}"
                                             @if ($product->category_id == $category->id) selected @endif>{{ $category->name }}
                                         </option>
@@ -45,7 +45,7 @@
                                 <select multiple id="subcategories" name="subcategories"
                                     class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                                     wire:model="product.subcategories">
-                                    @foreach (Helpers::getActiveSubcategories() as $subcategory)
+                                    @foreach (\App\Helpers::getActiveSubcategories() as $subcategory)
                                         <option value="{{ $subcategory->id }}"
                                             @if ($product?->subcategories == $subcategory->id) selected @endif>{{ $subcategory->name }}
                                         </option>
@@ -76,7 +76,7 @@
                                     class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                                     id="brand_id" name="brand_id" wire:model="product.brand_id">
                                     <option value="">{{ __('Select Brand') }}</option>
-                                    @foreach (Helpers::getActiveBrands() as $brand)
+                                    @foreach (\App\Helpers::getActiveBrands() as $brand)
                                         <option value="{{ $brand->id }}"
                                             @if ($product->brand_id == $brand->id) selected @endif>{{ $brand->name }}
                                         </option>

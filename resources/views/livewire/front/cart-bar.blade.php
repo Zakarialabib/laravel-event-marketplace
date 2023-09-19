@@ -52,7 +52,7 @@
                                                         class="w-full flex flex-col justify-center gap-6 items-center py-1 font-semibold font-heading text-gray-500 border border-gray-200 focus:ring-blue-300 focus:border-blue-300 rounded-md">
                                                         @if (!empty($item->price))
                                                             <p class="text-lg text-blue-500 font-bold font-heading mb-2">
-                                                                {{ Helpers::format_currency($item->price) }}
+                                                                {{ formatCurrency($item->price) }}
                                                             </p>
                                                         @endif
                                                         <div>
@@ -111,7 +111,7 @@
                             <div class="flex mb-8 items-center justify-between pb-5 border-b border-blue-100">
                                 <span class="text-blue-50">{{ __('Subtotal') }}</span>
                                 <span class="text-xl font-bold font-heading text-white">
-                                    {{ Helpers::format_currency($this->cartTotal) }}
+                                    {{ formatCurrency($this->cartTotal) }}
                                 </span>
                             </div>
                             <a class="block w-full py-4 bg-green-400 hover:bg-green-200 text-center text-white font-bold font-heading uppercase rounded-md transition duration-200 shadow-md"

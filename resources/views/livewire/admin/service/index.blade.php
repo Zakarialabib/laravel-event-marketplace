@@ -107,7 +107,7 @@
                             {{ $service->name }}
                         </x-table.td>
                         <x-table.td>
-                            {{ Helpers::format_currency($service->price) }}
+                            {{ formatCurrency($service->price) }}
                         </x-table.td>
                         <x-table.td>
                             <livewire:toggle-button :model="$service" field="status" key="{{ $service->id }}" />

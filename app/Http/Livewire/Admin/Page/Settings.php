@@ -17,27 +17,41 @@ class Settings extends Component
     use WithSorting;
 
     public $headerSettings;
+
     public $footerSettings;
 
     public $themeColor;
+
     public $popularProducts;
+
     public $flashDeal;
+
     public $bestSellers;
+
     public $topBrands;
+
     public $selectedColor;
+
     public $status;
+
     public $menuItems;
 
     public $featured_banner_id;
+
     public $page_id;
+
     public $language_id;
 
     public $settings;
 
     public $createSettingsModal = false;
+
     public $showHeaderModal = false;
+
     public $showFooterModal = false;
+
     public $topHeaderModal = false;
+
     public $bottomFooterModal = false;
 
     public int $perPage;
@@ -64,28 +78,28 @@ class Settings extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
     // Menu manipulation
-    public function addMenu()
+    public function addMenu(): void
     {
         $this->menuItems[] = [
             'menuName' => '',
@@ -98,13 +112,13 @@ class Settings extends Component
         ];
     }
 
-    public function removeMenu($index)
+    public function removeMenu($index): void
     {
         unset($this->menuItems[$index]);
         $this->menuItems = array_values($this->menuItems);
     }
 
-    public function addMenuItem($index)
+    public function addMenuItem($index): void
     {
         $this->menuItems[$index]['items'][] = [
             'label' => '',
@@ -112,15 +126,15 @@ class Settings extends Component
         ];
     }
 
-    public function removeMenuItem($menuIndex, $itemIndex)
+    public function removeMenuItem($menuIndex, $itemIndex): void
     {
         unset($this->menuItems[$menuIndex]['items'][$itemIndex]);
         $this->menuItems[$menuIndex]['items'] = array_values($this->menuItems[$menuIndex]['items']);
     }
 
-    public function saveMenuItems()
+    public function saveMenuItems(): void
     {
-        foreach ($this->menuItems as $index => $menu) {
+        foreach ($this->menuItems as $menu) {
             $menuName = $menu['menuName'];
 
             foreach ($menu['items'] as $item) {
@@ -143,7 +157,7 @@ class Settings extends Component
     }
 
     // Header settings
-    public function saveHeaderSettings()
+    public function saveHeaderSettings(): void
     {
         $column = [
             'numberOfColumns' => $this->headerSettings['numberOfColumns'],
@@ -160,7 +174,7 @@ class Settings extends Component
     }
 
     // Footer settings
-    public function saveFooterSettings()
+    public function saveFooterSettings(): void
     {
         $column = [
             'numberOfColumns' => $this->footerSettings['numberOfColumns'],
@@ -173,7 +187,7 @@ class Settings extends Component
         $this->footerSettings[] = $column;
     }
 
-    public function updatePagesettings($id)
+    public function updatePagesettings($id): void
     {
         $this->settings = Pagesetting::where('page_id', $id)->first();
 
@@ -197,7 +211,7 @@ class Settings extends Component
         $this->alert('success', 'Settings updated successfully.');
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -216,25 +230,25 @@ class Settings extends Component
 
         $pagesettings = $query->paginate($this->perPage);
 
-        return view('livewire.admin.page.settings', compact('pagesettings'));
+        return view('livewire.admin.page.settings', ['pagesettings' => $pagesettings]);
     }
 
-    public function selectedColor($color)
+    public function selectedColor($color): void
     {
         $this->themeColor = $color;
     }
 
-    public function selectedColors($index, $color)
+    public function selectedColors($index, string $color): void
     {
         $selectedColors = $this->themeColor;
 
         // Check if the selected color already exists in the array
-        $colorExists = array_filter($selectedColors, function ($value) use ($color) {
+        $colorExists = array_filter($selectedColors, function ($value) use ($color): bool {
             return $value == $this->selectedColor.'-'.$color;
         });
 
         // If the selected color does not exist, add it to the array
-        if (empty($colorExists)) {
+        if ($colorExists === []) {
             // If there are already 8 colors in the array, remove the first one
             if (count($selectedColors) == 8) {
                 array_shift($selectedColors);
@@ -245,7 +259,7 @@ class Settings extends Component
         }
 
         // Update the selectedColors property
-        $this->themeColor = array_map(function ($index, $value) {
+        $this->themeColor = array_map(static function ($index, $value): array {
             return [$index => $value];
         }, array_keys($selectedColors), $selectedColors);
     }

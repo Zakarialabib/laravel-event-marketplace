@@ -8,13 +8,11 @@ use App\Models\Language;
 use App\Models\Settings;
 use App\Observers\SettingsObserver;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 use App\Models\Contact;
 use App\Models\Subscriber;
 use App\Models\Registration;
@@ -25,21 +23,13 @@ use App\Observers\RegistrationObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
+    /** Register any application services. */
+    public function register(): void
     {
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    /** Bootstrap any application services. */
+    public function boot(): void
     {
         if (env('APP_ENV') === 'production') {
             URL::forceScheme('https');
@@ -47,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('languages', $this->getLanguages());
 
-        Factory::macro('getImageUrl', function (int $width, int $height): string {
+        Factory::macro('getImageUrl', static function (int $width, int $height): string {
             return sprintf(
                 'https://picsum.photos/%d/%d',
                 $width,
@@ -69,25 +59,8 @@ class AppServiceProvider extends ServiceProvider
             return [];
         }
 
-        return cache()->rememberForever('languages', function () {
+        return cache()->rememberForever('languages', static function () {
             return Language::pluck('name', 'code')->toArray();
         });
-    }
-
-    private function setLocale()
-    {
-        $sessionLocale = Session::get('locale');
-
-        if ( ! empty($sessionLocale) && in_array($sessionLocale, array_keys($this->getLanguages()))) {
-            App::setLocale($sessionLocale);
-        } else {
-            $defaultLanguage = Language::where('is_default', true)->first();
-
-            if ($defaultLanguage) {
-                App::setLocale($defaultLanguage->code);
-            }
-        }
-
-        Cache::forget('languages');
     }
 }

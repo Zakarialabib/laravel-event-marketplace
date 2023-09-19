@@ -36,7 +36,7 @@ class Edit extends Component
         return $this->sponsor?->image;
     }
 
-    public function editModal($sponsor)
+    public function editModal($sponsor): void
     {
         abort_if(Gate::denies('sponsor_update'), 403);
 
@@ -49,7 +49,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         abort_if(Gate::denies('sponsor_update'), 403);
 

@@ -23,13 +23,14 @@ class Product extends Model implements HasMedia
     use SoftDeletes;
     use CanBeBought;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'status',
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

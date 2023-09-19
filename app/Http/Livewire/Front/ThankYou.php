@@ -13,7 +13,7 @@ class ThankYou extends Component
 {
     public $order;
 
-    public function mount($id)
+    public function mount($id): void
     {
         $this->order = Order::findOrFail($id);
     }

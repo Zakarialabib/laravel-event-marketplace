@@ -46,43 +46,37 @@ class Categories extends Component
         return RaceLocation::active()->get();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function filterType($type, $value)
+    public function filterType($type, $value): void
     {
-        switch ($type) {
-            case 'category':
-                $this->category_name = $value;
-
-                break;
-            case 'location':
-                $this->raceLocation_id = $value;
-
-                break;
+        if ($type == 'category') {
+            $this->category_name = $value;
+        } elseif ($type == 'location') {
+            $this->raceLocation_id = $value;
         }
+
         $this->resetPage();
     }
 
-    public function clearFilter($type, $value)
+    public function clearFilter($type, $value): void
     {
-        switch ($type) {
-            case 'category':
-                $this->category_name = null;
-
-                break;
+        if ($type === 'category') {
+            $this->category_name = null;
         }
+
         $this->resetPage();
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->perPage += 25;
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->perPage = 25;
         $this->paginationOptions = [25, 50, 100];
@@ -101,7 +95,7 @@ class Categories extends Component
     public function render()
     {
         $query = Race::where('status', $this->status)
-            ->when($this->category_name, function ($query) {
+            ->when($this->category_name, function ($query): void {
                 $query->where('category_id', Category::where('name', $this->category_name)->first()->id);
             })
             ->when($this->raceLocation_id, function ($query) {
@@ -128,6 +122,6 @@ class Categories extends Component
 
         $races = $query->paginate($this->perPage);
 
-        return view('livewire.front.categories', compact('races'))->extends('layouts.app');
+        return view('livewire.front.categories', ['races' => $races])->extends('layouts.app');
     }
 }

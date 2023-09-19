@@ -37,29 +37,25 @@ class SubcategoryPage extends Component
         return Brand::active()->get();
     }
 
-    public function filterProducts($type, $value)
+    public function filterProducts($type, $value): void
     {
-        switch ($type) {
-            case 'brand':
-                $this->brand_id = $value;
-
-                break;
+        if ($type === 'brand') {
+            $this->brand_id = $value;
         }
+
         $this->resetPage();
     }
 
-    public function clearFilter($filter)
+    public function clearFilter($filter): void
     {
-        switch ($filter) {
-            case 'brand':
-                $this->brand_id = null;
-
-                break;
+        if ($filter === 'brand') {
+            $this->brand_id = null;
         }
+
         $this->resetPage();
     }
 
-    public function mount($subcategory)
+    public function mount($subcategory): void
     {
         $this->subcategory = Subcategory::findOrFail($subcategory->id);
 
@@ -73,7 +69,7 @@ class SubcategoryPage extends Component
         ];
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->perPage += 25;
     }

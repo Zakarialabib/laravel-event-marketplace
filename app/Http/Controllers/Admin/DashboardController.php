@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function changeLanguage($locale)
     {
         Session::put('code', $locale);
-        $language = Session::get('code');
+        Session::get('code');
 
         return redirect()->back();
     }

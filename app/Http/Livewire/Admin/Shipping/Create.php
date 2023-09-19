@@ -32,7 +32,7 @@ class Create extends Component
         return view('livewire.admin.shipping.create');
     }
 
-    public function createShipping()
+    public function createShipping(): void
     {
         $this->resetErrorBag();
 
@@ -45,7 +45,7 @@ class Create extends Component
         $this->createShipping = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

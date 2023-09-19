@@ -28,7 +28,7 @@ class Create extends Component
         'submit',
     ];
 
-    public function mount(Role $role)
+    public function mount(Role $role): void
     {
         $this->role = $role;
         $this->initListsForFields();

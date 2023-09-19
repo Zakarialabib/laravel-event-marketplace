@@ -5,7 +5,7 @@
 ])
 
 @php
-    $phone = Helpers::settings('social_whatsapp');
+    $phone = settings('social_whatsapp');
     
     // Delete the leading zero from the phone number, if it exists.
     if (strpos($phone, '0') === 0) {

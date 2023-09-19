@@ -31,7 +31,7 @@ class Create extends Component
         'user.tax_number' => 'nullable',
     ];
 
-    public function mount(User $user)
+    public function mount(User $user): void
     {
         $this->user = $user;
     }
@@ -41,7 +41,7 @@ class Create extends Component
         return view('livewire.admin.users.create');
     }
 
-    public function createUser()
+    public function createUser(): void
     {
         $this->resetErrorBag();
 
@@ -50,7 +50,7 @@ class Create extends Component
         $this->createUser = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

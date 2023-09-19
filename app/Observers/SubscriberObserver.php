@@ -13,7 +13,7 @@ class SubscriberObserver
     /** Handle the Subscriber "created" event. */
     public function created(Subscriber $subscriber): void
     {
-        $admin = User::whereHas('roles', function ($query) {
+        $admin = User::whereHas('roles', static function ($query): void {
             $query->where('name', 'admin');
         })->first();
 

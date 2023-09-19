@@ -21,6 +21,7 @@ class Redirect extends Model
         'created_at',
         'updated_at',
     ];
+
     public $filterable = [
         'id',
         'old_url',
@@ -29,6 +30,7 @@ class Redirect extends Model
         'created_at',
         'updated_at',
     ];
+
     /**
      * The attributes that are mass assignable.
      *

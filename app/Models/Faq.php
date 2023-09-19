@@ -14,7 +14,7 @@ class Faq extends Model
     use HasFactory;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'title',
         'status',
@@ -22,6 +22,7 @@ class Faq extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

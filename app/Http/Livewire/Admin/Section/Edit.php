@@ -40,12 +40,12 @@ class Edit extends Component
         'description'         => ['nullable'],
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
 
-    public function editModal($section)
+    public function editModal($section): void
     {
         $this->resetErrorBag();
 
@@ -60,7 +60,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

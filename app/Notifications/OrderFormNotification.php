@@ -21,11 +21,8 @@ class OrderFormNotification extends Notification
         return ['database'];
     }
 
-    protected $orderForm;
-
-    public function __construct($orderForm)
+    public function __construct(protected $orderForm)
     {
-        $this->orderForm = $orderForm;
     }
 
     /**

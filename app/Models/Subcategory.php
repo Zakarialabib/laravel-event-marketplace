@@ -13,12 +13,13 @@ class Subcategory extends Model
 {
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id', 'category_id', 'name', 'slug',
 
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -42,6 +43,6 @@ class Subcategory extends Model
 
     public function setSlugAttribute($value): void
     {
-        $this->attributes['slug'] = str_replace(' ', '-', $value);
+        $this->attributes['slug'] = str_replace(' ', '-', (string) $value);
     }
 }

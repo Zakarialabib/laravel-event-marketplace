@@ -37,7 +37,7 @@ class Edit extends Component
         return view('livewire.admin.shipping.edit');
     }
 
-    public function editModal($shipping)
+    public function editModal($shipping): void
     {
         // abort_if(Gate::denies('shipping_update'), 403);
 
@@ -50,7 +50,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         // abort_if(Gate::denies('shipping_update'), 403);
 

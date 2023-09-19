@@ -6,10 +6,8 @@ namespace App;
 
 use App\Models\Category;
 use App\Models\ProductCategory;
-use App\Models\Currency;
 use App\Models\Brand;
 use App\Models\Page;
-use App\Models\Settings;
 use App\Models\Blog;
 use App\Models\RaceLocation;
 use App\Models\Menu;
@@ -17,32 +15,14 @@ use App\Models\Pagesetting;
 use App\Models\Faq;
 use App\Models\Race;
 use App\Models\Subcategory;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Carbon\Carbon;
-use DateTimeInterface;
-use Exception;
 
 class Helpers
 {
-    /**
-     * Fetch Cached settings from database
-     *
-     * @param mixed $key
-     *
-     * @return mixed
-     */
-    public static function settings($key)
-    {
-        return Cache::rememberForever('settings', function () {
-            return Settings::pluck('value', 'key');
-        })->get($key);
-    }
-
     public static function pageSettings()
     {
         $pageSettings = Pagesetting::where('is_default', true)->first();
@@ -143,12 +123,8 @@ class Helpers
         return Brand::find($brand_id)->name;
     }
 
-    /**
-     * @param mixed $product
-     *
-     * @return string|null
-     */
-    public static function productLink($product)
+    /** @return string|null */
+    public static function productLink(mixed $product)
     {
         if ($product) {
             return route('front.product', $product->slug);
@@ -157,12 +133,8 @@ class Helpers
         return null;
     }
 
-    /**
-     * @param mixed $category
-     *
-     * @return mixed
-     */
-    public static function createCategory($category)
+    /** @return mixed */
+    public static function createCategory(mixed $category)
     {
         // Make sure $category is a string
         $category = implode('', $category);
@@ -175,12 +147,8 @@ class Helpers
         ])->id;
     }
 
-    /**
-     * @param mixed $brand
-     *
-     * @return mixed
-     */
-    public static function createBrand($brand)
+    /** @return mixed */
+    public static function createBrand(mixed $brand)
     {
         // Make sure $brand is a string
         $brand = implode('', $brand);
@@ -191,55 +159,7 @@ class Helpers
         ])->id;
     }
 
-    /**
-     * @param mixed $value
-     * @param bool $format
-     *
-     * @return mixed
-     */
-    public static function format_currency($value, $format = true)
-    {
-        if ( ! $format) {
-            return $value;
-        }
-
-        $currency = Currency::where('is_default', 1)->first();
-        $position = $currency->position;
-        $symbol = $currency->symbol;
-
-        return $position === 'prefix'
-            ? $symbol.number_format((float) $value, 0, '.', ',')
-            : number_format((float) $value, 0, '.', ',').' '.$symbol;
-    }
-
-    public static function format_date($value)
-    {
-        if ($value instanceof DateTimeInterface) {
-            return $value->format('Y-m-d');
-        }
-
-        // Check if value is non-empty and is a string
-        if (empty($value) || ! is_string($value)) {
-            return null;
-        }
-
-        // Ensure that the value is at least 10 characters long to avoid warnings with substr
-        if (strlen($value) < 10) {
-            return null;
-        }
-
-        $dateString = substr($value, 0, 10);
-
-        try {
-            $date = Carbon::createFromFormat('Y-m-d', $dateString);
-        } catch (Exception $e) {
-            return null; // Return null if date creation fails
-        }
-
-        return $date->format('Y-m-d');
-    }
-
-    public static function handleUpload($image, $width, $height, $productName)
+    public static function handleUpload($image, $width, $height, $productName): string
     {
         $imageName = Str::slug($productName).'-'.Str::random(5).'.'.$image->extension();
 
@@ -247,21 +167,21 @@ class Helpers
 
         // we need to resize image, otherwise it will be cropped
         if ($img->width() > $width) {
-            $img->resize($width, null, function ($constraint) {
+            $img->resize($width, null, static function ($constraint): void {
                 $constraint->aspectRatio();
             });
         }
 
         if ($img->height() > $height) {
-            $img->resize(null, $height, function ($constraint) {
+            $img->resize(null, $height, static function ($constraint): void {
                 $constraint->aspectRatio();
             });
         }
 
         $watermark = Image::make(public_path('images/logo.png'));
         $watermark->opacity(25);
-        $watermarkWidth = intval($width / 5);
-        $watermarkHeight = intval($watermarkWidth * $watermark->height() / $watermark->width());
+        $watermark->width();
+        $watermark->height();
         $img->insert($watermark, 'bottom-left', 20, 20)->resizeCanvas($width, $height, 'center', false, '#ffffff');
 
         $img->stream();
@@ -273,8 +193,6 @@ class Helpers
 
     public static function addMediaFromUrlToCollection(HasMedia $model, string $url, string $collectionName): Media
     {
-        $media = $model->addMediaFromUrl($url)->toMediaCollection($collectionName);
-
-        return $media;
+        return $model->addMediaFromUrl($url)->toMediaCollection($collectionName);
     }
 }

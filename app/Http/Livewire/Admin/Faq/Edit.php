@@ -31,7 +31,7 @@ class Edit extends Component
         'faq.description' => ['required'],
     ];
 
-    public function editModal($faq)
+    public function editModal($faq): void
     {
         //abort_if(Gate::denies('category_edit'), 403);
 
@@ -43,7 +43,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         //abort_if(Gate::denies('faq_edit'), 403);
 

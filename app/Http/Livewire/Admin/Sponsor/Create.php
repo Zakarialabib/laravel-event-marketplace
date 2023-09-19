@@ -25,7 +25,7 @@ class Create extends Component
     /** @var mixed */
     public $image;
 
-    public $image_url = null;
+    public $image_url;
 
     public $listeners = ['createModaal'];
 
@@ -41,7 +41,7 @@ class Create extends Component
         return view('livewire.admin.sponsors.create');
     }
 
-    public function createModaal()
+    public function createModaal(): void
     {
         $this->resetErrorBag();
 
@@ -52,7 +52,7 @@ class Create extends Component
         $this->createModaal = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

@@ -37,7 +37,7 @@ class Create extends Component
         return view('livewire.admin.blog-category.create');
     }
 
-    public function createBlogCategory()
+    public function createBlogCategory(): void
     {
         $this->resetErrorBag();
 
@@ -48,7 +48,7 @@ class Create extends Component
         $this->createBlogCategory = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

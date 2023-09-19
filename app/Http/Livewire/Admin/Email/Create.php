@@ -19,16 +19,19 @@ class Create extends Component
     public $listeners = ['createModal'];
 
     public $createModal;
+
     public $email_setting;
+
     public $description;
+
     public $message;
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
 
-    public function updatedMessage($value)
+    public function updatedMessage($value): void
     {
         $this->message = $value;
     }
@@ -49,7 +52,7 @@ class Create extends Component
         return view('livewire.admin.email.create');
     }
 
-    public function createModal()
+    public function createModal(): void
     {
         $this->resetErrorBag();
         $this->resetValidation();
@@ -59,7 +62,7 @@ class Create extends Component
         $this->createModal = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

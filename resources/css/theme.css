@@ -1,6 +1,6 @@
 /* Primary Color */
 :root {
-  --primary-color: {{ Helpers::settings('primary_color') }};
+  --primary-color: {{ settings('primary_color') }};
 }
 
 .bg-primary {
@@ -17,7 +17,7 @@
 
 /* Secondary Color */
 :root {
-  --secondary-color: {{ Helpers::settings('secondary_color') }}; /* Fetch the secondary color value from the database */
+  --secondary-color: {{ settings('secondary_color') }}; /* Fetch the secondary color value from the database */
 }
 
 .bg-secondary {

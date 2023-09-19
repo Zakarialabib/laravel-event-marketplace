@@ -71,27 +71,27 @@ class Index extends Component
         'featuredbanner.embeded_video' => ['nullable'],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -111,10 +111,10 @@ class Index extends Component
 
         $featuredbanners = $query->paginate($this->perPage);
 
-        return view('livewire.admin.featured-banner.index', compact('featuredbanners'));
+        return view('livewire.admin.featured-banner.index', ['featuredbanners' => $featuredbanners]);
     }
 
-    public function setFeatured($id)
+    public function setFeatured($id): void
     {
         FeaturedBanner::where('featured', '=', true)->update(['featured' => false]);
         $featuredbanner = FeaturedBanner::findOrFail($id);
@@ -124,7 +124,7 @@ class Index extends Component
         $this->alert('success', __('Featuredbanner featured successfully!'));
     }
 
-    public function editModal(FeaturedBanner $featuredbanner)
+    public function editModal(FeaturedBanner $featuredbanner): void
     {
         $this->resetErrorBag();
 
@@ -135,7 +135,7 @@ class Index extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
         // if product selected Helpers::productLink($product)
@@ -153,7 +153,7 @@ class Index extends Component
         $this->editModal = false;
     }
 
-    public function showModal(FeaturedBanner $featuredbanner)
+    public function showModal(FeaturedBanner $featuredbanner): void
     {
         $this->resetErrorBag();
 
@@ -164,7 +164,7 @@ class Index extends Component
         $this->showModal = true;
     }
 
-    public function delete(FeaturedBanner $featuredbanner)
+    public function delete(FeaturedBanner $featuredbanner): void
     {
         $featuredbanner->delete();
 

@@ -19,18 +19,13 @@ class EmailSubscribtionJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected $email;
-    protected $name;
-
     /** Create a new job instance. */
-    public function __construct(string $email, string $name)
+    public function __construct(protected string $email, protected string $name)
     {
-        $this->email = $email;
-        $this->name = $name;
     }
 
     /** Execute the job. */
-    public function handle()
+    public function handle(): void
     {
         Subscriber::firstOrCreate(
             ['email' => $this->email],

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Account;
 
 use Livewire\Component;
-use Throwable;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ParticipantInfos extends Component
@@ -18,7 +17,7 @@ class ParticipantInfos extends Component
         return view('livewire.account.participant-infos');
     }
 
-    protected function rules()
+    protected function rules(): array
     {
         return [
             'participant.email'                          => 'required|email|unique:participants,email,'.$this->participant->id,
@@ -40,34 +39,28 @@ class ParticipantInfos extends Component
         ];
     }
 
-    public function mount($participant)
+    public function mount($participant): void
     {
         $this->participant = $participant;
     }
 
-    public function save()
+    public function save(): void
     {
-        try {
-            $this->validate();
-
-            $this->participant->save();
-
-            $this->alert(
-                'success',
-                __('Participant information has been updated successfully!'),
-                [
-                    'position'          => 'center',
-                    'timer'             => 3000,
-                    'toast'             => true,
-                    'text'              => '',
-                    'confirmButtonText' => 'Ok',
-                    'cancelButtonText'  => 'Cancel',
-                    'showCancelButton'  => false,
-                    'showConfirmButton' => false,
-                ]
-            );
-        } catch (Throwable $th) {
-            throw $th;
-        }
+        $this->validate();
+        $this->participant->save();
+        $this->alert(
+            'success',
+            __('Participant information has been updated successfully!'),
+            [
+                'position'          => 'center',
+                'timer'             => 3000,
+                'toast'             => true,
+                'text'              => '',
+                'confirmButtonText' => 'Ok',
+                'cancelButtonText'  => 'Cancel',
+                'showCancelButton'  => false,
+                'showConfirmButton' => false,
+            ]
+        );
     }
 }

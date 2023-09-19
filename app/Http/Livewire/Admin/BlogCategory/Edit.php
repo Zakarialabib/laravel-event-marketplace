@@ -29,7 +29,7 @@ class Edit extends Component
         'blogcategory.meta_description' => 'nullable|max:200',
     ];
 
-    public function editModal($blogcategory)
+    public function editModal($blogcategory): void
     {
         // abort_if(Gate::denies('blogcategory_edit'), 403);
 
@@ -42,7 +42,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

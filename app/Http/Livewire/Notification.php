@@ -11,19 +11,19 @@ class Notification extends Component
 {
     public $notifications = [];
 
-    public function mount()
+    public function mount(): void
     {
         $user = Auth::user();
         $this->notifications = $user->unreadNotifications;
     }
 
-    public function markAsRead($notificationId)
+    public function markAsRead($notificationId): void
     {
         $notification = auth()->user()->notifications->where('id', $notificationId)->first();
 
         if ($notification) {
             $notification->markAsRead();
-            $this->notifications = $this->notifications->reject(function ($item) use ($notificationId) {
+            $this->notifications = $this->notifications->reject(static function ($item) use ($notificationId): bool {
                 return $item->id === $notificationId;
             });
         }

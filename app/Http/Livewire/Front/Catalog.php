@@ -21,15 +21,17 @@ class Catalog extends Component
     public $paginationOptions = [25, 50, 100];
 
     public $category_id;
+
     public $subcategory_id;
 
     public $sorting;
 
     public $sortingOptions;
 
-    public $selectedCategory = null;
+    public $selectedCategory;
 
     public $minPrice = 0;
+
     public $maxPrice = 0;
 
     protected $queryString = [
@@ -42,44 +44,34 @@ class Catalog extends Component
         return Section::active()->where('page', PageType::CATALOG)->get();
     }
 
-    public function filterType($type, $value)
+    public function filterType($type, $value): void
     {
-        // subcategory type with subcategory_id
-        switch ($type) {
-            case 'category':
-                $this->category_id = $value;
-
-                break;
-            case 'subcategory':
-                $this->subcategory_id = $value;
-
-                break;
+        if ($type == 'category') {
+            $this->category_id = $value;
+        } elseif ($type == 'subcategory') {
+            $this->subcategory_id = $value;
         }
 
         $this->resetPage();
     }
 
-    public function clearFilter($type, $value)
+    public function clearFilter($type, $value): void
     {
-        switch ($type) {
-            case 'category':
-                $this->category_id = null;
-
-                break;
-            case 'subcategory':
-                $this->subcategory_id = null;
-
-                break;
+        if ($type == 'category') {
+            $this->category_id = null;
+        } elseif ($type == 'subcategory') {
+            $this->subcategory_id = null;
         }
+
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortingOptions = [
             'name-asc'   => __('Order Alphabetic, A-Z'),
@@ -95,22 +87,15 @@ class Catalog extends Component
 
     public function applySorting($query)
     {
-        switch ($this->sorting) {
-            case 'name':
-                return $query->orderBy('name', 'asc');
-            case 'name-desc':
-                return $query->orderBy('name', 'desc');
-            case 'price':
-                return $query->orderBy('price', 'asc');
-            case 'price-desc':
-                return $query->orderBy('price', 'desc');
-            case 'date':
-                return $query->orderBy('created_at', 'asc');
-            case 'date-desc':
-                return $query->orderBy('created_at', 'desc');
-            default:
-                return $query;
-        }
+        return match ($this->sorting) {
+            'name'       => $query->orderBy('name', 'asc'),
+            'name-desc'  => $query->orderBy('name', 'desc'),
+            'price'      => $query->orderBy('price', 'asc'),
+            'price-desc' => $query->orderBy('price', 'desc'),
+            'date'       => $query->orderBy('created_at', 'asc'),
+            'date-desc'  => $query->orderBy('created_at', 'desc'),
+            default      => $query,
+        };
     }
 
     public function render()
@@ -124,6 +109,6 @@ class Catalog extends Component
 
         $products = $query->paginate($this->perPage);
 
-        return view('livewire.front.catalog', compact('products'))->extends('layouts.app');
+        return view('livewire.front.catalog', ['products' => $products])->extends('layouts.app');
     }
 }

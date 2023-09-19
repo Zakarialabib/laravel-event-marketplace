@@ -28,7 +28,7 @@ class Edit extends Component
         'service.price'       => 'required|min:3',
     ];
 
-    public function editModal($service)
+    public function editModal($service): void
     {
         //abort_if(Gate::denies('service_edit'), 403);
 
@@ -41,7 +41,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         //abort_if(Gate::denies('service_edit'), 403);
 

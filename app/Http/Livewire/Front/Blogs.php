@@ -19,7 +19,7 @@ class Blogs extends Component
 
     protected $listeners = ['categorySelected'];
 
-    public function categorySelected($category)
+    public function categorySelected($category): void
     {
         $this->category = $category;
     }
@@ -42,10 +42,10 @@ class Blogs extends Component
     public function render()
     {
         $blogs = Blog::with('category')
-            ->when('category', function ($query) {
+            ->when('category', function ($query): void {
                 $query->where('category_id', $this->category);
             })->paginate(6);
 
-        return view('livewire.front.blogs', compact('blogs'))->extends('layouts.app');
+        return view('livewire.front.blogs', ['blogs' => $blogs])->extends('layouts.app');
     }
 }

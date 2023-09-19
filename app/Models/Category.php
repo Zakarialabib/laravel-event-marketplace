@@ -19,7 +19,7 @@ class Category extends Model implements HasMedia
     use HasFactory;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'slug',
@@ -28,6 +28,7 @@ class Category extends Model implements HasMedia
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -56,13 +57,13 @@ class Category extends Model implements HasMedia
     }
 
     // Accessor for formatted category name
-    public function getFormattedNameAttribute()
+    public function getFormattedNameAttribute(): string
     {
-        return ucfirst($this->name);
+        return ucfirst((string) $this->name);
     }
 
     // Mutator for category slug
-    public function setSlugAttribute($value)
+    public function setSlugAttribute($value): void
     {
         $this->attributes['slug'] = Str::slug($value);
     }

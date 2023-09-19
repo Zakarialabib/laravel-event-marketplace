@@ -22,7 +22,7 @@ class Participant extends Model
     use HasGlobalDate;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'phone_number',
@@ -31,6 +31,7 @@ class Participant extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -88,13 +89,13 @@ class Participant extends Model
     }
 
     // Mutator for participant's birth date
-    public function setBirthDateAttribute($value)
+    public function setBirthDateAttribute($value): void
     {
         $this->attributes['birth_date'] = \Carbon\Carbon::parse($value)->format('Y-m-d');
     }
 
     // Mutator
-    public function setHealthInformationsAttribute($value)
+    public function setHealthInformationsAttribute($value): void
     {
         // Perform any validations or formatting here
         $this->attributes['health_informations'] = $value;

@@ -32,8 +32,8 @@
                         <div class="items-center flex flex-wrap justify-start">
                             <div>
                                 <a href="{{ route('front.index') }}" class="text-sky-500 cursor-pointer">
-                                    <img src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy"
-                                        class="h-16 align-middle w-auto" alt="{{ Helpers::settings('site_title') }}"
+                                    <img src="{{ asset('images/' . settings('site_logo')) }}" loading="lazy"
+                                        class="h-16 align-middle w-auto" alt="{{ settings('site_title') }}"
                                         onerror="this.onerror=null;this.src='{{ asset('images/logo/logo.png') }}';">
                                 </a>
                             </div>
@@ -135,8 +135,8 @@
         <nav class="relative flex flex-col py-6 px-6 w-full h-full bg-white border-r overflow-y-scroll">
             <div class="flex items-center">
                 <a class="mr-auto lg:text-3xl sm:text-xl font-bold font-heading" href="{{ route('front.index') }}">
-                    <img class="w-auto h-14" src="{{ asset('images/' . Helpers::settings('site_logo')) }}"
-                        alt="{{ Helpers::settings('site_title') }}" loading="lazy" />
+                    <img class="w-auto h-14" src="{{ asset('images/' . settings('site_logo')) }}"
+                        alt="{{ settings('site_title') }}" loading="lazy" />
                 </a>
                 <button @click="isSidebar = false" type="button">
                     <svg class="h-5 w-5 text-gray-500 cursor-pointer" width="10" height="10" viewbox="0 0 10 10"

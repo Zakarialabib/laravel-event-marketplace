@@ -54,27 +54,27 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -93,10 +93,10 @@ class Index extends Component
 
         $categories = $query->paginate($this->perPage);
 
-        return view('livewire.admin.product-category.index', compact('categories'))->extends('layouts.dashboard');
+        return view('livewire.admin.product-category.index', ['categories' => $categories])->extends('layouts.dashboard');
     }
 
-    public function deleteSelected()
+    public function deleteSelected(): void
     {
         abort_if(Gate::denies('category_delete'), 403);
 
@@ -107,7 +107,7 @@ class Index extends Component
         $this->resetSelected();
     }
 
-    public function delete(ProductCategory $category)
+    public function delete(ProductCategory $category): void
     {
         abort_if(Gate::denies('category_delete'), 403);
 

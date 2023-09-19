@@ -60,32 +60,32 @@ class Index extends Component
         return $this->sponsor?->image;
     }
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function confirmed()
+    public function confirmed(): void
     {
         $this->emit('delete');
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -106,10 +106,10 @@ class Index extends Component
 
         $sponsors = $query->paginate($this->perPage);
 
-        return view('livewire.admin.sponsors.index', compact('sponsors'));
+        return view('livewire.admin.sponsors.index', ['sponsors' => $sponsors]);
     }
 
-    public function showModal(Sponsor $sponsor)
+    public function showModal(Sponsor $sponsor): void
     {
         abort_if(Gate::denies('sponsor_show'), 403);
 
@@ -122,7 +122,7 @@ class Index extends Component
         $this->showModal = true;
     }
 
-    public function deleteModal($sponsor)
+    public function deleteModal($sponsor): void
     {
         $this->confirm(__('Are you sure you want to delete this?'), [
             'toast'             => false,
@@ -134,7 +134,7 @@ class Index extends Component
         $this->sponsor = $sponsor;
     }
 
-    public function deleteSelected()
+    public function deleteSelected(): void
     {
         abort_if(Gate::denies('sponsor_delete'), 403);
 
@@ -143,7 +143,7 @@ class Index extends Component
         $this->resetSelected();
     }
 
-    public function delete()
+    public function delete(): void
     {
         abort_if(Gate::denies('sponsor_delete'), 403);
 

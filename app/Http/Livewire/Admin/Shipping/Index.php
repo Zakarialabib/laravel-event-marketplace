@@ -47,32 +47,32 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function confirmed()
+    public function confirmed(): void
     {
         $this->emit('delete');
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -91,10 +91,10 @@ class Index extends Component
 
         $shippings = $query->paginate($this->perPage);
 
-        return view('livewire.admin.shipping.index', compact('shippings'))->extends('layouts.dashboard');
+        return view('livewire.admin.shipping.index', ['shippings' => $shippings])->extends('layouts.dashboard');
     }
 
-    public function deleteModal($page)
+    public function deleteModal($page): void
     {
         $this->confirm(__('Are you sure you want to delete this?'), [
             'toast'             => false,
@@ -106,7 +106,7 @@ class Index extends Component
         $this->page = $page;
     }
 
-    public function delete()
+    public function delete(): void
     {
         // abort_if(Gate::denies('shipping_delete'), 403);
 

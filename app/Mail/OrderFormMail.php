@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Mail;
 
-use App\Helpers;
 use App\Models\OrderForms;
+use App\Support\SettingsHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -38,7 +38,7 @@ class OrderFormMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->orderForm->name.' Request Order - '.Helpers::settings('site_title'),
+            subject: $this->orderForm->name.' Request Order - '.SettingsHelper::settings('site_title'),
         );
     }
 }

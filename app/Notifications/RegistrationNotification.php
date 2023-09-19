@@ -21,11 +21,8 @@ class RegistrationNotification extends Notification
         return ['database'];
     }
 
-    protected $registration;
-
-    public function __construct($registration)
+    public function __construct(protected $registration)
     {
-        $this->registration = $registration;
     }
 
     /**

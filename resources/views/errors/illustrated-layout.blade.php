@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Head Tags -->
-    @if (Helpers::settings('head_tags'))
-        {!! Helpers::settings('head_tags') !!}
+    @if (settings('head_tags'))
+        {!! settings('head_tags') !!}
     @endif
 
     <title>
-        @yield('title') || {{ Helpers::settings('site_title') }}
+        @yield('title') || {{ settings('site_title') }}
     </title>
  
-    <link rel="icon" href="{{ asset('images/' . Helpers::settings('site_favicon')) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/' . settings('site_favicon')) }}" type="image/x-icon">
 
     <!-- Styles -->
     @include('partials.front.css')
@@ -23,8 +23,8 @@
 
 <body class="antialiased font-sans">
     <!-- Body Tags -->
-    @if (Helpers::settings('body_tags'))
-        {!! Helpers::settings('body_tags') !!}
+    @if (settings('body_tags'))
+        {!! settings('body_tags') !!}
     @endif
 
     <x-header />

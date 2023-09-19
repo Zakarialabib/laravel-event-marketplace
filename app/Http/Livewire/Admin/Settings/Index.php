@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Settings;
 
-use App\Helpers;
 use App\Models\Settings;
+use App\Support\SettingsHelper;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
@@ -63,34 +63,35 @@ class Index extends Component
     public $seo_meta_description;
 
     public $footer_copyright_text;
+
     public $site_maintenance_message;
 
-    public function mount()
+    public function mount(): void
     {
-        $this->company_name = Helpers::settings('company_name');
-        $this->site_title = Helpers::settings('site_title');
-        $this->company_email_address = Helpers::settings('company_email_address');
-        $this->company_phone = Helpers::settings('company_phone');
-        $this->company_address = Helpers::settings('company_address');
-        $this->siteImage = Helpers::settings('site_logo');
-        $this->favicon = Helpers::settings('site_favicon');
-        $this->breadCrumb = Helpers::settings('site_breadCrumb_img');
-        $this->social_facebook = Helpers::settings('social_facebook');
-        $this->social_twitter = Helpers::settings('social_twitter');
-        $this->social_instagram = Helpers::settings('social_instagram');
-        $this->social_linkedin = Helpers::settings('social_linkedin');
-        $this->social_whatsapp = Helpers::settings('social_whatsapp');
-        $this->head_tags = Helpers::settings('head_tags');
-        $this->body_tags = Helpers::settings('body_tags');
-        $this->seo_meta_title = Helpers::settings('seo_meta_title');
-        $this->seo_meta_description = Helpers::settings('seo_meta_description');
-        $this->footer_copyright_text = Helpers::settings('footer_copyright_text');
-        $this->primary_color = Helpers::settings('primary_color');
-        $this->secondary_color = Helpers::settings('secondary_color');
-        $this->site_maintenance_message = Helpers::settings('site_maintenance_message');
+        $this->company_name = SettingsHelper::settings('company_name');
+        $this->site_title = SettingsHelper::settings('site_title');
+        $this->company_email_address = SettingsHelper::settings('company_email_address');
+        $this->company_phone = SettingsHelper::settings('company_phone');
+        $this->company_address = SettingsHelper::settings('company_address');
+        $this->siteImage = SettingsHelper::settings('site_logo');
+        $this->favicon = SettingsHelper::settings('site_favicon');
+        $this->breadCrumb = SettingsHelper::settings('site_breadCrumb_img');
+        $this->social_facebook = SettingsHelper::settings('social_facebook');
+        $this->social_twitter = SettingsHelper::settings('social_twitter');
+        $this->social_instagram = SettingsHelper::settings('social_instagram');
+        $this->social_linkedin = SettingsHelper::settings('social_linkedin');
+        $this->social_whatsapp = SettingsHelper::settings('social_whatsapp');
+        $this->head_tags = SettingsHelper::settings('head_tags');
+        $this->body_tags = SettingsHelper::settings('body_tags');
+        $this->seo_meta_title = SettingsHelper::settings('seo_meta_title');
+        $this->seo_meta_description = SettingsHelper::settings('seo_meta_description');
+        $this->footer_copyright_text = SettingsHelper::settings('footer_copyright_text');
+        $this->primary_color = SettingsHelper::settings('primary_color');
+        $this->secondary_color = SettingsHelper::settings('secondary_color');
+        $this->site_maintenance_message = SettingsHelper::settings('site_maintenance_message');
     }
 
-    public function save()
+    public function save(): void
     {
         $settings = [
             'company_name'             => $this->company_name,
@@ -120,7 +121,7 @@ class Index extends Component
         $this->alert('success', __('Settings updated successfully!'));
     }
 
-    public function uploadFavicon()
+    public function uploadFavicon(): void
     {
         $favicon = $this->upload($this->iconFile, $this->favicon, 'iconFile');
 
@@ -134,21 +135,20 @@ class Index extends Component
         }
     }
 
-    public function uploadbreadCrumb()
+    public function uploadbreadCrumb(): void
     {
         $breadCrumb = $this->upload($this->breadCrumbImg, $this->breadCrumbImg, 'breadCrumbImg');
 
         if ($breadCrumb) {
             Settings::set('site_breadCrumb_img', $breadCrumb);
             $this->alert('success', __('Breadcrumb Image updated successfully!'));
-            $this->breadCrumbImg = '';
             $this->breadCrumbImg = $breadCrumb;
         } else {
             $this->alert('error', __('Unable to upload your image'));
         }
     }
 
-    public function uploadLogo()
+    public function uploadLogo(): void
     {
         $logo = $this->upload($this->logoFile, $this->siteImage, 'logoFile');
 
@@ -167,7 +167,7 @@ class Index extends Component
         return view('livewire.admin.settings.index');
     }
 
-    private function upload($filename, $name, $validateName)
+    private function upload($filename, ?string $name, string $validateName)
     {
         $this->validate([
             $validateName => 'required|mimes:jpeg,png,jpg,gif,svg|max:1048',

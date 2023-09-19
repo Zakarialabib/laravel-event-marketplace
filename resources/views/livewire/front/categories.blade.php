@@ -140,7 +140,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach (Helpers::getActiveCategories() as $category)
+                        @foreach (\App\Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('category', '{{ $category->name }}')">
                                     <span
@@ -165,7 +165,7 @@
                         </button>
                     </div>
                     <ul x-show="openRaceLocation">
-                        @foreach (Helpers::getActiveRaceLocations() as $location)
+                        @foreach (\App\Helpers::getActiveRaceLocations() as $location)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('location', {{ $location->id }})">
                                     <span
@@ -221,7 +221,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach (Helpers::getActiveCategories() as $category)
+                        @foreach (\App\Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('category', '{{ $category->name }}')">
                                     <span

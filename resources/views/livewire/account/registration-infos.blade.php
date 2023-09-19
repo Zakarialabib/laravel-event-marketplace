@@ -11,7 +11,7 @@
                 <div class="relative py-9 px-16 h-full bg-white rounded-3xl">
                     <h3 class="font-heading mb-4 text-3xl md:text-4xl font-bold leading-tighter">
                         {{ $registration->race->name }}
-                        <small>{{ Helpers::format_date($registration->registration_date) }}</small>
+                        <small>{{ formatDate($registration->registration_date) }}</small>
                     </h3>
                     <a @click="expadedRegistration = {{ $registration->Id }}"
                         class="absolute -bottom-6 right-10 w-12 h-12 bg-green-500 rounded-full cursor-pointer flex items-center justify-center">
@@ -43,7 +43,7 @@
 
                         <li class="mb-4">
                             <span class="font-bold">{{ __('Date') }}:</span>
-                            <span>{{ Helpers::format_date($registration->date) }}</span>
+                            <span>{{ formatDate($registration->date) }}</span>
                         </li>
 
                         <li class="mb-4">

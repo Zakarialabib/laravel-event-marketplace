@@ -14,7 +14,7 @@ class ProductCategory extends Model
     use HasFactory;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'slug',
@@ -23,6 +23,7 @@ class ProductCategory extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

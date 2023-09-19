@@ -32,7 +32,7 @@ class Edit extends Component
         'category.description' => 'required|min:3',
     ];
 
-    public function editModal($category)
+    public function editModal($category): void
     {
         //abort_if(Gate::denies('category_edit'), 403);
 
@@ -45,7 +45,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         //abort_if(Gate::denies('category_edit'), 403);
 

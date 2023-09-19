@@ -8,18 +8,19 @@ use Livewire\Component;
 
 class Quill extends Component
 {
-    public const EVENT_VALUE_UPDATED = 'quill_value_updated';
+    final public const EVENT_VALUE_UPDATED = 'quill_value_updated';
 
     public $value;
+
     public $quillId;
 
-    public function mount($value)
+    public function mount($value): void
     {
         $this->value = $value;
         $this->quillId = 'quill-'.uniqid();
     }
 
-    public function updatedValue($value)
+    public function updatedValue($value): void
     {
         $this->emit(self::EVENT_VALUE_UPDATED, $value);
     }

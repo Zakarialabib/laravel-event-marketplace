@@ -25,7 +25,7 @@ class Create extends Component
         'faq.description' => ['required'],
     ];
 
-    public function mount(Faq $faq)
+    public function mount(Faq $faq): void
     {
         $this->faq = $faq;
     }
@@ -35,7 +35,7 @@ class Create extends Component
         return view('livewire.admin.faq.create');
     }
 
-    public function createModal()
+    public function createModal(): void
     {
         $this->resetErrorBag();
 
@@ -44,7 +44,7 @@ class Create extends Component
         $this->createModal = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

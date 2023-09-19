@@ -36,7 +36,7 @@ class Create extends Component
         'blog.meta_description' => 'nullable|max:200',
     ];
 
-    public function saveEditorState($editorJsonData)
+    public function saveEditorState($editorJsonData): void
     {
         $this->description = $editorJsonData;
     }
@@ -53,7 +53,7 @@ class Create extends Component
         return view('livewire.admin.blog.create');
     }
 
-    public function createBlog()
+    public function createBlog(): void
     {
         $this->resetErrorBag();
 
@@ -64,7 +64,7 @@ class Create extends Component
         $this->createBlog = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

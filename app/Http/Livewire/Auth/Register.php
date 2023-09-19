@@ -17,14 +17,20 @@ use Illuminate\Http\RedirectResponse;
 class Register extends Component
 {
     public $name = '';
+
     public $email = '';
+
     public $password = '';
+
     public $passwordConfirmation = '';
+
     public $phone;
+
     public $city;
+
     public $country;
 
-    public function mount()
+    public function mount(): void
     {
         $this->city = 'Casablanca';
         $this->country = 'Morocco';
@@ -57,16 +63,10 @@ class Register extends Component
 
         Auth::login($user, true);
 
-        switch (true) {
-            case $user->hasRole('admin'):
-                $homePage = RouteServiceProvider::ADMIN_HOME;
-
-                break;
-            default:
-                $homePage = RouteServiceProvider::CLIENT_HOME;
-
-                break;
-        }
+        $homePage = match (true) {
+            $user->hasRole('admin') => RouteServiceProvider::ADMIN_HOME,
+            default                 => RouteServiceProvider::CLIENT_HOME,
+        };
 
         return redirect()->intended($homePage);
     }

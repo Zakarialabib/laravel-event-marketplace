@@ -50,7 +50,7 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
@@ -89,7 +89,7 @@ class Index extends Component
 
         $subcategories = $query->paginate($this->perPage);
 
-        return view('livewire.admin.subcategory.index', compact('subcategories'))->extends('layouts.dashboard');
+        return view('livewire.admin.subcategory.index', ['subcategories' => $subcategories])->extends('layouts.dashboard');
     }
 
     public function delete(Subcategory $subcategory): void

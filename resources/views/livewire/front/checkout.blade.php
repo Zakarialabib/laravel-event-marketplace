@@ -21,7 +21,7 @@
                                     <option value="">{{ __('Please select') }}</option>
                                     @foreach ($this->shippings as $shipping)
                                         <option value="{{ $shipping->id }}">
-                                            {{ $shipping->title }} - {{ Helpers::format_currency($shipping->cost) }}
+                                            {{ $shipping->title }} - {{ formatCurrency($shipping->cost) }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -75,7 +75,7 @@
                                             @if (!empty($item->price))
                                                 <p
                                                     class="text-lg text-center mb-4 text-green-500 font-bold font-heading">
-                                                    {{ Helpers::format_currency($item->price) }}
+                                                    {{ formatCurrency($item->price) }}
                                                 </p>
                                             @endif
                                             <div class="flex flex-wrap items-center justify-center gap-2">
@@ -121,7 +121,7 @@
                                 <div class="flex justify-between">
                                     <span class="font-medium">{{ __('Subtotal') }}</span>
                                     <span class="font-bold font-heading">
-                                        {{ Helpers::format_currency($this->subTotal) }}
+                                        {{ formatCurrency($this->subTotal) }}
                                     </span>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                     <span class="font-medium">{{ __('Shipping') }}</span>
                                     @if (!empty($this->shipping_id))
                                         <span class="font-bold font-heading">
-                                            {{ Helpers::format_currency($this->shipping->cost) }}
+                                            {{ formatCurrency($this->shipping->cost) }}
                                         </span>
                                     @endif
                                 </div>
@@ -141,7 +141,7 @@
                                         class="text-base md:text-xl font-bold font-heading">{{ __('Total') }}</span>
                                     @if (!empty($this->cartTotal))
                                         <span class="font-bold font-heading">
-                                            {{ Helpers::format_currency($this->cartTotal) }}
+                                            {{ formatCurrency($this->cartTotal) }}
                                         </span>
                                     @endif
                                 </div>

@@ -14,10 +14,15 @@ class Report extends Component
     use WithPagination;
 
     public $totalRaces;
+
     public $upcomingRaces;
+
     public $races;
+
     public $registrations;
+
     public $selected = [];
+
     public $selectAll = false;
 
     public $filters = [
@@ -28,21 +33,17 @@ class Report extends Component
         'dateTo'   => null,
     ];
 
-    public function updatedFilters()
+    public function updatedFilters(): void
     {
         $this->resetPage();
     }
 
-    public function updatedSelectAll($value)
+    public function updatedSelectAll($value): void
     {
-        if ($value) {
-            $this->selected = $this->races->pluck('id')->map(fn ($id) => (string) $id)->toArray();
-        } else {
-            $this->selected = [];
-        }
+        $this->selected = $value ? $this->races->pluck('id')->map(static fn ($id): string => (string) $id)->toArray() : [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->totalRaces = Race::count();
         $this->upcomingRaces = Race::where('date', '>', now())->count();
@@ -54,7 +55,7 @@ class Report extends Component
         return RaceLocation::query()->get();
     }
 
-    public function resetFilters()
+    public function resetFilters(): void
     {
         $this->filters = [
             'statuses' => [],
@@ -91,6 +92,6 @@ class Report extends Component
 
         $races = $query->paginate(10);
 
-        return view('livewire.admin.race.report', compact('races'))->extends('layouts.dashboard');
+        return view('livewire.admin.race.report', ['races' => $races])->extends('layouts.dashboard');
     }
 }

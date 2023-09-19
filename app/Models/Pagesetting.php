@@ -22,6 +22,7 @@ class Pagesetting extends Model
         'page_id',
         'language_id',
     ];
+
     public $filterable = [
         'id', 'topbar', 'bottombar', 'topheader', 'bottomfooter',
         'popular_products', 'flash_deal', 'deal_of_the_day', 'best_sellers',
@@ -31,6 +32,7 @@ class Pagesetting extends Model
         'page_id',
         'language_id',
     ];
+
     protected $fillable = [
         'topbar', 'bottombar', 'topheader', 'bottomfooter',
         'popular_products', 'flash_deal', 'deal_of_the_day', 'best_sellers',

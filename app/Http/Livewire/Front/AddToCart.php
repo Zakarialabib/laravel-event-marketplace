@@ -20,7 +20,9 @@ class AddToCart extends Component
     public $product_id;
 
     public $selectedSize;
+
     public $selectedColor;
+
     public $quantity = 1;
 
     public $listeners = [
@@ -28,12 +30,12 @@ class AddToCart extends Component
 
     ];
 
-    public function mount(Product $product)
+    public function mount(Product $product): void
     {
         $this->product = $product;
     }
 
-    public function AddToCart($product_id)
+    public function AddToCart($product_id): void
     {
         $product = Product::find($product_id);
 
@@ -49,7 +51,7 @@ class AddToCart extends Component
                 'size'  => $this->selectedSize,
                 'color' => $this->selectedColor,
             ],
-        ])->associate('App\Models\Product');
+        ])->associate(Product::class);
 
         $this->emit('cartCountUpdated');
 

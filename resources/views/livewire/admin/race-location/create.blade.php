@@ -37,12 +37,12 @@
                             wire:model="raceLocation.description"></textarea>
                     <x-input-error :messages="$errors->get('raceLocation.description')" for="raceLocation.description" class="mt-2" />
                 </div>
-
+{{-- 
                 <div class="w-full my-2">
                     <x-label for="image" :value="__('Image')" />
                     <x-media-upload title="{{ __('Image') }}" name="image" wire:model="image"
                         :file="$image" single types="PNG / JPEG / WEBP" fileTypes="image/*" />
-                </div>
+                </div> --}}
 
                 <div class="w-full">
                     <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">

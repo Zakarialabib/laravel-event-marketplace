@@ -19,14 +19,11 @@ class PublishResults implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected $raceId;
-
-    public function __construct($raceId)
+    public function __construct(protected $raceId)
     {
-        $this->raceId = $raceId;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $registrations = Registration::where('race_id', $this->raceId)->get();
 

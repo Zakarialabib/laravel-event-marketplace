@@ -28,24 +28,28 @@ class ProductShow extends Component
     public $quantity = 1;
 
     public $product_id;
+
     public $selectedSize = '';
+
     public $selectedColor = '';
+
     public $brand_products;
+
     public $decreaseQuantity;
 
     public $increaseQuantity;
 
-    public function decreaseQuantity()
+    public function decreaseQuantity(): void
     {
-        $this->quantity -= 1;
+        --$this->quantity;
     }
 
-    public function increaseQuantity()
+    public function increaseQuantity(): void
     {
-        $this->quantity += 1;
+        ++$this->quantity;
     }
 
-    public function AddToCart($product_id)
+    public function AddToCart($product_id): void
     {
         $product = Product::find($product_id);
 
@@ -59,7 +63,7 @@ class ProductShow extends Component
                 'size'  => $this->selectedSize,
                 'color' => $this->selectedColor,
             ],
-        ])->associate('App\Models\Product');
+        ])->associate(Product::class);
 
         $this->emit('cartCountUpdated');
 
@@ -79,7 +83,7 @@ class ProductShow extends Component
         );
     }
 
-    public function mount(Product $product)
+    public function mount(Product $product): void
     {
         $this->product = $product;
 

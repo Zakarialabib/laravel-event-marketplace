@@ -1,7 +1,7 @@
 <div class="self-center relative" x-data="{ langSwitcher: false }">
     <a class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-blue-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 rounded-md"
         @click="langSwitcher = !langSwitcher">
-        <img src="{{ Helpers::flagImageUrl(\Illuminate\Support\Facades\App::getLocale()) }}" class="px-2">
+        <img src="{{ \App\Helpers::flagImageUrl(\Illuminate\Support\Facades\App::getLocale()) }}" class="px-2">
         @if (count($languages) > 1)
             <i class="fa fa-caret-down text-black"></i>
         @endif

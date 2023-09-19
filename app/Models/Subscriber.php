@@ -16,7 +16,7 @@ class Subscriber extends Model
     use HasUuid;
     use SoftDeletes;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'email',
@@ -24,6 +24,7 @@ class Subscriber extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

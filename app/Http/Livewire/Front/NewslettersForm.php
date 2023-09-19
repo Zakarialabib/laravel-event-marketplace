@@ -35,7 +35,7 @@ class NewslettersForm extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function subscribe()
+    public function subscribe(): void
     {
         $validatedData = $this->validate();
 

@@ -123,7 +123,7 @@
                             @endif
                         </x-table.td>
                         <x-table.td>
-                            {{ Helpers::format_date($race->registration_deadline) }}
+                            {{ formatDate($race->registration_deadline) }}
                         </x-table.td>
                         <x-table.td>
                             <button type="button" wire:click="$emit('showModal', {{ $race->id }})">
@@ -140,7 +140,7 @@
                         </x-table.td>
 
                         <x-table.td>
-                            {{ Helpers::format_currency($race->price) }}
+                            {{ formatCurrency($race->price) }}
                         </x-table.td>
 
                         <x-table.td>

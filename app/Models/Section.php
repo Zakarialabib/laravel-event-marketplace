@@ -21,7 +21,7 @@ class Section extends Model implements HasMedia
 
     public $table = 'sections';
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'status',
         'title',
@@ -31,6 +31,7 @@ class Section extends Model implements HasMedia
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -58,9 +59,8 @@ class Section extends Model implements HasMedia
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      *
-     * @return void
      */
-    public function scopeActive($query)
+    public function scopeActive($query): void
     {
         $query->where('status', 1);
     }

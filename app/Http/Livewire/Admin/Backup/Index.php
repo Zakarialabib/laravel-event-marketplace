@@ -31,12 +31,12 @@ class Index extends Component
         ]);
     }
 
-    public function generate()
+    public function generate(): void
     {
         try {
             Artisan::call('backup:run --only-db');
             $this->alert('success', __('Backup Generated with success.'));
-        } catch (Throwable $th) {
+        } catch (Throwable) {
             $this->alert('success', __('Database backup failed.'));
         }
     }
@@ -46,10 +46,10 @@ class Index extends Component
         return Storage::download($file);
     }
 
-    public function delete($name)
+    public function delete($name): void
     {
         foreach (glob(storage_path().'/app/public/backup/*') as $filename) {
-            $path = storage_path().'/app/public/backup/'.basename($name);
+            $path = storage_path().'/app/public/backup/'.basename((string) $name);
 
             if (file_exists($path)) {
                 @unlink($path);

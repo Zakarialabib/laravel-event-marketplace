@@ -63,10 +63,10 @@
                         {{ $redirect->new_url }}
                     </x-table.td>
                     <x-table.td>
-                        {{ Helpers::format_date($redirect->created_at) }}
+                        {{ formatDate($redirect->created_at) }}
                     </x-table.td>
                     <x-table.td>
-                        {{ Helpers::format_date($redirect->updated_at) }}
+                        {{ formatDate($redirect->updated_at) }}
                     </x-table.td>
 
                     <x-table.td>

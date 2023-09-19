@@ -11,7 +11,7 @@ class ProductOptions extends Component
 {
     public $options;
 
-    public function updatedOptions($options)
+    public function updatedOptions($options): void
     {
         $options = [];
 
@@ -24,7 +24,7 @@ class ProductOptions extends Component
         $this->emitUp('optionUpdated', $this->options);
     }
 
-    public function addOption()
+    public function addOption(): void
     {
         $this->options[] = [
             'type'  => '',
@@ -32,13 +32,13 @@ class ProductOptions extends Component
         ];
     }
 
-    public function removeOption($index)
+    public function removeOption($index): void
     {
         unset($this->options[$index]);
         $this->options = array_values($this->options);
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->options = [
             [

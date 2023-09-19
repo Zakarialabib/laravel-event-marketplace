@@ -18,9 +18,13 @@ class Index extends Component
     use WithSorting;
 
     public int $perPage;
+
     public array $orderable;
+
     public string $search = '';
+
     public array $selected = [];
+
     public array $paginationOptions;
 
     protected $queryString = [
@@ -29,22 +33,22 @@ class Index extends Component
         'sortDirection' => ['except' => 'desc'],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
@@ -59,7 +63,7 @@ class Index extends Component
         return (new ParticipantExport())->download('registrations.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -78,7 +82,7 @@ class Index extends Component
 
         $participants = $query->paginate($this->perPage);
 
-        return view('livewire.admin.participant.index', compact('participants'))
+        return view('livewire.admin.participant.index', ['participants' => $participants])
             ->extends('layouts.dashboard');
     }
 }

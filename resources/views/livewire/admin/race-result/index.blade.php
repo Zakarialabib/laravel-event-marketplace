@@ -130,7 +130,7 @@
                             </a>
                         </x-table.td>
                         <x-table.td>
-                            {{ Helpers::format_date($race_result->registration->registration_date) }}
+                            {{ formatDate($race_result->registration->registration_date) }}
                         </x-table.td>
                         <x-table.td>
                             {{ $race_result->place }} / {{ $race_result->time }} / {{ $race_result->date }}

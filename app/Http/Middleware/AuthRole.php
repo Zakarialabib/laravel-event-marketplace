@@ -13,8 +13,6 @@ class AuthRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Closure  $next
      *
      * @return mixed
      */
@@ -22,7 +20,7 @@ class AuthRole
     {
         $user = auth()->user();
 
-        if ($user) {
+        if ($user instanceof \Illuminate\Contracts\Auth\Authenticatable) {
             if ($role === $user->hasRole('admin')) {
                 return $next($request);
             }

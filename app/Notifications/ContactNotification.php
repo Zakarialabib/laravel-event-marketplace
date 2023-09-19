@@ -21,11 +21,8 @@ class ContactNotification extends Notification
         return ['database'];
     }
 
-    protected $contact;
-
-    public function __construct($contact)
+    public function __construct(protected $contact)
     {
-        $this->contact = $contact;
     }
 
     /**

@@ -31,7 +31,7 @@ class Create extends Component
         'createPage',
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
@@ -52,7 +52,7 @@ class Create extends Component
         return view('livewire.admin.page.create');
     }
 
-    public function createPage()
+    public function createPage(): void
     {
         $this->resetErrorBag();
 
@@ -65,7 +65,7 @@ class Create extends Component
         $this->createPage = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 
@@ -79,7 +79,7 @@ class Create extends Component
 
         $this->page->save();
 
-        $pageSettings = new Pagesetting([
+        new Pagesetting([
             'page_id'     => $this->page->id,
             'language_id' => $this->page->language_id,
         ]);

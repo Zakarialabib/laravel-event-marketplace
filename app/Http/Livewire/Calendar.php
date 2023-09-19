@@ -11,17 +11,19 @@ use App\Models\Race;
 class Calendar extends Component
 {
     public $year;
+
     public $month;
+
     public $events = [];
 
-    public function mount()
+    public function mount(): void
     {
         $this->year = Carbon::now()->year;
         $this->month = Carbon::now()->month;
         $this->fetchEvents();
     }
 
-    public function fetchEvents()
+    public function fetchEvents(): void
     {
         $startOfMonth = Carbon::createFromDate($this->year, $this->month, 1)->startOfDay();
         $endOfMonth = Carbon::createFromDate($this->year, $this->month, 1)->endOfMonth()->endOfDay();
@@ -29,14 +31,14 @@ class Calendar extends Component
         $this->events = Race::with('location')->whereBetween('date', [$startOfMonth, $endOfMonth])->get();
     }
 
-    public function previousMonth()
+    public function previousMonth(): void
     {
         $this->month = Carbon::createFromDate($this->year, $this->month, 1)->subMonth()->month;
         $this->year = Carbon::createFromDate($this->year, $this->month, 1)->year;
         $this->fetchEvents();
     }
 
-    public function nextMonth()
+    public function nextMonth(): void
     {
         $this->month = Carbon::createFromDate($this->year, $this->month, 1)->addMonth()->month;
         $this->year = Carbon::createFromDate($this->year, $this->month, 1)->year;
@@ -50,7 +52,8 @@ class Calendar extends Component
         ]);
     }
 
-    public function getCalendar()
+    /** @return array<mixed, array<'date'|'events', mixed>> */
+    public function getCalendar(): array
     {
         $startOfMonth = Carbon::createFromDate($this->year, $this->month, 1);
         $endOfMonth = Carbon::createFromDate($this->year, $this->month, 1)->endOfMonth();

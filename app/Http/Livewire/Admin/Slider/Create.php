@@ -24,13 +24,14 @@ class Create extends Component
     public $slider;
 
     public $image;
+
     public $description;
 
     public $listeners = [
         'createSlider',
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
@@ -52,7 +53,7 @@ class Create extends Component
         return view('livewire.admin.slider.create');
     }
 
-    public function createSlider()
+    public function createSlider(): void
     {
         $this->resetErrorBag();
 
@@ -64,7 +65,7 @@ class Create extends Component
         $this->createSlider = true;
     }
 
-    public function create()
+    public function create(): void
     {
         try {
             $this->validate();
@@ -78,6 +79,7 @@ class Create extends Component
 
                 $this->slider->image = $imageName;
             }
+
             $this->slider->language_id = 1;
 
             $this->slider->description = $this->description;
@@ -89,7 +91,7 @@ class Create extends Component
             $this->emit('refreshIndex');
 
             $this->createSlider = false;
-        } catch (Throwable $th) {
+        } catch (Throwable) {
             $this->alert('warning', __('An error happend Slider was not created.'));
         }
     }

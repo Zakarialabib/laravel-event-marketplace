@@ -6,11 +6,11 @@
 
         <div class="grid gap-y-8 gap-x-4 py-14 sm:grid-cols-3 lg:grid-cols-5 lg:py-16">
             <div class="relative">
-                <img src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy"
-                    alt="{{ Helpers::settings('site_title') }}" class="h-24 mix-blend-darken">
+                <img src="{{ asset('images/' . settings('site_logo')) }}" loading="lazy"
+                    alt="{{ settings('site_title') }}" class="h-24 mix-blend-darken">
                 <ul class="mt-12 flex items-center gap-8">
                     <li>
-                        <a href="{{ Helpers::settings('social_facebook') }}">
+                        <a href="{{ settings('social_facebook') }}">
                             <svg width="10" height="20" viewBox="0 0 10 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="transition hover:scale-110 hover:text-secondary">
@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ Helpers::settings('social_twitter') }}">
+                        <a href="{{ settings('social_twitter') }}">
                             <svg width="23" height="18" viewBox="0 0 23 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="transition hover:scale-110 hover:text-secondary">
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ Helpers::settings('social_instagram') }}">
+                        <a href="{{ settings('social_instagram') }}">
                             <svg width="23" height="22" viewBox="0 0 23 22" fill="currentColor"
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="transition hover:scale-110 hover:text-secondary">
@@ -74,7 +74,7 @@
             <div>
                 <ul class="flex flex-col gap-3 font-bold">
                     <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{ __('About us') }}</li>
-                    @foreach (Helpers::getActivePages() as $page)
+                    @foreach (App\Helpers::getActivePages() as $page)
                         <li><a href="{{ route('front.dynamicPage', $page->slug) }}"
                                 class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{ $page->title }}</a>
                         </li>
@@ -88,11 +88,11 @@
                 <ul class="flex flex-col gap-3 font-bold">
                     <li class="mb-3 text-lg font-extrabold text-black dark:text-white">{{ __('Information') }}</li>
                     <li>
-                        {{ Helpers::settings('company_address') }}
+                        {{ settings('company_address') }}
                     </li>
                     <li>
                         <a href="tel:+(617) 254-2333"
-                            class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{ Helpers::settings('company_phone') }}</a>
+                            class="capitalize inline-block transition hover:scale-110 hover:text-secondary hover:underline">{{ settings('company_phone') }}</a>
                     </li>
                 </ul>
             </div>
@@ -107,7 +107,7 @@
                         {{ date('Y') }}
                     </span>
                     <a href="javascript:" class="text-primary transition hover:text-secondary">
-                        {{ Helpers::settings('company_name') }}
+                        {{ settings('company_name') }}
                     </a>
                 </div>
                 <div>{{ __('Need help? Visit the') }} <a href="{{ route('front.contact') }}"

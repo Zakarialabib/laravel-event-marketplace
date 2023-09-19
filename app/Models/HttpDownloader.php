@@ -12,7 +12,7 @@ class HttpDownloader implements Downloader
 {
     public function getTempFile(string $url): string
     {
-        if ( ! $stream = Http::get($url)->body()) {
+        if (($stream = Http::get($url)->body()) === '' || ($stream = Http::get($url)->body()) === '0') {
             throw UnreachableUrl::create($url);
         }
 

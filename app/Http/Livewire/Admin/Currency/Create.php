@@ -26,7 +26,7 @@ class Create extends Component
         'currency.exchange_rate' => 'required|numeric',
     ];
 
-    public function mount(Currency $currency)
+    public function mount(Currency $currency): void
     {
         $this->currency = $currency;
     }
@@ -38,7 +38,7 @@ class Create extends Component
         return view('livewire.currency.create');
     }
 
-    public function createCurrency()
+    public function createCurrency(): void
     {
         $this->resetErrorBag();
 
@@ -47,7 +47,7 @@ class Create extends Component
         $this->createCurrency = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

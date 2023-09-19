@@ -68,7 +68,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach (Helpers::getActiveCategories() as $category)
+                        @foreach (\App\Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterProducts('category', {{ $category->id }})">
                                     <span
@@ -140,7 +140,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach (Helpers::getActiveCategories() as $category)
+                        @foreach (\App\Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterProducts('category', {{ $category->id }})">
                                     <span

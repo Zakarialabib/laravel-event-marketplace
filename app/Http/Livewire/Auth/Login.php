@@ -36,20 +36,14 @@ class Login extends Component
 
                 auth()->login($user, $this->remember_me);
 
-                switch (true) {
-                    case $user->hasRole('admin'):
-                        $homePage = RouteServiceProvider::ADMIN_HOME;
-
-                        break;
-                    default:
-                        $homePage = RouteServiceProvider::CLIENT_HOME;
-
-                        break;
-                }
+                $homePage = match (true) {
+                    $user->hasRole('admin') => RouteServiceProvider::ADMIN_HOME,
+                    default                 => RouteServiceProvider::CLIENT_HOME,
+                };
 
                 return redirect()->intended($homePage);
             }
-        } catch (Throwable $th) {
+        } catch (Throwable) {
             $this->addError('email', __('These credentials do not match our records'));
         }
     }

@@ -65,33 +65,33 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function filterRole($role)
+    public function filterRole($role): void
     {
         $this->filterRole = $role;
         $this->resetPage(); // Reset pagination to the first page
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -111,14 +111,14 @@ class Index extends Component
         ]);
 
         if ($this->filterRole === 'admin') {
-            $query->where(function ($query) {
-                $query->whereHas('roles', function ($query) {
+            $query->where(function ($query): void {
+                $query->whereHas('roles', function ($query): void {
                     $query->where('name', $this->filterRole);
                 });
             });
         } elseif ($this->filterRole === 'client') {
-            $query->where(function ($query) {
-                $query->whereHas('roles', function ($query) {
+            $query->where(function ($query): void {
+                $query->whereHas('roles', function ($query): void {
                     $query->where('name', $this->filterRole);
                 });
             });
@@ -126,7 +126,7 @@ class Index extends Component
 
         $users = $query->paginate($this->perPage);
 
-        return view('livewire.admin.users.index', compact('users'));
+        return view('livewire.admin.users.index', ['users' => $users]);
     }
 
     // getrolesproperty
@@ -136,12 +136,12 @@ class Index extends Component
     }
 
     // assign or change user role
-    public function assignRole(User $user, $role)
+    public function assignRole(User $user, $role): void
     {
         $user->assignRole($role);
     }
 
-    public function deleteSelected()
+    public function deleteSelected(): void
     {
         abort_if(Gate::denies('user_delete'), 403);
 
@@ -150,7 +150,7 @@ class Index extends Component
         $this->resetSelected();
     }
 
-    public function delete(User $user)
+    public function delete(User $user): void
     {
         abort_if(Gate::denies('user_delete'), 403);
 
@@ -159,7 +159,7 @@ class Index extends Component
         $this->alert('warning', __('User deleted successfully!'));
     }
 
-    public function showModal(User $user)
+    public function showModal(User $user): void
     {
         $this->user = $user;
 

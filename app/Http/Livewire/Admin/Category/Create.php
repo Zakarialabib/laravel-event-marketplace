@@ -30,7 +30,7 @@ class Create extends Component
         'category.description' => ['required'],
     ];
 
-    public function mount(Category $category)
+    public function mount(Category $category): void
     {
         $this->category = $category;
     }
@@ -45,7 +45,7 @@ class Create extends Component
         return Category::select('name', 'id')->get();
     }
 
-    public function createModal()
+    public function createModal(): void
     {
         $this->resetErrorBag();
 
@@ -54,7 +54,7 @@ class Create extends Component
         $this->createModal = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

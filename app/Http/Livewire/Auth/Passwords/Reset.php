@@ -25,7 +25,7 @@ class Reset extends Component
     /** @var string */
     public $passwordConfirmation;
 
-    public function mount($token)
+    public function mount($token): void
     {
         $this->email = request()->query('email', '');
         $this->token = $token;
@@ -45,7 +45,7 @@ class Reset extends Component
                 'email'    => $this->email,
                 'password' => $this->password,
             ],
-            function ($user, $password) {
+            function ($user, $password): void {
                 $user->password = Hash::make($password);
 
                 $user->setRememberToken(Str::random(60));

@@ -13,13 +13,8 @@ class ParticipantExport implements FromView
 {
     use Exportable;
 
-    /** @var array|null */
-    protected $ids;
-
-    public function __construct(
-        ?array $ids = null
-    ) {
-        $this->ids = $ids;
+    public function __construct(protected ?array $ids = null)
+    {
     }
 
     public function query()

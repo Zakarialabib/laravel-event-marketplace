@@ -21,16 +21,19 @@ class Edit extends Component
     ];
 
     public $editModal;
+
     public $email_setting;
+
     public $description;
+
     public $message;
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
 
-    public function updatedMessage($value)
+    public function updatedMessage($value): void
     {
         $this->message = $value;
     }
@@ -50,7 +53,7 @@ class Edit extends Component
         return view('livewire.admin.email.edit');
     }
 
-    public function editModal($id)
+    public function editModal($id): void
     {
         $this->resetErrorBag();
         $this->resetValidation();
@@ -60,7 +63,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

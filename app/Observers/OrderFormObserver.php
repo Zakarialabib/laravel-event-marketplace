@@ -13,7 +13,7 @@ class OrderFormObserver
     /** Handle the OrderForms "created" event. */
     public function created(OrderForms $orderForm): void
     {
-        $admin = User::whereHas('roles', function ($query) {
+        $admin = User::whereHas('roles', static function ($query): void {
             $query->where('name', 'admin');
         })->first();
 

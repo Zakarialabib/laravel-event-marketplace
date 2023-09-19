@@ -20,11 +20,12 @@ class Slider extends Model implements HasMedia
 
     public $table = 'sliders';
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id', 'title', 'status', 'language_id',
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -42,9 +43,8 @@ class Slider extends Model implements HasMedia
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      *
-     * @return void
      */
-    public function scopeActive($query)
+    public function scopeActive($query): void
     {
         $query->where('status', 1);
     }

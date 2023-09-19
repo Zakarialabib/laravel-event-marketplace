@@ -13,7 +13,7 @@ class Orders extends Component
 {
     public $orders;
 
-    public function mount()
+    public function mount(): void
     {
         $user = User::find(Auth::user()->id);
 

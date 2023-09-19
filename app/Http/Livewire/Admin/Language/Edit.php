@@ -19,7 +19,9 @@ class Edit extends Component
     public array $languages = [];
 
     public $language;
+
     public $name;
+
     public $code;
 
     public $editLanguage = false;
@@ -29,14 +31,14 @@ class Edit extends Component
         'language.code' => 'required',
     ];
 
-    public function editLanguage($id)
+    public function editLanguage($id): void
     {
         $this->language = Language::findOrFail($id);
 
         $this->editLanguage = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

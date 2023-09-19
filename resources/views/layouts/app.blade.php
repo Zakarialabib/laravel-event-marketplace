@@ -11,33 +11,33 @@
     {{-- <link rel="preload" href="{{ request()->getSchemeAndHttpHost() }}"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Head Tags -->
-    @if (Helpers::settings('head_tags'))
-        {!! Helpers::settings('head_tags') !!}
+    @if (settings('head_tags'))
+        {!! settings('head_tags') !!}
     @endif
 
     <title>
-        @yield('title') || {{ Helpers::settings('site_title') }}
+        @yield('title') || {{ settings('site_title') }}
     </title>
 
 
     @hasSection('meta')
         @yield('meta')
     @else
-        <meta name="title" content="{{ Helpers::settings('seo_meta_title') }}">
-        <meta name="description" content="{{ Helpers::settings('seo_meta_description') }}">
-        <meta property="og:title" content="{{ Helpers::settings('site_title') }}">
-        <meta property="og:description" content="{{ Helpers::settings('seo_meta_description') }}">
+        <meta name="title" content="{{ settings('seo_meta_title') }}">
+        <meta name="description" content="{{ settings('seo_meta_description') }}">
+        <meta property="og:title" content="{{ settings('site_title') }}">
+        <meta property="og:description" content="{{ settings('seo_meta_description') }}">
         <meta property="og:url" content="{{ route('front.index') }}" />
     @endif
 
     <meta property="og:locale" content="{{ app()->getLocale() }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="{{ Helpers::settings('company_name') }}" />
-    <meta name="author" content="{{ Helpers::settings('company_name') }}">
+    <meta property="og:site_name" content="{{ settings('company_name') }}" />
+    <meta name="author" content="{{ settings('company_name') }}">
     {{-- <link rel="canonical" href="{{ URL::current() }}"> --}}
     <meta name="robots" content="all,follow">
 
-    <link rel="icon" href="{{ asset('images/' . Helpers::settings('site_favicon')) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/' . settings('site_favicon')) }}" type="image/x-icon">
 
     @include('partials.front.css')
 </head>
@@ -47,8 +47,8 @@
     <x-loading-mask />
 
     <!-- Body Tags -->
-    @if (Helpers::settings('body_tags'))
-        {!! Helpers::settings('body_tags') !!}
+    @if (settings('body_tags'))
+        {!! settings('body_tags') !!}
     @endif
 
     <x-header />

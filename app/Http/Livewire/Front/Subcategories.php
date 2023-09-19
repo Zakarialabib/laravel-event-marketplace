@@ -25,6 +25,7 @@ class Subcategories extends Component
     public array $paginationOptions;
 
     public $subcategory_id;
+
     public $sorting;
 
     public $filterProductSubcategories;
@@ -41,23 +42,23 @@ class Subcategories extends Component
         ],
     ];
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function filterProductSubcategories($subcategory_id)
+    public function filterProductSubcategories($subcategory_id): void
     {
         $this->subcategory_id = $subcategory_id;
         $this->resetPage();
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sorting = 'default';
         $this->sortBy = 'id';
@@ -93,6 +94,6 @@ class Subcategories extends Component
             $products = $query->paginate($this->perPage);
         }
 
-        return view('livewire.front.subcategories', compact('products'));
+        return view('livewire.front.subcategories', ['products' => $products]);
     }
 }

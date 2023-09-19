@@ -21,20 +21,34 @@ class RegistrationForm extends Component
 {
     use LivewireAlert;
     public $race;
+
     public $user;
+
     public $participant;
+
     public $registration;
+
     public $services;
+
     public $selectedServices = [];
-    public $timeRemaining = 900; // 15 minutes in seconds
+
+    public $timeRemaining = 900;
+
+    // 15 minutes in seconds
     public $additionalServices = false;
+
     public $existingSubmission;
+
     public $newsletters = false;
+
     public $team;
+
     public $isTeamRegistration = false;
+
     public $name;
 
     public $existingRegistration;
+
     public $rules = [
         'participant.email'                          => 'required|email:rfc,dns,spoof,filter|unique:participants,email',
         'participant.name'                           => 'required|string',
@@ -55,7 +69,7 @@ class RegistrationForm extends Component
         'participant.sensitivities'                  => 'nullable',
     ];
 
-    public function mount($id)
+    public function mount($id): void
     {
         $this->race = Race::where('id', $id)->firstOrFail();
         $this->services = Service::all();
@@ -88,7 +102,7 @@ class RegistrationForm extends Component
     public function hydrate()
     {
         // Decrease the time remaining every second.
-        $this->timeRemaining--;
+        --$this->timeRemaining;
 
         // If time expires
         if ($this->timeRemaining <= 0) {
@@ -98,12 +112,12 @@ class RegistrationForm extends Component
         }
     }
 
-    public function dehydrate()
+    public function dehydrate(): void
     {
         Cache::put('registration_time_remaining', $this->timeRemaining, 900);
     }
 
-    public function updatedIsTeamRegistration($value)
+    public function updatedIsTeamRegistration($value): void
     {
         $this->isTeamRegistration = $value;
     }
@@ -152,13 +166,13 @@ class RegistrationForm extends Component
 
             Cart::instance('races')
                 ->add($this->race->id, $this->race->name, 1, $this->race->price)
-                ->associate('App\Models\Race');
+                ->associate(Race::class);
 
             foreach ($this->selectedServices as $serviceId) {
                 $service = Service::find($serviceId);
                 Cart::instance('services')
                     ->add($service->id, $service->name, 1, $service->price)
-                    ->associate('App\Models\Service');
+                    ->associate(Service::class);
             }
 
             if ($this->newsletters) {
@@ -170,10 +184,10 @@ class RegistrationForm extends Component
             $this->alert('success', __('Your order has been sent successfully!'));
 
             return redirect()->route('front.checkout-race');
-        } catch (Throwable $th) {
+        } catch (Throwable $throwable) {
             DB::rollBack();
 
-            throw $th;
+            throw $throwable;
         }
     }
 }

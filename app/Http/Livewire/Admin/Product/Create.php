@@ -25,6 +25,7 @@ class Create extends Component
     public $createProduct = false;
 
     public $product;
+
     public $subcategories;
 
     public $images;
@@ -51,12 +52,12 @@ class Create extends Component
         'product.embeded_video'    => ['nullable'],
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
 
-    public function updatedProductSubcategories()
+    public function updatedProductSubcategories(): void
     {
         $this->product->subcategories()->sync($this->product->subcategories);
     }
@@ -71,7 +72,7 @@ class Create extends Component
         return view('livewire.admin.product.create');
     }
 
-    public function createProduct()
+    public function createProduct(): void
     {
         $this->resetErrorBag();
 
@@ -82,7 +83,7 @@ class Create extends Component
         $this->createProduct = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

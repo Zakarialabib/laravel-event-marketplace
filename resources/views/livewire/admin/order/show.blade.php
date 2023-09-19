@@ -71,7 +71,7 @@
                 @endif
                 <div class="mb-4">
                     <p class="font-bold">{{ __('Order Amount') }}:</p>
-                    <p>{{ Helpers::format_currency($order->amount) }}</p>
+                    <p>{{ formatCurrency($order->amount) }}</p>
                 </div>
                 <div class="mb-4">
                     <p class="font-bold">{{ __('Payment Method') }}:</p>
@@ -91,7 +91,7 @@
                 </div>
                 <div class="mb-4">
                     <p class="font-bold">{{ __('Order Date') }}:</p>
-                    <p>{{ Helpers::format_date($order->date) }}</p>
+                    <p>{{ formatDate($order->date) }}</p>
                 </div>
                 <p>{{ $order->status->getName() }}</p>
             </div>
@@ -105,7 +105,7 @@
             </div>
             <div class="mb-4">
                 <p class="font-bold">{{ __('Order Date') }}:</p>
-                <p>{{ Helpers::format_date($order->date) }}</p>
+                <p>{{ formatDate($order->date) }}</p>
             </div>
         </div>
     </div>

@@ -17,20 +17,20 @@ trait CmiGateway
             $cmiClient->guardAgainstInvalidRequest();
             $payData = $cmiClient->getCmiData($params);
             $hash = $cmiClient->getHash($params);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
+        } catch (Exception $exception) {
+            Log::error($exception->getMessage());
 
             return redirect($cmiClient->getShopUrl())->withErrors(['payment' => __('Une erreur est survenue au niveau de la requête, veuillez réessayer ultérieurement.')]);
         }
 
-        return view('request-payment', compact('cmiClient', 'payData', 'hash'));
+        return view('request-payment', ['cmiClient' => $cmiClient, 'payData' => $payData, 'hash' => $hash]);
     }
 
     public function callback(Request $request)
     {
         $postData = $request->all();
 
-        if ($postData) {
+        if ($postData !== []) {
             $cmiClient = new Cmi();
 
             if ($cmiClient->validateHash($postData, $postData['HASH']) && $_POST['ProcReturnCode'] == '00') {
@@ -42,6 +42,6 @@ trait CmiGateway
             $response = 'No Data POST';
         }
 
-        return view('callback', compact('response'));
+        return view('callback', ['response' => $response]);
     }
 }

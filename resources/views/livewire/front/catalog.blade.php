@@ -90,7 +90,7 @@
                 </div>
                 <div class="swiper-container" x-ref="container">
                     <div class="swiper-wrapper">
-                        @foreach (Helpers::getActiveProductCategories() as $category)
+                        @foreach (\App\Helpers::getActiveProductCategories() as $category)
                             <div class="swiper-slide w-auto px-4">
                                 <div x-data="{ active: '{{ $category->id }}' === '{{ $category_id }}' }" x-init="$watch('active', value => value ? $wire.category_id = '{{ $category->id }}' : '')"
                                     class="relative inline-flex mx-auto rounded-full">
@@ -149,7 +149,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach (Helpers::getActiveProductCategories() as $category)
+                        @foreach (\App\Helpers::getActiveProductCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterType('category', '{{ $category->id }}')">
                                     <span
@@ -174,7 +174,7 @@
                         </button>
                     </div>
                     <ul x-show="openSubcategory">
-                        @foreach (Helpers::getActiveSubCategories() as $subcategory)
+                        @foreach (\App\Helpers::getActiveSubCategories() as $subcategory)
                             <li class="mb-2">
                                 <button type="button"
                                     wire:click="filterProducts('subcategory', {{ $subcategory->id }})">
@@ -222,7 +222,7 @@
                         </button>
                     </div>
                     <ul x-show="openSubcategory">
-                        @foreach (Helpers::getActiveSubCategories() as $subcategory)
+                        @foreach (\App\Helpers::getActiveSubCategories() as $subcategory)
                             <li class="mb-2">
                                 <button type="button"
                                     wire:click="filterProducts('subcategory', {{ $subcategory->id }})">

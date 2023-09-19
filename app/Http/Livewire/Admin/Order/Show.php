@@ -11,7 +11,7 @@ class Show extends Component
 {
     public $order;
 
-    public function mount($id)
+    public function mount($id): void
     {
         $this->order = Order::find($id);
     }

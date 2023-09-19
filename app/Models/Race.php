@@ -26,7 +26,7 @@ class Race extends Model implements HasMedia
     use HasUuid;
     use CanBeBought;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'status',
@@ -36,6 +36,7 @@ class Race extends Model implements HasMedia
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -127,7 +128,7 @@ class Race extends Model implements HasMedia
 
     public function getRegistrationOrdersTotalAttribute()
     {
-        return $this->registrations->sum(function ($registration) {
+        return $this->registrations->sum(static function ($registration) {
             return $registration->order ? $registration->order->amount : 0;
         });
     }

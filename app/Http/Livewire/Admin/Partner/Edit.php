@@ -38,7 +38,7 @@ class Edit extends Component
         return $this->partner?->image;
     }
 
-    public function editModal($partner)
+    public function editModal($partner): void
     {
         abort_if(Gate::denies('partner_update'), 403);
 
@@ -51,7 +51,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         abort_if(Gate::denies('partner_update'), 403);
 

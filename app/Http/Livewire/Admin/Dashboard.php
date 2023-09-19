@@ -19,9 +19,10 @@ use Carbon\Carbon;
 class Dashboard extends Component
 {
     public $startDate;
+
     public $endDate;
 
-    public function mount()
+    public function mount(): void
     {
         // Set default date range to the current month
         $this->startDate = Carbon::now()->startOfMonth()->toDateString();
@@ -47,18 +48,6 @@ class Dashboard extends Component
 
         $recentRegistrations = Registration::with('participant')->select('participant_id', 'created_at', 'id')->orderBy('created_at', 'desc')->take(10)->get();
 
-        return view('livewire.admin.dashboard', compact(
-            'productsCount',
-            'racesCount',
-            'recentOrders',
-            'recentRegistrations',
-            'registrationsCount',
-            'participantsCount',
-            'subscribersCount',
-            'ordersCount',
-            'contactsCount',
-            'orderFormProduct',
-            'orderFormRegistration',
-        ))->extends('layouts.dashboard');
+        return view('livewire.admin.dashboard', ['productsCount' => $productsCount, 'racesCount' => $racesCount, 'recentOrders' => $recentOrders, 'recentRegistrations' => $recentRegistrations, 'registrationsCount' => $registrationsCount, 'participantsCount' => $participantsCount, 'subscribersCount' => $subscribersCount, 'ordersCount' => $ordersCount, 'contactsCount' => $contactsCount, 'orderFormProduct' => $orderFormProduct, 'orderFormRegistration' => $orderFormRegistration])->extends('layouts.dashboard');
     }
 }

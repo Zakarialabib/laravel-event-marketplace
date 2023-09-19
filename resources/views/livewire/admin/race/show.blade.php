@@ -53,7 +53,7 @@
                                     {{ __('Date') }}
                                 </x-table.th>
                                 <x-table.td>
-                                    {{ Helpers::format_date($race?->date) }}
+                                    {{ formatDate($race?->date) }}
                                 </x-table.td>
                             </x-table.tr>
                             <x-table.tr>
@@ -61,7 +61,7 @@
                                     {{ __('Price') }}
                                 </x-table.th>
                                 <x-table.td>
-                                    {{ Helpers::format_currency($race?->price) }}
+                                    {{ formatCurrency($race?->price) }}
                                 </x-table.td>
                             </x-table.tr>
 

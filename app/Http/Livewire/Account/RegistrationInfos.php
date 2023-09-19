@@ -11,7 +11,7 @@ class RegistrationInfos extends Component
 {
     public $registrations;
 
-    public function mount($participant)
+    public function mount($participant): void
     {
         $this->registrations = Registration::where('participant_id', $participant->id)->get();
     }

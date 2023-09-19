@@ -21,11 +21,8 @@ class SubscribeNotification extends Notification
         return ['database'];
     }
 
-    protected $subscriber;
-
-    public function __construct($subscriber)
+    public function __construct(protected $subscriber)
     {
-        $this->subscriber = $subscriber;
     }
 
     /**

@@ -16,7 +16,7 @@ class Page extends Model implements HasMedia
     use InteractsWithMedia;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'title',
         'slug',
@@ -25,6 +25,7 @@ class Page extends Model implements HasMedia
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

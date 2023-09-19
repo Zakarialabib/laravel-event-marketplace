@@ -63,7 +63,7 @@
                                 {{ $result->place }}
                             </x-table.td>
                             <x-table.td>
-                                {{ Helpers::format_date($result->date) }}
+                                {{ formatDate($result->date) }}
                             </x-table.td>
                         </tr>
                         <tr x-show="openDropdown === {{ $index }}" class="bg-gray-50">

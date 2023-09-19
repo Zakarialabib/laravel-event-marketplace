@@ -90,12 +90,12 @@ class Create extends Component
 
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->resetErrorBag();
 
@@ -106,7 +106,7 @@ class Create extends Component
         $this->description = '';
     }
 
-    public function addSocialMedia()
+    public function addSocialMedia(): void
     {
         $this->social_media[] = [
             'name'  => '',
@@ -114,13 +114,13 @@ class Create extends Component
         ];
     }
 
-    public function removeSocialMedia($index)
+    public function removeSocialMedia($index): void
     {
         unset($this->social_media[$index]);
         $this->social_media = array_values($this->social_media);
     }
 
-    public function addSponsor()
+    public function addSponsor(): void
     {
         $this->sponsors[] = [
             'name'  => '',
@@ -129,18 +129,18 @@ class Create extends Component
         ];
     }
 
-    public function removeSponsor($index)
+    public function removeSponsor($index): void
     {
         unset($this->sponsors[$index]);
         $this->sponsors = array_values($this->sponsors);
     }
 
-    public function addFeature()
+    public function addFeature(): void
     {
         $this->features[] = '';
     }
 
-    public function removeFeature($index)
+    public function removeFeature($index): void
     {
         unset($this->features[$index]);
         $this->features = array_values($this->features);
@@ -154,7 +154,9 @@ class Create extends Component
 
         if ($this->images) {
             foreach ($this->images as $image) {
-                $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
+                if ($image instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
+                    $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
+                }
             }
         }
 
@@ -179,7 +181,7 @@ class Create extends Component
         return redirect()->route('admin.races');
     }
 
-    public function addCourse()
+    public function addCourse(): void
     {
         $this->courses[] = [
             'name'     => '',
@@ -189,13 +191,13 @@ class Create extends Component
         ];
     }
 
-    public function removeCourse($index)
+    public function removeCourse($index): void
     {
         unset($this->courses[$index]);
         $this->courses = array_values($this->courses);
     }
 
-    public function addRaceDate()
+    public function addRaceDate(): void
     {
         $this->calendar[] = [
             'date'   => '',
@@ -209,18 +211,18 @@ class Create extends Component
         ];
     }
 
-    public function removeRaceDate($date)
+    public function removeRaceDate($date): void
     {
         unset($this->calendar[$date]);
     }
 
-    public function removeRaceEvent($date, $eventIndex)
+    public function removeRaceEvent($date, $eventIndex): void
     {
         unset($this->calendar[$date]['events'][$eventIndex]);
         $this->calendar[$date]['events'] = array_values($this->calendar[$date]['events']);
     }
 
-    public function addRaceEvent($date)
+    public function addRaceEvent($date): void
     {
         $this->calendar[$date]['events'][] = [
             'start_time' => '',
@@ -229,7 +231,7 @@ class Create extends Component
         ];
     }
 
-    public function addOption()
+    public function addOption(): void
     {
         $this->options[] = [
             'type'  => '',
@@ -237,7 +239,7 @@ class Create extends Component
         ];
     }
 
-    public function removeOption($index)
+    public function removeOption($index): void
     {
         unset($this->options[$index]);
         $this->options = array_values($this->options);

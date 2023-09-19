@@ -21,11 +21,11 @@ class EditTranslation extends Component
         'translations.*.value' => 'required',
     ];
 
-    public function mount($code)
+    public function mount($code): void
     {
         $this->language = Language::where('code', $code)->firstOrFail();
         $this->translations = $this->getTranslations();
-        $this->translations = collect($this->translations)->map(function ($item, $key) {
+        $this->translations = collect($this->translations)->map(static function ($item, $key): array {
             return [
                 'key'   => $key,
                 'value' => $item,
@@ -35,17 +35,17 @@ class EditTranslation extends Component
 
     private function getTranslations()
     {
-        $path = base_path("lang/{$this->language->code}.json");
+        $path = base_path(sprintf('lang/%s.json', $this->language->code));
         $content = file_get_contents($path);
 
         return json_decode($content, true);
     }
 
-    public function updateTranslation()
+    public function updateTranslation(): void
     {
         $this->validate();
 
-        $path = base_path("lang/{$this->language->code}.json");
+        $path = base_path(sprintf('lang/%s.json', $this->language->code));
 
         if ( ! file_exists($path)) {
             $this->alert('error', __('File does not exist!'));
@@ -56,24 +56,25 @@ class EditTranslation extends Component
         try {
             $json = file_get_contents($path);
             $translations = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             $this->alert('error', __('Error decoding JSON data!'));
 
             return;
         }
 
-        foreach ($this->translations as $key => $translation) {
+        foreach ($this->translations as $translation) {
             if (array_key_exists($translation['key'], $translations)) {
                 $this->alert('error', __('Translation key already exists!'));
 
                 return;
             }
+
             $translations[$translation['key']] = $translation['value'];
         }
 
         try {
             file_put_contents($path, json_encode($translations, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             $this->alert('error', __('Error encoding JSON data!'));
 
             return;

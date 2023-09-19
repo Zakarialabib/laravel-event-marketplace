@@ -17,7 +17,7 @@ class Brand extends Model implements HasMedia
     use InteractsWithMedia;
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id', 'name', 'slug', 'status',
     ];
 

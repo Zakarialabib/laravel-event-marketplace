@@ -18,21 +18,25 @@ class Template extends Component
     use WithFileUploads;
 
     public $templates = [];
+
     public $selectedTemplate = [];
-    public $createTemplate = null;
+
+    public $createTemplate;
+
     public $pages = [];
+
     public $selectTemplate;
 
     public $listeners = [
         'createTemplate',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->templates = config('templates');
     }
 
-    public function createTemplate()
+    public function createTemplate(): void
     {
         $this->resetErrorBag();
 
@@ -41,12 +45,12 @@ class Template extends Component
         $this->createTemplate = true;
     }
 
-    public function updatedSelectTemplate()
+    public function updatedSelectTemplate(): void
     {
         $this->selectedTemplate = $this->templates[$this->selectTemplate];
     }
 
-    public function create()
+    public function create(): void
     {
         // try {
         $pageTemplate = [
@@ -60,9 +64,7 @@ class Template extends Component
 
         $page = Page::create($pageTemplate);
 
-        // dd($page);
-
-        $pageSettings = new Pagesetting([
+        new Pagesetting([
             'page_id' => $page->id,
             // 'language_id' => $page->language_id ?? null,
         ]);

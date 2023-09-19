@@ -36,21 +36,21 @@
                         <li class="mb-6">
                             <h4 class="mb-2 text-gray-50">{{ __('Telephone') }}</h4>
                             <a class="text-white hover:text-green-600 hover:underline"
-                                href="tel:{{ Helpers::settings('company_phone') }}">
-                                {{ Helpers::settings('company_phone') }}
+                                href="tel:{{ settings('company_phone') }}">
+                                {{ settings('company_phone') }}
                             </a>
                         </li>
                         <li class="mb-6">
                             <h4 class="mb-2 text-gray-50">{{ __('Email') }}</h4>
                             <a class="text-white hover:text-green-600 hover:underline"
-                                href="mailto:{{ Helpers::settings('company_email_address') }}">
-                                {{ Helpers::settings('company_email_address') }}
+                                href="mailto:{{ settings('company_email_address') }}">
+                                {{ settings('company_email_address') }}
                             </a>
                         </li>
                         <li>
                             <h4 class="mb-2 text-gray-50">{{ __('Whatsapp') }}</h4>
                             <a class="text-white hover:text-green-600 hover:underline" href="#" target="_blank">
-                                {{ Helpers::settings('social_whatsapp') }}
+                                {{ settings('social_whatsapp') }}
                             </a>
                         </li>
                     </ul>
@@ -62,19 +62,19 @@
             <div class="w-full flex flex-wrap lg:justify-between sm:justify-center mb-4">
                 <div class="w-full md:w-auto flex justify-center items-center gap-4">
                     <a class="inline-flex w-12 h-12"
-                        href="{{ Helpers::settings('social_facebook') }}" target="_blank">
+                        href="{{ settings('social_facebook') }}" target="_blank">
                         <i class="fab fa-facebook-f text-xl text-white hover:text-green-200 transition"></i>
                     </a>
                     <a class="inline-flex w-12 h-12"
-                        href="{{ Helpers::settings('social_instagram') }}" target="_blank">
+                        href="{{ settings('social_instagram') }}" target="_blank">
                         <i class="fab fa-instagram text-xl text-white hover:text-green-200 transition"></i>
                     </a>
                     <a class="inline-flex w-12 h-12"
-                        href="{{ Helpers::settings('social_twitter') }}" target="_blank">
+                        href="{{ settings('social_twitter') }}" target="_blank">
                         <i class="fab fa-twitter text-xl text-white hover:text-green-200 transition"></i>
                     </a>
                     <a class="inline-flex w-12 h-12"
-                        href="{{ Helpers::settings('social_linkedin') }}" target="_blank">
+                        href="{{ settings('social_linkedin') }}" target="_blank">
                         <i class="fab fa-linkedin-in text-xl text-white hover:text-green-200 transition"></i>
                     </a>
                 </div>

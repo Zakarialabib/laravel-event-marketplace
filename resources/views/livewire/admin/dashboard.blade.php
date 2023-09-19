@@ -142,8 +142,8 @@
                                             {{ $order->reference }}
                                         </a>
                                     </x-table.td>
-                                    <x-table.td>{{ Helpers::format_currency($order->amount) }}</x-table.td>
-                                    <x-table.td>{{ Helpers::format_date($order->created_at) }}</x-table.td>
+                                    <x-table.td>{{ formatCurrency($order->amount) }}</x-table.td>
+                                    <x-table.td>{{ formatDate($order->created_at) }}</x-table.td>
                                 </x-table.tr>
                             @endforeach
                         </x-table.tbody>
@@ -170,7 +170,7 @@
                                         {{ $registration->participant->phone_number }}
                                     </a>
                                 </x-table.td>
-                                <x-table.td>{{ Helpers::format_date($registration->created_at) }}</x-table.td>
+                                <x-table.td>{{ formatDate($registration->created_at) }}</x-table.td>
                             </x-table.tr>
                         @endforeach
                     </x-table.tbody>

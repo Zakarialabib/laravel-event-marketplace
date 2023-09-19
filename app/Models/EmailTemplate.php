@@ -12,7 +12,7 @@ class EmailTemplate extends Model
 {
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'type',
@@ -20,6 +20,7 @@ class EmailTemplate extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

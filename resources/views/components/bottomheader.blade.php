@@ -23,7 +23,7 @@
             class="absolute z-10 top-full max-w-screen-xl bg-white w-[35rem] sm:w-[25rem] 
              flex flex-wrap justify-between px-4 gap-4 py-4 text-center rounded-md shadow-lg"
             @click.away="isMenuOpen = false">
-            {{-- @foreach (Helpers::getActiveBrands() as $brand)
+            {{-- @foreach (\App\Helpers::getActiveBrands() as $brand)
                 <a class="" href="{{ route('front.brandPage', $brand->slug) }}">
                     <p class="mb-3 text-lg font-bold font-heading text-green-900 hover:text-green-600 hover:underline">
                         {{ $brand->name }}

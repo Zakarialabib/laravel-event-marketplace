@@ -42,7 +42,7 @@ class Edit extends Component
         'blog.meta_description' => 'nullable|max:200',
     ];
 
-    public function saveEditorState($editorJsonData)
+    public function saveEditorState($editorJsonData): void
     {
         $this->description = $editorJsonData;
     }
@@ -59,7 +59,7 @@ class Edit extends Component
         return view('livewire.admin.blog.edit');
     }
 
-    public function editModal($id)
+    public function editModal($id): void
     {
         // abort_if(Gate::denies('blog_edit'), 403);
 
@@ -74,7 +74,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

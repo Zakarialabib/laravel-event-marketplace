@@ -9,15 +9,15 @@ use App\Exceptions\InvalidRequest;
 
 class Cmi
 {
-    private string $baseUri;
+    private readonly string $baseUri;
 
-    private string $clientId;
+    private readonly string $clientId;
 
-    private string $storeKey;
+    private readonly string $storeKey;
 
-    private string $storeType;
+    private readonly string $storeType;
 
-    private string $tranType;
+    private readonly string $tranType;
 
     private string $lang;
 
@@ -31,17 +31,11 @@ class Cmi
 
     private string $callbackUrl;
 
-    private bool $callbackResponse;
+    private readonly string $hashAlgorithm;
 
-    private string $hashAlgorithm;
-
-    private string $encoding;
-
-    private bool $autoRedirect;
+    private readonly string $encoding;
 
     private string $sessionTimeout;
-
-    private string $rnd;
 
     private string $amount;
 
@@ -53,15 +47,11 @@ class Cmi
 
     private string $tel;
 
-    private bool $currenciesList;
-
     private string $amountCur;
 
     private string $symbolCur;
 
     private string $description;
-
-    private string $hash;
 
     public function __construct()
     {
@@ -76,12 +66,9 @@ class Cmi
         $this->failUrl = config('cmi-payment.failUrl');
         $this->shopUrl = config('cmi-payment.shopUrl');
         $this->callbackUrl = config('cmi-payment.callbackUrl');
-        $this->callbackResponse = (bool) config('cmi-payment.callbackResponse');
         $this->hashAlgorithm = config('cmi-payment.hashAlgorithm');
         $this->encoding = config('cmi-payment.encoding');
-        $this->autoRedirect = (bool) config('cmi-payment.autoRedirect');
         $this->sessionTimeout = config('cmi-payment.sessionTimeout');
-        $this->rnd = microtime();
         $this->guardAgainstInvalidConfiguration();
     }
 
@@ -102,22 +89,18 @@ class Cmi
 
     public function enableAutoRedirect(): void
     {
-        $this->autoRedirect = true;
     }
 
     public function disableAutoRedirect(): void
     {
-        $this->autoRedirect = false;
     }
 
     public function enableCallbackRespense(): void
     {
-        $this->callbackResponse = true;
     }
 
     public function disableCallbackRespense(): void
     {
-        $this->callbackResponse = false;
     }
 
     public function setOkUrl(string $okUrl): void
@@ -182,7 +165,6 @@ class Cmi
 
     public function enableCurrenciesList(): void
     {
-        $this->currenciesList = true;
     }
 
     public function setAmountCur($amountCur): void
@@ -204,10 +186,8 @@ class Cmi
     {
         $cmiData = $this->getCmiData($params);
         $plainText = $this->getPlainText($cmiData);
-        $hash = base64_encode(pack('H*', hash('sha512', $plainText)));
-        $this->hash = $hash;
 
-        return $hash;
+        return base64_encode(pack('H*', hash('sha512', $plainText)));
     }
 
     public function getCmiData(array $params = []): array
@@ -224,10 +204,10 @@ class Cmi
         ksort($data);
 
         foreach ($data as $key => $value) {
-            $formattedValue = trim($value);
+            $formattedValue = trim((string) $value);
             $formattedValue = str_replace('|', '\\|', str_replace('\\', '\\\\', $formattedValue));
 
-            if (strtolower($key) != 'hash' && strtolower($key) != 'encoding') {
+            if (strtolower((string) $key) != 'hash' && strtolower((string) $key) != 'encoding') {
                 $plainText = $plainText.$formattedValue.'|';
             }
         }
@@ -237,29 +217,30 @@ class Cmi
         return $plainText.$escapedStoreKey;
     }
 
-    private function unsetData(&$data): void
+    private function unsetData(array &$data): void
     {
         unset($data['storeKey'], $data['baseUri']);
     }
 
-    public function validateHash(array $data, $actualHash)
+    public function validateHash(array $data, $actualHash): bool
     {
         $this->unsetData($data);
         $postParams = [];
 
         foreach ($data as $key => $value) {
-            array_push($postParams, $key);
+            $postParams[] = $key;
         }
+
         natcasesort($postParams);
 
         $hashval = '';
 
         foreach ($postParams as $param) {
-            $paramValue = trim(html_entity_decode(preg_replace("/\n$/", '', $data[$param]), ENT_QUOTES, 'UTF-8'));
+            $paramValue = trim(html_entity_decode(preg_replace("/\n$/", '', (string) $data[$param]), ENT_QUOTES, 'UTF-8'));
             $escapedParamValue = str_replace('|', '\\|', str_replace('\\', '\\\\', $paramValue));
             $escapedParamValue = preg_replace('/document(.)/i', 'document.', $escapedParamValue);
 
-            $lowerParam = strtolower($param);
+            $lowerParam = strtolower((string) $param);
 
             if ($lowerParam != 'hash' && $lowerParam != 'encoding') {
                 $hashval = $hashval.$escapedParamValue.'|';
@@ -267,7 +248,7 @@ class Cmi
         }
 
         $escapedStoreKey = str_replace('|', '\\|', str_replace('\\', '\\\\', $this->storeKey));
-        $hashval = $hashval.$escapedStoreKey;
+        $hashval .= $escapedStoreKey;
 
         $calculatedHashValue = hash('sha512', $hashval);
         $hash = base64_encode(pack('H*', $calculatedHashValue));
@@ -276,7 +257,7 @@ class Cmi
     }
 
     /** @throws InvalidRequest */
-    public function guardAgainstInvalidRequest()
+    public function guardAgainstInvalidRequest(): void
     {
         //amount
         if ($this->amount == null) {
@@ -345,10 +326,10 @@ class Cmi
     }
 
     /** @throws InvalidConfiguration */
-    private function guardAgainstInvalidConfiguration()
+    private function guardAgainstInvalidConfiguration(): void
     {
         //clientId
-        if ( ! $this->clientId) {
+        if ($this->clientId === '' || $this->clientId === '0') {
             throw InvalidConfiguration::clientIdNotSpecified();
         }
 
@@ -357,7 +338,7 @@ class Cmi
         }
 
         //storeKey
-        if ( ! $this->storeKey) {
+        if ($this->storeKey === '' || $this->storeKey === '0') {
             throw InvalidConfiguration::storeKeyNotSpecified();
         }
 
@@ -366,7 +347,7 @@ class Cmi
         }
 
         //storeType
-        if ( ! $this->storeType) {
+        if ($this->storeType === '' || $this->storeType === '0') {
             throw InvalidConfiguration::attributeNotSpecified('modèle du paiement du marchand (storeType)');
         }
 
@@ -375,7 +356,7 @@ class Cmi
         }
 
         //tranType
-        if ( ! $this->tranType) {
+        if ($this->tranType === '' || $this->tranType === '0') {
             throw InvalidConfiguration::attributeNotSpecified('Type de la transaction (tranType)');
         }
 
@@ -389,7 +370,7 @@ class Cmi
         }
 
         //baseUri
-        if ( ! $this->baseUri) {
+        if ($this->baseUri === '' || $this->baseUri === '0') {
             throw InvalidConfiguration::attributeNotSpecified('gateway de paiement (baseUri)');
         }
 
@@ -402,7 +383,7 @@ class Cmi
         }
 
         //okUrl
-        if ( ! $this->okUrl) {
+        if ($this->okUrl === '' || $this->okUrl === '0') {
             throw InvalidConfiguration::attributeNotSpecified('okUrl');
         }
 
@@ -415,7 +396,7 @@ class Cmi
         }
 
         //failUrl
-        if ( ! $this->failUrl) {
+        if ($this->failUrl === '' || $this->failUrl === '0') {
             throw InvalidConfiguration::attributeNotSpecified('failUrl');
         }
 
@@ -428,7 +409,7 @@ class Cmi
         }
 
         //shopUrl
-        if ( ! $this->shopUrl) {
+        if ($this->shopUrl === '' || $this->shopUrl === '0') {
             throw InvalidConfiguration::attributeNotSpecified('shopUrl');
         }
 
@@ -441,7 +422,7 @@ class Cmi
         }
 
         //callbackUrl
-        if ( ! $this->callbackUrl) {
+        if ($this->callbackUrl === '' || $this->callbackUrl === '0') {
             throw InvalidConfiguration::attributeNotSpecified('callbackUrl');
         }
 
@@ -454,7 +435,7 @@ class Cmi
         }
 
         //hashAlgorithm
-        if ( ! $this->hashAlgorithm) {
+        if ($this->hashAlgorithm === '' || $this->hashAlgorithm === '0') {
             throw InvalidConfiguration::attributeNotSpecified('version du hachage (hashAlgorithm)');
         }
 
@@ -463,7 +444,7 @@ class Cmi
         }
 
         //encoding
-        if ( ! $this->encoding) {
+        if ($this->encoding === '' || $this->encoding === '0') {
             throw InvalidConfiguration::attributeNotSpecified('encodage des données (encoding)');
         }
 
@@ -472,7 +453,7 @@ class Cmi
         }
 
         //sessionTimeout
-        if ( ! $this->sessionTimeout) {
+        if ($this->sessionTimeout === '' || $this->sessionTimeout === '0') {
             throw InvalidConfiguration::attributeNotSpecified('délai d\'expiration de la session (sessionTimeout)');
         }
 

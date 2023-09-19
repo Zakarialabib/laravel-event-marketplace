@@ -52,27 +52,27 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -91,10 +91,10 @@ class Index extends Component
 
         $services = $query->paginate($this->perPage);
 
-        return view('livewire.admin.service.index', compact('services'))->extends('layouts.dashboard');
+        return view('livewire.admin.service.index', ['services' => $services])->extends('layouts.dashboard');
     }
 
-    public function deleteSelected()
+    public function deleteSelected(): void
     {
         abort_if(Gate::denies('service_delete'), 403);
 
@@ -105,7 +105,7 @@ class Index extends Component
         $this->resetSelected();
     }
 
-    public function delete(Service $service)
+    public function delete(Service $service): void
     {
         abort_if(Gate::denies('service_delete'), 403);
 

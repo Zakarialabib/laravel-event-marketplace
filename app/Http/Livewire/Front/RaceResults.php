@@ -30,17 +30,17 @@ class RaceResults extends Component
         'sortDirection' => ['except' => 'desc'],
     ];
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function mount($race)
+    public function mount($race): void
     {
         $this->race = $race;
         $this->sortBy = 'id';
@@ -62,6 +62,6 @@ class RaceResults extends Component
 
         $results = $query->paginate($this->perPage);
 
-        return view('livewire.front.race-results', compact('results'));
+        return view('livewire.front.race-results', ['results' => $results]);
     }
 }

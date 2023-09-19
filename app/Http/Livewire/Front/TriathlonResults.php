@@ -30,17 +30,17 @@ class TriathlonResults extends Component
         'sortDirection' => ['except' => 'desc'],
     ];
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function mount($race)
+    public function mount($race): void
     {
         $this->race = $race;
         $this->sortBy = 'id';
@@ -53,39 +53,34 @@ class TriathlonResults extends Component
     public function calculateRank($result, $field): int
     {
         $sortedResults = $result->sortByDesc($field);
-        $rank = $sortedResults->pluck('id')->search($result->id) + 1;
 
-        return $rank;
+        return $sortedResults->pluck('id')->search($result->id) + 1;
     }
 
-    public function calculateGenderRank($result, $field)
+    public function calculateGenderRank($result, $field): int|float
     {
         $genderSortedResults = RaceResult::where('race_id', $this->race->id)
             ->where('gender', $result->participant->gender) // Use the corresponding field for each discipline
             ->sortBy($field)
             ->get();
 
-        $genderRank = $genderSortedResults->pluck('id')->search($result->id) + 1;
-
-        return $genderRank;
+        return $genderSortedResults->pluck('id')->search($result->id) + 1;
     }
 
-    public function calculateOverallRank($results, $result)
+    public function calculateOverallRank($results, $result): int|float
     {
         // Sort results based on time (or any other relevant criteria)
         $sortedResults = $results->sortBy('time');
 
-        $overallRank = $sortedResults->search(function ($item) use ($result) {
+        return $sortedResults->search(static function ($item) use ($result): bool {
             return $item->id === $result->id;
         }) + 1;
-
-        return $overallRank;
     }
 
     public function render()
     {
         $query = RaceResult::where('race_id', $this->race->id)
-            ->with(['participant' => function ($query) {
+            ->with(['participant' => function ($query): void {
                 $query->where('name', 'like', '%'.$this->search.'%');
             }])->advancedFilter([
                 's'               => $this->search ?: null,
@@ -95,6 +90,6 @@ class TriathlonResults extends Component
 
         $results = $query->paginate($this->perPage);
 
-        return view('livewire.front.triathlon-results', compact('results'));
+        return view('livewire.front.triathlon-results', ['results' => $results]);
     }
 }

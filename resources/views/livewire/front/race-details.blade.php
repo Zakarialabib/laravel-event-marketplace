@@ -139,7 +139,7 @@
                     {{ __('Registration deadline') }}
                 </p>
                 <p class="text-black text-lg text-center mt-4">
-                    {{ Helpers::format_date($race->registration_deadline) }}
+                    {{ formatDate($race->registration_deadline) }}
                 </p>
             </div>
             <div class="w-full xl:w-3/4 lg:w-3/4 sm:w-full mt-2">
@@ -179,7 +179,7 @@
 
                         <div class="mb-4">
                             <span class="text-sm md:text-base font-medium text-gray-500">{{ __('Price') }}:</span>
-                            <span class="text-base md:text-lg">{{ Helpers::format_currency($race->price) }}</span>
+                            <span class="text-base md:text-lg">{{ formatCurrency($race->price) }}</span>
                         </div>
                         <div class="w-full text-center my-4">
                             @if ($race->calendar)
@@ -351,7 +351,7 @@
 
                                     <li>
                                         <span class="font-bold">{{ __('Date') }}:</span>
-                                        <span>{{ Helpers::format_date($existingRegistration->date) }}</span>
+                                        <span>{{ formatDate($existingRegistration->date) }}</span>
                                     </li>
 
                                 </ul>

@@ -66,27 +66,27 @@ class Index extends Component
         'section.description' => 'nullable',
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -107,11 +107,11 @@ class Index extends Component
 
         $sections = $query->paginate($this->perPage);
 
-        return view('livewire.admin.section.index', compact('sections'));
+        return view('livewire.admin.section.index', ['sections' => $sections]);
     }
 
     // Section  Delete
-    public function delete(Section $section)
+    public function delete(Section $section): void
     {
         //   abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -121,7 +121,7 @@ class Index extends Component
     }
 
     // Section  Clone
-    public function clone(Section $section)
+    public function clone(Section $section): void
     {
         $section_details = Section::find($section->id);
 

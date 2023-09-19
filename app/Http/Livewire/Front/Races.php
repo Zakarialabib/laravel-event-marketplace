@@ -42,17 +42,17 @@ class Races extends Component
         return RaceLocation::active()->get();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->perPage += 5;
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->perPage = 5;
 
@@ -71,7 +71,7 @@ class Races extends Component
     public function render()
     {
         $query = Race::where('status', $this->status)
-            ->when($this->category_id, function ($query) {
+            ->when($this->category_id, function ($query): void {
                 $query->where('category_id', $this->category_id);
             })
             ->when($this->raceLocation_id, function ($query) {
@@ -98,6 +98,6 @@ class Races extends Component
 
         $races = $query->paginate($this->perPage);
 
-        return view('livewire.front.races', compact('races'))->extends('layouts.app');
+        return view('livewire.front.races', ['races' => $races])->extends('layouts.app');
     }
 }

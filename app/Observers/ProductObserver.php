@@ -10,13 +10,8 @@ use App\Enums\RedirectionStatus;
 
 class ProductObserver
 {
-    /**
-     * Handle the Product "updating" event.
-     *
-     * @param  \App\Models\Product  $product
-     * @return void
-     */
-    public function updating(Product $product)
+    /** Handle the Product "updating" event. */
+    public function updating(Product $product): void
     {
         // Check if the product's slug has changed
         if ($product->isDirty('slug')) {

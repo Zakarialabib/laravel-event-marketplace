@@ -39,7 +39,7 @@ class Index extends Component
 
     public $promoAllProducts = false;
 
-    public $percentage = null;
+    public $percentage;
 
     public $copyPriceToOldPrice = false;
 
@@ -77,33 +77,33 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function selectStore($storeId)
+    public function selectStore($storeId): void
     {
         $this->filterStore = $storeId;
         $this->resetPage(); // Reset pagination to the first page
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -116,7 +116,7 @@ class Index extends Component
 
     public function render(): View|Factory
     {
-        $query = Product::with(['category' => function ($query) {
+        $query = Product::with(['category' => static function ($query): void {
             $query->select('id', 'name');
         },
         ])->select('products.*')->advancedFilter([
@@ -130,10 +130,10 @@ class Index extends Component
 
         $products = $query->paginate($this->perPage);
 
-        return view('livewire.admin.product.index', compact('products'))->extends('layouts.dashboard');
+        return view('livewire.admin.product.index', ['products' => $products])->extends('layouts.dashboard');
     }
 
-    public function delete(Product $product)
+    public function delete(Product $product): void
     {
         abort_if(Gate::denies('product_delete'), 403);
 
@@ -151,7 +151,7 @@ class Index extends Component
         $this->resetSelected();
     }
 
-    public function selectAll()
+    public function selectAll(): void
     {
         if (count(array_intersect($this->selected, Product::pluck('id')->toArray())) === count(Product::pluck('id')->toArray())) {
             $this->selected = [];
@@ -160,7 +160,7 @@ class Index extends Component
         }
     }
 
-    public function selectPage()
+    public function selectPage(): void
     {
         if (count(array_intersect($this->selected, Product::paginate($this->perPage)->pluck('id')->toArray())) === count(Product::paginate($this->perPage)->pluck('id')->toArray())) {
             $this->selected = [];
@@ -170,7 +170,7 @@ class Index extends Component
     }
 
     // Product  Clone
-    public function clone(Product $product)
+    public function clone(Product $product): void
     {
         $product_details = Product::find($product->id);
         // dd($product_details);
@@ -191,12 +191,12 @@ class Index extends Component
         $this->alert('success', __('Product Cloned successfully!'));
     }
 
-    public function promoAllProducts()
+    public function promoAllProducts(): void
     {
         $this->promoAllProducts = true;
     }
 
-    public function updateSelected()
+    public function updateSelected(): void
     {
         $products = Product::whereIn('id', $this->selected)->get();
 
@@ -207,10 +207,11 @@ class Index extends Component
                 $product->price = $product->discount_price;
                 $product->discount_price = null;
             } elseif ($this->percentageMethod === '+') {
-                $product->price = round(floatval($product->price) * (1 + $this->percentage / 100));
+                $product->price = round((float) $product->price * (1 + $this->percentage / 100));
             } else {
-                $product->price = round(floatval($product->price) * (1 - $this->percentage / 100));
+                $product->price = round((float) $product->price * (1 - $this->percentage / 100));
             }
+
             $product->save();
         }
 

@@ -12,11 +12,11 @@ class Language extends Model
 {
     use HasAdvancedFilter;
 
-    public const IS_DEFAULT = 1;
+    final public const IS_DEFAULT = 1;
 
-    public const IS_NOT_DEFAULT = 0;
+    final public const IS_NOT_DEFAULT = 0;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'name',
         'code',
@@ -25,6 +25,7 @@ class Language extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

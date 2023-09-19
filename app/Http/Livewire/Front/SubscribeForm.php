@@ -6,8 +6,8 @@ namespace App\Http\Livewire\Front;
 
 use App\Enums\OrderType;
 use App\Enums\Status;
-use App\Helpers;
 use App\Models\OrderForms;
+use App\Support\SettingsHelper;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -22,6 +22,7 @@ class SubscribeForm extends Component
     public $name;
 
     public $phone;
+
     public $email;
 
     public $type;
@@ -30,7 +31,7 @@ class SubscribeForm extends Component
 
     public $race;
 
-    public function mount($race)
+    public function mount($race): void
     {
         $this->race = $race;
     }
@@ -40,7 +41,7 @@ class SubscribeForm extends Component
         return view('livewire.front.subscribe-form');
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate([
             'name'  => 'required',
@@ -60,7 +61,7 @@ class SubscribeForm extends Component
 
         $this->alert('success', __('Your order has been sent successfully!'));
 
-        Mail::to(Helpers::settings('company_email_email'))->send(new OrderFormMail($order));
+        Mail::to(SettingsHelper::settings('company_email_email'))->send(new OrderFormMail($order));
 
         $this->reset();
     }

@@ -13,15 +13,15 @@ class SearchBox extends Component
 {
     public $listeners = ['updatedSearch' => 'search'];
 
-    public $search = null;
+    public $search;
 
     public $results = [];
 
     public $searchBox = true;
 
-    public function updatedSearch()
+    public function updatedSearch(): void
     {
-        if (strlen($this->search) > 3) {
+        if (strlen((string) $this->search) > 3) {
             $this->results = Product::active()
                 ->where('name', 'like', '%'.$this->search.'%')
                 ->orWhere('description', 'like', '%'.$this->search.'%')
@@ -32,13 +32,13 @@ class SearchBox extends Component
         }
     }
 
-    public function hideSearchResults()
+    public function hideSearchResults(): void
     {
         $this->searchBox = false;
         $this->clearSearch();
     }
 
-    public function clearSearch()
+    public function clearSearch(): void
     {
         $this->search = '';
         $this->results = [];

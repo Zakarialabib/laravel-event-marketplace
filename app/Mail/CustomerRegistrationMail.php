@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Mail;
 
-use App\Helpers;
+use App\Support\SettingsHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
@@ -17,6 +17,7 @@ class CustomerRegistrationMail extends Mailable
     use Queueable;
     use SerializesModels;
 
+    /** @var \App\Models\User */
     public $user;
 
     public function __construct(User $user)
@@ -33,10 +34,10 @@ class CustomerRegistrationMail extends Mailable
             ]);
     }
 
-    public function envelope()
+    public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(Helpers::settings('company_email_address'), Helpers::settings('site_title')),
+            from: new Address(SettingsHelper::settings('company_email_address'), SettingsHelper::settings('site_title')),
             subject: sprintf('Welcome, %s!', $this->user->name),
         );
     }

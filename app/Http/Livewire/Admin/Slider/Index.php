@@ -65,27 +65,27 @@ class Index extends Component
         'slider.embeded_video' => ['nullable'],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -104,7 +104,7 @@ class Index extends Component
 
         $sliders = $query->paginate($this->perPage);
 
-        return view('livewire.admin.slider.index', compact('sliders'))->extends('layouts.dashboard');
+        return view('livewire.admin.slider.index', ['sliders' => $sliders])->extends('layouts.dashboard');
     }
 
     // public function getPhotoPreviewProperty()
@@ -112,7 +112,7 @@ class Index extends Component
     //     return $this->slider->image;
     // }
 
-    public function setFeatured($id)
+    public function setFeatured($id): void
     {
         Slider::where('featured', '=', true)->update(['featured' => false]);
         $slider = Slider::findOrFail($id);
@@ -122,7 +122,7 @@ class Index extends Component
         $this->alert('success', __('Slider featured successfully!'));
     }
 
-    public function showModal(Slider $slider)
+    public function showModal(Slider $slider): void
     {
         $this->resetErrorBag();
 
@@ -133,7 +133,7 @@ class Index extends Component
         $this->showModal = true;
     }
 
-    public function delete(Slider $slider)
+    public function delete(Slider $slider): void
     {
         $slider->delete();
 

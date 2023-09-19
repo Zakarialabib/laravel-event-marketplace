@@ -16,12 +16,19 @@ class VisualEditor extends Component
     public $logoUrl = '';
 
     public $menuItems = [];
+
     public $cardContent = [];
+
     public $textContent = [];
+
     public $listItems = [];
+
     public $headerSettings = [];
+
     public $footerSettings = [];
+
     public $accordionItems = [];
+
     public $tabItems = [];
 
     public $themeColor = [];
@@ -31,29 +38,32 @@ class VisualEditor extends Component
     public $colorOptions = [];
 
     public $colors;
+
     public $breadcrumbType;
+
     public $breadcrumbImage;
 
     public $selectedColor;
 
     public $breadcrumbsSettings = [];
+
     public $pageLoaderSettings = [];
 
     protected $listeners = ['addComponent'];
 
-    public function mount()
+    public function mount(): void
     {
         $this->components = [
-            'listItems' => array_map(function ($item) {
+            'listItems' => array_map(static function (array $item): array {
                 return ['itemText' => $item['itemText']];
             }, $this->listItems),
-            'tabItems' => array_map(function ($item) {
+            'tabItems' => array_map(static function (array $item): array {
                 return [
                     'title'   => $item['title'],
                     'content' => $item['content'],
                 ];
             }, $this->tabItems),
-            'accordionItems' => array_map(function ($item) {
+            'accordionItems' => array_map(static function (array $item): array {
                 return [
                     'title'   => $item['title'],
                     'content' => $item['content'],
@@ -104,22 +114,22 @@ class VisualEditor extends Component
         $this->selectedColor = 'gray';
     }
 
-    public function selectedColor($color)
+    public function selectedColor($color): void
     {
         $this->themeColor = $color;
     }
 
-    public function selectedColors($index, $color)
+    public function selectedColors($index, string $color): void
     {
         $selectedColors = $this->themeColor;
 
         // Check if the selected color already exists in the array
-        $colorExists = array_filter($selectedColors, function ($value) use ($color) {
+        $colorExists = array_filter($selectedColors, function ($value) use ($color): bool {
             return $value == $this->selectedColor.'-'.$color;
         });
 
         // If the selected color does not exist, add it to the array
-        if (empty($colorExists)) {
+        if ($colorExists === []) {
             // If there are already 8 colors in the array, remove the first one
             if (count($selectedColors) == 8) {
                 array_shift($selectedColors);
@@ -130,24 +140,24 @@ class VisualEditor extends Component
         }
 
         // Update the selectedColors property
-        $this->themeColor = array_map(function ($index, $value) {
+        $this->themeColor = array_map(static function ($index, $value): array {
             return [$index => $value];
         }, array_keys($selectedColors), $selectedColors);
     }
 
-    public function addTextContent()
+    public function addTextContent(): void
     {
         $this->components['textContent'][] = [
             'textContent' => '',
         ];
     }
 
-    public function addLogo($logoUrl)
+    public function addLogo($logoUrl): void
     {
         $this->components['logo'] = $logoUrl;
     }
 
-    public function addComponent($type, $props = [])
+    public function addComponent($type, $props = []): void
     {
         $component = [
             'type'     => $type,
@@ -155,10 +165,10 @@ class VisualEditor extends Component
             'children' => [],
         ];
 
-        array_push($this->components, $component);
+        $this->components[] = $component;
     }
 
-    public function addLayout()
+    public function addLayout(): void
     {
         $this->components['layout'] = [
             'columns' => 2,
@@ -167,7 +177,7 @@ class VisualEditor extends Component
         ];
     }
 
-    public function addSection($bgColor = null)
+    public function addSection($bgColor = null): void
     {
         $this->components['sections'][] = [
             'bgColor' => $bgColor,
@@ -175,7 +185,7 @@ class VisualEditor extends Component
         ];
     }
 
-    public function addColumn($width = 1)
+    public function addColumn($width = 1): void
     {
         $this->components['layout']['content'][] = [
             'type'    => 'column',
@@ -184,7 +194,7 @@ class VisualEditor extends Component
         ];
     }
 
-    public function addVideo($url = '', $autoplay = false)
+    public function addVideo($url = '', $autoplay = false): void
     {
         $this->components['videos'][] = [
             'url'      => $url,
@@ -192,7 +202,7 @@ class VisualEditor extends Component
         ];
     }
 
-    public function saveBreadcrumbs()
+    public function saveBreadcrumbs(): void
     {
         $breadcrumbs = [
             'type'  => $this->breadcrumbType,
@@ -203,7 +213,7 @@ class VisualEditor extends Component
         $this->breadcrumbsSettings = $breadcrumbs;
     }
 
-    public function saveLoader()
+    public function saveLoader(): void
     {
         $loader = [
             'backgroundColor' => $this->pageLoaderSettings['backgroundColor'],
@@ -216,7 +226,7 @@ class VisualEditor extends Component
     }
 
     // Menu manipulation
-    public function addMenu()
+    public function addMenu(): void
     {
         $this->menuItems[] = [
             'menuName' => '',
@@ -229,13 +239,13 @@ class VisualEditor extends Component
         ];
     }
 
-    public function removeMenu($index)
+    public function removeMenu($index): void
     {
         unset($this->menuItems[$index]);
         $this->menuItems = array_values($this->menuItems);
     }
 
-    public function addMenuItem($index)
+    public function addMenuItem($index): void
     {
         $this->menuItems[$index]['items'][] = [
             'label' => '',
@@ -243,15 +253,15 @@ class VisualEditor extends Component
         ];
     }
 
-    public function removeMenuItem($menuIndex, $itemIndex)
+    public function removeMenuItem($menuIndex, $itemIndex): void
     {
         unset($this->menuItems[$menuIndex]['items'][$itemIndex]);
         $this->menuItems[$menuIndex]['items'] = array_values($this->menuItems[$menuIndex]['items']);
     }
 
-    public function saveMenuItems()
+    public function saveMenuItems(): void
     {
-        foreach ($this->menuItems as $index => $menu) {
+        foreach ($this->menuItems as $menu) {
             $menuName = $menu['menuName'];
 
             foreach ($menu['items'] as $item) {
@@ -274,7 +284,7 @@ class VisualEditor extends Component
     }
 
     // Header settings
-    public function saveHeaderSettings()
+    public function saveHeaderSettings(): void
     {
         $column = [
             'numberOfColumns' => $this->headerSettings['numberOfColumns'],
@@ -291,7 +301,7 @@ class VisualEditor extends Component
     }
 
     // Footer settings
-    public function saveFooterSettings()
+    public function saveFooterSettings(): void
     {
         $column = [
             'numberOfColumns' => $this->footerSettings['numberOfColumns'],
@@ -304,7 +314,7 @@ class VisualEditor extends Component
         $this->footerSettings[] = $column;
     }
 
-    public function addCardContent()
+    public function addCardContent(): void
     {
         $this->cardContent[] = [
             'cardImage'      => '',
@@ -318,9 +328,9 @@ class VisualEditor extends Component
         ];
     }
 
-    public function saveCardContent()
+    public function saveCardContent(): void
     {
-        $this->cardContent = array_map(function ($item) {
+        $this->cardContent = array_map(static function (array $item): array {
             return [
                 'cardImage'      => $item['cardImage'],
                 'cardTitle'      => $item['cardTitle'],
@@ -334,14 +344,14 @@ class VisualEditor extends Component
         }, $this->cardContent);
     }
 
-    public function removeCardContent($itemIndex)
+    public function removeCardContent($itemIndex): void
     {
         unset($this->cardContent[$itemIndex]);
         $this->cardContent = array_values($this->cardContent);
     }
 
     // accordion items manipulation
-    public function addAccordionItem()
+    public function addAccordionItem(): void
     {
         $this->components['accordionItems'][] = [
             'title'   => '',
@@ -349,9 +359,9 @@ class VisualEditor extends Component
         ];
     }
 
-    public function saveAccordionItems()
+    public function saveAccordionItems(): void
     {
-        $this->components['accordionItems'] = array_map(function ($item) {
+        $this->components['accordionItems'] = array_map(static function (array $item): array {
             return [
                 'title'   => $item['title'],
                 'content' => $item['content'],
@@ -359,14 +369,14 @@ class VisualEditor extends Component
         }, $this->components['accordionItems']);
     }
 
-    public function removeAccordionItem($itemIndex)
+    public function removeAccordionItem($itemIndex): void
     {
         unset($this->components['accordionItems'][$itemIndex]);
         $this->components['accordionItems'] = array_values($this->components['accordionItems']);
     }
 
     // tab items manipulation
-    public function addTabItem()
+    public function addTabItem(): void
     {
         $this->components['tabItems'][] = [
             'title'   => '',
@@ -374,9 +384,9 @@ class VisualEditor extends Component
         ];
     }
 
-    public function saveTabItems()
+    public function saveTabItems(): void
     {
-        $this->components['tabItems'] = array_map(function ($item) {
+        $this->components['tabItems'] = array_map(static function (array $item): array {
             return [
                 'title'   => $item['title'],
                 'content' => $item['content'],
@@ -384,28 +394,28 @@ class VisualEditor extends Component
         }, $this->components['tabItems']);
     }
 
-    public function removeTabItem($itemIndex)
+    public function removeTabItem($itemIndex): void
     {
         unset($this->components['tabItems'][$itemIndex]);
         $this->components['tabItems'] = array_values($this->components['tabItems']);
     }
 
     // list items manipulation
-    public function addListItem()
+    public function addListItem(): void
     {
         $this->components['listItems'][] = [
             'itemText' => '',
         ];
     }
 
-    public function saveListItems()
+    public function saveListItems(): void
     {
-        $this->listItems = array_map(function ($item) {
+        $this->listItems = array_map(static function (array $item): array {
             return ['itemText' => $item['itemText']];
         }, $this->components['listItems']);
     }
 
-    public function removeListItem($index)
+    public function removeListItem($index): void
     {
         unset($this->components['listItems'][$index]);
         $this->components['listItems'] = array_values($this->components['listItems']);
@@ -429,18 +439,18 @@ class VisualEditor extends Component
         unset($this->textContent[$itemIndex]);
     }
 
-    public function removeLogo()
+    public function removeLogo(): void
     {
         $this->logoUrl = '';
         unset($this->logoUrl);
     }
 
-    public function removeColor($index)
+    public function removeColor($index): void
     {
         unset($this->themeColor[$index]);
     }
 
-    public function createPage()
+    public function createPage(): void
     {
         // Convert the components data to a string
         $components = json_encode([
@@ -470,7 +480,7 @@ class VisualEditor extends Component
         File::put(resource_path('views/pages/'.$name.'.blade.php'), $content);
     }
 
-    public function store()
+    public function store(): void
     {
         // Pagesettings::find(1);
         // $this->menuWidget =

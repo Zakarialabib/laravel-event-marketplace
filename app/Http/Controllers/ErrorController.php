@@ -28,7 +28,7 @@ class ErrorController extends Controller
             ]);
 
             return redirect($redirect->new_url, $redirect->http_status_code);
-        } catch (Throwable $th) {
+        } catch (Throwable) {
             return redirect(url('/'));
         }
     }

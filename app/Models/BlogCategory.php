@@ -12,13 +12,14 @@ class BlogCategory extends Model
 {
     use HasAdvancedFilter;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'title',
         'language_id',
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -48,8 +49,8 @@ class BlogCategory extends Model
         return $this->belongsTo(Language::class);
     }
 
-    public function setSlugAttribute($value)
+    public function setSlugAttribute($value): void
     {
-        $this->attributes['slug'] = str_replace(' ', '-', $value);
+        $this->attributes['slug'] = str_replace(' ', '-', (string) $value);
     }
 }

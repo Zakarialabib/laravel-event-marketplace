@@ -12,14 +12,14 @@ class ApiToken extends Component
 
     public $authenticated = false;
 
-    public function createToken()
+    public function createToken(): void
     {
         $this->resetErrorBag();
 
         $this->token = auth()->user()->createToken('api-token')->plainTextToken;
     }
 
-    public function deleteToken()
+    public function deleteToken(): void
     {
         auth()->user()->tokens()->delete();
 

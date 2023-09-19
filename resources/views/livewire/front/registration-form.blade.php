@@ -216,7 +216,7 @@
                                         <input type="checkbox" wire:model="selectedServices" name="services[]"
                                             id="service-{{ $service->id }}" value="{{ $service->id }}"
                                             class="mr-2">
-                                        {{ $service->name }} ({{ Helpers::format_currency($service->price) }})
+                                        {{ $service->name }} ({{ formatCurrency($service->price) }})
                                     </label>
                                 </li>
                             @endforeach

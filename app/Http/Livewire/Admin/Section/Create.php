@@ -44,12 +44,12 @@ class Create extends Component
         'section.link'           => ['nullable'],
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
 
-    public function createSection()
+    public function createSection(): void
     {
         $this->resetErrorBag();
 
@@ -72,7 +72,7 @@ class Create extends Component
         return Language::select('name', 'id')->get();
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
 

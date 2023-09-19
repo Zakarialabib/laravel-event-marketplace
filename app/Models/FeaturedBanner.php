@@ -12,15 +12,16 @@ class FeaturedBanner extends Model
 {
     use HasAdvancedFilter;
 
-    public const StatusInactive = 0;
+    final public const StatusInactive = 0;
 
-    public const StatusActive = 1;
+    final public const StatusActive = 1;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id', 'title', 'status', 'featured', 'language_id',
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [

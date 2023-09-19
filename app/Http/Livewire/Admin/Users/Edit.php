@@ -32,7 +32,7 @@ class Edit extends Component
         'user.address'  => 'nullable',
     ];
 
-    public function editModal($user)
+    public function editModal($user): void
     {
         // abort_if(Gate::denies('user_edit'), 403);
 
@@ -45,7 +45,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

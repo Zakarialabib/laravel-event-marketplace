@@ -23,6 +23,7 @@ class Create extends Component
     public $brand;
 
     public $images;
+
     public $listeners = [
         'createModal',
         'imagesUpdated' => 'onImagesUpdated',

@@ -13,7 +13,7 @@ class RegistrationObserver
     /** Handle the Registration "created" event. */
     public function created(Registration $registration): void
     {
-        $admin = User::whereHas('roles', function ($query) {
+        $admin = User::whereHas('roles', static function ($query): void {
             $query->where('name', 'admin');
         })->first();
 

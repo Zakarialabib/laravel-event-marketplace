@@ -39,7 +39,7 @@ class Create extends Component
         'featuredbanner.embeded_video' => ['nullable'],
     ];
 
-    public function mount(FeaturedBanner $featuredbanner)
+    public function mount(FeaturedBanner $featuredbanner): void
     {
         $this->featuredbanner = $featuredbanner;
         $this->initListsForFields();
@@ -52,7 +52,7 @@ class Create extends Component
         return view('livewire.admin.featured-banner.create');
     }
 
-    public function createFeaturedBanner()
+    public function createFeaturedBanner(): void
     {
         $this->resetErrorBag();
 
@@ -61,7 +61,7 @@ class Create extends Component
         $this->createFeaturedBanner = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 
@@ -80,7 +80,7 @@ class Create extends Component
         $this->createFeaturedBanner = false;
     }
 
-    public function initListsForFields()
+    public function initListsForFields(): void
     {
         $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
         $this->listsForFields['products'] = Product::pluck('name', 'id')->toArray();

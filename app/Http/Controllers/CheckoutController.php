@@ -17,11 +17,8 @@ class CheckoutController extends Controller
 {
     use CmiGateway;
 
-    public $order;
-
-    public function __construct($order = null)
+    public function __construct(public $order = null)
     {
-        $this->order = $order;
     }
 
     public function initiateCmiPayment($id)
@@ -43,6 +40,7 @@ class CheckoutController extends Controller
         $cmiClient->setCurrency('504');
         $cmiClient->setDescription('ceci est un exemple à utiliser');
         $cmiClient->setSessionTimeout(1800);
+
         $otherData = [
             'billToStreet1' => $registration->participant->address,
             'billToCity'    => $registration->participant->city,

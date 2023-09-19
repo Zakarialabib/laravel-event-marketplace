@@ -24,7 +24,7 @@ class Edit extends Component
 
     // public $images;
 
-    public $category_id = null;
+    public $category_id;
 
     public $listeners = [
         'editModal',
@@ -41,7 +41,7 @@ class Edit extends Component
         return Category::select('name', 'id')->get();
     }
 
-    public function editModal($raceLocation)
+    public function editModal($raceLocation): void
     {
         //abort_if(Gate::denies('raceLocation_edit'), 403);
 
@@ -54,7 +54,7 @@ class Edit extends Component
         $this->editModal = true;
     }
 
-    public function update()
+    public function update(): void
     {
         //abort_if(Gate::denies('raceLocation_edit'), 403);
 

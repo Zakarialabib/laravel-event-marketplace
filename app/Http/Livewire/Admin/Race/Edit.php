@@ -84,7 +84,7 @@ class Edit extends Component
 
     ];
 
-    public function updatedDescription($value)
+    public function updatedDescription($value): void
     {
         $this->description = $value;
     }
@@ -94,18 +94,18 @@ class Edit extends Component
         $this->images = $images;
     }
 
-    public function addFeature()
+    public function addFeature(): void
     {
         $this->features[] = '';
     }
 
-    public function removeFeature($index)
+    public function removeFeature($index): void
     {
         unset($this->features[$index]);
         $this->features = array_values($this->features);
     }
 
-    public function addOption()
+    public function addOption(): void
     {
         $this->options[] = [
             'type'  => '',
@@ -113,13 +113,13 @@ class Edit extends Component
         ];
     }
 
-    public function removeOption($index)
+    public function removeOption($index): void
     {
         unset($this->options[$index]);
         $this->options = array_values($this->options);
     }
 
-    public function addSponsor()
+    public function addSponsor(): void
     {
         $this->sponsors[] = [
             'name'  => '',
@@ -128,13 +128,13 @@ class Edit extends Component
         ];
     }
 
-    public function removeSponsor($index)
+    public function removeSponsor($index): void
     {
         unset($this->sponsors[$index]);
         $this->sponsors = array_values($this->sponsors);
     }
 
-    public function addSocialMedia()
+    public function addSocialMedia(): void
     {
         $this->social_media[] = [
             'name'  => '',
@@ -142,13 +142,13 @@ class Edit extends Component
         ];
     }
 
-    public function removeSocialMedia($index)
+    public function removeSocialMedia($index): void
     {
         unset($this->social_media[$index]);
         $this->social_media = array_values($this->social_media);
     }
 
-    public function addCourse()
+    public function addCourse(): void
     {
         $this->courses[] = [
             'name'     => '',
@@ -158,13 +158,13 @@ class Edit extends Component
         ];
     }
 
-    public function removeCourse($index)
+    public function removeCourse($index): void
     {
         unset($this->courses[$index]);
         $this->courses = array_values($this->courses);
     }
 
-    public function addRaceDate()
+    public function addRaceDate(): void
     {
         $this->calendar[] = [
             'date'   => '',
@@ -178,18 +178,18 @@ class Edit extends Component
         ];
     }
 
-    public function removeRaceDate($date)
+    public function removeRaceDate($date): void
     {
         unset($this->calendar[$date]);
     }
 
-    public function removeRaceEvent($date, $eventIndex)
+    public function removeRaceEvent($date, $eventIndex): void
     {
         unset($this->calendar[$date]['events'][$eventIndex]);
         $this->calendar[$date]['events'] = array_values($this->calendar[$date]['events']);
     }
 
-    public function addRaceEvent($date)
+    public function addRaceEvent($date): void
     {
         $this->calendar[$date]['events'][] = [
             'start_time' => '',
@@ -203,7 +203,7 @@ class Edit extends Component
         $this->images = $this->race->getMedia('local_files');
     }
 
-    public function mount($name)
+    public function mount($name): void
     {
         $this->resetErrorBag();
 
@@ -213,11 +213,11 @@ class Edit extends Component
 
         $this->description = $this->race->description;
 
-        $this->calendar = json_decode($this->race->calendar, true) ?? [];
-        $this->social_media = json_decode($this->race->social_media, true) ?? [];
-        $this->features = json_decode($this->race->features, true) ?? [];
-        $this->courses = json_decode($this->race->course, true) ?? [];
-        $this->sponsors = json_decode($this->race->sponsors, true) ?? [];
+        $this->calendar = json_decode((string) $this->race->calendar, true) ?? [];
+        $this->social_media = json_decode((string) $this->race->social_media, true) ?? [];
+        $this->features = json_decode((string) $this->race->features, true) ?? [];
+        $this->courses = json_decode((string) $this->race->course, true) ?? [];
+        $this->sponsors = json_decode((string) $this->race->sponsors, true) ?? [];
         $this->options = $this->race->options ?? [];
 
         $this->images = $this->race->getMedia('local_files');
@@ -234,6 +234,7 @@ class Edit extends Component
                 }
             }
         }
+
         // dd($this->images);
 
         $this->race->description = $this->description;

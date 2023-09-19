@@ -22,40 +22,48 @@ class Index extends Component
     use LivewireAlert;
 
     public int $perPage;
+
     public array $orderable;
+
     public string $search = '';
+
     public array $selected = [];
+
     public array $paginationOptions;
+
     public $importModal;
+
     public $file;
+
     public $raceType;
+
     protected $queryString = [
         'search'        => ['except' => ''],
         'sortBy'        => ['except' => 'id'],
         'sortDirection' => ['except' => 'desc'],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function updatedRaceType()
+    public function updatedRaceType(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
@@ -70,7 +78,7 @@ class Index extends Component
         return (new RaceResultsExport())->download('race_results_exports.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
-    public function importModal()
+    public function importModal(): void
     {
         $this->resetErrorBag();
 
@@ -79,7 +87,7 @@ class Index extends Component
         $this->importModal = true;
     }
 
-    public function importResults()
+    public function importResults(): void
     {
         // abort_if(Gate::denies('race_result_access'), 403);
 
@@ -99,7 +107,7 @@ class Index extends Component
         $this->importModal = false;
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -119,7 +127,7 @@ class Index extends Component
 
         $race_results = $query->paginate($this->perPage);
 
-        return view('livewire.admin.race-result.index', compact('race_results'))
+        return view('livewire.admin.race-result.index', ['race_results' => $race_results])
             ->extends('layouts.dashboard');
     }
 }

@@ -11,19 +11,24 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class MediaLibrary extends Component
 {
     public $model;
+
     public $editModal = false;
+
     public $media;
+
     public $models;
+
     public $mediaItems;
+
     public $image;
 
-    public function editMedia($id)
+    public function editMedia($id): void
     {
         $this->media = Media::findOrFail($id);
         $this->editModal = true;
     }
 
-    public function deleteMedia($id)
+    public function deleteMedia($id): void
     {
         $media = Media::findOrFail($id);
         Storage::disk($media->disk)->delete($media->getPath());
@@ -32,7 +37,7 @@ class MediaLibrary extends Component
         $this->refreshMediaItems();
     }
 
-    public function mount($model = null)
+    public function mount($model = null): void
     {
         $this->model = $model ?? 'Race';
         $this->models = $this->getModels();
@@ -44,7 +49,7 @@ class MediaLibrary extends Component
         return view('livewire.media-library');
     }
 
-    public function updatedModel($model)
+    public function updatedModel($model): void
     {
         $this->model = $model;
         $this->refreshMediaItems();
@@ -52,37 +57,27 @@ class MediaLibrary extends Component
 
     protected function refreshMediaItems()
     {
-        switch ($this->model) {
-            case 'Race':
-                $this->mediaItems = Media::where('model_type', 'App\Models\Race')
-                    ->where('collection_name', 'local_files')
-                    ->get();
-
-                break;
-            case 'Race Location':
-                $this->mediaItems = Media::where('model_type', 'App\Models\RaceLocation')
-                    ->where('collection_name', 'local_files')
-                    ->get();
-
-                break;
-                // Add more cases for other models as needed
-            default:
-                $this->mediaItems = collect();
-
-                break;
-        }
+        $this->mediaItems = match ($this->model) {
+            'Race' => Media::where('model_type', \App\Models\Race::class)
+                ->where('collection_name', 'local_files')
+                ->get(),
+            'Race Location' => Media::where('model_type', \App\Models\RaceLocation::class)
+                ->where('collection_name', 'local_files')
+                ->get(),
+            default => collect(),
+        };
     }
 
-    protected function getModels()
+    protected function getModels(): array
     {
         return [
-            'App\Models\Race'         => 'Race',
-            'App\Models\RaceLocation' => 'Race Location',
+            \App\Models\Race::class         => 'Race',
+            \App\Models\RaceLocation::class => 'Race Location',
             // Add more models as needed
         ];
     }
 
-    public function setActiveImage($index)
+    public function setActiveImage($index): void
     {
         $media = $this->mediaItems[$index - 1];
         $this->image = $media->getUrl();

@@ -40,7 +40,7 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
@@ -79,6 +79,6 @@ class Index extends Component
 
         $orderforms = $query->paginate($this->perPage);
 
-        return view('livewire.admin.order-form.index', compact('orderforms'))->extends('layouts.dashboard');
+        return view('livewire.admin.order-form.index', ['orderforms' => $orderforms])->extends('layouts.dashboard');
     }
 }

@@ -17,7 +17,7 @@ class RaceResult extends Model
     use HasAdvancedFilter;
     use HasGlobalDate;
 
-    public const ATTRIBUTES = [
+    final public const ATTRIBUTES = [
         'id',
         'race_id',
         'participant_id',
@@ -33,6 +33,7 @@ class RaceResult extends Model
     ];
 
     public $orderable = self::ATTRIBUTES;
+
     public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
@@ -83,7 +84,7 @@ class RaceResult extends Model
     // Scope to filter race results by gender
     public function scopeByGender($query, $gender)
     {
-        return $query->whereHas('participant', function ($q) use ($gender) {
+        return $query->whereHas('participant', static function ($q) use ($gender): void {
             $q->where('gender', $gender);
         });
     }

@@ -17,7 +17,7 @@ class FrontController extends Controller
     {
         $product = Product::where('slug', $slug)->first() ?? abort(404);
 
-        return view('front.product', compact('product'));
+        return view('front.product', ['product' => $product]);
     }
 
     public function subcategories()
@@ -45,7 +45,7 @@ class FrontController extends Controller
     {
         $page = Page::where('slug', $slug)->first() ?? abort(404);
 
-        return view('front.dynamic-page', compact('page'));
+        return view('front.dynamic-page', ['page' => $page]);
     }
 
     public function generateSitemaps()
@@ -56,8 +56,8 @@ class FrontController extends Controller
             Log::info('Sitemap generated successfully!');
 
             return back();
-        } catch (Throwable $th) {
-            Log::info('Sitemap generation failed!', [$th->getMessage()]);
+        } catch (Throwable $throwable) {
+            Log::info('Sitemap generation failed!', [$throwable->getMessage()]);
 
             return back();
         }

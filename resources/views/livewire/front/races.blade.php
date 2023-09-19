@@ -28,7 +28,7 @@
                         <select name="location_id" id="location_id" wire:model="raceLocation_id"
                             class="bg-transparent border border-gray-200 hover:border-gray-300 rounded-4xl">
                             <option value=""></option>
-                            @foreach (Helpers::getActiveRaceLocations() as $location)
+                            @foreach (\App\Helpers::getActiveRaceLocations() as $location)
                                 <option value="{{ $location->id }}">
                                     {{ $location->name }}
                                 </option>
@@ -41,7 +41,7 @@
                         <select name="category_id" id="category_id" wire:model="category_id"
                             class="bg-transparent border border-gray-200 hover:border-gray-300 rounded-4xl">
                             <option value=""></option>
-                            @foreach (Helpers::getActiveCategories() as $category)
+                            @foreach (\App\Helpers::getActiveCategories() as $category)
                                 <option value="{{ $category->id }}">
                                     {{ $category->name }}
                                 </option>

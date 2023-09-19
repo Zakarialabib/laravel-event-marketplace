@@ -7,12 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        @yield('title') || {{ Helpers::settings('site_title') }}
+        @yield('title') || {{ settings('site_title') }}
     </title>
     <!-- Styles -->
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('images/' . Helpers::settings('site_favicon')) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/' . settings('site_favicon')) }}" type="image/x-icon">
 
     @include('partials.front.css')
 

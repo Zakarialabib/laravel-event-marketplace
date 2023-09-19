@@ -59,7 +59,7 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
@@ -105,7 +105,7 @@ class Index extends Component
 
         $brands = $query->paginate($this->perPage);
 
-        return view('livewire.admin.brands.index', compact('brands'))->extends('layouts.dashboard');
+        return view('livewire.admin.brands.index', ['brands' => $brands])->extends('layouts.dashboard');
     }
 
     public function showModal(Brand $brand): void

@@ -12,7 +12,7 @@ class Verify extends Component
 {
     use LivewireAlert;
 
-    public function resend()
+    public function resend(): void
     {
         if (Auth::user()->hasVerifiedEmail()) {
             redirect(route('home'));

@@ -101,7 +101,7 @@
                         </button>
                     </div>
                     <ul x-show="openCategory">
-                        @foreach (Helpers::getActiveCategories() as $category)
+                        @foreach (\App\Helpers::getActiveCategories() as $category)
                             <li class="mb-2">
                                 <button type="button" wire:click="filterProducts('category', {{ $category->id }})">
                                     <span class="inline-block px-4 py-2 text-sm font-bold font-heading text-blue-300">

@@ -128,12 +128,12 @@
                     <tr>
                         <td><input type="checkbox" value="{{ $race->id }}" wire:model="selected"></td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $race->name }}</td>
-                        <td class="py-2 px-4 border-b border-gray-200">{{ Helpers::format_date($race->created_at) }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ formatDate($race->created_at) }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">
                             {{ \App\Enums\RaceStatus::getLabel($race->status)}}
                         </td>
                         <td class="py-2 px-4 border-b border-gray-200">
-                            {{ Helpers::format_date($race->registration_deadline) }}</td>
+                            {{ formatDate($race->registration_deadline) }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">
                             {{ $race->getNumberOfParticipantsAttribute() }}
                         </td>

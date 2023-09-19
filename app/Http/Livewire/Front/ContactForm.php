@@ -16,9 +16,13 @@ class ContactForm extends Component
     use LivewireAlert;
 
     public $contact;
+
     public $name;
+
     public $email;
+
     public $phone_number;
+
     public $message;
 
     protected $listeners = [
@@ -32,7 +36,7 @@ class ContactForm extends Component
         'contact.message'      => 'required',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->contact = new Contact();
     }
@@ -42,7 +46,7 @@ class ContactForm extends Component
         return view('livewire.front.contact-form');
     }
 
-    public function submit()
+    public function submit(): void
     {
         $this->validate();
 
@@ -50,7 +54,7 @@ class ContactForm extends Component
 
         $this->alert('success', __('Your Message is sent succesfully.'));
 
-        $admin = User::whereHas('roles', function ($query) {
+        $admin = User::whereHas('roles', static function ($query): void {
             $query->where('name', 'admin');
         })->first();
 

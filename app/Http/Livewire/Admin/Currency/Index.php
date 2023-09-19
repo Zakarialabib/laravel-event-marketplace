@@ -61,27 +61,27 @@ class Index extends Component
         ],
     ];
 
-    public function getSelectedCountProperty()
+    public function getSelectedCountProperty(): int
     {
         return count($this->selected);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage()
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
 
-    public function resetSelected()
+    public function resetSelected(): void
     {
         $this->selected = [];
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->sortBy = 'id';
         $this->sortDirection = 'desc';
@@ -102,10 +102,10 @@ class Index extends Component
 
         $currencies = $query->paginate($this->perPage);
 
-        return view('livewire.currency.index', compact('currencies'));
+        return view('livewire.currency.index', ['currencies' => $currencies]);
     }
 
-    public function showModal(Currency $currency)
+    public function showModal(Currency $currency): void
     {
         abort_if(Gate::denies('currency_show'), 403);
 
@@ -114,7 +114,7 @@ class Index extends Component
         $this->showModal = true;
     }
 
-    public function editModal(Currency $currency)
+    public function editModal(Currency $currency): void
     {
         abort_if(Gate::denies('currency_edit'), 403);
 
@@ -127,7 +127,7 @@ class Index extends Component
         $this->editModal = true;
     }
 
-    public function update(Currency $currency)
+    public function update(Currency $currency): void
     {
         abort_if(Gate::denies('currency_edit'), 403);
 
@@ -140,7 +140,7 @@ class Index extends Component
         $this->alert('success', __('Currency updated successfully!'));
     }
 
-    public function delete(Currency $currency)
+    public function delete(Currency $currency): void
     {
         abort_if(Gate::denies('currency_delete'), 403);
 

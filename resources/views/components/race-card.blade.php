@@ -52,7 +52,7 @@
                             <i class="fa fa-money-bill-wave"></i>
                         </span>
                         <span
-                            class="text-base md:text-lg capitalize">{{ Helpers::format_currency($race->price) }}</span>
+                            class="text-base md:text-lg capitalize">{{ formatCurrency($race->price) }}</span>
                     </p>
 
                     @if ($race->course)
@@ -153,7 +153,7 @@
             <ul class="pt-6 grid grid-cols-2 gap-4 justify-center items-center list-none py-6">
                 <li>
                     <span class="text-slate-400">{{ __('Price') }}</span>
-                    <p class="text-lg font-medium">{{ Helpers::format_currency($race->price) }}</p>
+                    <p class="text-lg font-medium">{{ formatCurrency($race->price) }}</p>
                 </li>
                 <li>
                     <a href="{{ route('front.raceDetails', $race->slug) }}"

@@ -6,8 +6,7 @@ namespace App\Traits;
 
 trait ForModels
 {
-    /** @param mixed $selectedModels */
-    public function forModels($selectedModels)
+    public function forModels(mixed $selectedModels)
     {
         $this->models = $selectedModels;
 
