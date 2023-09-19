@@ -14,7 +14,6 @@ return new class () extends Migration {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug');
-            $table->date('date');
             $table->longText('description')->nullable();
             $table->json('content')->nullable();
             $table->foreignId('race_location_id')->constrained('race_locations');

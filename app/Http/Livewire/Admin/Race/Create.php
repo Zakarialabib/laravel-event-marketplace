@@ -49,7 +49,6 @@ class Create extends Component
     public array $rules = [
 
         'race.name'                  => ['required', 'string', 'max:255'],
-        'race.date'                  => ['required', 'date'],
         'race.price'                 => ['required', 'numeric', 'max:2147483647'],
         'race.race_location_id'      => ['required', 'integer'],
         'race.category_id'           => ['required', 'integer'],
@@ -154,9 +153,7 @@ class Create extends Component
 
         if ($this->images) {
             foreach ($this->images as $image) {
-                if ($image instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
-                    $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
-                }
+                $this->race->addMedia($image)->toMediaCollection('local_files');
             }
         }
 

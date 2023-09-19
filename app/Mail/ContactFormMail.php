@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Mail;
 
-use App\Support\SettingsHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -39,8 +38,8 @@ class ContactFormMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(SettingsHelper::settings('company_email_address'), SettingsHelper::settings('site_title')),
-            subject: 'New Contact from '.$this->contact->name.' - '.SettingsHelper::settings('site_title'),
+            from: new Address(settings('company_email_address'), settings('site_title')),
+            subject: 'New Contact from '.$this->contact->name.' - '.settings('site_title'),
         );
     }
 }

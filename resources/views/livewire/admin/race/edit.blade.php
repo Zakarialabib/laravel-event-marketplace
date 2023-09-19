@@ -82,11 +82,6 @@
                     <x-input-error :messages="$errors->get('price')" for="price" class="mt-2" />
                 </div>
                 <div class="px-3 mb-2">
-                    <x-label for="date" :value="__('Date')" required />
-                    <x-date-picker id="date_id" picker="date" required name="date_id" wire:model="race.date" />
-                    <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
-                </div>
-                <div class="px-3 mb-2">
                     <x-label for="start_registration" :value="__('Registration starts at')" required />
                     <x-date-picker id="start_registration_id" picker="date" required name="start_registration_id"
                         wire:model="race.start_registration" />
@@ -123,7 +118,7 @@
                     <x-input-error :messages="$errors->get('race.number_of_racers')" for="number_of_racers" class="mt-2" />
                 </div>
 
-                <div class="px-3 mb-2">
+                {{-- <div class="px-3 mb-2">
                     <x-checkbox-input label="{{ __('Is this the first year for your race?') }}"
                         model="{{ $race->first_year }}">
                         <x-input wire:model="race.first_year" type="text" id="first_year" class="w-full block"
@@ -136,7 +131,7 @@
                     <x-input id="last_year_url" class="block mt-1 w-full" type="text" name="last_year_url"
                         wire:model="race.last_year_url" required />
                     <x-input-error :messages="$errors->get('race.last_year_url')" for="last_year_url" class="mt-2" />
-                </div>
+                </div> --}}
 
                 <div class="col-span-full px-2">
                     <div class="space-y-4 flex flex-col items-center justify-center my-4">
@@ -190,8 +185,19 @@
             </div>
 
             <div class="w-full px-4 my-2">
-                <x-label for="images" :value="__('Images')" />
-                @livewire('multiple-uploads')
+                <x-media-upload title="{{ __('Images') }}" name="images" wire:model="images"
+                    :file="$this->race->getMedia('local_files')" multiple types="PNG / JPEG / WEBP" />
+                @if ($images)
+                    <ul class="my-4 grid grid-cols-6 gap-4">
+                        @foreach ($images as $image)
+                            <li
+                                class="relative group col-span-1 h-20 border border-secondary-300 dark:border-secondary-700 rounded-md overflow-hidden">
+                                <img class="h-full w-full object-cover" src="{{ $image->temporaryUrl() }}"
+                                    alt="" />
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
 
             <div x-data="{ tab: 'socialMedia' }" class="flex h-auto bg-gray-100">

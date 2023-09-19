@@ -13,15 +13,26 @@ use App\Models\Slider;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use App\Enums\PageType;
+use App\Models\Category;
 
 class Index extends Component
 {
+    public $category_name;
+
     public function getRacesProperty(): Collection
     {
         return Race::active()
-            ->orderBy('date', 'desc')
+            ->when($this->category_name, function ($query): void {
+                $query->where('category_id', Category::where('name', $this->category_name)->first()->id);
+            })
+            ->orderBy('start_registration', 'desc')
             ->limit(4)
             ->get();
+    }
+
+    public function filterType($value): void
+    {
+        $this->category_name = $value;
     }
 
     public function getPartnersProperty(): Collection

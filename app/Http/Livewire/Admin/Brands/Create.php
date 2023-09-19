@@ -64,11 +64,7 @@ class Create extends Component
         $this->brand->slug = Str::slug($this->brand->name);
 
         if ($this->images) {
-            $imageName = Str::slug($this->brand->name).'.'.$this->brand->extension();
-
             $this->brand->addMedia($this->images)->toMediaCollection('local_files');
-
-            $this->brand->images = $imageName;
         }
 
         $this->brand->save();

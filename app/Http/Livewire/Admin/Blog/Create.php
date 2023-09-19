@@ -73,11 +73,7 @@ class Create extends Component
         $this->blog->language_id = 1;
 
         if ($this->images) {
-            $imageName = Str::slug($this->blog->name).'.'.$this->blog->extension();
-
             $this->blog->addMedia($this->images)->toMediaCollection('local_files');
-
-            $this->blog->images = $imageName;
         }
 
         $this->blog->description = $this->description;

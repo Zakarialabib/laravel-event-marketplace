@@ -26,7 +26,7 @@ class BlogFactory extends Factory
             'slug'             => $this->faker->slug,
             'description'      => $this->faker->paragraph,
             'meta_title'       => $this->faker->sentence,
-            'meta_description' => $this->faker->paragraph(1),
+            'meta_description' => $this->faker->paragraph,
             'language_id'      => 1,
             'featured'         => true,
             'status'           => true,

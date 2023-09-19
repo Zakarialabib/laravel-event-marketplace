@@ -22,7 +22,6 @@ class RaceSeeder extends Seeder
             'id'                    => Str::uuid(),
             'name'                  => 'Triathlon Dar Bouazza',
             'description'           => 'Le Triathlon Dar Bouazza est un événement sportif qui se déroule à Dar Bouazza, Casablanca, Maroc. Il s\'agit d\'un triathlon de distance olympique (1,5 km de natation, 40 km de vélo et 10 km de course à pied) qui se déroule sur 3 jours.',
-            'date'                  => '2023-10-10',
             'slug'                  => 'triathlon-dar-bouazza-casablanca',
             'race_location_id'      => 1,
             'category_id'           => 3, // Assuming 'Triathlon' category has an ID of 3

@@ -20,6 +20,7 @@ use App\Observers\ContactObserver;
 use App\Observers\OrderFormObserver;
 use App\Observers\SubscriberObserver;
 use App\Observers\RegistrationObserver;
+use Illuminate\Support\Facades\Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('languages', $this->getLanguages());
 
-        Factory::macro('getImageUrl', static function (int $width, int $height): string {
+        Factory::macro('getImageUrl', function (int $width, int $height): string {
             return sprintf(
                 'https://picsum.photos/%d/%d',
                 $width,
@@ -55,12 +56,16 @@ class AppServiceProvider extends ServiceProvider
 
     private function getLanguages()
     {
-        if ( ! Schema::hasTable('languages')) {
-            return [];
-        }
+        if ( ! app()->runningInConsole()) {
+            if ( ! Schema::hasTable('languages')) {
+                return;
+            }
 
-        return cache()->rememberForever('languages', static function () {
-            return Language::pluck('name', 'code')->toArray();
-        });
+            return cache()->rememberForever('languages', function () {
+                return Session::has('language')
+                    ? Language::pluck('name', 'code')->toArray()
+                    : Language::where('is_default', 1)->first();
+            });
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Front;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Models\OrderForms;
-use App\Support\SettingsHelper;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use App\Mail\OrderFormMail;
@@ -69,7 +68,7 @@ class OrderForm extends Component
 
         $this->alert('success', __('Your order has been sent successfully!'));
 
-        Mail::to(SettingsHelper::settings('company_email_address'))->send(new OrderFormMail($order));
+        Mail::to(settings('company_email_address'))->send(new OrderFormMail($order));
 
         $this->reset(['name', 'phone', 'address', 'message']);
     }

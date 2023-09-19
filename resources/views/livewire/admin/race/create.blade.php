@@ -106,11 +106,6 @@
                     <x-input-error :messages="$errors->get('race.number_of_days')" for="number_of_days" class="mt-2" />
                 </div>
                 <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                    <x-label for="date" :value="__('Date')" required />
-                    <x-date-picker id="race-date" picker="date" name="race-date" required wire:model="race.date" />
-                    <x-input-error :messages="$errors->get('race.date')" for="date" class="mt-2" />
-                </div>
-                <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                     <x-label for="elevation_gain" :value="__('Elevation gain')" required />
                     <x-input id="elevation_gain" class="block mt-1 w-full" type="text" name="elevation_gain"
                         wire:model="race.elevation_gain" />
@@ -122,17 +117,17 @@
                         wire:model="race.number_of_racers" required />
                     <x-input-error :messages="$errors->get('race.number_of_racers')" for="number_of_racers" class="mt-2" />
                 </div>
-                <x-checkbox-input label="{{ __('Is this the first year for your race?') }}" model="first_year">
+                {{-- <x-checkbox-input label="{{ __('Is this the first year for your race?') }}" model="first_year">
                     <x-input wire:model="race.first_year" type="text" id="first_year" class="w-full block"
                         name="first_year" />
                 </x-checkbox-input>
 
                 <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
-                    <x-label for="first_year" :value="__('Last year url')" required />
+                    <x-label for="last_year_url" :value="__('Last year url')" required />
                     <x-input id="last_year_url" class="block mt-1 w-full" type="text" name="last_year_url"
                         wire:model="race.last_year_url" required />
                     <x-input-error :messages="$errors->get('race.last_year_url')" for="last_year_url" class="mt-2" />
-                </div>
+                </div> --}}
             </div>
 
             <div class="flex flex-wrap -mx-2 mb-3">
@@ -143,8 +138,19 @@
                 </div>
 
                 <div class="w-full px-4 my-2">
-                    <x-label for="image" :value="__('Race Image')" />
-                    @livewire('multiple-uploads')
+                    <x-media-upload title="{{ __('Images') }}" name="images" wire:model="images"
+                        multiple types="PNG / JPEG / WEBP" />
+                    @if ($images)
+                        <ul class="my-4 grid grid-cols-6 gap-4">
+                            @foreach ($images as $image)
+                                <li
+                                    class="relative group col-span-1 h-20 border border-secondary-300 dark:border-secondary-700 rounded-md overflow-hidden">
+                                    <img class="h-full w-full object-cover" src="{{ $image->temporaryUrl() }}"
+                                        alt="" />
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
             </div>
 

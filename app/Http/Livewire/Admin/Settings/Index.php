@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Settings;
 
 use App\Models\Settings;
-use App\Support\SettingsHelper;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
@@ -68,27 +67,27 @@ class Index extends Component
 
     public function mount(): void
     {
-        $this->company_name = SettingsHelper::settings('company_name');
-        $this->site_title = SettingsHelper::settings('site_title');
-        $this->company_email_address = SettingsHelper::settings('company_email_address');
-        $this->company_phone = SettingsHelper::settings('company_phone');
-        $this->company_address = SettingsHelper::settings('company_address');
-        $this->siteImage = SettingsHelper::settings('site_logo');
-        $this->favicon = SettingsHelper::settings('site_favicon');
-        $this->breadCrumb = SettingsHelper::settings('site_breadCrumb_img');
-        $this->social_facebook = SettingsHelper::settings('social_facebook');
-        $this->social_twitter = SettingsHelper::settings('social_twitter');
-        $this->social_instagram = SettingsHelper::settings('social_instagram');
-        $this->social_linkedin = SettingsHelper::settings('social_linkedin');
-        $this->social_whatsapp = SettingsHelper::settings('social_whatsapp');
-        $this->head_tags = SettingsHelper::settings('head_tags');
-        $this->body_tags = SettingsHelper::settings('body_tags');
-        $this->seo_meta_title = SettingsHelper::settings('seo_meta_title');
-        $this->seo_meta_description = SettingsHelper::settings('seo_meta_description');
-        $this->footer_copyright_text = SettingsHelper::settings('footer_copyright_text');
-        $this->primary_color = SettingsHelper::settings('primary_color');
-        $this->secondary_color = SettingsHelper::settings('secondary_color');
-        $this->site_maintenance_message = SettingsHelper::settings('site_maintenance_message');
+        $this->company_name = settings('company_name');
+        $this->site_title = settings('site_title');
+        $this->company_email_address = settings('company_email_address');
+        $this->company_phone = settings('company_phone');
+        $this->company_address = settings('company_address');
+        $this->siteImage = settings('site_logo');
+        $this->favicon = settings('site_favicon');
+        $this->breadCrumb = settings('site_breadCrumb_img');
+        $this->social_facebook = settings('social_facebook');
+        $this->social_twitter = settings('social_twitter');
+        $this->social_instagram = settings('social_instagram');
+        $this->social_linkedin = settings('social_linkedin');
+        $this->social_whatsapp = settings('social_whatsapp');
+        $this->head_tags = settings('head_tags');
+        $this->body_tags = settings('body_tags');
+        $this->seo_meta_title = settings('seo_meta_title');
+        $this->seo_meta_description = settings('seo_meta_description');
+        $this->footer_copyright_text = settings('footer_copyright_text');
+        $this->primary_color = settings('primary_color');
+        $this->secondary_color = settings('secondary_color');
+        $this->site_maintenance_message = settings('site_maintenance_message');
     }
 
     public function save(): void

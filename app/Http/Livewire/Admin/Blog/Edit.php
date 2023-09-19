@@ -8,7 +8,6 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -79,11 +78,8 @@ class Edit extends Component
         $this->validate();
 
         if ($this->images) {
-            $imageName = Str::slug($this->blog->name).'.'.$this->blog->extension();
-
+            $this->blog->clearMediaCollection('local_files');
             $this->blog->addMedia($this->images)->toMediaCollection('local_files');
-
-            $this->blog->images = $imageName;
         }
 
         $this->blog->description = $this->description;

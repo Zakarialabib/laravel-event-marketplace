@@ -46,7 +46,7 @@ class Report extends Component
     public function mount(): void
     {
         $this->totalRaces = Race::count();
-        $this->upcomingRaces = Race::where('date', '>', now())->count();
+        $this->upcomingRaces = Race::where('start_registration', '>', now())->count();
         $this->registrations = Race::withCount('orders')->get()->sum('participants_count');
     }
 
@@ -83,11 +83,11 @@ class Report extends Component
         }
 
         if ($this->filters['dateFrom']) {
-            $query->whereDate('date', '>=', $this->filters['dateFrom']);
+            $query->whereDate('start_registration', '>=', $this->filters['dateFrom']);
         }
 
         if ($this->filters['dateTo']) {
-            $query->whereDate('date', '<=', $this->filters['dateTo']);
+            $query->whereDate('end_registration', '<=', $this->filters['dateTo']);
         }
 
         $races = $query->paginate(10);

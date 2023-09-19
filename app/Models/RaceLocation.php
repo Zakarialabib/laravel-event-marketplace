@@ -36,7 +36,6 @@ class RaceLocation extends Model implements HasMedia
         'description',
         'images',
         'options',
-        'date',
         'latitude',
         'longitude',
         'category_id',

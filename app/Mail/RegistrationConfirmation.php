@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Mail;
 
 use App\Models\Participant;
-use App\Support\SettingsHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -39,7 +38,7 @@ class RegistrationConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->participant->name.' Registration Confirmation - '.SettingsHelper::settings('site_title'),
+            subject: $this->participant->name.' Registration Confirmation - '.settings('site_title'),
         );
     }
 }

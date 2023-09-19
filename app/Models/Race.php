@@ -30,9 +30,12 @@ class Race extends Model implements HasMedia
         'id',
         'name',
         'status',
-        'date',
         'race_location_id',
         'category_id',
+        'start_registration',
+        'end_registration',
+        'registration_deadline',
+        'created_at',
     ];
 
     public $orderable = self::ATTRIBUTES;
@@ -42,7 +45,6 @@ class Race extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
-        'date',
         'race_location_id',
         'category_id',
         'start_registration',
@@ -73,7 +75,6 @@ class Race extends Model implements HasMedia
         'calendar'     => 'json',
         'course'       => 'json',
         'satuts'       => RaceStatus::class,
-        'date'         => 'date',
     ];
 
     public function location(): BelongsTo
@@ -126,18 +127,6 @@ class Race extends Model implements HasMedia
             ->format('webp');
     }
 
-    public function getRegistrationOrdersTotalAttribute()
-    {
-        return $this->registrations->sum(static function ($registration) {
-            return $registration->order ? $registration->order->amount : 0;
-        });
-    }
-
-    public function getTotalOrdersAttribute()
-    {
-        return $this->orders->count();
-    }
-
     public function scopeActive($query)
     {
         return $query->where('status', true);
@@ -145,22 +134,32 @@ class Race extends Model implements HasMedia
 
     public function scopeUpcoming($query)
     {
-        return $query->where('date', '>', now());
+        return $query->where('start_registration', '>', now());
     }
 
     public function scopeThisYear($query)
     {
-        return $query->whereYear('date', date('Y'));
+        return $query->whereYear('start_registration', date('Y'));
     }
 
     public function scopeThisMonth($query)
     {
-        return $query->whereYear('date', date('Y'))
-            ->whereMonth('date', date('m'));
+        return $query->whereYear('start_registration', date('Y'))
+            ->whereMonth('start_registration', date('m'));
     }
 
     public function getNumberOfParticipantsAttribute()
     {
         return $this->registrations()->count();
+    }
+
+    public function getRegistrationOrdersTotalAttribute()
+    {
+
+    }
+
+    public function getTotalOrdersAttribute()
+    {
+        return $this->orders()->count();
     }
 }

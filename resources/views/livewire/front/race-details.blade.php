@@ -16,6 +16,7 @@
     <section style="background-image: url({{ $race->getFirstMediaUrl('local_files') }})"
         class="relative w-full pt-36 pb-10 h-auto bg-center bg-no-repeat bg-cover border-b shadow-md border-green-700">
         <div class="absolute inset-0 bg-black opacity-60"></div>
+
         <div class="grid grid-cols-1 text-center mt-10 bottom-0 px-4">
             <div class="text-center z-10 my-2">
                 <h3
@@ -199,7 +200,8 @@
                                             @foreach (json_decode($race->calendar) as $data)
                                                 <tr class="border-b bg-gray-100">
                                                     <td class="text-left py-1 sm:py-2 px-1 sm:px-3 font-bold">
-                                                        {{ $data->date }}<x /td>
+                                                        {{ $data->date }}
+                                                    <td>
                                                     <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
                                                     <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
                                                     <td class="py-1 sm:py-2 px-1 sm:px-3"></td>
@@ -235,6 +237,7 @@
                 </div>
                 <div x-show="activeTab === 'tab1'" id="tab1"
                     class="border border-green-200 p-6 rounded-md mt-5 shadow-sm">
+
                     @if ($race->course)
                         <p
                             class="w-full text-center mb-6 pt-10 text-3xl lg:text-5xl md:text-3xl sm:text-xl font-bold tracking-tight uppercase text-gray-800">
@@ -302,6 +305,30 @@
                         <p class="block text-base md:text-lg text-gray-400">{{ __('No race details available') }}.
                         </p>
                     @endif
+
+                    <section class="flex items-center z-10 relative gap-[30px] lg:gap-[50px">
+                        <div
+                            class="flex-1 w-[80%] grid md:grid-cols-2 sm:sm-grid-cols-1 items-center py-10 transition-all duration-500 relative">
+                            @foreach ($race->getMedia('local_files') as $image)
+                                <div class="relative mx-5">
+                                    <div
+                                        class="rounded-2xl p-0 flex items-center bg-white z-10 relative flex-col lg:gap-[50px] lg:flex-row">
+                                        <a class="block self-stretch flex-1 aspect-[580/421]" href="#"
+                                            tabindex="0">
+                                            <img class="h-full w-full object-cover rounded-2xl lg:rounded-tr-none lg:rounded-br-2xl"
+                                                src="{{ $image->getUrl() }}" alt="{{ $image }}">
+                                        </a>
+                                    </div>
+                                    <div class="w-full h-full z-0 -translate-y-[95%] translate-x-[2%] pt-[45px]">
+                                        <div
+                                            class="w-full h-full rounded-2xl bg-opacity-50 transition-all duration-200 bg-bg-2 group-hover:-translate-x-[10px] group-hover:-translate-y-[10px]">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </section>
+
                 </div>
                 @if ($existingRegistration)
                     <div x-show="activeTab === 'tab2'" id="tab2"

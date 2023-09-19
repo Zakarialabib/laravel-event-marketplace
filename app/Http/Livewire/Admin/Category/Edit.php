@@ -8,7 +8,6 @@ use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Category;
-use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
 
@@ -57,9 +56,9 @@ class Edit extends Component
         $this->validate();
 
         if ($this->images) {
-            $imageName = Str::slug($this->category->name).'.'.$this->images->extension();
+            $this->category->clearMediaCollection('local_files');
+
             $this->category->addMedia($this->images)->toMediaCollection('local_files');
-            $this->category->images = $imageName;
         }
 
         $this->category->save();

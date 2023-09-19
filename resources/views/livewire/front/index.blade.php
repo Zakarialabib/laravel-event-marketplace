@@ -7,12 +7,24 @@
         <section class="w-full mx-auto bg-gray-900 h-auto relative">
             <x-theme.slider :sliders="$this->sliders" />
         </section>
-        <section class="lg:px-10 sm:px-6 lg:py-16 md:py-14">
+        <section class="lg:px-10 sm:px-6 lg:py-16 md:py-14" x-data="{ activeTab: 0 }">
             <h3
-                class="uppercase mb-4 text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-10 text-center">
+                class="uppercase text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl leading-tight font-extrabold text-black cursor-pointer pb-6 text-center">
                 {{ __('Upcoming Races') }}
             </h3>
-            <div class="flex flex-wrap items-center mt-4 space-y-4">
+            <div
+                class="flex items-center border-t-2 border-gray-50 border-dashed gap-5 justify-center flex-wrap mx-auto w-full py-4 sm:w-[80%] xl:w-full mb-6">
+                @foreach (\App\Helpers::getActiveCategories() as $category)
+                    <button type="button" id="{{ $category->name }}"
+                        class="text-gray-600 font-bold bg-gray-50 rounded-full border-transparent transition-all duration-200 cursor-pointer tab-item font-chivo text-sm px-5 py-[10px] text-[14px] leading-[18px] lg:text-[18px] lg:leading-[22px] lg:px-[20px] lg:py-[16px] hover:bg-transparent hover:text-red-900 border-[2px] hover:border-red-900 hover:translate-y-[-2px] 
+                            {{ $category->name == $category_name ? 'bg-red-500 text-white border-red-900' : '' }}"
+                        wire:click="filterType('{{ $category->name }}')">
+                        {{ $category->name }}
+                    </button>
+                @endforeach
+            </div>
+            <div class="flex flex-wrap items-center mt-4 space-y-4" wire:loading.class.delay="opacity-50"
+                wire:target="filterType">
                 @forelse ($this->races as $race)
                     <div class="relative w-full px-4">
                         <x-race-card :race="$race" view="wide" />

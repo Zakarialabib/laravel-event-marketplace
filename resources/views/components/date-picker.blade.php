@@ -2,7 +2,7 @@
     <div class="flatpickr flatpickr-{{ $attributes['id'] }} relative">
         @if (!isset($attributes['required']))
             <div class="absolute inset-y-0 left-0 flex items-center">
-                <button id="clear-{{ $attributes['id'] }}" type="button" class="text-rose-600 w-10 h-full" data-clear>
+                <button id="clear-{{ $attributes['id'] }}" type="button" class="text-red-600 w-10 h-full" data-clear>
                     <i class="far fa-times-circle"></i>
                 </button>
             </div>
@@ -10,7 +10,7 @@
 
         <input type="text"
             placeholder="{{ $attributes['picker'] === 'date' ? 'YYYY-MM-DD' : ($attributes['picker'] === 'time' ? 'HH:MM:SS' : 'YYYY-MM-DD HH:MM:SS') }}"
-            class="py-2 leading-5 bg-white text-gray-700  rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+            class="py-2 pl-10 leading-5 bg-white text-gray-700  rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
             {{ $attributes }} data-input>
     </div>
 </div>

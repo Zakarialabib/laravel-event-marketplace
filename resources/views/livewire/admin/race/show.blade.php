@@ -53,7 +53,23 @@
                                     {{ __('Date') }}
                                 </x-table.th>
                                 <x-table.td>
-                                    {{ formatDate($race?->date) }}
+                                    {{ formatDate($race?->start_registration) }}
+                                </x-table.td>
+                            </x-table.tr>
+                            <x-table.tr>
+                                <x-table.th>
+                                    {{ __('Date') }}
+                                </x-table.th>
+                                <x-table.td>
+                                    {{ formatDate($race?->end_registration) }}
+                                </x-table.td>
+                            </x-table.tr>
+                            <x-table.tr>
+                                <x-table.th>
+                                    {{ __('Date') }}
+                                </x-table.th>
+                                <x-table.td>
+                                    {{ formatDate($race?->registration_deadline) }}
                                 </x-table.td>
                             </x-table.tr>
                             <x-table.tr>
@@ -71,6 +87,19 @@
                                 </x-table.th>
                                 <x-table.td class="whitespace-pre-line">
                                     {!! $race?->description !!}
+                                </x-table.td>
+                            </x-table.tr>
+                            <x-table.tr>
+                                <x-table.th>
+                                    {{ __('Images') }}
+                                </x-table.th>
+                                <x-table.td>
+                                    <div class="flex gap-4">
+                                        @foreach ($race?->getMedia('local_files') as $image)
+                                            <img src="{{ $image->getUrl() }}" alt="{{ $image->getUrl() }}"
+                                                class="rounded shadow w-28 h-28">
+                                        @endforeach
+                                    </div>
                                 </x-table.td>
                             </x-table.tr>
                         </x-table-responsive>

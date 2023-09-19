@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Front;
 use App\Enums\OrderType;
 use App\Enums\Status;
 use App\Models\OrderForms;
-use App\Support\SettingsHelper;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -61,7 +60,7 @@ class SubscribeForm extends Component
 
         $this->alert('success', __('Your order has been sent successfully!'));
 
-        Mail::to(SettingsHelper::settings('company_email_email'))->send(new OrderFormMail($order));
+        Mail::to(settings('company_email_email'))->send(new OrderFormMail($order));
 
         $this->reset();
     }

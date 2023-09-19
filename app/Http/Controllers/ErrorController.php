@@ -18,7 +18,7 @@ class ErrorController extends Controller
             $redirect = Redirect::where('old_url', $request->url())->first();
 
             if ($redirect) {
-                return redirect($redirect->new_url, RedirectionStatus::TEMPORARY_REDIRECT);
+                return redirect($redirect->new_url, '301');
             }
 
             $redirect = Redirect::create([

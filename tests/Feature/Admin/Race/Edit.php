@@ -34,7 +34,6 @@ test('can update race', function () {
     $race->refresh();
 
     expect($race->name)->toBe('New Race Name');
-    expect($race->date)->toBe('2022-01-01');
     expect($race->price)->toBe(100);
     expect($race->race_location_id)->toBe($location->id);
     expect($race->category_id)->toBe($category->id);

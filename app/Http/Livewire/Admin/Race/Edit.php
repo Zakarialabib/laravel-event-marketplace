@@ -42,9 +42,7 @@ class Edit extends Component
     public array $listsForFields = [];
 
     protected $rules = [
-
         'race.name'                  => ['required', 'string', 'max:255'],
-        'race.date'                  => ['required', 'date'],
         'race.price'                 => ['required', 'numeric', 'max:2147483647'],
         'race.race_location_id'      => ['required', 'integer'],
         'race.category_id'           => ['required', 'integer'],
@@ -213,14 +211,13 @@ class Edit extends Component
 
         $this->description = $this->race->description;
 
-        $this->calendar = json_decode((string) $this->race->calendar, true) ?? [];
-        $this->social_media = json_decode((string) $this->race->social_media, true) ?? [];
-        $this->features = json_decode((string) $this->race->features, true) ?? [];
-        $this->courses = json_decode((string) $this->race->course, true) ?? [];
-        $this->sponsors = json_decode((string) $this->race->sponsors, true) ?? [];
-        $this->options = $this->race->options ?? [];
+        $this->calendar = is_string($this->race->calendar) ? json_decode($this->race->calendar, true) : [];
+        $this->social_media = is_string($this->race->social_media) ? json_decode($this->race->social_media, true) : [];
+        $this->features = is_string($this->race->features) ? json_decode($this->race->features, true) : [];
+        $this->courses = is_string($this->race->course) ? json_decode($this->race->course, true) : [];
+        $this->sponsors = is_string($this->race->sponsors) ? json_decode($this->race->sponsors, true) : [];
+        $this->options = is_string($this->race->options) ? json_decode($this->race->options, true) : [];
 
-        $this->images = $this->race->getMedia('local_files');
     }
 
     public function update()
@@ -228,10 +225,10 @@ class Edit extends Component
         $this->validate();
 
         if ($this->images) {
+            $this->race->clearMediaCollection('local_files');
+
             foreach ($this->images as $image) {
-                if ($image instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
-                    $this->race->addMedia($image->getRealPath())->toMediaCollection('local_files');
-                }
+                $this->race->addMedia($image)->toMediaCollection('local_files');
             }
         }
 

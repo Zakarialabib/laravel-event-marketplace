@@ -61,9 +61,7 @@ class Create extends Component
         $this->category->slug = Str::slug($this->category->name);
 
         if ($this->images) {
-            $imageName = Str::slug($this->category->name).'.'.$this->images->extension();
             $this->category->addMedia($this->images)->toMediaCollection('local_files');
-            $this->category->images = $imageName;
         }
 
         $this->category->save();

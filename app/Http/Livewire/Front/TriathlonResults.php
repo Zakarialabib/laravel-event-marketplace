@@ -61,7 +61,7 @@ class TriathlonResults extends Component
     {
         $genderSortedResults = RaceResult::where('race_id', $this->race->id)
             ->where('gender', $result->participant->gender) // Use the corresponding field for each discipline
-            ->sortBy($field)
+            ->orderBy($field)
             ->get();
 
         return $genderSortedResults->pluck('id')->search($result->id) + 1;
@@ -70,7 +70,7 @@ class TriathlonResults extends Component
     public function calculateOverallRank($results, $result): int|float
     {
         // Sort results based on time (or any other relevant criteria)
-        $sortedResults = $results->sortBy('time');
+        $sortedResults = $results->orderBy('time');
 
         return $sortedResults->search(static function ($item) use ($result): bool {
             return $item->id === $result->id;

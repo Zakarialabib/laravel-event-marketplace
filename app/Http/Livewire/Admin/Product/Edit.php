@@ -110,6 +110,8 @@ class Edit extends Component
         $this->validate();
 
         if ($this->images) {
+            $this->product->clearMediaCollection('local_files');
+
             foreach ($this->images as $image) {
                 $this->product->addMedia($image->getRealPath())->toMediaCollection('local_files');
             }

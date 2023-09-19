@@ -147,35 +147,6 @@
                     </div>
                 @endif
             @endforeach
-
         </div>
-
-        
-
     </div>
 </x-dashboard-layout>
-
-@section('scripts')
-    <script>
-        document.querySelectorAll('.js-date').forEach(el => {
-            el.addEventListener('click', event => {
-                clearActive();
-                hideAll();
-                el.classList.add('active');
-                document.querySelector(`#${el.dataset.date}`).style.display = 'flex';
-            });
-        });
-
-        const clearActive = () => {
-            document.querySelectorAll('.js-date').forEach(el => {
-                el.classList.remove('active');
-            });
-        };
-
-        const hideAll = () => {
-            document.querySelectorAll('.js-date-row').forEach(el => {
-                el.style.display = 'none';
-            });
-        };
-    </script>
-@endsection

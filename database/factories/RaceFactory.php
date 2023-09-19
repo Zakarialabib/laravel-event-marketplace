@@ -24,7 +24,6 @@ class RaceFactory extends Factory
     {
         return [
             'name'                  => $this->faker->word,
-            'date'                  => $this->faker->date,
             'description'           => $this->faker->sentence,
             'race_location_id'      => 1,
             'category_id'           => 1,

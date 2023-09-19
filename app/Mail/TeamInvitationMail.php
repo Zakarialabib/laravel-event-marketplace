@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Mail;
 
-use App\Support\SettingsHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -30,8 +29,8 @@ class TeamInvitationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(SettingsHelper::settings('company_email_address'), SettingsHelper::settings('site_title')),
-            subject: 'You are invited to Team-'.$this->team->name.'-'.SettingsHelper::settings('site_title'),
+            from: new Address(settings('company_email_address'), settings('site_title')),
+            subject: 'You are invited to Team-'.$this->team->name.'-'.settings('site_title'),
         );
     }
 

@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Admin\Brands;
 use App\Models\Brand;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
@@ -53,11 +52,8 @@ class Edit extends Component
         $this->validate();
 
         if ($this->images) {
-            $imageName = Str::slug($this->brand->name).'.'.$this->brand->extension();
-
+            $this->brand->clearMediaCollection('local_files');
             $this->brand->addMedia($this->images)->toMediaCollection('local_files');
-
-            $this->brand->images = $imageName;
         }
 
         $this->brand->save();

@@ -115,12 +115,12 @@
                                 wire:loading.attr="disabled">
                         </x-table.td>
                         <x-table.td>
-                            @if ($race->hasMedia('local_files'))
-                                <img src="{{ $race->getFirstMediaUrl('local_files') }}" alt="{{ $race->name }}"
-                                    class="w-10 h-10 rounded-full object-cover">
-                            @else
-                                <p>{{ __('No race image available') }}.</p>
-                            @endif
+                            <div class="flex gap-4">
+                                @foreach ($race->getMedia('local_files') as $image)
+                                    <img src="{{ $image->getUrl() }}" alt="{{ $image->getUrl() }}"
+                                        class="w-7 h-7 shadow">
+                                @endforeach
+                            </div>
                         </x-table.td>
                         <x-table.td>
                             {{ formatDate($race->registration_deadline) }}
