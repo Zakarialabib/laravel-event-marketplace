@@ -155,7 +155,6 @@ class Race extends Model implements HasMedia
 
     public function getRegistrationOrdersTotalAttribute()
     {
-
     }
 
     public function getTotalOrdersAttribute()

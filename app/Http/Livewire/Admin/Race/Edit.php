@@ -217,7 +217,6 @@ class Edit extends Component
         $this->courses = is_string($this->race->course) ? json_decode($this->race->course, true) : [];
         $this->sponsors = is_string($this->race->sponsors) ? json_decode($this->race->sponsors, true) : [];
         $this->options = is_string($this->race->options) ? json_decode($this->race->options, true) : [];
-
     }
 
     public function update()
