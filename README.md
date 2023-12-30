@@ -1,6 +1,6 @@
-# Race Organization Platform
+# Race Events Marketplace Platform- Laravel Livewire CMS
  
-Welcome to the Race Organization Platform – your premier destination for race exploration, registration, and more. Dive into our user-centric website and experience ease of navigation, consistency in design, and access to a platform of resources tailored to meet the business needs.
+Welcome to Race Events Marketplace Platform- Laravel Livewire CMS your premier destination for race exploration, registration, and more. Dive into our user-centric website and experience ease of navigation, consistency in design, and access to a platform of resources tailored to meet the business needs.
 
 ## Introduction:
 
